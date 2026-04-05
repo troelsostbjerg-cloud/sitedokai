@@ -11,7 +11,10 @@
       </p>
     </div>
 
-    <form id="contactForm" class="max-w-lg mx-auto space-y-6">
+    <form id="contactForm" action="https://formsubmit.co/kontakt@sitedokai.com" method="POST" class="max-w-lg mx-auto space-y-6">
+      <input type="hidden" name="_subject" value="Ny SitedokAI henvendelse" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
       <div>
         <label for="name" class="block text-sm font-semibold text-brand mb-2">Dit navn *</label>
         <input
@@ -64,11 +67,9 @@
         <input type="checkbox" id="gdpr" name="gdpr" required aria-required="true" class="mt-1" />
         <label for="gdpr" class="text-sm text-gray-500">
           Jeg accepterer at SitedokAI kontakter mig og gemmer mine data i overensstemmelse med GDPR.
-          Se vores <a href="#" class="underline hover:text-brand">privatlivspolitik</a>.
+          Se vores <a href="/privatlivspolitik" class="underline hover:text-brand">privatlivspolitik</a>.
         </label>
       </div>
-
-      <div id="formMessage" class="hidden"></div>
 
       <button
         type="submit"
@@ -80,22 +81,3 @@
   </div>
 </section>
 
-<script>
-  const form = document.getElementById('contactForm') as HTMLFormElement;
-  const formMessage = document.getElementById('formMessage') as HTMLDivElement;
-
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const email = formData.get('email') as string;
-
-    formMessage.className = 'p-4 bg-green-50 text-green-800 border border-green-200 text-sm';
-    formMessage.textContent = `Tak! Vi modtog din anmodning. Du hoerer fra os inden 24 timer paa: ${email}`;
-
-    form.reset();
-    setTimeout(() => {
-      formMessage.className = 'hidden';
-      formMessage.textContent = '';
-    }, 5000);
-  });
-</script>
