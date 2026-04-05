@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Om SitedokAI" description="SitedokAI er et dansk website audit bureau. Vi giver danske SMV'er et klart billede af, hvad Google AI ser på deres hjemmeside.">
+  <Nav />
+  <main>
+    <!-- Hero / Story -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+          <div>
+            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-6">
+              Om SitedokAI
+            </h1>
+            <div class="space-y-4 text-gray-500 leading-relaxed">
+              <p>
+                Jeg byggede SitedokAI fordi jeg så et problem, som ingen ellers løste.
+              </p>
+              <p>
+                Danske virksomheder bruger tusindvis af kroner på webdesign, SEO og content marketing. Men de ved ikke, hvad Google AI faktisk ser på deres hjemmeside. De modtager lange rapporter med 100 anbefalinger. Halvdelen er irrelevante. De bliver ikke lavet.
+              </p>
+              <p>
+                Jeg ville have værktøjet, som jeg ønskede eksisterede: en rapport der siger "disse 5 ting betyder noget". Ikke "lav alt det her". Så byggede jeg SitedokAI.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-gray-50 border border-gray-200 p-6">
+              <div class="font-display text-2xl font-extrabold text-accent mb-1">5 platforme</div>
+              <div class="text-sm text-gray-500">ChatGPT, Perplexity, Claude, Gemini, Google AI</div>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 p-6">
+              <div class="font-display text-2xl font-extrabold text-brand mb-1">10 tests</div>
+              <div class="text-sm text-gray-500">Teknisk sundhed baseret på Google PageSpeed API</div>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 p-6">
+              <div class="font-display text-2xl font-extrabold text-brand mb-1">Kilde-analyse</div>
+              <div class="text-sm text-gray-500">Vi viser hvorfor AI anbefaler konkurrenter i stedet for dig</div>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 p-6">
+              <div class="font-display text-2xl font-extrabold text-brand mb-1">Handlingsbar</div>
+              <div class="text-sm text-gray-500">Konkrete anbefalinger med hvem, hvad, hvornår</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="bg-brand text-white">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="max-w-2xl">
+          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
+            Mission
+          </h2>
+          <p class="text-lg text-white/60 leading-relaxed">
+            Vi giver danske SMV'er et klart billede af, hvad Google AI ser, når den crawler deres hjemmeside.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12">
+          Hvad vi tror på
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <h3 class="font-display text-xl font-bold text-brand mb-3">Transparens</h3>
+            <p class="text-gray-500 leading-relaxed">
+              Vi viser dig vores metode. Ikke black box. Du ved, hvad du får, og hvorfor det betyder noget.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold text-brand mb-3">Data over mavefornemmelse</h3>
+            <p class="text-gray-500 leading-relaxed">
+              Vi scanner ikke subjektivt. Vi måler hvad AI ser, hvordan det ranker, og hvad konkurrenterne gør. Så handler du på fakta.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold text-brand mb-3">Konkrete handlinger over lange analyser</h3>
+            <p class="text-gray-500 leading-relaxed">
+              En rapport på 100 sider hjælper ikke. Vi giver dig fem prioriterede forbedringer, som du kan handle på denne uge.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold text-brand mb-3">Dansk først</h3>
+            <p class="text-gray-500 leading-relaxed">
+              Vi bygger for danske virksomheder. Vi kender sproget, markedet og kulturen. Dansk sprog, dansk support, dansk tænkning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gray-50">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
+          Vil du vide mere?
+        </h2>
+        <p class="text-lg text-gray-500 mb-8">
+          Start med en gratis rapport eller kontakt os direkte.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/gratis-rapport" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors">
+            Gratis rapport
+          </a>
+          <a href="/kontakt" class="inline-block border-2 border-brand text-brand py-4 px-10 font-bold text-lg hover:bg-brand hover:text-white transition-colors">
+            Kontakt os
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

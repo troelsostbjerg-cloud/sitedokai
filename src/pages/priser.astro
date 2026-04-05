@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const plans = [
+  {
+    name: 'Audit Start',
+    price: '5.000',
+    period: 'DKK / måned',
+    setup: '2.000 DKK engangsgebyr',
+    minimum: '3 måneders minimum',
+    featured: false,
+    features: [
+      'Månedlig AI-synlighedsrapport (score 0-100)',
+      '10+ automatiserede tests',
+      'Performance, sikkerhed, SEO-basics',
+      'Konkrete forbedringspunkter',
+      '30 min. månedlig gennemgang med Troels',
+    ],
+    best: 'Virksomheder der vil starte med at forstå deres AI-synlighed',
+    cta: 'Vælg Audit Start',
+  },
+  {
+    name: 'Audit Pro',
+    price: '9.000',
+    period: 'DKK / måned',
+    setup: '2.000 DKK engangsgebyr',
+    minimum: '3 måneders minimum',
+    featured: true,
+    features: [
+      'Alt fra Audit Start',
+      'Konkurrent-benchmark (3 konkurrenter)',
+      'AI-citationsanalyse (ChatGPT, Perplexity, Google AI)',
+      'Prioriteret handlingsplan',
+      'Ugentlig email-opfølgning',
+    ],
+    best: 'E-commerce virksomheder der vil overhale konkurrenterne',
+    cta: 'Vælg Audit Pro',
+  },
+  {
+    name: 'Audit Accelerator',
+    price: '14.000',
+    period: 'DKK / måned',
+    setup: '3.000 DKK engangsgebyr',
+    minimum: '6 måneders minimum',
+    featured: false,
+    features: [
+      'Alt fra Audit Pro',
+      '5 konkurrenter i benchmark',
+      'GEO-optimering med AI-søgemaskine-fokus',
+      'Implementeringssupport: vi hjælper med at fixe problemerne',
+      'Direkte Slack-kanal med Troels',
+      'Ugentlig 30 min. session',
+    ],
+    best: 'Virksomheder der vil have maksimal AI-synlighed hurtigst muligt',
+    cta: 'Vælg Audit Accelerator',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Hvad er AI-synlighed og hvorfor er det vigtigt?',
+    a: 'AI-synlighed betyder hvor ofte din virksomhed optræder i svar fra AI-søgemaskiner som ChatGPT, Perplexity og Google AI. Uden AI-synlighed mister du 30-40% af den online trafik, der tidligere kom fra Google. Vi måler præcis hvor dine konkurrenter optræder, og hvor du ikke er synlig endnu.',
+  },
+  {
+    q: 'Hvad får jeg i den gratis rapport vs. den betalte pakke?',
+    a: 'Den gratis rapport viser din aktuelle AI-synlighedsscore og tester 5 basale områder. Den betalte pakke tilføjer 10+ tests, konkurrent-benchmark, konkret handlingsplan, og sparring med Troels. Gratis rapporten er til selvoplysten. Betalte pakker er til virksomheder der vil have det lavet.',
+  },
+  {
+    q: 'Hvor hurtigt ser jeg resultater?',
+    a: 'De fleste sites ser forbedring indenfor 2-4 uger. Nogle sider ser resultater på 3-5 dage, andre tager 6-8 uger. Det afhænger af udgangspositionen og hvor hurtigt du handler. Vi måler hver måned så du ved præcist hvor du står.',
+  },
+  {
+    q: 'Kan I hjælpe med at implementere ændringerne?',
+    a: 'Ja, men kun på Audit Accelerator-pakken. På Start og Pro giver vi dig planen, men du implementerer selv. Mange ændringer er små ting: bedre FAQ-sider, bedre metadata, bedre struktur. Vi viser dig præcis hvad.',
+  },
+  {
+    q: 'Hvad hvis min side allerede scorer højt?',
+    a: 'Højt Google-SEO-score betyder ikke høj AI-synlighed. Det er to forskellige ting. Mange sites der scorede højt for 6 måneder siden, falder ned nu fordi konkurrenterne har optimeret.',
+  },
+  {
+    q: 'Kan jeg opsige efter minimumperioden?',
+    a: 'Ja. Audit Start og Pro har 3 måneders minimum, Accelerator har 6. Efter det kan du opsige med 30 dages varsel. Vi mister aldrig kunder der ser resultater.',
+  },
+];
+---
+
+<Layout title="Priser - SitedokAI" description="Transparent priser uden gemte udgifter. Se vores tre pakker for AI-synligheds audit.">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="max-w-2xl">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
+            Transparent priser uden gemte udgifter
+          </h1>
+          <p class="text-lg text-gray-500">
+            Du betaler for resultater, ikke for funktioner der ikke virker.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="bg-brand text-white">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
+          {plans.map((plan) => (
+            <div class={`bg-brand-light p-8 flex flex-col ${plan.featured ? 'ring-2 ring-accent ring-inset' : ''}`}>
+              {plan.featured && (
+                <div class="text-xs font-semibold text-accent uppercase tracking-wider mb-4">Mest populær</div>
+              )}
+              <div class="text-sm font-bold text-white/80 mb-3">{plan.name}</div>
+              <div class="font-display text-3xl font-extrabold text-white mb-1">{plan.price}</div>
+              <div class="text-sm text-white/40 mb-2">{plan.period}</div>
+              <div class="text-xs text-white/30 mb-1">{plan.setup}</div>
+              <div class="text-xs text-white/30 mb-8">{plan.minimum}</div>
+
+              <ul class="space-y-3 mb-6 flex-grow">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start gap-3 text-sm text-white/60">
+                    <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="text-xs text-white/40 mb-6">
+                Best for: {plan.best}
+              </div>
+
+              <a
+                href="/kontakt"
+                class={`block text-center py-3 px-6 font-semibold text-sm transition-colors ${
+                  plan.featured
+                    ? 'bg-accent text-brand hover:bg-accent-light'
+                    : 'border border-white/20 text-white/80 hover:border-white/50 hover:text-white'
+                }`}
+              >
+                {plan.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12">
+          Ofte stillede spørgsmål
+        </h2>
+        <div class="space-y-8">
+          {faqs.map((faq) => (
+            <div class="border-b border-gray-200 pb-8">
+              <h3 class="font-display text-lg font-bold text-brand mb-3">{faq.q}</h3>
+              <p class="text-gray-500 leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="bg-gray-50">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
+          Ikke sikker hvor du skal starte?
+        </h2>
+        <p class="text-lg text-gray-500 mb-8">
+          Start med en gratis rapport og se præcis hvor du står mod konkurrenterne.
+        </p>
+        <a href="/gratis-rapport" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors">
+          Bestil gratis rapport
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
