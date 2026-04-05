@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Tests from '../components/Tests.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Pricing from '../components/Pricing.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="SitedokAI: Er din hjemmeside synlig for AI?">
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Tests />
+    <HowItWorks />
+    <Pricing />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

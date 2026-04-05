@@ -1,0 +1,95 @@
+---
+const plans = [
+  {
+    name: 'Gratis AI-sundhedstjek',
+    price: '0 kr',
+    period: 'Engangstjek',
+    featured: false,
+    features: [
+      'AI-synlighed paa 3 platforme',
+      '5 basale tekniske tests',
+      'Overordnet score',
+      'Email-rapport',
+    ],
+    cta: 'Lav en gratis audit',
+  },
+  {
+    name: 'Fuld Rapport',
+    price: '3.500 kr',
+    period: 'Engangskoeb',
+    featured: true,
+    features: [
+      'AI-synlighed paa 5 platforme',
+      'Alle 10 tekniske tests',
+      'Konkurrent-benchmark',
+      'Kilde-analyse: hvorfor AI anbefaler andre',
+      'Prioriterede handlingsanbefalinger',
+      'Email-support i 30 dage',
+    ],
+    cta: 'Bestil fuld rapport',
+  },
+  {
+    name: 'AI Handlingsplan',
+    price: '7.500 kr',
+    period: 'Engangskoeb + strategisk session',
+    featured: false,
+    features: [
+      'Alt fra Fuld Rapport',
+      '60 min strategisk gennemgang',
+      'Konkret GEO-handlingsplan',
+      'Implementerings-prioritering',
+      'Opfoelgning efter 30 dage',
+      'Direkte linje til raadgiver',
+    ],
+    cta: 'Bestil handlingsplan',
+  },
+];
+---
+
+<section id="pricing" class="bg-brand text-white">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-2xl mb-12">
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Prissaetning
+      </h2>
+      <p class="text-lg text-white/50">
+        Gennemsigtig prissaetning. Ingen abonnementer, ingen skjulte gebyrer.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
+      {plans.map((plan) => (
+        <div class={`bg-brand-light p-8 flex flex-col ${plan.featured ? 'ring-2 ring-accent ring-inset' : ''}`}>
+          {plan.featured && (
+            <div class="text-xs font-semibold text-accent uppercase tracking-wider mb-4">Mest populaer</div>
+          )}
+          <div class="text-sm font-bold text-white/80 mb-3">{plan.name}</div>
+          <div class="font-display text-3xl font-extrabold text-white mb-1">{plan.price}</div>
+          <div class="text-sm text-white/40 mb-8">{plan.period}</div>
+
+          <ul class="space-y-3 mb-8 flex-grow">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-sm text-white/60">
+                <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            class={`block text-center py-3 px-6 font-semibold text-sm transition-colors ${
+              plan.featured
+                ? 'bg-accent text-brand hover:bg-accent-light'
+                : 'border border-white/20 text-white/80 hover:border-white/50 hover:text-white'
+            }`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

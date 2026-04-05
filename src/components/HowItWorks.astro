@@ -1,0 +1,45 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'Send din URL',
+    desc: 'Indsend dit website via formularen. Vi begynder med det samme.',
+  },
+  {
+    num: '02',
+    title: 'Vi tester alt',
+    desc: 'AI-synlighed paa 5 platforme plus 10 tekniske tests. Automatiseret, grundigt og baseret paa officielle API\'er.',
+  },
+  {
+    num: '03',
+    title: 'Faa din rapport',
+    desc: 'En handlingsbar rapport med scores, konkurrent-benchmarks og prioriterede anbefalinger. Du ved praecis hvad du skal goere.',
+  },
+];
+---
+
+<section id="how-it-works" class="bg-white border-b border-gray-200">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-2xl mb-16">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
+        Saadan virker det
+      </h2>
+      <p class="text-lg text-gray-500">
+        Fra URL til handlingsbar rapport. Simpelt og konkret.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+      {steps.map((step, i) => (
+        <div class="relative">
+          {i < steps.length - 1 && (
+            <div class="hidden md:block absolute top-8 left-full w-full h-px bg-gray-200 -translate-x-4" />
+          )}
+          <div class="font-display text-5xl font-extrabold text-accent/20 mb-4">{step.num}</div>
+          <h3 class="font-display text-lg font-bold text-brand mb-2">{step.title}</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
