@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+const posts = [
+  {
+    slug: 'geo-hvad-er-det',
+    title: 'GEO: Det nye SEO der afgør om din virksomhed dukker op i ChatGPT',
+    description: 'Generative Engine Optimization er ikke fremtid — det er nu. Her er hvad det er, og hvad du kan gøre ved det.',
+    date: '7. april 2026',
+    readtime: '5 min',
+    tag: 'GEO',
+  },
+];
+---
+
+<Layout title="Blog - SitedokAI" description="Guides og indsigt om AI-synlighed, GEO og hvad der afgør om din virksomhed dukker op i ChatGPT, Perplexity og Google AI.">
+  <Nav />
+  <main>
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="max-w-2xl">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
+            Viden om AI-synlighed
+          </h1>
+          <p class="text-lg text-gray-500">
+            Guides og indsigt om GEO, AI-søgemaskiner og hvad der afgør om din virksomhed bliver fundet — eller overset.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50">
+      <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="bg-white border border-gray-200 p-6 hover:border-accent transition-colors group block">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-1">{post.tag}</span>
+                <span class="text-xs text-gray-400">{post.readtime}</span>
+              </div>
+              <h2 class="font-display text-lg font-bold text-brand mb-3 group-hover:text-accent transition-colors leading-snug">
+                {post.title}
+              </h2>
+              <p class="text-sm text-gray-500 leading-relaxed mb-4">{post.description}</p>
+              <div class="text-xs text-gray-400">{post.date}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-brand text-white">
+      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20 text-center">
+        <h2 class="font-display text-2xl md:text-3xl font-bold mb-4">
+          Klar til at se din AI-synlighed?
+        </h2>
+        <p class="text-white/60 mb-8 max-w-xl mx-auto">
+          Teori er én ting. En rapport med din konkrete score, fund og prioriterede fixes er en anden.
+        </p>
+        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold hover:bg-amber-300 transition-colors">
+          Bestil rapport — 2.495 kr
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

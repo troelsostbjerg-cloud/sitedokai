@@ -30,6 +30,8 @@ import '../styles/global.css';
               <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI rapport" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
+              <!-- Skift INDSAET_STRIPE_LINK ud med dit Stripe Payment Link når det er oprettet -->
+              <input type="hidden" name="_next" value="https://buy.stripe.com/INDSAET_STRIPE_LINK" />
 
               <div>
                 <label for="name" class="block text-sm font-semibold text-brand mb-2">Dit navn *</label>
@@ -90,11 +92,14 @@ import '../styles/global.css';
                 </label>
               </div>
 
+              <p class="text-xs text-gray-400 leading-relaxed">
+                Når du klikker nedenfor, modtager vi din bestilling og du videresendes til betaling via Stripe (2.495 kr). Rapporten leveres inden for 48 timer på hverdage.
+              </p>
               <button
                 type="submit"
                 class="w-full bg-accent text-brand py-4 px-8 font-bold text-lg hover:bg-accent-light transition-colors"
               >
-                Bestil rapport — 2.495 kr
+                Bestil og betal — 2.495 kr →
               </button>
             </form>
           </div>
