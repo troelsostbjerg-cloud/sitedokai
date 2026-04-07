@@ -24,4 +24,22 @@ Dansk AI-synlighedsrapport for virksomheder der vil forstå hvordan deres websit
 </p> <p class="text-sm text-white/50 mt-2">Dansk produkt. Enkel bestilling. Rapport leveret som PDF.</p> </div> <div> <h3 class="text-sm font-bold uppercase tracking-wider mb-4 text-white/70">Kontakt</h3> <p class="text-sm text-white/50 mb-2">
 Email: <a href="mailto:troelsostbjerg@gmail.com" class="text-accent hover:text-accent-light transition-colors">troelsostbjerg@gmail.com</a> </p> <p class="text-sm text-white/50">
 Svar inden for 24 timer på hverdage
-</p> </div> <div> <h3 class="text-sm font-bold uppercase tracking-wider mb-4 text-white/70">Links</h3> <div class="space-y-2"> <p><a href="#tests" class="text-sm text-white/50 hover:text-accent transition-colors">Hvad vi tester</a></p> <p><a href="#pricing" class="text-sm text-white/50 hover:text-accent transition-colors">Pris</a></p> <p><a href="#contact" class="text-sm text-white/50 hover:text-accent transition-colors">Bestil rapport</a></p> <p><a href="/privatlivspolitik" class="text-sm text-white/50 hover:text-accent transition-colors">Privatlivspolitik</a></p> </div> </div> </div> <div class="border-t border-white/10 pt-8 text-center"> <p class="text-sm text-white/30">&copy; 2026 SitedokAI. Alle rettigheder forbeholdt.</p> </div> </div> </footer>  </body></html>
+</p> </div> <div> <h3 class="text-sm font-bold uppercase tracking-wider mb-4 text-white/70">Links</h3> <div class="space-y-2"> <p><a href="#tests" class="text-sm text-white/50 hover:text-accent transition-colors">Hvad vi tester</a></p> <p><a href="#pricing" class="text-sm text-white/50 hover:text-accent transition-colors">Pris</a></p> <p><a href="#contact" class="text-sm text-white/50 hover:text-accent transition-colors">Bestil rapport</a></p> <p><a href="/privatlivspolitik" class="text-sm text-white/50 hover:text-accent transition-colors">Privatlivspolitik</a></p> </div> </div> </div> <div class="border-t border-white/10 pt-8 text-center"> <p class="text-sm text-white/30">&copy; 2026 SitedokAI. Alle rettigheder forbeholdt.</p> </div> </div> </footer>  <script>
+      document.addEventListener('submit', (event) => {
+        const form = event.target;
+
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const websiteInput = form.querySelector('input[name="website"]');
+
+        if (!(websiteInput instanceof HTMLInputElement)) return;
+
+        const value = websiteInput.value.trim();
+
+        if (!value) return;
+
+        if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value)) {
+          websiteInput.value = `https://${value.replace(/^\/+/, '')}`;
+        }
+      });
+    </script> </body> </html>
