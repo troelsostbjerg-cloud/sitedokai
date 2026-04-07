@@ -30,5 +30,24 @@ const { title, description = 'Er din hjemmeside synlig for AI? SitedokAI tester 
   </head>
   <body class="bg-white">
     <slot />
+    <script is:inline>
+      document.addEventListener('submit', (event) => {
+        const form = event.target;
+
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const websiteInput = form.querySelector('input[name="website"]');
+
+        if (!(websiteInput instanceof HTMLInputElement)) return;
+
+        const value = websiteInput.value.trim();
+
+        if (!value) return;
+
+        if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value)) {
+          websiteInput.value = `https://${value.replace(/^\/+/, '')}`;
+        }
+      });
+    </script>
   </body>
 </html>

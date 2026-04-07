@@ -42,10 +42,14 @@
       <div>
         <label for="website" class="block text-sm font-semibold text-brand mb-2">Website URL *</label>
         <input
-          type="url"
+          type="text"
+          inputmode="url"
+          autocomplete="url"
+          autocapitalize="none"
+          spellcheck="false"
           id="website"
           name="website"
-          placeholder="https://www.example.dk"
+          placeholder="www.example.dk"
           required
           aria-required="true"
           class="w-full px-4 py-3 border border-gray-300 text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors"
