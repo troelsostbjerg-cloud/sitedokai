@@ -5,18 +5,106 @@ import Hero from '../components/Hero.astro';
 import Tests from '../components/Tests.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Pricing from '../components/Pricing.astro';
+import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const faqs = [
+  {
+    q: 'Hvad får jeg for 495 kr?',
+    a: 'Du får et AI-synlighedstjek af 1 website og op til 5 nøglesider, vurderet på 5 AI-platforme, plus en kort PDF med score, fund og 3 prioriterede forbedringer.',
+  },
+  {
+    q: 'Hvad er ikke med?',
+    a: 'Der er ingen implementering, intet møde og ingen løbende rådgivning. Du får diagnosen og de vigtigste næste skridt.',
+  },
+  {
+    q: 'Hvornår gælder introtilbuddet?',
+    a: 'Tilbuddet gælder i 14 dage fra lanceringen. Bestillinger i perioden låses til 495 kr.',
+  },
+  {
+    q: 'Hvad sker der efter bestilling?',
+    a: 'Du sender din URL og kontaktoplysninger. Vi bekræfter ordren på mail og leverer rapporten inden for 48 timer på hverdage.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://sitedokai.com/#organization',
+      name: 'SitedokAI',
+      url: 'https://sitedokai.com',
+      logo: 'https://sitedokai.com/og-image.svg',
+      email: 'info@sitedokai.com',
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'customer support',
+          email: 'info@sitedokai.com',
+          availableLanguage: ['da'],
+        },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://sitedokai.com/#website',
+      url: 'https://sitedokai.com',
+      name: 'SitedokAI',
+      inLanguage: 'da-DK',
+    },
+    {
+      '@type': 'Service',
+      '@id': 'https://sitedokai.com/#service',
+      name: 'SitedokAI AI-synlighedstjek',
+      serviceType: 'AI-synlighedstjek',
+      provider: {
+        '@id': 'https://sitedokai.com/#organization',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Danmark',
+      },
+      description: 'AI-synlighedstjek for 1 website og op til 5 nøglesider. Inkluderer vurdering på 5 AI-platforme og en kort PDF med 3 prioriterede forbedringer.',
+      offers: {
+        '@type': 'Offer',
+        price: '495',
+        priceCurrency: 'DKK',
+        availability: 'https://schema.org/LimitedAvailability',
+        url: 'https://sitedokai.com/kontakt',
+        priceValidUntil: '2026-04-22',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://sitedokai.com/#faq',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      })),
+    },
+  ],
+};
 ---
 
-<Layout title="SitedokAI: Er din hjemmeside synlig for AI?">
+<Layout
+  title="SitedokAI: Er din hjemmeside synlig i AI?"
+  description="Få et AI-synlighedstjek fra SitedokAI. Introtilbud: 495 kr i 14 dage for 1 website og op til 5 nøglesider, leveret som kort PDF inden for 48 timer på hverdage."
+  structuredData={structuredData}
+>
   <Nav />
   <main id="main">
     <Hero />
     <Tests />
     <HowItWorks />
     <Pricing />
+    <FAQ faqs={faqs} />
     <Contact />
   </main>
   <Footer />

@@ -1,0 +1,30 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+const { faqs } = Astro.props as { faqs: FAQItem[] };
+---
+
+<section id="faq" class="bg-white border-b border-gray-200">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-2xl mb-12">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
+        Ofte stillede spørgsmål
+      </h2>
+      <p class="text-lg text-gray-500">
+        Kort svar på det vigtigste, før du bestiller.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {faqs.map((faq) => (
+        <div class="border border-gray-200 p-6 bg-gray-50">
+          <h3 class="font-display text-lg font-bold text-brand mb-3">{faq.q}</h3>
+          <p class="text-gray-500 leading-relaxed text-sm">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
