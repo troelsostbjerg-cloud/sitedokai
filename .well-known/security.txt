@@ -1,0 +1,4 @@
+Contact: mailto:info@sitedokai.com
+Expires: 2027-04-09T00:00:00.000Z
+Preferred-Languages: da, en
+Canonical: https://sitedokai.com/.well-known/security.txt
