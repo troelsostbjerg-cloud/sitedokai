@@ -1,0 +1,45 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SitedokAI og-image</title>
+  <desc id="desc">SitedokAI introtilbud til AI-synlighedstjek for danske virksomheder.</desc>
+  <rect width="1200" height="630" fill="#0F172A"/>
+  <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#06B6D4" stroke-opacity="0.18"/>
+  <g opacity="0.18">
+    <path d="M0 120H1200" stroke="#06B6D4"/>
+    <path d="M0 240H1200" stroke="#06B6D4"/>
+    <path d="M0 360H1200" stroke="#06B6D4"/>
+    <path d="M0 480H1200" stroke="#06B6D4"/>
+    <path d="M160 0V630" stroke="#06B6D4"/>
+    <path d="M320 0V630" stroke="#06B6D4"/>
+    <path d="M480 0V630" stroke="#06B6D4"/>
+    <path d="M640 0V630" stroke="#06B6D4"/>
+    <path d="M800 0V630" stroke="#06B6D4"/>
+    <path d="M960 0V630" stroke="#06B6D4"/>
+  </g>
+  <g transform="translate(118 125)">
+    <circle cx="90" cy="90" r="90" fill="#0F172A" stroke="#06B6D4" stroke-width="2"/>
+    <circle cx="90" cy="90" r="70" stroke="#06B6D4" stroke-opacity="0.7" stroke-width="2"/>
+    <circle cx="90" cy="90" r="48" stroke="#06B6D4" stroke-opacity="0.45" stroke-width="2"/>
+    <circle cx="90" cy="90" r="18" fill="#F8FAFC"/>
+    <line x1="90" y1="18" x2="90" y2="90" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+    <line x1="138" y1="54" x2="90" y2="90" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="340" y="190" fill="#67E8F9" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-SYNLIGHED FOR DANSKE VIRKSOMHEDER</text>
+  <text x="340" y="286" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="800">SitedokAI</text>
+  <text x="340" y="356" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Få svar på om din hjemmeside bliver fundet i AI</text>
+  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">Introtilbud: 495 kr i 14 dage</text>
+  <g transform="translate(340 474)">
+    <rect width="250" height="64" rx="12" fill="#FBBF24"/>
+    <text x="28" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil introtilbud</text>
+  </g>
+  <g transform="translate(628 485)">
+    <text fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">5 AI-platforme</text>
+    <text y="34" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">1 website + op til 5 sider</text>
+    <text y="68" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">Kort PDF inden for 48 timer</text>
+  </g>
+  <defs>
+    <linearGradient id="bg" x1="69" y1="58" x2="1132" y2="595" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>
