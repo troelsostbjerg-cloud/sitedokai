@@ -1,33 +1,36 @@
 ---
+import HeroAnimation from './HeroAnimation.astro';
 ---
 <section class="relative overflow-hidden bg-brand text-white">
   <!-- Subtle radar grid pattern -->
   <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, #06b6d4 1px, transparent 0); background-size: 48px 48px;"></div>
 
   <div class="relative max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
-    <!-- Badge -->
     <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 max-w-3xl mx-auto text-white">
       Bliver din hjemmeside fundet i ChatGPT og Google AI?
     </h1>
 
     <p class="text-lg md:text-xl text-white/60 mb-10 max-w-2xl mx-auto leading-relaxed">
-      Vi tester 1 website og op til 5 nøglesider på 5 AI-platforme og sender en detaljeret PDF med score, fund og prioriterede forbedringer.
+      Vi tester 1 website og op til 5 nøglesider på 4 AI-platforme og sender en detaljeret PDF med score, fund og prioriterede forbedringer.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#contact" class="bg-accent text-brand px-8 py-4 font-bold text-lg hover:bg-accent-light transition-colors">
+      <a href="#contact" class="bg-amber-400 text-brand px-8 py-4 font-bold text-lg rounded-md hover:bg-amber-300 transition-colors">
         Bestil AI-synlighedsrapport — 2.495 kr
       </a>
-      <a href="#how-it-works" class="border border-white/20 text-white/80 px-8 py-4 font-semibold text-lg hover:border-white/50 hover:text-white transition-colors">
+      <a href="/eksempel" class="border border-white/20 text-white/80 px-8 py-4 font-semibold text-lg rounded-md hover:border-white/50 hover:text-white transition-colors">
         Se hvad du får
       </a>
     </div>
 
+    <!-- Animated scan demo -->
+    <HeroAnimation />
+
     <!-- Trust indicators -->
-    <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-12 text-sm text-white/40">
+    <div class="mt-8 flex flex-wrap justify-center gap-8 md:gap-12 text-sm text-white/40">
       <div class="flex items-center gap-2">
         <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        <span>5 AI-platforme testet</span>
+        <span>4 AI-platforme testet</span>
       </div>
       <div class="flex items-center gap-2">
         <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>

@@ -1,0 +1,420 @@
+---
+---
+<div class="hero-anim mx-auto max-w-2xl mt-12 mb-4">
+  <!-- Browser mockup -->
+  <div class="ha-browser">
+    <div class="ha-chrome">
+      <div class="ha-dots"><span></span><span></span><span></span></div>
+      <div class="ha-url"><span class="ha-lock">●</span> ditfirma.dk</div>
+    </div>
+    <div class="ha-page">
+      <!-- Scan line -->
+      <div class="ha-scanline" id="haScanline"></div>
+
+      <!-- Wireframe content -->
+      <div class="ha-wire-nav">
+        <div class="ha-block" style="width:60px;height:8px;opacity:0.15"></div>
+        <div style="display:flex;gap:8px">
+          <div class="ha-block" style="width:30px;height:5px;opacity:0.08"></div>
+          <div class="ha-block" style="width:30px;height:5px;opacity:0.08"></div>
+          <div class="ha-block" style="width:30px;height:5px;opacity:0.08"></div>
+        </div>
+      </div>
+      <div class="ha-block" style="width:65%;height:12px;margin:0 auto 8px;opacity:0.14"></div>
+      <div class="ha-block" style="width:50%;height:12px;margin:0 auto 14px;opacity:0.10"></div>
+      <div class="ha-block" style="width:55%;height:6px;margin:0 auto 4px;opacity:0.05"></div>
+      <div class="ha-block" style="width:40%;height:6px;margin:0 auto 18px;opacity:0.05"></div>
+      <div style="display:flex;justify-content:center;gap:8px">
+        <div class="ha-block ha-cta-block" style="width:100px;height:24px"></div>
+        <div class="ha-block" style="width:70px;height:24px;border:1px solid rgba(255,255,255,0.08);background:transparent;border-radius:4px"></div>
+      </div>
+
+      <!-- Platform results overlay -->
+      <div class="ha-results" id="haResults">
+        <div class="ha-result" data-status="found" data-delay="1000">
+          <div class="ha-r-icon ha-chatgpt">C</div>
+          <span class="ha-r-name">ChatGPT</span>
+          <span class="ha-r-status"></span>
+        </div>
+        <div class="ha-result" data-status="missing" data-delay="1700">
+          <div class="ha-r-icon ha-claude">A</div>
+          <span class="ha-r-name">Claude</span>
+          <span class="ha-r-status"></span>
+        </div>
+        <div class="ha-result" data-status="missing" data-delay="2400">
+          <div class="ha-r-icon ha-google">G</div>
+          <span class="ha-r-name">Google AI</span>
+          <span class="ha-r-status"></span>
+        </div>
+        <div class="ha-result" data-status="found" data-delay="3000">
+          <div class="ha-r-icon ha-gemini">G</div>
+          <span class="ha-r-name">Gemini</span>
+          <span class="ha-r-status"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score bar beneath browser -->
+  <div class="ha-score-bar" id="haScoreBar">
+    <span class="ha-score-label">AI-synlighed</span>
+    <div class="ha-score-track">
+      <div class="ha-score-fill" id="haScoreFill"></div>
+    </div>
+    <span class="ha-score-num" id="haScoreNum">0</span>
+  </div>
+</div>
+
+<style>
+  .hero-anim {
+    position: relative;
+  }
+
+  /* Browser */
+  .ha-browser {
+    background: rgba(2,6,23,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px -12px rgba(0,0,0,0.4);
+  }
+
+  .ha-chrome {
+    height: 30px;
+    background: rgba(15,23,42,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .ha-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .ha-dots span {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: block;
+  }
+
+  .ha-url {
+    flex: 1;
+    height: 18px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 3px;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .ha-lock {
+    color: rgba(14,116,144,0.6);
+    font-size: 6px;
+    margin-right: 5px;
+  }
+
+  .ha-page {
+    padding: 20px 24px 24px;
+    position: relative;
+    min-height: 180px;
+  }
+
+  .ha-block {
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    display: block;
+  }
+
+  .ha-cta-block {
+    background: rgba(251,191,36,0.15);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 4px;
+  }
+
+  .ha-wire-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  /* Scan line */
+  .ha-scanline {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent 0%, rgba(14,116,144,0.4) 20%, rgba(6,182,212,0.8) 50%, rgba(14,116,144,0.4) 80%, transparent 100%);
+    box-shadow: 0 0 8px 2px rgba(6,182,212,0.15);
+    top: 0;
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+    transition: top 3.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+  }
+
+  .ha-scanline::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 0;
+    height: 30px;
+    background: linear-gradient(180deg, rgba(6,182,212,0.03) 0%, transparent 100%);
+  }
+
+  /* Platform results */
+  .ha-results {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .ha-result {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ha-result.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .ha-result.is-found {
+    border-color: rgba(34,197,94,0.2);
+    background: rgba(34,197,94,0.04);
+  }
+
+  .ha-result.is-missing {
+    border-color: rgba(203,36,49,0.15);
+    background: rgba(203,36,49,0.03);
+  }
+
+  .ha-r-icon {
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .ha-chatgpt { background: rgba(16,163,127,0.12); color: #10a37f; }
+  .ha-claude  { background: rgba(217,119,62,0.12); color: #d9773e; }
+  .ha-google  { background: rgba(66,133,244,0.12); color: #4285f4; }
+  .ha-gemini  { background: rgba(138,100,255,0.12); color: #8a64ff; }
+
+  .ha-r-name {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    flex: 1;
+    font-weight: 500;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .ha-r-status {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .ha-r-status.ok { color: #22c55e; }
+  .ha-r-status.no { color: #cb2431; }
+
+  /* Score bar */
+  .ha-score-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0 4px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .ha-score-bar.show { opacity: 1; }
+
+  .ha-score-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .ha-score-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .ha-score-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #cb2431, #fbbf24);
+    border-radius: 2px;
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ha-score-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fbbf24;
+    min-width: 24px;
+    text-align: right;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.5px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ha-scanline,
+    .ha-result,
+    .ha-score-bar,
+    .ha-score-fill {
+      transition: none !important;
+    }
+    .ha-scanline {
+      display: none;
+    }
+    .ha-result {
+      opacity: 1;
+      transform: none;
+    }
+    .ha-score-bar {
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .ha-results {
+      position: relative;
+      right: auto;
+      top: auto;
+      transform: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .ha-r-name { display: none; }
+  }
+</style>
+
+<script>
+  function initHeroAnimation() {
+    const scanline = document.getElementById('haScanline');
+    const scoreBar = document.getElementById('haScoreBar');
+    const scoreFill = document.getElementById('haScoreFill');
+    const scoreNum = document.getElementById('haScoreNum');
+    const results = document.querySelectorAll('.ha-result');
+
+    if (!scanline) return;
+
+    const TARGET_SCORE = 34;
+
+    function animateScore(target: number) {
+      const start = performance.now();
+      const duration = 800;
+      function tick(now: number) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        scoreNum!.textContent = String(Math.round(eased * target));
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function reset() {
+      scanline.style.transition = 'none';
+      scanline.style.top = '0';
+      scanline.style.opacity = '0';
+      scoreBar.classList.remove('show');
+      scoreFill.style.width = '0%';
+      scoreNum!.textContent = '0';
+      results.forEach(r => {
+        r.classList.remove('show', 'is-found', 'is-missing');
+        const status = r.querySelector('.ha-r-status') as HTMLElement;
+        if (status) status.textContent = '';
+        if (status) status.className = 'ha-r-status';
+      });
+    }
+
+    function run() {
+      reset();
+
+      // Start scan
+      setTimeout(() => {
+        scanline.style.opacity = '1';
+        scanline.style.transition = 'top 3.2s cubic-bezier(0.4,0,0.2,1), opacity 0.3s';
+        scanline.style.top = '180px';
+      }, 200);
+
+      // Show platforms
+      results.forEach(r => {
+        const delay = parseInt(r.getAttribute('data-delay') || '1000');
+        const found = r.getAttribute('data-status') === 'found';
+        setTimeout(() => {
+          r.classList.add('show', found ? 'is-found' : 'is-missing');
+          const status = r.querySelector('.ha-r-status') as HTMLElement;
+          if (status) {
+            status.textContent = found ? '✓' : '✗';
+            status.classList.add(found ? 'ok' : 'no');
+          }
+        }, delay);
+      });
+
+      // Show score
+      setTimeout(() => {
+        scoreBar.classList.add('show');
+        scoreFill.style.width = TARGET_SCORE + '%';
+        animateScore(TARGET_SCORE);
+      }, 3800);
+
+      // Hold, then loop
+      setTimeout(() => {
+        scanline.style.opacity = '0';
+        setTimeout(run, 1200);
+      }, 7000);
+    }
+
+    // Start when visible
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        run();
+        observer.disconnect();
+      }
+    }, { threshold: 0.3 });
+
+    const container = document.querySelector('.hero-anim');
+    if (container) observer.observe(container);
+  }
+
+  document.addEventListener('DOMContentLoaded', initHeroAnimation);
+</script>

@@ -8,7 +8,7 @@ const steps = [
   {
     num: '02',
     title: 'Vi tester dit website',
-    desc: 'AI-synlighed på 5 platforme, 1 website og op til 5 nøglesider plus teknisk baseline.',
+    desc: 'AI-synlighed på 4 platforme, 1 website og op til 5 nøglesider plus teknisk baseline.',
   },
   {
     num: '03',
@@ -35,7 +35,7 @@ const steps = [
           {i < steps.length - 1 && (
             <div class="hidden md:block absolute top-8 left-full w-full h-px bg-gray-200 -translate-x-4" />
           )}
-          <div class="font-display text-5xl font-extrabold text-accent/20 mb-4">{step.num}</div>
+          <div class="font-display text-5xl font-extrabold text-gray-200 mb-4" aria-hidden="true">{step.num}</div>
           <h3 class="font-display text-lg font-bold text-brand mb-2">{step.title}</h3>
           <p class="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
         </div>
