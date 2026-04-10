@@ -26,13 +26,13 @@
   <text x="340" y="190" fill="#67E8F9" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-SYNLIGHED FOR DANSKE VIRKSOMHEDER</text>
   <text x="340" y="286" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="800">SitedokAI</text>
   <text x="340" y="356" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Få svar på om din hjemmeside bliver fundet i AI</text>
-  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">Introtilbud: 495 kr i 14 dage</text>
+  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">2.495 kr. Leveret som PDF inden for 48 timer.</text>
   <g transform="translate(340 474)">
     <rect width="250" height="64" rx="12" fill="#FBBF24"/>
-    <text x="28" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil introtilbud</text>
+    <text x="32" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil rapport</text>
   </g>
   <g transform="translate(628 485)">
-    <text fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">5 AI-platforme</text>
+    <text fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">4 AI-platforme</text>
     <text y="34" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">1 website + op til 5 sider</text>
     <text y="68" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">Kort PDF inden for 48 timer</text>
   </g>

@@ -10,9 +10,9 @@ export default {
           dark: '#020617',
         },
         accent: {
-          DEFAULT: '#06b6d4',
+          DEFAULT: '#0e7490',
+          bright: '#06b6d4',
           light: '#22d3ee',
-          dim: '#0e7490',
         },
         score: {
           green: '#22863a',

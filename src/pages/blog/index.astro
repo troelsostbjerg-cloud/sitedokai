@@ -39,13 +39,13 @@ const posts = [
             <a href={`/blog/${post.slug}`} class="bg-white border border-gray-200 p-6 hover:border-accent transition-colors group block">
               <div class="flex items-center gap-3 mb-4">
                 <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-1">{post.tag}</span>
-                <span class="text-xs text-gray-400">{post.readtime}</span>
+                <span class="text-xs text-gray-500">{post.readtime}</span>
               </div>
               <h2 class="font-display text-lg font-bold text-brand mb-3 group-hover:text-accent transition-colors leading-snug">
                 {post.title}
               </h2>
               <p class="text-sm text-gray-500 leading-relaxed mb-4">{post.description}</p>
-              <div class="text-xs text-gray-400">{post.date}</div>
+              <div class="text-xs text-gray-500">{post.date}</div>
             </a>
           ))}
         </div>

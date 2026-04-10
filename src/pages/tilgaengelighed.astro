@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Tilgængelighedserklæring — SitedokAI" description="SitedokAIs tilgængelighedserklæring i henhold til European Accessibility Act (EAA) og WCAG 2.1 AA.">
+  <Nav />
+  <main class="bg-white">
+    <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+      <h1 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-8">
+        Tilgængelighedserklæring
+      </h1>
+      <p class="text-gray-500 text-sm mb-12">Sidst opdateret: 9. april 2026</p>
+
+      <div class="space-y-10 text-gray-600 leading-relaxed">
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Overordnet status</h2>
+          <p>
+            SitedokAI (sitedokai.com) tilstræber at være i overensstemmelse med WCAG 2.1 niveau AA. Sitet er delvist i overensstemmelse med standarden.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Hvad vi har gjort</h2>
+          <ul class="list-disc list-inside space-y-1 ml-2">
+            <li>Semantisk HTML med korrekte overskriftshierarkier</li>
+            <li>Tilstrækkeligt farvekontrast-forhold på tekst og interaktive elementer</li>
+            <li>Skip-to-content link for tastaturnavigation</li>
+            <li>Alt-tekster på relevante billeder</li>
+            <li>Formularer med tilknyttede labels</li>
+            <li>Responsivt design der fungerer med zoom op til 200%</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Kendte begrænsninger</h2>
+          <p>Vi er opmærksomme på følgende områder der kan forbedres:</p>
+          <ul class="list-disc list-inside space-y-1 ml-2 mt-3">
+            <li>PDF-rapporter leveret til kunder er endnu ikke fuldt tilgængelige</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Feedback og kontakt</h2>
+          <p>
+            Oplever du problemer med tilgængeligheden på vores website, hører vi gerne fra dig. Kontakt os på
+            <a href="mailto:info@sitedokai.com" class="text-accent hover:text-accent-light transition-colors underline">info@sitedokai.com</a>.
+          </p>
+          <p class="mt-3">
+            Vi bestræber os på at svare inden for 5 hverdage og udbedre eventuelle tilgængelighedsproblemer hurtigst muligt.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Håndhævelse</h2>
+          <p>
+            Hvis du ikke er tilfreds med vores håndtering af din henvendelse, kan du klage til Digitaliseringsstyrelsen:<br />
+            <a href="https://www.digst.dk" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-light transition-colors underline">www.digst.dk</a>
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-xl font-bold text-brand mb-3">Seneste vurdering</h2>
+          <p>
+            Denne erklæring er baseret på en automatiseret test med axe-core samt manuel gennemgang, udført den 9. april 2026.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
