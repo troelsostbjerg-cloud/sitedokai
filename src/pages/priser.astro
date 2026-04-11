@@ -5,12 +5,25 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const included = [
-  'AI-synlighed testet på 4 AI-platforme: ChatGPT, Gemini, Google AI Overviews og Claude',
-  '10 tekniske tests: performance, sikkerhed, SEO-basics og Core Web Vitals',
-  'Konkurrent-benchmark mod relevante alternativer',
-  'Klar PDF-rapport med score, fund og prioriterede forbedringer',
+  'AI-synlighed testet på ChatGPT, Gemini, Google AI Overviews og Claude',
+  'Gennemgang af 1 website og op til 5 nøglesider',
+  'Teknisk baseline for performance, struktur, SEO og sikkerhed',
+  'Dansk PDF med score, fund og prioriterede forbedringer',
   'Levering inden for 48 timer på hverdage',
-  'Ingen abonnement, ingen binding, ingen møder',
+  'Ingen abonnement, ingen binding og ingen skjulte tillæg',
+];
+
+const trustBullets = [
+  'Sikker betaling via Stripe',
+  'Ordrebekræftelse fra info@sitedokai.com',
+  'Levering som PDF, ingen mødekrav bagefter',
+];
+
+const orderFlow = [
+  'Du udfylder formularen og går til betaling.',
+  'Vi bekræfter ordren på mail.',
+  'Vi tester website og nøglesider på tværs af AI-platforme og tekniske signaler.',
+  'Du modtager rapporten som PDF inden for 48 timer på hverdage.',
 ];
 
 const faqs = [
@@ -20,49 +33,42 @@ const faqs = [
   },
   {
     q: 'Hvad får jeg konkret?',
-    a: 'Du får en færdig PDF-rapport med AI-synlighedsscore, teknisk audit, benchmark mod konkurrenter og en prioriteret liste over de vigtigste forbedringer.',
+    a: 'Du får en færdig PDF-rapport med AI-synlighedsscore, teknisk audit, konkurrentblik og en prioriteret liste over de vigtigste forbedringer.',
   },
   {
     q: 'Skal jeg booke et møde eller en gennemgang?',
-    a: 'Nej. Produktet er bevidst simpelt. Du bestiller rapporten, vi leverer rapporten, og så er arbejdet færdigt.',
+    a: 'Nej. Produktet er bevidst enkelt. Du bestiller rapporten, vi leverer rapporten, og så kan du arbejde videre internt eller med din udvikler.',
   },
   {
     q: 'Hvor hurtigt leverer I?',
     a: 'Normalt inden for 48 timer på hverdage. Hvis din side er meget stor eller teknisk sær, siger vi det med det samme.',
   },
-  {
-    q: 'Hjælper I også med at implementere ændringerne?',
-    a: 'Nej. SitedokAI er et rapportprodukt, ikke et bureauforløb. Du får diagnosen og prioriteringen, men implementerer selv eller med din udvikler.',
-  },
-  {
-    q: 'Hvem giver det mening for?',
-    a: 'Det giver bedst mening for virksomheder med et rigtigt website og et kommercielt behov for at være synlige i søgning og AI-svar. Især e-commerce, B2B og servicesites.',
-  },
 ];
 ---
 
-<Layout title="Priser - SitedokAI" description="Én fast pris. Én rapport. 2.495 kr for en komplet AI-synlighedsrapport leveret som PDF.">
+<Layout title="Priser - SitedokAI" description="AI-synlighedsrapport til 2.495 kr. Fast pris, sikker betaling og levering som PDF inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl">
+        <div class="max-w-3xl">
+          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Fast pris</div>
           <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            Én pris. Én rapport. Færdigt arbejde.
+            AI-synlighedsrapport til 2.495 kr
           </h1>
-          <p class="text-lg text-gray-500">
-            SitedokAI er ikke et abonnement og ikke et konsulentforløb. Du bestiller en rapport til 2.495 kr, vi leverer rapporten som PDF, og så er den der.
+          <p class="text-lg text-gray-500 leading-relaxed">
+            SitedokAI er ét produkt med én fast pris. Du bestiller rapporten, betaler sikkert via Stripe og modtager en dansk PDF med score, fund og prioriterede forbedringer.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="bg-brand text-white">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-xl mx-auto bg-brand-light p-8 md:p-10 ring-2 ring-accent ring-inset">
+    <section class="bg-brand text-white border-b border-white/10">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
+        <div class="bg-brand-light p-8 md:p-10 ring-2 ring-accent ring-inset rounded-2xl">
           <div class="text-sm font-bold text-white/80 mb-3">SitedokAI Rapport</div>
           <div class="font-display text-4xl md:text-5xl font-extrabold text-white mb-1">2.495 kr</div>
-          <div class="text-sm text-white/40 mb-8">Engangskøb, ingen binding</div>
+          <div class="text-sm text-white/60 mb-8">Engangskøb, levering inden for 48 timer på hverdage</div>
 
           <ul class="space-y-3 mb-8">
             {included.map((item) => (
@@ -75,12 +81,44 @@ const faqs = [
             ))}
           </ul>
 
-          <a
-            href="/kontakt"
-            class="block text-center py-4 px-6 font-bold text-lg bg-amber-400 text-brand hover:bg-amber-300 transition-colors"
-          >
-            Bestil rapport
+          <a href="/kontakt" class="block text-center py-4 px-6 font-bold text-lg bg-amber-400 text-brand hover:bg-amber-300 transition-colors rounded-md mb-5">
+            Bestil AI-synlighedsrapport for 2.495 kr
           </a>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {trustBullets.map((item) => (
+              <div class="border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white/70 text-center">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
+            <div class="text-sm font-semibold uppercase tracking-wider text-accent-bright mb-3">Hvad sker der efter bestilling?</div>
+            <ol class="space-y-4">
+              {orderFlow.map((item, index) => (
+                <li class="flex items-start gap-4 text-sm text-white/70 leading-relaxed">
+                  <span class="w-8 h-8 rounded-full bg-white/10 text-white font-bold flex items-center justify-center flex-shrink-0">{index + 1}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
+            <h2 class="font-display text-2xl font-bold text-white mb-4">Vil du se leverancen først?</h2>
+            <p class="text-white/70 text-sm leading-relaxed mb-5">
+              Se eksempelrapporten og få en konkret fornemmelse af hvordan score, platformsvurderinger og anbefalinger bliver præsenteret.
+            </p>
+            <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-accent-bright hover:text-accent-light transition-colors">
+              Se eksempelrapporten
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -104,13 +142,13 @@ const faqs = [
     <section class="bg-gray-50">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
         <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-          Klar til at se hvordan din side ser ud i AI?
+          Klar til at få din AI-synlighed vurderet?
         </h2>
-        <p class="text-lg text-gray-500 mb-8">
-          Bestil rapporten i dag. Du får en klar PDF med fund, score og prioriteter. Ingen møder bagefter.
+        <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
+          Bestil rapporten i dag og få en konkret leverance på dansk, uden abonnement og uden et langt bureauforløb bagefter.
         </p>
-        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors">
-          Bestil rapport — 2.495 kr
+        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md">
+          Bestil AI-synlighedsrapport for 2.495 kr
         </a>
       </div>
     </section>

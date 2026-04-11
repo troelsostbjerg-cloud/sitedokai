@@ -3,19 +3,39 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const trustBullets = [
+  'Ingen abonnement eller binding',
+  'Sikker betaling via Stripe',
+  'Ordrebekræftelse og levering fra info@sitedokai.com',
+];
+
+const steps = [
+  'Udfyld formularen med navn, email og website.',
+  'Du går videre til sikker betaling på 2.495 kr.',
+  'Vi bekræfter ordren og starter gennemgangen samme hverdag eller næste hverdag.',
+  'Du modtager rapporten som PDF inden for 48 timer på hverdage.',
+];
+
+const included = [
+  'AI-synlighed på 4 platforme',
+  'Gennemgang af 1 website og op til 5 nøglesider',
+  'Teknisk baseline og prioriterede anbefalinger',
+];
 ---
 
-<Layout title="Bestil rapport - SitedokAI" description="Bestil en AI-synlighedsrapport fra SitedokAI for 2.495 kr. Leveret som PDF inden for 48 timer på hverdage.">
+<Layout title="Bestil AI-synlighedsrapport - SitedokAI" description="Bestil AI-synlighedsrapporten fra SitedokAI for 2.495 kr. Sikker betaling, ordrebekræftelse på mail og levering som PDF inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl">
+        <div class="max-w-3xl">
+          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Bestil rapporten</div>
           <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            Bestil din rapport
+            Bestil AI-synlighedsrapport for 2.495 kr
           </h1>
-          <p class="text-lg text-gray-500">
-            SitedokAI er et enkelt produkt: en AI-synlighedsrapport til 2.495 kr. Ingen møder, ingen abonnement, ingen efterfølgende konsulentforløb.
+          <p class="text-lg text-gray-500 leading-relaxed">
+            Udfyld formularen, betal sikkert via Stripe, og modtag en dansk PDF med score, fund og prioriterede forbedringer. Hele flowet er gjort enkelt, tydeligt og uden abonnement.
           </p>
         </div>
       </div>
@@ -23,8 +43,8 @@ import '../styles/global.css';
 
     <section class="bg-gray-50">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
             <h2 class="font-display text-2xl font-bold text-brand mb-8">Indsend din bestilling</h2>
             <form action="https://formsubmit.co/info@sitedokai.com" method="POST" class="space-y-6">
               <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI rapport" />
@@ -35,54 +55,22 @@ import '../styles/global.css';
 
               <div>
                 <label for="name" class="block text-sm font-semibold text-brand mb-2">Dit navn *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  aria-required="true"
-                  class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors"
-                />
+                <input type="text" id="name" name="name" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
               </div>
 
               <div>
                 <label for="email" class="block text-sm font-semibold text-brand mb-2">Email-adresse *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  aria-required="true"
-                  class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors"
-                />
+                <input type="email" id="email" name="email" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
               </div>
 
               <div>
                 <label for="website" class="block text-sm font-semibold text-brand mb-2">Website URL *</label>
-                <input
-                  type="text"
-                  inputmode="url"
-                  autocomplete="url"
-                  autocapitalize="none"
-                  spellcheck="false"
-                  id="website"
-                  name="website"
-                  placeholder="www.example.dk"
-                  required
-                  aria-required="true"
-                  class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors"
-                />
+                <input type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" id="website" name="website" placeholder="www.example.dk" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
               </div>
 
               <div>
                 <label for="message" class="block text-sm font-semibold text-brand mb-2">Noter (valgfri)</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="5"
-                  placeholder="Branche, konkurrenter eller særlige sider vi skal være opmærksomme på"
-                  class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical"
-                ></textarea>
+                <textarea id="message" name="message" rows="5" placeholder="Branche, konkurrenter eller særlige sider vi skal være opmærksomme på" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical"></textarea>
               </div>
 
               <div class="flex items-start gap-3">
@@ -92,42 +80,53 @@ import '../styles/global.css';
                 </label>
               </div>
 
-              <p class="text-xs text-gray-500 leading-relaxed">
-                Når du klikker nedenfor, modtager vi din bestilling og du videresendes til betaling via Stripe (2.495 kr). Rapporten leveres inden for 48 timer på hverdage.
-              </p>
-              <button
-                type="submit"
-                class="w-full bg-amber-400 text-brand py-4 px-8 font-bold text-lg hover:bg-amber-300 transition-colors"
-              >
-                Bestil og betal — 2.495 kr →
+              <button type="submit" class="w-full bg-amber-400 text-brand py-4 px-8 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md">
+                Bestil AI-synlighedsrapport for 2.495 kr
               </button>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {trustBullets.map((item) => (
+                  <div class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-600 text-center">
+                    {item}
+                  </div>
+                ))}
+              </div>
+
+              <p class="text-xs text-gray-500 leading-relaxed">
+                Når du klikker på knappen, modtager vi din bestilling og du videresendes til betaling via Stripe. Derefter bekræfter vi ordren på mail.
+              </p>
             </form>
           </div>
 
-          <div class="space-y-10">
-            <div>
-              <h2 class="font-display text-2xl font-bold text-brand mb-6">Det får du</h2>
-              <div class="space-y-4">
-                <div class="bg-white border border-gray-200 p-6">
-                  <div class="text-sm font-bold text-brand mb-1">Leverance</div>
-                  <div class="text-gray-500">Færdig PDF-rapport med AI-synlighed, tekniske fund og prioriterede forbedringer</div>
-                </div>
-                <div class="bg-white border border-gray-200 p-6">
-                  <div class="text-sm font-bold text-brand mb-1">Leveringstid</div>
-                  <div class="text-gray-500">Normalt inden for 48 timer på hverdage</div>
-                </div>
-                <div class="bg-white border border-gray-200 p-6">
-                  <div class="text-sm font-bold text-brand mb-1">Pris</div>
-                  <div class="text-gray-500">2.495 kr som engangsbeløb</div>
-                </div>
-              </div>
+          <div class="space-y-6">
+            <div class="bg-brand text-white rounded-2xl p-6 md:p-8">
+              <h2 class="font-display text-2xl font-bold mb-6">Hvad sker der efter bestilling?</h2>
+              <ol class="space-y-4">
+                {steps.map((step, index) => (
+                  <li class="flex items-start gap-4 text-sm text-white/70 leading-relaxed">
+                    <span class="w-8 h-8 rounded-full bg-white/10 text-white font-bold flex items-center justify-center flex-shrink-0">{index + 1}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <div class="bg-brand text-white p-8">
-              <h3 class="font-display text-xl font-bold mb-3">Direkte og simpelt</h3>
-              <p class="text-white/60 mb-0 text-sm leading-relaxed">
-                Du bestiller rapporten. Vi laver rapporten. Du får rapporten. Det er hele modellen.
-              </p>
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
+              <h3 class="font-display text-xl font-bold text-brand mb-4">Det får du</h3>
+              <ul class="space-y-3 text-sm text-gray-600 mb-6">
+                {included.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-accent transition-colors">
+                Se eksempelrapporten først
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>

@@ -3,122 +3,153 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const pillars = [
+  {
+    title: '4 AI-platforme',
+    text: 'ChatGPT, Gemini, Google AI Overviews og Claude testes med relevante branchesøgninger og svaranalyse.',
+  },
+  {
+    title: 'Teknisk baseline',
+    text: 'Rapporten vurderer blandt andet performance, struktur, indekserbarhed, sikkerhed og centrale SEO-signaler.',
+  },
+  {
+    title: 'Manuel prioritering',
+    text: 'Fundene sorteres og forklares på dansk, så det er tydeligt hvad der skal løses først, og hvorfor det betyder noget.',
+  },
+];
+
+const method = [
+  {
+    title: '1. Prompttests og svaranalyse',
+    text: 'Vi tester om virksomheden bliver nævnt, hvordan den beskrives, og hvilke konkurrenter der fylder i svarene.',
+  },
+  {
+    title: '2. Kilde- og synlighedstjek',
+    text: 'Vi ser på om AI-svar bygger på opdaterede kilder, samt om virksomhedsdata og vigtige sider er nemme at forstå.',
+  },
+  {
+    title: '3. Teknisk gennemgang',
+    text: 'Vi vurderer de signaler som påvirker crawlbarhed, performance, struktur og tillid i et AI-præget søgelandskab.',
+  },
+  {
+    title: '4. Prioriteret leverance',
+    text: 'Rapporten slutter med de vigtigste anbefalinger i prioriteret rækkefølge, så teamet hurtigt kan handle på dem.',
+  },
+];
+
+const trust = [
+  'Fast produkt og fast pris. Ingen skjult upsell til et konsulentforløb.',
+  'Dansk leverance med tydelige fund, ikke generiske AI-buzzwords.',
+  'Ordre, support og levering håndteres fra info@sitedokai.com.',
+];
 ---
 
-<Layout title="Om SitedokAI" description="SitedokAI er et dansk website audit bureau. Vi giver danske SMV'er et klart billede af, hvad Google AI ser på deres hjemmeside.">
+<Layout title="Om SitedokAI" description="Se metoden bag SitedokAI. AI-synlighedsrapporten kombinerer prompttests, teknisk gennemgang og prioriterede anbefalinger i en dansk PDF.">
   <Nav />
   <main>
-    <!-- Hero / Story -->
     <section class="bg-white border-b border-gray-200">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          <div>
-            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-6">
-              Om SitedokAI
-            </h1>
-            <div class="space-y-4 text-gray-500 leading-relaxed">
-              <p>
-                Jeg byggede SitedokAI fordi jeg så hvordan AI-søgning var ved at ændre alt — og at det kun var de store virksomheder med dedikerede AI-afdelinger der var forberedt.
-              </p>
-              <p>
-                Mindre virksomheder har ikke tid til at sætte sig ind i GEO, AI Overviews og prompt-optimering. De har en forretning at drive. Men hvis de ikke dukker op når kunderne spørger ChatGPT, taber de kunder de aldrig vidste de mistede.
-              </p>
-              <p>
-                SitedokAI giver dem det samme overblik som de store har — i én rapport, til én fair pris, med klart sprog. Ingen 100-siders analyser. Bare: "her er problemet, her er løsningen, her starter du."
-              </p>
-            </div>
+        <div class="max-w-3xl mb-12">
+          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Metode og troværdighed</div>
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-6">
+            SitedokAI er bygget som et konkret rapportprodukt, ikke som løs mission-copy.
+          </h1>
+          <div class="space-y-4 text-lg text-gray-500 leading-relaxed">
+            <p>
+              Formålet er enkelt: at gøre det tydeligt om en virksomhed faktisk bliver fundet og anbefalet i AI-svar, og hvad der skal forbedres først, hvis svaret er nej.
+            </p>
+            <p>
+              Rapporten samler prompttests, kildeanalyse og teknisk gennemgang i én leverance. Det gør den brugbar for ledelse, marketing og udvikling på samme tid.
+            </p>
           </div>
+        </div>
 
-          <div class="space-y-6">
-            <div class="bg-gray-50 border border-gray-200 p-6">
-              <div class="font-display text-2xl font-extrabold text-accent mb-1">4 AI-platforme</div>
-              <div class="text-sm text-gray-500">ChatGPT, Gemini, Google AI Overviews, Claude</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {pillars.map((item) => (
+            <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+              <div class="font-display text-2xl font-extrabold text-brand mb-3">{item.title}</div>
+              <p class="text-sm text-gray-500 leading-relaxed">{item.text}</p>
             </div>
-            <div class="bg-gray-50 border border-gray-200 p-6">
-              <div class="font-display text-2xl font-extrabold text-brand mb-1">10 tests</div>
-              <div class="text-sm text-gray-500">Teknisk sundhed baseret på Google PageSpeed API</div>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 p-6">
-              <div class="font-display text-2xl font-extrabold text-brand mb-1">Kilde-analyse</div>
-              <div class="text-sm text-gray-500">Vi viser hvorfor AI anbefaler konkurrenter i stedet for dig</div>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 p-6">
-              <div class="font-display text-2xl font-extrabold text-brand mb-1">Handlingsbar</div>
-              <div class="text-sm text-gray-500">Konkrete anbefalinger med hvem, hvad, hvornår</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Mission -->
-    <section class="bg-brand text-white">
+    <section class="bg-brand text-white border-b border-white/10">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl">
-          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            Mission
+        <div class="max-w-3xl mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Sådan arbejder SitedokAI
           </h2>
-          <p class="text-lg text-white/60 leading-relaxed mb-4">
-            At gøre AI-synlighed tilgængelig for alle virksomheder — ikke kun dem med store budgetter og dedikerede AI-teams.
+          <p class="text-lg text-white/70 leading-relaxed">
+            Metoden er lavet til virksomheder, som har brug for et klart billede af deres AI-synlighed uden at købe et stort analyseforløb først.
           </p>
-          <p class="text-white/40 leading-relaxed">
-            Lige nu afgør AI-søgemaskiner hvem der bliver anbefalet til kunderne. De store virksomheder optimerer aktivt for det. Vi sørger for at resten ikke bliver overhalet.
-          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {method.map((item) => (
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <h3 class="font-display text-xl font-bold mb-3">{item.title}</h3>
+              <p class="text-white/70 leading-relaxed text-sm">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Values -->
     <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12">
-          Hvad vi tror på
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <h3 class="font-display text-xl font-bold text-brand mb-3">Transparens</h3>
-            <p class="text-gray-500 leading-relaxed">
-              Vi viser dig vores metode. Ikke black box. Du ved, hvad du får, og hvorfor det betyder noget.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-display text-xl font-bold text-brand mb-3">Data over mavefornemmelse</h3>
-            <p class="text-gray-500 leading-relaxed">
-              Vi scanner ikke subjektivt. Vi måler hvad AI ser, hvordan det ranker, og hvad konkurrenterne gør. Så handler du på fakta.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-display text-xl font-bold text-brand mb-3">Konkrete handlinger over lange analyser</h3>
-            <p class="text-gray-500 leading-relaxed">
-              En rapport på 100 sider hjælper ikke. Vi giver dig fem prioriterede forbedringer, som du kan handle på denne uge.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-display text-xl font-bold text-brand mb-3">Dansk først</h3>
-            <p class="text-gray-500 leading-relaxed">
-              Vi bygger for danske virksomheder. Vi kender sproget, markedet og kulturen. Dansk sprog, dansk support, dansk tænkning.
-            </p>
-          </div>
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+        <div>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-6">
+            Hvad gør rapporten troværdig?
+          </h2>
+          <p class="text-lg text-gray-500 leading-relaxed mb-8">
+            SitedokAI prøver ikke at være alt for alle. Produktet er afgrænset, leverancen er tydelig, og anbefalingerne er lavet til at kunne bruges i praksis.
+          </p>
+          <ul class="space-y-4">
+            {trust.map((item) => (
+              <li class="flex items-start gap-3 text-gray-600 leading-relaxed">
+                <svg class="w-5 h-5 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8">
+          <div class="text-xs font-semibold uppercase tracking-wider text-accent mb-3">Eksempel på leverance</div>
+          <h3 class="font-display text-2xl font-bold text-brand mb-4">Fra bestilling til færdig PDF</h3>
+          <p class="text-sm text-gray-500 leading-relaxed mb-6">
+            Når du bestiller, bekræfter vi ordren på mail, gennemgår website og nøglesider, og sender derefter en dansk rapport med score, fund og prioriteringer inden for 48 timer på hverdage.
+          </p>
+          <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-accent transition-colors">
+            Se eksempelrapporten
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="bg-gray-50">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
         <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-          Vil du vide mere?
+          Klar til at få vurderet din AI-synlighed?
         </h2>
-        <p class="text-lg text-gray-500 mb-8">
-          Bestil rapporten direkte eller gå til bestillingssiden.
+        <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
+          Du får en konkret rapport til 2.495 kr, leveret som PDF og uden abonnement eller skjult konsulentforløb.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors">
-            Bestil rapport
-          </a>
-          <a href="/priser" class="inline-block border-2 border-brand text-brand py-4 px-10 font-bold text-lg hover:bg-brand hover:text-white transition-colors">
-            Se pris
-          </a>
+        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md mb-6">
+          Bestil AI-synlighedsrapport for 2.495 kr
+        </a>
+        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-500">
+          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Sikker betaling via Stripe</span>
+          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Ordrebekræftelse fra info@sitedokai.com</span>
+          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Levering inden for 48 timer på hverdage</span>
         </div>
       </div>
     </section>

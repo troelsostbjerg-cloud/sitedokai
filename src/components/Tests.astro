@@ -2,8 +2,8 @@
 const aiTests = [
   {
     title: 'ChatGPT',
-    desc: 'Bliver din virksomhed anbefalet når kunder spørger ChatGPT om dit fagområde?',
-    source: 'OpenAI API',
+    desc: 'Bliver din virksomhed anbefalet, når kunder spørger ChatGPT om dit fagområde?',
+    source: 'Prompttests og svaranalyse',
     color: '#10a37f',
     bg: 'rgba(16,163,127,0.08)',
     border: 'rgba(16,163,127,0.2)',
@@ -12,7 +12,7 @@ const aiTests = [
   {
     title: 'Gemini',
     desc: 'Anbefaler Googles Gemini din virksomhed i relevante branchesøgninger?',
-    source: 'Google Gemini API',
+    source: 'Prompttests og kildekontrol',
     color: '#8a64ff',
     bg: 'rgba(138,100,255,0.08)',
     border: 'rgba(138,100,255,0.2)',
@@ -21,7 +21,7 @@ const aiTests = [
   {
     title: 'Google AI Overviews',
     desc: 'Vises du i Googles AI-genererede svar øverst i søgeresultaterne?',
-    source: 'Google Search',
+    source: 'Søgninger og kildeudtræk',
     color: '#4285f4',
     bg: 'rgba(66,133,244,0.08)',
     border: 'rgba(66,133,244,0.2)',
@@ -29,8 +29,8 @@ const aiTests = [
   },
   {
     title: 'Claude',
-    desc: 'Nævner Anthropics Claude din virksomhed i relevante branchesøgninger?',
-    source: 'Claude API',
+    desc: 'Nævner Claude din virksomhed i relevante branchesøgninger?',
+    source: 'Prompttests og citationscheck',
     color: '#d9773e',
     bg: 'rgba(217,119,62,0.08)',
     border: 'rgba(217,119,62,0.2)',
@@ -69,30 +69,24 @@ const techTests = [
 
 <section id="tests" class="bg-gray-50 border-b border-gray-200">
   <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-    <!-- AI Visibility tests -->
     <div class="mb-20">
       <div class="inline-flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-        Primær analyse — 80% af rapporten
+        Primær analyse, 80% af rapporten
       </div>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-        AI-synlighed: Kan AI finde dig?
+        AI-synlighed: Kan AI finde og anbefale dig?
       </h2>
-      <p class="text-lg text-gray-500 max-w-2xl mb-10">
-        Ingen kan selv tjekke deres AI-synlighed. De store hyrer konsulenter til det. Vi giver dig samme indsigt til en fast pris — testet på tværs af 4 AI-platforme med branchespecifikke søgninger.
+      <p class="text-lg text-gray-500 max-w-3xl mb-10 leading-relaxed">
+        Rapporten kombinerer prompttests, svaranalyse og kildekontrol på tværs af 4 AI-platforme. Du kan se hvor du bliver nævnt, hvor du overses, og hvilke konkurrenter der tager pladsen i stedet.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {aiTests.map((test) => (
-          <div
-            class="relative bg-white rounded-xl border border-gray-200 p-6 md:p-8 hover:shadow-md transition-shadow overflow-hidden"
-          >
+          <div class="relative bg-white rounded-xl border border-gray-200 p-6 md:p-8 hover:shadow-md transition-shadow overflow-hidden">
             <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={`background: ${test.color}`}></div>
             <div class="flex items-start gap-4">
-              <div
-                class="w-11 h-11 flex items-center justify-center rounded-lg flex-shrink-0"
-                style={`background: ${test.bg}; border: 1px solid ${test.border}`}
-              >
+              <div class="w-11 h-11 flex items-center justify-center rounded-lg flex-shrink-0" style={`background: ${test.bg}; border: 1px solid ${test.border}`}>
                 <svg class="w-5 h-5" fill="none" stroke={test.color} viewBox="0 0 24 24">
                   <Fragment set:html={test.icon} />
                 </svg>
@@ -108,15 +102,17 @@ const techTests = [
       </div>
     </div>
 
-    <!-- Technical tests -->
     <div>
       <div class="inline-flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-4">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-        Teknisk sundhed — 20% af rapporten
+        Teknisk sundhed, 20% af rapporten
       </div>
       <h3 class="font-display text-2xl font-bold text-brand tracking-tight mb-6">
-        Website performance og sikkerhed
+        Website performance, struktur og sikkerhed
       </h3>
+      <p class="text-gray-500 max-w-3xl mb-8 leading-relaxed">
+        AI-synlighed er ikke kun prompts. Rapporten gennemgår også de signaler, der gør et website lettere at forstå og citere, blandt andet performance, indekserbarhed, struktur og teknisk kvalitet.
+      </p>
 
       <div class="flex flex-wrap gap-3">
         {techTests.map((test) => (
