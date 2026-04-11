@@ -2,9 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Tests from '../components/Tests.astro';
-import HowItWorks from '../components/HowItWorks.astro';
+import WhyNotDIY from '../components/WhyNotDIY.astro';
+import DemoSlides from '../components/DemoSlides.astro';
 import Pricing from '../components/Pricing.astro';
+import MiniTest from '../components/MiniTest.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
@@ -100,81 +101,10 @@ const structuredData = {
   <Nav />
   <main id="main">
     <Hero />
-
-    <!-- Prominent eksempelrapport-sektion -->
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
-            <p class="text-sm font-bold text-accent uppercase tracking-wider mb-3">Se hvad du får</p>
-            <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-              Eksempel: AI-synlighedsrapport for Nordisk Køkken
-            </h2>
-            <p class="text-gray-500 leading-relaxed mb-4">
-              Se en komplet rapport med AI-synlighedsscore, platformanalyse, teknisk audit og prioriterede forbedringer. Præcis hvad du får for din virksomhed.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-500 mb-6">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                AI-synlighed testet på ChatGPT, Gemini, Claude og Google AI
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Konkurrent-benchmark med kilde-analyse
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Teknisk audit: performance, SEO, sikkerhed, Core Web Vitals
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Prioriterede forbedringer du kan handle på med det samme
-              </li>
-            </ul>
-            <div class="flex flex-col sm:flex-row gap-3">
-              <a href="/eksempel" class="inline-block bg-amber-400 text-brand px-6 py-3 font-bold hover:bg-amber-300 transition-colors">
-                Se eksempelrapporten
-              </a>
-              <a href="/demo-rapport.html" class="inline-block border-2 border-brand text-brand px-6 py-3 font-bold hover:bg-brand hover:text-white transition-colors">
-                Se den fulde PDF
-              </a>
-            </div>
-          </div>
-          <div class="bg-gray-50 border border-gray-200 rounded-2xl p-8 text-center">
-            <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold mb-3">Samlet score</p>
-            <div class="inline-flex items-end gap-2 mb-3">
-              <span class="font-display text-6xl font-extrabold text-red-500">32</span>
-              <span class="text-xl text-gray-300 font-bold mb-2">/100</span>
-            </div>
-            <div class="inline-block bg-red-50 text-red-500 text-sm font-bold px-4 py-1.5 rounded-full mb-4">
-              Lav synlighed
-            </div>
-            <div class="grid grid-cols-2 gap-3 mt-4">
-              <div class="bg-white border border-gray-200 rounded-lg p-3">
-                <div class="text-xs text-gray-400 mb-1">ChatGPT</div>
-                <div class="text-sm font-bold text-red-500">Ikke synlig</div>
-              </div>
-              <div class="bg-white border border-gray-200 rounded-lg p-3">
-                <div class="text-xs text-gray-400 mb-1">Google AI</div>
-                <div class="text-sm font-bold text-red-500">Konkurrent dominerer</div>
-              </div>
-              <div class="bg-white border border-gray-200 rounded-lg p-3">
-                <div class="text-xs text-gray-400 mb-1">Claude</div>
-                <div class="text-sm font-bold text-yellow-500">Begrænset</div>
-              </div>
-              <div class="bg-white border border-gray-200 rounded-lg p-3">
-                <div class="text-xs text-gray-400 mb-1">Gemini</div>
-                <div class="text-sm font-bold text-yellow-500">Forældet info</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <Tests />
-    <HowItWorks />
+    <DemoSlides />
+    <WhyNotDIY />
     <Pricing />
+    <MiniTest />
     <FAQ faqs={faqs} />
     <Contact />
   </main>

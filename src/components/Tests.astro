@@ -2,8 +2,8 @@
 const aiTests = [
   {
     title: 'ChatGPT',
-    desc: 'Bliver din virksomhed anbefalet, når kunder spørger ChatGPT om dit fagområde?',
-    source: 'Prompttests og svaranalyse',
+    desc: 'Bliver din virksomhed anbefalet når kunder spørger ChatGPT om dit fagområde?',
+    source: 'OpenAI API',
     color: '#10a37f',
     bg: 'rgba(16,163,127,0.08)',
     border: 'rgba(16,163,127,0.2)',
@@ -12,7 +12,7 @@ const aiTests = [
   {
     title: 'Gemini',
     desc: 'Anbefaler Googles Gemini din virksomhed i relevante branchesøgninger?',
-    source: 'Prompttests og kildekontrol',
+    source: 'Google Gemini API',
     color: '#8a64ff',
     bg: 'rgba(138,100,255,0.08)',
     border: 'rgba(138,100,255,0.2)',
@@ -21,7 +21,7 @@ const aiTests = [
   {
     title: 'Google AI Overviews',
     desc: 'Vises du i Googles AI-genererede svar øverst i søgeresultaterne?',
-    source: 'Søgninger og kildeudtræk',
+    source: 'Google Search',
     color: '#4285f4',
     bg: 'rgba(66,133,244,0.08)',
     border: 'rgba(66,133,244,0.2)',
@@ -29,8 +29,8 @@ const aiTests = [
   },
   {
     title: 'Claude',
-    desc: 'Nævner Claude din virksomhed i relevante branchesøgninger?',
-    source: 'Prompttests og citationscheck',
+    desc: 'Nævner Anthropics Claude din virksomhed i relevante branchesøgninger?',
+    source: 'Claude API',
     color: '#d9773e',
     bg: 'rgba(217,119,62,0.08)',
     border: 'rgba(217,119,62,0.2)',
@@ -42,26 +42,51 @@ const techTests = [
   {
     title: 'Desktop',
     desc: 'Hastighed og stabilitet',
+    score: 92,
+    grade: 'Fremragende',
+    gradeColor: '#22863a',
+    gradeBg: 'rgba(34,134,58,0.1)',
+    ringColor: '#22863a',
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
   },
   {
     title: 'Mobil',
     desc: 'Smartphone-oplevelse',
+    score: 78,
+    grade: 'God',
+    gradeColor: '#b08800',
+    gradeBg: 'rgba(176,136,0,0.1)',
+    ringColor: '#f59e0b',
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />',
   },
   {
     title: 'Sikkerhed',
     desc: 'SSL og headers',
+    score: 96,
+    grade: 'Fremragende',
+    gradeColor: '#22863a',
+    gradeBg: 'rgba(34,134,58,0.1)',
+    ringColor: '#22863a',
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />',
   },
   {
     title: 'SEO',
     desc: 'Meta-tags og struktur',
+    score: 85,
+    grade: 'God',
+    gradeColor: '#22863a',
+    gradeBg: 'rgba(34,134,58,0.1)',
+    ringColor: '#22863a',
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />',
   },
   {
     title: 'Web Vitals',
     desc: 'Googles UX-metrics',
+    score: 71,
+    grade: 'Forbedring',
+    gradeColor: '#b08800',
+    gradeBg: 'rgba(176,136,0,0.1)',
+    ringColor: '#f59e0b',
     icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
   },
 ];
@@ -69,24 +94,30 @@ const techTests = [
 
 <section id="tests" class="bg-gray-50 border-b border-gray-200">
   <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <!-- AI Visibility tests -->
     <div class="mb-20">
       <div class="inline-flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-        Primær analyse, 80% af rapporten
+        Primær analyse — 80% af rapporten
       </div>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-        AI-synlighed: Kan AI finde og anbefale dig?
+        AI-synlighed: Kan AI finde dig?
       </h2>
-      <p class="text-lg text-gray-500 max-w-3xl mb-10 leading-relaxed">
-        Rapporten kombinerer prompttests, svaranalyse og kildekontrol på tværs af 4 AI-platforme. Du kan se hvor du bliver nævnt, hvor du overses, og hvilke konkurrenter der tager pladsen i stedet.
+      <p class="text-lg text-gray-500 max-w-2xl mb-10">
+        Vi tester systematisk din synlighed på tværs af 4 AI-platforme med branchespecifikke søgninger — så du ved præcis hvor du står, og hvad der skal til for at dukke op.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {aiTests.map((test) => (
-          <div class="relative bg-white rounded-xl border border-gray-200 p-6 md:p-8 hover:shadow-md transition-shadow overflow-hidden">
+          <div
+            class="relative bg-white rounded-xl border border-gray-200 p-6 md:p-8 hover:shadow-md transition-shadow overflow-hidden"
+          >
             <div class="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={`background: ${test.color}`}></div>
             <div class="flex items-start gap-4">
-              <div class="w-11 h-11 flex items-center justify-center rounded-lg flex-shrink-0" style={`background: ${test.bg}; border: 1px solid ${test.border}`}>
+              <div
+                class="w-11 h-11 flex items-center justify-center rounded-lg flex-shrink-0"
+                style={`background: ${test.bg}; border: 1px solid ${test.border}`}
+              >
                 <svg class="w-5 h-5" fill="none" stroke={test.color} viewBox="0 0 24 24">
                   <Fragment set:html={test.icon} />
                 </svg>
@@ -102,32 +133,69 @@ const techTests = [
       </div>
     </div>
 
+    <!-- Technical tests -->
     <div>
       <div class="inline-flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-4">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-        Teknisk sundhed, 20% af rapporten
+        Teknisk sundhed — 20% af rapporten
       </div>
       <h3 class="font-display text-2xl font-bold text-brand tracking-tight mb-6">
-        Website performance, struktur og sikkerhed
+        Website performance og sikkerhed
       </h3>
-      <p class="text-gray-500 max-w-3xl mb-8 leading-relaxed">
-        AI-synlighed er ikke kun prompts. Rapporten gennemgår også de signaler, der gør et website lettere at forstå og citere, blandt andet performance, indekserbarhed, struktur og teknisk kvalitet.
-      </p>
 
-      <div class="flex flex-wrap gap-3">
-        {techTests.map((test) => (
-          <div class="flex items-center gap-3 bg-white border border-gray-200 rounded-lg px-5 py-3.5 hover:shadow-sm transition-shadow">
-            <div class="w-8 h-8 flex items-center justify-center text-gray-400">
-              <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <Fragment set:html={test.icon} />
-              </svg>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        {techTests.map((test) => {
+          const C = 100.53; // circumference of r=16 circle
+          const dash = (test.score / 100) * C;
+          const gap = C - dash;
+          return (
+            <div class="group bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md hover:border-accent/30 transition-all duration-200 flex flex-col gap-4">
+              <!-- Icon + title -->
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 flex items-center justify-center rounded-lg bg-accent/8 flex-shrink-0">
+                  <svg class="w-4.5 h-4.5" fill="none" stroke="#0e7490" viewBox="0 0 24 24">
+                    <Fragment set:html={test.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-brand leading-tight">{test.title}</div>
+                  <div class="text-xs text-gray-400 leading-tight mt-0.5">{test.desc}</div>
+                </div>
+              </div>
+
+              <!-- Score ring + number -->
+              <div class="flex items-center gap-3">
+                <div class="relative flex-shrink-0">
+                  <svg width="44" height="44" viewBox="0 0 44 44" class="rotate-[-90deg]">
+                    <!-- Track -->
+                    <circle cx="22" cy="22" r="16" fill="none" stroke="#e5e7eb" stroke-width="3.5" />
+                    <!-- Progress -->
+                    <circle
+                      cx="22" cy="22" r="16"
+                      fill="none"
+                      stroke={test.ringColor}
+                      stroke-width="3.5"
+                      stroke-linecap="round"
+                      stroke-dasharray={`${dash} ${gap}`}
+                    />
+                  </svg>
+                  <span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold" style={`color: ${test.ringColor}`}>
+                    {test.score}
+                  </span>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-xs font-semibold px-2 py-0.5 rounded-full inline-block" style={`color: ${test.gradeColor}; background: ${test.gradeBg}`}>
+                    {test.grade}
+                  </div>
+                  <!-- Progress bar -->
+                  <div class="mt-2 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full transition-all" style={`width: ${test.score}%; background: ${test.ringColor}`}></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <div class="text-sm font-bold text-brand">{test.title}</div>
-              <div class="text-xs text-gray-400">{test.desc}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </div>

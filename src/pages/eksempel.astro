@@ -3,207 +3,191 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-
-const trustBullets = [
-  'Samme leverancetype som den betalte rapport',
-  'Fast pris på 2.495 kr og levering inden for 48 timer på hverdage',
-  'Ordrebekræftelse og support fra info@sitedokai.com',
-];
 ---
 
-<Layout title="Eksempelrapport - SitedokAI" description="Se et eksempel på en SitedokAI AI-synlighedsrapport og forstå hvad du får for 2.495 kr.">
+<Layout title="Eksempelrapport — SitedokAI" description="Se et eksempel på en SitedokAI AI-synlighedsrapport. Forstå hvad du får for 2.495 kr.">
   <Nav />
-  <main class="bg-gray-50 min-h-screen">
+  <main>
+
+    <!-- Report Header -->
+    <section class="bg-brand border-b border-white/10">
+      <div class="max-w-4xl mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-20">
+        <p class="text-sm text-accent-light font-semibold uppercase tracking-wider mb-3">Eksempelrapport</p>
+        <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">
+          Nordisk Køkken
+        </h1>
+        <p class="text-white/50 text-lg mb-2">AI-synlighed & teknisk website audit</p>
+        <p class="text-white/30 text-sm">Genereret 5. april 2026 &middot; SitedokAI</p>
+        <p class="mt-6 text-sm text-white/40 border border-white/10 inline-block px-4 py-2 rounded-lg">
+          Fiktiv virksomhed — din rapport vil være tilpasset din virksomhed.
+          <a href="/demo-rapport.html" class="text-accent-light underline ml-1 hover:text-white transition-colors">Se fuld PDF &rarr;</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Overall Score -->
     <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20">
-        <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
-          <div>
-            <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Eksempelrapport</div>
-            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-              Se hvordan en AI-synlighedsrapport ser ud i praksis
-            </h1>
-            <p class="text-lg text-gray-500 leading-relaxed mb-8">
-              Her ser du en fiktiv eksempelrapport for Nordisk Køkken. Struktur, niveau og leverancetype svarer til det du får, når du bestiller SitedokAI-rapporten til 2.495 kr.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 mb-6">
-              <a href="/kontakt" class="inline-block bg-amber-400 text-brand px-8 py-4 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md text-center">
-                Bestil AI-synlighedsrapport for 2.495 kr
-              </a>
-              <a href="/demo-rapport.html" class="inline-block border border-gray-300 text-brand px-8 py-4 font-semibold text-lg hover:border-brand transition-colors rounded-md text-center">
-                Åbn fuld eksempelrapport
-              </a>
+      <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+        <div class="text-center">
+          <p class="text-sm text-gray-400 uppercase tracking-wider font-semibold mb-4">Samlet AI-synlighedsscore</p>
+          <div class="inline-flex items-end gap-2 mb-4">
+            <span class="font-display text-7xl md:text-8xl font-extrabold text-score-red">32</span>
+            <span class="text-2xl text-gray-300 font-bold mb-3">/100</span>
+          </div>
+          <div class="inline-block bg-red-50 text-score-red text-sm font-bold px-4 py-1.5 rounded-full">
+            Lav synlighed
+          </div>
+          <p class="text-gray-500 text-sm mt-4 max-w-md mx-auto">
+            Nordisk Køkken er stort set usynlig for AI-søgemaskiner. Konkurrenter dominerer anbefalingerne.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Breakdown -->
+    <section class="bg-gray-50 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="font-display text-2xl font-bold text-brand mb-6">AI-platform synlighed</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-brand">ChatGPT</h3>
+              <span class="text-xs font-bold text-score-red bg-red-50 px-2.5 py-1 rounded-full">Ikke synlig</span>
             </div>
-            <div class="flex flex-wrap gap-3 text-sm text-gray-500">
-              {trustBullets.map((item) => (
-                <span class="bg-gray-50 border border-gray-200 rounded-full px-4 py-2">{item}</span>
-              ))}
+            <p class="text-sm text-gray-500">Nævner ikke Nordisk Køkken ved relevante søgninger som "bedste restauranter København" og "dansk frokostordning".</p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-brand">Google AI Overviews</h3>
+              <span class="text-xs font-bold text-score-red bg-red-50 px-2.5 py-1 rounded-full">Konkurrent dominerer</span>
+            </div>
+            <p class="text-sm text-gray-500">Viser konkurrent MadMarkedet i AI-svarene 3x oftere. Nordisk Køkken nævnes kun i forbindelse med anmeldelser fra 2022.</p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-brand">Claude</h3>
+              <span class="text-xs font-bold text-score-yellow bg-yellow-50 px-2.5 py-1 rounded-full">Begrænset</span>
+            </div>
+            <p class="text-sm text-gray-500">Begrænset synlighed. Mangler strukturerede data og konsistent online tilstedeværelse på tværs af platforme.</p>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-semibold text-brand">Gemini</h3>
+              <span class="text-xs font-bold text-score-yellow bg-yellow-50 px-2.5 py-1 rounded-full">Forældet info</span>
+            </div>
+            <p class="text-sm text-gray-500">Finder virksomheden men med forældet information. Viser gammel adresse og udgået menukort. Opdateret indhold når ikke igennem.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Scores -->
+    <section class="bg-white border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="font-display text-2xl font-bold text-brand mb-6">Teknisk website audit</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+            <p class="font-display text-4xl font-extrabold text-score-green mb-1">78</p>
+            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Performance</p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+            <p class="font-display text-4xl font-extrabold text-score-green mb-1">92</p>
+            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Sikkerhed</p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+            <p class="font-display text-4xl font-extrabold text-score-yellow mb-1">61</p>
+            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">SEO</p>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+            <p class="font-display text-4xl font-extrabold text-score-yellow mb-1">55</p>
+            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Core Web Vitals</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="bg-gray-50 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="font-display text-2xl font-bold text-brand mb-6">Vigtigste fund</h2>
+        <div class="space-y-3">
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6 flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-score-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-brand text-sm mb-1">Ingen schema markup (JSON-LD)</h3>
+              <p class="text-sm text-gray-500">Hjemmesiden mangler strukturerede data helt. AI-modeller kan ikke identificere virksomhedstype, lokation, menukort eller åbningstider.</p>
             </div>
           </div>
 
-          <div class="bg-brand text-white rounded-2xl p-6 md:p-8">
-            <div class="text-xs font-semibold uppercase tracking-wider text-accent-bright mb-3">Det ser du i rapporten</div>
-            <ul class="space-y-4 text-sm text-white/70 leading-relaxed">
-              <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-accent-bright mt-2 flex-shrink-0"></span><span>Samlet AI-synlighedsscore og klar status på hvor alvorligt problemet er.</span></li>
-              <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-accent-bright mt-2 flex-shrink-0"></span><span>Platform-for-platform gennemgang af ChatGPT, Gemini, Google AI Overviews og Claude.</span></li>
-              <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-accent-bright mt-2 flex-shrink-0"></span><span>Vigtigste fund og konkrete anbefalinger, så teamet ved hvad der skal ske først.</span></li>
-            </ul>
+          <div class="bg-white border border-gray-200 rounded-xl p-6 flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-score-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-brand text-sm mb-1">Konkurrenten MadMarkedet er 3x mere synlig</h3>
+              <p class="text-sm text-gray-500">MadMarkedet nævnes konsekvent af ChatGPT og Google AI Overviews pga. aktiv blog, opdaterede Google Business-data og korrekt implementeret schema markup.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6 flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-score-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-brand text-sm mb-1">Core Web Vitals under grænsen</h3>
+              <p class="text-sm text-gray-500">LCP på 4.2s (grænse: 2.5s) og CLS på 0.18 (grænse: 0.1). Langsom indlæsning og layout-skift påvirker både brugeroplevelse og AI-crawlere.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-gray-200 rounded-xl p-6 flex gap-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-score-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-brand text-sm mb-1">Forældet indhold spredt online</h3>
+              <p class="text-sm text-gray-500">Gemini og andre modeller trækker gammel information fra Yelp, TripAdvisor og uopdaterede kataloger. Aktiv opdatering af profiler anbefales.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-white">
+      <div class="max-w-4xl mx-auto px-6 py-16 md:py-20">
+        <div class="bg-brand rounded-2xl p-10 md:p-14 text-center">
+          <h2 class="font-display text-2xl md:text-3xl font-extrabold text-white mb-4">
+            Vil du vide hvordan din virksomhed performer?
+          </h2>
+          <p class="text-white/50 mb-8 max-w-lg mx-auto">
+            Få en komplet AI-synlighedsrapport tilpasset din virksomhed. Klar inden for 48 timer.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/demo-rapport.html" class="inline-block bg-white text-brand px-8 py-3.5 font-bold text-lg hover:bg-gray-100 transition-colors rounded-md">
+              Se den fulde rapport
+            </a>
+            <a href="/#contact" class="inline-block border-2 border-white/20 text-white px-8 py-3.5 font-bold text-lg hover:bg-white/10 transition-colors rounded-md">
+              Bestil din rapport &rarr;
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="bg-amber-400 text-brand text-center py-3 px-6 text-sm font-semibold">
-      Dette er en eksempelrapport for en fiktiv virksomhed. Din rapport bliver tilpasset din virksomhed og dit website.
-      <a href="/demo-rapport.html" class="underline ml-2 font-bold hover:text-brand/80">Se den fulde rapport</a>
-    </div>
-
-    <section class="max-w-4xl mx-auto px-6 pt-16 pb-10">
-      <p class="text-sm text-accent font-semibold uppercase tracking-wider mb-3">Eksempelrapport</p>
-      <h2 class="font-display text-4xl md:text-5xl font-extrabold text-brand mb-4">
-        Nordisk Køkken
-      </h2>
-      <p class="text-gray-500 text-lg mb-2">AI-synlighed og teknisk website audit</p>
-      <p class="text-gray-500 text-sm">Genereret 5. april 2026 · SitedokAI</p>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 pb-12">
-      <div class="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 text-center">
-        <p class="text-sm text-gray-500 uppercase tracking-wider font-semibold mb-4">Samlet AI-synlighedsscore</p>
-        <div class="inline-flex items-end gap-2 mb-4">
-          <span class="font-display text-7xl md:text-8xl font-extrabold text-score-red">32</span>
-          <span class="text-2xl text-gray-300 font-bold mb-3">/100</span>
-        </div>
-        <div class="inline-block bg-red-50 text-score-red text-sm font-bold px-4 py-1.5 rounded-full">
-          Lav synlighed
-        </div>
-        <p class="text-gray-500 text-sm mt-4 max-w-md mx-auto">
-          Nordisk Køkken er stort set usynlig for AI-søgemaskiner. Konkurrenter dominerer anbefalingerne.
-        </p>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 pb-12">
-      <h2 class="font-display text-2xl font-bold text-brand mb-6">AI-platform synlighed</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-white border border-gray-200 rounded-xl p-6">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-brand">ChatGPT</h3>
-            <span class="text-xs font-bold text-score-red bg-red-50 px-2.5 py-1 rounded-full">Ikke synlig</span>
-          </div>
-          <p class="text-sm text-gray-500">Nævner ikke Nordisk Køkken ved relevante søgninger som "bedste restauranter København" og "dansk frokostordning".</p>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-xl p-6">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-brand">Google AI Overviews</h3>
-            <span class="text-xs font-bold text-score-red bg-red-50 px-2.5 py-1 rounded-full">Konkurrent dominerer</span>
-          </div>
-          <p class="text-sm text-gray-500">Viser konkurrent MadMarkedet i AI-svarene 3x oftere. Nordisk Køkken nævnes kun i forbindelse med anmeldelser fra 2022.</p>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-xl p-6">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-brand">Claude</h3>
-            <span class="text-xs font-bold text-score-yellow bg-yellow-50 px-2.5 py-1 rounded-full">Begrænset</span>
-          </div>
-          <p class="text-sm text-gray-500">Begrænset synlighed. Mangler strukturerede data og konsistent online tilstedeværelse på tværs af platforme.</p>
-        </div>
-
-        <div class="bg-white border border-gray-200 rounded-xl p-6 md:col-span-2">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-brand">Gemini</h3>
-            <span class="text-xs font-bold text-score-yellow bg-yellow-50 px-2.5 py-1 rounded-full">Forældet info</span>
-          </div>
-          <p class="text-sm text-gray-500">Finder virksomheden men med forældet information. Viser gammel adresse og udgået menukort. Opdateret indhold når ikke igennem.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 pb-12">
-      <h2 class="font-display text-2xl font-bold text-brand mb-6">Teknisk website audit</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
-          <p class="font-display text-4xl font-extrabold text-score-green mb-1">78</p>
-          <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Performance</p>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
-          <p class="font-display text-4xl font-extrabold text-score-green mb-1">92</p>
-          <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Sikkerhed</p>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
-          <p class="font-display text-4xl font-extrabold text-score-yellow mb-1">61</p>
-          <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">SEO</p>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-xl p-6 text-center">
-          <p class="font-display text-4xl font-extrabold text-score-yellow mb-1">55</p>
-          <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Core Web Vitals</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 pb-12">
-      <h2 class="font-display text-2xl font-bold text-brand mb-6">Vigtigste fund</h2>
-      <div class="bg-white border border-gray-200 rounded-2xl p-8 space-y-5">
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-score-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-brand text-sm mb-1">Ingen schema markup (JSON-LD)</h3>
-            <p class="text-sm text-gray-500">Hjemmesiden mangler strukturerede data helt. AI-modeller kan ikke identificere virksomhedstype, lokation, menukort eller åbningstider.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-score-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-brand text-sm mb-1">Konkurrenten MadMarkedet er 3x mere synlig</h3>
-            <p class="text-sm text-gray-500">MadMarkedet nævnes konsekvent af ChatGPT og Google AI Overviews på grund af aktiv blog, opdaterede Google Business-data og korrekt schema markup.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-score-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-brand text-sm mb-1">Core Web Vitals under grænsen</h3>
-            <p class="text-sm text-gray-500">LCP på 4.2s (grænse: 2.5s) og CLS på 0.18 (grænse: 0.1). Langsom indlæsning og layout-skift påvirker både brugeroplevelse og AI-crawlere.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div class="flex-shrink-0 w-8 h-8 bg-yellow-50 rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-score-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-brand text-sm mb-1">Forældet indhold spredt online</h3>
-            <p class="text-sm text-gray-500">Gemini og andre modeller trækker gammel information fra Yelp, TripAdvisor og uopdaterede kataloger. Aktiv opdatering af profiler anbefales.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 pb-20">
-      <div class="bg-brand rounded-2xl p-10 md:p-14 text-center">
-        <h2 class="font-display text-2xl md:text-3xl font-extrabold text-white mb-4">
-          Vil du have samme type rapport for din egen virksomhed?
-        </h2>
-        <p class="text-white/70 mb-8 max-w-xl mx-auto leading-relaxed">
-          Bestil AI-synlighedsrapporten til 2.495 kr. Du får ordrebekræftelse på mail, sikker betaling og levering som PDF inden for 48 timer på hverdage.
-        </p>
-        <a href="/kontakt" class="inline-block bg-amber-400 text-brand px-8 py-4 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md mb-5">
-          Bestil AI-synlighedsrapport for 2.495 kr
-        </a>
-        <div class="flex flex-wrap justify-center gap-3 text-sm text-white/70">
-          <span class="bg-white/5 border border-white/10 rounded-full px-4 py-2">Fast pris, 2.495 kr</span>
-          <span class="bg-white/5 border border-white/10 rounded-full px-4 py-2">Sikker betaling via Stripe</span>
-          <span class="bg-white/5 border border-white/10 rounded-full px-4 py-2">Mail fra info@sitedokai.com</span>
-        </div>
-      </div>
-    </section>
   </main>
   <Footer />
 </Layout>

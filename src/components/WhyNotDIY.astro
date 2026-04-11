@@ -1,0 +1,66 @@
+---
+const rows = [
+  {
+    diy: 'Spørg ChatGPT "kender du min virksomhed?"',
+    sitedok: '50+ systematiske prompts: brand, kategori, problem og konkurrenter',
+  },
+  {
+    diy: '1 platform, 1 vagt spørgsmål',
+    sitedok: '4 AI-platforme med branchespecifikke søgninger',
+  },
+  {
+    diy: 'Subjektivt svar du ikke kan måle',
+    sitedok: 'Kvantificeret score med konkurrentbenchmark',
+  },
+  {
+    diy: 'Ingen teknisk kontekst',
+    sitedok: 'Teknisk audit: PageSpeed, SEO, sikkerhed, Web Vitals',
+  },
+  {
+    diy: 'Ingen handlingsplan',
+    sitedok: 'Prioriterede næste skridt du kan handle på i denne uge',
+  },
+];
+---
+
+<section id="why-not-diy" class="bg-brand text-white">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-2xl mb-12">
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        "Kan jeg ikke bare spørge ChatGPT selv?"
+      </h2>
+      <p class="text-lg text-white/50">
+        Jo. Og du får ét tilfældigt svar du ikke kan handle på. Her er forskellen.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto -mx-6 px-6">
+      <table class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="text-left text-xs font-bold uppercase tracking-wider text-white/30 pb-4 pr-4 w-1/2">Gør-det-selv</th>
+            <th class="text-left text-xs font-bold uppercase tracking-wider text-accent pb-4 w-1/2">SitedokAI-rapport</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr class={i % 2 === 0 ? 'bg-white/[0.03]' : ''}>
+              <td class="py-3.5 px-4 text-white/40 align-top">
+                <span class="flex items-start gap-2">
+                  <svg class="w-4 h-4 mt-0.5 text-white/20 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
+                  {row.diy}
+                </span>
+              </td>
+              <td class="py-3.5 px-4 text-white/80 align-top">
+                <span class="flex items-start gap-2">
+                  <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                  {row.sitedok}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
