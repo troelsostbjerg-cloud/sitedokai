@@ -16,7 +16,7 @@ const {
   title,
   description = 'Er din hjemmeside synlig for AI? SitedokAI tester din synlighed på ChatGPT, Gemini, Google AI Overviews og Claude. 2.495 kr for 1 website og op til 5 nøglesider.',
   canonical = Astro.url.href,
-  ogImage = '/og-image.svg',
+  ogImage = '/og-image.png',
   structuredData,
   noindex = false,
 } = Astro.props;
@@ -24,6 +24,7 @@ const {
 const siteUrl = Astro.site?.href ?? 'https://sitedokai.com/';
 const canonicalUrl = canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+const ogImageType = ogImageUrl.endsWith('.png') ? 'image/png' : ogImageUrl.endsWith('.jpg') || ogImageUrl.endsWith('.jpeg') ? 'image/jpeg' : undefined;
 const schemaBlocks = !structuredData ? [] : Array.isArray(structuredData) ? structuredData : [structuredData];
 const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 ---
@@ -43,6 +44,9 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    {ogImageType && <meta property="og:image:type" content={ogImageType} />}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
