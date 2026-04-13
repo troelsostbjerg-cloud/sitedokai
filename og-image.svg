@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">SitedokAI og-image</title>
-  <desc id="desc">SitedokAI introtilbud til AI-synlighedstjek for danske virksomheder.</desc>
+  <desc id="desc">SitedokAI AI-audit med Client Room for danske virksomheder.</desc>
   <rect width="1200" height="630" fill="#0F172A"/>
   <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#06B6D4" stroke-opacity="0.18"/>
   <g opacity="0.18">
@@ -26,15 +26,15 @@
   <text x="340" y="190" fill="#67E8F9" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-SYNLIGHED FOR DANSKE VIRKSOMHEDER</text>
   <text x="340" y="286" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="800">SitedokAI</text>
   <text x="340" y="356" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Få svar på om din hjemmeside bliver fundet i AI</text>
-  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">2.495 kr. Leveret som PDF inden for 48 timer.</text>
+  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">2.495 kr. Client Room inden for 48 timer.</text>
   <g transform="translate(340 474)">
     <rect width="250" height="64" rx="12" fill="#FBBF24"/>
-    <text x="32" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil rapport</text>
+    <text x="42" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil audit</text>
   </g>
   <g transform="translate(628 485)">
     <text fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">4 AI-platforme</text>
     <text y="34" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">1 website + op til 5 sider</text>
-    <text y="68" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">Kort PDF inden for 48 timer</text>
+    <text y="68" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">Client Room + PDF-eksport</text>
   </g>
   <defs>
     <linearGradient id="bg" x1="69" y1="58" x2="1132" y2="595" gradientUnits="userSpaceOnUse">
