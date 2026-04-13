@@ -7,13 +7,13 @@ import '../styles/global.css';
 const trustBullets = [
   'Ingen abonnement eller binding',
   'Sikker betaling via Stripe',
-  'Ordrebekræftelse og levering fra info@sitedokai.com',
+  'Rapporten leveres fra info@sitedokai.com',
 ];
 
 const steps = [
   'Udfyld formularen med navn, email og website.',
   'Du går videre til sikker betaling på 2.495 kr.',
-  'Vi bekræfter ordren og starter gennemgangen samme hverdag eller næste hverdag.',
+  'Når bestilling og betaling er gennemført, starter vi gennemgangen samme hverdag eller næste hverdag.',
   'Du modtager rapporten som PDF inden for 48 timer på hverdage.',
 ];
 
@@ -24,7 +24,7 @@ const included = [
 ];
 ---
 
-<Layout title="Bestil AI-synlighedsrapport - SitedokAI" description="Bestil AI-synlighedsrapporten fra SitedokAI for 2.495 kr. Sikker betaling, ordrebekræftelse på mail og levering som PDF inden for 48 timer på hverdage.">
+<Layout title="Bestil AI-synlighedsrapport - SitedokAI" description="Bestil AI-synlighedsrapporten fra SitedokAI for 2.495 kr. Sikker betaling via Stripe og levering som PDF inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
@@ -69,8 +69,11 @@ const included = [
               </div>
 
               <div>
-                <label for="message" class="block text-sm font-semibold text-brand mb-2">Noter (valgfri)</label>
-                <textarea id="message" name="message" rows="5" placeholder="Branche, konkurrenter eller særlige sider vi skal være opmærksomme på" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical"></textarea>
+                <label for="message" class="block text-sm font-semibold text-brand mb-2">Noter (valgfri, 30 sek.)</label>
+                <p class="text-sm text-gray-500 mb-3">
+                  Skriv kun hvis relevant: jeres vigtigste ydelse, primære område og evt. 1-3 sider vi skal fokusere ekstra på. Konkurrenter finder vi som regel selv.
+                </p>
+                <textarea id="message" name="message" rows="5" placeholder="Fx: Vi er tømrer i Køge og Roskilde. Fokusér især på totalentreprise og energirenovering. Kig gerne ekstra på /services/totalentreprise og /kontakt." class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical"></textarea>
               </div>
 
               <div class="flex items-start gap-3">
@@ -93,7 +96,7 @@ const included = [
               </div>
 
               <p class="text-xs text-gray-500 leading-relaxed">
-                Når du klikker på knappen, modtager vi din bestilling og du videresendes til betaling via Stripe. Derefter bekræfter vi ordren på mail.
+                Når du klikker på knappen, sendes bestillingen til os og du videresendes til betaling via Stripe.
               </p>
             </form>
           </div>

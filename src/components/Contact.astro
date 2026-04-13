@@ -2,13 +2,13 @@
 const trustBullets = [
   'Ingen abonnement eller binding',
   'Sikker betaling via Stripe efter formularen',
-  'Svar og ordrebekræftelse fra info@sitedokai.com',
+  'Rapporten leveres fra info@sitedokai.com',
 ];
 
 const orderSteps = [
   'Udfyld formularen med navn, email og website.',
   'Du sendes videre til Stripe og betaler 2.495 kr sikkert.',
-  'Vi bekræfter ordren på mail og starter gennemgangen.',
+  'Når bestilling og betaling er gennemført, starter vi gennemgangen.',
   'Du modtager rapporten som PDF inden for 48 timer på hverdage.',
 ];
 ---
@@ -20,7 +20,7 @@ const orderSteps = [
         Bestil din AI-synlighedsrapport
       </h2>
       <p class="text-lg text-gray-500 leading-relaxed">
-        Du bestiller én rapport til 2.495 kr. Når formularen er sendt, går du videre til sikker betaling, og vi sender derefter ordrebekræftelse og rapport fra info@sitedokai.com.
+        Du bestiller én rapport til 2.495 kr. Når formularen er sendt, går du videre til sikker betaling, og rapporten leveres derefter fra info@sitedokai.com.
       </p>
     </div>
 
@@ -49,8 +49,11 @@ const orderSteps = [
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-semibold text-brand mb-2">Noter (valgfri)</label>
-            <textarea id="message" name="message" rows="4" placeholder="Branche, konkurrenter eller særlige sider vi skal være opmærksomme på" class="w-full px-4 py-3 border border-gray-300 text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical bg-white"></textarea>
+            <label for="message" class="block text-sm font-semibold text-brand mb-2">Noter (valgfri, 30 sek.)</label>
+            <p class="text-sm text-gray-500 mb-3">
+              Skriv kun hvis relevant: jeres vigtigste ydelse, primære område og evt. 1-3 sider vi skal fokusere ekstra på. Konkurrenter finder vi som regel selv.
+            </p>
+            <textarea id="message" name="message" rows="4" placeholder="Fx: Vi er tømrer i Køge og Roskilde. Fokusér især på totalentreprise og energirenovering. Kig gerne ekstra på /services/totalentreprise og /kontakt." class="w-full px-4 py-3 border border-gray-300 text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors resize-vertical bg-white"></textarea>
           </div>
 
           <div class="flex items-start gap-3">
@@ -74,7 +77,7 @@ const orderSteps = [
           </div>
 
           <p class="text-xs text-gray-500 leading-relaxed text-center">
-            Når du klikker på knappen, modtager vi din bestilling, og du sendes videre til Stripe for sikker betaling. Derefter bekræfter vi ordren på mail.
+            Når du klikker på knappen, sendes bestillingen til os, og du sendes videre til Stripe for sikker betaling.
           </p>
         </form>
       </div>
