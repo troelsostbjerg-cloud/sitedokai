@@ -26,11 +26,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/gratis-rapport</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://sitedokai.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
