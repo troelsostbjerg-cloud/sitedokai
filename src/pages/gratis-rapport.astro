@@ -5,21 +5,21 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Bestil AI-synlighedsrapport - SitedokAI" description="Bestil en AI-synlighedsrapport fra SitedokAI. Fast pris: 2.495 kr. Levering som PDF inden for 48 timer på hverdage.">
+<Layout title="Bestil AI-audit - SitedokAI" description="Bestil en AI-audit fra SitedokAI. Fast pris: 2.495 kr. Levering i Client Room inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-brand text-white">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
         <div class="max-w-2xl mx-auto text-center">
           <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Bestil din AI-synlighedsrapport
+            Bestil din AI-audit
           </h1>
           <p class="text-lg text-white/60 mb-10">
-            Fast pris: 2.495 kr. Du sender din URL, vi scanner siden, og du får en færdig PDF-rapport inden for 48 timer på hverdage.
+            Fast pris: 2.495 kr. Du sender din URL, vi gennemgår siden, og du får et Client Room inden for 48 timer på hverdage. PDF følger med som eksport.
           </p>
 
           <form action="https://formsubmit.co/info@sitedokai.com" method="POST" class="max-w-lg mx-auto space-y-4">
-            <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI rapport" />
+            <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI audit" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
 
@@ -77,7 +77,7 @@ import '../styles/global.css';
             <div class="flex items-start gap-3 text-left">
               <input type="checkbox" id="gdpr" name="gdpr" required aria-required="true" class="mt-1" />
               <label for="gdpr" class="text-sm text-white/50">
-                Jeg accepterer at SitedokAI gemmer mine oplysninger for at kunne levere rapporten og kontakte mig om ordren.
+                Jeg accepterer at SitedokAI gemmer mine oplysninger for at kunne levere auditen og kontakte mig om ordren.
               </label>
             </div>
 
@@ -85,9 +85,9 @@ import '../styles/global.css';
               type="submit"
               class="w-full bg-amber-400 text-brand py-4 px-8 font-bold text-lg hover:bg-amber-300 transition-colors"
             >
-              Bestil AI-synlighedsrapport til 2.495 kr
+              Bestil AI-audit til 2.495 kr
             </button>
-            <p class="text-sm text-white/30">Ingen abonnement. Ingen opfølgning. Kun rapporten.</p>
+            <p class="text-sm text-white/30">Ingen abonnement. Ingen tung platform. Kun en klar leverance.</p>
           </form>
         </div>
       </div>
@@ -112,9 +112,9 @@ import '../styles/global.css';
             </p>
           </div>
           <div class="border border-gray-200 p-8">
-            <div class="font-display text-xl font-bold text-brand mb-3">3. Du får rapporten</div>
+            <div class="font-display text-xl font-bold text-brand mb-3">3. Du får leverancen</div>
             <p class="text-gray-500 leading-relaxed">
-              Du modtager en færdig PDF med score, fund og prioriterede forbedringer. Ingen møde bagefter.
+              Du modtager et Client Room med score, fund og prioriterede næste skridt. PDF følger med som eksport.
             </p>
           </div>
         </div>
@@ -123,12 +123,12 @@ import '../styles/global.css';
 
     <section class="bg-gray-50 border-b border-gray-200">
       <div class="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-6">
-          Hvad vi ikke gør
-        </h2>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-6">
+            Hvad vi ikke gør
+          </h2>
         <div class="space-y-4 text-gray-500 leading-relaxed">
           <p>Ingen abonnementsbinding. Ingen workshops. Ingen løbende konsulentforløb.</p>
-          <p>SitedokAI er et rapportprodukt. Du køber rapporten, vi leverer rapporten, og så er arbejdet afsluttet.</p>
+          <p>SitedokAI er en enkel audit-leverance. Du køber auditen, vi leverer Client Room + PDF, og så er arbejdet afsluttet.</p>
         </div>
       </div>
     </section>

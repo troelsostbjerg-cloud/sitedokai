@@ -5,39 +5,40 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const included = [
-  'AI-synlighed testet på ChatGPT, Gemini, Google AI Overviews og Claude',
+  'AI-synlighed testet på ChatGPT, Gemini, Codex og Google AI',
   'Gennemgang af 1 website og op til 5 nøglesider',
   'Teknisk baseline for performance, struktur, SEO og sikkerhed',
-  'Dansk PDF med score, fund og prioriterede forbedringer',
+  'Interaktivt Client Room med status, konkurrentbillede og næste skridt',
+  'PDF-eksport til intern deling',
   'Levering inden for 48 timer på hverdage',
   'Ingen abonnement, ingen binding og ingen skjulte tillæg',
 ];
 
 const trustBullets = [
   'Sikker betaling via Stripe',
-  'PDF leveres på mail',
-  'Levering som PDF, ingen mødekrav bagefter',
+  'Client Room + PDF-eksport',
+  'Levering uden abonnement eller login-cirkus',
 ];
 
 const orderFlow = [
   'Du udfylder formularen og går til betaling.',
   'Du gennemfører betalingen sikkert via Stripe.',
   'Vi tester website og nøglesider på tværs af AI-platforme og tekniske signaler.',
-  'Du modtager rapporten som PDF inden for 48 timer på hverdage.',
+  'Du modtager et Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
 ];
 
 const faqs = [
   {
-    q: 'Hvad koster rapporten?',
-    a: 'Rapporten koster 2.495 kr som engangsbeløb. Ingen abonnement. Ingen skjulte gebyrer.',
+    q: 'Hvad koster auditen?',
+    a: 'Auditen koster 2.495 kr som engangsbeløb. Ingen abonnement. Ingen skjulte gebyrer.',
   },
   {
     q: 'Hvad får jeg konkret?',
-    a: 'Du får en færdig PDF-rapport med AI-synlighedsscore, teknisk audit, konkurrentblik og en prioriteret liste over de vigtigste forbedringer.',
+    a: 'Du får et interaktivt Client Room med AI-status, teknisk gennemgang, konkurrentblik og prioriterede næste skridt. PDF følger med som eksport.',
   },
   {
     q: 'Skal jeg booke et møde eller en gennemgang?',
-    a: 'Nej. Produktet er bevidst enkelt. Du bestiller rapporten, vi leverer rapporten, og så kan du arbejde videre internt eller med din udvikler.',
+    a: 'Nej. Produktet er bevidst enkelt. Du bestiller auditen, vi leverer Client Room + PDF, og så kan du arbejde videre internt eller med din udvikler.',
   },
   {
     q: 'Hvor hurtigt leverer I?',
@@ -46,7 +47,7 @@ const faqs = [
 ];
 ---
 
-<Layout title="Priser - SitedokAI" description="AI-synlighedsrapport til 2.495 kr. Fast pris, sikker betaling og levering som PDF inden for 48 timer på hverdage.">
+<Layout title="Priser - SitedokAI" description="AI-audit til 2.495 kr. Fast pris, sikker betaling og levering i Client Room inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
@@ -54,10 +55,10 @@ const faqs = [
         <div class="max-w-3xl">
           <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Fast pris</div>
           <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            AI-synlighedsrapport til 2.495 kr
+            AI-audit med Client Room til 2.495 kr
           </h1>
           <p class="text-lg text-gray-500 leading-relaxed">
-            SitedokAI er ét produkt med én fast pris. Du bestiller rapporten, betaler sikkert via Stripe og modtager en dansk PDF med score, fund og prioriterede forbedringer.
+            SitedokAI er ét produkt med én fast pris. Du bestiller auditen, betaler sikkert via Stripe og modtager et Client Room med de vigtigste svar. PDF følger med som eksport.
           </p>
         </div>
       </div>
@@ -66,7 +67,7 @@ const faqs = [
     <section class="bg-brand text-white border-b border-white/10">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
         <div class="bg-brand-light p-8 md:p-10 ring-2 ring-accent ring-inset rounded-2xl">
-          <div class="text-sm font-bold text-white/80 mb-3">SitedokAI Rapport</div>
+          <div class="text-sm font-bold text-white/80 mb-3">SitedokAI Audit</div>
           <div class="font-display text-4xl md:text-5xl font-extrabold text-white mb-1">2.495 kr</div>
           <div class="text-sm text-white/60 mb-8">Engangskøb, levering inden for 48 timer på hverdage</div>
 
@@ -82,7 +83,7 @@ const faqs = [
           </ul>
 
           <a href="/kontakt" class="block text-center py-4 px-6 font-bold text-lg bg-amber-400 text-brand hover:bg-amber-300 transition-colors rounded-md mb-5">
-            Bestil AI-synlighedsrapport for 2.495 kr
+            Bestil AI-audit for 2.495 kr
           </a>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -110,10 +111,10 @@ const faqs = [
           <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
             <h2 class="font-display text-2xl font-bold text-white mb-4">Vil du se leverancen først?</h2>
             <p class="text-white/70 text-sm leading-relaxed mb-5">
-              Se eksempelrapporten og få en konkret fornemmelse af hvordan score, platformsvurderinger og anbefalinger bliver præsenteret.
+              Se demoen og få en konkret fornemmelse af hvordan overblik, konkurrentbillede og næste skridt bliver præsenteret.
             </p>
             <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-accent-bright hover:text-accent-light transition-colors">
-              Se eksempelrapporten
+              Se demoen
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -145,10 +146,10 @@ const faqs = [
           Klar til at få din AI-synlighed vurderet?
         </h2>
         <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
-          Bestil rapporten i dag og få en konkret leverance på dansk, uden abonnement og uden et langt bureauforløb bagefter.
+          Bestil auditen i dag og få en konkret leverance på dansk, uden abonnement og uden et langt bureauforløb bagefter.
         </p>
         <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md">
-          Bestil AI-synlighedsrapport for 2.495 kr
+          Bestil AI-audit for 2.495 kr
         </a>
       </div>
     </section>

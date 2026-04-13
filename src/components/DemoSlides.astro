@@ -3,7 +3,7 @@ const slides = [
   {
     id: 'score',
     label: 'AI-score',
-    title: 'Samlet AI-synlighedsscore',
+    title: 'Samlet overblik',
     content: `
       <div class="text-center">
         <div class="inline-flex items-end gap-2 mb-3">
@@ -18,7 +18,7 @@ const slides = [
   {
     id: 'platforms',
     label: 'Platforme',
-    title: 'AI-platform synlighed',
+    title: 'Hvor I bliver valgt',
     content: `
       <div class="grid grid-cols-2 gap-3">
         <div class="bg-white border border-gray-200 rounded-lg p-4">
@@ -37,10 +37,10 @@ const slides = [
         </div>
         <div class="bg-white border border-gray-200 rounded-lg p-4">
           <div class="flex items-center justify-between mb-2">
-            <span class="font-semibold text-brand text-sm">Claude</span>
+            <span class="font-semibold text-brand text-sm">Codex</span>
             <span class="text-[10px] font-bold text-score-yellow bg-yellow-50 px-2 py-0.5 rounded-full">Begrænset</span>
           </div>
-          <p class="text-xs text-gray-400">Mangler strukturerede data og konsistent tilstedeværelse</p>
+          <p class="text-xs text-gray-400">Mangler tydelige sider og stærke beviser på troværdighed</p>
         </div>
         <div class="bg-white border border-gray-200 rounded-lg p-4">
           <div class="flex items-center justify-between mb-2">
@@ -90,8 +90,8 @@ const slides = [
   },
   {
     id: 'action',
-    label: 'Handlingsplan',
-    title: 'Prioriterede næste skridt',
+    label: 'Næste skridt',
+    title: 'Det her skal gøres først',
     content: `
       <div class="space-y-3">
         <div class="flex gap-3 items-start">
@@ -117,8 +117,8 @@ const slides = [
             <span class="text-xs font-bold text-accent">3</span>
           </div>
           <div>
-            <p class="font-semibold text-brand text-sm">Skriv 3 brancheartikler</p>
-            <p class="text-xs text-gray-400 mt-0.5">AI-modeller trækker fra autoritative kilder. Publicér indhold om dit speciale.</p>
+            <p class="font-semibold text-brand text-sm">Lav 3 stærke sider om jeres vigtigste ydelser</p>
+            <p class="text-xs text-gray-400 mt-0.5">Gør det lettere for både kunder og AI-svar at forstå hvorfor I skal vælges.</p>
           </div>
         </div>
       </div>
@@ -130,17 +130,16 @@ const slides = [
 <section id="demo" class="bg-gray-50 border-b border-gray-200">
   <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
     <div class="max-w-2xl mb-10">
-      <p class="text-sm text-accent font-semibold uppercase tracking-wider mb-3">Eksempelrapport</p>
+      <p class="text-sm text-accent font-semibold uppercase tracking-wider mb-3">Demo</p>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-        Se hvad du får
+        Se hvordan kundeoplevelsen ser ud
       </h2>
       <p class="text-gray-500">
-        Rapporten for den fiktive virksomhed "Nordisk Køkken". Din rapport vil være tilpasset din virksomhed med rigtige data.
+        Et eksempel på et Client Room for den fiktive virksomhed "Nordisk Køkken". Din leverance vil være tilpasset din virksomhed med rigtige data.
       </p>
     </div>
 
-    <!-- Tab navigation -->
-    <div class="flex gap-1 mb-8 overflow-x-auto -mx-6 px-6 scrollbar-hide" role="tablist" aria-label="Rapportsektioner">
+    <div class="flex gap-1 mb-8 overflow-x-auto -mx-6 px-6 scrollbar-hide" role="tablist" aria-label="Demosektioner">
       {slides.map((slide, i) => (
         <button
           role="tab"
