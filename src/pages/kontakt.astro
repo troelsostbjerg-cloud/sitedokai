@@ -7,24 +7,24 @@ import '../styles/global.css';
 const trustBullets = [
   'Ingen abonnement eller binding',
   'Sikker betaling via Stripe',
-  'Client Room + PDF-eksport',
+  'Privat Client Room-link + PDF',
 ];
 
 const steps = [
   'Udfyld formularen med navn, email og website.',
   'Du går videre til sikker betaling på 2.495 kr.',
   'Når bestilling og betaling er gennemført, starter vi gennemgangen samme hverdag eller næste hverdag.',
-  'Du modtager et Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
+  'Du modtager en mail med et privat link til dit Client Room inden for 48 timer på hverdage. PDF følger med som eksport. Ingen login.',
 ];
 
 const included = [
   'AI-synlighed på 4 platforme: ChatGPT, Gemini, Google AI og Claude',
   'Gennemgang af 1 website og op til 5 nøglesider',
-  'Client Room med teknisk baseline, konkurrentbillede og næste skridt',
+  'Client Room på mail som privat link, med teknisk baseline, konkurrentbillede og næste skridt',
 ];
 ---
 
-<Layout title="Bestil AI-audit - SitedokAI" description="Bestil AI-auditen fra SitedokAI for 2.495 kr. Sikker betaling via Stripe og levering i et Client Room inden for 48 timer på hverdage.">
+<Layout title="Bestil AI-audit - SitedokAI" description="Bestil AI-auditen fra SitedokAI for 2.495 kr. Sikker betaling via Stripe og levering på mail som privat Client Room-link inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
@@ -35,7 +35,7 @@ const included = [
             Bestil AI-audit for 2.495 kr
           </h1>
           <p class="text-lg text-gray-500 leading-relaxed">
-            Udfyld formularen, betal sikkert via Stripe, og modtag et Client Room med score, fund og prioriterede næste skridt. PDF følger med som eksport. Hele flowet er gjort enkelt og uden abonnement.
+            Udfyld formularen, betal sikkert via Stripe, og modtag en mail med et privat link til dit Client Room med score, fund og prioriterede næste skridt. PDF følger med som eksport. Hele flowet er gjort enkelt og uden abonnement.
           </p>
         </div>
       </div>
@@ -96,7 +96,7 @@ const included = [
               </div>
 
               <p class="text-xs text-gray-500 leading-relaxed">
-                Når du klikker på knappen, sendes bestillingen til os og du videresendes til betaling via Stripe.
+                Når du klikker på knappen, sendes bestillingen til os og du videresendes til betaling via Stripe. Selve leverancen kommer bagefter på mail som privat link.
               </p>
             </form>
           </div>
