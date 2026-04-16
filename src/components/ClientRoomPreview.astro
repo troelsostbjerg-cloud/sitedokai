@@ -259,10 +259,6 @@ const previewHighlights: PreviewHighlight[] = [
               aria-label="Guidet preview af Client Room"
             ></video>
 
-            <div class="guided-chips" aria-hidden="true">
-              <span>15 sek. guidet preview</span>
-              <span>Uden lyd</span>
-            </div>
           </div>
         </div>
       </div>
@@ -680,29 +676,6 @@ const previewHighlights: PreviewHighlight[] = [
     height: 100%;
     object-fit: cover;
     background: #020617;
-  }
-
-  .guided-chips {
-    position: absolute;
-    left: 1rem;
-    bottom: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-    pointer-events: none;
-  }
-
-  .guided-chips span {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.48rem 0.8rem;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(5, 11, 22, 0.72);
-    color: rgba(226, 232, 240, 0.84);
-    font-size: 0.76rem;
-    font-weight: 700;
-    backdrop-filter: blur(12px);
   }
 
   .guided-highlights {
@@ -1354,12 +1327,6 @@ const previewHighlights: PreviewHighlight[] = [
 
     .guided-video-frame {
       border-radius: 1.2rem;
-    }
-
-    .guided-chips {
-      left: 0.75rem;
-      right: 0.75rem;
-      bottom: 0.75rem;
     }
 
     .room-hero,
