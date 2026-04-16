@@ -1,0 +1,13 @@
+{
+  "token": "My8aQxsX5l9Ejkwgwxj4rPA9",
+  "client_name": "BifrostConnect",
+  "created_at": "2026-04-16T10:52:26+00:00",
+  "mode": "encrypted_static",
+  "files": [
+    "index.html",
+    "room.enc.json",
+    "executive-pdf.html",
+    "executive-pdf.enc.json",
+    "studio.css"
+  ]
+}
