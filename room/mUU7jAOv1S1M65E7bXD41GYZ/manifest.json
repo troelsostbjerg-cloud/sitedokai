@@ -1,0 +1,13 @@
+{
+  "token": "mUU7jAOv1S1M65E7bXD41GYZ",
+  "client_name": "Grant Thornton Danmark",
+  "created_at": "2026-04-16T14:20:39+00:00",
+  "mode": "encrypted_static",
+  "files": [
+    "index.html",
+    "room.enc.json",
+    "executive-pdf.html",
+    "executive-pdf.enc.json",
+    "studio.css"
+  ]
+}
