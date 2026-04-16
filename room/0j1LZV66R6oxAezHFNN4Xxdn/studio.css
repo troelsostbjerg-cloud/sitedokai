@@ -1413,6 +1413,11 @@ body.client-room-print-mode .evidence-card {
   color: #b6f3de;
 }
 
+.mini-pill.is-neutral {
+  background: rgba(56, 189, 248, 0.16);
+  color: #bae6fd;
+}
+
 .mini-pill.is-negative {
   background: rgba(239, 68, 68, 0.16);
   color: #fecaca;
@@ -2251,5 +2256,721 @@ body.client-room-print-mode .evidence-card {
   .closing-room-panel {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+body.client-room-pdf-body {
+  background:
+    radial-gradient(circle at top left, rgba(6, 182, 212, 0.18), transparent 22rem),
+    linear-gradient(180deg, #eef4fb 0%, #dfe9f5 100%);
+}
+
+body.client-room-pdf-body::before {
+  opacity: 0.12;
+}
+
+.client-room-pdf-body .client-room-header {
+  display: none;
+}
+
+.client-room-pdf-body .app-shell-room {
+  max-width: 1160px;
+  padding-top: 24px;
+}
+
+.client-room-pdf-body .page-frame {
+  margin-top: 0;
+}
+
+.executive-pdf {
+  display: grid;
+  gap: 24px;
+}
+
+.pdf-page {
+  position: relative;
+  padding: 30px;
+  border-radius: 32px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.98)),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 20rem);
+  box-shadow: 0 32px 70px rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+  page-break-after: always;
+  break-after: page;
+}
+
+.pdf-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.pdf-page h1,
+.pdf-page h2,
+.pdf-page h3 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.pdf-page p {
+  margin: 0;
+  color: #4b5d77;
+  line-height: 1.6;
+}
+
+.pdf-cover-page {
+  overflow: hidden;
+  border-color: rgba(103, 232, 249, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(251, 191, 36, 0.2), transparent 18rem),
+    radial-gradient(circle at left center, rgba(6, 182, 212, 0.18), transparent 22rem),
+    linear-gradient(135deg, rgba(6, 17, 31, 0.98), rgba(8, 23, 44, 0.98));
+  color: #f8fbff;
+}
+
+.pdf-cover-page h1,
+.pdf-cover-page h2,
+.pdf-cover-page h3,
+.pdf-cover-page p,
+.pdf-cover-page strong {
+  color: inherit;
+}
+
+.pdf-cover-top,
+.pdf-cover-grid,
+.pdf-score-grid,
+.pdf-focus-grid,
+.pdf-page-header,
+.pdf-action-grid,
+.pdf-proof-grid,
+.pdf-query-grid,
+.pdf-insight-grid,
+.pdf-competitor-grid,
+.pdf-query-meta,
+.pdf-chip-row,
+.pdf-action-meta {
+  display: grid;
+  gap: 16px;
+}
+
+.pdf-cover-top {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.pdf-cover-client {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: rgba(226, 238, 249, 0.86);
+  letter-spacing: 0.04em;
+}
+
+.pdf-cover-badge {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.pdf-cover-grid {
+  margin-top: 26px;
+  grid-template-columns: minmax(0, 1.8fr) minmax(280px, 1fr);
+  align-items: start;
+}
+
+.pdf-cover-copy h1 {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.pdf-cover-lead {
+  max-width: 54ch;
+  margin-top: 18px !important;
+  font-size: 1.08rem;
+  color: rgba(226, 238, 249, 0.84) !important;
+}
+
+.pdf-cover-summary {
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.pdf-summary-line {
+  display: grid;
+  gap: 6px;
+}
+
+.pdf-summary-line span,
+.pdf-score-card span,
+.pdf-focus-label,
+.pdf-list-label,
+.pdf-proof-label,
+.pdf-query-meta span,
+.pdf-competitor-card span,
+.pdf-mini-metric span {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pdf-summary-line span {
+  color: rgba(226, 238, 249, 0.62);
+}
+
+.pdf-summary-line strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pdf-score-grid {
+  margin-top: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pdf-score-card,
+.pdf-focus-card,
+.pdf-action-card,
+.pdf-proof-card,
+.pdf-query-card,
+.pdf-insight-card,
+.pdf-competitor-card {
+  break-inside: avoid;
+}
+
+.pdf-score-card {
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pdf-score-card span {
+  color: rgba(226, 238, 249, 0.62);
+}
+
+.pdf-score-card strong {
+  display: block;
+  margin-top: 12px;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: -0.04em;
+}
+
+.pdf-score-card p {
+  margin-top: 10px;
+  color: rgba(226, 238, 249, 0.78);
+}
+
+.pdf-focus-grid {
+  margin-top: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdf-focus-card {
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pdf-focus-label {
+  color: rgba(34, 211, 238, 0.92);
+}
+
+.pdf-focus-card strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 1.34rem;
+  line-height: 1.15;
+}
+
+.pdf-focus-card p {
+  margin-top: 12px;
+  color: rgba(226, 238, 249, 0.8);
+}
+
+.pdf-page-light .pdf-page-header {
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+  align-items: end;
+}
+
+.pdf-page-light .pdf-page-header p {
+  justify-self: end;
+  max-width: 40ch;
+}
+
+.pdf-page-light .eyebrow {
+  color: #0891b2;
+}
+
+.pdf-page-light h2 {
+  margin-top: 8px;
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.pdf-section-divider {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.pdf-action-grid {
+  margin-top: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdf-action-card {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 22px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(241, 246, 252, 0.98));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.pdf-action-number {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(6, 182, 212, 0.12);
+  color: #0891b2;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.pdf-action-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.pdf-action-copy h3 {
+  font-size: 1.4rem;
+  line-height: 1.05;
+}
+
+.pdf-action-why {
+  color: #0f172a !important;
+  font-weight: 600;
+}
+
+.pdf-chip-row {
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+
+.pdf-chip-row-tight {
+  gap: 8px;
+}
+
+.pdf-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.14);
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.pdf-pill-soft {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.16);
+}
+
+.pdf-pill-ghost {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+.pdf-list-block {
+  display: grid;
+  gap: 10px;
+}
+
+.pdf-bullet-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #4b5d77;
+}
+
+.pdf-bullet-list li + li {
+  margin-top: 8px;
+}
+
+.pdf-action-meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.pdf-action-meta span {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.04);
+  color: #4b5d77;
+  font-size: 0.92rem;
+}
+
+.pdf-action-meta strong {
+  color: #0f172a;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.pdf-proof-grid {
+  margin-top: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdf-proof-card {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.96);
+  color: #f8fbff;
+}
+
+.pdf-proof-card h3,
+.pdf-proof-card p,
+.pdf-proof-card strong {
+  color: inherit;
+}
+
+.pdf-proof-label {
+  color: rgba(34, 211, 238, 0.9);
+}
+
+.pdf-proof-card h3 {
+  margin-top: 12px;
+  font-size: 1.28rem;
+}
+
+.pdf-proof-card p {
+  margin-top: 10px;
+  color: rgba(226, 238, 249, 0.78);
+}
+
+.pdf-proof-detail {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(226, 238, 249, 0.94);
+}
+
+.pdf-query-grid {
+  margin-top: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdf-query-card {
+  padding: 22px;
+  border-radius: 26px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(242, 247, 253, 0.98));
+}
+
+.pdf-query-critical {
+  border-color: rgba(239, 68, 68, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(239, 68, 68, 0.08);
+}
+
+.pdf-query-watch {
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.08);
+}
+
+.pdf-query-stable {
+  border-color: rgba(16, 185, 129, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.08);
+}
+
+.pdf-query-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.pdf-query-score {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 2rem;
+  line-height: 0.9;
+}
+
+.pdf-query-card h3 {
+  margin-top: 14px;
+  font-size: 1.34rem;
+  line-height: 1.08;
+}
+
+.pdf-query-card p {
+  margin-top: 10px;
+}
+
+.pdf-query-meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pdf-query-meta div {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.pdf-query-meta strong {
+  font-size: 0.98rem;
+  line-height: 1.35;
+  color: #0f172a;
+}
+
+.pdf-query-note {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(8, 17, 31, 0.96);
+  color: rgba(226, 238, 249, 0.94);
+  line-height: 1.55;
+}
+
+.pdf-insight-grid {
+  margin-top: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pdf-insight-card {
+  padding: 24px;
+  border-radius: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(241, 246, 252, 0.98));
+}
+
+.pdf-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+}
+
+.pdf-card-head h2 {
+  margin-top: 8px;
+  font-size: 1.9rem;
+  line-height: 1.02;
+}
+
+.pdf-side-stat {
+  min-width: 74px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.06);
+  text-align: center;
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.pdf-card-intro {
+  margin-top: 14px !important;
+}
+
+.pdf-mini-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pdf-mini-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.pdf-mini-row p {
+  margin-top: 6px;
+  font-size: 0.92rem;
+}
+
+.pdf-mini-metric {
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.pdf-mini-metric strong {
+  font-size: 1.02rem;
+}
+
+.pdf-competitor-grid {
+  margin-top: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pdf-competitor-card {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.pdf-competitor-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  line-height: 1.08;
+}
+
+.pdf-competitor-card p {
+  margin-top: 10px;
+}
+
+.pdf-empty-state {
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px dashed rgba(15, 23, 42, 0.16);
+  color: #4b5d77;
+}
+
+@media (max-width: 1080px) {
+  .pdf-cover-grid,
+  .pdf-page-light .pdf-page-header,
+  .pdf-insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-page-light .pdf-page-header p {
+    justify-self: start;
+    max-width: none;
+  }
+
+  .pdf-score-grid,
+  .pdf-focus-grid,
+  .pdf-action-grid,
+  .pdf-proof-grid,
+  .pdf-query-grid,
+  .pdf-competitor-grid,
+  .pdf-action-meta,
+  .pdf-query-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .client-room-pdf-body .app-shell-room {
+    padding-inline: 14px;
+  }
+
+  .pdf-page,
+  .pdf-cover-summary,
+  .pdf-action-card,
+  .pdf-proof-card,
+  .pdf-query-card,
+  .pdf-insight-card {
+    padding: 20px;
+  }
+
+  .pdf-cover-top,
+  .pdf-score-grid,
+  .pdf-focus-grid,
+  .pdf-action-grid,
+  .pdf-proof-grid,
+  .pdf-query-grid,
+  .pdf-insight-grid,
+  .pdf-competitor-grid,
+  .pdf-action-meta,
+  .pdf-query-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .pdf-chip-row {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+  }
+}
+
+@media print {
+  html:has(body.client-room-pdf-body),
+  body.client-room-pdf-body {
+    background: #ffffff !important;
+  }
+
+  body.client-room-pdf-body::before {
+    display: none !important;
+  }
+
+  .client-room-pdf-body .app-shell-room {
+    max-width: none;
+    padding: 0;
+  }
+
+  .client-room-pdf-body .page-frame {
+    gap: 0;
+  }
+
+  .pdf-page {
+    min-height: auto;
+    margin: 0;
+    padding: 16mm 14mm;
+    border-radius: 24px;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .pdf-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .pdf-cover-page {
+    background:
+      radial-gradient(circle at top right, rgba(251, 191, 36, 0.18), transparent 18rem),
+      radial-gradient(circle at left center, rgba(6, 182, 212, 0.14), transparent 22rem),
+      linear-gradient(135deg, rgba(6, 17, 31, 1), rgba(8, 23, 44, 1));
+  }
+
+  .pdf-score-card,
+  .pdf-focus-card {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .pdf-action-card,
+  .pdf-proof-card,
+  .pdf-query-card,
+  .pdf-insight-card,
+  .pdf-competitor-card,
+  .pdf-mini-row,
+  .pdf-query-meta div,
+  .pdf-action-meta span {
+    break-inside: avoid;
   }
 }

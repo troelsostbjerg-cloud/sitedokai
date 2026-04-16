@@ -1,2210 +1,265 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="da">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <title>BifrostConnect · Client Room</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./studio.css">
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07111f;
+        --panel: rgba(8, 17, 31, 0.92);
+        --panel-soft: rgba(255, 255, 255, 0.05);
+        --border: rgba(103, 232, 249, 0.14);
+        --text: #e5eef9;
+        --muted: #98a9c2;
+        --accent: #f59e0b;
+        --cyan: #22d3ee;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: Inter, system-ui, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 24rem),
+          radial-gradient(circle at right 20%, rgba(245, 158, 11, 0.14), transparent 22rem),
+          linear-gradient(180deg, #07111f 0%, #0b1728 100%);
+      }
+      .lock-shell {
+        width: min(100%, 460px);
+        padding: 32px;
+        border-radius: 28px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        box-shadow: 0 30px 80px rgba(2, 8, 23, 0.42);
+      }
+      .eyebrow {
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+      h1 {
+        margin: 12px 0 10px;
+        font-family: "Bricolage Grotesque", Inter, system-ui, sans-serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        line-height: 0.98;
+      }
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      form {
+        display: grid;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      label {
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        font-size: 1rem;
+      }
+      button {
+        padding: 14px 18px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #111827;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .status {
+        margin-top: 16px;
+        min-height: 24px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+      .status.error {
+        color: #fecaca;
+      }
+      .status.success {
+        color: #bbf7d0;
+      }
+      .inline-link {
+        color: var(--cyan);
+      }
+      .pdf-view {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        background: #0b1728;
+      }
+      .pdf-toolbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(7, 17, 31, 0.96);
+      }
+      .pdf-toolbar a {
+        color: #111827;
+        background: var(--accent);
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 800;
+      }
+      .pdf-frame {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #fff;
+      }
+    </style>
   </head>
-  <body class="client-room-body client-room-v5">
-    <div class="app-shell app-shell-room">
-      <header class="client-room-header">
-        <div class="client-room-brand">
-          <div class="radar-mark">
-            <span class="radar-ring radar-ring-1"></span>
-            <span class="radar-ring radar-ring-2"></span>
-            <span class="radar-beam"></span>
-          </div>
-          <div>
-            <div class="eyebrow">Client Room</div>
-            <div class="brand-link brand-link-static">SitedokAI</div>
-          </div>
-        </div>
-
-        <div class="client-room-header-meta">
-          <div class="client-room-header-item">
-            <span>Format</span>
-            <strong>Read-only kundeoverblik</strong>
-          </div>
-          <div class="client-room-header-item">
-            <span>Leveret af</span>
-            <strong>SitedokAI</strong>
-          </div>
-          <div class="client-room-header-item">
-            <span>Kontakt</span>
-            <a href="mailto:info@sitedokai.com" class="client-room-support-link">info@sitedokai.com</a>
-          </div>
-        </div>
-      </header>
-
-      <main class="page-frame">
-        
-  <section class="hero-panel hero-panel-room">
-    <div>
-      <div class="eyebrow">AI Markedsposition</div>
-      <h1>BifrostConnect</h1>
-      <p class="lead lead-strong">AI-platformene ser jer for sjældent i de vigtige søgninger.</p>
-      <p class="lead">Det største løft kommer fra at svare tydeligere på kundernes vigtigste spørgsmål og gøre jer lettere at stole på.</p>
-
-      <div class="verdict-strip">
-        <div class="verdict-item">
-          <span>AI-markedsposition</span>
-          <strong>47/100</strong>
-        </div>
-        <div class="verdict-item">
-          <span>Hvor sikre vi er</span>
-          <strong>Lav</strong>
-        </div>
-        <div class="verdict-item">
-          <span>Bredde nu</span>
-          <strong>38%</strong>
-        </div>
-        <div class="verdict-item">
-          <span>Start her</span>
-          <strong>Lav sider, der svarer på de søgninger I taber</strong>
-        </div>
-      </div>
-    </div>
-
-      <div class="room-publish-box room-publish-box-rich">
-        <div>
-          <span>Senest opdateret</span>
-          <strong>15 Apr 2026 · 20:13</strong>
-        </div>
-        <div>
-          <span>Adgang</span>
-          <strong>Privat link + adgangskode</strong>
-        </div>
-        <div>
-          <span>Omfang</span>
-          <strong>13 søgninger · 1 konkurrenter</strong>
-        </div>
-        <p class="room-publish-note">
-          
-          Rummet er read-only og åbner direkte i browseren via privat link og adgangskode. PDF-versionen er den korte ledelsesopsummering, men selve beslutningsrummet er denne side.
-        
-      </p>
-      
-        <a class="button button-primary" href="./SitedokAI_ClientRoom_BifrostConnect.pdf">Hent Executive PDF</a>
-      
-    </div>
-  </section>
-
-  <div class="room-reading-surface">
-    <section class="card-grid card-grid-3">
-      <article class="metric-card metric-card-decision metric-card-plain">
-        <span class="metric-label">AI-markedsposition</span>
-        <strong class="metric-value">47/100</strong>
-        <p>Et samlet blik på hvor godt I fanger søgninger, hvor bredt I bliver nævnt, og hvor tydeligt AI kan stole på jeres digitale fodaftryk.</p>
-        <div class="impact-range formula-breakdown">
-          <span>AI-synlighed 44/100</span>
-          <span>Bredde 38%</span>
-          <span>Socialt lag 44/100</span>
-          <span>Teknik 81/100</span>
-        </div>
-      </article>
-      <article class="metric-card metric-card-decision">
-        <span class="metric-label">Det der vil hjælpe mest</span>
-        <strong class="metric-title">Lav sider, der svarer på de søgninger I taber</strong>
-        <p>Det er den hurtigste vej til at blive valgt oftere, når nogen er tæt på at købe.</p>
-      </article>
-      <article class="metric-card metric-card-decision metric-card-impact">
-        <span class="metric-label">Mulig effekt</span>
-        <strong class="metric-value" id="summary-impact-value">+46%</strong>
-        <p>Vores bedste bud på hvor meget mere relevant interesse planen kan skabe.</p>
-        <div class="impact-range">
-          <span id="summary-impact-low">Forsigtigt 29%</span>
-          <span id="summary-impact-base">Mest sandsynligt 46%</span>
-          <span id="summary-impact-high">Bedste fald 68%</span>
-        </div>
-      </article>
-    </section>
-
-    <section class="data-panel data-panel-focus">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Søgninger Først</div>
-          <h2>Det bygger vores vurdering på</h2>
-        </div>
-        <p>Her er de vigtigste søgninger, vi har testet, så I kan se hvor I står, før vi anbefaler noget.</p>
-      </div>
-
-      
-        <div class="summary-chip-row">
-          
-            <article class="summary-chip-card">
-              <span class="metric-label">Kort fortalt</span>
-              <strong>6 vigtige søgninger ender uden jer.</strong>
-            </article>
-          
-            <article class="summary-chip-card">
-              <span class="metric-label">Kort fortalt</span>
-              <strong>I bliver nævnt ujævnt på tværs af platforme i 3 søgninger.</strong>
-            </article>
-          
-            <article class="summary-chip-card">
-              <span class="metric-label">Kort fortalt</span>
-              <strong>4 profiler eller troværdighedstegn giver et uklart billede.</strong>
-            </article>
-          
-        </div>
-      
-
-      <div class="query-overview-list">
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">category</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>hardware-based out-of-band remote access industrial systems</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Are you looking for an overview, architecture guidance, or product options? Here’s a concise primer on hardware-based out-of-band (OOB) remote access for industrial/OT environments. What it is - A physically separate pa…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">category</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>zero trust remote access for PLC and SCADA Denmark</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Are you looking for: - A Denmark/EU-compliant architecture for zero‑trust remote access into PLC/SCADA? - A shortlist of vendors/partners that operate in Denmark? - Or both (plus implementation steps and controls to mee…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">problem</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>NIS2 remote access OT Denmark</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Here is a comprehensive overview of **NIS2, Remote Access, and OT Security in Denmark**: --- ## 🇩🇰 NIS2 in Denmark — Status &amp; Implementation The EU&#39;s NIS2 Directive came into effect in Denmark on **1 July 2025** and is…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">problem</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>VPN alternative for industrial remote access Denmark</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">If you’re looking for alternatives to traditional VPNs for industrial/OT remote access in Denmark, consider these options. They’re designed to reduce lateral movement risk, add identity- and device-aware controls, and i…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">problem</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>critical infrastructure remote access without VPN</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Are you looking for secure ways to let engineers/vendors reach OT/ICS systems without a traditional VPN? Here are common patterns that critical‑infrastructure operators use, plus when to choose each. If you share your u…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-critical">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Tabt</span>
-                <span class="mini-pill">problem</span>
-                <span class="score-chip score-critical">0%</span>
-              </div>
-              <h3>secure remote access to isolated PLC and SCADA systems</h3>
-              <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Ingen af de testede platforme endnu</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Below is a concise, field-tested approach to enabling secure remote access to isolated PLC/SCADA (OT) environments while preserving safety and availability. Core principles - Minimize trust: no direct OT exposure to the…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-watch">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Ustabil</span>
-                <span class="mini-pill">category</span>
-                <span class="score-chip score-watch">25%</span>
-              </div>
-              <h3>secure remote access for OT and critical infrastructure Denmark</h3>
-              <p>I bliver nævnt på Google AI, men mangler stadig på ChatGPT, Claude og Gemini.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>Google AI</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>ChatGPT, Claude, Gemini</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det gør jeres synlighed sårbar, fordi kunden kan få et forskelligt svar alt efter hvor de spørger.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Got it—secure remote access for OT/ICS in Danish critical infrastructure. Below is a vendor-agnostic blueprint you can adapt quickly, plus a short discovery checklist so I can tailor it to your sector and constraints. F…</div>
-            </div>
-            
-          </article>
-        
-          <article class="query-overview-row query-overview-watch">
-            <div class="query-row-main">
-              <div class="query-row-top">
-                <span class="pill">Ustabil</span>
-                <span class="mini-pill">comparison</span>
-                <span class="score-chip score-watch">25%</span>
-              </div>
-              <h3>Secomea alternatives Denmark industrial remote access</h3>
-              <p>I bliver nævnt på ChatGPT, men mangler stadig på Claude, Gemini og Google AI.</p>
-            </div>
-            <div class="query-row-side">
-              <div>
-                <span class="metric-label">Synlig på</span>
-                <p>ChatGPT</p>
-              </div>
-              <div>
-                <span class="metric-label">Mangler på</span>
-                <p>Claude, Gemini, Google AI</p>
-              </div>
-            </div>
-            
-            <div class="query-row-proof">
-              <div class="query-proof-block">
-                <span class="metric-label">Hvorfor vi reagerer</span>
-                <p>Det gør jeres synlighed sårbar, fordi kunden kan få et forskelligt svar alt efter hvor de spørger.</p>
-              </div>
-              <div class="detail-note detail-note-inline">Here are solid Secomea alternatives for industrial/OT remote access that are available in Denmark (local vendors and globally used solutions with Danish presence/resellers): Denmark-based - BifrostConnect (Copenhagen):…</div>
-            </div>
-            
-          </article>
-        
-      </div>
-
-      
-        <details class="scenario-backlog executive-details">
-          <summary>Se alle testede søgninger</summary>
-          <div class="heatmap-layout">
-            <div class="heatmap-list">
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>hardware-based out-of-band remote access industrial systems</strong>
-                      <div class="muted-line">category</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="hardware-based out-of-band remote access industrial systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Are you looking for an overview, architecture guidance, or product options? Here’s a concise primer on hardware-based out-of-band (OOB) remote access for industrial/OT environments. What it is - A physically separate path (often cellular, satellite, or secondary ISP) for accessing sites and assets when the primary production network is unavailable or should remain isolated. - Delivered via dedicated hardware (gateways, console servers, secure modems) that provide remote reach to PLCs, RTUs, HMIs, network gear, and power/serial infrastructure without riding the plant LAN. Why use it - Incident response and recovery when the primary network is down or compromised. - Safe maintenance windows and vendor access without opening the process network. - Stronger segmentation and reduced blast radius vs in-band VPNs. Common architectures 1) Cellular OOB gateway in control cabinet - Components: LTE/5G industrial router with dual SIMs, serial/Ethernet ports, DI/DO, secure VPN to a central management service, optional private APN. - Use cases: water/wastewater lift stations, remote pumping, renewables. 2) Console-server OOB for network/OT gear - Components: serial console server, PDU control,…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure, remote, access og trust"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="hardware-based out-of-band remote access industrial systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="# Hardware-Based Out-of-Band (OOB) Remote Access for Industrial Systems A comprehensive overview of concepts, hardware types, key players, use cases, and security considerations. --- ## 1. What Is Out-of-Band (OOB) Remote Access? Out-of-band (OOB) management entails managing network operations and processes through an out-of-band network — a separate network that operates alongside the main (in-band) network, yet functions independently, not depending on the same infrastructure or services. Hardware-based OOBM features allow remote management of an organization&#39;s fleet of devices — no matter where they are and even if they are powered down or the operating system is unresponsive. The term &#34;band&#34; refers to the communication channels that IT departments use to access and control devices via remote monitoring and management (RMM) tools. In-band management refers to managing devices over the corporate network, whereas out-of-band (OOB) refers to managing devices over any separate communication channel. --- ## 2. Why It Matters for Industrial / OT Systems The exploding demand for remote access into today&#39;s industrial control systems (ICS) and operational technology (OT) systems has cre…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure, remote, access og security"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="hardware-based out-of-band remote access industrial systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Hardware-based Out-of-Band (OOB) remote access for industrial systems refers to methods and technologies that provide access to devices and systems independent of the primary operational network (the &#34;in-band&#34; network). This independence is critical in industrial environments where network failures, system freezes, or security incidents can render traditional in-band access unusable. The &#34;hardware-based&#34; aspect means these solutions rely on dedicated physical devices, not just software running on the target system or its primary network. ### Why OOB is Crucial for Industrial Systems: 1. **Network Failures:** If the primary SCADA or control network goes down, OOB provides an alternative path to diagnose and resolve the issue. 2. **System Freezes/Crashes:** PLCs, RTUs, industrial PCs, or HMIs can freeze, making them unresponsive via their primary network interface. OOB allows for console access, power cycling, or rebooting. 3. **Configuration Errors:** Accidental misconfigurations can lock out in-band access. OOB provides a fallback. 4. **Remote/Unmanned Sites:** Many industrial facilities (oil &amp; gas pipelines, water treatment plants, remote substations) are geographically dispersed…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure, remote, access og security"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="hardware-based out-of-band remote access industrial systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Hardware-based out-of-band (OOB) remote access for industrial systems provides a critical, independent channel for managing and monitoring operational technology (OT) even when the primary network is down or compromised. This approach is essential for maintaining business continuity, enhancing security, and reducing costly downtime in industrial environments. **What is Hardware-Based Out-of-Band Remote Access?** Out-of-band management refers to the ability to manage and monitor devices using a dedicated, separate communication channel that is independent of the device&#39;s operating system or primary network connection. In industrial settings, this typically involves specialized hardware that allows administrators to access, control, and troubleshoot systems remotely, even if they are powered off, unresponsive due to an OS failure, or affected by a cyberattack. **Key Components and How They Work:** Hardware-based OOBM solutions often rely on devices like: * **Serial Console Servers (or Terminal Servers):** These devices connect directly to the serial ports (e.g., RS-232, USB) of industrial control systems, routers, switches, and other network-attached equipment. They provide a comman…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>zero trust remote access for PLC and SCADA Denmark</strong>
-                      <div class="muted-line">category</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="zero trust remote access for PLC and SCADA Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Are you looking for: - A Denmark/EU-compliant architecture for zero‑trust remote access into PLC/SCADA? - A shortlist of vendors/partners that operate in Denmark? - Or both (plus implementation steps and controls to meet NIS2/IEC 62443)? If both, here’s a concise starting point you can use today. What “zero trust remote access” to OT should look like - Identity first: tie all access (employees and third parties) to your IdP with MFA and strong device posture; enforce least‑privilege and just‑in‑time approvals per asset/function. This aligns with IEC 62443 remote‑access controls. ([en.wikipedia.org](https://en.wikipedia.org/wiki/IEC_62443?utm_source=openai)) - Brokered, outbound‑only connectivity: place an access broker in the OT DMZ; all sessions originate outbound from site to broker (no inbound VPN holes). Use protocol break/HTML5 proxies for RDP/SSH/VNC, with file‑transfer inspection. ([xage.com](https://xage.com/wp-content/uploads/2020/10/Zero-Trust-Remote-Access.pdf?utm_source=openai)) - Per‑asset policy and segmentation: map zones/conduits and restrict access at the PLC/HMI/server level; log and record sessions; enforce command filtering where feasible. ([de.wikipedia.org](h…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="zero trust remote access, remote, access og trust"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="zero trust remote access for PLC and SCADA Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="# 🔐 Zero Trust Remote Access for PLC &amp; SCADA Systems — with a Focus on Denmark --- ## 🇩🇰 Why This Matters in Denmark Industrial organizations are built around security, reliability, and accessibility — and all of this is at serious risk today with the connectivity explosion of industrial (OT) systems, including PLCs, ICS, and SCADA. SCADA in European critical infrastructure is subject to NIS2 , and the European Union adopted the Network and Information Security (NIS) directive in 2016 and converted it to law in most EU nations in 2018, complemented by ENISA guidelines and the IEC 62443 standard. **Denmark is home to Secomea**, a leading OT-focused Zero Trust remote access vendor. Secomea is an official CVE Numbering Authority (CNA) — the first in Denmark. --- ## 🔎 What Is Zero Trust for PLC/SCADA? Zero Trust Architecture is a security framework that operates on the principle of &#34;never trust, always verify.&#34; It assumes that threats may exist both outside and inside the network. Zero Trust Architecture for OT security works on a different principle — instead of trusting any user just because they are connected through a VPN, Zero Trust requires every user to be verified every single…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="zero trust remote access, OT security, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="zero trust remote access for PLC and SCADA Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Implementing Zero Trust remote access for PLCs and SCADA in Denmark is a critical step towards securing industrial control systems (ICS) in a country with a strong focus on cybersecurity and critical infrastructure protection. Given the increasing connectivity of OT environments and the rising threat landscape, a &#34;never trust, always verify&#34; approach is essential. Here&#39;s a comprehensive guide to achieving Zero Trust remote access for your PLC and SCADA environment in Denmark: ## Understanding the Challenge in OT Before diving into Zero Trust, it&#39;s crucial to acknowledge the unique challenges of OT environments: 1. **Legacy Systems:** Many PLCs and SCADA components are decades old, with limited security features, proprietary protocols, and infrequent patching cycles. 2. **Real-time Operations:** Any security measure must not introduce latency or disrupt critical processes. Downtime is extremely costly and can be dangerous. 3. **Proprietary Protocols:** Modbus, OPC, DNP3, EtherNet/IP, Profinet, etc., require specialized tools for inspection and control. 4. **Air-Gapped Myth:** While many OT networks were traditionally air-gapped, increased connectivity (IIoT, remote access, IT/OT co…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, zero trust remote access, OT security og secure"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="zero trust remote access for PLC and SCADA Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Zero Trust Remote Access for PLC and SCADA systems in Denmark is gaining traction as organizations seek to enhance the security of their Operational Technology (OT) environments against evolving cyber threats. This approach moves beyond traditional perimeter-based security, adopting a &#34;never trust, always verify&#34; principle for all users and devices attempting to access industrial control systems (ICS). **Key Principles of Zero Trust for OT/ICS** A Zero Trust architecture for PLC and SCADA systems involves several critical components: * **Least Privilege Access:** Users and devices are granted only the minimum access necessary for their tasks, reducing the potential impact of a breach. * **Continuous Authentication and Authorization:** Access requests are continuously verified based on user identity, device posture, and contextual policies, rather than trusting implicitly once inside the network. Multi-factor authentication (MFA) is often a key part of this. * **Micro-segmentation:** OT networks are divided into smaller, isolated segments, limiting lateral movement for attackers and containing incidents. * **Comprehensive Visibility and Monitoring:** All access attempts and system…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, zero trust remote access, OT security og secure"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>NIS2 remote access OT Denmark</strong>
-                      <div class="muted-line">problem</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="NIS2 remote access OT Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Ingen svartekst gemt."
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="Ingen tydelige kontekstsignaler gemt."
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="NIS2 remote access OT Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Here is a comprehensive overview of **NIS2, Remote Access, and OT Security in Denmark**: --- ## 🇩🇰 NIS2 in Denmark — Status &amp; Implementation The EU&#39;s NIS2 Directive came into effect in Denmark on **1 July 2025** and is now implemented into Danish law. It is designed to enhance cybersecurity across thousands of companies and organisations delivering essential services in various critical sectors. In Denmark, NIS2 has been implemented through **framework legislation**, which involves a cross-sectoral main law along with sector-specific legislation for the telecommunications, energy, and financial sectors. Denmark has implemented a **sector-specific approach** to regulators, and as there is one centralised authority, SAMSIK, there are also a number of sector-specific regulators depending on the specific scope/industry which the entity falls under NIS2 with reference to. In Denmark, it is not possible to impose administrative fines directly — any sanctions must follow the regular processes under the public prosecution authority. The management body&#39;s personal liability has also not been included as part of the transposition. The NIS2 Act covers sectors such as **energy, transport, hea…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="NIS2 remote access OT Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="NIS2 (Network and Information Security 2 Directive) significantly tightens cybersecurity requirements across critical sectors within the EU, including those operating in Denmark. When it comes to **remote access to Operational Technology (OT)** environments in Denmark, NIS2 introduces a heightened level of scrutiny, demanding robust cybersecurity measures. Here&#39;s a breakdown of the implications and what organizations in Denmark need to consider: ## Understanding the Core Components 1. **NIS2 Directive:** * **Scope:** Expands the list of critical sectors (Essential Entities - EE, Important Entities - IE) and brings more organizations under its purview. This includes many industrial operators who manage OT. * **Key Requirements:** Mandates comprehensive cybersecurity risk management measures, incident reporting, supply chain security, business continuity, and board-level accountability. * **Risk-Based Approach:** Organizations must conduct thorough risk assessments and implement proportionate technical and organizational measures to mitigate identified risks. * **Stronger Enforcement:** Higher fines for non-compliance. 2. **Remote Access:** * **Necessity:** Crucial for maintenance,…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="NIS2 remote access OT Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="The NIS2 Directive has significantly impacted remote access to Operational Technology (OT) systems in Denmark, introducing stringent cybersecurity requirements for a wide range of entities. Denmark formally incorporated the NIS2 Directive into its national law with the &#34;Lov om foranstaltninger til sikring af et højt cybersikkerhedsniveau&#34; (Act on measures to ensure a high level of cybersecurity), often referred to as the NIS-2-loven, which came into force on July 1, 2025. The Danish implementation of NIS2 employs a multi-sectoral approach, supplementing a general cybersecurity framework with specific legislation for critical sectors such as energy, telecommunications, and finance. This expansion brings approximately 6,000 entities under the scope of NIS2, a substantial increase from the 1,000 covered by the previous NIS1 directive, encompassing both essential (VE) and important (VI) entities. Organizations in critical infrastructure sectors that rely on OT are particularly affected. For remote access to OT environments, NIS2 emphasizes the need for robust security measures. Remote access is identified as a critical risk area, and organizations are mandated to implement secure meth…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, NIS2 compliance, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>VPN alternative for industrial remote access Denmark</strong>
-                      <div class="muted-line">problem</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="VPN alternative for industrial remote access Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="If you’re looking for alternatives to traditional VPNs for industrial/OT remote access in Denmark, consider these options. They’re designed to reduce lateral movement risk, add identity- and device-aware controls, and improve auditability for NIS2/IEC 62443-aligned programs. 1) Zero Trust Network Access (ZTNA) platforms - What it is: Identity- and device‑posture–based access to specific apps/ports, without exposing whole networks. Often cloud-delivered and agent/tunnel based. - Good for: OEM/service partners, engineers, and staff who need access to HMIs, historians, RDP/SSH jump boxes, web HMIs, etc., with MFA and per‑session policies. - Examples: - Cloudflare Access/Tunnel: app- and service-level access, device posture, short‑lived auth, replaces VPNs. ([cloudflare.com](https://www.cloudflare.com/teams/zero-trust-network-access?utm_source=openai)) - Zscaler Private Access (ZPA): ZTNA with OT/IIoT use cases, Siemens partnership for OT access. ([zscaler.com](https://www.zscaler.com/solutions/modern-workplace/work-from-anywhere?utm_source=openai)) - Also seen in practice: Prisma Access (Palo Alto) or Microsoft"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="remote, access, trust og industrial"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="VPN alternative for industrial remote access Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Here is a comprehensive overview of **VPN alternatives for industrial remote access**, with a specific focus on the Danish and broader European industrial/OT (Operational Technology) context: --- ## 🏭 Why Traditional VPNs Fall Short in Industrial Environments Many industrial organizations still rely on VPNs or jump servers for remote access, but these solutions introduce significant risks: VPNs provide direct access to OT systems, bypassing security layers like the Purdue Model and increasing exposure to cyber threats. VPNs by default are designed to provide network-level access, meaning they expose more of the network to threats — especially in scenarios where a user&#39;s credentials are hijacked and used by malicious actors — leaving corporate data, applications, and sensitive material vulnerable to attack. VPNs don&#39;t scale well, and adding remote access workstations or contractors requires labor-intensive procedures, making managing and controlling user access difficult as the number of users increases. In Denmark specifically, Industrial Control Systems (ICS) and Operational Technology (OT) environments are the backbone of Denmark&#39;s advanced industrial ecosystem. From renewable e…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="VPN alternative for industrial remote access Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Yes, absolutely! For industrial remote access in Denmark, especially with the upcoming NIS2 directive and a strong focus on cybersecurity, there are several superior alternatives to traditional VPNs. Traditional VPNs, while functional, often provide a &#34;flat&#34; network access that can be a security risk in OT environments. Here are the primary VPN alternatives for industrial remote access, along with their benefits and considerations: ### 1. Dedicated Industrial Remote Access Platforms (IRAPs) / Secure Remote Access Solutions These are purpose-built solutions designed for OT environments, offering enhanced security, granularity, and ease of management compared to generic VPNs. **How they work:** Typically involve a physical or virtual gateway device installed at the industrial site (e.g., next to PLCs, HMIs, SCADA systems). This gateway establishes an outbound, encrypted connection to a cloud-based or on-premise central server. Technicians and engineers then connect to this central server, which brokers secure, granular access to the specified industrial equipment. **Key Features &amp; Benefits:** * **Zero-Trust Architecture (often):** Access is granted based on &#34;least privilege,&#34; meanin…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, industrial remote access, PLC remote access og secure"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="VPN alternative for industrial remote access Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="For industrial remote access in Denmark, several robust and secure alternatives to traditional VPNs are available, offering enhanced security, granular control, and features tailored for Operational Technology (OT) environments. These alternatives address the specific challenges of industrial systems, such as the need for high availability, real-time control, and compliance with standards like IEC 62443. Here are key VPN alternatives and providers with a presence or focus in Denmark: **1. Zero Trust Network Access (ZTNA) and Software-Defined Perimeter (SDP)** ZTNA operates on the principle of &#34;never trust, always verify,&#34; requiring strict identity verification for every user and device attempting to connect, regardless of their location. Access is granted only to specific applications or resources rather than the entire network, significantly reducing the attack surface. SDPs, often a component of Zero Trust, create a software-defined network boundary that hides connected infrastructure from external parties, making it invisible to attackers. * **Benefits:** Enhanced security through granular access control and continuous verification, reduced attack surface, improved visibility,…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, industrial remote access og secure"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>critical infrastructure remote access without VPN</strong>
-                      <div class="muted-line">problem</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="critical infrastructure remote access without VPN"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Are you looking for secure ways to let engineers/vendors reach OT/ICS systems without a traditional VPN? Here are common patterns that critical‑infrastructure operators use, plus when to choose each. If you share your use case (monitoring vs. control, vendor access, cloud, latency), I can tailor this. What “no‑VPN” usually means - Replace network‑level tunnels with identity‑, device‑, and application‑level access. No flat network reachability, no inbound ports, and least‑privilege per session. Main options 1) Zero Trust Network Access (ZTNA) / Software‑Defined Perimeter (SDP) - How it works: A lightweight outbound connector from your DMZ establishes a brokered, mutually authenticated control channel to a cloud/on‑prem controller. Users authenticate with MFA; device posture is checked; only approved apps/protocols are proxied. - Pros: No exposed inbound services; micro‑segmented, per‑app policies; JIT access; easy contractor onboarding; good audit. - Cons: OT protocols can be tricky; deterministic latency needs testing; offline dependency planning needed. 2) Privileged Access Management (PAM) jump servers (brokered sessions) - How it works: Users authenticate to a hardened bastion…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="critical infrastructure remote access without VPN"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="# 🔒 Critical Infrastructure Remote Access Without VPN As cyber threats against industrial and operational technology (OT) environments intensify, organizations managing critical infrastructure are rapidly moving away from traditional VPNs toward more secure, modern alternatives. Here&#39;s a comprehensive breakdown: --- ## ⚠️ Why VPNs Fall Short for Critical Infrastructure VPNs and jump servers can create security risks by enabling non-granular, standing access to critical resources, which can translate into a lasting foothold for attackers. VPNs face scalability and performance limitations and introduce direct connectivity to lower levels of the OT environment, often breaking the Purdue Model of control hierarchy — a model designed to prevent direct communication between certain levels, ensuring a layered defense. VPNs extend the network to remote users, making it possible for malware on a user&#39;s device to infiltrate the OT network. They also require rigorous configuration and management, and VPN access is often maintained by separate entities within an organization, causing delays and inefficiencies in providing remote access to vendors. Attackers regularly discover and exploit crit…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="OT security, critical infrastructure remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="critical infrastructure remote access without VPN"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Accessing Critical Infrastructure (CI) remotely without a traditional VPN is a highly sensitive topic that demands extreme caution and a robust, multi-layered security strategy. The goal should never be to reduce security, but rather to implement a more modern, granular, and context-aware approach that might surpass the capabilities of a basic VPN for CI environments. Traditional VPNs, while effective for general corporate access, can sometimes be seen as &#34;all or nothing&#34; – once connected, a user often has broad network access. For critical infrastructure, this broad access can be a significant risk. The core philosophy for secure remote access to CI, especially without a traditional VPN, should be **Zero Trust Network Access (ZTNA)**. Here are the secure alternatives and essential considerations for critical infrastructure remote access without a traditional VPN: --- ### Secure Alternatives to Traditional VPNs for Critical Infrastructure 1. **Zero Trust Network Access (ZTNA) / Software-Defined Perimeter (SDP):** * **Concept:** ZTNA operates on the principle of &#34;never trust, always verify.&#34; It establishes secure, direct, and granular connections between a verified user/device and…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, critical infrastructure remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="critical infrastructure remote access without VPN"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="While Virtual Private Networks (VPNs) have been a traditional method for remote access, critical infrastructure organizations are increasingly adopting more secure and robust alternatives due to the inherent risks and limitations of VPNs, such as implicit endpoint trust and potential for lateral movement in case of a breach. Modern approaches prioritize a &#34;never trust, always verify&#34; philosophy, often referred to as Zero Trust. Key technologies and methods for critical infrastructure remote access without a VPN include: * **Disconnected Access / Protocol-Isolated Architecture** This approach completely severs the network path between a user&#39;s device and the operational technology (OT) environment. Instead of routing network traffic, it isolates access at the protocol level, allowing users to interact with applications (like HMIs, PLCs, and engineering workstations) through browser-based interaction, screen rendering, and strict protocol mediation. This method prevents malware delivery, stops data exfiltration, eliminates lateral movement, and protects OT systems without requiring endpoint trust. * **Zero Trust Network Access (ZTNA)** ZTNA operates on the principle that no user or…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, critical infrastructure remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>secure remote access to isolated PLC and SCADA systems</strong>
-                      <div class="muted-line">problem</div>
-                    </div>
-                    <span class="score-chip score-critical">0%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="secure remote access to isolated PLC and SCADA systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Below is a concise, field-tested approach to enabling secure remote access to isolated PLC/SCADA (OT) environments while preserving safety and availability. Core principles - Minimize trust: no direct OT exposure to the internet; all access terminates in controlled IT/DMZ tiers. - Least privilege and time-bounded access: just-in-time (JIT), role-based, with multi-factor authentication (MFA). - Protocol break and inspection: never carry raw OT protocols end-to-end from remote users into Level 2/1. - Strong auditability: record sessions, commands, file transfers; retain immutable logs. - Safety first: remote actions must not bypass site procedures, interlocks, or Management of Change (MoC). Reference architecture (Purdue-style) 1) Remote user/device - Managed endpoint with disk encryption, EDR, posture checks, and a hardware-authenticator (FIDO2) or smart card. - Identity from your corporate IdP (Azure AD/Entra, Okta, etc.) issuing short-lived credentials. 2) Internet edge (IT) - ZTNA or VPN concentrator with MFA and device posture. Prefer certificate-based auth; restrict to named apps/ports. - Deny split tunneling. Require DNS over TLS to corporate resolvers. 3) Secure Access DMZ (…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="secure remote access to isolated PLC and SCADA systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="# 🔒 Secure Remote Access to Isolated PLC and SCADA Systems A comprehensive guide to protecting Operational Technology (OT) environments while enabling legitimate remote connectivity. --- ## ⚠️ Why This Matters SCADA systems and PLCs control real physical processes — pumps, motors, valves, conveyor belts. If something goes wrong during a remote session, the result is not just a corrupted file — it could be a flooded tank, an overloaded motor, or a dangerous pressure spike. Remote access is the most common entry point for SCADA attacks. The Dragos 2026 report tracked 119 ransomware groups impacting over 3,300 industrial organizations — nearly double the count from 2024 — and many of these incidents start in IT but spread to OT through shared infrastructure. For many years, industrial systems were protected simply by being physically isolated — what security professionals call an &#34;air gap.&#34; If a system was not connected to the internet, it was assumed to be safe. That era is over. For decades, SCADA software operated in relatively isolated networks. That isolation is largely gone. Today&#39;s SCADA environments connect to enterprise systems, remote maintenance platforms, analytics engine…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="secure remote access to isolated PLC and SCADA systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Securing remote access to isolated PLC and SCADA systems is one of the most critical and challenging aspects of industrial cybersecurity. The goal is to provide necessary access for maintenance, monitoring, and programming without compromising the isolation that protects these sensitive operational technology (OT) systems. Here&#39;s a comprehensive approach, encompassing strategies, technologies, and best practices: ## Core Principles 1. **Maintain Isolation:** The primary objective is to preserve the integrity of the isolated network. Remote access should introduce the *minimum possible attack surface*. 2. **Defense-in-Depth:** Implement multiple layers of security controls, so if one fails, others can still protect the system. 3. **Least Privilege:** Grant users and systems only the permissions absolutely necessary to perform their functions, for the shortest possible time. 4. **Zero Trust:** &#34;Never trust, always verify.&#34; Assume no user or device is inherently trustworthy, even if they are inside the network perimeter. 5. **Auditability &amp; Monitoring:** All access and actions must be logged, monitored, and auditable to detect and respond to suspicious activity. ## Key Challenges * *…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="secure remote access to isolated PLC and SCADA systems"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Secure remote access to isolated PLC and SCADA systems is crucial for industrial operations, allowing for remote monitoring, maintenance, and troubleshooting while mitigating cybersecurity risks. This requires a comprehensive framework that balances operational needs with rigorous security controls. Key strategies and technologies for achieving secure remote access include: * **Minimizing and Centralizing Access Paths** Establishing a single, controlled access path for all remote connectivity helps reduce misconfigurations and vulnerabilities. * **Network Segmentation and DMZs** Isolating critical control system components on dedicated network segments, separated from the corporate IT network by firewalls, is a fundamental security measure. A Demilitarized Zone (DMZ) or secure access proxy can act as an intermediary for all remote access, preventing direct inbound connections to sensitive devices. * **Virtual Private Networks (VPNs)** VPNs are a common method for creating encrypted tunnels between remote users and industrial environments, shielding data traffic from interception. Industrial-grade firewalls and authentication controls enhance VPN security. Some solutions offer plug…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>secure remote access for OT and critical infrastructure Denmark</strong>
-                      <div class="muted-line">category</div>
-                    </div>
-                    <span class="score-chip score-watch">25%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="secure remote access for OT and critical infrastructure Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Got it—secure remote access for OT/ICS in Danish critical infrastructure. Below is a vendor-agnostic blueprint you can adapt quickly, plus a short discovery checklist so I can tailor it to your sector and constraints. First, a few clarifying questions - Sector and assets: energy, water, transport, healthcare, manufacturing, others? How many sites and which OEMs/protocols (e.g., Siemens S7, ABB, IEC‑104, Modbus, DNP3)? - Remote users: internal engineers, field techs, third‑party/OEM vendors? - Regulatory drivers: NIS2 scope, IEC 62443 adoption, sector guidance from Danish authorities, GDPR implications? - Current state: any existing VPN/jump servers, PAM, monitoring (SIEM/SOC), and how vendor access is handled today? - Non-functional needs: latency/jitter tolerance, safety procedures, maintenance windows, offline operation requirements. Reference architecture (high level) - External edge - Identity and access management: enterprise IdP with phishing‑resistant MFA (FIDO2 or smartcards), device certificates, and conditional access. - Remote access broker (no direct inbound to OT): ZTNA/SDP or tightly controlled VPN landing only in a secure zone; deny split tunneling. - Enterprise DMZ…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="secure remote access for OT and critical infrastructure Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Here is a comprehensive overview of **Secure Remote Access for OT and Critical Infrastructure in Denmark** — covering the threat landscape, regulatory framework, technical best practices, and strategic recommendations. --- # 🔐 Secure Remote Access for OT &amp; Critical Infrastructure in Denmark --- ## 1. 🚨 The Threat Landscape in Denmark Denmark faces a severe and evolving cyber threat environment targeting its operational technology (OT) and critical infrastructure. Denmark&#39;s official 2025 cyber threat assessment confirms a very high level of risk from cybercrime and espionage, with record ransomware activity, persistent DDoS campaigns linked to pro-Russian actors, and a rising focus on operational technology in utilities and industry. Pro-Russian hackers have repeatedly scanned for internet-exposed control systems, logging in where weak or default credentials exist and manipulating settings to create disruption. A Danish waterworks incident in late 2024 briefly left households without water due to changes in pressure levels. The threat level against Denmark and the rest of the world is increasing, particularly in the realms of sabotage and cybersecurity. The potential consequences o…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="secure remote access for OT and critical infrastructure Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Securing remote access for Operational Technology (OT) and Critical Infrastructure (CI) in Denmark requires a highly robust, multi-layered approach, driven by unique OT constraints and evolving regulatory landscapes like the EU&#39;s NIS2 Directive. Here&#39;s a comprehensive guide to establishing secure remote access for OT/CI in Denmark: ## Understanding the Unique Challenges of OT Remote Access Before diving into solutions, it&#39;s crucial to acknowledge why OT remote access is different from IT: 1. **Safety and Physical Impact:** Compromise can lead to physical damage, environmental harm, injury, or loss of life, not just data theft. 2. **Availability Over Confidentiality:** Downtime is often more catastrophic than data breaches. 3. **Legacy Systems:** Many OT systems are old, unpatchable, difficult to update, and weren&#39;t designed with modern network security in mind. 4. **Real-time Requirements:** Latency and network disruptions can impact control processes. 5. **Proprietary Protocols:** Non-standard communication protocols require specialized handling. 6. **Vendor Access:** OEMs and third-party contractors frequently need access for maintenance and support. 7. **Air Gaps are a Myth:**…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-visible"
-                        data-platform="Google AI"
-                        data-query="secure remote access for OT and critical infrastructure Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #5"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: secure remote access, secure, remote, access."
-                        data-answer="Denmark is significantly strengthening its secure remote access for Operational Technology (OT) and critical infrastructure, driven by the implementation of the EU&#39;s NIS2 Directive and the Critical Entities Resilience (CER) Act. These legislative frameworks impose stringent cybersecurity requirements on a wide range of critical and important entities, including those in energy, transport, healthcare, drinking water, wastewater, and digital infrastructure sectors. **Key Legislative and Regulatory Landscape:** * **NIS2 Directive:** Implemented in Denmark through a new act (the Danish NIS Act) effective July 1, 2025, it mandates enhanced cybersecurity measures, systematic risk management, incident management, and security measures for critical and important entities. It also requires these entities to report significant security incidents within 24 hours. The directive expands the scope beyond traditional critical infrastructure to include sectors like food production and manufacturing, and places board-level responsibility for cybersecurity. * **CER Act:** Also effective July 1, 2025, Denmark&#39;s Act on the Resilience of Critical Entities transposes the EU&#39;s CER Directive. It introduc…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>Secomea alternatives Denmark industrial remote access</strong>
-                      <div class="muted-line">comparison</div>
-                    </div>
-                    <span class="score-chip score-watch">25%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="ChatGPT"
-                        data-query="Secomea alternatives Denmark industrial remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #3"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret matcher bifrostconnect.com og rammer også jeres faktiske kontekst: OT security, industrial remote access, secure, remote."
-                        data-answer="Here are solid Secomea alternatives for industrial/OT remote access that are available in Denmark (local vendors and globally used solutions with Danish presence/resellers): Denmark-based - BifrostConnect (Copenhagen): Danish-made, zero‑trust, hardware-assisted remote access purpose-built for OT and critical infrastructure; supports NIS2-aligned controls and audited third‑party access. ([bifrostconnect.com](https://bifrostconnect.com/?utm_source=openai)) - Orange Cyberdefense Denmark: Managed industrial remote access/OT security services and remote technical assistance if you prefer a service-led model. ([orangecyberdefense.com](https://www.orangecyberdefense.com/dk/our-offering/managed-services/industrial-security/industrial-remote-access?utm_source=openai)) Global vendors commonly used in DK (with local sites or resellers) - Ewon (HMS Networks) + Talk2M cloud, distributed by Wexøe in Denmark. Widely used for PLC/HMI access and data logging. ([wexoe.dk](https://www.wexoe.dk/industry/wexoee-a-s-styrker-fokus-paa-iot-i-industrien/?utm_source=openai)) - IXON Cloud + IXrouter (industrial VPN/edge gateway). Danish sellers list it under “Remote Access Cloud.” ([ixon.cloud](https://www.…"
-                        data-aliases="BifrostConnect og bifrostconnect.com"
-                        data-signals="OT security, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #3</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Claude"
-                        data-query="Secomea alternatives Denmark industrial remote access"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Here is a comprehensive overview of the best **Secomea alternatives** for **industrial remote access**, with a focus on the Danish and broader European market context: --- ## 🏭 About Secomea (The Benchmark) Founded in 2008, Secomea has been serving manufacturers and machine builders for over 15 years, with headquarters in Copenhagen and offices in the US, China, and Japan, plus an international network of 70+ partner distributors. Based on Zero Trust principles and IEC 62443-certified, Secomea is custom-made to protect industrial systems and networks. --- ## 🔁 Top Secomea Alternatives ### 1. 🇳🇱 IXON Cloud **Best for: Machine builders wanting an integrated IIoT + remote access platform** IXON is trusted by 2,500+ machine builders to deliver faster, smarter, and more efficient service with secure remote access, data insights, and cloud-based tools. You can manage machines and users in one central platform for both remote access and IoT — IXON claims to be the only IIoT platform with integrated remote access. IXON gateways connect PLCs, HMIs, and industrial devices to IXON Cloud for remote VPN access and data capabilities, with 4G, Wi-Fi, or Ethernet support. &gt; 💡 Note: Both StrideLin…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, OT security, industrial remote access og secure"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="Secomea alternatives Denmark industrial remote access"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Secomea is a well-established player in industrial remote access, especially in Denmark, being a Danish company. However, the market for secure industrial remote access is growing rapidly, with many excellent alternatives available. When looking for alternatives, consider factors like security, ease of use, scalability, integration with existing systems, hardware vs. software focus, and local support in Denmark. Here&#39;s a breakdown of Secomea alternatives, categorized for clarity: --- ### Direct Competitors (Hardware &amp; Cloud-Based Appliances) These companies offer solutions very similar in concept to Secomea&#39;s SiteManager/GateManager/LinkManager. 1. **HMS Networks (eWON Cosy &amp; Flexy):** * **Strengths:** One of Secomea&#39;s biggest direct competitors globally. eWON Cosy is simple for remote access, while eWON Flexy offers more advanced data logging and edge computing capabilities. Both utilize the Talk2M cloud platform for centralized management. Strong presence and support in the Nordic region. * **Danish Presence:** Very strong, often through local distributors and integrators. 2. **IXON (IXrouter &amp; IXplatform):** * **Strengths:** A modern, cloud-native approach to industrial remote…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Google AI"
-                        data-query="Secomea alternatives Denmark industrial remote access"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="When seeking alternatives to Secomea for industrial remote access in Denmark, a range of solutions are available, from dedicated industrial remote access appliances to broader remote support software and specialized Danish cybersecurity firms. These alternatives offer secure connectivity for monitoring, troubleshooting, and maintaining industrial equipment such as PLCs, HMIs, and SCADA systems. Here are some notable Secomea alternatives and relevant Danish companies: **Direct Industrial Remote Access Solutions &amp; General Alternatives:** * **Tosibox** is a purpose-built industrial remote access appliance often mentioned alongside Secomea. It offers secure, standardized access across multiple industrial sites. * **IXON Cloud** provides secure remote access for PLCs and HMIs through its edge gateways and cloud platform, designed for easy setup and scalability. * **FlexiHub** is a software solution that enables remote PLC access by providing a simple method for accessing RS-232/485/422 and USB ports remotely, without requiring additional hardware or network reconfigurations. * **TSplus Remote Access** offers a cost-effective platform for secure access to Windows applications and deskto…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>best industrial remote access solution Denmark</strong>
-                      <div class="muted-line">category</div>
-                    </div>
-                    <span class="score-chip score-watch">50%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="ChatGPT"
-                        data-query="best industrial remote access solution Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="Do you mean a secure remote-access platform for industrial/OT equipment (PLCs, HMIs, SCADA) available in Denmark? If so, here’s a concise, Denmark-relevant short list with when to pick each, plus local availability. Best-fit options to consider - Secomea (Denmark-based, OT-first SRA) - When to pick: You want an OT-focused, vendor-neutral platform with strong access control, audit trails, and simple deployment for machine builders and plants in the Nordics. - Why it stands out: Purpose-built for OT remote access; Danish HQ; widely used by OEMs/SIs; public commitment to IEC 62443 practices and vulnerability handling (CNA). ([secomea.com](https://secomea.com/?utm_source=openai)) - Siemens SINEMA Remote Connect (for Siemens-centric sites) - When to pick: Your stack is Siemens (SCALANCE, S7, etc.) and you want centrally managed VPNs, automatic router enrollment, and tight integration with Siemens gear. - Denmark availability: Danish product page and local distribution (RS, Farnell, Wattoo). ([siemens.com](https://www.siemens.com/da-dk/products/scalance/sinema-remote-connect/?utm_source=openai)) - HMS Networks Ewon (Cosy/Flexy + Talk2M) - When to pick: You need fast, proven “machine-to-…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure, remote, access og industrial"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-visible"
-                        data-platform="Claude"
-                        data-query="best industrial remote access solution Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #5"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: secure remote access, industrial remote access, secure, remote."
-                        data-answer="Here is a comprehensive overview of the **best industrial remote access solutions available in Denmark** in 2025, covering both Danish-headquartered vendors and globally recognized platforms widely used in Danish industry: --- ## 🏭 Best Industrial Remote Access Solutions for Denmark --- ### 🥇 1. **Secomea** *(Denmark&#39;s #1 — HQ in Copenhagen)* Secomea is widely regarded as the top industrial remote access solution — and it&#39;s proudly Danish. Secomea is a Secure Remote Access (SRA) solution purpose-built for operational environments and cyber-physical systems (CPS). Secomea is headquartered in Denmark with offices in China, Japan, and North America, and has partnerships with a global network of distributors. **Key Features:** - Connects to any ICS equipment (PLC, HMI, SCADA, DCS), manages user access, and controls remote sessions in real time — based on Zero Trust principles and IEC 62443-certified. - Over 8,000 customers around the world use it every day across thousands of sites, including manufacturers, machine builders, OEMs, critical infrastructures, and system integrators. - Centralizes access control: all user permissions, access logs, and session recordings are managed in one…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-miss"
-                        data-platform="Gemini"
-                        data-query="best industrial remote access solution Denmark"
-                        data-summary="Ikke fundet"
-                        data-meta="Tæller ikke med i vurderingen"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
-                        data-answer="When looking for the &#34;best&#34; industrial remote access solution in Denmark, it&#39;s crucial to understand that &#34;best&#34; is highly dependent on your specific needs, existing infrastructure, budget, and security requirements. However, certain solutions stand out in the industrial remote access space, particularly those with a strong focus on security, reliability, and ease of use for operational technology (OT) environments. Given Denmark&#39;s advanced industrial landscape and strong focus on data security (GDPR), here are the top considerations and leading solutions: ### Key Factors to Consider for Denmark: 1. **Security (Paramount):** This is non-negotiable for industrial systems. Look for robust encryption, multi-factor authentication (MFA), granular access control, audit trails, and ideally a Zero-Trust architecture. 2. **Reliability &amp; Uptime:** Industrial processes cannot afford downtime. The solution must be stable and resilient. 3. **Ease of Use &amp; Management:** OT personnel often need to use these systems without deep IT networking knowledge. Simple setup, intuitive interfaces, and centralized management are key. 4. **Integration with OT Systems:** Seamless connectivity to PLCs (Siemen…"
-                        data-aliases="Ingen sikre alias-match gemt."
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Ikke fundet</strong>
-                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-visible"
-                        data-platform="Google AI"
-                        data-query="best industrial remote access solution Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #5"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: secure remote access, zero trust remote access, OT security, industrial remote access."
-                        data-answer="For Danish industries seeking robust and secure remote access solutions, several providers, both local and international, offer specialized platforms designed to meet the unique demands of operational technology (OT) environments. These solutions prioritize secure connectivity, efficient maintenance, and compliance with industrial cybersecurity standards. Key industrial remote access solutions in Denmark include: * **Secomea:** A Danish-based company, Secomea specializes in remote monitoring and management solutions specifically developed for the automation industry since 1999. Their solution is endorsed by leading PLC and HMI manufacturers and is known for its ease of installation. It comprises three basic components for secure communication, offering features like remote programming, monitoring, and data logging. Secomea&#39;s GateManager cloud service allows for the creation and management of user accounts, organization of equipment in a domain tree structure, and remote administration of SiteManagers. They also provide LinkManager Mobile for platform-independent access to PLC operator interfaces and SCADA systems. * **Admin By Request:** This Danish cybersecurity company provides…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, zero trust remote access, OT security og industrial remote access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>BifrostConnect remote access Denmark</strong>
-                      <div class="muted-line">brand</div>
-                    </div>
-                    <span class="score-chip score-good">100%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="ChatGPT"
-                        data-query="BifrostConnect remote access Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #2"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret matcher bifrostconnect.com og rammer også jeres faktiske kontekst: secure remote access, secure, remote, access."
-                        data-answer="Do you mean BifrostConnect, the Danish company that makes a hardware‑based remote access platform? - What it is: A secure remote access solution built around a portable “Bifrost Unit” plus a cloud/on‑prem manager. It’s designed for OT/ICS and other segmented or offline environments, with options like enforced session recording and device‑ or network‑level access. ([bifrostconnect.com](https://bifrostconnect.com/?utm_source=openai)) - Who uses it: Aimed at service providers and operators in critical infrastructure (water, energy, manufacturing) and other high‑assurance environments, including NIS2 contexts. ([bifrostconnect.com](https://bifrostconnect.com/ot-service-providers/?utm_source=openai)) - Company: BifrostConnect ApS, founded in 2016, headquartered at Islands Brygge 55, 2300 Copenhagen S, Denmark. ([bifrostconnect.com](https://bifrostconnect.com/company/?utm_source=openai)) - Docs/brochures: Security and product overviews are available from the company, including their security documentation and solution brochure. ([bifrostconnect.com](https://bifrostconnect.com/wp-content/uploads/2025/06/Security-Documentation-V.2.2.1.pdf?utm_source=openai)) If this is what you’re after,…"
-                        data-aliases="BifrostConnect og bifrostconnect.com"
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Claude"
-                        data-query="BifrostConnect remote access Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret matcher bifrostconnect.com og rammer også jeres faktiske kontekst: secure remote access, secure, remote, access."
-                        data-answer="# 🌉 BifrostConnect — Danish Remote Access Company ## Overview BifrostConnect is a Danish tech company creating secure, versatile, and user-friendly remote access to critical infrastructure. Founded in 2018, their products are designed, manufactured, and assembled in Scandinavia. The company is headquartered at Islands Brygge 55, 2300 Copenhagen S, Denmark. --- ## 🔧 How It Works BifrostConnect offers a remote access solution consisting of two elements: (1) a hardware unit the size of a passport that you connect to any type of equipment, and (2) an encrypted online service which duplicates and transmits the video, data, or control function from the connected equipment directly to the web browser of your IT specialist. Everything is encrypted and transmitted over the hardware unit&#39;s 4G, LAN, or Wi-Fi connection, allowing you to receive instant IT support on any type of equipment while keeping it offline. --- ## 🛡️ Key Features &amp; Technology - **Unified Out-of-Band Access (UOA):** With BifrostConnect Unified Out-of-band Access™ (UOA), they provide secure access to equipment that is offline, isolated, or not yet on the network. Commissioning teams, vendors, and operators can connect ins…"
-                        data-aliases="BifrostConnect og bifrostconnect.com"
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Gemini"
-                        data-query="BifrostConnect remote access Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: remote, access, infrastructure."
-                        data-answer="Yes, **BifrostConnect** is a relevant name in the context of **remote access in Denmark**. BifrostConnect is a Danish IT company that provides a range of IT services and solutions, primarily to businesses in Denmark. Remote access is a core component of how they deliver many of their services, including: 1. **IT Support:** They use remote access tools to quickly connect to their clients&#39; computers and servers to troubleshoot issues, install software, configure settings, and provide general technical assistance without needing to be physically on-site. 2. **IT Operations &amp; Management:** For managed IT services, remote access allows them to monitor systems, perform maintenance, apply updates, and ensure the smooth operation of their clients&#39; IT infrastructure. 3. **Consulting &amp; Setup:** They might use remote access during the setup phase of new systems or to guide clients through configurations. So, if you&#39;re looking for an IT service provider in Denmark that offers support and management capabilities leveraging remote access, BifrostConnect is certainly a company you might encounter or consider."
-                        data-aliases="BifrostConnect"
-                        data-signals="remote, access og infrastructure"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Google AI"
-                        data-query="BifrostConnect remote access Denmark"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: NIS2 compliance, secure, remote, access."
-                        data-answer="BifrostConnect is a Danish technology company specializing in secure, hardware-based remote access solutions, designed, developed, and manufactured in Denmark. The company provides remote access technology for critical infrastructure and various IT/OT equipment, emphasizing a Zero Trust security model. Founded in 2018, with the idea emerging in 2016, BifrostConnect aims to offer secure, user-friendly, and affordable remote access, particularly for situations where traditional solutions are too complex, expensive, or unreliable. Their hardware unit acts as a bridge, enabling non-technical personnel to grant secure access to remote experts for troubleshooting and maintenance, even when systems are offline, segmented, or air-gapped. BifrostConnect&#39;s solutions are built to support compliance with regulations like NIS2, offering features such as secure third-party access, audit logging, and faster incident response and recovery. Their technology is patented and adheres to the international IEC 62443 security level 2 standard for security and hardware development. The company is headquartered in Copenhagen, Denmark, and has received significant funding from Danish investors, including I…"
-                        data-aliases="BifrostConnect"
-                        data-signals="NIS2 compliance, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>BifrostConnect zero trust OT remote access</strong>
-                      <div class="muted-line">brand</div>
-                    </div>
-                    <span class="score-chip score-good">100%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="ChatGPT"
-                        data-query="BifrostConnect zero trust OT remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #2"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret matcher bifrostconnect.com og rammer også jeres faktiske kontekst: remote, access, trust, security."
-                        data-answer="Are you looking for an overview of BifrostConnect’s zero‑trust OT remote access, or help evaluating/implementing it? Here’s a concise primer: What it is - Hardware‑based, zero‑trust remote access for OT/industrial assets, designed to work even with isolated, legacy, or air‑gapped systems and with third‑party/vendor access. ([bifrostconnect.com](https://bifrostconnect.com/how-it-works/?utm_source=openai)) How it works (high level) - A portable “Bifrost” unit bridges IT, OT, and external vendors without installing software on target machines. Sessions use WebRTC and are brokered through Bifrost’s service with policy controls and auditing; no traditional VPN tunnel to the plant network. ([bifrostconnect.com](https://bifrostconnect.com/how-it-works/?utm_source=openai)) Security model - Zero‑trust by design: least‑privilege access, strong authentication, per‑session authorization, and full audit logs. Built to support compliance needs (e.g., NIS2 alignment) and to avoid exposing OT to the public internet. ([bifrostconnect.com](https://bifrostconnect.com/remote-access-for-ot-security-compliance-leaders/?utm_source=openai)) Typical OT use cases - Ad‑hoc vendor access, commissioning, upgr…"
-                        data-aliases="BifrostConnect og bifrostconnect.com"
-                        data-signals="remote, access, trust og security"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Claude"
-                        data-query="BifrostConnect zero trust OT remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret matcher entiteten, har mindst ét relevant kontekstsignal og trækker på en officiel eller direkte kilde om virksomheden."
-                        data-answer="# BifrostConnect — Zero Trust OT Remote Access ## 🔷 What Is BifrostConnect? BifrostConnect is a **hardware-based remote access solution** that allows secure remote access **without installing software on endpoints**. It enables access to IT and OT equipment and devices, including computers, PLCs, and more. Inspired by Nordic mythology — where Bifrost is the bridge between the world of gods and humans — BifrostConnect bridges the gap between connected equipment and IT/OT specialists, regardless of distance. It is designed and manufactured in Scandinavia, built on values of innovation, quality, and trust. --- ## 🔐 Zero Trust Architecture Advancing on **Zero Trust Network Access (ZTNA)** principles, BifrostConnect **decouples application access from network access**, reducing attack surfaces and inhibiting lateral movement. Access to endpoints and applications is exclusively granted to authorized users, **eliminating implicit trust**. BifrostConnect codifies its Zero Trust approach into four key pillars: | Pillar | Description | |---|---| | **Zero Trust by Default** | Follows the principles of **least privilege** and **Just-in-Time Access** to ensure maximum security. All session dat…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, zero trust remote access, OT security og NIS2 compliance"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Gemini"
-                        data-query="BifrostConnect zero trust OT remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #2"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: secure remote access, secure, remote, access."
-                        data-answer="Based on the statement &#34;BifrostConnect zero trust OT remote access,&#34; BifrostConnect is a solution designed to provide highly secure remote access specifically for **Operational Technology (OT)** environments, adhering to **Zero Trust** security principles. Let&#39;s break down what that means and why it&#39;s critical: ### What BifrostConnect Likely Offers: 1. **Zero Trust Security Model:** * **&#34;Never trust, always verify.&#34;** This is the core tenet. It means no user, device, or application is inherently trusted, regardless of whether it&#39;s inside or outside the network perimeter. * **Strict Authentication:** Every access attempt requires robust identity verification (e.g., multi-factor authentication, device certificates). * **Least Privilege Access:** Users are granted only the minimum access rights necessary to perform their specific tasks. A technician needing to adjust a specific PLC parameter will not get full network access to the entire plant. * **Continuous Verification:** Trust is not granted once; it&#39;s continuously evaluated throughout the session based on user behavior, device posture, and environmental factors. * **Micro-segmentation:** OT assets are isolated into granular segm…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Google AI"
-                        data-query="BifrostConnect zero trust OT remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: zero trust remote access, secure, remote, access."
-                        data-answer="BifrostConnect offers a zero trust remote access solution specifically designed for Operational Technology (OT) environments, as well as IT infrastructure. It distinguishes itself through a portable, clientless hardware device that enables secure, point-to-point remote access to equipment, even when it is offline, isolated, or not yet commissioned. Key aspects of BifrostConnect&#39;s zero trust OT remote access include: * **Zero Trust Principles** The solution is built on zero trust principles, emphasizing &#34;least privilege&#34; and &#34;just-in-time&#34; access. This means that access is continuously verified and granted only for the specific resources and duration required, regardless of the user&#39;s location or device. * **Clientless and Portable Hardware** BifrostConnect utilizes a plug-and-play hardware unit, eliminating the need for software installation on the endpoint, network, or the technician&#39;s computer. Its portable design, often with a built-in battery and LTE connectivity, makes it ideal for ad-hoc remote access to standalone OT equipment, jump stations, and engineering stations. * **Out-of-Band Connectivity** By leveraging an out-of-band LTE connection, BifrostConnect ensures that rem…"
-                        data-aliases="BifrostConnect"
-                        data-signals="zero trust remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-                <article class="heatmap-query-card">
-                  <div class="heatmap-query-head">
-                    <div>
-                      <strong>What is BifrostConnect industrial remote access</strong>
-                      <div class="muted-line">brand</div>
-                    </div>
-                    <span class="score-chip score-good">100%</span>
-                  </div>
-                  <div class="heatmap-platform-grid">
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="ChatGPT"
-                        data-query="What is BifrostConnect industrial remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Responses API + web search"
-                        data-reason="Svaret matcher bifrostconnect.com og rammer også jeres faktiske kontekst: industrial remote access, secure, remote, access."
-                        data-answer="BifrostConnect is a hardware‑based industrial remote access solution. You plug a small “Bifrost Unit” into the target system (PLC/HMI/IPC or other OT/IT gear) and it gives you secure KVM control (keyboard‑video‑mouse) plus network/serial/USB tunnels without needing a pre‑configured VPN or the device to be on the corporate network. It’s designed for commissioning, incident response, and sites that are offline, isolated, or not yet integrated. ([bifrostconnect.com](https://bifrostconnect.com/)) How it works (in brief) - Portable unit connects via HDMI, USB, Ethernet or RS‑232; it can reach the internet over LAN, Wi‑Fi, or built‑in 4G/LTE. Sessions use encrypted WebRTC. ([bifrostconnect.com](https://bifrostconnect.com/specifications/bifrostconnect-technical-specifications/)) - Two modes: Attended (someone on site plugs it in) and Unattended (permanently installed) with MFA/SAML, role‑based access, audit logging, USB disk emulation for OS re‑install, and a relay for remote power cycling. ([bifrostconnect.com](https://bifrostconnect.com/unattended-access/)) - Provides both Direct Native Access (KVM) and Direct Tunnel Access (IP/Serial/USB) under a Zero Trust model, aimed at critical in…"
-                        data-aliases="BifrostConnect og bifrostconnect.com"
-                        data-signals="industrial remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">ChatGPT</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Claude"
-                        data-query="What is BifrostConnect industrial remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Claude API + web search"
-                        data-reason="Svaret matcher entiteten, har mindst ét relevant kontekstsignal og trækker på en officiel eller direkte kilde om virksomheden."
-                        data-answer="## BifrostConnect Industrial Remote Access **BifrostConnect** is a secure, hardware-based industrial remote access solution designed for both IT and OT (Operational Technology) environments. It is a Danish tech company founded in 2018, with products designed, manufactured, and assembled in Scandinavia. Here&#39;s a comprehensive breakdown: --- ### 🔧 What It Is BifrostConnect is a portable, clientless hardware solution that enables point-to-point remote access to both IT and OT equipment. Its portable design allows users to provide direct remote access on an ad-hoc basis, making it ideal for third-party remote access. The solution consists of two elements: (1) a hardware unit, the size of a passport, that you connect to any type of equipment, and (2) an encrypted online service which duplicates and transmits the video, data, or control function from the connected equipment directly to the web browser of an IT specialist. --- ### 🌟 Core Technology: Unified Out-of-Band Access (UOA) BifrostConnect seamlessly combines **Direct Native Access** (native keyboard, video, and mouse control) and **Direct Tunnel Access** (connecting using native engineering or diagnostic tools) into one unified p…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Claude</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Gemini"
-                        data-query="What is BifrostConnect industrial remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="Gemini API + Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: secure remote access, industrial remote access, secure, remote."
-                        data-answer="**BifrostConnect industrial remote access** is a specialized, secure, and often cloud-based solution designed to enable engineers, technicians, and integrators to remotely access, monitor, diagnose, and control industrial equipment and networks from anywhere in the world. It&#39;s named after the Bifrost bridge in Norse mythology, symbolizing a secure and reliable connection between different realms – in this case, the remote user and the industrial operational technology (OT) environment. Here&#39;s a breakdown of what it entails: 1. **Purpose:** * To overcome the limitations of traditional industrial remote access (e.g., insecure VPNs, opening firewall ports, costly and time-consuming on-site visits). * To facilitate efficient maintenance, troubleshooting, programming, and data acquisition for industrial machinery (PLCs, HMIs, robots, industrial PCs, SCADA systems, etc.) without requiring physical presence at the factory floor or remote site. 2. **Key Features &amp; How It Works:** * **Secure Connectivity:** This is paramount. BifrostConnect typically establishes an encrypted, outbound-only connection from the industrial network to a secure cloud platform. This means no inbound firewall por…"
-                        data-aliases="BifrostConnect"
-                        data-signals="secure remote access, industrial remote access, secure og remote"
-                      >
-                        <span class="heatmap-platform-name">Gemini</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                      <button
-                        type="button"
-                        class="heatmap-cell heatmap-platform-card heatmap-win"
-                        data-platform="Google AI"
-                        data-query="What is BifrostConnect industrial remote access"
-                        data-summary="Rigtigt match"
-                        data-meta="Tæller med som placering #1"
-                        data-method="API med Google Search grounding"
-                        data-reason="Svaret matcher BifrostConnect og rammer flere specifikke signaler om jeres rigtige kontekst: industrial remote access, secure, remote, access."
-                        data-answer="BifrostConnect industrial remote access is a hardware-based solution designed to provide secure and efficient remote access to operational technology (OT) and information technology (IT) equipment, particularly within industrial automation and manufacturing environments. It aims to overcome the limitations of traditional remote access methods in segmented, isolated, or even offline industrial settings. Key aspects of BifrostConnect industrial remote access include: * **Hardware-Based and Plug-and-Play** The system utilizes a portable hardware unit that connects directly to controllers, HMIs, network ports, or general-purpose computing devices, eliminating the need for software installations on the endpoint or network. * **Secure and Isolated Access** It establishes encrypted, point-to-point remote access without exposing the operational network or endpoints to the internet. This is achieved by using an independent internet connection (LTE, Wi-Fi, or LAN) that is not shared with the connected endpoint, thereby minimizing the attack surface and maintaining security in isolated environments. * **Zero Trust Principles** BifrostConnect is built on Zero Trust principles, incorporating f…"
-                        data-aliases="BifrostConnect"
-                        data-signals="industrial remote access, secure, remote og access"
-                      >
-                        <span class="heatmap-platform-name">Google AI</span>
-                        <strong>Rigtigt match</strong>
-                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
-                      </button>
-                    
-                  </div>
-                </article>
-              
-            </div>
-
-            <aside class="heatmap-detail" id="heatmap-detail">
-              <div class="eyebrow">Vælg et felt</div>
-              <h3 id="heatmap-detail-title">Se hvorfor vi vurderer det sådan</h3>
-              <p id="heatmap-detail-summary">Klik på et platformssvar for at se både metode, vores vurdering og det konkrete svar.</p>
-              <div class="heatmap-detail-grid">
-                <div class="heatmap-detail-card">
-                  <span class="metric-label">Vores vurdering</span>
-                  <p id="heatmap-detail-verdict">Ingen valgt endnu.</p>
-                </div>
-                <div class="heatmap-detail-card">
-                  <span class="metric-label">Kørt som</span>
-                  <p id="heatmap-detail-method">Ingen valgt endnu.</p>
-                </div>
-                <div class="heatmap-detail-card">
-                  <span class="metric-label">Alias-match</span>
-                  <p id="heatmap-detail-aliases">Ingen valgt endnu.</p>
-                </div>
-                <div class="heatmap-detail-card">
-                  <span class="metric-label">Kontekstsignaler</span>
-                  <p id="heatmap-detail-signals">Ingen valgt endnu.</p>
-                </div>
-              </div>
-              <div class="detail-note" id="heatmap-detail-note">
-                Den konkrete begrundelse for vores klassificering vises her.
-              </div>
-              <div class="heatmap-answer-block">
-                <span class="metric-label">Modelens faktiske svar</span>
-                <blockquote class="heatmap-answer-quote" id="heatmap-detail-answer">Det konkrete platformsvar vises her.</blockquote>
-              </div>
-            </aside>
-          </div>
-        </details>
-      
-    </section>
-
-    <section class="data-panel data-panel-support">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Diagnose</div>
-          <h2>Det vigtigste vi baserer det på</h2>
-        </div>
-        <p>Her er de vigtigste fund, der forklarer hvorfor vi peger på netop de næste skridt.</p>
-      </div>
-
-      <div class="proof-grid">
-        
-          <article class="proof-card">
-            <span class="proof-label">Vigtig søgning</span>
-            <h3>hardware-based out-of-band remote access industrial systems</h3>
-            <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            <div class="detail-note detail-note-inline">Are you looking for an overview, architecture guidance, or product options? Here’s a concise primer on hardware-based out-of-band (OOB) remote access for industrial/OT environments. What it is - A physically separate pa…</div>
-          </article>
-        
-          <article class="proof-card">
-            <span class="proof-label">Vigtig søgning</span>
-            <h3>zero trust remote access for PLC and SCADA Denmark</h3>
-            <p>I bliver ikke nævnt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
-            <div class="detail-note detail-note-inline">Are you looking for: - A Denmark/EU-compliant architecture for zero‑trust remote access into PLC/SCADA? - A shortlist of vendors/partners that operate in Denmark? - Or both (plus implementation steps and controls to mee…</div>
-          </article>
-        
-          <article class="proof-card">
-            <span class="proof-label">Teknisk problem</span>
-            <h3>Image optimization</h3>
-            <p>Det svageste tekniske område scorer 60/100.</p>
-            <div class="detail-note detail-note-inline">Når det her halter, bliver siden sværere at bruge og sværere at forstå korrekt.</div>
-          </article>
-        
-          <article class="proof-card">
-            <span class="proof-label">Troværdighed</span>
-            <h3>De vigtigste troværdighedstegn er ikke tydelige nok endnu</h3>
-            <p>Det er især Google Business, LinkedIn og Instagram der gør billedet af jer uklart lige nu.</p>
-            <div class="detail-note detail-note-inline">Når Google, profiler og øvrige troværdighedstegn ikke fortæller den samme klare historie, bliver I sværere at vælge og sværere for AI at placere rigtigt.</div>
-          </article>
-        
-      </div>
-
-      
-        <details class="scenario-backlog executive-details">
-          <summary>Se mere dokumentation</summary>
-          <div class="evidence-grid">
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">Profil</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>Linkedin signal</h3>
-                <p>https://www.linkedin.com/company/bifrostconnect</p>
-                <div class="muted-line">Kilde: linkedin</div>
-              </article>
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">ai_response</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>BifrostConnect vs Secomea remote access · Google AI</h3>
-                <p>Both BifrostConnect and Secomea offer secure remote access solutions primarily aimed at Operational Technology (OT) and Industrial Control Systems (ICS) environments, but they employ distinct approaches and emphasize different features. **BifrostConnect Remote Access** BifrostConnect distinguishes itself with a hardware-based, portable, and plug-and-play so…</p>
-                <div class="muted-line">Kilde: Google AI</div>
-              </article>
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">ai_response</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>BifrostConnect vs Secomea remote access · Gemini</h3>
-                <p>BifrostConnect and Secomea are both prominent solutions for secure remote access, particularly for industrial (OT) environments. While they aim to solve similar problems, their approaches, architectures, and market positioning have some key differences. Here&#39;s a comparison to help you understand which might be a better fit for your needs: --- ## BifrostConn…</p>
-                <div class="muted-line">Kilde: Gemini</div>
-              </article>
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">ai_response</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>BifrostConnect vs Secomea remote access · Claude</h3>
-                <p>Here is a detailed comparison of **BifrostConnect** vs **Secomea** across the most important dimensions of remote access: --- ## 🔐 BifrostConnect vs Secomea — Remote Access Comparison --- ### 🏢 Company Background - **BifrostConnect:** A Danish tech company founded in 2018. The idea emerged in 2016 during a work trip from Denmark to Sweden, when the founder…</p>
-                <div class="muted-line">Kilde: Claude</div>
-              </article>
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">ai_response</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>BifrostConnect vs Secomea remote access · ChatGPT</h3>
-                <p>Do you want a quick head-to-head summary, or guidance on which one fits your use case? If the latter, what are you connecting to (PLCs/HMIs/PCs/servers), how many sites, and any certification/compliance needs (e.g., IEC 62443)? Short comparison - What they are - BifrostConnect: Appliance-based remote console/access to on‑site computers and devices, with bro…</p>
-                <div class="muted-line">Kilde: ChatGPT</div>
-              </article>
-            
-              <article class="evidence-card">
-                <div class="evidence-meta">
-                  <span class="pill">ai_response</span>
-                  <span class="mini-pill">Stærkt grundlag</span>
-                </div>
-                <h3>BifrostConnect zero trust OT remote access · Google AI</h3>
-                <p>BifrostConnect offers a zero trust remote access solution specifically designed for Operational Technology (OT) environments, as well as IT infrastructure. It distinguishes itself through a portable, clientless hardware device that enables secure, point-to-point remote access to equipment, even when it is offline, isolated, or not yet commissioned. Key aspe…</p>
-                <div class="muted-line">Kilde: Google AI</div>
-              </article>
-            
-          </div>
-        </details>
-      
-    </section>
-
-    <section class="data-panel data-panel-action">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Næste 30 Dage</div>
-          <h2>Det her skal I gøre først</h2>
-        </div>
-        <p>Tre prioriterede bevægelser med tydelig kobling til det, vi faktisk har set i søgningerne og fundene.</p>
-      </div>
-
-      <div class="decision-actions-grid">
-        
-          <article class="decision-action-card">
-            <div class="decision-step">1</div>
-            <div class="decision-action-copy">
-              <div class="scenario-top">
-                <span class="pill">Indsats Mellem</span>
-                <span class="mini-pill">Godt bud</span>
-              </div>
-              <h3>Lav sider, der svarer på de søgninger I taber</h3>
-              <p class="decision-why">Det er den hurtigste vej til at blive valgt oftere, når nogen er tæt på at købe.</p>
-              <p>Start med 2-3 korte sider eller stærke sektioner, der matcher de søgninger, hvor I i dag ikke bliver nævnt, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
-              
-                <div class="action-evidence-block">
-                  <span class="metric-label">Bygger især på</span>
-                  <div class="action-evidence-list">
-                    
-                      <span class="mini-pill">hardware-based out-of-band remote access industrial systems</span>
-                    
-                      <span class="mini-pill">zero trust remote access for PLC and SCADA Denmark</span>
-                    
-                      <span class="mini-pill">NIS2 remote access OT Denmark</span>
-                    
-                  </div>
-                </div>
-              
-              
-                <div class="action-examples-block">
-                  <span class="metric-label">Helt konkret</span>
-                  <ul class="action-examples-list">
-                    
-                      <li>Lav en side der matcher søgningen &#34;hardware-based out-of-band remote access industrial systems&#34; og viser arkitekturen visuelt: hvordan løsningen er sat op, hvilke miljøer den passer til, og hvilke tekniske krav eller begrænsninger den løser.</li>
-                    
-                      <li>Lav en forklarende side der matcher søgningen &#34;zero trust remote access for PLC and SCADA Denmark&#34; og gør det tydeligt hvordan jeres løsning er bygget op, hvilke principper I følger, og hvornår den er relevant i praksis.</li>
-                    
-                      <li>Lav en side der matcher søgningen &#34;NIS2 remote access OT Denmark&#34; direkte og forklar hvilke krav eller risici kunderne står med, hvordan jeres løsning reducerer dem, og hvilke konkrete kontrolpunkter eller use cases I dækker.</li>
-                    
-                  </ul>
-                </div>
-              
-              <div class="decision-action-meta">
-                
-                  <span><strong>Det skal laves</strong>3 sider eller sektioner</span>
-                
-                <span><strong>Mest sandsynligt</strong>+28%</span>
-                <span><strong>Spænd</strong>17-42%</span>
-              </div>
-            </div>
-          </article>
-        
-          <article class="decision-action-card">
-            <div class="decision-step">2</div>
-            <div class="decision-action-copy">
-              <div class="scenario-top">
-                <span class="pill">Indsats Lille</span>
-                <span class="mini-pill">Godt bud</span>
-              </div>
-              <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
-              <p class="decision-why">Når jeres online aftryk er uklart, bliver I også sværere at vælge.</p>
-              <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
-              
-                <div class="action-evidence-block">
-                  <span class="metric-label">Bygger især på</span>
-                  <div class="action-evidence-list">
-                    
-                      <span class="mini-pill">Google Business</span>
-                    
-                      <span class="mini-pill">Linkedin</span>
-                    
-                      <span class="mini-pill">Instagram</span>
-                    
-                  </div>
-                </div>
-              
-              
-                <div class="action-examples-block">
-                  <span class="metric-label">Helt konkret</span>
-                  <ul class="action-examples-list">
-                    
-                      <li>Opret og udfyld en Google Business Profile med virksomhedsnavn, kategori, adresse, telefon og link til websitet.</li>
-                    
-                      <li>Brug samme korte positionering på LinkedIn som på websitet: hvad I hjælper med, hvem I hjælper, og hvornår man typisk tager fat.</li>
-                    
-                      <li>Opdatér Instagram-bio og link, så den peger til en side med jeres hovedydelser i stedet for en generel forside.</li>
-                    
-                  </ul>
-                </div>
-              
-              <div class="decision-action-meta">
-                
-                  <span><strong>Det skal laves</strong>1 profil + 2 tekst-/bio-opdateringer</span>
-                
-                <span><strong>Mest sandsynligt</strong>+18%</span>
-                <span><strong>Spænd</strong>12-26%</span>
-              </div>
-            </div>
-          </article>
-        
-          <article class="decision-action-card">
-            <div class="decision-step">3</div>
-            <div class="decision-action-copy">
-              <div class="scenario-top">
-                <span class="pill">Indsats Lille</span>
-                <span class="mini-pill">Stærkt grundlag</span>
-              </div>
-              <h3>Løs det største tekniske problem i image optimization</h3>
-              <p class="decision-why">Når det tekniske halter, bliver siden sværere at bruge og sværere at læse korrekt.</p>
-              <p>Ret det tekniske område, der holder jer mest tilbage, så resten af forbedringerne får bedre effekt.</p>
-              
-                <div class="action-evidence-block">
-                  <span class="metric-label">Bygger især på</span>
-                  <div class="action-evidence-list">
-                    
-                      <span class="mini-pill">Image optimization</span>
-                    
-                  </div>
-                </div>
-              
-              
-                <div class="action-examples-block">
-                  <span class="metric-label">Helt konkret</span>
-                  <ul class="action-examples-list">
-                    
-                      <li>Find den konkrete fejl bag image optimization og ret den først, før I bygger mere indhold ovenpå.</li>
-                    
-                      <li>Mål siden igen bagefter og brug den nye måling som før/efter-bevis på forbedringen.</li>
-                    
-                  </ul>
-                </div>
-              
-              <div class="decision-action-meta">
-                
-                  <span><strong>Det skal laves</strong>1 teknisk rettelse</span>
-                
-                <span><strong>Mest sandsynligt</strong>+13%</span>
-                <span><strong>Spænd</strong>8-18%</span>
-              </div>
-            </div>
-          </article>
-        
-      </div>
-    </section>
-
-    
-      <section class="data-panel data-panel-authority">
-        <div class="panel-head">
-          <div>
-            <div class="eyebrow">Authority & Profiler</div>
-            <h2>AI indexability: 42/100</h2>
-          </div>
-          <p>De kilder AI-modeller kigger i, når de skal svare om jer. Vægtet efter jeres branche <strong style="color: var(--color-ink-strong, #fff);">(b2b saas)</strong>. 5 af 13 kilder bidrager aktivt.</p>
-        </div>
-
-        
-        
-        <h3 class="subhead">Sociale kanaler AI tjekker først</h3>
-        <div class="authority-grid">
-          
-            
-            
-            
-            <article class="authority-card authority-tone-neutral">
-              <div class="authority-card-head">
-                <span class="authority-name">facebook</span>
-                <span class="mini-pill">Ingen profil</span>
-              </div>
-              
-              <div class="authority-meta">
-                <span>Lav</span>
-                <span>Kilde: facebook_discovery</span>
-              </div>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">google_business</span>
-                <span class="mini-pill">Ingen profil</span>
-              </div>
-              
-              <div class="authority-meta">
-                <span>Lav</span>
-                
-              </div>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-watch">
-              <div class="authority-card-head">
-                <span class="authority-name">instagram</span>
-                <span class="score-chip score-watch">70</span>
-                
-              </div>
-              <a class="authority-link" href="https://www.instagram.com/bifrostconnect" target="_blank" rel="noopener">https://www.instagram.com/bifrostconnect</a>
-              <div class="authority-meta">
-                <span>Lav</span>
-                <span>Kilde: slug_guess</span>
-              </div>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-good">
-              <div class="authority-card-head">
-                <span class="authority-name">linkedin</span>
-                <span class="score-chip score-good">100</span>
-                
-              </div>
-              <a class="authority-link" href="https://www.linkedin.com/company/bifrostconnect" target="_blank" rel="noopener">https://www.linkedin.com/company/bifrostconnect</a>
-              <div class="authority-meta">
-                <span>Høj sikkerhed</span>
-                <span>Kilde: website</span>
-              </div>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">trustpilot</span>
-                <span class="mini-pill">Ingen profil</span>
-              </div>
-              
-              <div class="authority-meta">
-                <span>Lav</span>
-                
-              </div>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-watch">
-              <div class="authority-card-head">
-                <span class="authority-name">youtube</span>
-                <span class="score-chip score-watch">70</span>
-                
-              </div>
-              <a class="authority-link" href="https://www.youtube.com/channel/UCrylHYwCCi8rmun7QPT20Yw" target="_blank" rel="noopener">https://www.youtube.com/channel/UCrylHYwCCi8rmun7QPT20Yw</a>
-              <div class="authority-meta">
-                
-                
-              </div>
-            </article>
-          
-        </div>
-        
-
-        
-        
-        <h3 class="subhead subhead-spaced">Eksterne autoritetskilder</h3>
-        <div class="authority-grid">
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">Wikipedia</span>
-                <span class="mini-pill">Vægt 10%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">Primær træningskilde for LLMer.</p>
-              
-              <span class="authority-confidence">Lav</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-good">
-              <div class="authority-card-head">
-                <span class="authority-name">CVR (Erhvervsstyrelsen)</span>
-                <span class="mini-pill">Vægt 5%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score">85/100</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">Officiel virksomhedsregistrering.</p>
-              <a class="authority-link" href="https://datacvr.virk.dk/enhed/virksomhed/37669490" target="_blank" rel="noopener">https://datacvr.virk.dk/enhed/virksomhed/37669490</a>
-              <span class="authority-confidence">Høj sikkerhed</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-good">
-              <div class="authority-card-head">
-                <span class="authority-name">Proff.dk</span>
-                <span class="mini-pill">Vægt 5%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score">75/100</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">Offentlig finansiel profil.</p>
-              <a class="authority-link" href="https://www.proff.dk:443/firma/bifrostconnect-aps/k%C3%B8benhavn-s/it-drift-og-support/0MFDYQI0ZDG" target="_blank" rel="noopener">https://www.proff.dk:443/firma/bifrostconnect-aps/k%C3%B8benhavn-s/it-drift-og-support/0MFDYQI0ZDG</a>
-              <span class="authority-confidence">Høj sikkerhed</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">Medie-omtale</span>
-                <span class="mini-pill">Vægt 10%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">Aktuel medieomtale (sidste 12 mdr).</p>
-              
-              <span class="authority-confidence">Lav</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">G2.com</span>
-                <span class="mini-pill">Vægt 10%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">B2B SaaS-reviews AI citerer.</p>
-              
-              <span class="authority-confidence">Lav</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">Capterra</span>
-                <span class="mini-pill">Vægt 7%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">B2B software-directory.</p>
-              
-              <span class="authority-confidence">Lav</span>
-            </article>
-          
-            
-            
-            
-            <article class="authority-card authority-tone-critical">
-              <div class="authority-card-head">
-                <span class="authority-name">Wikidata</span>
-                <span class="mini-pill">Vægt 3%</span>
-              </div>
-              <div class="authority-score-row">
-                
-                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
-                
-                
-              </div>
-              <p class="authority-purpose">Struktureret faktabase bag Wikipedia.</p>
-              
-              <span class="authority-confidence">Lav</span>
-            </article>
-          
-        </div>
-        
-
-        
-        
-        <div class="authority-gaps">
-          <div class="authority-gaps-head">
-            <span class="eyebrow eyebrow-danger">Kritiske huller</span>
-            <strong>3 kilder AI savner</strong>
-          </div>
-          <div class="authority-gaps-list">
-            
-            <div class="authority-gap-row">
-              <div class="authority-gap-name">Wikipedia</div>
-              <div class="authority-gap-action">Overvej at oprette en Wikipedia-artikel eller bede om external-references-støtte — kræver notability.</div>
-              <div class="authority-gap-weight">Vægt 10%</div>
-            </div>
-            
-            <div class="authority-gap-row">
-              <div class="authority-gap-name">Medie-omtale (Google News)</div>
-              <div class="authority-gap-action">Søg proaktivt PR og pressemeddelelser til minimum 3-5 omtaler i brancheblade sidste 12 mdr.</div>
-              <div class="authority-gap-weight">Vægt 10%</div>
-            </div>
-            
-            <div class="authority-gap-row">
-              <div class="authority-gap-name">G2</div>
-              <div class="authority-gap-action">Opret gratis G2-profil og bed eksisterende kunder om at anmelde.</div>
-              <div class="authority-gap-weight">Vægt 10%</div>
-            </div>
-            
-          </div>
-        </div>
-        
-      </section>
-    
-
-    
-      <section class="data-panel data-panel-subtle cockpit-panel">
-        <div class="panel-head">
-          <div>
-            <div class="eyebrow">Næste Modelskift</div>
-            <h2>Sådan ser det næste løft typisk ud</h2>
-          </div>
-          <p>Her er de greb vi først ville prioritere, og det samlede løft vi typisk forventer, hvis de bliver gennemført. Det er vores bedste bud, ikke en garanti.</p>
-        </div>
-
-        <div class="forecast-layout">
-          <div class="scenario-column">
-            
-              <article class="scenario-card scenario-card-selected">
-                <div class="scenario-top">
-                  <span class="pill">Indsats M</span>
-                  <span class="mini-pill">Godt bud</span>
-                </div>
-                <h3>Lav sider, der svarer på de søgninger I taber</h3>
-                <p>Start med 2-3 korte sider eller stærke sektioner, der matcher de søgninger, hvor I i dag ikke bliver nævnt, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
-                <div class="scenario-meta">
-                  <span>Synlighed +18</span>
-                  <span>Bredde +20%</span>
-                  <span>Mest sandsynligt +28%</span>
-                </div>
-              </article>
-            
-              <article class="scenario-card scenario-card-selected">
-                <div class="scenario-top">
-                  <span class="pill">Indsats S</span>
-                  <span class="mini-pill">Godt bud</span>
-                </div>
-                <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
-                <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
-                <div class="scenario-meta">
-                  <span>Synlighed +4</span>
-                  <span>Bredde +4%</span>
-                  <span>Mest sandsynligt +18%</span>
-                </div>
-              </article>
-            
-
-            
-          </div>
-
-          <div class="forecast-column">
-            <div class="forecast-summary forecast-summary-executive">
-              <div class="forecast-kpi">
-                <span>Synlighed i AI-svar</span>
-                <strong id="forecast-ai-value">44</strong>
-                <small id="forecast-ai-delta">nu</small>
-              </div>
-              <div class="forecast-kpi">
-                <span>Hvor bredt I bliver nævnt</span>
-                <strong id="forecast-coverage-value">38</strong>
-                <small id="forecast-coverage-delta">nu</small>
-              </div>
-              <div class="forecast-kpi">
-                <span>Mulig effekt</span>
-                <strong id="forecast-impact-value">46%</strong>
-                <small>mere relevant kundeinteresse</small>
-              </div>
-            </div>
-
-            <div class="forecast-graph">
-              <div class="forecast-row">
-                <div class="forecast-label">Synlighed i AI-svar</div>
-                <div class="forecast-track">
-                  <div id="bar-ai-current" class="forecast-bar is-current" style="width: 44%"></div>
-                  <div id="bar-ai-projected" class="forecast-bar is-projected" style="width: 66%"></div>
-                  <div id="bar-ai-target" class="forecast-target" style="left: 85%"></div>
-                </div>
-              </div>
-              <div class="forecast-row">
-                <div class="forecast-label">Hvor bredt I bliver nævnt</div>
-                <div class="forecast-track">
-                  <div id="bar-coverage-current" class="forecast-bar is-current" style="width: 38%"></div>
-                  <div id="bar-coverage-projected" class="forecast-bar is-projected" style="width: 62%"></div>
-                  <div id="bar-coverage-target" class="forecast-target" style="left: 80%"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="impact-panel">
-              <div>
-                <span>Muligt løft i relevant kundeinteresse</span>
-                <strong id="impact-base">46%</strong>
-              </div>
-              <div class="impact-band">
-                <span id="impact-low">Forsigtigt 29%</span>
-                <span id="impact-base-band">Mest sandsynligt 46%</span>
-                <span id="impact-high">Bedste fald 68%</span>
-              </div>
-              <p>Tallene er vores bedste skøn. De viser retning og størrelsesorden, ikke et løfte.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    
-
-    <section class="data-panel data-panel-subtle">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Konkurrentpres</div>
-          <h2>Sådan står I mod konkurrenterne</h2>
-        </div>
-      <p>I står ikke bagud på ren tilstedeværelse i denne gennemgang, men næste skridt er at blive valgt mere stabilt i de søgninger, der betyder mest.</p>
-    </div>
-
-    <div class="competitor-brief-grid">
-      
-        <article class="competitor-brief-card">
-          <span class="metric-label">Jer lige nu</span>
-          <strong class="metric-title">7 gange nævnt</strong>
-          <p>I bliver valgt i AI-svar med en samlet score på 44/100 og bredde på 38%.</p>
-        </article>
-      
-        <article class="competitor-brief-card">
-          <span class="metric-label">Førende konkurrent</span>
-          <strong class="metric-title">7 gange nævnt</strong>
-          <p>Secomea er fundet i sammenligningsdata, men uden teknisk benchmark-score endnu.</p>
-        </article>
-      
-        <article class="competitor-brief-card">
-          <span class="metric-label">Det betyder</span>
-          <strong class="metric-title">Næste skridt</strong>
-          <p>Det er ikke nok bare at være med. Næste gevinst kommer fra at blive valgt oftere i de vigtigste søgninger.</p>
-        </article>
-      
-    </div>
-
-    
-      <div class="peer-list">
-        
-          <div class="peer-row">
-            <strong>Secomea</strong>
-            <span>7 gange nævnt</span>
-          </div>
-        
-      </div>
-    
-    </section>
-
-    
-      <section class="data-panel closing-room-panel">
-        <div>
-          <div class="eyebrow">Næste Skridt</div>
-          <h2>Brug roomet som arbejdsplan for de næste 30 dage</h2>
-          <p>Det her room samler status, konkurrentpres, authority-signaler og næste løft i ét sted. Hvis I vil, kan vi bruge det som udgangspunkt for en kort prioriteringsgennemgang.</p>
-        </div>
-        <div class="closing-room-actions">
-          <a class="button button-primary" href="./SitedokAI_ClientRoom_BifrostConnect.pdf">Hent Executive PDF</a>
-          <a class="button button-ghost" href="mailto:info@sitedokai.com">Book opfølgning</a>
-        </div>
-      </section>
-    
-
-  </div>
-
-  
+  <body>
+    <main class="lock-shell">
+      <div class="eyebrow">Privat Client Room</div>
+      <h1 id="headline"></h1>
+      <p id="intro"></p>
+      <form id="unlock-form">
+        <label for="password">Adgangskode</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" autofocus required>
+        <button type="submit">Lås op</button>
+      </form>
+      <div id="status" class="status"></div>
+    </main>
     <script>
-      (() => {
-        const detailTitle = document.getElementById("heatmap-detail-title");
-        const detailSummary = document.getElementById("heatmap-detail-summary");
-        const detailNote = document.getElementById("heatmap-detail-note");
-        const detailVerdict = document.getElementById("heatmap-detail-verdict");
-        const detailMethod = document.getElementById("heatmap-detail-method");
-        const detailAliases = document.getElementById("heatmap-detail-aliases");
-        const detailSignals = document.getElementById("heatmap-detail-signals");
-        const detailAnswer = document.getElementById("heatmap-detail-answer");
-        document.querySelectorAll(".heatmap-cell").forEach((button) => {
-          button.addEventListener("click", () => {
-            detailTitle.textContent = `${button.dataset.query} · ${button.dataset.platform}`;
-            detailSummary.textContent = button.dataset.meta || "Ingen opsummering.";
-            detailVerdict.textContent = button.dataset.summary || "Ingen vurdering gemt.";
-            detailMethod.textContent = button.dataset.method || "Ingen metode gemt.";
-            detailAliases.textContent = button.dataset.aliases || "Ingen aliasdata gemt.";
-            detailSignals.textContent = button.dataset.signals || "Ingen kontekstdata gemt.";
-            detailNote.textContent = button.dataset.reason || "Ingen begrundelse gemt.";
-            detailAnswer.textContent = button.dataset.answer || "Ingen svartekst gemt.";
-          });
-        });
-      })();
-    </script>
-  
+      const pageTitle = "BifrostConnect · Client Room";
+      const headline = "BifrostConnect";
+      const intro = "Skriv adgangskoden, du har fået sammen med linket, for at dekryptere og åbne Client Room.";
+      const encryptedFilename = "./room.enc.json";
+      const successMode = "html";
+      const successTitle = "BifrostConnect · Client Room";
+      const sessionKey = "sitedok_room_html_0j1LZV66R6oxAezHFNN4Xxdn";
+      const downloadFilename = "Executive.pdf";
+      document.title = pageTitle;
+      document.getElementById("headline").textContent = headline;
+      document.getElementById("intro").textContent = intro;
 
-      </main>
-    </div>
+      function setStatus(message, kind = "") {
+        const node = document.getElementById("status");
+        node.textContent = message;
+        node.className = kind ? `status ${kind}` : "status";
+      }
+
+      function b64ToBytes(value) {
+        const binary = atob(value);
+        const bytes = new Uint8Array(binary.length);
+        for (let index = 0; index < binary.length; index += 1) {
+          bytes[index] = binary.charCodeAt(index);
+        }
+        return bytes;
+      }
+
+      function bytesToUtf8(bytes) {
+        return new TextDecoder().decode(bytes);
+      }
+
+      async function deriveKey(password, salt, iterations) {
+        const baseKey = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(password),
+          "PBKDF2",
+          false,
+          ["deriveKey"],
+        );
+        return crypto.subtle.deriveKey(
+          {
+            name: "PBKDF2",
+            hash: "SHA-256",
+            salt,
+            iterations,
+          },
+          baseKey,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["decrypt"],
+        );
+      }
+
+      async function decryptPayload(password) {
+        const response = await fetch(encryptedFilename, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Kunne ikke hente det krypterede room.");
+        }
+        const payload = await response.json();
+        const salt = b64ToBytes(payload.salt_b64);
+        const iv = b64ToBytes(payload.iv_b64);
+        const ciphertext = b64ToBytes(payload.ciphertext_b64);
+        const key = await deriveKey(password, salt, payload.iterations);
+        const plaintext = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
+        return new Uint8Array(plaintext);
+      }
+
+      async function unlock(password) {
+        setStatus("Låser op...", "");
+        try {
+          const bytes = await decryptPayload(password);
+          if (successMode === "html") {
+            const html = bytesToUtf8(bytes);
+            if (sessionKey) {
+              sessionStorage.setItem(sessionKey, html);
+            }
+            document.open();
+            document.write(html);
+            document.close();
+            return;
+          }
+
+          const blob = new Blob([bytes], { type: "application/pdf" });
+          const blobUrl = URL.createObjectURL(blob);
+          const wrapper = document.createElement("div");
+          wrapper.className = "pdf-view";
+          wrapper.innerHTML = `
+            <div class="pdf-toolbar">
+              <strong>${successTitle}</strong>
+              <a href="${blobUrl}" download="${downloadFilename}">Download PDF</a>
+            </div>
+            <iframe class="pdf-frame" src="${blobUrl}" title="${successTitle}"></iframe>
+          `;
+          document.body.innerHTML = "";
+          document.body.appendChild(wrapper);
+          document.title = successTitle;
+          return;
+        } catch (error) {
+          setStatus("Adgangskoden passer ikke, eller roomet kunne ikke dekrypteres.", "error");
+        }
+      }
+
+      if (sessionKey) {
+        const cachedHtml = sessionStorage.getItem(sessionKey);
+        if (cachedHtml) {
+          document.open();
+          document.write(cachedHtml);
+          document.close();
+        }
+      }
+
+      document.getElementById("unlock-form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const password = document.getElementById("password").value;
+        await unlock(password);
+      });
+    </script>
   </body>
 </html>
