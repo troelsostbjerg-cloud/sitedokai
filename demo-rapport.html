@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Testeksport fra Client Room — SitedokAI</title>
+    <title>Executive PDF-demo — SitedokAI</title>
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=inter:400,500,600,700" rel="stylesheet" />
     <style>
@@ -12,12 +12,10 @@
         color-scheme: dark;
         --bg: #050b16;
         --panel: rgba(8, 17, 31, 0.84);
-        --panel-soft: rgba(15, 23, 42, 0.72);
-        --panel-border: rgba(34, 211, 238, 0.16);
+        --line: rgba(255, 255, 255, 0.08);
         --text: #e5eef9;
         --muted: rgba(226, 232, 240, 0.72);
         --cyan: #22d3ee;
-        --amber: #fcd34d;
       }
 
       * {
@@ -48,7 +46,7 @@
       .page {
         position: relative;
         z-index: 1;
-        max-width: 1040px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 72px 24px 88px;
       }
@@ -63,8 +61,6 @@
       }
 
       h1,
-      h2,
-      .score,
       .cta a {
         font-family: "Bricolage Grotesque", system-ui, sans-serif;
       }
@@ -84,20 +80,14 @@
         line-height: 1.75;
       }
 
-      .panel,
-      .summary,
-      .action,
-      .note {
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      .panel {
+        margin-top: 32px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        overflow: hidden;
         background: var(--panel);
         backdrop-filter: blur(18px);
         box-shadow: 0 30px 80px rgba(2, 8, 23, 0.36);
-      }
-
-      .panel {
-        margin-top: 32px;
-        border-radius: 30px;
-        overflow: hidden;
       }
 
       .panel-top {
@@ -106,7 +96,7 @@
         justify-content: space-between;
         gap: 16px;
         padding: 18px 22px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid var(--line);
         background: rgba(4, 10, 22, 0.7);
       }
 
@@ -129,82 +119,30 @@
         font-size: 0.82rem;
       }
 
-      .panel-body {
-        padding: 28px;
-      }
-
-      .summary-grid,
-      .actions-grid {
-        display: grid;
-        gap: 16px;
-      }
-
-      .summary-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .summary {
-        padding: 20px;
-        border-radius: 22px;
-      }
-
-      .summary .title {
-        display: block;
-        color: rgba(152, 169, 194, 0.88);
-        font-size: 0.76rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-      }
-
-      .score {
-        display: block;
-        margin-top: 12px;
-        font-size: 2rem;
-        letter-spacing: -0.03em;
-      }
-
-      .summary p,
-      .action p,
-      .note p {
+      .note {
+        padding: 22px 24px 0;
         color: var(--muted);
         line-height: 1.7;
       }
 
-      h2 {
-        margin: 0 0 12px;
-        font-size: 1.8rem;
-        letter-spacing: -0.03em;
+      .pdf-shell {
+        padding: 18px;
+        background: rgba(2, 8, 23, 0.36);
       }
 
-      .actions-grid {
-        margin-top: 20px;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .action {
-        padding: 22px;
-        border-radius: 22px;
-      }
-
-      .action strong {
-        display: block;
-        margin-bottom: 12px;
-        font-size: 1.02rem;
-      }
-
-      .note {
-        margin-top: 22px;
-        padding: 20px 22px;
-        border-radius: 22px;
-        background: var(--panel-soft);
+      iframe {
+        width: 100%;
+        height: min(78vh, 1100px);
+        border: 0;
+        border-radius: 18px;
+        background: #fff;
       }
 
       .cta {
         display: flex;
         gap: 14px;
         flex-wrap: wrap;
-        margin-top: 28px;
+        padding: 24px;
       }
 
       .cta a {
@@ -227,91 +165,53 @@
         color: var(--text);
       }
 
-      .accent {
-        color: var(--amber);
-      }
-
       @media (max-width: 860px) {
-        .summary-grid,
-        .actions-grid {
-          grid-template-columns: 1fr;
-        }
-
         .panel-top {
           flex-direction: column;
           align-items: flex-start;
+        }
+
+        iframe {
+          height: 70vh;
         }
       }
     </style>
   </head>
   <body>
     <main class="page">
-      <p class="eyebrow">Testeksport</p>
-      <h1>Client Room er hovedoplevelsen. Det her er kun eksporten.</h1>
+      <p class="eyebrow">Executive PDF</p>
+      <h1>Det her er den faktiske eksport fra EvigtUnivers-demoen.</h1>
       <p class="lead">
-        Denne side viser, hvordan en kort eksport fra Client Room kan se ud, når noget skal deles internt.
-        Kunden her er fiktiv, men strukturen matcher den samme logik som i den endelige demo: én forklaret toplinje,
-        tre vigtigste bevægelser og et tydeligt billede af hvorfor virksomheden taber brede søgninger i dag.
+        PDF'en herunder er den samme type Executive PDF, vi eksporterer fra et rigtigt Client Room.
+        Kunden er stadig fiktiv, men layoutet og formatet matcher den egentlige leverance.
       </p>
 
       <section class="panel">
         <div class="panel-top">
           <div class="meta">
             <span>EvigtUnivers</span>
-            <span>15. april 2026</span>
-            <span>Fiktiv demo</span>
+            <span>Executive PDF</span>
+            <span>Fiktiv kunde</span>
           </div>
-          <span class="label">Kort eksport</span>
+          <span class="label">Faktisk eksport</span>
         </div>
 
-        <div class="panel-body">
-          <div class="summary-grid">
-            <article class="summary">
-              <span class="title">Hvor I står nu</span>
-              <strong class="score">77/100</strong>
-              <p>I står stærkt på brand og sammenligning, men taber stadig for mange brede planet- og astronomi-gavesøgninger.</p>
-            </article>
-            <article class="summary">
-              <span class="title">Hvad der flytter mest</span>
-              <strong class="score">Købsnære guides + proof</strong>
-              <p>Sider om planeter til børneværelset, måne-lamper og astronomi-gavesæt vil gøre jer lettere at vælge.</p>
-            </article>
-            <article class="summary">
-              <span class="title">Mulig effekt</span>
-              <strong class="score accent">+24%</strong>
-              <p>Det er vores bedste bud på løftet, hvis guides, trust-lag og compare-proof går live sammen.</p>
-            </article>
-          </div>
+        <div class="note">
+          Selve Client Roomet er hovedoplevelsen. PDF'en er den korte ledelsesversion til deling internt eller videresendelse.
+        </div>
 
-          <div class="note">
-            <h2>Det vigtigste lige nu</h2>
-            <p>
-              EvigtUnivers står ikke svagt, fordi webshoppen er ukendt. Den står svagt, fordi Stjernehimmel.dk er
-              lettere at forstå og lettere at stole på i de brede søgninger, hvor nye kunder endnu ikke kender navnet.
-            </p>
-          </div>
+        <div class="pdf-shell">
+          <iframe
+            src="/SitedokAI_ClientRoom_EvigtUnivers.pdf#view=FitH"
+            title="Executive PDF for EvigtUnivers"
+          ></iframe>
+        </div>
 
-          <div class="actions-grid">
-            <article class="action">
-              <strong>1. Byg fire købsnære sider til de vigtigste queries</strong>
-              <p>Forklar hvem I hjælper, hvad der passer til kontor, møde og event, og hvad kunden får for budgettet.</p>
-            </article>
-            <article class="action">
-              <strong>2. Flyt beviser på kvalitet ind på de sider der taber</strong>
-              <p>Gør cases, anmeldelser, leveringsområder og proof lettere at finde dér hvor AI allerede vurderer jer.</p>
-            </article>
-            <article class="action">
-              <strong>3. Synk Google Business, LinkedIn og website</strong>
-              <p>Ens beskrivelser, services og cases på tværs af profilerne giver mere tillid i AI-svar.</p>
-            </article>
-          </div>
+        <div class="cta">
+          <a class="cta-primary" href="/SitedokAI_ClientRoom_EvigtUnivers.pdf">Hent PDF</a>
+          <a class="cta-secondary" href="/client-room-demo.html">Tilbage til Client Room</a>
         </div>
       </section>
-
-      <div class="cta">
-        <a class="cta-primary" href="/eksempel">Se hele Client Room-demoen</a>
-        <a class="cta-secondary" href="/kontakt">Bestil AI-audit</a>
-      </div>
     </main>
   </body>
 </html>

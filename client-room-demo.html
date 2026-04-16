@@ -1,1836 +1,1515 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="da">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Client Room · EvigtUnivers</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-base: #020617;
-      --bg-panel: #050b16;
-      --bg-elev-1: #07111f;
-      --bg-elev-2: #08111f;
-      --bg-elev-3: #0f172a;
-      --line: rgba(255, 255, 255, 0.08);
-      --line-strong: rgba(255, 255, 255, 0.14);
-      --ink: #f8fafc;
-      --ink-soft: #e5eef9;
-      --ink-muted: #98a9c2;
-      --ink-faint: #64748b;
-      --cyan: #22d3ee;
-      --cyan-2: #06b6d4;
-      --cyan-light: #67e8f9;
-      --amber: #fcd34d;
-      --amber-2: #fbbf24;
-      --green: #34d399;
-      --orange: #f97316;
-      --red: #f87171;
-      --shadow: 0 30px 90px rgba(2, 6, 23, 0.6);
-      --radius-xl: 28px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --max: 1280px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: "Inter", -apple-system, system-ui, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.12), transparent 28%),
-        radial-gradient(circle at 100% 18%, rgba(251, 191, 36, 0.10), transparent 24%),
-        linear-gradient(180deg, #07111f 0%, #050b16 60%, #020617 100%);
-      min-height: 100vh;
-    }
-
-    h1, h2, h3, h4, h5 {
-      font-family: "Bricolage Grotesque", "Inter", sans-serif;
-      letter-spacing: -0.022em;
-      color: var(--ink);
-    }
-
-    p { margin: 0; line-height: 1.6; }
-    button, input { font: inherit; }
-
-    .shell {
-      width: min(calc(100% - 28px), var(--max));
-      margin: 0 auto;
-      padding-bottom: 80px;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(2, 6, 23, 0.86);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .topbar-inner {
-      width: min(calc(100% - 28px), var(--max));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 20px;
-      align-items: center;
-      padding: 16px 0;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--ink);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-    }
-
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan-light), var(--cyan-2));
-      box-shadow: 0 0 16px rgba(34, 211, 238, 0.6);
-    }
-
-    .topbar-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      color: var(--ink-muted);
-      font-size: 0.85rem;
-    }
-
-    .topbar-meta strong {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .topbar-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      font-weight: 600;
-      border: 0;
-      cursor: pointer;
-      padding: 10px 18px;
-      font-size: 0.92rem;
-      transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
-    }
-
-    .btn:hover, .btn:focus-visible {
-      transform: translateY(-1px);
-      outline: none;
-    }
-
-    .btn-ghost {
-      color: var(--ink);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line-strong);
-    }
-
-    .btn-primary {
-      color: #02101a;
-      background: linear-gradient(135deg, var(--cyan-light), var(--cyan-2));
-      box-shadow: 0 8px 24px rgba(34, 211, 238, 0.28);
-      font-weight: 700;
-    }
-
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--cyan);
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 22px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.6;
-    }
-
-    .hero {
-      margin-top: 18px;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 14% 16%, rgba(34, 211, 238, 0.16), transparent 28%),
-        radial-gradient(circle at 86% 12%, rgba(251, 191, 36, 0.10), transparent 24%),
-        linear-gradient(180deg, #07111f, #050b16);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -90px;
-      bottom: -100px;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.10), transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      padding: 44px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.95fr;
-      gap: 32px;
-      align-items: start;
-    }
-
-    .hero-copy { display: grid; gap: 22px; }
-
-    .hero-title {
-      margin: 0;
-      font-size: clamp(2.6rem, 5.2vw, 4.2rem);
-      line-height: 0.98;
-      max-width: 14ch;
-      font-weight: 600;
-    }
-
-    .hero-title em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--cyan-light), var(--cyan));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-sub {
-      max-width: 58ch;
-      color: var(--ink-muted);
-      font-size: 1.04rem;
-    }
-
-    .hero-story {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .story-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 16px;
-    }
-
-    .story-card span {
-      display: block;
-      font-size: 0.74rem;
-      color: var(--ink-muted);
-      margin-bottom: 6px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .story-card strong {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 1.04rem;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .hero-surface {
-      background: linear-gradient(180deg, rgba(8, 17, 31, 0.92), rgba(15, 23, 42, 0.92));
-      border: 1px solid var(--line-strong);
-      border-radius: 24px;
-      padding: 24px;
-      display: grid;
-      gap: 20px;
-    }
-
-    .hero-surface-top {
-      display: grid;
-      grid-template-columns: 132px minmax(0, 1fr);
-      gap: 20px;
-      align-items: center;
-    }
-
-    .ring-wrap {
-      display: grid;
-      gap: 10px;
-      justify-items: center;
-    }
-
-    .ring {
-      --score: 77;
-      width: 132px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle closest-side, var(--bg-elev-3) 70%, transparent 71% 100%),
-        conic-gradient(var(--cyan) calc(var(--score) * 1%), rgba(34, 211, 238, 0.12) 0);
-      display: grid;
-      place-items: center;
-      box-shadow: inset 0 0 0 1px var(--line-strong), 0 0 32px rgba(34, 211, 238, 0.08);
-    }
-
-    .ring strong {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 2.6rem;
-      line-height: 1;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .ring-label {
-      text-align: center;
-      font-size: 0.72rem;
-      color: var(--cyan);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .surface-copy h2 {
-      margin: 0 0 10px;
-      font-size: 1.5rem;
-      line-height: 1.18;
-      font-weight: 600;
-    }
-
-    .surface-copy p {
-      color: var(--ink-muted);
-      font-size: 0.96rem;
-      margin-bottom: 0;
-    }
-
-    .signal-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(34, 211, 238, 0.06);
-      border: 1px solid rgba(34, 211, 238, 0.18);
-    }
-
-    .signal-row strong {
-      display: block;
-      font-size: 0.96rem;
-      color: var(--ink);
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-weight: 600;
-    }
-
-    .signal-row small {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.84rem;
-      margin-top: 3px;
-    }
-
-    .score-chip {
-      min-width: 64px;
-      height: 32px;
-      padding: 0 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-family: "JetBrains Mono", monospace;
-      font-weight: 600;
-      background: rgba(52, 211, 153, 0.12);
-      color: var(--green);
-      border: 1px solid rgba(52, 211, 153, 0.22);
-    }
-
-    .score-chip.warn {
-      background: rgba(252, 211, 77, 0.12);
-      color: var(--amber);
-      border-color: rgba(252, 211, 77, 0.24);
-    }
-
-    .score-chip.critical {
-      background: rgba(248, 113, 113, 0.12);
-      color: var(--red);
-      border-color: rgba(248, 113, 113, 0.24);
-    }
-
-    .surface-bars { display: grid; gap: 12px; }
-    .metric { display: grid; gap: 7px; }
-
-    .metric-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.86rem;
-      color: var(--ink-muted);
-    }
-
-    .metric strong {
-      font-size: 0.92rem;
-      color: var(--ink);
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-    }
-
-    .metric-top span {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.86rem;
-      color: var(--ink);
-    }
-
-    .bar {
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-    }
-
-    .bar > span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--cyan-light), var(--cyan));
-    }
-
-    .bar.warn > span {
-      background: linear-gradient(90deg, var(--amber), var(--amber-2));
-    }
-
-    .bar.critical > span {
-      background: linear-gradient(90deg, var(--orange), var(--red));
-    }
-
-    .section {
-      margin-top: 22px;
-      background: linear-gradient(180deg, rgba(8, 17, 31, 0.86), rgba(5, 11, 22, 0.92));
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      padding: 32px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-
-    .section-head h2 {
-      margin: 8px 0 0;
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-      max-width: 22ch;
-      line-height: 1.08;
-      font-weight: 600;
-    }
-
-    .section-head p {
-      max-width: 56ch;
-      color: var(--ink-muted);
-      font-size: 0.96rem;
-    }
-
-    .formula-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-    }
-
-    .cards-2, .cards-3, .cards-4 { display: grid; gap: 14px; }
-    .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .formula-card, .query-card, .cause-card, .plan-card,
-    .proof-card, .comp-card, .roi-card, .scenario-card {
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: var(--bg-elev-2);
-      padding: 20px;
-      display: grid;
-      gap: 12px;
-      color: var(--ink);
-    }
-
-    .formula-card h3, .query-card h3, .cause-card h3, .plan-card h3,
-    .proof-card h3, .comp-card h3, .scenario-card h3 {
-      margin: 0;
-      font-size: 1.16rem;
-      line-height: 1.25;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .formula-card p, .query-card p, .cause-card p, .plan-card p,
-    .proof-card p, .comp-card p, .scenario-card p {
-      color: var(--ink-muted);
-      font-size: 0.94rem;
-    }
-
-    .formula-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .formula-score {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 1.9rem;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 10px;
-      font-size: 0.7rem;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--ink-muted);
-      font-family: "JetBrains Mono", monospace;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    .score-formula-box {
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(34, 211, 238, 0.06), rgba(8, 17, 31, 0.4));
-      border: 1px solid var(--line-strong);
-      padding: 22px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .equation-line {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 12px;
-      align-items: center;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-      padding: 12px 14px;
-    }
-
-    .equation-line span:first-child {
-      color: var(--ink-soft);
-      font-size: 0.94rem;
-    }
-
-    .equation-line strong {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 1.04rem;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    .equation-line span:last-child {
-      color: var(--ink-muted);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.86rem;
-    }
-
-    .equation-total {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      border-top: 1px dashed var(--line-strong);
-      padding-top: 14px;
-      margin-top: 4px;
-    }
-
-    .equation-total p {
-      color: var(--ink-muted);
-      font-size: 0.92rem;
-      max-width: 32ch;
-    }
-
-    .equation-total strong {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 2.8rem;
-      line-height: 1;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    .query-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .query-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .query-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 14px;
-    }
-
-    .query-head h3 {
-      margin-top: 8px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 10px;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      background: rgba(34, 211, 238, 0.10);
-      color: var(--cyan);
-      border: 1px solid rgba(34, 211, 238, 0.22);
-      border-radius: 999px;
-      font-weight: 700;
-    }
-
-    .tag.problem { background: rgba(248, 113, 113, 0.10); color: var(--red); border-color: rgba(248, 113, 113, 0.22); }
-    .tag.compare { background: rgba(252, 211, 77, 0.10); color: var(--amber); border-color: rgba(252, 211, 77, 0.22); }
-    .tag.brand { background: rgba(52, 211, 153, 0.10); color: var(--green); border-color: rgba(52, 211, 153, 0.22); }
-
-    .platforms { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .mini-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 10px;
-      font-size: 0.7rem;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--ink-muted);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    .mini-pill.hit { background: rgba(52, 211, 153, 0.10); color: var(--green); border-color: rgba(52, 211, 153, 0.22); }
-    .mini-pill.miss { background: rgba(248, 113, 113, 0.10); color: var(--red); border-color: rgba(248, 113, 113, 0.22); }
-
-    .quote {
-      border-left: 2px solid var(--cyan);
-      padding: 6px 0 6px 12px;
-      color: var(--ink-muted);
-      font-size: 0.92rem;
-      font-style: italic;
-      line-height: 1.5;
-    }
-
-    .query-alert {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(252, 211, 77, 0.06);
-      border: 1px solid rgba(252, 211, 77, 0.18);
-      color: var(--amber);
-      font-size: 0.92rem;
-      line-height: 1.5;
-    }
-
-    .query-alert strong { color: var(--amber); font-weight: 600; }
-
-    .query-side { display: grid; gap: 14px; }
-
-    .sublist { display: grid; gap: 8px; }
-
-    .sublist-item {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-    }
-
-    .sublist-item strong {
-      display: block;
-      font-size: 0.92rem;
-      color: var(--ink);
-      margin-bottom: 4px;
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-    }
-
-    .sublist-item span {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.88rem;
-    }
-
-    .comp-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-    }
-
-    .race { display: grid; gap: 10px; }
-
-    .race-row {
-      display: grid;
-      grid-template-columns: 36px 1.3fr 1.5fr 100px 56px;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-    }
-
-    .race-row.you {
-      background: rgba(34, 211, 238, 0.06);
-      border-color: rgba(34, 211, 238, 0.22);
-    }
-
-    .race-row > span:first-child {
-      font-family: "JetBrains Mono", monospace;
-      color: var(--ink-muted);
-      font-size: 0.86rem;
-    }
-
-    .race-row strong {
-      display: block;
-      color: var(--ink);
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-      font-size: 0.96rem;
-    }
-
-    .race-sub {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.78rem;
-      margin-top: 2px;
-    }
-
-    .race-track {
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-    }
-
-    .race-track > span {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--cyan-light), var(--cyan));
-    }
-
-    .race-row.alt .race-track > span {
-      background: linear-gradient(90deg, var(--amber), var(--amber-2));
-    }
-
-    .race-row > span:nth-last-child(2) {
-      color: var(--ink-muted);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.84rem;
-    }
-
-    .race-row > span:last-child {
-      color: var(--ink);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-
-    .cause-grid, .plan-grid, .roi-grid { display: grid; gap: 14px; }
-    .cause-grid, .plan-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .roi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .cause-top, .plan-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 12px;
-    }
-
-    .cause-num, .roi-metric {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 1.7rem;
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .severity {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-weight: 700;
-      background: rgba(248, 113, 113, 0.12);
-      color: var(--red);
-      border: 1px solid rgba(248, 113, 113, 0.24);
-    }
-
-    .severity.medium { background: rgba(252, 211, 77, 0.12); color: var(--amber); border-color: rgba(252, 211, 77, 0.24); }
-    .severity.low { background: rgba(34, 211, 238, 0.12); color: var(--cyan); border-color: rgba(34, 211, 238, 0.24); }
-
-    .data-points { display: grid; gap: 8px; }
-
-    .data-points div {
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-      color: var(--ink-muted);
-      font-size: 0.88rem;
-    }
-
-    .data-points strong {
-      margin-right: 6px;
-      color: var(--cyan);
-      font-family: "JetBrains Mono", monospace;
-      font-weight: 600;
-    }
-
-    .toggle-wrap { display: grid; gap: 18px; }
-    .toggle-row { display: flex; gap: 10px; flex-wrap: wrap; }
-
-    .toggle {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 16px;
-      cursor: pointer;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--ink-muted);
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: transform 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
-    }
-
-    .toggle:hover, .toggle:focus-visible {
-      transform: translateY(-1px);
-      outline: none;
-      color: var(--ink);
-    }
-
-    .toggle.active {
-      background: rgba(34, 211, 238, 0.12);
-      color: var(--cyan);
-      border-color: rgba(34, 211, 238, 0.32);
-      box-shadow: 0 0 24px rgba(34, 211, 238, 0.16);
-    }
-
-    .scenario-layout {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-    }
-
-    .scenario-kpis {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .scenario-kpis > div {
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-      padding: 12px;
-    }
-
-    .scenario-kpis span {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.74rem;
-      margin-bottom: 4px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .scenario-kpis strong {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 1.24rem;
-      color: var(--cyan);
-      font-weight: 600;
-    }
-
-    .steps { display: grid; gap: 10px; }
-
-    .step {
-      padding: 14px 16px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-    }
-
-    .step strong {
-      display: block;
-      font-size: 0.96rem;
-      color: var(--ink);
-      margin-bottom: 4px;
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-    }
-
-    .step span {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.9rem;
-    }
-
-    .step-meta {
-      display: inline-flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .step-meta span {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(34, 211, 238, 0.08);
-      color: var(--cyan);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid rgba(34, 211, 238, 0.18);
-      display: inline-flex !important;
-      width: auto !important;
-    }
-
-    .step-meta span.effort {
-      background: rgba(252, 211, 77, 0.08);
-      color: var(--amber);
-      border-color: rgba(252, 211, 77, 0.18);
-    }
-
-    .roi-card {
-      text-align: center;
-      padding: 22px 18px;
-    }
-
-    .roi-card span {
-      display: block;
-      color: var(--ink-muted);
-      font-size: 0.84rem;
-      margin: 8px 0;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .roi-metric {
-      color: var(--cyan);
-    }
-
-    .roi-card p {
-      font-size: 0.88rem;
-      color: var(--ink-muted);
-    }
-
-    .closing {
-      margin-top: 22px;
-      border-radius: var(--radius-xl);
-      padding: 36px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.14), transparent 30%),
-        linear-gradient(180deg, #07111f, #050b16);
-      border: 1px solid var(--line-strong);
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1.4fr 0.9fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .closing h2 {
-      margin: 10px 0 12px;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      max-width: 22ch;
-      line-height: 1.12;
-      font-weight: 600;
-    }
-
-    .closing em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--cyan-light), var(--cyan));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .closing p { color: var(--ink-muted); max-width: 58ch; }
-
-    .closing-actions { display: grid; gap: 12px; }
-
-    .closing-action {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-    }
-
-    .closing-action strong {
-      display: block;
-      color: var(--ink);
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-    }
-
-    .closing-action small {
-      color: var(--ink-muted);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .footer-note {
-      margin-top: 22px;
-      color: var(--ink-faint);
-      text-align: center;
-      font-size: 0.82rem;
-      letter-spacing: 0.02em;
-    }
-
-    @media (max-width: 1120px) {
-      .hero-inner, .formula-grid, .query-layout, .comp-grid, .scenario-layout, .closing {
-        grid-template-columns: 1fr;
-      }
-      .cards-2, .cards-3, .cards-4,
-      .cause-grid, .plan-grid, .roi-grid, .query-grid, .scenario-kpis {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 820px) {
-      .topbar-inner { grid-template-columns: 1fr; }
-      .hero-inner, .section, .closing { padding: 22px; }
-      .hero-story, .cards-2, .cards-3, .cards-4,
-      .cause-grid, .plan-grid, .roi-grid, .query-grid, .scenario-kpis {
-        grid-template-columns: 1fr;
-      }
-      .hero-surface-top { grid-template-columns: 1fr; justify-items: center; }
-      .ring-wrap { margin: 0 auto; }
-      .section-head { flex-direction: column; align-items: start; }
-      .race-row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <span class="brand-dot"></span>
-        <span>SITEDOK.AI</span>
-      </div>
-      <div class="topbar-meta">
-        <strong>EvigtUnivers</strong>
-        <span>·</span>
-        <span>Fiktiv demo · 15. april 2026</span>
-        <span>·</span>
-        <span>8 queries · 4 platforme · 11 autoritetskilder</span>
-      </div>
-      <div class="topbar-actions">
-        <a class="btn btn-ghost" href="/demo-rapport.html">Se eksport</a>
-        <a class="btn btn-primary" href="/kontakt">Bestil audit</a>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>EvigtUnivers · Client Room-demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./client-room-demo.css">
+  </head>
+  <body class="client-room-body client-room-v5">
+    <div class="app-shell app-shell-room">
+      <header class="client-room-header">
+        <div class="client-room-brand">
+          <div class="radar-mark">
+            <span class="radar-ring radar-ring-1"></span>
+            <span class="radar-ring radar-ring-2"></span>
+            <span class="radar-beam"></span>
+          </div>
+          <div>
+            <div class="eyebrow">Client Room</div>
+            <div class="brand-link brand-link-static">SitedokAI</div>
+          </div>
+        </div>
+
+        <div class="client-room-header-meta">
+          <div class="client-room-header-item">
+            <span>Format</span>
+            <strong>Levende demo af Client Room</strong>
+          </div>
+          <div class="client-room-header-item">
+            <span>Leveret af</span>
+            <strong>SitedokAI</strong>
+          </div>
+          <div class="client-room-header-item">
+            <span>Kontakt</span>
+            <a href="mailto:info@sitedokai.com" class="client-room-support-link">info@sitedokai.com</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-frame">
+        
+  <section class="hero-panel hero-panel-room">
+    <div>
+      <div class="eyebrow">AI Markedsposition</div>
+      <h1>EvigtUnivers</h1>
+      <p class="lead lead-strong">I er synlige, men ikke stabile nok endnu.</p>
+      <p class="lead">I bliver fundet nogle steder, men ikke jævnt nok til at I virkelig trækker fra.</p>
+
+      <div class="verdict-strip">
+        <div class="verdict-item">
+          <span>AI-markedsposition</span>
+          <strong>67/100</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Hvor sikre vi er</span>
+          <strong>Lav</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Bredde nu</span>
+          <strong>41%</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Start her</span>
+          <strong>Lav sider, der gør kildesynlighed til rigtige mentions</strong>
+        </div>
       </div>
     </div>
-  </header>
 
-  <div class="shell">
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <span class="kicker">Client Room · EvigtUnivers</span>
-          <h1 class="hero-title">I er synlige i AI. Nu handler det om at blive <em>valgt først</em>.</h1>
-          <p class="hero-sub">
-            ChatGPT, Gemini, Claude og Google AI nævner jer på 7 af 8 købssøgninger. Men når kunden spørger
-            konkret — &bdquo;hvilken planet-dekoration passer til børneværelset?&ldquo; — falder I ud. Og i brede
-            kategorisvar står Stjernehimmel.dk stadig som default-vinder. Det er det hul roomet gør tydeligt.
-          </p>
-
-          <div class="hero-story">
-            <div class="story-card">
-              <span>Styrken</span>
-              <strong>Brand + lokale signaler solidt</strong>
-            </div>
-            <div class="story-card">
-              <span>Det største hul</span>
-              <strong>0/2 på købsnær gave-query</strong>
-            </div>
-            <div class="story-card">
-              <span>Presset</span>
-              <strong>Stjernehimmel.dk ejer kategori</strong>
-            </div>
-          </div>
+      <div class="room-publish-box room-publish-box-rich">
+        <div>
+          <span>Senest opdateret</span>
+          <strong>16 Apr 2026 · 09:11</strong>
         </div>
+        <div>
+          <span>Adgang</span>
+          <strong>Åben demo</strong>
+        </div>
+        <div>
+          <span>Omfang</span>
+          <strong>9 søgninger · 2 konkurrenter</strong>
+        </div>
+        <p class="room-publish-note">
+          
+          Det her er en åben demo af det samme read-only Client Room-format som kunder modtager. PDF-versionen er den korte ledelsesopsummering, men selve beslutningsrummet er denne side.
+        
+      </p>
+      
+        <a class="button button-primary" href="./SitedokAI_ClientRoom_EvigtUnivers.pdf">Hent Executive PDF</a>
+      
+    </div>
+  </section>
 
-        <aside class="hero-surface">
-          <div class="hero-surface-top">
-            <div class="ring-wrap">
-              <div class="ring" style="--score:77;">
-                <strong id="hero-score">77</strong>
-              </div>
-              <span class="ring-label">AI Markedsposition</span>
-            </div>
-            <div class="surface-copy">
-              <h2>Stærk synlighed. Svagere når kunden er tæt på køb.</h2>
-              <p>
-                Grundsynlighed og socialt fodaftryk er i top. Men når AI skal vælge én astronomi-webshop til børneværelset
-                eller fødselsdagsgaven, vinder konkurrenten stadig lidt for ofte. Det er ikke et teknisk problem
-                alene — det er et svarflade-problem.
-              </p>
-            </div>
-          </div>
-
-          <div class="surface-bars">
-            <div class="metric">
-              <div class="metric-top"><strong>Søgedækning</strong><span>84</span></div>
-              <div class="bar"><span style="width:84%"></span></div>
-            </div>
-            <div class="metric">
-              <div class="metric-top"><strong>Tillidsflade</strong><span>75</span></div>
-              <div class="bar warn"><span style="width:75%"></span></div>
-            </div>
-            <div class="metric">
-              <div class="metric-top"><strong>Konkurrenceforspring</strong><span>65</span></div>
-              <div class="bar critical"><span style="width:65%"></span></div>
-            </div>
-            <div class="metric">
-              <div class="metric-top"><strong>Website-parathed</strong><span>78</span></div>
-              <div class="bar warn"><span style="width:78%"></span></div>
-            </div>
-          </div>
-
-          <div class="signal-row">
-            <div>
-              <strong>Det ene tal ledelsen kan styre efter</strong>
-              <small>Synlighed, autoritet, konkurrentafstand og teknisk parathed i én score.</small>
-            </div>
-            <span class="score-chip">77/100</span>
-          </div>
-        </aside>
-      </div>
+  <div class="room-reading-surface">
+    <section class="card-grid card-grid-3">
+      <article class="metric-card metric-card-decision metric-card-plain">
+        <span class="metric-label">AI-markedsposition</span>
+        <strong class="metric-value">67/100</strong>
+        <p>Et samlet blik på hvor godt I fanger søgninger, hvor bredt I bliver nævnt, og hvor tydeligt AI kan stole på jeres digitale fodaftryk.</p>
+        <div class="impact-range formula-breakdown">
+          <span>AI-synlighed 97/100</span>
+          <span>Bredde 41%</span>
+          <span>Socialt lag 6/100</span>
+          <span>Teknik 76/100</span>
+        </div>
+      </article>
+      <article class="metric-card metric-card-decision">
+        <span class="metric-label">Det der vil hjælpe mest</span>
+        <strong class="metric-title">Lav sider, der gør kildesynlighed til rigtige mentions</strong>
+        <p>Det er den hurtigste vej til at gå fra løs tilstedeværelse til at blive valgt oftere, når nogen er tæt på at købe.</p>
+      </article>
+      <article class="metric-card metric-card-decision metric-card-impact">
+        <span class="metric-label">Mulig effekt</span>
+        <strong class="metric-value" id="summary-impact-value">+35%</strong>
+        <p>Vores bedste bud på hvor meget mere relevant interesse planen kan skabe.</p>
+        <div class="impact-range">
+          <span id="summary-impact-low">Forsigtigt 22%</span>
+          <span id="summary-impact-base">Mest sandsynligt 35%</span>
+          <span id="summary-impact-high">Bedste fald 52%</span>
+        </div>
+      </article>
     </section>
 
-    <section class="section">
-      <div class="section-head">
+    <section class="data-panel data-panel-focus">
+      <div class="panel-head">
         <div>
-          <span class="kicker">Sådan regner vi</span>
-          <h2>Hvor scoren kommer fra</h2>
+          <div class="eyebrow">Søgninger Først</div>
+          <h2>Det bygger vores vurdering på</h2>
         </div>
-        <p>
-          Jeres samlede tal på 77 er ikke ét målepunkt — det er fire dele lagt sammen: hvor ofte AI nævner
-          jer, hvor meget AI stoler på jer, hvor langt I er fra konkurrenten, og hvor klart jeres website
-          bakker svarene op. Hver del vægter forskelligt.
-        </p>
+        <p>Her er de vigtigste søgninger, vi har testet, så I kan se hvor I står, før vi anbefaler noget.</p>
       </div>
 
-      <div class="formula-grid">
-        <div class="cards-2">
-          <article class="formula-card">
-            <div class="formula-card-top">
-              <strong class="formula-score">84</strong>
-              <span class="chip">35%</span>
-            </div>
-            <h3>Søgedækning</h3>
-            <p>Hvor ofte I bliver nævnt eller valgt på brand-, kategori-, problem- og sammenligningssøgninger med reel købsintention.</p>
-            <div class="bar"><span style="width:84%"></span></div>
-          </article>
-
-          <article class="formula-card">
-            <div class="formula-card-top">
-              <strong class="formula-score">75</strong>
-              <span class="chip">30%</span>
-            </div>
-            <h3>Tillidsflade</h3>
-            <p>Google Business, Trustpilot, LinkedIn og virksomhedsdata bekræfter jer. Der mangler stærkere cases, omtaler og mere ens profiler.</p>
-            <div class="bar warn"><span style="width:75%"></span></div>
-          </article>
-
-          <article class="formula-card">
-            <div class="formula-card-top">
-              <strong class="formula-score">65</strong>
-              <span class="chip">20%</span>
-            </div>
-            <h3>Konkurrenceforspring</h3>
-            <p>Stjernehimmel.dk fylder mere som default-svar på kategori-queries. Afstanden er positioneringsmæssig, ikke teknisk.</p>
-            <div class="bar critical"><span style="width:65%"></span></div>
-          </article>
-
-          <article class="formula-card">
-            <div class="formula-card-top">
-              <strong class="formula-score">78</strong>
-              <span class="chip">15%</span>
-            </div>
-            <h3>Website-parathed</h3>
-            <p>Forside og produktoversigt holder niveauet. Der mangler dedikerede sider om planet-dekoration, astronomi-gaver og leveringstider AI kan citere direkte.</p>
-            <div class="bar warn"><span style="width:78%"></span></div>
-          </article>
+      
+        <div class="summary-chip-row">
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>5 vigtige søgninger ender helt uden jer.</strong>
+            </article>
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>I bliver nævnt ujævnt på tværs af platforme i 1 søgninger.</strong>
+            </article>
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>Det største tekniske problem lige nu er security headers.</strong>
+            </article>
+          
         </div>
+      
 
-        <div class="score-formula-box">
-          <div>
-            <span class="kicker">Regnestykket</span>
-            <h3 style="margin: 8px 0 10px; font-size: 1.5rem; font-weight: 600;">AI Markedsposition</h3>
-            <p style="color: var(--ink-muted); font-size: 0.94rem;">
-              Ikke &bdquo;hvor ofte nævnes I&ldquo;, men &bdquo;hvor sandsynligt er det, at AI finder jer, stoler på jer og vælger jer frem for konkurrenten&ldquo;.
-            </p>
-          </div>
-
-          <div class="equation-line">
-            <span>Søgedækning</span>
-            <strong id="eq-1">84</strong>
-            <span>× 0,35</span>
-          </div>
-          <div class="equation-line">
-            <span>Tillidsflade</span>
-            <strong id="eq-2">75</strong>
-            <span>× 0,30</span>
-          </div>
-          <div class="equation-line">
-            <span>Konkurrenceforspring</span>
-            <strong id="eq-3">65</strong>
-            <span>× 0,20</span>
-          </div>
-          <div class="equation-line">
-            <span>Website-parathed</span>
-            <strong id="eq-4">78</strong>
-            <span>× 0,15</span>
-          </div>
-
-          <div class="equation-total">
-            <div>
-              <span class="kicker">Resultat</span>
-              <p style="margin-top: 8px;">Et solidt udgangspunkt. Ikke stærkt nok til at være svær at slå i købssituationen endnu.</p>
+      <div class="query-overview-list">
+        
+          <article class="query-overview-row query-overview-critical">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Tabt</span>
+                <span class="mini-pill">category</span>
+                <span class="score-chip score-critical">0%</span>
+              </div>
+              <h3>Bedste webshops til astronomi-gaver i Danmark</h3>
+              <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
             </div>
-            <strong id="equation-score">77</strong>
-          </div>
-        </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Ingen af de testede platforme endnu</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
+              </div>
+              <div class="detail-note detail-note-inline">De bedste danske webshops til astronomi-gaver er: Stjernehimmel.dk (bredeste sortiment), Månelys ApS (premium måne-lamper), Smarturs.dk og Planetariums webshop. Også gode: Natur og Museum-butikkerne online.</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-critical">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Tabt</span>
+                <span class="mini-pill">category</span>
+                <span class="score-chip score-critical">0%</span>
+              </div>
+              <h3>Hvor kan jeg købe planeter til børneværelse?</h3>
+              <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Ingen af de testede platforme endnu</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Til børneværelse med planet-tema kan du kigge på: IKEA (solsystem-mobiler), Smarturs.dk (planet-plakater), Stjernehimmel.dk (LED-planeter), og Panduro Hobby (gør-det-selv planet-sæt). Sprog med trygt loft, lys og vægsti…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-critical">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Tabt</span>
+                <span class="mini-pill">comparison</span>
+                <span class="score-chip score-critical">0%</span>
+              </div>
+              <h3>Alternativer til Stjernehimmel.dk</h3>
+              <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Ingen af de testede platforme endnu</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Gode alternativer til Stjernehimmel.dk er: Månelys ApS, Smarturs.dk, IKEA og Tycho Brahe Planetarium shop.</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-critical">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Tabt</span>
+                <span class="mini-pill">problem</span>
+                <span class="score-chip score-critical">0%</span>
+              </div>
+              <h3>Hvor finder jeg måne-lamper og planet-mobiler?</h3>
+              <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Ingen af de testede platforme endnu</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Månelys.dk har et stort udvalg af måne-lamper. Til mobiler kan du også prøve IKEA, JYSK og Smarturs.</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-critical">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Tabt</span>
+                <span class="mini-pill">problem</span>
+                <span class="score-chip score-critical">0%</span>
+              </div>
+              <h3>Inspirér min søn til astronomi — hvad skal jeg købe?</h3>
+              <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Ingen af de testede platforme endnu</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det er en købssituation, hvor efterspørgslen kan lande direkte hos konkurrenter.</p>
+              </div>
+              <div class="detail-note detail-note-inline">For at inspirere et barn til astronomi anbefaler jeg: en god begynder-teleskop (fx fra Astroshop.dk), et solsystem-mobile, selvlysende stjerner til loftet, og bogen &#39;Stjerner over Danmark&#39;. Webshops: Stjernehimmel.dk, S…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-watch">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Ustabil</span>
+                <span class="mini-pill">comparison</span>
+                <span class="score-chip score-watch">67%</span>
+              </div>
+              <h3>EvigtUnivers vs Stjernehimmel — hvad er bedst?</h3>
+              <p>I bliver nævnt på ChatGPT og Claude, men mangler stadig på Gemini.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det gør jeres synlighed sårbar, fordi kunden kan få et forskelligt svar alt efter hvor de spørger.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Stjernehimmel.dk har bredere sortiment og er mere etableret i markedet. EvigtUnivers er nyere, men har fokus på præmie-produkter og hurtig levering. Valget afhænger af, om du prioriterer bredde (Stjernehimmel) eller kur…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">brand</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>Fortæl mig om EvigtUnivers webshop</h3>
+              <p>I står stærkt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">EvigtUnivers er en specialiseret webshop til astronomi- og rum-tema indretning.</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">brand</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>Hvad er EvigtUnivers?</h3>
+              <p>I står stærkt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">EvigtUnivers (evigtunivers.dk) er en dansk webshop med speciale i astronomi-inspireret indretning — planet-mobiler, måne-lamper, væg-stickers med solsystemet og gaver til børn, der elsker rummet. De leverer i hele Danma…</div>
+            </div>
+            
+          </article>
+        
       </div>
+
+      
+        <details class="scenario-backlog executive-details">
+          <summary>Se alle testede søgninger</summary>
+          <div class="heatmap-layout">
+            <div class="heatmap-list">
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Bedste webshops til astronomi-gaver i Danmark</strong>
+                      <div class="muted-line">category</div>
+                    </div>
+                    <span class="score-chip score-critical">0%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="Bedste webshops til astronomi-gaver i Danmark"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="De bedste danske webshops til astronomi-gaver er: Stjernehimmel.dk (bredeste sortiment), Månelys ApS (premium måne-lamper), Smarturs.dk og Planetariums webshop. Også gode: Natur og Museum-butikkerne online."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="Bedste webshops til astronomi-gaver i Danmark"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Jeg vil anbefale at starte med Stjernehimmel.dk og Månelys.dk — begge har god kundeservice og et gennemtænkt sortiment. Også planetariums egne online butikker."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="Bedste webshops til astronomi-gaver i Danmark"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Stjernehimmel.dk, Månelys og Smarturs dominerer markedet for astronomi-inspirerede gaver i Danmark."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Hvor kan jeg købe planeter til børneværelse?</strong>
+                      <div class="muted-line">category</div>
+                    </div>
+                    <span class="score-chip score-critical">0%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="Hvor kan jeg købe planeter til børneværelse?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Til børneværelse med planet-tema kan du kigge på: IKEA (solsystem-mobiler), Smarturs.dk (planet-plakater), Stjernehimmel.dk (LED-planeter), og Panduro Hobby (gør-det-selv planet-sæt). Sprog med trygt loft, lys og vægstickers."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="Hvor kan jeg købe planeter til børneværelse?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="I Danmark kan du kigge på: IKEA (mobiler, lamper), Smartsho, Panduro, Stjernehimmel.dk og større webshops som Smarturs. Til kvalitets-planeter anbefaler jeg at søge efter &#39;solsystem wall sticker&#39; eller &#39;3D planet mobile&#39;."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="Hvor kan jeg købe planeter til børneværelse?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Prøv Stjernehimmel.dk, IKEA, JYSK og Panduro Hobby. Stjernehimmel har dedikerede planet-kollektioner til børneværelser."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Alternativer til Stjernehimmel.dk</strong>
+                      <div class="muted-line">comparison</div>
+                    </div>
+                    <span class="score-chip score-critical">0%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="Alternativer til Stjernehimmel.dk"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Gode alternativer til Stjernehimmel.dk er: Månelys ApS, Smarturs.dk, IKEA og Tycho Brahe Planetarium shop."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="Alternativer til Stjernehimmel.dk"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Månelys.dk, Smarturs og Etsy (for unikke produkter) er gode alternativer til Stjernehimmel.dk."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="Alternativer til Stjernehimmel.dk"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Månelys.dk, Smarturs og IKEA er de mest nævnte alternativer."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Hvor finder jeg måne-lamper og planet-mobiler?</strong>
+                      <div class="muted-line">problem</div>
+                    </div>
+                    <span class="score-chip score-critical">0%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="Hvor finder jeg måne-lamper og planet-mobiler?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Månelys.dk har et stort udvalg af måne-lamper. Til mobiler kan du også prøve IKEA, JYSK og Smarturs."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="Hvor finder jeg måne-lamper og planet-mobiler?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Til måne-lamper: Månelys.dk eller Amazon. Til planet-mobiler: IKEA, Smarturs eller Etsy (hvis du søger håndlavede)."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="Hvor finder jeg måne-lamper og planet-mobiler?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Månelys ApS specialiserer sig i måne-lamper. Planet-mobiler findes hos IKEA og Smarturs."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Inspirér min søn til astronomi — hvad skal jeg købe?</strong>
+                      <div class="muted-line">problem</div>
+                    </div>
+                    <span class="score-chip score-critical">0%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="Inspirér min søn til astronomi — hvad skal jeg købe?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="For at inspirere et barn til astronomi anbefaler jeg: en god begynder-teleskop (fx fra Astroshop.dk), et solsystem-mobile, selvlysende stjerner til loftet, og bogen &#39;Stjerner over Danmark&#39;. Webshops: Stjernehimmel.dk, Smarturs."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="Inspirér min søn til astronomi — hvad skal jeg købe?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Start med en let introduktion: selvlysende stjerner på loftet, en månelampe, og evt. en begynder-kikkert. Til 8-12 år: et rigtigt teleskop. Butikker: Stjernehimmel.dk, Astroshop.dk, Tycho Brahe Planetariums shop."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="Inspirér min søn til astronomi — hvad skal jeg købe?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Kombinationen af en begynder-teleskop, selvlysende stjerner og et planet-mobile fra Stjernehimmel.dk virker godt."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>EvigtUnivers vs Stjernehimmel — hvad er bedst?</strong>
+                      <div class="muted-line">comparison</div>
+                    </div>
+                    <span class="score-chip score-watch">67%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="EvigtUnivers vs Stjernehimmel — hvad er bedst?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #2"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Stjernehimmel.dk har bredere sortiment og er mere etableret i markedet. EvigtUnivers er nyere, men har fokus på præmie-produkter og hurtig levering. Valget afhænger af, om du prioriterer bredde (Stjernehimmel) eller kurateret kvalitet (EvigtUnivers)."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="EvigtUnivers vs Stjernehimmel — hvad er bedst?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #2"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Stjernehimmel.dk er bredere og billigere; EvigtUnivers.dk er mere kurateret med fokus på premium måne-lamper og håndlavede planet-mobiler. Hvis kvalitet er vigtigst: EvigtUnivers. Hvis pris og udvalg: Stjernehimmel."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Gemini"
+                        data-query="EvigtUnivers vs Stjernehimmel — hvad er bedst?"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Stjernehimmel.dk er den største aktør på markedet. EvigtUnivers er mindre kendt."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Fortæl mig om EvigtUnivers webshop</strong>
+                      <div class="muted-line">brand</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="Fortæl mig om EvigtUnivers webshop"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="EvigtUnivers er en specialiseret webshop til astronomi- og rum-tema indretning."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="Fortæl mig om EvigtUnivers webshop"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="EvigtUnivers.dk er en dansk specialshop til planet- og måne-inspireret indretning."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Gemini"
+                        data-query="Fortæl mig om EvigtUnivers webshop"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Dansk webshop med fokus på planet- og måne-produkter til børn."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Hvad er EvigtUnivers?</strong>
+                      <div class="muted-line">brand</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="Hvad er EvigtUnivers?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="EvigtUnivers (evigtunivers.dk) er en dansk webshop med speciale i astronomi-inspireret indretning — planet-mobiler, måne-lamper, væg-stickers med solsystemet og gaver til børn, der elsker rummet. De leverer i hele Danmark."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="Hvad er EvigtUnivers?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="EvigtUnivers.dk er en dansk e-commerce virksomhed, der sælger astronomi-relaterede produkter — særligt til børneværelser. Typisk sortiment: 3D planet-mobiler, LED måne-lamper, solsystem-plakater og videnskabsgaver."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Gemini"
+                        data-query="Hvad er EvigtUnivers?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="EvigtUnivers er en dansk online butik, der sælger rum- og astronomi-tema indretning til børneværelser. Sortimentet omfatter planeter, måne-lamper og uddannelsesmæssige gaver."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>evigtunivers.dk — hvad sælger de?</strong>
+                      <div class="muted-line">brand</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="evigtunivers.dk — hvad sælger de?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="De sælger planet-mobiler, måne-lamper, solsystem-plakater og astronomi-gaver til børn."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="evigtunivers.dk — hvad sælger de?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="evigtunivers.dk sælger planet- og måne-indretning samt astronomi-inspirerede gaver til børn."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Gemini"
+                        data-query="evigtunivers.dk — hvad sælger de?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Ukendt metode"
+                        data-reason="Ingen ekstra forklaring gemt."
+                        data-answer="Sortimentet omfatter rum-tema indretning og uddannelsesmæssige gaver."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+            </div>
+
+            <aside class="heatmap-detail" id="heatmap-detail">
+              <div class="eyebrow">Vælg et felt</div>
+              <h3 id="heatmap-detail-title">Se hvorfor vi vurderer det sådan</h3>
+              <p id="heatmap-detail-summary">Klik på et platformssvar for at se både metode, vores vurdering og det konkrete svar.</p>
+              <div class="heatmap-detail-grid">
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Vores vurdering</span>
+                  <p id="heatmap-detail-verdict">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Kørt som</span>
+                  <p id="heatmap-detail-method">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Alias-match</span>
+                  <p id="heatmap-detail-aliases">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Kontekstsignaler</span>
+                  <p id="heatmap-detail-signals">Ingen valgt endnu.</p>
+                </div>
+              </div>
+              <div class="detail-note" id="heatmap-detail-note">
+                Den konkrete begrundelse for vores klassificering vises her.
+              </div>
+              <div class="heatmap-answer-block">
+                <span class="metric-label">Modelens faktiske svar</span>
+                <blockquote class="heatmap-answer-quote" id="heatmap-detail-answer">Det konkrete platformsvar vises her.</blockquote>
+              </div>
+            </aside>
+          </div>
+        </details>
+      
     </section>
 
-    <section class="section">
-      <div class="section-head">
+    <section class="data-panel data-panel-support">
+      <div class="panel-head">
         <div>
-          <span class="kicker">Hvad AI siger</span>
-          <h2>Alle 8 søgninger — grupperet efter intention</h2>
+          <div class="eyebrow">Diagnose</div>
+          <h2>Det vigtigste vi baserer det på</h2>
         </div>
-        <p>
-          Vi testede 8 queries på tværs af fire typer: brand, kategori, problem og sammenligning.
-          Hver type fortæller noget forskelligt om købsrejsen — og hvor AI allerede vælger jer.
-        </p>
+        <p>Her er de vigtigste fund, der forklarer hvorfor vi peger på netop de næste skridt.</p>
       </div>
 
-      <div class="query-layout">
-        <div class="query-grid">
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag brand">Brand · 1</span>
-                <h3>&bdquo;Hvad er EvigtUnivers?&ldquo;</h3>
-              </div>
-              <span class="score-chip">4/4 · #1</span>
-            </div>
-            <p>Stærkeste fundament. Alle fire AI-platforme kender jer og sætter jer som position #1.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill hit">Gemini</span>
-              <span class="mini-pill hit">Claude</span>
-              <span class="mini-pill hit">Google AI</span>
-            </div>
-            <div class="quote">&bdquo;EvigtUnivers er en dansk webshop med planeter, måner og astronomi-dekoration til børneværelser, gaver og interiør i hele landet…&ldquo;</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag brand">Brand · 2</span>
-                <h3>&bdquo;Fortæl mig om EvigtUnivers — webshop med planeter og måner&ldquo;</h3>
-              </div>
-              <span class="score-chip">2/2 · #1</span>
-            </div>
-            <p>Bekræfter brand-styrken. Begge testede platforme placerer jer som position #1 på ren brand-forespørgsel.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill hit">Claude</span>
-            </div>
-            <div class="quote">&bdquo;EvigtUnivers tilbyder planet-dekoration, måne-lamper og astronomi-gavesæt med fokus på hurtig levering og tydelig pakkestatus…&ldquo;</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag">Kategori · 1</span>
-                <h3>&bdquo;Bedste webshop til planeter og astronomi-gaver i Danmark&ldquo;</h3>
-              </div>
-              <span class="score-chip warn">2/3 · #2</span>
-            </div>
-            <p>I nævnes, men som andenvalg. Stjernehimmel.dk tager default-pladsen, Claude nævner jer slet ikke.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill hit">Google AI</span>
-              <span class="mini-pill miss">Claude</span>
-            </div>
-            <div class="query-alert">Stjernehimmel.dk nævnes 7 gange på tværs af kategori-queries. Det er ikke et teknisk problem — det er et tillids- og positioneringshul.</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag">Kategori · 2</span>
-                <h3>&bdquo;Planet-dekoration til børneværelse i Danmark&ldquo;</h3>
-            </div>
-              <span class="score-chip warn">1/2 · #2</span>
-            </div>
-            <p>ChatGPT nævner jer som ét af valgene. Claude skipper jer helt og peger alene på Stjernehimmel.dk.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill miss">Claude</span>
-            </div>
-            <div class="query-alert">Når to platforme er uenige om jeres relevans, signalerer det at autoritetsgrundlaget er for tyndt på kategori-niveau.</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag problem">Problem · 1</span>
-                <h3>&bdquo;Hvilken webshop er bedst til astronomi-gaver til børn?&ldquo;</h3>
-              </div>
-              <span class="score-chip warn">1/2 · #2</span>
-            </div>
-            <p>Netop kernen i jeres positionering — bredt sortiment og gode gaveforslag. Alligevel finder kun ChatGPT jer. Claude ser det ikke.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill miss">Claude</span>
-            </div>
-            <div class="query-alert">Jeres vigtigste differentiator er ikke tydelig nok i AI's vidensbase. Produktbeskrivelser, anmeldelser og konkrete gaveanbefalinger skal løfte det.</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag problem">Problem · 2</span>
-                <h3>&bdquo;Hvad skal jeg købe for at indrette et børneværelse med planeter og måner?&ldquo;</h3>
-              </div>
-              <span class="score-chip critical">0/2</span>
-            </div>
-            <p>Købsnær rådgivning — og I har ingen stemme. Ingen af platformene nævner jer overhovedet.</p>
-            <div class="platforms">
-              <span class="mini-pill miss">ChatGPT</span>
-              <span class="mini-pill miss">Claude</span>
-            </div>
-            <div class="query-alert"><strong>Det største gap.</strong> Brugeren er tæt på køb og søger aktivt en anbefaling. I har ingen guides eller FAQ-sider AI kan citere. Konkurrenten har.</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag compare">Sammenligning · 1</span>
-                <h3>&bdquo;EvigtUnivers vs Månelys ApS&ldquo;</h3>
-              </div>
-              <span class="score-chip">2/2 · #1</span>
-            </div>
-            <p>Her vinder I. Begge platforme placerer jer som det stærkere valg mod Månelys ApS — solid position.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill hit">Claude</span>
-            </div>
-            <div class="quote">&bdquo;EvigtUnivers fremhæves for bredere produktsortiment og bedre egnethed til både små og store gavepakker end Månelys ApS…&ldquo;</div>
-          </article>
-
-          <article class="query-card">
-            <div class="query-head">
-              <div>
-                <span class="tag compare">Sammenligning · 2</span>
-                <h3>&bdquo;EvigtUnivers vs Stjernehimmel.dk&ldquo;</h3>
-              </div>
-              <span class="score-chip warn">2/2 · #2</span>
-            </div>
-            <p>AI ser jer som relevant udfordrer, men ikke den naturlige leder i direkte dyst. Begge platforme nævner konkurrenten først.</p>
-            <div class="platforms">
-              <span class="mini-pill hit">ChatGPT</span>
-              <span class="mini-pill hit">Claude</span>
-            </div>
-            <div class="query-alert">Her er &bdquo;hvorfor vælge jer?&ldquo;-hullet tydeligt. Sammenligningssektion med 3 proof points lukker det hurtigst.</div>
-          </article>
-        </div>
-
-        <aside class="query-side">
+      <div class="proof-grid">
+        
           <article class="proof-card">
-            <span class="chip" style="background: rgba(34, 211, 238, 0.10); color: var(--cyan); border-color: rgba(34, 211, 238, 0.22);">Hele billedet</span>
-            <h3>7 af 8 queries vinder I. Den ene I taber, er den dyreste.</h3>
-            <p>Brand-søgninger og sammenligninger er grønne. Det er når kunden vil have et konkret svar på &bdquo;hvem skal levere?&ldquo;, &bdquo;hvilken løsning passer?&ldquo; og &bdquo;hvordan ser den ud i praksis?&ldquo; at AI ikke har nok materiale fra jer.</p>
-            <div class="sublist">
-              <div class="sublist-item">
-                <strong>Brand (2 queries)</strong>
-                <span>Begge vundet · position #1 på alle platforme</span>
-              </div>
-              <div class="sublist-item">
-                <strong>Kategori (2 queries)</strong>
-                <span>Nævnt, men #2 · Stjernehimmel.dk default</span>
-              </div>
-              <div class="sublist-item">
-                <strong>Problem (2 queries)</strong>
-                <span>Én vundet, én tabt — hullet ligger her</span>
-              </div>
-              <div class="sublist-item">
-                <strong>Sammenligning (2 queries)</strong>
-                <span>Begge nævnt · #1 vs. Månelys ApS, #2 vs. Stjernehimmel.dk</span>
-              </div>
-            </div>
+            <span class="proof-label">Vigtig søgning</span>
+            <h3>Bedste webshops til astronomi-gaver i Danmark</h3>
+            <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            <div class="detail-note detail-note-inline">De bedste danske webshops til astronomi-gaver er: Stjernehimmel.dk (bredeste sortiment), Månelys ApS (premium måne-lamper), Smarturs.dk og Planetariums webshop. Også gode: Natur og Museum-butikkerne online.</div>
           </article>
-
+        
           <article class="proof-card">
-            <span class="chip" style="background: rgba(252, 211, 77, 0.10); color: var(--amber); border-color: rgba(252, 211, 77, 0.22);">Ledelsesoversættelse</span>
-            <h3>Grøn på brand ≠ vækst</h3>
-            <p>Brand-synlighed holder eksisterende kunder. Det er kategori- og problem-søgningerne der skaber nye. Det er dér AI-rettede guides, cases og proof points flytter omsætning.</p>
+            <span class="proof-label">Vigtig søgning</span>
+            <h3>Hvor kan jeg købe planeter til børneværelse?</h3>
+            <p>I bliver ikke nævnt på ChatGPT, Claude og Gemini i denne søgning.</p>
+            <div class="detail-note detail-note-inline">Til børneværelse med planet-tema kan du kigge på: IKEA (solsystem-mobiler), Smarturs.dk (planet-plakater), Stjernehimmel.dk (LED-planeter), og Panduro Hobby (gør-det-selv planet-sæt). Sprog med trygt loft, lys og vægsti…</div>
           </article>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Diagnose</span>
-          <h2>Tre årsager — prioriteret efter konsekvens</h2>
-        </div>
-        <p>
-          Hver årsag er bygget som symptom, data og første greb. Det er her I ser præcis hvad AI mangler fra jer
-          for at lukke hullet.
-        </p>
-      </div>
-
-      <div class="cause-grid">
-        <article class="cause-card">
-          <div class="cause-top">
-            <span class="cause-num">01</span>
-            <span class="severity">Kritisk</span>
-          </div>
-          <h3>Rådgivningssøgninger mangler svarflader</h3>
-          <p>Kunden spørger efter konkret anbefaling. AI finder ingen guides, gaveforslag eller FAQ der kan citeres som jeres svar.</p>
-          <div class="data-points">
-            <div><strong>0/2</strong> platforme nævner jer på &bdquo;hvad skal jeg købe for at indrette børneværelset?&ldquo;</div>
-            <div><strong>Høj værdi</strong> — brugeren er tæt på køb</div>
-            <div><strong>Årsag</strong> — ingen dedikerede guides til børneværelse, gavekøb og rumtemaer</div>
-          </div>
-          <div class="sublist-item">
-            <strong>Første greb</strong>
-            <span>Byg 4-6 guides: planeter til børneværelse efter alder, måne-lamper, astronomi-gaver til fødselsdage, LED-rumtemaer og prisguide.</span>
-          </div>
-        </article>
-
-        <article class="cause-card">
-          <div class="cause-top">
-            <span class="cause-num">02</span>
-            <span class="severity medium">Høj</span>
-          </div>
-          <h3>For få autoritetssignaler til kategori-tillid</h3>
-          <p>CVR, Proff og virksomhedsprofiler er på plads. Men cases, omtaler og profilerne fortæller ikke helt samme historie — og det er det der får AI til at vælge jer som &bdquo;det sikre&ldquo; i kategori-svar.</p>
-          <div class="data-points">
-            <div><strong>6/11</strong> autoritetskilder bekræfter jer</div>
-            <div><strong>0</strong> stærke cases uden for sitet</div>
-            <div><strong>Mangler</strong> — ens proof på tværs af Google, LinkedIn og website</div>
-          </div>
-          <div class="sublist-item">
-            <strong>Første greb</strong>
-            <span>Saml cases, anmeldelser og en strammere Google Business + LinkedIn-fortælling der matcher websitet.</span>
-          </div>
-        </article>
-
-        <article class="cause-card">
-          <div class="cause-top">
-            <span class="cause-num">03</span>
-            <span class="severity medium">Mellem</span>
-          </div>
-          <h3>Konkurrenten er tydeligere — ikke bedre</h3>
-          <p>Stjernehimmel.dk fylder mere i AI-svar fordi deres forskel er lettere at citere. Ikke fordi tilbuddet er stærkere.</p>
-          <div class="data-points">
-            <div><strong>7 mentions</strong> til Stjernehimmel.dk på kategori</div>
-            <div><strong>#2</strong> i direkte sammenligning mod dem</div>
-            <div><strong>Gap</strong> — positionering og proof, ikke teknik</div>
-          </div>
-          <div class="sublist-item">
-            <strong>Første greb</strong>
-            <span>En sammenligningssektion: hvad I er bedst til, hvilke gavekøb I passer til, og hvornår man vælger jer frem for Stjernehimmel.dk.</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Konkurrentpres</span>
-          <h2>Hvem fylder i de queries der afgør valget</h2>
-        </div>
-        <p>
-          Mentions på tværs af kategori- og sammenligningssøgninger. Stjernehimmel.dk leder med 7. I er tæt på med 6 —
-          men positionen er oftere #2.
-        </p>
-      </div>
-
-      <div class="comp-grid">
-        <article class="comp-card">
-          <h3>Mention race — kategori + sammenligning</h3>
-          <div class="race">
-            <div class="race-row alt">
-              <span>01</span>
-              <div>
-                <strong>Stjernehimmel.dk</strong>
-                <span class="race-sub">Leder kategori · default i sammenligning</span>
-              </div>
-              <div class="race-track"><span style="width:100%"></span></div>
-              <span>7 mentions</span>
-              <span>76</span>
-            </div>
-            <div class="race-row you">
-              <span>02</span>
-              <div>
-                <strong>EvigtUnivers</strong>
-                <span class="race-sub">Jer · stærk synlighed, svagere default-valg</span>
-              </div>
-              <div class="race-track"><span style="width:86%"></span></div>
-              <span>6 mentions</span>
-              <span>77</span>
-            </div>
-            <div class="race-row">
-              <span>03</span>
-              <div>
-                <strong>Månelys ApS</strong>
-                <span class="race-sub">Overlap-risiko på mellemqueries</span>
-              </div>
-              <div class="race-track"><span style="width:28%"></span></div>
-              <span>2 mentions</span>
-              <span>58</span>
-            </div>
-            <div class="race-row">
-              <span>04</span>
-              <div>
-                <strong>Astroshop.dk</strong>
-                <span class="race-sub">Teknisk stærk, lav AI-andel endnu</span>
-              </div>
-              <div class="race-track"><span style="width:14%"></span></div>
-              <span>1 mention</span>
-              <span>52</span>
-            </div>
-          </div>
-        </article>
-
-        <div class="cards-2">
+        
           <article class="proof-card">
-            <h3>Hvad de gør bedre</h3>
-            <p>De gør valget lettere at forklare i ét kort AI-svar.</p>
-            <div class="sublist">
-              <div class="sublist-item"><strong>Klarere kategori-sider</strong><span>Svarene er tættere på selve spørgsmålet.</span></div>
-              <div class="sublist-item"><strong>Mere proof</strong><span>Flere signaler der signalerer &bdquo;sikkert valg&ldquo;.</span></div>
-              <div class="sublist-item"><strong>Tydeligere position</strong><span>Deres forskel er nem at citere.</span></div>
-            </div>
+            <span class="proof-label">Teknisk problem</span>
+            <h3>Security headers</h3>
+            <p>Det svageste tekniske område scorer 10/100.</p>
+            <div class="detail-note detail-note-inline">Når det her halter, bliver siden sværere at bruge og sværere at forstå korrekt.</div>
           </article>
-
+        
           <article class="proof-card">
-            <h3>Hvad I realistisk kan lukke</h3>
-            <p>Ikke hele deres footprint. Kun den del der flytter scoren hurtigst.</p>
-            <div class="sublist">
-              <div class="sublist-item"><strong>Købsnære guides</strong><span>4-6 sider der svarer på valgspørgsmål om børneværelse, gavekøb og rumtema direkte.</span></div>
-              <div class="sublist-item"><strong>Compare proof</strong><span>3 forskelle forklaret i en sammenligningssektion.</span></div>
-              <div class="sublist-item"><strong>Trust-lag uden vanity</strong><span>Reviews, produktbilleder, leveringstider og 2-3 eksterne omtaler.</span></div>
-            </div>
+            <span class="proof-label">Troværdighed</span>
+            <h3>De vigtigste troværdighedstegn er ikke tydelige nok endnu</h3>
+            <p>Det er især Google Business, Instagram og Trustpilot der gør billedet af jer uklart lige nu.</p>
+            <div class="detail-note detail-note-inline">Når Google, profiler og øvrige troværdighedstegn ikke fortæller den samme klare historie, bliver I sværere at vælge og sværere for AI at placere rigtigt.</div>
           </article>
-        </div>
+        
       </div>
+
+      
+        <details class="scenario-backlog executive-details">
+          <summary>Se mere dokumentation</summary>
+          <div class="evidence-grid">
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">technical_gap</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Security headers</h3>
+                <p>Score 10/100</p>
+                <div class="muted-line">Kilde: security_headers</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>evigtunivers.dk — hvad sælger de? · Gemini</h3>
+                <p>Sortimentet omfatter rum-tema indretning og uddannelsesmæssige gaver.</p>
+                <div class="muted-line">Kilde: Gemini</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>evigtunivers.dk — hvad sælger de? · Claude</h3>
+                <p>evigtunivers.dk sælger planet- og måne-indretning samt astronomi-inspirerede gaver til børn.</p>
+                <div class="muted-line">Kilde: Claude</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>evigtunivers.dk — hvad sælger de? · ChatGPT</h3>
+                <p>De sælger planet-mobiler, måne-lamper, solsystem-plakater og astronomi-gaver til børn.</p>
+                <div class="muted-line">Kilde: ChatGPT</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Fortæl mig om EvigtUnivers webshop · Gemini</h3>
+                <p>Dansk webshop med fokus på planet- og måne-produkter til børn.</p>
+                <div class="muted-line">Kilde: Gemini</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Fortæl mig om EvigtUnivers webshop · Claude</h3>
+                <p>EvigtUnivers.dk er en dansk specialshop til planet- og måne-inspireret indretning.</p>
+                <div class="muted-line">Kilde: Claude</div>
+              </article>
+            
+          </div>
+        </details>
+      
     </section>
 
-    <section class="section toggle-wrap">
-      <div class="section-head">
+    <section class="data-panel data-panel-action">
+      <div class="panel-head">
         <div>
-          <span class="kicker">Plan</span>
-          <h2>Tre måder at prioritere — vælg den der passer tempoet</h2>
+          <div class="eyebrow">Næste 30 Dage</div>
+          <h2>Det her skal I gøre først</h2>
         </div>
-        <p>
-          Samme materiale, tre rækkefølger. Skift mellem scenarierne for at se hvilket løft de giver på hovedscore,
-          coverage og trust — og hvilke tre første greb der matcher.
-        </p>
+        <p>Tre prioriterede bevægelser med tydelig kobling til det, vi faktisk har set i søgningerne og fundene.</p>
       </div>
 
-      <div class="toggle-row">
-        <button class="toggle active" data-scenario="balanced" type="button">Balanceret</button>
-        <button class="toggle" data-scenario="fast" type="button">Hurtigste løft</button>
-        <button class="toggle" data-scenario="category" type="button">Kategori først</button>
-      </div>
-
-      <div class="scenario-layout">
-        <article class="scenario-card">
-          <span class="chip">Scenarie-effekt</span>
-          <h3 id="scenario-title">Balanceret: stærkeste samlede bevægelse</h3>
-          <p id="scenario-copy">
-            Kombinér nye guides, synligere trust-signaler og én sammenligningssektion. Ikke den korteste vej, men den giver
-            den bedste samlede markedsposition over ét kvartal.
-          </p>
-
-          <div class="scenario-kpis">
-            <div><span>Ny hovedscore</span><strong id="scenario-score">85</strong></div>
-            <div><span>Coverage</span><strong id="scenario-coverage">95%</strong></div>
-            <div><span>Tillidsflade</span><strong id="scenario-trust">82</strong></div>
-            <div><span>Estimeret lift</span><strong id="scenario-impact">+24%</strong></div>
-          </div>
-
-          <div class="steps" id="scenario-steps">
-            <div class="step">
-              <strong>1. Publicér 4 købsnære guides</strong>
-              <span>Planeter til børneværelse efter alder, astronomi-gaver til fødselsdage, LED-rumtemaer og prisguide efter behov.</span>
-              <div class="step-meta"><span>Owner: Jer</span><span class="effort">Indsats: M</span></div>
-            </div>
-            <div class="step">
-              <strong>2. Tilføj sammenligningssektion på site</strong>
-              <span>3 proof points: sortiment, levering og anmeldelser. Bygges op mod Stjernehimmel.dk.</span>
-              <div class="step-meta"><span>Owner: Sammen</span><span class="effort">Indsats: S</span></div>
-            </div>
-            <div class="step">
-              <strong>3. Løft trust: cases + profiler</strong>
-              <span>Saml cases og anmeldelser. Stram Google Business, LinkedIn og site-proof op samtidig.</span>
-              <div class="step-meta"><span>Owner: Troels</span><span class="effort">Indsats: M</span></div>
-            </div>
-          </div>
-        </article>
-
-        <div class="plan-grid">
-          <article class="plan-card">
-            <div class="plan-top">
-              <div>
-                <span class="tag problem">Spor 1</span>
-                <h3>Vær stemmen på valget</h3>
+      <div class="decision-actions-grid">
+        
+          <article class="decision-action-card">
+            <div class="decision-step">1</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Mellem</span>
+                <span class="mini-pill">Godt bud</span>
               </div>
-              <span class="score-chip">+9 AI</span>
-            </div>
-            <p>Guides der svarer direkte på &bdquo;hvilken løsning passer til børneværelset?&ldquo;, &bdquo;hvordan vælger jeg en astronomi-gave?&ldquo; og &bdquo;hvad får jeg for budgettet?&ldquo;.</p>
-          </article>
-
-          <article class="plan-card">
-            <div class="plan-top">
-              <div>
-                <span class="tag">Spor 2</span>
-                <h3>Gør tillidsfladen stærkere</h3>
+              <h3>Lav sider, der gør kildesynlighed til rigtige mentions</h3>
+              <p class="decision-why">Det er den hurtigste vej til at gå fra løs tilstedeværelse til at blive valgt oftere, når nogen er tæt på at købe.</p>
+              <p>Start med 2-3 korte sider eller stærke sektioner, der matcher de søgninger, hvor I i dag enten mangler helt eller kun er synlige som kilde, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Bedste webshops til astronomi-gaver i Danmark</span>
+                    
+                      <span class="mini-pill">Hvor kan jeg købe planeter til børneværelse?</span>
+                    
+                      <span class="mini-pill">Alternativer til Stjernehimmel.dk</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Lav en kort side eller sektion der svarer direkte på søgningen &#34;Bedste webshops til astronomi-gaver i Danmark&#34; med en klar forklaring, konkrete eksempler og et tydeligt næste skridt.</li>
+                    
+                      <li>Lav en kort side eller sektion der svarer direkte på søgningen &#34;Hvor kan jeg købe planeter til børneværelse?&#34; med en klar forklaring, konkrete eksempler og et tydeligt næste skridt.</li>
+                    
+                      <li>Lav en sammenligningssektion der matcher søgningen &#34;Alternativer til Stjernehimmel.dk&#34; direkte og forklar: hvornår man vælger jer, hvilke krav I løser bedre end alternativerne, og hvilke 2-3 proof points der underbygger forskellen.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>3 sider eller sektioner</span>
+                
+                <span><strong>Mest sandsynligt</strong>+28%</span>
+                <span><strong>Spænd</strong>17-42%</span>
               </div>
-              <span class="score-chip warn">+7 Trust</span>
             </div>
-            <p>Google Business, Trustpilot, LinkedIn og korte cases skal fortælle samme historie som websitet. Det henter de manglende tillidssignaler ind.</p>
           </article>
-
-          <article class="plan-card">
-            <div class="plan-top">
-              <div>
-                <span class="tag compare">Spor 3</span>
-                <h3>Gør forskellen let at citere</h3>
+        
+          <article class="decision-action-card">
+            <div class="decision-step">2</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Lille</span>
+                <span class="mini-pill">Stærkt grundlag</span>
               </div>
-              <span class="score-chip critical">+5 Gap</span>
+              <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
+              <p class="decision-why">Når jeres online aftryk er uklart, bliver I også sværere at vælge.</p>
+              <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Google Business</span>
+                    
+                      <span class="mini-pill">Instagram</span>
+                    
+                      <span class="mini-pill">Trustpilot</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Opret og udfyld en Google Business Profile med virksomhedsnavn, kategori, adresse, telefon og link til websitet.</li>
+                    
+                      <li>Opdatér Instagram-bio og link, så den peger til en side med jeres hovedydelser i stedet for en generel forside.</li>
+                    
+                      <li>Hvis anmeldelser bliver vigtige i salget, så saml 2-3 korte kundeudtalelser og brug dem på website og LinkedIn først.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>1 profil + 2 tekst-/bio-opdateringer</span>
+                
+                <span><strong>Mest sandsynligt</strong>+7%</span>
+                <span><strong>Spænd</strong>5-10%</span>
+              </div>
             </div>
-            <p>Sammenligningssektion med 3 klare grunde til jer frem for Stjernehimmel.dk. Svækker AI's default-refleks.</p>
           </article>
-        </div>
+        
+          <article class="decision-action-card">
+            <div class="decision-step">3</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Mellem</span>
+                <span class="mini-pill">Stærkt grundlag</span>
+              </div>
+              <h3>Løs det største tekniske problem i security headers</h3>
+              <p class="decision-why">Når det tekniske halter, bliver siden sværere at bruge og sværere at læse korrekt.</p>
+              <p>Ret det tekniske område, der holder jer mest tilbage, så resten af forbedringerne får bedre effekt.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Security headers</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Find den konkrete fejl bag security headers og ret den først, før I bygger mere indhold ovenpå.</li>
+                    
+                      <li>Mål siden igen bagefter og brug den nye måling som før/efter-bevis på forbedringen.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>1 teknisk rettelse</span>
+                
+                <span><strong>Mest sandsynligt</strong>+16%</span>
+                <span><strong>Spænd</strong>10-22%</span>
+              </div>
+            </div>
+          </article>
+        
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-head">
+    
+
+    
+      <section class="data-panel data-panel-subtle cockpit-panel">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Næste Modelskift</div>
+            <h2>Sådan ser det næste løft typisk ud</h2>
+          </div>
+          <p>Her er de greb vi først ville prioritere, og det samlede løft vi typisk forventer, hvis de bliver gennemført. Det er vores bedste bud, ikke en garanti.</p>
+        </div>
+
+        <div class="forecast-layout">
+          <div class="scenario-column">
+            
+              <article class="scenario-card scenario-card-selected">
+                <div class="scenario-top">
+                  <span class="pill">Indsats M</span>
+                  <span class="mini-pill">Godt bud</span>
+                </div>
+                <h3>Lav sider, der gør kildesynlighed til rigtige mentions</h3>
+                <p>Start med 2-3 korte sider eller stærke sektioner, der matcher de søgninger, hvor I i dag enten mangler helt eller kun er synlige som kilde, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
+                <div class="scenario-meta">
+                  <span>Synlighed +18</span>
+                  <span>Bredde +20%</span>
+                  <span>Mest sandsynligt +28%</span>
+                </div>
+              </article>
+            
+              <article class="scenario-card scenario-card-selected">
+                <div class="scenario-top">
+                  <span class="pill">Indsats S</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
+                <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
+                <div class="scenario-meta">
+                  <span>Synlighed +4</span>
+                  <span>Bredde +4%</span>
+                  <span>Mest sandsynligt +7%</span>
+                </div>
+              </article>
+            
+
+            
+          </div>
+
+          <div class="forecast-column">
+            <div class="forecast-summary forecast-summary-executive">
+              <div class="forecast-kpi">
+                <span>Synlighed i AI-svar</span>
+                <strong id="forecast-ai-value">97</strong>
+                <small id="forecast-ai-delta">nu</small>
+              </div>
+              <div class="forecast-kpi">
+                <span>Hvor bredt I bliver nævnt</span>
+                <strong id="forecast-coverage-value">41</strong>
+                <small id="forecast-coverage-delta">nu</small>
+              </div>
+              <div class="forecast-kpi">
+                <span>Mulig effekt</span>
+                <strong id="forecast-impact-value">35%</strong>
+                <small>mere relevant kundeinteresse</small>
+              </div>
+            </div>
+
+            <div class="forecast-graph">
+              <div class="forecast-row">
+                <div class="forecast-label">Synlighed i AI-svar</div>
+                <div class="forecast-track">
+                  <div id="bar-ai-current" class="forecast-bar is-current" style="width: 97%"></div>
+                  <div id="bar-ai-projected" class="forecast-bar is-projected" style="width: 100%"></div>
+                  <div id="bar-ai-target" class="forecast-target" style="left: 95%"></div>
+                </div>
+              </div>
+              <div class="forecast-row">
+                <div class="forecast-label">Hvor bredt I bliver nævnt</div>
+                <div class="forecast-track">
+                  <div id="bar-coverage-current" class="forecast-bar is-current" style="width: 41%"></div>
+                  <div id="bar-coverage-projected" class="forecast-bar is-projected" style="width: 65%"></div>
+                  <div id="bar-coverage-target" class="forecast-target" style="left: 80%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="impact-panel">
+              <div>
+                <span>Muligt løft i relevant kundeinteresse</span>
+                <strong id="impact-base">35%</strong>
+              </div>
+              <div class="impact-band">
+                <span id="impact-low">Forsigtigt 22%</span>
+                <span id="impact-base-band">Mest sandsynligt 35%</span>
+                <span id="impact-high">Bedste fald 52%</span>
+              </div>
+              <p>Tallene er vores bedste skøn. De viser retning og størrelsesorden, ikke et løfte.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+
+    <section class="data-panel data-panel-subtle">
+      <div class="panel-head">
         <div>
-          <span class="kicker">Økonomisk effekt</span>
-          <h2>Retning og størrelsesorden — ikke et løfte</h2>
+          <div class="eyebrow">Konkurrentpres</div>
+          <h2>Sådan står I mod konkurrenterne</h2>
         </div>
-        <p>
-          Estimat baseret på gennemsnitlig konverteringsrate fra organisk AI-henvisning samt en typisk B2C-ordreværdi for planet-dekoration og astronomi-gaver. Formål: give ledelsen et realistisk målbånd.
-        </p>
-      </div>
+      <p>I står ikke bagud på ren tilstedeværelse i denne gennemgang, men næste skridt er at blive valgt mere stabilt i de søgninger, der betyder mest.</p>
+    </div>
 
-      <div class="roi-grid">
-        <article class="roi-card">
-          <strong class="roi-metric">+3</strong>
-          <span>queries flyttet til grønt felt</span>
-          <p>Realistisk med 1 sprint guides + sammenligningssektion live samtidig.</p>
+    <div class="competitor-brief-grid">
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Jer lige nu</span>
+          <strong class="metric-title">4 gange nævnt</strong>
+          <p>I bliver valgt i AI-svar med en samlet score på 97/100 og bredde på 41%.</p>
         </article>
-        <article class="roi-card">
-          <strong class="roi-metric">+24%</strong>
-          <span>mere relevant AI-interesse</span>
-          <p>Bedste sandsynlige løft når guides, trust og compare går live sammen.</p>
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Førende konkurrent</span>
+          <strong class="metric-title">4 gange nævnt</strong>
+          <p>Stjernehimmel har et teknisk udgangspunkt på 79/100.</p>
         </article>
-        <article class="roi-card">
-          <strong class="roi-metric">35–65k</strong>
-          <span>DKK månedlig omsætning</span>
-          <p>Spænd ud fra konverteringsrate på AI-henvist trafik og en realistisk gennemsnitsordre i B2C-e-commerce.</p>
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Det betyder</span>
+          <strong class="metric-title">Næste skridt</strong>
+          <p>Det er ikke nok bare at være med. Næste gevinst kommer fra at blive valgt oftere i de vigtigste søgninger.</p>
         </article>
-        <article class="roi-card">
-          <strong class="roi-metric">85</strong>
-          <span>Ny AI Markedsposition</span>
-          <p>Et realistisk næste plateau — ikke et &bdquo;perfect score&ldquo;-mål.</p>
-        </article>
+      
+    </div>
+
+    
+      <div class="peer-list">
+        
+          <div class="peer-row">
+            <strong>Stjernehimmel</strong>
+            <span>4 gange nævnt</span>
+          </div>
+        
+          <div class="peer-row">
+            <strong>Månelys ApS</strong>
+            <span>3 gange nævnt</span>
+          </div>
+        
       </div>
+    
     </section>
 
-    <section class="closing">
-      <div>
-        <span class="kicker">Næste skridt</span>
-        <h2>I er synlige nok til at være med. Lad os gøre jer <em>svære at slå</em>.</h2>
-        <p>
-          Denne demo er fiktiv, men strukturen er den samme som i rigtige leverancer. Book en opfølgning, så går
-          vi de tre første greb igennem og gør det klart hvad der skal gøres af jer, og hvad vi laver på jeres vegne.
-        </p>
-      </div>
+    
+      <section class="data-panel closing-room-panel">
+        <div>
+          <div class="eyebrow">Næste Skridt</div>
+          <h2>Brug roomet som arbejdsplan for de næste 30 dage</h2>
+          <p>Det her room samler status, konkurrentpres, authority-signaler og næste løft i ét sted. Hvis I vil, kan vi bruge det som udgangspunkt for en kort prioriteringsgennemgang.</p>
+        </div>
+        <div class="closing-room-actions">
+          <a class="button button-primary" href="./SitedokAI_ClientRoom_EvigtUnivers.pdf">Hent Executive PDF</a>
+          <a class="button button-ghost" href="mailto:info@sitedokai.com">Book opfølgning</a>
+        </div>
+      </section>
+    
 
-      <div class="closing-actions">
-        <div class="closing-action">
-          <div>
-            <strong>Book opfølgning</strong>
-            <small>45 min · gennemgang af spor 1-3</small>
-          </div>
-          <a class="btn btn-primary" href="/kontakt">Vælg tid</a>
-        </div>
-        <div class="closing-action">
-          <div>
-            <strong>Eksport som PDF</strong>
-            <small>Til bestyrelse eller intern deling</small>
-          </div>
-          <a class="btn btn-ghost" href="/demo-rapport.html">Se eksport</a>
-        </div>
-        <div class="closing-action">
-          <div>
-            <strong>Skriv direkte</strong>
-            <small>info@sitedokai.com · svar inden for 24 timer</small>
-          </div>
-          <a class="btn btn-ghost" href="/kontakt">Send besked</a>
-        </div>
-      </div>
-    </section>
-
-    <p class="footer-note">
-      Client Room · evigtunivers.dk · Fiktiv SitedokAI demo · 15. april 2026 · 8 queries · 4 AI-platforme · 11 autoritetskilder
-    </p>
   </div>
 
-  <script>
-    const scenarios = {
-      balanced: {
-        hero: 85,
-        title: "Balanceret: stærkeste samlede bevægelse",
-        copy: "Kombinér nye guides, synligere trust-signaler og én sammenligningssektion. Ikke den korteste vej, men den giver den bedste samlede markedsposition over ét kvartal.",
-        coverage: "95%",
-        trust: "82",
-        impact: "+24%",
-        eq: [90, 82, 78, 85],
-        steps: [
-          ["1. Publicér 4 købsnære guides", "Planeter til børneværelse efter alder, måne-lamper, astronomi-gaver til fødselsdage og LED-rumtemaer.", "Jer", "M"],
-          ["2. Tilføj sammenligningssektion på site", "3 proof points: sortiment, levering og anmeldelser. Bygges op mod Stjernehimmel.dk.", "Sammen", "S"],
-          ["3. Løft trust: cases + profiler", "Saml anmeldelser og cases. Stram Google Business, LinkedIn og website-proof op samtidig.", "Troels", "M"]
-        ]
-      },
-      fast: {
-        hero: 81,
-        title: "Hurtigste løft: trust og sammenhæng først",
-        copy: "Vælg de hurtigste signaler: review-flow, profiljusteringer og én kort sammenligningssektion. Mindre total-lift, men hurtigere synlig effekt på kategori-queries.",
-        coverage: "89%",
-        trust: "84",
-        impact: "+15%",
-        eq: [86, 84, 72, 80],
-        steps: [
-          ["1. Stram Google Business + LinkedIn op", "Fjerner tvivl i de vigtigste trust-flader. Hurtig gevinst.", "Troels", "S"],
-          ["2. Saml 8-12 kundebeviser", "Korte anmeldelser, cases og leveringsproof — synlige på de vigtigste sider.", "Jer", "S"],
-          ["3. Byg én compare-blok", "Forskellen til Stjernehimmel.dk med 3 klare proof points.", "Sammen", "S"]
-        ]
-      },
-      category: {
-        hero: 83,
-        title: "Kategori først: vind de spørgsmål der skaber ny efterspørgsel",
-        copy: "Brug energien på kategori- og problem-queries før alt andet. Det giver det største sving i coverage og mere ejerskab af de søgninger der skaber nye kunder.",
-        coverage: "97%",
-        trust: "76",
-        impact: "+21%",
-        eq: [92, 76, 70, 82],
-        steps: [
-          ["1. Publicér 6 buyer/problem-guides", "Tæt på kundens konkrete valgspørgsmål: aldersgruppe, budget, rumtema og leveringsbehov.", "Jer", "L"],
-          ["2. Link guides ind i kategori- og servicesider", "Stærkere interne signaler hele vejen gennem sitet.", "Jer", "M"],
-          ["3. Udbyg FAQ og compare-indhold", "Gør det lettere for AI at gengive jeres forskel præcist.", "Sammen", "M"]
-        ]
-      }
-    };
+  
+    <script>
+      (() => {
+        const detailTitle = document.getElementById("heatmap-detail-title");
+        const detailSummary = document.getElementById("heatmap-detail-summary");
+        const detailNote = document.getElementById("heatmap-detail-note");
+        const detailVerdict = document.getElementById("heatmap-detail-verdict");
+        const detailMethod = document.getElementById("heatmap-detail-method");
+        const detailAliases = document.getElementById("heatmap-detail-aliases");
+        const detailSignals = document.getElementById("heatmap-detail-signals");
+        const detailAnswer = document.getElementById("heatmap-detail-answer");
+        document.querySelectorAll(".heatmap-cell").forEach((button) => {
+          button.addEventListener("click", () => {
+            detailTitle.textContent = `${button.dataset.query} · ${button.dataset.platform}`;
+            detailSummary.textContent = button.dataset.meta || "Ingen opsummering.";
+            detailVerdict.textContent = button.dataset.summary || "Ingen vurdering gemt.";
+            detailMethod.textContent = button.dataset.method || "Ingen metode gemt.";
+            detailAliases.textContent = button.dataset.aliases || "Ingen aliasdata gemt.";
+            detailSignals.textContent = button.dataset.signals || "Ingen kontekstdata gemt.";
+            detailNote.textContent = button.dataset.reason || "Ingen begrundelse gemt.";
+            detailAnswer.textContent = button.dataset.answer || "Ingen svartekst gemt.";
+          });
+        });
+      })();
+    </script>
+  
 
-    const toggles = Array.from(document.querySelectorAll(".toggle"));
-    const titleNode = document.getElementById("scenario-title");
-    const copyNode = document.getElementById("scenario-copy");
-    const scoreNode = document.getElementById("scenario-score");
-    const coverageNode = document.getElementById("scenario-coverage");
-    const trustNode = document.getElementById("scenario-trust");
-    const impactNode = document.getElementById("scenario-impact");
-    const stepsNode = document.getElementById("scenario-steps");
-    const heroScoreNode = document.getElementById("hero-score");
-    const equationScoreNode = document.getElementById("equation-score");
-    const ringNode = document.querySelector(".ring");
-    const eqNodes = [1, 2, 3, 4].map(i => document.getElementById(`eq-${i}`));
-
-    function renderScenario(name) {
-      const data = scenarios[name];
-      if (!data) return;
-
-      titleNode.textContent = data.title;
-      copyNode.textContent = data.copy;
-      scoreNode.textContent = data.hero;
-      coverageNode.textContent = data.coverage;
-      trustNode.textContent = data.trust;
-      impactNode.textContent = data.impact;
-      heroScoreNode.textContent = data.hero;
-      equationScoreNode.textContent = data.hero;
-      ringNode.style.setProperty("--score", data.hero);
-
-      data.eq.forEach((v, i) => { if (eqNodes[i]) eqNodes[i].textContent = v; });
-
-      stepsNode.innerHTML = data.steps.map(([title, text, owner, effort]) => (
-        `<div class="step"><strong>${title}</strong><span>${text}</span>
-          <div class="step-meta"><span>Owner: ${owner}</span><span class="effort">Indsats: ${effort}</span></div>
-        </div>`
-      )).join("");
-
-      toggles.forEach((button) => {
-        button.classList.toggle("active", button.dataset.scenario === name);
-      });
-    }
-
-    toggles.forEach((button) => {
-      button.addEventListener("click", () => renderScenario(button.dataset.scenario));
-    });
-  </script>
-</body>
+      </main>
+    </div>
+  </body>
 </html>
