@@ -2,29 +2,45 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ClientRoomPreview from '../components/ClientRoomPreview.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Client Room-demo — SitedokAI" description="Se en statisk demo af det Client Room, du modtager fra SitedokAI. Eksporten er sekundær; hovedoplevelsen er den interaktive kundeside.">
+<Layout title="Client Room-demo — SitedokAI" description="Se en fiktiv, men realistisk Client Room-demo fra SitedokAI. EvigtUnivers — AI-markedsposition 67/100, ni søgninger testet på fire AI-platforme.">
   <Nav />
   <main>
     <section class="bg-brand border-b border-white/10">
-      <div class="max-w-5xl mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-20">
+      <div class="max-w-5xl mx-auto px-6 pt-20 pb-12 md:pt-28 md:pb-16">
         <p class="text-sm text-accent-light font-semibold uppercase tracking-wider mb-3">Demo</p>
         <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">
-          Se et rigtigt Client Room-eksempel
+          Sådan ser et Client Room ud i praksis
         </h1>
         <p class="text-white/60 text-lg max-w-3xl leading-relaxed">
-          Her ser du den oplevelse, en kunde faktisk får. Fokus er ikke en rapportside eller et slideshow, men et enkelt overblik over hvor virksomheden står, hvad der holder den tilbage, og hvad teamet skal gøre først.
+          Det her er en fiktiv, men realistisk demo for <strong class="text-white font-semibold">EvigtUnivers</strong> —
+          en opdigtet webshop med planeter, måner og astronomi-gaver, bygget i samme struktur, samme visualitet og samme beslutningslogik som den oplevelse rigtige kunder modtager.
         </p>
         <p class="mt-6 text-sm text-white/35">
-          Fiktiv virksomhed med eksempeldata. Din leverance bliver lavet med data fra dit eget website og dine vigtigste søgninger.
+          Fiktiv virksomhed · AI-markedsposition 67/100 · Ni søgninger · Fire AI-platforme · Konkurrentbenchmark mod Stjernehimmel.dk og Månelys ApS.
         </p>
       </div>
     </section>
 
-    <ClientRoomPreview variant="full" />
+    <section class="bg-brand">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 pb-16 md:pb-24">
+        <div class="rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_40px_120px_rgba(2,8,23,0.55)]" style="background:#020617;">
+          <iframe
+            src="/client-room-demo.html"
+            title="Client Room-demo for EvigtUnivers"
+            loading="lazy"
+            class="w-full block"
+            style="height: 90vh; min-height: 720px; border: 0; background: #020617;"
+          ></iframe>
+        </div>
+        <p class="mt-4 text-center text-xs text-white/35">
+          Demoen er en levende kopi af det Client Room kunder modtager. Kunden er fiktiv, men flowet og præsentationen matcher den rigtige leverance.
+          <a href="/client-room-demo.html" target="_blank" rel="noopener" class="text-accent-light hover:text-white transition-colors underline underline-offset-4">Åbn demoen i fuldt vindue</a>.
+        </p>
+      </div>
+    </section>
 
     <section class="bg-white border-t border-gray-200">
       <div class="max-w-5xl mx-auto px-6 py-16 md:py-20">
@@ -34,7 +50,8 @@ import '../styles/global.css';
             Vil du have et Client Room for din egen virksomhed?
           </h2>
           <p class="text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Vi tester dit website på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med prioriterede næste skridt inden for 48 timer på hverdage.
+            Vi tester dit website på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med prioriterede næste skridt.
+            Du modtager en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/kontakt" class="inline-block bg-amber-400 text-brand px-8 py-3.5 font-bold text-lg hover:bg-amber-300 transition-colors rounded-full">
