@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ClientRoomPreview from '../components/ClientRoomPreview.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Todai Opportunity Room — Troels Østbjerg"
+  description="En kort, noindex opportunity room bygget til Todai: hvorfor min profil matcher, og hvordan SiteDokAI-produktet ser ud i praksis."
+  canonical="/todai"
+  noindex={true}
+>
+  <main class="bg-brand min-h-screen">
+    <section class="border-b border-white/10 bg-brand">
+      <div class="max-w-6xl mx-auto px-6 pt-16 pb-14 md:pt-24 md:pb-20">
+        <div class="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-cyan-200">
+          Bygget til Todai
+        </div>
+
+        <div class="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <div>
+            <h1 class="font-display text-4xl md:text-6xl font-extrabold text-white leading-[0.98] max-w-4xl">
+              Jeg ser friktion indefra
+              <span class="text-accent-light"> og omsætter den til AI-løsninger</span>
+            </h1>
+
+            <p class="mt-6 max-w-3xl text-lg leading-relaxed text-white/70">
+              Jeg har 10+ års operationel erfaring fra både store og mindre virksomheder.
+              Det betyder, at jeg hurtigt kan se hvor processer bliver tunge, hvor beslutninger
+              mister fart, og hvor AI faktisk kan skabe værdi. Under min jobsøgning byggede jeg
+              <strong class="text-white">SiteDokAI på 2 måneder</strong> som konkret proof of work.
+            </p>
+
+            <div class="mt-8 grid gap-4 md:grid-cols-3">
+              <article class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">Stor virksomhed</p>
+                <h2 class="mt-3 font-display text-2xl font-bold text-white">Novo Nordisk</h2>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  Tæt på governance, store afhængigheder og komplekse beslutningsflows.
+                </p>
+              </article>
+
+              <article class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">Scale-up</p>
+                <h2 class="mt-3 font-display text-2xl font-bold text-white">Vitamin Well</h2>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  Tempo, vækst, prioritering og behovet for løsninger der virker i praksis.
+                </p>
+              </article>
+
+              <article class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">AI build</p>
+                <h2 class="mt-3 font-display text-2xl font-bold text-white">2 måneder</h2>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  SiteDokAI bygget fra idé til klientklar leverance under min jobsøgning.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_80px_rgba(2,8,23,0.35)]">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">Hvor jeg matcher jer</p>
+            <div class="mt-5 grid gap-4">
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <h3 class="font-display text-xl font-bold text-white">1. Business scoping</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  Jeg forstår hvordan virksomheder fungerer indefra og kan derfor hurtigere se,
+                  hvilke problemer der er værd at løse og hvilke der bare er AI-støj.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <h3 class="font-display text-xl font-bold text-white">2. Implementation</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  Jeg bygger ikke kun prompt-idéer, men rigtige workflows, outputlag og
+                  leverancer som andre kan bruge bagefter.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <h3 class="font-display text-xl font-bold text-white">3. Adoption</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/65">
+                  Min baggrund gør, at jeg tænker meget over om en løsning bliver brugt,
+                  forstået og forankret, ikke kun om den er teknisk smart.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-brand">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-18">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wider text-accent-light">Produktet i praksis</p>
+            <h2 class="mt-3 font-display text-3xl md:text-4xl font-extrabold text-white">
+              Her er det Client Room jeg byggede
+            </h2>
+            <p class="mt-4 max-w-3xl text-white/65 leading-relaxed">
+              Demoen nedenfor er en fiktiv kunde, men det er den rigtige produktlogik,
+              den rigtige visualitet og den samme type leverance som SiteDokAI giver.
+            </p>
+          </div>
+          <a
+            href="/eksempel"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-bold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            Åbn fuld demo-side
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-brand px-6 pb-14 md:pb-18">
+      <div class="max-w-7xl mx-auto">
+        <ClientRoomPreview variant="full" />
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-brand">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-18">
+        <div class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div class="rounded-[2rem] border border-white/10 bg-white/5 p-7">
+            <p class="text-sm font-semibold uppercase tracking-wider text-accent-light">Bygget på 2 måneder</p>
+            <h2 class="mt-3 font-display text-3xl font-extrabold text-white">Det jeg nåede at bygge</h2>
+            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <div class="text-3xl font-black text-white">4</div>
+                <p class="mt-2 text-sm text-white/65">AI-platforme i samme evalueringsflow</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <div class="text-3xl font-black text-white">84</div>
+                <p class="mt-2 text-sm text-white/65">rapportvariabler i det deterministiske outputlag</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <div class="text-3xl font-black text-white">9</div>
+                <p class="mt-2 text-sm text-white/65">outputchecks for at holde leverancen konsistent</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-4">
+                <div class="text-3xl font-black text-white">1</div>
+                <p class="mt-2 text-sm text-white/65">Client Room + executive PDF som reel kundeleverance</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] border border-white/10 bg-white/5 p-7">
+            <p class="text-sm font-semibold uppercase tracking-wider text-accent-light">Hvis jeg startede hos jer</p>
+            <h2 class="mt-3 font-display text-3xl font-extrabold text-white">Hvordan jeg ville gå til de første 90 dage</h2>
+            <div class="mt-6 grid gap-4">
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">0–30 dage</p>
+                <p class="mt-2 text-white/75 leading-relaxed">
+                  Forstå hvordan I pitcher, scoper og leverer AI-projekter i praksis. Lære hvor
+                  Todai skaber værdi i kundedialogen, og hvor jeres stærkeste implementation-mønstre ligger.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">30–60 dage</p>
+                <p class="mt-2 text-white/75 leading-relaxed">
+                  Tage større ejerskab i krydsfeltet mellem problemforståelse, løsningsstruktur og kundevendt output.
+                  Være med til at forme løsninger så de både er teknisk skarpe og forretningsmæssigt anvendelige.
+                </p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-brand/50 p-5">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">60–90 dage</p>
+                <p class="mt-2 text-white/75 leading-relaxed">
+                  Bidrage tydeligt på projekter hvor implementering, adoption og kundelogik skal hænge sammen.
+                  Det er dér jeg tror, jeg hurtigst kan skabe værdi hos jer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-white">
+      <div class="max-w-4xl mx-auto px-6 py-16 text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-blue-700">Kort version</p>
+        <h2 class="mt-3 font-display text-3xl md:text-4xl font-extrabold text-brand">
+          Jeg tror jeg kan skabe værdi hos Todai fordi jeg kombinerer operationel tyngde med reel AI-builder-energi
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-gray-600">
+          Hvis den kombination lyder relevant, vil jeg meget gerne tage en samtale.
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="mailto:troelsostbjerg@gmail.com" class="inline-flex items-center justify-center rounded-full bg-brand px-8 py-3.5 text-base font-bold text-white transition-colors hover:bg-slate-800">
+            troelsostbjerg@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726/" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full border border-gray-300 px-8 py-3.5 text-base font-bold text-gray-700 transition-colors hover:border-brand hover:text-brand">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
