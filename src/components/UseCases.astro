@@ -1,0 +1,259 @@
+---
+const cases = [
+  {
+    label: 'Kategori',
+    title: 'Når kunden beder AI pege på relevante leverandører',
+    prompt: '"Hvem er de bedste erhvervsadvokater i København?"',
+    insight: 'Her bliver den første shortlist ofte lavet, for kunden kender endnu ikke navnene på de virksomheder der burde overvejes.',
+    outcome: 'Hvis jeres website er uklart om ydelse, målgruppe eller geografi, bliver I ofte ikke foreslået tidligt nok.',
+  },
+  {
+    label: 'Problem / løsning',
+    title: 'Når kunden allerede har et konkret behov',
+    prompt: '"Hvem kan hjælpe med ISO 27001 forberedelse for en dansk B2B-virksomhed?"',
+    insight: 'Det er ofte de bedste søgninger, fordi kunden er tæt på en beslutning og beder AI oversætte behov til leverandørvalg.',
+    outcome: 'Her vinder de virksomheder, som forklarer problemet, løsningen og erfaringen mest konkret.',
+  },
+  {
+    label: 'Sammenligning',
+    title: 'Når AI bliver brugt til at sammenligne jer med alternativerne',
+    prompt: '"Hvad er forskellen på [jer] og [konkurrent]?"',
+    insight: 'Hvis I ikke selv har formuleret forskellen tydeligt nok, kommer AI til at beskrive markedet på konkurrentens præmisser.',
+    outcome: 'Det er her proof, cases og en tydelig positionering ofte bliver afgørende.',
+  },
+  {
+    label: 'Brand',
+    title: 'Når nogen allerede har hørt om jer, men stadig bruger AI til at afkode jer',
+    prompt: '"Hvad laver [virksomhedsnavn], og hvem er de relevante for?"',
+    insight: 'Mange virksomheder forventer at brandsøgninger altid står stærkt, men websitet gør det ikke altid let for AI at forklare dem korrekt.',
+    outcome: 'Selv kendte navne taber troværdighed, hvis ydelser, målgruppe og beviser står for spredt.',
+  },
+];
+
+const needSignals = [
+  'I lever af henvendelser fra kunder, der forsker for de kontakter jer.',
+  'Jeres marked har reelle alternativer, som AI let kan foreslå i stedet.',
+  'Det er vigtigt at jeres ydelse, geografi eller specialer bliver forstået rigtigt ved første gennemlæsning.',
+];
+---
+
+<section id="use-cases" class="usecase-surface">
+  <div class="usecase-shell">
+    <div class="usecase-intro">
+      <div>
+        <p class="usecase-eyebrow">Use cases</p>
+        <h2>AI-synlighed betyder mest i de konkrete øjeblikke hvor kunder bruger AI til at sortere markedet</h2>
+      </div>
+      <p>
+        Det handler ikke om at opfinde et kunstigt nyt behov. Det handler om at se hvornår jeres website allerede bliver fortolket som en del af en rigtig købssituation, og hvor uklarhed koster jer placeringer eller tillid.
+      </p>
+    </div>
+
+    <div class="usecase-grid">
+      {cases.map((item) => (
+        <article class="case-card">
+          <div class="case-head">
+            <span class="case-label">{item.label}</span>
+            <div class="case-prompt">
+              <span>Eksempel på spørgsmål</span>
+              <strong>{item.prompt}</strong>
+            </div>
+          </div>
+          <h3>{item.title}</h3>
+          <p class="case-insight">{item.insight}</p>
+          <p class="case-outcome">{item.outcome}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="usecase-bridge">
+      <article class="usecase-summary">
+        <span>Derfor matcher det SitedokAI</span>
+        <strong>Det er præcis de fire søgetyper vi allerede tester i auditen.</strong>
+        <p>
+          I stedet for at tale abstrakt om "AI-trafik" gør vi problemet konkret: hvilke spørgsmål AI skal kunne forstå, hvad der gør jer sværere at anbefale, og hvilke sider der bør gøres tydeligere først.
+        </p>
+      </article>
+
+      <article class="usecase-summary">
+        <span>Det er ofte et tegn på relevans hvis</span>
+        <ul>
+          {needSignals.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <a href="/use-cases" class="usecase-link">Læs den længere forklaring</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .usecase-surface {
+    background: #f8f4ec;
+    border-bottom: 1px solid rgba(31, 42, 51, 0.08);
+  }
+
+  .usecase-shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5.2rem 1.5rem;
+    color: #1f2a33;
+  }
+
+  .usecase-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(16rem, 0.75fr);
+    gap: 1.4rem;
+    align-items: end;
+  }
+
+  .usecase-eyebrow,
+  .case-label,
+  .case-prompt span,
+  .usecase-summary span {
+    display: block;
+    color: #9f6a24;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .usecase-intro h2,
+  .case-card h3,
+  .usecase-summary strong {
+    margin: 0;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+  }
+
+  .usecase-intro h2 {
+    max-width: 12.5ch;
+    margin-top: 0.9rem;
+    font-size: clamp(2.8rem, 5vw, 4.9rem);
+    text-wrap: balance;
+  }
+
+  .usecase-intro > p,
+  .case-card p,
+  .usecase-summary p,
+  .usecase-summary li {
+    color: rgba(31, 42, 51, 0.74);
+    line-height: 1.72;
+  }
+
+  .usecase-intro > p {
+    max-width: 33rem;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .usecase-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+  }
+
+  .case-card,
+  .usecase-summary {
+    padding: 1.35rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(31, 42, 51, 0.08);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 18px 42px rgba(31, 42, 51, 0.05);
+  }
+
+  .case-head {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .case-prompt {
+    padding: 0.95rem;
+    border-radius: 0.95rem;
+    background: #f3ebdd;
+    border: 1px solid rgba(159, 106, 36, 0.12);
+  }
+
+  .case-prompt strong {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  .case-card h3 {
+    margin-top: 1rem;
+    font-size: 1.65rem;
+  }
+
+  .case-insight {
+    margin: 0.8rem 0 0;
+  }
+
+  .case-outcome {
+    margin: 0.8rem 0 0;
+    color: #1f2a33;
+    font-weight: 600;
+  }
+
+  .usecase-bridge {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .usecase-summary strong {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 1.55rem;
+  }
+
+  .usecase-summary p {
+    margin: 0.8rem 0 0;
+  }
+
+  .usecase-summary ul {
+    margin: 0.9rem 0 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .usecase-link {
+    display: inline-flex;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: #1f2a33;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(31, 42, 51, 0.14);
+    padding-bottom: 0.15rem;
+  }
+
+  @media (max-width: 980px) {
+    .usecase-intro,
+    .usecase-grid,
+    .usecase-bridge {
+      grid-template-columns: 1fr;
+    }
+
+    .usecase-intro h2 {
+      max-width: 13ch;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .usecase-shell {
+      padding-block: 4rem;
+    }
+
+    .usecase-intro h2 {
+      max-width: none;
+      font-size: clamp(2.4rem, 12vw, 3.6rem);
+    }
+  }
+</style>

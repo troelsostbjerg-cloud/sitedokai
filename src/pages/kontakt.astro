@@ -6,25 +6,28 @@ import '../styles/global.css';
 
 const trustBullets = [
   'Ingen abonnement eller binding',
-  'Sikker betaling via Stripe',
-  'Privat Client Room-link + PDF',
+  'Kortbetaling nu via Stripe',
+  'Privat link + adgangskode',
 ];
 
+const checkoutAction = 'https://sitedokai-checkout.pages.dev/api/checkout';
+const siteOrigin = 'https://sitedokai.com';
+
 const steps = [
-  'Udfyld formularen med navn, email og website.',
+  'Udfyld firmanavn, kontaktperson, email og website.',
   'Du går videre til sikker betaling på 2.495 kr.',
   'Når bestilling og betaling er gennemført, starter vi gennemgangen samme hverdag eller næste hverdag.',
-  'Du modtager en mail med et privat link til dit Client Room inden for 48 timer på hverdage. PDF følger med som eksport. Ingen login.',
+  'Stripe sender kvittering/faktura for betalingen, og du modtager derefter en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
 ];
 
 const included = [
   'AI-synlighed på 4 platforme: ChatGPT, Gemini, Google AI og Claude',
   'Gennemgang af 1 website og op til 5 nøglesider',
-  'Client Room på mail som privat link, med teknisk baseline, konkurrentbillede og næste skridt',
+  'Client Room leveret som privat link + adgangskode, med teknisk baseline, konkurrentbillede og næste skridt',
 ];
 ---
 
-<Layout title="Bestil AI-audit - SitedokAI" description="Bestil AI-auditen fra SitedokAI for 2.495 kr. Sikker betaling via Stripe og levering på mail som privat Client Room-link inden for 48 timer på hverdage.">
+<Layout title="Bestil AI-audit - SitedokAI" description="Bestil AI-auditen fra SitedokAI for 2.495 kr. Betal med kort via Stripe, modtag kvittering/faktura bagefter, og få levering via privat link og adgangskode til dit firmas Client Room inden for 48 timer på hverdage.">
   <Nav />
   <main>
     <section class="bg-white border-b border-gray-200">
@@ -32,10 +35,10 @@ const included = [
         <div class="max-w-3xl">
           <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Bestil auditen</div>
           <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            Bestil AI-audit for 2.495 kr
+            Bestil AI-audit hvis det virker som det rigtige næste skridt
           </h1>
           <p class="text-lg text-gray-500 leading-relaxed">
-            Udfyld formularen, betal sikkert via Stripe, og modtag en mail med et privat link til dit Client Room med score, fund og prioriterede næste skridt. PDF følger med som eksport. Hele flowet er gjort enkelt og uden abonnement.
+            Udfyld formularen, betal sikkert med kort via Stripe, og modtag derefter både Stripe-kvittering/faktura og en mail med et privat link og en adgangskode til dit firmas Client Room. Her får I status, fund og prioriterede næste skridt samlet i samme leverance.
           </p>
         </div>
       </div>
@@ -46,21 +49,24 @@ const included = [
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
           <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8">
             <h2 class="font-display text-2xl font-bold text-brand mb-8">Indsend din bestilling</h2>
-            <form action="https://formsubmit.co/info@sitedokai.com" method="POST" class="space-y-6">
-              <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI audit" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value="https://buy.stripe.com/eVqdRaf6Wa7U0cZ2TE2sM00" />
-              <input type="hidden" name="pakke" value="AI-audit 2.495 kr, 1 website, op til 5 nøglesider, Client Room + PDF-eksport" />
+            <form action={checkoutAction} method="POST" class="space-y-6">
+              <input type="hidden" name="source_page" value="kontakt_page" />
+              <input type="hidden" name="return_path" value="/kontakt" />
+              <input type="hidden" name="site_origin" value={siteOrigin} />
 
               <div>
-                <label for="name" class="block text-sm font-semibold text-brand mb-2">Dit navn *</label>
-                <input type="text" id="name" name="name" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
+                <label for="company_name" class="block text-sm font-semibold text-brand mb-2">Firmanavn *</label>
+                <input type="text" id="company_name" name="company_name" required aria-required="true" autocomplete="organization" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
+              </div>
+
+              <div>
+                <label for="name" class="block text-sm font-semibold text-brand mb-2">Kontaktperson *</label>
+                <input type="text" id="name" name="name" required aria-required="true" autocomplete="name" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
               </div>
 
               <div>
                 <label for="email" class="block text-sm font-semibold text-brand mb-2">Email-adresse *</label>
-                <input type="email" id="email" name="email" required aria-required="true" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
+                <input type="email" id="email" name="email" required aria-required="true" autocomplete="email" class="w-full px-4 py-3 border border-gray-300 bg-white text-brand placeholder-gray-400 focus:outline-none focus:border-accent transition-colors" />
               </div>
 
               <div>
@@ -83,8 +89,8 @@ const included = [
                 </label>
               </div>
 
-              <button type="submit" class="w-full bg-amber-400 text-brand py-4 px-8 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md">
-                Bestil AI-audit for 2.495 kr
+              <button type="submit" class="w-full bg-brand text-white py-4 px-8 font-bold text-lg hover:bg-brand-light transition-colors rounded-md">
+                Gå til sikker betaling på 2.495 kr
               </button>
 
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -96,18 +102,18 @@ const included = [
               </div>
 
               <p class="text-xs text-gray-500 leading-relaxed">
-                Når du klikker på knappen, sendes bestillingen til os og du videresendes til betaling via Stripe. Selve leverancen kommer bagefter på mail som privat link.
+                Når du klikker på knappen, opretter vi din Stripe-checkout med firmanavn, website og noter, så betaling, faktura og ordregrundlag hænger sammen bagefter.
               </p>
             </form>
           </div>
 
           <div class="space-y-6">
-            <div class="bg-brand text-white rounded-2xl p-6 md:p-8">
+            <div class="bg-[#f3ebdd] text-brand rounded-2xl p-6 md:p-8 border border-[#e1d2bc]">
               <h2 class="font-display text-2xl font-bold mb-6">Hvad sker der efter bestilling?</h2>
               <ol class="space-y-4">
                 {steps.map((step, index) => (
-                  <li class="flex items-start gap-4 text-sm text-white/70 leading-relaxed">
-                    <span class="w-8 h-8 rounded-full bg-white/10 text-white font-bold flex items-center justify-center flex-shrink-0">{index + 1}</span>
+                  <li class="flex items-start gap-4 text-sm text-brand/72 leading-relaxed">
+                    <span class="w-8 h-8 rounded-full bg-white text-brand font-bold flex items-center justify-center flex-shrink-0 border border-[#e1d2bc]">{index + 1}</span>
                     <span>{step}</span>
                   </li>
                 ))}
@@ -123,6 +129,10 @@ const included = [
                     <span>{item}</span>
                   </li>
                 ))}
+                <li class="flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></span>
+                  <span>Betalt Stripe-kvittering/faktura sendt automatisk efter kortbetalingen.</span>
+                </li>
               </ul>
               <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-accent transition-colors">
                 Se demoen først

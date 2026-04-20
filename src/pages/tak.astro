@@ -3,63 +3,65 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const checkoutApiOrigin = 'https://sitedokai-checkout.pages.dev';
 ---
 
 <Layout
   title="Tak for din bestilling - SitedokAI"
-  description="Tak for din bestilling hos SitedokAI. Vi gennemgår dine oplysninger og sender dit Client Room på mail som privat link fra info@sitedokai.com."
+  description="Tak for din bestilling hos SitedokAI. Stripe sender kvittering/faktura for betalingen, og vi sender bagefter en mail med privat link og adgangskode til dit firmas Client Room fra info@sitedokai.com."
 >
   <Nav />
   <main>
-    <section class="bg-brand text-white border-b border-white/10">
+    <section class="bg-[#f6f1e8] border-b border-[#e6ddd1]">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
         <div class="max-w-2xl">
           <p class="text-sm font-bold uppercase tracking-[0.2em] text-accent mb-4">Bestilling modtaget</p>
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight text-brand mb-6">
             Tak, vi har modtaget din bestilling
           </h1>
-          <p class="text-lg text-white/70 leading-relaxed">
-            Vi gennemgår dine oplysninger og vender tilbage på mail fra info@sitedokai.com. Når auditen er klar, får du et privat link til dit Client Room direkte i mailen.
+          <p class="text-lg text-brand/68 leading-relaxed">
+            Stripe sender kvittering/faktura for betalingen til samme email, og vi gennemgår nu dine oplysninger. Når auditen er klar, modtager du en mail fra info@sitedokai.com med et privat link og en adgangskode til dit firmas Client Room.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="bg-white border-b border-gray-200">
+    <section class="bg-white border-b border-[#e6ddd1]">
       <div class="max-w-5xl mx-auto px-6 py-20 md:py-24">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="border border-gray-200 p-6 bg-gray-50">
+          <div class="rounded-[1.6rem] border border-[#e6ddd1] p-6 bg-[#faf7f2] shadow-[0_14px_36px_rgba(31,42,51,0.04)]">
             <div class="text-sm font-bold text-accent mb-2">1. Bekræftelse</div>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Vi tjekker at vi har det rigtige website og de nødvendige oplysninger.
+            <p class="text-sm text-brand/66 leading-relaxed">
+              Stripe har håndteret betalingen, og vi tjekker nu, at vi har det rigtige website og de nødvendige oplysninger.
             </p>
           </div>
-          <div class="border border-gray-200 p-6 bg-gray-50">
+          <div class="rounded-[1.6rem] border border-[#e6ddd1] p-6 bg-[#faf7f2] shadow-[0_14px_36px_rgba(31,42,51,0.04)]">
             <div class="text-sm font-bold text-accent mb-2">2. Analyse</div>
-            <p class="text-sm text-gray-500 leading-relaxed">
+            <p class="text-sm text-brand/66 leading-relaxed">
               Vi vurderer 1 website og op til 5 nøglesider på tværs af AI-platforme og tekniske signaler.
             </p>
           </div>
-          <div class="border border-gray-200 p-6 bg-gray-50">
+          <div class="rounded-[1.6rem] border border-[#e6ddd1] p-6 bg-[#faf7f2] shadow-[0_14px_36px_rgba(31,42,51,0.04)]">
             <div class="text-sm font-bold text-accent mb-2">3. Levering</div>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Du modtager en mail med et privat link til dit Client Room med score, fund og næste skridt inden for 48 timer på hverdage. PDF følger med som eksport, og der er ikke login.
+            <p class="text-sm text-brand/66 leading-relaxed">
+              Du modtager en mail med et privat link og en adgangskode til dit firmas Client Room med score, fund og næste skridt inden for 48 timer på hverdage. PDF følger med som eksport.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-gray-50">
+    <section class="bg-[#f5efe5] border-b border-[#e6ddd1]">
       <div class="max-w-5xl mx-auto px-6 py-16 md:py-20 text-center">
-        <p class="text-gray-500 mb-8">
+        <p class="text-brand/62 mb-8">
           Har du noget du vil tilføje til ordren, så skriv til <a href="mailto:info@sitedokai.com" class="text-brand underline hover:text-accent transition-colors">info@sitedokai.com</a>.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors">
+          <a href="/" class="inline-block rounded-xl bg-brand text-white py-4 px-10 font-bold text-lg hover:bg-brand-light transition-colors">
             Til forsiden
           </a>
-          <a href="/eksempel" class="inline-block border-2 border-brand text-brand py-4 px-10 font-bold text-lg hover:bg-brand hover:text-white transition-colors">
+          <a href="/eksempel" class="inline-block rounded-xl border border-[#d7ccbc] bg-white text-brand py-4 px-10 font-bold text-lg hover:bg-[#faf7f2] transition-colors">
             Se demo
           </a>
         </div>
@@ -67,4 +69,22 @@ import '../styles/global.css';
     </section>
   </main>
   <Footer />
+  <script is:inline>
+    (() => {
+      const sessionId = new URLSearchParams(window.location.search).get('session_id');
+      if (!sessionId) {
+        return;
+      }
+
+      const payload = new URLSearchParams({ session_id: sessionId });
+      fetch(`${checkoutApiOrigin}/api/orders/confirm`, {
+        method: 'POST',
+        body: payload,
+        mode: 'no-cors',
+        keepalive: true,
+      }).catch(() => {
+        // Ordre-sync må gerne være stille fra kundens synspunkt.
+      });
+    })();
+  </script>
 </Layout>

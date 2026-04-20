@@ -1,66 +1,61 @@
 ---
 const rows = [
   {
-    diy: 'Spørg ChatGPT "kender du min virksomhed?"',
-    sitedok: 'Systematisk test af brand, kategori, problem og konkurrenter',
+    quick: 'Et enkelt svar på et enkelt tidspunkt',
+    audit: 'Et samlet billede af kategori, problem, sammenligning og brand',
   },
   {
-    diy: '1 platform, 1 vagt spørgsmål',
-    sitedok: '4 AI-platforme med branchespecifikke søgninger',
+    quick: 'Ingen tydelig forskel på hvad der er signal og hvad der er støj',
+    audit: 'Søgningerne bliver sat i kontekst, så det er tydeligt hvor problemet faktisk ligger',
   },
   {
-    diy: 'Subjektivt svar du ikke kan måle',
-    sitedok: 'Klar status med konkurrentbillede og næste skridt',
+    quick: 'Ingen sammenhæng mellem AI-svar, website og konkurrenter',
+    audit: 'Website, AI-platforme, konkurrentbillede og næste skridt bliver læst som samme problem',
   },
   {
-    diy: 'Ingen teknisk kontekst',
-    sitedok: 'Teknisk gennemgang: performance, SEO, sikkerhed og website-sundhed',
-  },
-  {
-    diy: 'Ingen handlingsplan',
-    sitedok: 'Prioriterede næste skridt du kan handle på med det samme',
+    quick: 'Svært at forklare videre internt',
+    audit: 'Client Room gør det let at dele status, dokumentation og prioriteringer med teamet',
   },
 ];
 ---
 
-<section id="why-not-diy" class="bg-brand text-white">
-  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-    <div class="max-w-2xl mb-12">
-      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
-        "Kan jeg ikke bare spørge ChatGPT selv?"
-      </h2>
-      <p class="text-lg text-white/50">
-        Jo. Og du får ét tilfældigt svar du ikke kan handle på. Her er forskellen.
-      </p>
-    </div>
+<section id="why-not-diy" class="bg-white border-b border-[#e7dfd3]">
+  <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Afgrænsning</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
+          I kan godt spørge ChatGPT selv. Spørgsmålet er bare om det giver et beslutningsgrundlag.
+        </h2>
+        <p class="text-lg text-brand/70 leading-relaxed">
+          Et spontant tjek kan være fint som nysgerrighed. Men når noget skal prioriteres internt, er det typisk
+          vigtigere at forstå mønstret på tværs af søgninger og konkurrenter end at have et enkelt svar.
+        </p>
+      </div>
 
-    <div class="overflow-x-auto -mx-6 px-6">
-      <table class="w-full text-sm">
-        <thead>
-          <tr>
-            <th class="text-left text-xs font-bold uppercase tracking-wider text-white/30 pb-4 pr-4 w-1/2">Gør-det-selv</th>
-            <th class="text-left text-xs font-bold uppercase tracking-wider text-accent pb-4 w-1/2">SitedokAI audit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr class={i % 2 === 0 ? 'bg-white/[0.03]' : ''}>
-              <td class="py-3.5 px-4 text-white/40 align-top">
-                <span class="flex items-start gap-2">
-                  <svg class="w-4 h-4 mt-0.5 text-white/20 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
-                  {row.diy}
-                </span>
-              </td>
-              <td class="py-3.5 px-4 text-white/80 align-top">
-                <span class="flex items-start gap-2">
-                  <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                  {row.sitedok}
-                </span>
-              </td>
-            </tr>
+      <div class="rounded-[1.4rem] border border-[#e7dfd3] bg-[#fbf8f3] p-4 md:p-5 shadow-[0_18px_42px_rgba(31,42,51,0.04)]">
+        <div class="grid grid-cols-2 gap-3 mb-3 px-2">
+          <div>
+            <span class="block text-xs font-semibold uppercase tracking-[0.14em] text-brand/45">Det spontane tjek</span>
+          </div>
+          <div>
+            <span class="block text-xs font-semibold uppercase tracking-[0.14em] text-accent">En rigtig audit</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          {rows.map((row) => (
+            <article class="grid grid-cols-1 md:grid-cols-2 gap-3 rounded-[1rem] border border-[#e7dfd3] bg-white p-4">
+              <div class="rounded-[0.9rem] bg-[#f4efe6] p-4 text-sm leading-relaxed text-brand/62">
+                {row.quick}
+              </div>
+              <div class="rounded-[0.9rem] bg-[#f7f0e3] p-4 text-sm leading-relaxed text-brand">
+                {row.audit}
+              </div>
+            </article>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>

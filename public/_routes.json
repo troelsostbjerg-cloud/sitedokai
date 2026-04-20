@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "include": [
+    "/room/*",
+    "/api/*",
+    "/orders"
+  ],
+  "exclude": []
+}

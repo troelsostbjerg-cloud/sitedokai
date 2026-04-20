@@ -14,7 +14,7 @@ interface Props {
 
 const {
   title,
-  description = 'Er din hjemmeside synlig for AI? SitedokAI tester din synlighed på ChatGPT, Gemini, Google AI og Claude. 2.495 kr for 1 website og op til 5 nøglesider.',
+  description = 'Forstå hvordan AI læser jeres website. SitedokAI tester jeres synlighed på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med forklaring, prioritering og næste skridt.',
   canonical = Astro.url.href,
   ogImage = '/og-image.png',
   structuredData,
@@ -54,27 +54,27 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=inter:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
     {schemaBlocks.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
     <title>{title}</title>
   </head>
-  <body class="bg-white">
-    <slot />
+    <body class="bg-[#faf7f2] text-brand">
+      <slot />
 
     <!-- Cookie-information banner (kun tekniske cookies) -->
-    <section id="cookie-banner" aria-label="Cookie-information" class="fixed bottom-0 left-0 right-0 bg-brand text-white px-6 py-4 z-50 border-t border-white/10 hidden">
+    <section id="cookie-banner" aria-label="Cookie-information" class="fixed bottom-0 left-0 right-0 bg-[#f7f2e8]/95 text-brand px-6 py-4 z-50 border-t border-[#d9cfbf] shadow-[0_-12px_40px_rgba(31,42,51,0.08)] hidden backdrop-blur">
       <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <p class="text-sm text-white/80">
+        <p class="text-sm text-brand/72">
           Vi bruger kun nødvendige tekniske cookies for at sikre at hjemmesiden fungerer korrekt. Ingen tracking, ingen markedsføring.
-          <a href="/privatlivspolitik" class="text-accent-bright underline hover:text-accent-light">Læs mere</a>
+          <a href="/privatlivspolitik" class="text-accent underline decoration-[rgba(159,106,36,0.35)] underline-offset-4 hover:text-brand">Læs mere</a>
         </p>
         <div class="flex gap-2 flex-shrink-0">
-          <button id="cookie-decline" class="border border-white/30 text-white/80 px-4 py-2 text-sm font-bold hover:bg-white/10 transition-colors whitespace-nowrap">
+          <button id="cookie-decline" class="border border-[#d9cfbf] text-brand/70 px-4 py-2 text-sm font-bold hover:bg-white transition-colors whitespace-nowrap rounded-md">
             Afvis
           </button>
-          <button id="cookie-accept" class="bg-amber-400 text-brand px-4 py-2 text-sm font-bold hover:bg-amber-300 transition-colors whitespace-nowrap">
+          <button id="cookie-accept" class="bg-brand text-white px-4 py-2 text-sm font-bold hover:bg-brand-light transition-colors whitespace-nowrap rounded-md">
             Acceptér
           </button>
         </div>

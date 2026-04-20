@@ -1,26 +1,380 @@
 ---
+const heroHighlights = [
+  {
+    label: 'Hvornår det betyder noget',
+    value: 'Når AI er med til at forme den første shortlist',
+    body: 'Især kategori-, problem-, sammenlignings- og brandsøgninger kan flytte interesse, længe før nogen klikker ind på jeres website.',
+  },
+  {
+    label: 'Hvad vi tester',
+    value: '4 AI-platforme og jeres vigtigste sider',
+    body: 'Vi ser hvordan jeres website bliver læst på ChatGPT, Gemini, Google AI og Claude, og hvad der gør jer lette eller svære at anbefale.',
+  },
+  {
+    label: 'Hvad I får',
+    value: 'Client Room først, PDF som eksport',
+    body: 'Leverancen er lavet til at skabe ro og retning: dokumentation, prioritering og næste skridt i samme visning.',
+  },
+];
+
+const decisionMoments = [
+  {
+    title: 'Kategori',
+    question: 'Hvem bliver anbefalet, når kunden kun kender problemet og ikke jeres navn?',
+    answer: 'Det er ofte her brede leverandørvalg bliver lavet.',
+  },
+  {
+    title: 'Sammenligning',
+    question: 'Hvad siger AI, når kunden holder jer op mod en konkurrent?',
+    answer: 'Hvis positioneringen er uklar, skriver AI forskellen på konkurrentens præmisser.',
+  },
+  {
+    title: 'Brand',
+    question: 'Forstår AI faktisk hvad I laver, når nogen søger direkte på jer?',
+    answer: 'Mange virksomheder tror brandet står stærkt, men websitet forklarer det stadig for bredt.',
+  },
+];
+
+const exampleSignals = [
+  {
+    label: 'Det AI mangler at forstå',
+    value: 'Hvad I leverer, til hvem, og hvorfor I er relevante nu',
+  },
+  {
+    label: 'Det der ofte mangler',
+    value: 'Konkrete servicesider, tydelige beviser og en skarp sammenligning mod alternativer',
+  },
+  {
+    label: 'Det Client Room gør lettere',
+    value: 'At se hvad der koster henvendelser nu, og hvad der bør gøres først',
+  },
+];
 ---
-<section class="relative overflow-hidden bg-brand text-white">
-  <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle at 1px 1px, #06b6d4 1px, transparent 0); background-size: 48px 48px;"></div>
 
-  <div class="relative max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-    <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 max-w-3xl mx-auto text-white">
-      Få klarhed over hvordan AI ser din virksomhed
-    </h1>
+<section class="hero-surface">
+  <div class="hero-shell">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-kicker">AI-audit + Client Room</p>
+        <h1>Forstå hvornår AI bliver en del af kundens første shortlist</h1>
+        <p class="hero-intro">
+          Når en potentiel kunde bruger AI til at finde leverandører, bliver jeres website fortolket før det bliver besøgt.
+          SitedokAI er lavet for at gøre det tydeligt hvor det sker, hvad AI mangler at forstå, og hvad der sandsynligvis
+          vil flytte mest først.
+        </p>
 
-    <p class="text-lg md:text-xl text-white/60 mb-8 max-w-xl mx-auto leading-relaxed">
-      Vi tester dit website på ChatGPT, Gemini, Google AI og Claude og leverer et interaktivt Client Room med de vigtigste næste skridt på mail som privat link. PDF følger med som eksport.
-    </p>
+        <div class="hero-actions">
+          <a href="/eksempel" class="hero-primary">Se et eksempel på en audit</a>
+          <a href="/use-cases" class="hero-secondary">Se købssituationerne</a>
+        </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-      <a href="#contact" class="bg-amber-400 text-brand px-8 py-4 font-bold text-lg rounded-md hover:bg-amber-300 transition-colors">
-        Bestil AI-audit — 2.495 kr
-      </a>
-      <a href="#demo" class="border border-white/20 text-white/80 px-8 py-4 font-semibold text-lg rounded-md hover:border-white/50 hover:text-white transition-colors">
-        Se demo
-      </a>
+        <p class="hero-note">
+          Bestil kun hvis det faktisk er relevant for jeres salgsproces. Forsiden her er bygget for at hjælpe jer med at vurdere det nøgternt.
+        </p>
+
+        <div class="hero-highlights">
+          {heroHighlights.map((item) => (
+            <article class="hero-highlight">
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <aside class="hero-stage" aria-label="Eksempel på hvordan behovet bliver skabt">
+        <div class="hero-stage-top">
+          <p class="hero-stage-label">Et mere brugbart første overblik</p>
+          <h2>AI-synlighed bliver relevant når den påvirker valget for kunden, ikke bare fordi AI er populært.</h2>
+          <p>
+            Derfor starter vi med købssituationerne og de tabte søgninger, ikke med et stort luftigt salgsbudskab.
+          </p>
+        </div>
+
+        <div class="hero-stage-board">
+          {decisionMoments.map((item) => (
+            <article class="hero-stage-card">
+              <span>{item.title}</span>
+              <strong>{item.question}</strong>
+              <p>{item.answer}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="hero-stage-rail">
+          {exampleSignals.map((item) => (
+            <div class="hero-stage-rail-item">
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </div>
+          ))}
+        </div>
+      </aside>
     </div>
-
-    <p class="text-sm text-white/30">På mail som privat link inden for 48 timer på hverdage. Ingen abonnement.</p>
   </div>
 </section>
+
+<style>
+  .hero-surface {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(31, 42, 51, 0.08);
+    background:
+      radial-gradient(circle at top left, rgba(212, 170, 114, 0.14), transparent 26rem),
+      radial-gradient(circle at 85% 18%, rgba(191, 135, 66, 0.08), transparent 20rem),
+      linear-gradient(180deg, #faf7f2 0%, #f5efe5 100%);
+    color: #1f2a33;
+  }
+
+  .hero-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(31, 42, 51, 0.08) 1px, transparent 0);
+    background-size: 34px 34px;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .hero-shell {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4.8rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(21rem, 0.96fr);
+    gap: 1.6rem;
+    align-items: start;
+    min-height: calc(100dvh - 7rem);
+  }
+
+  .hero-copy {
+    max-width: 42rem;
+    padding-top: 2.4rem;
+    animation: heroFadeUp 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-kicker,
+  .hero-highlight span,
+  .hero-stage-card span,
+  .hero-stage-rail-item span,
+  .hero-stage-label {
+    display: block;
+    margin: 0;
+    color: #9f6a24;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h1,
+  .hero-stage-top h2 {
+    margin: 0;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    letter-spacing: -0.05em;
+    line-height: 0.96;
+  }
+
+  .hero-copy h1 {
+    max-width: 12.4ch;
+    margin-top: 1rem;
+    font-size: clamp(3.3rem, 6.6vw, 6.1rem);
+    text-wrap: balance;
+  }
+
+  .hero-intro,
+  .hero-stage-top p,
+  .hero-highlight p,
+  .hero-stage-card p,
+  .hero-note {
+    color: rgba(31, 42, 51, 0.74);
+    line-height: 1.72;
+  }
+
+  .hero-intro {
+    max-width: 34rem;
+    margin: 1.2rem 0 0;
+    font-size: 1.05rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.7rem;
+  }
+
+  .hero-primary,
+  .hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.92rem 1.3rem;
+    border-radius: 0.85rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), background 180ms ease, border-color 180ms ease;
+  }
+
+  .hero-primary {
+    background: #1f2a33;
+    color: #ffffff;
+    box-shadow: 0 18px 40px rgba(31, 42, 51, 0.12);
+  }
+
+  .hero-secondary {
+    border: 1px solid rgba(31, 42, 51, 0.12);
+    color: #1f2a33;
+    background: rgba(255, 255, 255, 0.64);
+  }
+
+  .hero-primary:hover,
+  .hero-secondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .hero-note {
+    max-width: 33rem;
+    margin: 0.95rem 0 0;
+    font-size: 0.94rem;
+  }
+
+  .hero-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.95rem;
+    margin-top: 1.8rem;
+  }
+
+  .hero-highlight,
+  .hero-stage-card,
+  .hero-stage-rail-item {
+    border: 1px solid rgba(31, 42, 51, 0.08);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .hero-highlight {
+    padding: 1rem;
+    box-shadow: 0 18px 40px rgba(31, 42, 51, 0.05);
+  }
+
+  .hero-highlight strong,
+  .hero-stage-card strong,
+  .hero-stage-rail-item strong {
+    display: block;
+    margin-top: 0.65rem;
+    font-size: 1rem;
+    line-height: 1.34;
+  }
+
+  .hero-highlight p {
+    margin: 0.65rem 0 0;
+    font-size: 0.9rem;
+  }
+
+  .hero-stage {
+    display: grid;
+    gap: 1rem;
+    padding: 1.2rem;
+    border-radius: 1.4rem;
+    border: 1px solid rgba(31, 42, 51, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(249, 245, 238, 0.96)),
+      radial-gradient(circle at top right, rgba(212, 170, 114, 0.16), transparent 16rem);
+    box-shadow: 0 28px 70px rgba(31, 42, 51, 0.08);
+    animation: heroFadeUp 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 120ms;
+  }
+
+  .hero-stage-top {
+    padding: 0.4rem 0.2rem 0;
+  }
+
+  .hero-stage-top h2 {
+    margin-top: 0.8rem;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+  }
+
+  .hero-stage-top p {
+    margin: 0.95rem 0 0;
+    font-size: 0.96rem;
+  }
+
+  .hero-stage-board {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .hero-stage-card {
+    padding: 1rem;
+  }
+
+  .hero-stage-card p {
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+  }
+
+  .hero-stage-rail {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-stage-rail-item {
+    padding: 0.95rem;
+  }
+
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-copy {
+      max-width: none;
+      padding-top: 1.4rem;
+    }
+
+    .hero-copy h1 {
+      max-width: 12ch;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero-shell {
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-copy h1 {
+      max-width: none;
+      font-size: clamp(2.7rem, 14vw, 4.2rem);
+    }
+
+    .hero-highlights,
+    .hero-stage-rail {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-stage {
+      padding: 1rem;
+    }
+  }
+</style>

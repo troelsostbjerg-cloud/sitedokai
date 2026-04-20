@@ -2,51 +2,69 @@
 const features = [
   'AI-synlighed testet på ChatGPT, Gemini, Google AI og Claude',
   'Gennemgang af 1 website og op til 5 nøglesider',
-  'Teknisk baseline: performance, SEO og indeksérbarhed',
+  'Teknisk baseline for performance, struktur, SEO og sikkerhed',
   'Interaktivt Client Room med overblik, konkurrentbillede og næste skridt',
-  'PDF-eksport til intern deling og videre arbejde',
+  'PDF-eksport til intern deling',
   'Levering inden for 48 timer på hverdage',
-  'Ingen abonnement og ingen tung platform',
+];
+
+const fitSignals = [
+  'Passer bedst hvis I vil forstå status nu og prioritere de første forbedringer bagefter.',
+  'Passer mindre godt hvis I forventer løfte om rankings eller et langt konsulentforløb inkluderet i prisen.',
+  'Produktet er med vilje afgrænset, så det er let at forstå hvad I får og hvad I ikke får.',
 ];
 ---
 
-<section id="pricing" class="bg-brand text-white">
-  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-    <div class="max-w-2xl mx-auto text-center mb-12">
-      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
-        AI-audit med Client Room
-      </h2>
-      <p class="text-lg text-white/50">
-        Du får et klart beslutningsgrundlag uden at købe et langt bureauforløb eller en stor SaaS-løsning først.
-      </p>
+<section id="pricing" class="bg-[#f6f1e8] border-b border-[#e6ddd1]">
+  <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Pris og scope</p>
+        <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
+          Et fast produkt til jer der vil have overblik før der bliver investeret mere tid og penge
+        </h2>
+        <p class="text-lg text-brand/72 leading-relaxed">
+          SitedokAI er ikke bygget som et tungt bureauforløb. Det er en afgrænset audit til virksomheder, som
+          vil forstå hvor AI allerede påvirker efterspørgsel, og hvad det giver mening at gøre først.
+        </p>
+      </div>
+
+      <article class="rounded-[1.5rem] border border-[#ddd4c7] bg-white p-8 md:p-10 shadow-[0_24px_60px_rgba(31,42,51,0.06)]">
+        <div class="flex flex-wrap items-end justify-between gap-4 border-b border-[#eee5d8] pb-6">
+          <div>
+            <span class="block text-sm font-semibold uppercase tracking-[0.16em] text-accent mb-3">SitedokAI Audit</span>
+            <div class="font-display text-4xl md:text-5xl font-extrabold text-brand">2.495 kr</div>
+            <div class="mt-2 text-sm text-brand/58">Engangsbetaling. Ingen abonnement eller binding.</div>
+          </div>
+          <a href="/kontakt" class="inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Gå til bestilling
+          </a>
+        </div>
+
+        <ul class="mt-6 space-y-3">
+          {features.map((feature) => (
+            <li class="flex items-start gap-3 text-sm leading-relaxed text-brand/74">
+              <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-accent"></span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-6 rounded-[1rem] border border-[#eee5d8] bg-[#faf6ef] p-5">
+          <span class="block text-xs font-semibold uppercase tracking-[0.16em] text-brand/45">Kort sagt</span>
+          <p class="mt-2 text-sm leading-relaxed text-brand/70">
+            Det her er lavet til jer der vil have klarhed nu, ikke til jer der leder efter en stor platform eller en lang analyseproces.
+          </p>
+        </div>
+      </article>
     </div>
 
-    <div class="max-w-lg mx-auto bg-brand-light p-8 md:p-10 ring-2 ring-accent ring-inset">
-      <div class="text-sm font-bold text-white/80 mb-3">SitedokAI Audit</div>
-      <div class="flex items-baseline gap-3 mb-1">
-        <span class="text-lg text-white/30 line-through">8.000+ kr/md</span>
-        <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">Lean start</span>
-      </div>
-      <div class="font-display text-4xl md:text-5xl font-extrabold text-white mb-1">2.495 kr</div>
-      <div class="text-sm text-white/60 mb-8">Engangsbetaling — ingen abonnement</div>
-
-      <ul class="space-y-3 mb-8">
-        {features.map((feature) => (
-          <li class="flex items-start gap-3 text-sm text-white/60">
-            <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-
-      <a
-        href="#contact"
-        class="block text-center py-4 px-6 font-bold text-lg bg-amber-400 text-brand hover:bg-amber-300 transition-colors"
-      >
-        Bestil audit
-      </a>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+      {fitSignals.map((item) => (
+        <article class="rounded-[1rem] border border-[#e6ddd1] bg-white p-5 text-sm leading-relaxed text-brand/70">
+          {item}
+        </article>
+      ))}
     </div>
   </div>
 </section>

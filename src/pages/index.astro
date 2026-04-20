@@ -4,6 +4,8 @@ import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import WhyNotDIY from '../components/WhyNotDIY.astro';
 import ClientRoomPreview from '../components/ClientRoomPreview.astro';
+import UseCases from '../components/UseCases.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import Pricing from '../components/Pricing.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
@@ -21,7 +23,7 @@ const faqs = [
   },
   {
     q: 'Hvad sker der efter bestilling?',
-    a: 'Du sender din URL og kontaktoplysninger, gennemfører betalingen via Stripe, og vi sender dit Client Room på mail som privat link inden for 48 timer på hverdage. PDF følger med som eksport, og der er ikke login.',
+    a: 'Du sender din URL og kontaktoplysninger, gennemfører betalingen via Stripe, og du modtager en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
   },
   {
     q: 'Hvorfor skal jeg kende min AI-synlighed?',
@@ -93,15 +95,17 @@ const structuredData = {
 ---
 
 <Layout
-  title="SitedokAI: Er din hjemmeside synlig i AI?"
-  description="Få en AI-audit fra SitedokAI. 2.495 kr for 1 website og op til 5 nøglesider på ChatGPT, Gemini, Google AI og Claude, leveret på mail som privat Client Room-link inden for 48 timer på hverdage."
+  title="SitedokAI: Forstå hvordan AI læser jeres website"
+  description="SitedokAI hjælper virksomheder med at forstå hvornår AI bliver en del af kundens første shortlist. Vi tester jeres website på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med forklaring, prioritering og næste skridt."
   structuredData={structuredData}
 >
   <Nav />
   <main id="main">
     <Hero />
+    <UseCases />
     <ClientRoomPreview />
     <WhyNotDIY />
+    <HowItWorks />
     <Pricing />
     <FAQ faqs={faqs} />
     <Contact />

@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import UseCases from '../components/UseCases.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const signals = [
+  {
+    title: 'Kunden researcher for de kontakter jer',
+    body: 'Hvis jeres salgsproces starter med at kunden danner sig et overblik selv, er AI allerede et sted hvor markedet bliver sorteret.',
+  },
+  {
+    title: 'I bliver ofte sammenlignet med tydelige alternativer',
+    body: 'Når markedet er let at sammenligne, bliver AI hurtigt en genvej til at formulere forskellene på jer og konkurrenterne.',
+  },
+  {
+    title: 'Jeres ydelse kræver forklaring og tillid',
+    body: 'Jo mere kundens valg afhænger af forståelse, specialer og beviser, desto vigtigere er det hvordan websitet bliver fortolket.',
+  },
+];
+
+const implications = [
+  'AI skal kunne forstå ydelse, målgruppe og geografi uden at gætte.',
+  'Vigtige sider skal stå tættere på beviser, cases og praktiske fakta.',
+  'Sammenligninger bør formuleres af jer selv, ikke overlades til tilfældige AI-svar.',
+];
+---
+
+<Layout
+  title="Use cases - hvornår AI bliver en del af kundens første shortlist"
+  description="Læs hvornår AI-synlighed faktisk betyder noget. SitedokAI forklarer hvilke købssituationer der gør AI relevant, og hvad det betyder for website, positionering og proof."
+>
+  <Nav />
+  <main>
+    <section class="border-b border-[#e6ddd1] bg-[#faf7f2]">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Use cases</p>
+        <h1 class="max-w-4xl font-display text-4xl md:text-6xl font-bold tracking-tight text-brand mb-6 text-balance">
+          AI-synlighed er mest relevant når AI bliver brugt til at sortere markedet for kunden
+        </h1>
+        <div class="max-w-3xl space-y-4 text-lg leading-relaxed text-brand/72">
+          <p>
+            Ikke alle virksomheder behøver at gå op i AI-synlighed på samme måde. Men for mange B2B- og servicevirksomheder
+            er der allerede konkrete øjeblikke hvor AI er med til at skabe den første shortlist.
+          </p>
+          <p>
+            Siden her forklarer hvornår det typisk sker, og hvorfor det betyder noget for hvordan jeres website forklarer ydelser,
+            specialer, geografi og beviser på kvalitet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <UseCases />
+
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-10 items-start">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Tegn på relevans</p>
+            <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
+              Det er ofte relevant at tage AI-synlighed alvorligt hvis en eller flere af de her ting allerede er sande
+            </h2>
+          </div>
+
+          <div class="grid gap-4">
+            {signals.map((item) => (
+              <article class="rounded-[1rem] border border-[#e6ddd1] bg-[#fbf8f3] p-6">
+                <h3 class="font-display text-2xl font-bold tracking-tight text-brand mb-3">{item.title}</h3>
+                <p class="text-brand/70 leading-relaxed">{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#f6f1e8]">
+      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+        <div class="max-w-3xl mb-8">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Hvad det betyder for websitet</p>
+          <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
+            Når AI er med i købssituationen, bliver klarhed på websitet vigtigere end pynt
+          </h2>
+          <p class="text-lg leading-relaxed text-brand/72">
+            Mange problemer handler ikke om at få mere marketing-støj på siden. De handler om at gøre det lettere at forstå hvad I laver, hvorfor I er relevante, og hvad der skiller jer ud.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          {implications.map((item) => (
+            <article class="rounded-[1rem] border border-[#e0d6c8] bg-white p-5 text-brand/72 leading-relaxed">
+              {item}
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a href="/eksempel" class="inline-flex items-center justify-center rounded-md bg-brand px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Se et eksempel på en audit
+          </a>
+          <a href="/kontakt" class="inline-flex items-center justify-center rounded-md border border-[#d7ccbc] bg-white px-6 py-3.5 text-sm font-bold text-brand transition-colors hover:bg-[#faf6ef]">
+            Gå til bestilling
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
