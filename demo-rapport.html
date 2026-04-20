@@ -6,16 +6,17 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Executive PDF-demo — SitedokAI</title>
     <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=inter:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=outfit:400,500,600,700" rel="stylesheet" />
     <style>
       :root {
-        color-scheme: dark;
-        --bg: #050b16;
-        --panel: rgba(8, 17, 31, 0.84);
-        --line: rgba(255, 255, 255, 0.08);
-        --text: #e5eef9;
-        --muted: rgba(226, 232, 240, 0.72);
-        --cyan: #22d3ee;
+        --bg: #faf7f2;
+        --bg-soft: #f4eee5;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-soft: rgba(248, 243, 235, 0.92);
+        --line: rgba(31, 42, 51, 0.08);
+        --text: #1f2a33;
+        --muted: #6d7882;
+        --copper: #9f6a24;
       }
 
       * {
@@ -25,22 +26,12 @@
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: Inter, system-ui, sans-serif;
+        font-family: Outfit, system-ui, sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 26rem),
-          radial-gradient(circle at right 20%, rgba(251, 191, 36, 0.12), transparent 22rem),
-          linear-gradient(180deg, #081221 0%, #050b16 100%);
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.12) 1px, transparent 0);
-        background-size: 36px 36px;
-        opacity: 0.24;
-        pointer-events: none;
+          radial-gradient(circle at top left, rgba(191, 135, 66, 0.12), transparent 24rem),
+          radial-gradient(circle at right 20%, rgba(159, 106, 36, 0.08), transparent 22rem),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
       }
 
       .page {
@@ -53,7 +44,7 @@
 
       .eyebrow {
         margin: 0 0 14px;
-        color: var(--cyan);
+        color: var(--copper);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.18em;
@@ -86,8 +77,7 @@
         border-radius: 30px;
         overflow: hidden;
         background: var(--panel);
-        backdrop-filter: blur(18px);
-        box-shadow: 0 30px 80px rgba(2, 8, 23, 0.36);
+        box-shadow: 0 30px 80px rgba(31, 42, 51, 0.08);
       }
 
       .panel-top {
@@ -97,7 +87,7 @@
         gap: 16px;
         padding: 18px 22px;
         border-bottom: 1px solid var(--line);
-        background: rgba(4, 10, 22, 0.7);
+        background: rgba(248, 243, 235, 0.92);
       }
 
       .meta {
@@ -113,8 +103,8 @@
         align-items: center;
         padding: 7px 12px;
         border-radius: 999px;
-        background: rgba(34, 211, 238, 0.12);
-        color: var(--cyan);
+        background: rgba(159, 106, 36, 0.12);
+        color: var(--copper);
         font-weight: 700;
         font-size: 0.82rem;
       }
@@ -127,7 +117,7 @@
 
       .pdf-shell {
         padding: 18px;
-        background: rgba(2, 8, 23, 0.36);
+        background: rgba(245, 239, 229, 0.9);
       }
 
       iframe {
@@ -156,13 +146,14 @@
       }
 
       .cta-primary {
-        background: linear-gradient(135deg, var(--cyan) 0%, #06b6d4 100%);
-        color: #03111d;
+        background: #1f2a33;
+        color: #ffffff;
       }
 
       .cta-secondary {
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(31, 42, 51, 0.12);
         color: var(--text);
+        background: #ffffff;
       }
 
       @media (max-width: 860px) {

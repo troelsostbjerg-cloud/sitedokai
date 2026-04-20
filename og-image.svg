@@ -1,45 +1,48 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">SitedokAI og-image</title>
-  <desc id="desc">SitedokAI AI-audit med Client Room for danske virksomheder.</desc>
-  <rect width="1200" height="630" fill="#0F172A"/>
-  <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#06B6D4" stroke-opacity="0.18"/>
-  <g opacity="0.18">
-    <path d="M0 120H1200" stroke="#06B6D4"/>
-    <path d="M0 240H1200" stroke="#06B6D4"/>
-    <path d="M0 360H1200" stroke="#06B6D4"/>
-    <path d="M0 480H1200" stroke="#06B6D4"/>
-    <path d="M160 0V630" stroke="#06B6D4"/>
-    <path d="M320 0V630" stroke="#06B6D4"/>
-    <path d="M480 0V630" stroke="#06B6D4"/>
-    <path d="M640 0V630" stroke="#06B6D4"/>
-    <path d="M800 0V630" stroke="#06B6D4"/>
-    <path d="M960 0V630" stroke="#06B6D4"/>
+  <desc id="desc">SitedokAI AI-audit med Client Room i den nye lyse stil.</desc>
+  <rect width="1200" height="630" fill="#FAF7F2"/>
+  <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#E2D6C6"/>
+  <g opacity="0.12">
+    <path d="M0 120H1200" stroke="#C8B79E"/>
+    <path d="M0 240H1200" stroke="#C8B79E"/>
+    <path d="M0 360H1200" stroke="#C8B79E"/>
+    <path d="M0 480H1200" stroke="#C8B79E"/>
+    <path d="M160 0V630" stroke="#C8B79E"/>
+    <path d="M320 0V630" stroke="#C8B79E"/>
+    <path d="M480 0V630" stroke="#C8B79E"/>
+    <path d="M640 0V630" stroke="#C8B79E"/>
+    <path d="M800 0V630" stroke="#C8B79E"/>
+    <path d="M960 0V630" stroke="#C8B79E"/>
   </g>
   <g transform="translate(118 125)">
-    <circle cx="90" cy="90" r="90" fill="#0F172A" stroke="#06B6D4" stroke-width="2"/>
-    <circle cx="90" cy="90" r="70" stroke="#06B6D4" stroke-opacity="0.7" stroke-width="2"/>
-    <circle cx="90" cy="90" r="48" stroke="#06B6D4" stroke-opacity="0.45" stroke-width="2"/>
-    <circle cx="90" cy="90" r="18" fill="#F8FAFC"/>
-    <line x1="90" y1="18" x2="90" y2="90" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
-    <line x1="138" y1="54" x2="90" y2="90" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="90" cy="90" r="90" fill="#F6EFE4" stroke="#D7C7AE" stroke-width="2"/>
+    <circle cx="90" cy="90" r="70" stroke="#BF8742" stroke-opacity="0.45" stroke-width="2"/>
+    <circle cx="90" cy="90" r="48" stroke="#BF8742" stroke-opacity="0.28" stroke-width="2"/>
+    <circle cx="90" cy="90" r="18" fill="#1F2A33"/>
+    <line x1="90" y1="18" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
+    <line x1="138" y1="54" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
   </g>
-  <text x="340" y="190" fill="#67E8F9" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-SYNLIGHED FOR DANSKE VIRKSOMHEDER</text>
-  <text x="340" y="286" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="800">SitedokAI</text>
-  <text x="340" y="356" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="600">Få svar på om din hjemmeside bliver fundet i AI</text>
-  <text x="340" y="432" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="28">2.495 kr. Client Room inden for 48 timer.</text>
-  <g transform="translate(340 474)">
-    <rect width="250" height="64" rx="12" fill="#FBBF24"/>
-    <text x="42" y="41" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">Bestil audit</text>
+  <text x="340" y="182" fill="#9F6A24" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-AUDIT + CLIENT ROOM</text>
+  <text x="340" y="278" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">Forstå hvordan AI</text>
+  <text x="340" y="352" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">læser jeres website</text>
+  <text x="340" y="430" fill="#6D7882" font-family="Arial, sans-serif" font-size="32" font-weight="600">Status, bevis og næste skridt samlet i et roligt Client Room.</text>
+  <g transform="translate(340 482)">
+    <rect width="232" height="60" rx="14" fill="#1F2A33"/>
+    <text x="39" y="39" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="800">Se eksempel</text>
   </g>
-  <g transform="translate(628 485)">
-    <text fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">4 AI-platforme</text>
-    <text y="34" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">1 website + op til 5 sider</text>
-    <text y="68" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="24">Client Room + PDF-eksport</text>
+  <g transform="translate(604 487)">
+    <rect width="160" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
+    <text x="32" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">4 platforme</text>
+  </g>
+  <g transform="translate(786 487)">
+    <rect width="152" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
+    <text x="36" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">48 timer</text>
   </g>
   <defs>
     <linearGradient id="bg" x1="69" y1="58" x2="1132" y2="595" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#111827"/>
-      <stop offset="1" stop-color="#0F172A"/>
+      <stop stop-color="#FCFAF6"/>
+      <stop offset="1" stop-color="#F2E8DA"/>
     </linearGradient>
   </defs>
 </svg>
