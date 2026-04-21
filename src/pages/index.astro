@@ -1,33 +1,222 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import WhyNotDIY from '../components/WhyNotDIY.astro';
-import ClientRoomPreview from '../components/ClientRoomPreview.astro';
-import UseCases from '../components/UseCases.astro';
-import HowItWorks from '../components/HowItWorks.astro';
-import Pricing from '../components/Pricing.astro';
-import FAQ from '../components/FAQ.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const faqs = [
+const navItems = [
+  { label: 'Ydelser', href: '#services' },
+  { label: 'Rooms', href: '#rooms' },
+  { label: 'Hvornår dashboard', href: '#systems' },
+  { label: 'Arbejdsform', href: '#process' },
+  { label: 'Forløb', href: '#engagements' },
+];
+
+const heroLanes = [
   {
-    q: 'Hvad får jeg for 2.495 kr?',
-    a: 'Du får en AI-audit af 1 website og op til 5 nøglesider, testet på 4 AI-platforme, leveret i et interaktivt Client Room med overblik, konkurrentbillede og prioriterede næste skridt. PDF følger med som eksport.',
+    label: 'Entry product',
+    title: 'AI Audit',
+    body: 'Fast produkt for virksomheder der vil forstå synlighed, uklarhed og første prioritering.',
   },
   {
-    q: 'Hvad er ikke med?',
-    a: 'Der er ingen implementering, intet abonnement og ingen tung platform. Du får diagnosen, de vigtigste næste skridt og en leverance der er let at dele internt.',
+    label: 'Sprint',
+    title: 'Authority Sprint',
+    body: 'Gør ydelser, cases og nøglesider skarpere for kunder og AI.',
   },
   {
-    q: 'Hvad sker der efter bestilling?',
-    a: 'Du sender din URL og kontaktoplysninger, gennemfører betalingen via Stripe, og du modtager en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
+    label: 'Room',
+    title: 'Room Build',
+    body: 'Byg et klient-, compliance-, content- eller ops-room omkring et konkret problem.',
   },
   {
-    q: 'Hvorfor skal jeg kende min AI-synlighed?',
-    a: 'Stadig flere kunder bruger ChatGPT og lignende til at finde leverandører. Store virksomheder optimerer allerede aktivt for det. Hvis din virksomhed ikke dukker op, taber du kunder til konkurrenter der gør.',
+    label: 'Build',
+    title: 'Dashboard eller mini-app',
+    body: 'Når kunden mangler et lille arbejdsværktøj og ikke endnu et dokument.',
+  },
+];
+
+const serviceFamilies = [
+  {
+    tag: 'Entry product',
+    title: 'AI Audit',
+    price: '2.495 kr',
+    summary:
+      'Den skarpeste indgang til SiteDok. Vi tester hvordan virksomheden bliver læst og valgt, og samler det i et Client Room.',
+    fit: 'Bedst når virksomheden er svær at forstå online, eller vil se hvor AI og kunder mister tråden først.',
+    deliverables: ['AI-synlighed på 4 platforme', 'konkurrentbillede', 'Client Room + PDF'],
+  },
+  {
+    tag: 'Sprint',
+    title: 'Authority Sprint',
+    price: 'Fra 9.500 kr',
+    summary:
+      'Vi omsætter auditfund eller forretningsuklarhed til bedre service-sider, cases, artikler og forklarende struktur.',
+    fit: 'Bedst når virksomheden egentlig er dygtig, men websitet forklarer for bredt eller for svagt.',
+    deliverables: ['side- og indholdsplan', 'udvalgte omskrivninger', 'proof- og case-struktur'],
+  },
+  {
+    tag: 'Room',
+    title: 'Room Build',
+    price: 'Fra 12.500 kr',
+    summary:
+      'Vi bygger et room der samler status, dokumentation, beslutninger og næste skridt for et konkret arbejdsområde.',
+    fit: 'Bedst når e-mails, mapper og noter har taget over, og ingen har et klart arbejdsrum.',
+    deliverables: ['room-struktur', 'status- og dokumentationsflow', 'klar ejerlogik'],
+  },
+  {
+    tag: 'Ops',
+    title: 'Workflow Sprint',
+    price: 'Fra 12.500 kr',
+    summary:
+      'Vi tager et manuelt flow og gør det lettere at drive med formularer, automation, QA-trin og færre løse mellemrum.',
+    fit: 'Bedst når virksomheden taber tid på intake, opfølgning, review eller gentagne administrative trin.',
+    deliverables: ['workflow-kort', 'let automation', 'driftsflow der kan vedligeholdes'],
+  },
+  {
+    tag: 'Build',
+    title: 'Dashboard eller mini-app',
+    price: 'Scope efter afklaring',
+    summary:
+      'Når et room ikke er nok, bygger vi et lille værktøj eller dashboard som faktisk bliver brugt i den daglige drift.',
+    fit: 'Bedst når nogen skal opdatere data, arbejde i systemet eller logge ind og bruge det som værktøj.',
+    deliverables: ['spec og scope', 'hosted webapp', 'login, data og drift sat rigtigt op'],
+  },
+  {
+    tag: 'Partner',
+    title: 'Løbende digital partner',
+    price: 'Fra 6.000 kr / md',
+    summary:
+      'For små virksomheder der mangler en rolig person til at prioritere, QA’e og hjælpe de rigtige små ting helt i mål.',
+    fit: 'Bedst når ledelsen mangler en digital medspiller, men ikke ønsker at ansætte en fuld intern rolle endnu.',
+    deliverables: ['månedlig prioritering', 'sparring og review', 'små leverancer i den rigtige rækkefølge'],
+  },
+];
+
+const roomFamily = [
+  {
+    title: 'Client Room',
+    body: 'Audit, anbefalinger, dokumentation og næste skridt i et kundevendt rum.',
+  },
+  {
+    title: 'Compliance Room',
+    body: 'Krav, mangler, dokumenter, ansvar og status samlet i et roligere format end e-mail og mapper.',
+  },
+  {
+    title: 'Content Room',
+    body: 'Briefs, authority-gap, kladder, cases og godkendelser samlet et sted.',
+  },
+  {
+    title: 'Ops Room',
+    body: 'Status på workflows, QA-trin, automations og forbedringer i driften.',
+  },
+  {
+    title: 'Build Room',
+    body: 'Spec, scope, beslutninger, QA og næste version når vi bygger dashboard eller mini-app.',
+  },
+];
+
+const systemChoices = [
+  {
+    title: 'Room',
+    when: 'Når virksomheden primært har brug for overblik, beslutninger, dokumentation og et fælles sted at kigge.',
+    shape: ['status og kontekst', 'dokumenter og beviser', 'næste skridt og ansvar'],
+  },
+  {
+    title: 'Dashboard',
+    when: 'Når der er live data, gentagen opdatering og nogen faktisk skal bruge det som arbejdsflade.',
+    shape: ['login og brugere', 'live status og tabeller', 'driftsvisning og historik'],
+  },
+  {
+    title: 'Mini-app',
+    when: 'Når systemet skal gøre noget aktivt: oprette, redigere, sende, beregne eller styre et flow.',
+    shape: ['forms og handlinger', 'database og rettigheder', 'hosting, backups og drift'],
+  },
+];
+
+const fitScenarios = [
+  {
+    title: 'Specialistvirksomheden der er svær at forstå online',
+    body: 'Her starter vi ofte med AI Audit og Authority Sprint. Problemet er sjældent manglende kvalitet, men uklar digital forklaring.',
+  },
+  {
+    title: 'Virksomheden med dokumentationspres og løse processer',
+    body: 'Her giver Compliance Room eller Ops Room mere værdi end endnu en kampagne eller endnu et PDF-dokument.',
+  },
+  {
+    title: 'Teamet der mister tid på gentagelser og manuelt rod',
+    body: 'Her er svaret tit et Workflow Sprint eller en mini-app der fjerner friktion i stedet for at øge kompleksiteten.',
+  },
+  {
+    title: 'Ledelsen der mangler en rolig digital medspiller',
+    body: 'Her er den rigtige leverance ofte ikke et stort projekt, men en partner der kan prioritere, QA’e og få de små rigtige ting over stregen.',
+  },
+];
+
+const notForUs = [
+  'Store enterprise-platforme med tunge procurement-forløb.',
+  'Klassiske marketing-retainers med konstant kampagneproduktion.',
+  'Ad hoc softwareprojekter uden klart problem, scope eller ejer.',
+  '“Byg lige alt det her” uden prioritering, driftstanke eller fælles retning.',
+];
+
+const processSteps = [
+  {
+    number: '01',
+    title: 'Vi afklarer hvad problemet egentlig er',
+    body: 'Er det synlighed, tillid, dokumentation, drift eller et arbejdsværktøj der mangler? Det er vigtigere end at vælge løsning for tidligt.',
+  },
+  {
+    number: '02',
+    title: 'Vi pakker det i et klart spor',
+    body: 'I stedet for et diffust bureauforløb bliver arbejdet pakket som audit, sprint, room, build eller partnerforløb.',
+  },
+  {
+    number: '03',
+    title: 'Vi bygger den mindste rigtige løsning',
+    body: 'En bedre side. Et room. Et workflow. Et dashboard. Ikke mere end nødvendigt, men heller ikke kun slides og gode intentioner.',
+  },
+  {
+    number: '04',
+    title: 'Vi gør det let at fortsætte hvis det virker',
+    body: 'Hvis samarbejdet giver effekt, kan næste lag bygge videre på samme struktur og samme familie af rooms.',
+  },
+];
+
+const engagements = [
+  {
+    title: 'AI Audit',
+    price: '2.495 kr',
+    body: 'Fast entry product. God når virksomheden vil forstå status før der investeres mere.',
+    note: 'Bestilles som produkt.',
+  },
+  {
+    title: 'Sprint',
+    price: 'Fra 9.500 kr',
+    body: 'Til Authority Sprint, Room Build og Workflow Sprint med klart scope og afgrænset leverance.',
+    note: 'Købes som afgrænset forløb.',
+  },
+  {
+    title: 'Build / Partner',
+    price: 'Efter afklaring',
+    body: 'Til dashboard, mini-app eller løbende partnerrolle hvor scope, hosting og drift skal sidde rigtigt.',
+    note: 'Scopes efter afklaringssamtale.',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Hvis I bygger et dashboard til en kunde, hvordan hostes det så?',
+    a: 'Som udgangspunkt hoster vi det for kunden først som en rigtig webapp med domæne eller subdomæne, login, database, backups og drift. Det er den enkleste model for små virksomheder. Senere kan det flyttes til kundens egen konto hvis det giver mening.',
+  },
+  {
+    q: 'Hvordan vælger I mellem room, dashboard og mini-app?',
+    a: 'Et room er bedst når problemet er overblik, dokumentation og beslutninger. Et dashboard er bedst når data skal opdateres og følges løbende. En mini-app er bedst når brugeren faktisk skal arbejde i systemet og gøre noget aktivt.',
+  },
+  {
+    q: 'Er AI Audit stadig en vigtig del af firmaet?',
+    a: 'Ja. AI Audit er stadig den skarpeste indgang, fordi den viser hvor virksomheden er uklar, svag eller overset. Den fungerer som diagnose for meget af det videre arbejde.',
+  },
+  {
+    q: 'Kan man starte småt?',
+    a: 'Ja. Det er hele pointen. De fleste burde starte med audit eller et afgrænset sprint, og kun bagefter bygge room, workflow eller dashboard hvis det er den rigtige næste bevægelse.',
   },
 ];
 
@@ -38,30 +227,23 @@ const structuredData = {
       '@type': 'Organization',
       '@id': 'https://sitedokai.com/#organization',
       name: 'SitedokAI',
+      alternateName: 'SiteDok',
       url: 'https://sitedokai.com',
       logo: 'https://sitedokai.com/favicon.svg',
       email: 'info@sitedokai.com',
-      contactPoint: [
-        {
-          '@type': 'ContactPoint',
-          contactType: 'customer support',
-          email: 'info@sitedokai.com',
-          availableLanguage: ['da'],
-        },
-      ],
     },
     {
       '@type': 'WebSite',
       '@id': 'https://sitedokai.com/#website',
       url: 'https://sitedokai.com',
-      name: 'SitedokAI',
+      name: 'SiteDok',
       inLanguage: 'da-DK',
     },
     {
-      '@type': 'Service',
+      '@type': 'ProfessionalService',
       '@id': 'https://sitedokai.com/#service',
-      name: 'SitedokAI AI-audit',
-      serviceType: 'AI-audit med Client Room',
+      name: 'SiteDok',
+      serviceType: 'AI Audit, Authority Sprint, Room Build, Workflow Sprint og små dashboards',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -69,46 +251,468 @@ const structuredData = {
         '@type': 'Country',
         name: 'Danmark',
       },
-      description: 'AI-audit for 1 website og op til 5 nøglesider. Inkluderer vurdering på 4 AI-platforme, interaktivt Client Room og PDF-eksport.',
-      offers: {
-        '@type': 'Offer',
-        price: '2495',
-        priceCurrency: 'DKK',
-        availability: 'https://schema.org/InStock',
-        url: 'https://sitedokai.com/#contact',
-      },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': 'https://sitedokai.com/#faq',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.a,
-        },
-      })),
+      email: 'info@sitedokai.com',
     },
   ],
 };
 ---
 
 <Layout
-  title="SitedokAI: Forstå hvordan AI læser jeres website"
-  description="SitedokAI hjælper virksomheder med at forstå hvornår AI bliver en del af kundens første shortlist. Vi tester jeres website på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med forklaring, prioritering og næste skridt."
+  title="SiteDok | AI Audit, rooms og små systemer til små virksomheder"
+  description="SiteDok hjælper små virksomheder med digital klarhed gennem AI Audit, authority-indhold, rooms, workflows og små apps. Start med audit eller et afgrænset sprint."
   structuredData={structuredData}
 >
-  <Nav />
-  <main id="main">
-    <Hero />
-    <UseCases />
-    <ClientRoomPreview />
-    <WhyNotDIY />
-    <HowItWorks />
-    <Pricing />
-    <FAQ faqs={faqs} />
-    <Contact />
+  <main id="main" class="bg-[#f7f2e8] text-brand">
+    <section class="relative overflow-hidden border-b border-[#e3d8ca] bg-[radial-gradient(circle_at_top_left,rgba(233,210,173,0.62),transparent_28rem),radial-gradient(circle_at_85%_12%,rgba(176,131,71,0.12),transparent_20rem),linear-gradient(180deg,#f7f2e8_0%,#f4ede2_100%)]">
+      <div class="pointer-events-none absolute inset-0">
+        <div class="absolute left-[6%] top-10 h-72 w-72 rounded-full bg-[#edd9b6]/65 blur-3xl"></div>
+        <div class="absolute right-[6%] top-28 h-80 w-80 rounded-full bg-[rgba(159,106,36,0.09)] blur-3xl"></div>
+        <div class="absolute inset-0 opacity-[0.16]" style="background-image: radial-gradient(circle at 1px 1px, rgba(31,42,51,0.18) 1px, transparent 0); background-size: 32px 32px;"></div>
+      </div>
+
+      <div class="relative mx-auto max-w-[1400px] px-6 pb-20 pt-6 md:pb-28">
+        <header class="rounded-full border border-[#ddd1c0] bg-[rgba(251,248,242,0.88)] px-5 py-4 shadow-[0_18px_50px_rgba(31,42,51,0.07)] backdrop-blur">
+          <div class="flex items-center justify-between gap-4">
+            <a href="#main" class="flex items-center gap-3">
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-[#d8ccb9] bg-[#f3e8d5] shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
+                <svg viewBox="0 0 32 32" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="16" cy="16" r="15" fill="none" stroke="#9f6a24" stroke-width="1.4"></circle>
+                  <circle cx="16" cy="16" r="9" fill="none" stroke="#9f6a24" stroke-width="1.1" opacity="0.55"></circle>
+                  <circle cx="16" cy="16" r="3.4" fill="#1f2a33"></circle>
+                  <path d="M16 4.5v11.5l7-7" fill="none" stroke="#9f6a24" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"></path>
+                </svg>
+              </span>
+              <div>
+                <p class="font-display text-lg font-extrabold tracking-tight text-brand">SiteDok</p>
+                <p class="text-xs uppercase tracking-[0.24em] text-brand/46">fra SitedokAI</p>
+              </div>
+            </a>
+
+            <nav class="hidden items-center gap-2 md:flex">
+              {navItems.map((item) => (
+                <a href={item.href} class="rounded-full px-4 py-2 text-sm font-medium text-brand/70 transition-colors hover:bg-white hover:text-brand">
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <div class="flex items-center gap-3">
+              <a href="/kontakt#afklaring" class="hidden rounded-full px-4 py-2 text-sm font-semibold text-brand/70 transition-colors hover:bg-white hover:text-brand md:inline-flex">
+                Kontakt
+              </a>
+              <a href="#engagements" class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-3 text-sm font-bold text-white transition-transform duration-200 hover:-translate-y-[1px] hover:bg-brand-light">
+                Se samarbejdsformer
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <div class="mt-14 grid items-start gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <div class="max-w-3xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">For små virksomheder der mangler digital klarhed</p>
+            <h1 class="mt-5 font-display text-5xl font-bold tracking-tight text-brand md:text-7xl md:leading-[0.94]">
+              Vi hjælper små virksomheder med at blive lettere at forstå, lettere at stole på og lettere at drive.
+            </h1>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/72">
+              SiteDok er ikke et bredt bureau. Vi arbejder i spændet mellem AI Audit, authority-indhold, rooms, workflows og små apps.
+              Målet er ikke at bygge mest muligt, men at få det rigtige lille digitale lag på plads og gjort brugbart.
+            </p>
+
+            <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a href="#services" class="inline-flex items-center justify-center rounded-full bg-[#9f6a24] px-6 py-3.5 text-sm font-bold text-white transition-transform duration-200 hover:-translate-y-[1px] hover:bg-[#8d5d1f]">
+                Se det vi faktisk tilbyder
+              </a>
+              <a href="/kontakt#afklaring" class="inline-flex items-center justify-center rounded-full border border-[#d3c6b1] bg-[rgba(255,255,255,0.72)] px-6 py-3.5 text-sm font-bold text-brand transition-colors hover:bg-white">
+                Tal med os om jeres case
+              </a>
+            </div>
+
+            <div class="mt-10 grid gap-4 sm:grid-cols-3">
+              <article class="rounded-[1.45rem] border border-[#e3d8ca] bg-[rgba(255,255,255,0.74)] p-5 shadow-[0_16px_38px_rgba(31,42,51,0.04)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Start rigtigt</p>
+                <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Audit først</h2>
+                <p class="mt-2 text-sm leading-relaxed text-brand/68">Når problemet er uklart, starter vi med diagnose i stedet for at bygge for tidligt.</p>
+              </article>
+              <article class="rounded-[1.45rem] border border-[#e3d8ca] bg-[rgba(255,255,255,0.74)] p-5 shadow-[0_16px_38px_rgba(31,42,51,0.04)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Byg mindre</p>
+                <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Sprint og rooms</h2>
+                <p class="mt-2 text-sm leading-relaxed text-brand/68">Mange problemer løses bedre med et room eller et lille sprint end med en stor platform.</p>
+              </article>
+              <article class="rounded-[1.45rem] border border-[#e3d8ca] bg-[rgba(255,255,255,0.74)] p-5 shadow-[0_16px_38px_rgba(31,42,51,0.04)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Byg rigtigt</p>
+                <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">App når det kræves</h2>
+                <p class="mt-2 text-sm leading-relaxed text-brand/68">Vi bygger dashboard eller mini-app, men kun når problemet faktisk kalder på det.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute -left-10 top-10 hidden h-40 w-40 rounded-full bg-[#ead8b8]/70 blur-3xl lg:block"></div>
+            <div class="relative overflow-hidden rounded-[2.7rem] border border-[#ddd1c1] bg-[rgba(255,255,255,0.82)] p-6 shadow-[0_24px_70px_rgba(31,42,51,0.08)] backdrop-blur md:p-8">
+              <div class="rounded-[1.9rem] bg-[#1f2a33] p-6 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-white/58">Den fælles røde tråd</p>
+                <h2 class="mt-3 font-display text-3xl font-bold tracking-tight">Client Room er ikke længere hele firmaet. Det er den røde tråd mellem ydelserne.</h2>
+                <p class="mt-4 max-w-xl text-sm leading-relaxed text-white/74">
+                  Uanset om I starter med audit, sprint, dokumentation eller et lille system, får I et sted hvor status, beslutninger og næste skridt hænger sammen.
+                </p>
+              </div>
+
+              <div class="mt-6 grid gap-4 md:grid-cols-[0.98fr_1.02fr]">
+                <article class="rounded-[1.7rem] border border-[#e3d8ca] bg-[#fbf8f3] p-6">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Den konkrete virksomhedstype</p>
+                  <div class="mt-4 space-y-3">
+                    <div class="rounded-[1rem] border border-[#e7dccf] bg-white px-4 py-3 text-sm text-brand/72">Specialistvirksomheder der er svære at forstå online</div>
+                    <div class="rounded-[1rem] border border-[#e7dccf] bg-white px-4 py-3 text-sm text-brand/72">Teams med for meget dokumentation og for lidt struktur</div>
+                    <div class="rounded-[1rem] border border-[#e7dccf] bg-white px-4 py-3 text-sm text-brand/72">Virksomheder med manuelle workflows der stjæler tid</div>
+                    <div class="rounded-[1rem] border border-[#e7dccf] bg-white px-4 py-3 text-sm text-brand/72">Ledelser der mangler en rolig digital medspiller</div>
+                  </div>
+                </article>
+
+                <article class="rounded-[1.7rem] border border-[#d9ccb8] bg-[#f1e6d4] p-6">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Det vi vil være kendt for</p>
+                  <div class="mt-4 grid gap-3">
+                    {heroLanes.map((lane) => (
+                      <div class="rounded-[1rem] bg-[rgba(255,255,255,0.76)] px-4 py-3">
+                        <span class="block text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{lane.label}</span>
+                        <strong class="mt-2 block font-display text-2xl font-bold tracking-tight text-brand">{lane.title}</strong>
+                        <p class="mt-2 text-sm leading-relaxed text-brand/70">{lane.body}</p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              </div>
+
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                <article class="rounded-[1.45rem] border border-[#e4d9cb] bg-white p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Indgang 1</p>
+                  <h3 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Klarhed</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-brand/68">Når virksomheden ved at noget bremser, men ikke endnu hvad der skal bygges.</p>
+                </article>
+                <article class="rounded-[1.45rem] border border-[#e4d9cb] bg-white p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Indgang 2</p>
+                  <h3 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Sprint</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-brand/68">Når problemet er kendt og et afgrænset stykke arbejde skal laves ordentligt.</p>
+                </article>
+                <article class="rounded-[1.45rem] border border-[#e4d9cb] bg-white p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Indgang 3</p>
+                  <h3 class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Build</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-brand/68">Når virksomheden faktisk har brug for et værktøj, ikke kun et bedre overblik.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="border-b border-[#e3d8ca] bg-white">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+        <div class="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Ydelser</p>
+            <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-6xl">
+              Det her kan I bruge os til.
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-brand/72">
+              Vi arbejder med et lille sæt ydelser der hænger naturligt sammen. Det gør det lettere at forstå hvad I køber, og lettere for os at levere noget der faktisk kan bruges bagefter.
+            </p>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {serviceFamilies.map((service) => (
+              <article class="rounded-[2rem] border border-[#e3d8ca] bg-[#fbf8f3] p-6 shadow-[0_18px_44px_rgba(31,42,51,0.04)] transition-transform duration-200 hover:-translate-y-[2px]">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">{service.tag}</p>
+                <div class="mt-4 flex items-start justify-between gap-4">
+                  <h3 class="max-w-[12ch] font-display text-3xl font-bold tracking-tight text-brand">{service.title}</h3>
+                  <span class="rounded-full border border-[#d9ccb9] bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-brand/68">
+                    {service.price}
+                  </span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-brand/72">{service.summary}</p>
+                <div class="mt-5 grid gap-2">
+                  {service.deliverables.map((item) => (
+                    <div class="rounded-[1rem] border border-[#e6ddd1] bg-white px-4 py-3 text-sm text-brand/70">{item}</div>
+                  ))}
+                </div>
+                <div class="mt-5 rounded-[1.2rem] border border-[#eadfce] bg-[#f7f0e4] p-4 text-sm leading-relaxed text-brand/70">
+                  <strong class="block font-semibold text-brand">Bedst når:</strong>
+                  <span class="mt-2 block">{service.fit}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rooms" class="border-b border-[#e3d8ca] bg-[#f4ede3]">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+        <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Familie af rooms</p>
+            <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-6xl">
+              En familie af rooms giver jer samme arbejdslogik på tværs af forskellige opgaver.
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-brand/72">
+              Når først strukturen er kendt, bliver det lettere at arbejde videre. Hver ny leverance bygger videre på samme format:
+              status, dokumentation, beslutninger og næste skridt.
+            </p>
+            <div class="mt-8 rounded-[1.9rem] border border-[#d9ccb9] bg-white p-6 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Hvorfor det virker</p>
+              <p class="mt-3 text-base leading-relaxed text-brand/72">
+                Det giver mindre friktion internt, færre løse dokumenter og en mere genkendelig måde at arbejde sammen på, også når opgaven ændrer karakter undervejs.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {roomFamily.map((room) => (
+              <article class="rounded-[1.9rem] border border-[#ddd1bf] bg-[rgba(255,255,255,0.8)] p-6 shadow-[0_18px_44px_rgba(31,42,51,0.05)] backdrop-blur">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Room</p>
+                <h3 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{room.title}</h3>
+                <p class="mt-4 text-sm leading-relaxed text-brand/70">{room.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="systems" class="border-b border-[#e3d8ca] bg-white">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Room eller dashboard?</p>
+          <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-6xl">
+            Skal I bruge et room, et dashboard eller en mini-app?
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-brand/72">
+            Mange små virksomheder har ikke brug for en stor platform. De har brug for det rigtige lag: et sted at skabe overblik, et dashboard til løbende drift eller en lille app der gør noget aktivt.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-5 lg:grid-cols-3">
+          {systemChoices.map((choice) => (
+            <article class="rounded-[2rem] border border-[#e3d8ca] bg-[#fbf8f3] p-7 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Systemtype</p>
+              <h3 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand">{choice.title}</h3>
+              <p class="mt-4 text-sm leading-relaxed text-brand/72">{choice.when}</p>
+              <div class="mt-6 grid gap-2">
+                {choice.shape.map((item) => (
+                  <div class="rounded-[1rem] border border-[#e6ddd1] bg-white px-4 py-3 text-sm text-brand/70">{item}</div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-8 rounded-[2rem] border border-[#d9ccb9] bg-[#f4ecde] p-7 shadow-[0_18px_44px_rgba(31,42,51,0.03)]">
+          <div class="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Hosting af dashboard</p>
+              <h3 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">Hvis vi bygger et dashboard, hoster vi det typisk for kunden først.</h3>
+            </div>
+            <div class="grid gap-4 md:grid-cols-3">
+              <div class="rounded-[1.2rem] border border-[#ddd1bf] bg-white p-5 text-sm leading-relaxed text-brand/70">
+                <strong class="block font-semibold text-brand">Frontend og backend</strong>
+                <span class="mt-2 block">Hosted som rigtig webapp på domæne eller subdomæne.</span>
+              </div>
+              <div class="rounded-[1.2rem] border border-[#ddd1bf] bg-white p-5 text-sm leading-relaxed text-brand/70">
+                <strong class="block font-semibold text-brand">Login og data</strong>
+                <span class="mt-2 block">Brugere, database, adgang og backups sat op som drift og ikke som hobbyprojekt.</span>
+              </div>
+              <div class="rounded-[1.2rem] border border-[#ddd1bf] bg-white p-5 text-sm leading-relaxed text-brand/70">
+                <strong class="block font-semibold text-brand">Flyt senere hvis det giver mening</strong>
+                <span class="mt-2 block">Hvis værktøjet vokser, kan det flyttes til kundens egen konto og ejerskab.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e3d8ca] bg-[#fbf8f3]">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Hvem det er for</p>
+          <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-6xl">
+            Typiske virksomheder vi hjælper.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-brand/72">
+            Ofte handler det ikke om branche alene, men om hvilken type digitalt problem virksomheden sidder med lige nu.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-5 md:grid-cols-2">
+          {fitScenarios.map((scenario) => (
+            <article class="rounded-[2rem] border border-[#e3d8ca] bg-white p-7 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
+              <h3 class="max-w-xl font-display text-3xl font-bold tracking-tight text-brand">{scenario.title}</h3>
+              <p class="mt-4 text-base leading-relaxed text-brand/70">{scenario.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-[0.76fr_1.24fr]">
+          <div class="rounded-[2rem] border border-[#d9ccb9] bg-[#f3eadb] p-7">
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Ikke det rigtige match</p>
+            <h3 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">Fokus gør siden troværdig.</h3>
+            <p class="mt-4 text-sm leading-relaxed text-brand/72">
+              Vi er ikke det rigtige match til alt. Det gør det lettere at vurdere tidligt om vi passer til jeres opgave.
+            </p>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            {notForUs.map((item) => (
+              <article class="rounded-[1.5rem] border border-[#e3d8ca] bg-white p-5 text-sm leading-relaxed text-brand/72 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
+                {item}
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="border-b border-[#e3d8ca] bg-white">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-28">
+        <div class="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Arbejdsform</p>
+            <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-6xl">
+              Sådan arbejder vi.
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-brand/72">
+              Vi starter med at forstå problemet, pakker det i et klart spor og bygger kun det næste lag der faktisk giver mening.
+            </p>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            {processSteps.map((step) => (
+              <article class="rounded-[1.9rem] border border-[#e2d7c8] bg-[#fbf8f3] p-6 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
+                <p class="text-sm font-semibold uppercase tracking-[0.22em] text-accent">{step.number}</p>
+                <h3 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{step.title}</h3>
+                <p class="mt-4 text-sm leading-relaxed text-brand/68">{step.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="engagements" class="border-b border-[#e3d8ca] bg-[#1f2a33] text-white">
+      <div class="mx-auto max-w-[1400px] px-6 py-20 md:py-24">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#d9b27a]">Samarbejdsformer</p>
+          <h2 class="mt-4 font-display text-4xl font-bold tracking-tight md:text-6xl">
+            Tre måder at starte samarbejdet på.
+          </h2>
+          <p class="mt-5 text-lg leading-relaxed text-white/74">
+            De fleste opgaver giver bedst mening som et produkt, et afgrænset sprint eller et build/partnerforløb. Det holder både scope og forventninger sunde.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-5 lg:grid-cols-3">
+          {engagements.map((engagement) => (
+            <article class="rounded-[2rem] border border-white/10 bg-white/6 p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#d9b27a]">Engagement</p>
+              <h3 class="mt-4 font-display text-3xl font-bold tracking-tight text-white">{engagement.title}</h3>
+              <div class="mt-4 text-2xl font-bold tracking-tight text-[#f3d2a3]">{engagement.price}</div>
+              <p class="mt-4 text-sm leading-relaxed text-white/72">{engagement.body}</p>
+              <div class="mt-6 rounded-[1.2rem] border border-white/10 bg-black/10 p-4 text-sm leading-relaxed text-white/68">
+                {engagement.note}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e3d8ca] bg-[#f4ede2]">
+      <div class="mx-auto max-w-[1200px] px-6 py-20 md:py-24">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">FAQ</p>
+          <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand md:text-5xl">
+            Spørgsmål vi ofte får.
+          </h2>
+        </div>
+
+        <div class="mt-10 grid gap-4">
+          {faqItems.map((item) => (
+            <article class="rounded-[1.7rem] border border-[#ddd1bf] bg-white p-6 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
+              <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{item.q}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-brand/72">{item.a}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-white">
+      <div class="mx-auto max-w-[1200px] px-6 py-20 md:py-24">
+        <div class="grid gap-6 lg:grid-cols-[0.88fr_1.12fr]">
+          <div class="rounded-[2.2rem] border border-[#ddd1bf] bg-[#fbf8f3] p-8 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Start småt og byg det rigtige næste lag</p>
+            <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand">
+              I behøver ikke starte med et stort projekt.
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-brand/72">
+              De fleste får mest værdi af at starte med audit eller et afgrænset sprint. Hvis det viser sig at næste rigtige lag er et room, et workflow eller et lille system, bygger vi videre derfra.
+            </p>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <article class="rounded-[2rem] border border-[#ddd1bf] bg-[#1f2a33] p-7 text-white shadow-[0_18px_44px_rgba(31,42,51,0.12)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#d9b27a]">Start her</p>
+              <h3 class="mt-4 font-display text-3xl font-bold tracking-tight">AI Audit</h3>
+              <p class="mt-4 text-sm leading-relaxed text-white/72">
+                Hvis I vil starte med et konkret produkt, er AI Audit stadig den rigtige første indgang.
+              </p>
+              <a href="/kontakt#audit" class="mt-6 inline-flex items-center justify-center rounded-full bg-[#d9b27a] px-5 py-3 text-sm font-bold text-brand transition-transform duration-200 hover:-translate-y-[1px] hover:bg-[#e4c08e]">
+                Gå til audit-sporet
+              </a>
+            </article>
+
+            <article class="rounded-[2rem] border border-[#ddd1bf] bg-[#f3eadb] p-7 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent">Tal med os</p>
+              <h3 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">Room, sprint eller dashboard?</h3>
+              <p class="mt-4 text-sm leading-relaxed text-brand/72">
+                Hvis I allerede ved at problemet handler om dokumentation, drift eller et værktøj, så start med en afklaringssamtale.
+              </p>
+              <a href="/kontakt#afklaring" class="mt-6 inline-flex items-center justify-center rounded-full bg-brand px-5 py-3 text-sm font-bold text-white transition-transform duration-200 hover:-translate-y-[1px] hover:bg-brand-light">
+                Gå til afklaringssporet
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-[#e3d8ca] bg-[#f3ece0]">
+      <div class="mx-auto max-w-[1200px] px-6 py-12">
+        <div class="grid gap-8 md:grid-cols-[1.25fr_0.75fr_0.75fr]">
+          <div>
+            <p class="font-display text-2xl font-extrabold tracking-tight text-brand">SiteDok</p>
+            <p class="mt-3 max-w-xl text-sm leading-relaxed text-brand/68">
+              AI Audit, rooms, workflows og små systemer for små virksomheder der vil være lettere at forstå, lettere at stole på og lettere at drive.
+            </p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand/50">Links</p>
+            <div class="mt-4 grid gap-2">
+              {navItems.map((item) => (
+                <a href={item.href} class="text-sm text-brand/70 transition-colors hover:text-accent">{item.label}</a>
+              ))}
+              <a href="/use-cases" class="text-sm text-brand/70 transition-colors hover:text-accent">Use cases</a>
+            </div>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand/50">Kontakt</p>
+            <div class="mt-4 grid gap-2 text-sm text-brand/70">
+              <a href="mailto:info@sitedokai.com" class="transition-colors hover:text-accent">info@sitedokai.com</a>
+              <span>Danmark</span>
+              <span>AI Audit som entry product</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </main>
-  <Footer />
 </Layout>

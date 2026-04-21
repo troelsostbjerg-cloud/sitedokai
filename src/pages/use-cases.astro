@@ -1,107 +1,177 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import UseCases from '../components/UseCases.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const signals = [
+const serviceUseCases = [
   {
-    title: 'Kunden researcher for de kontakter jer',
-    body: 'Hvis jeres salgsproces starter med at kunden danner sig et overblik selv, er AI allerede et sted hvor markedet bliver sorteret.',
+    tag: 'AI Audit',
+    summary: 'Når virksomheden har brug for et klart billede af hvordan den bliver læst, nævnt og valgt online.',
+    fit: 'God første indgang når problemet stadig er uklart.',
+    examples: [
+      {
+        title: 'Tømrerfirma i en mellemstor by',
+        body: 'Virksomheden dukker svagt op i ChatGPT og Gemini på lokale opgaver. Her giver AI Audit et klart billede af hvor de taber synlighed, og hvilke sider eller forklaringer der skal styrkes først.',
+      },
+      {
+        title: 'Mindre revisionshus',
+        body: 'AI nævner konkurrenter oftere end dem selv. Her er værdien at få en prioriteret side- og indholdsretning før der bruges tid på nye marketingaktiviteter.',
+      },
+    ],
   },
   {
-    title: 'I bliver ofte sammenlignet med tydelige alternativer',
-    body: 'Når markedet er let at sammenligne, bliver AI hurtigt en genvej til at formulere forskellene på jer og konkurrenterne.',
+    tag: 'Authority Sprint',
+    summary: 'Når virksomheden egentlig er dygtig, men websitet ikke forklarer det skarpt nok til kunder eller AI.',
+    fit: 'Godt når der er stof nok, men forklaringen er for bred, for vag eller for flad.',
+    examples: [
+      {
+        title: 'VVS-firma med svage servicesider',
+        body: 'Her kan et sprint omsætte erfaring og faglighed til tydeligere servicebeskrivelser, FAQ og korte artikler der gør virksomheden lettere at forstå.',
+      },
+      {
+        title: 'Mindre B2B-rådgiver',
+        body: 'Her kan vi gøre cases, sammenligninger og beviser skarpere, så websitet bedre understøtter salget i stedet for bare at være præsentation.',
+      },
+    ],
   },
   {
-    title: 'Jeres ydelse kræver forklaring og tillid',
-    body: 'Jo mere kundens valg afhænger af forståelse, specialer og beviser, desto vigtigere er det hvordan websitet bliver fortolket.',
+    tag: 'Room Build',
+    summary: 'Når overblik, dokumentation og næste skridt er spredt i mails, mapper og menneskers hukommelse.',
+    fit: 'Godt når virksomheden mangler et roligt arbejdsrum, ikke endnu en stor platform.',
+    examples: [
+      {
+        title: 'Fødevareproducent med dokumentationspres',
+        body: 'Et Compliance Room kan samle krav, mangler, dokumenter, ansvar og status på en måde der er lettere at drive end en voksende mailtråd.',
+      },
+      {
+        title: 'Bogholderi eller revisionshus med rodet onboarding',
+        body: 'Et Onboarding Room kan samle checklister, dokumentønsker, status og afleveringspunkter, så forløbet bliver lettere at følge for både team og kunde.',
+      },
+    ],
+  },
+  {
+    tag: 'Workflow Sprint',
+    summary: 'Når virksomheden mister tid og energi på manuelle overleveringer, ujævn opfølgning eller for mange små trin.',
+    fit: 'Godt når problemet handler om drift, ikke om at bygge et fuldt nyt system.',
+    examples: [
+      {
+        title: 'Maler- eller murerfirma med ujævn lead-opfølgning',
+        body: 'Et sprint kan samle intake, statusmodel og opfølgning, så virksomheden ikke mister henvendelser mellem formular, telefon og Facebook.',
+      },
+      {
+        title: 'Bogholderi med lang kundeonboarding',
+        body: 'Her kan vi stramme processen op med checklister, reminders og tydelig opgavestyring uden at udskifte hele deres CRM.',
+      },
+    ],
+  },
+  {
+    tag: 'Dashboard eller mini-app',
+    summary: 'Når et room ikke længere er nok, og nogen faktisk skal logge ind og arbejde i et lille værktøj.',
+    fit: 'Godt når data skal opdateres løbende, eller når systemet skal gøre noget aktivt.',
+    examples: [
+      {
+        title: 'Fødevareproducent med egenkontrol i papir eller Excel',
+        body: 'Et lille internt værktøj kan gøre checks, afvigelser og PDF-eksport lettere at drive i hverdagen uden at starte et tungt softwareprojekt.',
+      },
+      {
+        title: 'Ejendomsservicefirma med tilsyn i Messenger',
+        body: 'En lille tilsynsapp kan samle status, billeder og kommentarer ét sted, så arbejdet ikke drukner i chats og løse filer.',
+      },
+    ],
   },
 ];
 
-const implications = [
-  'AI skal kunne forstå ydelse, målgruppe og geografi uden at gætte.',
-  'Vigtige sider skal stå tættere på beviser, cases og praktiske fakta.',
-  'Sammenligninger bør formuleres af jer selv, ikke overlades til tilfældige AI-svar.',
+const selectionRules = [
+  'Start med AI Audit når virksomheden ikke endnu ved hvad der skal laves.',
+  'Start med sprint når problemet er kendt og skal løses afgrænset.',
+  'Start med room når det vigtigste behov er struktur, dokumentation og overblik.',
+  'Start med dashboard eller mini-app når nogen faktisk skal arbejde i systemet og gøre noget aktivt.',
 ];
 ---
 
 <Layout
-  title="Use cases - hvornår AI bliver en del af kundens første shortlist"
-  description="Læs hvornår AI-synlighed faktisk betyder noget. SitedokAI forklarer hvilke købssituationer der gør AI relevant, og hvad det betyder for website, positionering og proof."
+  title="Use cases | SiteDok"
+  description="Se hvilke typer virksomheder og problemer SiteDok typisk hjælper med gennem AI Audit, Authority Sprint, rooms, workflow-sprints og små dashboards."
 >
   <Nav />
-  <main>
+  <main id="main">
     <section class="border-b border-[#e6ddd1] bg-[#faf7f2]">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Use cases</p>
-        <h1 class="max-w-4xl font-display text-4xl md:text-6xl font-bold tracking-tight text-brand mb-6 text-balance">
-          AI-synlighed er mest relevant når AI bliver brugt til at sortere markedet for kunden
-        </h1>
-        <div class="max-w-3xl space-y-4 text-lg leading-relaxed text-brand/72">
-          <p>
-            Ikke alle virksomheder behøver at gå op i AI-synlighed på samme måde. Men for mange B2B- og servicevirksomheder
-            er der allerede konkrete øjeblikke hvor AI er med til at skabe den første shortlist.
-          </p>
-          <p>
-            Siden her forklarer hvornår det typisk sker, og hvorfor det betyder noget for hvordan jeres website forklarer ydelser,
-            specialer, geografi og beviser på kvalitet.
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div class="max-w-4xl">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Use cases</p>
+          <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+            Typiske problemer vi hjælper små virksomheder med.
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-brand/70">
+            SiteDok er ikke bygget omkring én branche. Det er bygget omkring nogle få typer digitale problemer der går igen hos små virksomheder:
+            uklarhed, manglende beviser, rodet dokumentation, manuelle workflows og behovet for et lille arbejdsværktøj.
           </p>
         </div>
       </div>
     </section>
-
-    <UseCases />
 
     <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="max-w-6xl mx-auto px-6 py-20 md:py-28">
-        <div class="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-10 items-start">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Tegn på relevans</p>
-            <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
-              Det er ofte relevant at tage AI-synlighed alvorligt hvis en eller flere af de her ting allerede er sande
-            </h2>
-          </div>
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div class="grid gap-6">
+          {serviceUseCases.map((service) => (
+            <article class="rounded-[2rem] border border-[#e6ddd1] bg-[#fbf8f3] p-8 shadow-[0_20px_48px_rgba(31,42,51,0.04)]">
+              <div class="grid gap-8 lg:grid-cols-[0.86fr_1.14fr]">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{service.tag}</p>
+                  <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">{service.tag}</h2>
+                  <p class="mt-4 text-base leading-relaxed text-brand/70">{service.summary}</p>
+                  <div class="mt-6 rounded-[1.2rem] border border-[#eadfce] bg-white p-4 text-sm leading-relaxed text-brand/70">
+                    <strong class="block font-semibold text-brand">Typisk fit:</strong>
+                    <span class="mt-2 block">{service.fit}</span>
+                  </div>
+                </div>
 
-          <div class="grid gap-4">
-            {signals.map((item) => (
-              <article class="rounded-[1rem] border border-[#e6ddd1] bg-[#fbf8f3] p-6">
-                <h3 class="font-display text-2xl font-bold tracking-tight text-brand mb-3">{item.title}</h3>
-                <p class="text-brand/70 leading-relaxed">{item.body}</p>
-              </article>
-            ))}
-          </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                  {service.examples.map((example) => (
+                    <article class="rounded-[1.4rem] border border-[#e6ddd1] bg-white p-5 shadow-[0_14px_36px_rgba(31,42,51,0.03)]">
+                      <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{example.title}</h3>
+                      <p class="mt-4 text-sm leading-relaxed text-brand/70">{example.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-[#f6f1e8]">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-3xl mb-8">
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent mb-4">Hvad det betyder for websitet</p>
-          <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight text-brand mb-5 text-balance">
-            Når AI er med i købssituationen, bliver klarhed på websitet vigtigere end pynt
-          </h2>
-          <p class="text-lg leading-relaxed text-brand/72">
-            Mange problemer handler ikke om at få mere marketing-støj på siden. De handler om at gøre det lettere at forstå hvad I laver, hvorfor I er relevante, og hvad der skiller jer ud.
-          </p>
-        </div>
-
-        <div class="grid gap-4">
-          {implications.map((item) => (
-            <article class="rounded-[1rem] border border-[#e0d6c8] bg-white p-5 text-brand/72 leading-relaxed">
+    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
+      <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Sådan vælger vi format</p>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+          Vi starter med det mindste rigtige format.
+        </h2>
+        <div class="mt-8 grid gap-4">
+          {selectionRules.map((item) => (
+            <article class="rounded-[1.4rem] border border-[#e0d6c8] bg-white p-5 text-base leading-relaxed text-brand/70 shadow-[0_14px_36px_rgba(31,42,51,0.03)]">
               {item}
             </article>
           ))}
         </div>
+      </div>
+    </section>
 
-        <div class="mt-10 flex flex-col sm:flex-row gap-4">
-          <a href="/eksempel" class="inline-flex items-center justify-center rounded-md bg-brand px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-            Se et eksempel på en audit
+    <section class="bg-white">
+      <div class="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
+        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-4xl">
+          Usikker på hvor jeres case hører hjemme?
+        </h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand/68">
+          Start med AI Audit hvis retningen er uklar. Start med kontakt hvis I allerede ved at det handler om dokumentation, workflow eller et lille system.
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="/kontakt#audit" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Bestil AI Audit
           </a>
-          <a href="/kontakt" class="inline-flex items-center justify-center rounded-md border border-[#d7ccbc] bg-white px-6 py-3.5 text-sm font-bold text-brand transition-colors hover:bg-[#faf6ef]">
-            Gå til bestilling
+          <a href="/kontakt#afklaring" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
+            Tal med os om jeres case
           </a>
         </div>
       </div>

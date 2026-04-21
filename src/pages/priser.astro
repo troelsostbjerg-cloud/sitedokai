@@ -4,153 +4,187 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const included = [
-  'AI-synlighed testet på ChatGPT, Gemini, Google AI og Claude',
-  'Gennemgang af 1 website og op til 5 nøglesider',
-  'Teknisk baseline for performance, struktur, SEO og sikkerhed',
-  'Interaktivt Client Room med status, konkurrentbillede og næste skridt',
-  'PDF-eksport til intern deling',
-  'Levering inden for 48 timer på hverdage',
-  'Ingen abonnement, ingen binding og ingen skjulte tillæg',
+const engagements = [
+  {
+    tag: 'Entry product',
+    title: 'AI Audit',
+    price: '2.495 kr',
+    summary: 'Fast produkt når virksomheden vil forstå status før der investeres mere.',
+    included: [
+      'AI-synlighed testet på ChatGPT, Gemini, Google AI og Claude',
+      'gennemgang af 1 website og op til 5 nøglesider',
+      'konkurrentbillede, teknisk baseline og Client Room + PDF',
+    ],
+    fit: 'Bedst når virksomheden er svær at forstå online, eller vil se hvor AI og kunder mister tråden først.',
+    cta: { label: 'Bestil AI Audit', href: '/kontakt#audit' },
+  },
+  {
+    tag: 'Sprint',
+    title: 'Authority Sprint',
+    price: 'Fra 9.500 kr',
+    summary: 'Afgrænset sprint der skærper det virksomheden allerede ved, men ikke får forklaret skarpt nok online.',
+    included: ['side- og indholdsplan', 'udvalgte omskrivninger', 'proof- og case-struktur'],
+    fit: 'Bedst når websitet forklarer for bredt, for svagt eller uden tydelige beviser.',
+    cta: { label: 'Tal med os om sprint', href: '/kontakt#afklaring' },
+  },
+  {
+    tag: 'Room / Ops',
+    title: 'Room Build eller Workflow Sprint',
+    price: 'Fra 12.500 kr',
+    summary: 'Til dokumentation, onboarding og drift der er blevet for rodet til mapper, mails og manuelle overleveringer.',
+    included: ['room-struktur eller workflow-kort', 'status- og dokumentationsflow', 'let automation og tydelig ejerlogik'],
+    fit: 'Bedst når for meget bor i mapper, noter og menneskers hukommelse.',
+    cta: { label: 'Tal med os om room eller flow', href: '/kontakt#afklaring' },
+  },
+  {
+    tag: 'Build / Partner',
+    title: 'Dashboard, mini-app eller partnerrolle',
+    price: 'Efter afklaring',
+    summary: 'Når der skal bygges et rigtigt værktøj, eller når virksomheden mangler en rolig digital medspiller over tid.',
+    included: ['scope og løsningsretning', 'hosting, login og drift sat rigtigt op', 'mulig månedlig prioritering og QA'],
+    fit: 'Bedst når et room ikke længere er nok, eller når ledelsen mangler en fast digital sparringspartner.',
+    cta: { label: 'Start med afklaring', href: '/kontakt#afklaring' },
+  },
 ];
 
-const trustBullets = [
-  'Sikker betaling via Stripe',
-  'Client Room + PDF-eksport',
-  'Privat link + adgangskode',
-];
-
-const orderFlow = [
-  'Du udfylder formularen og går til betaling.',
-  'Du gennemfører betalingen sikkert via Stripe.',
-  'Vi tester website og nøglesider på tværs af AI-platforme og tekniske signaler.',
-  'Du modtager en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
+const principles = [
+  {
+    title: 'Start med det mindste rigtige format',
+    body: 'De fleste bør starte med audit eller et sprint. Det giver mere mening end at bygge for tidligt.',
+  },
+  {
+    title: 'Build sker kun når behovet er reelt',
+    body: 'Vi bygger dashboard eller mini-app, men kun når nogen faktisk skal bruge det som arbejdsværktøj.',
+  },
+  {
+    title: 'Pris følger scope og drift',
+    body: 'Jo tættere vi kommer på app, data, login og drift, desto vigtigere er afklaringen før pris.',
+  },
 ];
 
 const faqs = [
   {
-    q: 'Hvad koster auditen?',
-    a: 'Auditen koster 2.495 kr som engangsbeløb. Ingen abonnement. Ingen skjulte gebyrer.',
+    q: 'Kan man stadig bare købe AI Audit som produkt?',
+    a: 'Ja. AI Audit er stadig vores klareste entry product og kan bestilles direkte som fast produkt til 2.495 kr.',
   },
   {
-    q: 'Hvad får jeg konkret?',
-    a: 'Du får et interaktivt Client Room med AI-status, teknisk gennemgang, konkurrentblik og prioriterede næste skridt. PDF følger med som eksport.',
+    q: 'Hvorfor har I ikke faste priser på dashboard og mini-app?',
+    a: 'Fordi pris her afhænger mere af scope, hosting, data og drift end af design alene. Vi vil hellere være præcise end kunstigt simple.',
   },
   {
-    q: 'Skal jeg booke et møde eller en gennemgang?',
-    a: 'Nej. Produktet er bevidst enkelt. Du bestiller auditen, vi leverer Client Room + PDF, og så kan du arbejde videre internt eller med din udvikler.',
-  },
-  {
-    q: 'Hvor hurtigt leverer I?',
-    a: 'Normalt inden for 48 timer på hverdage. Hvis din side er meget stor eller teknisk sær, siger vi det med det samme.',
+    q: 'Hvordan starter de fleste?',
+    a: 'De fleste starter med AI Audit eller en afklaringssamtale om sprint, room eller workflow. Build kommer typisk bagefter, ikke først.',
   },
 ];
 ---
 
-<Layout title="Priser - SitedokAI" description="AI-audit til 2.495 kr. Fast pris, sikker betaling og levering via privat link og adgangskode til dit firmas Client Room inden for 48 timer på hverdage.">
+<Layout
+  title="Forløb og priser | SiteDok"
+  description="Se hvordan SiteDok arbejder med AI Audit, Authority Sprint, Room Build, Workflow Sprint og små dashboards. AI Audit starter ved 2.495 kr."
+>
   <Nav />
-  <main>
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+  <main id="main">
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div class="max-w-3xl">
-          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Fast pris</div>
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            AI-audit med Client Room til 2.495 kr
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Forløb og pris</p>
+          <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+            Vælg det mindste rigtige samarbejdsformat.
           </h1>
-          <p class="text-lg text-gray-500 leading-relaxed">
-            SitedokAI er ét produkt med én fast pris. Du bestiller auditen, betaler sikkert via Stripe og modtager en mail med et privat link og en adgangskode til dit firmas Client Room. PDF følger med som eksport.
+          <p class="mt-6 text-lg leading-relaxed text-brand/70">
+            SiteDok er bygget som en lille familie af ydelser. Nogle opgaver giver mening som et fast produkt. Andre skal scopes som sprint, room eller build.
+            Pointen er ikke at sælge størst muligt projekt, men at vælge det rigtige format først.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="bg-[#f6f1e8] text-brand border-b border-[#e6ddd1]">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
-        <div class="bg-white p-8 md:p-10 ring-1 ring-[#e0d6c8] rounded-2xl shadow-[0_24px_60px_rgba(31,42,51,0.05)]">
-          <div class="text-sm font-bold text-brand/72 mb-3">SitedokAI Audit</div>
-          <div class="font-display text-4xl md:text-5xl font-extrabold text-brand mb-1">2.495 kr</div>
-          <div class="text-sm text-brand/60 mb-8">Engangskøb, levering inden for 48 timer på hverdage</div>
-
-          <ul class="space-y-3 mb-8">
-            {included.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-brand/72">
-                <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <a href="/kontakt" class="block text-center py-4 px-6 font-bold text-lg bg-brand text-white hover:bg-brand-light transition-colors rounded-md mb-5">
-            Bestil AI-audit for 2.495 kr
-          </a>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {trustBullets.map((item) => (
-              <div class="border border-[#e6ddd1] bg-[#faf6ef] rounded-xl px-4 py-3 text-sm text-brand/68 text-center">
-                {item}
+    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div class="grid gap-5 lg:grid-cols-2">
+          {engagements.map((engagement) => (
+            <article class="rounded-[2rem] border border-[#e0d6c8] bg-white p-8 shadow-[0_24px_60px_rgba(31,42,51,0.05)]">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{engagement.tag}</p>
+                  <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{engagement.title}</h2>
+                </div>
+                <div class="rounded-full border border-[#d9ccb9] bg-[#faf6ef] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-brand/70">
+                  {engagement.price}
+                </div>
               </div>
-            ))}
-          </div>
+
+              <p class="mt-5 text-base leading-relaxed text-brand/70">{engagement.summary}</p>
+
+              <div class="mt-6 grid gap-3">
+                {engagement.included.map((item) => (
+                  <div class="rounded-[1rem] border border-[#e6ddd1] bg-[#fbf8f3] px-4 py-3 text-sm text-brand/70">{item}</div>
+                ))}
+              </div>
+
+              <div class="mt-6 rounded-[1.2rem] border border-[#eadfce] bg-[#f7f0e4] p-4 text-sm leading-relaxed text-brand/72">
+                <strong class="block font-semibold text-brand">Bedst når:</strong>
+                <span class="mt-2 block">{engagement.fit}</span>
+              </div>
+
+              <a href={engagement.cta.href} class="mt-6 inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+                {engagement.cta.label}
+              </a>
+            </article>
+          ))}
         </div>
+      </div>
+    </section>
 
-        <div class="space-y-6">
-          <div class="bg-white border border-[#e6ddd1] rounded-2xl p-6 md:p-8">
-            <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-3">Hvad sker der efter bestilling?</div>
-            <ol class="space-y-4">
-              {orderFlow.map((item, index) => (
-                <li class="flex items-start gap-4 text-sm text-brand/72 leading-relaxed">
-                  <span class="w-8 h-8 rounded-full bg-[#faf6ef] text-brand font-bold flex items-center justify-center flex-shrink-0 border border-[#e6ddd1]">{index + 1}</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ol>
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto grid max-w-6xl gap-5 px-6 py-20 md:grid-cols-3 md:py-24">
+        {principles.map((item) => (
+          <article class="rounded-[1.6rem] border border-[#e6ddd1] bg-[#fbf8f3] p-6 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
+            <h2 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h2>
+            <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-b border-[#e6ddd1] bg-[#1f2a33] text-white">
+      <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
+        <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Startpunkt</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
+              AI Audit er stadig den enkleste måde at komme i gang på.
+            </h2>
+            <p class="mt-5 text-base leading-relaxed text-white/72">
+              Når problemet endnu ikke er afgrænset, er audit næsten altid det bedste første køb. Den viser om næste rigtige bevægelse er indhold, room, workflow eller build.
+            </p>
           </div>
 
-          <div class="bg-white border border-[#e6ddd1] rounded-2xl p-6 md:p-8">
-            <h2 class="font-display text-2xl font-bold text-brand mb-4">Vil du se leverancen først?</h2>
-            <p class="text-brand/70 text-sm leading-relaxed mb-5">
-              Se demoen og få en konkret fornemmelse af hvordan overblik, konkurrentbillede og næste skridt bliver præsenteret.
+          <div class="rounded-[2rem] border border-white/10 bg-white/6 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Direkte bestilling</p>
+            <div class="mt-4 font-display text-5xl font-bold tracking-tight text-[#f3d2a3]">2.495 kr</div>
+            <p class="mt-4 text-sm leading-relaxed text-white/72">
+              Fast pris. Ingen abonnement. Client Room + PDF. Levering inden for 48 timer på hverdage.
             </p>
-            <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-accent transition-colors">
-              Se demoen
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
+            <a href="/kontakt#audit" class="mt-6 inline-flex items-center justify-center rounded-full bg-[#d9b27a] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-[#e4c08e]">
+              Bestil AI Audit
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12">
-          Ofte stillede spørgsmål
-        </h2>
-        <div class="space-y-8">
+    <section class="bg-white">
+      <div class="mx-auto max-w-4xl px-6 py-20 md:py-24">
+        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-4xl">Ofte stillede spørgsmål</h2>
+        <div class="mt-10 space-y-8">
           {faqs.map((faq) => (
-            <div class="border-b border-gray-200 pb-8">
-              <h3 class="font-display text-lg font-bold text-brand mb-3">{faq.q}</h3>
-              <p class="text-gray-500 leading-relaxed">{faq.a}</p>
-            </div>
+            <article class="border-b border-[#e6ddd1] pb-8">
+              <h3 class="font-display text-xl font-bold tracking-tight text-brand">{faq.q}</h3>
+              <p class="mt-3 text-base leading-relaxed text-brand/68">{faq.a}</p>
+            </article>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-50">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-          Klar til at få din AI-synlighed vurderet?
-        </h2>
-        <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
-          Bestil auditen i dag og få en konkret leverance på dansk, uden abonnement og uden et langt bureauforløb bagefter.
-        </p>
-        <a href="/kontakt" class="inline-block bg-brand text-white py-4 px-10 font-bold text-lg hover:bg-brand-light transition-colors rounded-md">
-          Bestil AI-audit for 2.495 kr
-        </a>
       </div>
     </section>
   </main>
