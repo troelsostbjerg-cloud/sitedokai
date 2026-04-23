@@ -1,0 +1,19 @@
+{
+  "token": "leW5NizhEa7Pter6WzuUwGBz",
+  "client_slug": "demo",
+  "client_name": "Manual Kunde",
+  "created_at": "2026-04-21T10:18:04+00:00",
+  "access_mode": "secret_url",
+  "requires_password": false,
+  "public_url": "https://sitedokai.com/room/leW5NizhEa7Pter6WzuUwGBz/",
+  "public_pdf_url": "https://sitedokai.com/room/leW5NizhEa7Pter6WzuUwGBz/SitedokAI_ClientRoom_Manual_Kunde.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_Manual_Kunde.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

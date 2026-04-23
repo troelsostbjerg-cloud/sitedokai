@@ -1,0 +1,19 @@
+{
+  "token": "Pzn3mLx20bqbE6bbque97wqb",
+  "client_slug": "demo",
+  "client_name": "Skovly Byg",
+  "created_at": "2026-04-16T06:33:23+00:00",
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/Pzn3mLx20bqbE6bbque97wqb/",
+  "public_pdf_url": "https://sitedokai.com/room/Pzn3mLx20bqbE6bbque97wqb/SitedokAI_ClientRoom_Skovly_Byg.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_Skovly_Byg.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

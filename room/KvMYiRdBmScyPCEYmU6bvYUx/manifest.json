@@ -1,0 +1,17 @@
+{
+  "token": "KvMYiRdBmScyPCEYmU6bvYUx",
+  "client_slug": "noerbaek",
+  "client_name": "NOERBAEK",
+  "created_at": "2026-04-14T18:25:15+00:00",
+  "public_url": "https://sitedokai.com/room/KvMYiRdBmScyPCEYmU6bvYUx/",
+  "public_pdf_url": "https://sitedokai.com/room/KvMYiRdBmScyPCEYmU6bvYUx/SitedokAI_ClientRoom_NOERBAEK.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_NOERBAEK.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

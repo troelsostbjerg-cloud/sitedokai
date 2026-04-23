@@ -1,0 +1,19 @@
+{
+  "token": "df4OIrFrk9g6yBfLPCf90IIk",
+  "client_slug": "demo",
+  "client_name": "Nordlys Advokater",
+  "created_at": "2026-04-16T06:30:12+00:00",
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/df4OIrFrk9g6yBfLPCf90IIk/",
+  "public_pdf_url": "https://sitedokai.com/room/df4OIrFrk9g6yBfLPCf90IIk/SitedokAI_ClientRoom_Nordlys_Advokater.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_Nordlys_Advokater.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

@@ -1,13 +1,19 @@
 {
   "token": "REmzhPK0foZ5GCZYkEX136gb",
+  "client_slug": "andemors-verden-prelive-en-20260416",
   "client_name": "Andemors Verden",
   "created_at": "2026-04-16T12:10:19+00:00",
-  "mode": "encrypted_static",
-  "files": [
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/REmzhPK0foZ5GCZYkEX136gb/",
+  "public_pdf_url": "https://sitedokai.com/room/REmzhPK0foZ5GCZYkEX136gb/SitedokAI_ClientRoom_Andemors_Verden.pdf",
+  "bundle_files": [
     "index.html",
-    "room.enc.json",
-    "executive-pdf.html",
-    "executive-pdf.enc.json",
-    "studio.css"
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_Andemors_Verden.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
   ]
 }

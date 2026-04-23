@@ -1,265 +1,1812 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="da">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow, noarchive">
     <title>Mieritz Advokatfirma · Client Room</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #07111f;
-        --panel: rgba(8, 17, 31, 0.92);
-        --panel-soft: rgba(255, 255, 255, 0.05);
-        --border: rgba(103, 232, 249, 0.14);
-        --text: #e5eef9;
-        --muted: #98a9c2;
-        --accent: #f59e0b;
-        --cyan: #22d3ee;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        font-family: Inter, system-ui, sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top left, rgba(34, 211, 238, 0.14), transparent 24rem),
-          radial-gradient(circle at right 20%, rgba(245, 158, 11, 0.14), transparent 22rem),
-          linear-gradient(180deg, #07111f 0%, #0b1728 100%);
-      }
-      .lock-shell {
-        width: min(100%, 460px);
-        padding: 32px;
-        border-radius: 28px;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        box-shadow: 0 30px 80px rgba(2, 8, 23, 0.42);
-      }
-      .eyebrow {
-        color: var(--cyan);
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        font-size: 0.72rem;
-        font-weight: 700;
-      }
-      h1 {
-        margin: 12px 0 10px;
-        font-family: "Bricolage Grotesque", Inter, system-ui, sans-serif;
-        font-size: clamp(2rem, 4vw, 2.8rem);
-        line-height: 0.98;
-      }
-      p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-      form {
-        display: grid;
-        gap: 12px;
-        margin-top: 22px;
-      }
-      label {
-        font-size: 0.9rem;
-        font-weight: 700;
-      }
-      input {
-        width: 100%;
-        padding: 14px 16px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--text);
-        font-size: 1rem;
-      }
-      button {
-        padding: 14px 18px;
-        border: 0;
-        border-radius: 999px;
-        background: var(--accent);
-        color: #111827;
-        font-size: 1rem;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .status {
-        margin-top: 16px;
-        min-height: 24px;
-        color: var(--muted);
-        font-size: 0.94rem;
-      }
-      .status.error {
-        color: #fecaca;
-      }
-      .status.success {
-        color: #bbf7d0;
-      }
-      .inline-link {
-        color: var(--cyan);
-      }
-      .pdf-view {
-        position: fixed;
-        inset: 0;
-        display: grid;
-        grid-template-rows: auto 1fr;
-        background: #0b1728;
-      }
-      .pdf-toolbar {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        align-items: center;
-        padding: 16px 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(7, 17, 31, 0.96);
-      }
-      .pdf-toolbar a {
-        color: #111827;
-        background: var(--accent);
-        padding: 10px 14px;
-        border-radius: 999px;
-        font-weight: 800;
-      }
-      .pdf-frame {
-        width: 100%;
-        height: 100%;
-        border: 0;
-        background: #fff;
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./studio.css">
   </head>
-  <body>
-    <main class="lock-shell">
-      <div class="eyebrow">Privat Client Room</div>
-      <h1 id="headline"></h1>
-      <p id="intro"></p>
-      <form id="unlock-form">
-        <label for="password">Adgangskode</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" autofocus required>
-        <button type="submit">Lås op</button>
-      </form>
-      <div id="status" class="status"></div>
-    </main>
-    <script>
-      const pageTitle = "Mieritz Advokatfirma · Client Room";
-      const headline = "Mieritz Advokatfirma";
-      const intro = "Skriv adgangskoden, du har fået sammen med linket, for at dekryptere og åbne Client Room.";
-      const encryptedFilename = "./room.enc.json";
-      const successMode = "html";
-      const successTitle = "Mieritz Advokatfirma · Client Room";
-      const sessionKey = "sitedok_room_html_gtYD7zbfYaiDoFdBbyiUeRGA";
-      const downloadFilename = "Executive.pdf";
-      document.title = pageTitle;
-      document.getElementById("headline").textContent = headline;
-      document.getElementById("intro").textContent = intro;
+  <body class="client-room-body client-room-v5">
+    <div class="app-shell app-shell-room">
+      <header class="client-room-header">
+        <div class="client-room-brand">
+          <div class="radar-mark">
+            <span class="radar-ring radar-ring-1"></span>
+            <span class="radar-ring radar-ring-2"></span>
+            <span class="radar-beam"></span>
+          </div>
+          <div>
+            <div class="eyebrow">Client Room</div>
+            <div class="brand-link brand-link-static">SitedokAI</div>
+          </div>
+        </div>
 
-      function setStatus(message, kind = "") {
-        const node = document.getElementById("status");
-        node.textContent = message;
-        node.className = kind ? `status ${kind}` : "status";
-      }
+        <div class="client-room-header-meta">
+          <div class="client-room-header-item">
+            <span>Format</span>
+            <strong>Read-only kundeoverblik</strong>
+          </div>
+          <div class="client-room-header-item">
+            <span>Leveret af</span>
+            <strong>SitedokAI</strong>
+          </div>
+          <div class="client-room-header-item">
+            <span>Kontakt</span>
+            <a href="mailto:info@sitedokai.com" class="client-room-support-link">info@sitedokai.com</a>
+          </div>
+        </div>
+      </header>
 
-      function b64ToBytes(value) {
-        const binary = atob(value);
-        const bytes = new Uint8Array(binary.length);
-        for (let index = 0; index < binary.length; index += 1) {
-          bytes[index] = binary.charCodeAt(index);
-        }
-        return bytes;
-      }
+      <main class="page-frame">
+        
+  <section class="hero-panel hero-panel-room">
+    <div>
+      <div class="eyebrow">AI Markedsposition</div>
+      <h1>Mieritz Advokatfirma</h1>
+      <p class="lead lead-strong">I bliver fundet, men der er stadig penge på bordet.</p>
+      <p class="lead">I står allerede godt, men næste løft kommer fra at blive valgt mere sikkert i de situationer, hvor kunden skal tage en beslutning.</p>
 
-      function bytesToUtf8(bytes) {
-        return new TextDecoder().decode(bytes);
-      }
+      <div class="verdict-strip">
+        <div class="verdict-item">
+          <span>AI-markedsposition</span>
+          <strong>78/100</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Hvor sikre vi er</span>
+          <strong>Høj</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Bredde nu</span>
+          <strong>81%</strong>
+        </div>
+        <div class="verdict-item">
+          <span>Start her</span>
+          <strong>Styrk de sider, der skal vinde søgningerne</strong>
+        </div>
+      </div>
+    </div>
 
-      async function deriveKey(password, salt, iterations) {
-        const baseKey = await crypto.subtle.importKey(
-          "raw",
-          new TextEncoder().encode(password),
-          "PBKDF2",
-          false,
-          ["deriveKey"],
-        );
-        return crypto.subtle.deriveKey(
-          {
-            name: "PBKDF2",
-            hash: "SHA-256",
-            salt,
-            iterations,
-          },
-          baseKey,
-          { name: "AES-GCM", length: 256 },
-          false,
-          ["decrypt"],
-        );
-      }
+      <div class="room-publish-box room-publish-box-rich">
+        <div>
+          <span>Senest opdateret</span>
+          <strong>16 Apr 2026 · 10:58</strong>
+        </div>
+        <div>
+          <span>Adgang</span>
+          <strong>Privat link + adgangskode</strong>
+        </div>
+        <div>
+          <span>Omfang</span>
+          <strong>8 søgninger · 3 konkurrenter</strong>
+        </div>
+        <p class="room-publish-note">
+          
+          Rummet er read-only og åbner direkte i browseren via privat link og adgangskode. PDF-versionen er den korte ledelsesopsummering, men selve beslutningsrummet er denne side.
+        
+      </p>
+      
+        <a class="button button-primary" href="./SitedokAI_ClientRoom_Mieritz_Advokatfirma.pdf">Hent Executive PDF</a>
+      
+    </div>
+  </section>
 
-      async function decryptPayload(password) {
-        const response = await fetch(encryptedFilename, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error("Kunne ikke hente det krypterede room.");
-        }
-        const payload = await response.json();
-        const salt = b64ToBytes(payload.salt_b64);
-        const iv = b64ToBytes(payload.iv_b64);
-        const ciphertext = b64ToBytes(payload.ciphertext_b64);
-        const key = await deriveKey(password, salt, payload.iterations);
-        const plaintext = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ciphertext);
-        return new Uint8Array(plaintext);
-      }
+  <div class="room-reading-surface">
+    <section class="card-grid card-grid-3">
+      <article class="metric-card metric-card-decision metric-card-plain">
+        <span class="metric-label">AI-markedsposition</span>
+        <strong class="metric-value">78/100</strong>
+        <p>Et samlet blik på hvor godt I fanger søgninger, hvor bredt I bliver nævnt, og hvor tydeligt AI kan stole på jeres digitale fodaftryk.</p>
+        <div class="impact-range formula-breakdown">
+          <span>AI-synlighed 81/100</span>
+          <span>Bredde 81%</span>
+          <span>Socialt lag 69/100</span>
+          <span>Teknik 77/100</span>
+        </div>
+      </article>
+      <article class="metric-card metric-card-decision">
+        <span class="metric-label">Det der vil hjælpe mest</span>
+        <strong class="metric-title">Styrk de sider, der skal vinde søgningerne</strong>
+        <p>Det er den hurtigste vej til at gå fra løs tilstedeværelse til at blive valgt oftere, når nogen er tæt på at købe.</p>
+      </article>
+      <article class="metric-card metric-card-decision metric-card-impact">
+        <span class="metric-label">Mulig effekt</span>
+        <strong class="metric-value" id="summary-impact-value">+23%</strong>
+        <p>Vores bedste bud på hvor meget mere relevant interesse planen kan skabe.</p>
+        <div class="impact-range">
+          <span id="summary-impact-low">Forsigtigt 14%</span>
+          <span id="summary-impact-base">Mest sandsynligt 23%</span>
+          <span id="summary-impact-high">Bedste fald 34%</span>
+        </div>
+      </article>
+    </section>
 
-      async function unlock(password) {
-        setStatus("Låser op...", "");
-        try {
-          const bytes = await decryptPayload(password);
-          if (successMode === "html") {
-            const html = bytesToUtf8(bytes);
-            if (sessionKey) {
-              sessionStorage.setItem(sessionKey, html);
-            }
-            document.open();
-            document.write(html);
-            document.close();
-            return;
-          }
+    <section class="data-panel data-panel-focus">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Søgninger Først</div>
+          <h2>Det bygger vores vurdering på</h2>
+        </div>
+        <p>Her er de vigtigste søgninger, vi har testet, så I kan se hvor I står, før vi anbefaler noget.</p>
+      </div>
 
-          const blob = new Blob([bytes], { type: "application/pdf" });
-          const blobUrl = URL.createObjectURL(blob);
-          const wrapper = document.createElement("div");
-          wrapper.className = "pdf-view";
-          wrapper.innerHTML = `
-            <div class="pdf-toolbar">
-              <strong>${successTitle}</strong>
-              <a href="${blobUrl}" download="${downloadFilename}">Download PDF</a>
+      
+        <div class="summary-chip-row">
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>I bliver nævnt ujævnt på tværs af platforme i 2 søgninger.</strong>
+            </article>
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>1 profiler eller troværdighedstegn giver et uklart billede.</strong>
+            </article>
+          
+            <article class="summary-chip-card">
+              <span class="metric-label">Kort fortalt</span>
+              <strong>Det største tekniske problem lige nu er security headers.</strong>
+            </article>
+          
+        </div>
+      
+
+      <div class="query-overview-list">
+        
+          <article class="query-overview-row query-overview-watch">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Ustabil</span>
+                <span class="mini-pill">comparison</span>
+                <span class="score-chip score-watch">50%</span>
+              </div>
+              <h3>Mieritz Advokatfirma vs DreistStorgaard Advokater</h3>
+              <p>I bliver nævnt på Claude og Google AI, men mangler stadig på ChatGPT og Gemini.</p>
             </div>
-            <iframe class="pdf-frame" src="${blobUrl}" title="${successTitle}"></iframe>
-          `;
-          document.body.innerHTML = "";
-          document.body.appendChild(wrapper);
-          document.title = successTitle;
-          return;
-        } catch (error) {
-          setStatus("Adgangskoden passer ikke, eller roomet kunne ikke dekrypteres.", "error");
-        }
-      }
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Claude, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Gemini</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det gør jeres synlighed sårbar, fordi kunden kan få et forskelligt svar alt efter hvor de spørger.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Do you want a quick comparison of these two Danish law firms? What matters most to you: - Practice areas (e.g., real estate, corporate/M&amp;A, disputes, employment, private client) - Size and partner attention (boutique vs…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-watch">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Ustabil</span>
+                <span class="mini-pill">problem</span>
+                <span class="score-chip score-watch">50%</span>
+              </div>
+              <h3>inkasso advokat Køge</h3>
+              <p>I bliver nævnt på Claude og Gemini, men mangler stadig på ChatGPT og Google AI.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Claude, Gemini</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT, Google AI</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det gør jeres synlighed sårbar, fordi kunden kan få et forskelligt svar alt efter hvor de spørger.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Leder du efter en inkasso‑advokat i Køge? Her er 3 lokale muligheder du kan kontakte med det samme: - Advokathuset, Køge - Hjælper bl.a. med retssager og inkasso. Kontakt: cb@advokathuset-koege.dk, +45 23 74 86 17. ([hb…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">category</span>
+                <span class="score-chip score-good">75%</span>
+              </div>
+              <h3>bedste advokat i Køge</h3>
+              <p>I står stærkt på ChatGPT, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Claude</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Hvilken type sag drejer det sig om? “Bedst” afhænger af området (fx bolig/fast ejendom, familieret, strafferet, erhvervsret, dødsbo osv.). Hvis du siger lidt om behovet, kan jeg pege mere præcist. Gode, lokale advokatko…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">generic</span>
+                <span class="score-chip score-good">75%</span>
+              </div>
+              <h3>juridisk rådgivning Køge</h3>
+              <p>I står stærkt på Claude, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>Claude, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>ChatGPT</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Mangler du juridisk rådgivning i/omkring Køge? Her er hurtige muligheder – både gratis og lokale: Gratis og anonym rådgivning - Telefonretshjælpen (dækker bl.a. Køge Kommune): Ring 88 44 21 10 tirsdag og torsdag kl. 15–…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">brand</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>Hvad er MLAW i Køge?</h3>
+              <p>I står stærkt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">MLAW er Mieritz Advokatfirma – et advokatfirma i Køge. De rådgiver både private og virksomheder, har adresse på Stensbjergvej 1, 2.th., 4600 Køge, og driver også en podcast under navnet MLAW. ([mlaw.dk](https://mlaw.dk/…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">brand</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>Hvad er Mieritz Advokatfirma?</h3>
+              <p>I står stærkt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Mieritz Advokatfirma er et dansk advokatfirma (ApS) med base i Køge. De rådgiver både private og virksomheder bl.a. om boligkøb, dødsbo/skifte, lejeret, skilsmisse, testamenter og ægtepagter samt erhvervslejeret, kontra…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">category</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>advokatfirma i Køge for virksomheder</h3>
+              <p>I står stærkt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Her er nogle erhvervsrettede advokatfirmaer i Køge og nærområdet, som arbejder med virksomheder: - DreistStorgaard Advokater (Køge) - Erhverv: selskabsret, ansættelsesret, køb/salg af virksomheder m.m. - Adresse: Bag Ha…</div>
+            </div>
+            
+          </article>
+        
+          <article class="query-overview-row query-overview-stable">
+            <div class="query-row-main">
+              <div class="query-row-top">
+                <span class="pill">Stærk</span>
+                <span class="mini-pill">problem</span>
+                <span class="score-chip score-good">100%</span>
+              </div>
+              <h3>hjælp til testamente i Køge</h3>
+              <p>I står stærkt på ChatGPT, Claude, Gemini og Google AI i denne søgning.</p>
+            </div>
+            <div class="query-row-side">
+              <div>
+                <span class="metric-label">Synlig på</span>
+                <p>ChatGPT, Claude, Gemini, Google AI</p>
+              </div>
+              <div>
+                <span class="metric-label">Mangler på</span>
+                <p>Ingen tydelige mangler i denne søgning</p>
+              </div>
+            </div>
+            
+            <div class="query-row-proof">
+              <div class="query-proof-block">
+                <span class="metric-label">Hvorfor vi reagerer</span>
+                <p>Det her er en søgning, hvor I allerede har noget, der virker, og som bør beskyttes og bygges videre på.</p>
+              </div>
+              <div class="detail-note detail-note-inline">Selvfølgelig — hvad har du mest brug for i Køge-området? - finde en lokal advokat til at udarbejde testamente - få overblik over testaments-typer og typiske valg - klargøre dine ønsker i en tjekliste, før du møder advok…</div>
+            </div>
+            
+          </article>
+        
+      </div>
 
-      if (sessionKey) {
-        const cachedHtml = sessionStorage.getItem(sessionKey);
-        if (cachedHtml) {
-          document.open();
-          document.write(cachedHtml);
-          document.close();
-        }
-      }
+      
+        <details class="scenario-backlog executive-details">
+          <summary>Se alle testede søgninger</summary>
+          <div class="heatmap-layout">
+            <div class="heatmap-list">
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Mieritz Advokatfirma vs DreistStorgaard Advokater</strong>
+                      <div class="muted-line">comparison</div>
+                    </div>
+                    <span class="score-chip score-watch">50%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="ChatGPT"
+                        data-query="Mieritz Advokatfirma vs DreistStorgaard Advokater"
+                        data-summary="For tyndt match"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret gentager navnet (Mieritz Advokatfirma, Mieritz), men giver ikke nok konkrete signaler til at vi tør tælle det som et sikkert fund."
+                        data-answer="Do you want a quick comparison of these two Danish law firms? What matters most to you: - Practice areas (e.g., real estate, corporate/M&amp;A, disputes, employment, private client) - Size and partner attention (boutique vs. larger full-service) - Fees/billing approach - Location and responsiveness - Rankings/reputation and typical clients - Languages Also, what’s your legal need and timeline? If you confirm, I can pull the latest publicly available details and compare Mieritz Advokatfirma and DreistStorgaard Advokater side by side."
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>For tyndt match</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="Mieritz Advokatfirma vs DreistStorgaard Advokater"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #2"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, erhvervsrådgivning, inkasso, juridisk."
+                        data-answer="Her er en sammenligning af **Mieritz Advokatfirma** og **DreistStorgaard Advokater** baseret på tilgængelig information: --- ## ⚖️ Mieritz Advokatfirma vs. DreistStorgaard Advokater --- ### 🏢 Om firmaerne **Mieritz Advokatfirma** Mieritz Advokatfirma er beliggende i Køge og tilbyder specialiseret juridisk rådgivning til privatpersoner og virksomheder. Firmaet tilbyder juridisk rådgivning inden for en bred vifte af områder, herunder erhvervsretlige sager med ejendomshandler, testamenter, ægtepagter mv., og har stor erfaring og møderet til at tage sager hele vejen til Højesteret. **DreistStorgaard Advokater** DreistStorgaard Advokater A/S blev dannet gennem en fusion af to advokatfirmaer i Køge den 1. september 2015, ejet af Svend-Aage Dreist Hansen og Søren Storgaard. I perioden fra 2015 til i dag er virksomheden vokset fra 55 til +90 medarbejdere. DreistStorgaard er Sjællands største advokatfirma uden for København. --- ### 📍 Geografisk tilstedeværelse | | **Mieritz Advokatfirma** | **DreistStorgaard Advokater** | |---|---|---| | **Primær placering** | Køge (+ Næstved, Haslev) | Holbæk (hovedkontor) | | **Kontorer** | Primært lokalt | Flere kontorer | DreistStorgaards dedikerede m…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, erhvervsrådgivning, inkasso og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="Mieritz Advokatfirma vs DreistStorgaard Advokater"
+                        data-summary="For tyndt match"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret gentager navnet (Mieritz Advokatfirma, Mieritz), men giver ikke nok konkrete signaler til at vi tør tælle det som et sikkert fund."
+                        data-answer="Mieritz Advokatfirma and DreistStorgaard Advokater are two well-established Danish law firms, but they operate with significantly different focuses and client profiles. The choice between them depends entirely on your specific legal needs. Here&#39;s a breakdown of their main differences: --- ### Mieritz Advokatfirma * **Primary Focus:** Mieritz Advokatfirma is primarily known as a highly specialized **criminal defense firm (strafferetsadvokat / forsvarer)**. * **Expertise:** Their core competence lies in criminal law, representing individuals accused of various crimes, from minor offenses to serious felonies. They are experts in Danish criminal procedure, evidence, and navigating the justice system for their clients. * **Clientele:** Individuals who are under investigation, charged with a crime, or need legal representation in criminal court proceedings. * **Size &amp; Approach:** Often perceived as a more focused, boutique firm dedicated to this specific niche. This can imply a very personal, dedicated, and in-depth approach to criminal cases. * **When to Choose Mieritz Advokatfirma:** If you, or someone you know, has been arrested, charged with a crime, or needs legal counsel related t…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>For tyndt match</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Google AI"
+                        data-query="Mieritz Advokatfirma vs DreistStorgaard Advokater"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: ."
+                        data-answer="Mieritz Advokatfirma and DreistStorgaard Advokater are two Danish law firms offering legal services, with some distinct differences in their size, scope, and approach. Both firms are located in Køge, Denmark, though DreistStorgaard also has a presence in Næstved. **Mieritz Advokatfirma** Mieritz Advokatfirma is a smaller firm with an employee count of 10 as of March 2024. The firm emphasizes a modern, digital approach and the use of AI, aiming to make legal services accessible, understandable, and useful. They are known for their direct communication, providing honest assessments to clients regarding their cases and pricing. Mieritz Advokatfirma offers legal advice to private individuals and businesses across various areas, including corporate law matters, property transactions, wills, and prenuptial agreements. Key individuals associated with the firm include Jesper Køppen Fenger-Mieritz, Mikael Køppen Mieritz, and Bettina Elidsbo Mieritz Schmidt. **DreistStorgaard Advokater** DreistStorgaard Advokater is considerably larger, described as Zealand&#39;s largest law firm outside Copenhagen, with approximately 80 employees. They operate as a full-service law firm, possessing significant…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>inkasso advokat Køge</strong>
+                      <div class="muted-line">problem</div>
+                    </div>
+                    <span class="score-chip score-watch">50%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="inkasso advokat Køge"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
+                        data-answer="Leder du efter en inkasso‑advokat i Køge? Her er 3 lokale muligheder du kan kontakte med det samme: - Advokathuset, Køge - Hjælper bl.a. med retssager og inkasso. Kontakt: cb@advokathuset-koege.dk, +45 23 74 86 17. ([hbkoge.dk](https://www.hbkoge.dk/partneroversigt/advokathuset/)) - DreistStorgaard Advokater, Køge - Har dedikeret inkassoafdeling og kontor i Køge (Bag Haverne 32). Se deres inkassoside og lokale nyhed om inkasso-team. Tlf. 56 63 44 66. ([dreiststorgaard.dk](https://dreiststorgaard.dk/erhverv/inkasso/?utm_source=openai)) - Advokatfirmaet Engelbrecht, Køge - Tilbyder både udenretlig og retslig inkasso. Adresse: Galoche Allé 6, 4600 Køge. Tlf. 54 70 58 00, post@aelaw.dk. ([advokatfirmaetengelbrecht.dk](https://www.advokatfirmaetengelbrecht.dk/erhvervsret/inkasso))"
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="advokat og inkasso"
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="inkasso advokat Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #3"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: juridisk rådgivning, inkasso, juridisk."
+                        data-answer="Her er en oversigt over **inkasso advokater i og omkring Køge**, som kan hjælpe dig med inddrivelse af tilgodehavender: --- ## 🏛️ 1. DreistStorgaard Advokater – Køge DreistStorgaard er et fremsynet full-service advokatfirma, der rådgiver en bred vifte af klienter – alt fra privatkunder til lokale og nationale virksomheder i SMV-segmentet samt internationale virksomheder. - 📍 **Adresse:** Bag Haverne 32, 4600 Køge - 📞 **Tlf.:** 56 63 44 66 - 📧 **E-mail:** kontakt@dslaw.dk - 🌐 [dreiststorgaard.dk](https://dreiststorgaard.dk/erhverv/inkasso/) De sikrer en effektiv og resultatorienteret inkassobehandling. Mange virksomheder forsøger selv at håndtere rykkerprocedurer, men det kan være både tidskrævende og frustrerende. DreistStorgaard tilbyder ekspertise til at hjælpe med at undgå inkassosager gennem effektive rykkerprocedurer og professionel rådgivning. **Ydelser inkluderer bl.a.:** Inkassoskrivelser, skylderklæringer og andre nødvendige papirer · Telefonisk dialog for at finde en udenretlig løsning · Håndtering af betalingsaftaler med debitor · Registrering og løbende overvågning af debitor i RKI-systemet · Professionel bistand i fogedsager og efterfølgende retssager · Effektiv inddr…"
+                        data-aliases="Advokatfirma"
+                        data-signals="juridisk rådgivning, inkasso, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #3</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="inkasso advokat Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, inkasso."
+                        data-answer="Søger du en advokat i Køge med speciale i inkasso, er der flere muligheder. En advokat kan hjælpe både dig, der skal inddrive gæld, og dig, der er blevet præsenteret for et inkassokrav. **Sådan finder du en inkassoadvokat i Køge:** 1. **Online søgning:** Den nemmeste måde er at søge online. Brug søgetermer som: * &#34;inkassoadvokat Køge&#34; * &#34;advokat Køge erhvervsret inkasso&#34; * &#34;gældsinddrivelse advokat Køge&#34; * &#34;advokatfirma Køge inkasso&#34; 2. **Lokale advokatfirmaer:** Mange advokatfirmaer i Køge-området har afdelinger eller specialister inden for erhvervsret, hvor inkasso typisk falder ind under. Tjek deres hjemmesider for at se, hvilke specialer de tilbyder. Eksempler på større advokatfirmaer, der ofte dækker Køge-området og har kompetencer inden for inkasso/erhvervsret, kan være: * Advodan Køge * Ret&amp;Råd Køge * Lund Elmer Sandager (har kontor i København, men dækker ofte Sjælland) * Flere mindre, lokale firmaer. 3. **Advokatsamfundets register:** Du kan også søge på Advokatsamfundets hjemmeside, hvor du kan finde advokater og ofte se deres specialer. **Hvad en inkassoadvokat kan hjælpe med:** En advokat med speciale i inkasso kan bistå dig, uanset om du er kreditor (skal have penge)…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, inkasso og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Google AI"
+                        data-query="inkasso advokat Køge"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
+                        data-answer="I Køge findes der flere advokatfirmaer, der specialiserer sig i inkasso. Disse firmaer kan hjælpe virksomheder med at inddrive udestående betalinger effektivt og professionelt. Nogle af de advokatfirmaer, der tilbyder inkassoservices i eller nær Køge, inkluderer: * **DreistStorgaard:** Har et kontor i Køge og tilbyder en bred vifte af inkassoservices, herunder udenretlig og retlig inkasso, samt rådgivning om, hvordan man kan undgå fremtidige inkassosager. * **PARTNER Advokater:** Tilbyder hurtig og effektiv inddrivelse af tilgodehavender i Køge. * **Ret&amp;Råd Advokater Køge:** Tilbyder advokathjælp til inkassosager og har en inkassoafdeling. Generelt fokuserer inkassoret i Danmark på processen med at inddrive betalinger fra personer eller virksomheder, der skylder penge. Det omfatter både kreditorers og debitorers juridiske rettigheder og ansvar, og sikrer at inkassopraksis er fair og etisk. Inkassoadvokater kan hjælpe med alt fra at gennemgå sagen og kontakte debitor, til at udarbejde dokumenter, forhandle afdragsordninger og føre retssager."
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="inkasso og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>bedste advokat i Køge</strong>
+                      <div class="muted-line">category</div>
+                    </div>
+                    <span class="score-chip score-good">75%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="ChatGPT"
+                        data-query="bedste advokat i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: ."
+                        data-answer="Hvilken type sag drejer det sig om? “Bedst” afhænger af området (fx bolig/fast ejendom, familieret, strafferet, erhvervsret, dødsbo osv.). Hvis du siger lidt om behovet, kan jeg pege mere præcist. Gode, lokale advokatkontorer i Køge, du kan starte med: - DreistStorgaard Advokater A/S (hovedkontor i Køge). Full-service med både privat- og erhvervssager. Adresse: Bag Haverne 32 / Galoche Allé 6, 4600 Køge. ([dreiststorgaard.dk](https://dreiststorgaard.dk/om-os/vores-dna/?utm_source=openai)) - PARTNER Advokater (Køge). Både erhverv og privat; lokalt forankret. Adresse: Stensbjergvej 7, 3.tv, 4600 Køge. ([partneradvokater.dk](https://partneradvokater.dk/?utm_source=openai)) - Ret&amp;Råd Advokater, Køge. Bred privat- og erhvervsprofil (bolig, familieret m.m.). ([ret-raad.dk](https://www.ret-raad.dk/koege/?utm_source=openai)) - Mieritz Advokatfirma, Køge. Rådgiver bl.a. om ejendomshandler, testamenter/ægtepagter og erhverv. Adresse: Stensbjergvej 1, 2.th., 4600 Køge. ([mlaw.dk](https://mlaw.dk/?utm_source=openai)) Sådan vælger du hurtigt: - Match specialet til sagen (se deres “kompetencer/specialer”-sider). - Ring til 2–3 kontorer, bed om kort indledende afklaring og prisoverslag. - Spørg…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="Claude"
+                        data-query="bedste advokat i Køge"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
+                        data-answer="Her er en oversigt over nogle af de mest kendte og anerkendte advokatfirmaer og advokater i Køge: --- ## ⚖️ Bedste advokater i Køge ### 1. 🏆 DreistStorgaard Advokater A/S Hos DreistStorgaard Advokater i Køge tilbydes rådgivning inden for både privatret og erhvervsret – altid tilpasset den enkeltes situation. - Som erfarne boligadvokater hjælper de dig trygt igennem køb og salg af bolig – fra købsaftale til skøde. - De rådgiver virksomheder i alle faser – fra opstart til generationsskifte – herunder selskabsret, ansættelsesret samt køb og salg af virksomheder. - Selskabet har 14 ansatte registreret ved Advokatsamfundet. - 📞 Tlf.: 55 75 00 75 | 🌐 [dreiststorgaard.dk](https://dreiststorgaard.dk) --- ### 2. PARTNER Advokater Advokataktieselskab Deres faglighed og den værdi, de kan tilføre kunderne, er drivkræfter – og de møder kunderne netop der, hvor de har en udfordring eller et problem, de ønsker løst. - De tilbyder bl.a. rådgivning om boligkøb, bopæls- og samværssager samt erhvervsret. - Selskabet har 3 ansatte registreret ved Advokatsamfundet. - 🌐 [partneradvokater.dk](https://partneradvokater.dk) --- ### 3. Advokathuset Køge ApS Advokathuset i Køge er en alsidig virksomhed, der…"
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="advokat, juridisk rådgivning, boligkøb og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="bedste advokat i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, juridisk."
+                        data-answer="Det er svært at pege på én &#34;bedste&#34; advokat i Køge, da den bedste advokat for dig afhænger helt af: 1. **Den specifikke type sag, du har:** Skal du bruge en advokat inden for familieret (skilsmisse, bodeling), strafferet, erhvervsret, fast ejendom, arveret, retshjælp, etc.? Advokater specialiserer sig. 2. **Advokatens erfaring og ekspertise inden for netop dit område.** 3. **Personlig kemi og kommunikation:** Det er vigtigt, at du føler dig tryg og forstået. 4. **Salær og omkostninger.** 5. **Lokation og tilgængelighed.** **For at finde den bedste advokat til dit behov, vil jeg anbefale følgende:** 1. **Identificer sagstypen:** Det absolut vigtigste er at vide, hvilken type juridisk problem du står overfor. 2. **Søg på nettet:** Brug søgemaskiner med specifikke termer som f.eks.: * &#34;advokat Køge familieret&#34; * &#34;advokat Køge erhvervsret&#34; * &#34;advokat Køge bolighandel&#34; * &#34;advokat Køge retshjælp&#34; 3. **Advokatsamfundets Advokatnøgle:** Advokatsamfundet har en søgemaskine, hvor du kan finde advokater baseret på speciale og geografi: [https://www.advokatsamfundet.dk/advokatnoeglen/](https://www.advokatsamfundet.dk/advokatnoeglen/) 4. **Spørg efter anbefalinger:** Venner, familie eller koll…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Google AI"
+                        data-query="bedste advokat i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #4"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, juridisk rådgivning, testamente, inkasso."
+                        data-answer="Det er subjektivt at udpege den &#34;bedste&#34; advokat i Køge, da valget ofte afhænger af de specifikke juridiske behov. Dog fremhæver søgningerne flere velrenommerede advokatfirmaer og individuelle advokater i området, som har en bred vifte af kompetencer og positiv omtale. Blandt de mest fremtrædende er: * **DreistStorgaard Advokater A/S**: Dette firma har en TrustScore på 4,1 ud af 5 baseret på 101 anmeldelser, hvilket indikerer en generelt god kundetilfredshed. De beskriver sig selv som et fremsynet advokatfirma med fokus på kvalitet, tilgængelighed, hurtighed og engagement, og de yder rådgivning til både små og mellemstore virksomheder samt privatpersoner. DreistStorgaard har 14 ansatte registreret ved Advokatsamfundet. * **Advokathuset i Køge ApS**: Advokathuset har en lang historie, da det har betjent klienter siden 1960. Firmaet er velrenommeret og stabilt med 3 advokater og 3 sekretærer, der alle fungerer som selvstændige sagsbehandlere. De lægger stor vægt på et personligt forhold til deres klienter og tilbyder rådgivning inden for en bred vifte af juridiske områder, herunder ejendomshandler, dødsbobehandling, testamenter, ægtepagter, fremtidsfuldmagter, retssager, straffesage…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, testamente og inkasso"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #4</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>juridisk rådgivning Køge</strong>
+                      <div class="muted-line">generic</div>
+                    </div>
+                    <span class="score-chip score-good">75%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-miss"
+                        data-platform="ChatGPT"
+                        data-query="juridisk rådgivning Køge"
+                        data-summary="Ikke fundet"
+                        data-meta="Tæller ikke med i vurderingen"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret giver ikke et tydeligt match på den rigtige virksomhed eller person."
+                        data-answer="Mangler du juridisk rådgivning i/omkring Køge? Her er hurtige muligheder – både gratis og lokale: Gratis og anonym rådgivning - Telefonretshjælpen (dækker bl.a. Køge Kommune): Ring 88 44 21 10 tirsdag og torsdag kl. 15–20 for gratis, anonym telefonisk rådgivning. ([tlfrh.dk](https://www.tlfrh.dk/)) - Den Mobile Retshjælp: Gratis rådgivning pr. telefon og mail. Telefon 72 11 90 77 (hverdage formiddag). Kan kontaktes online. ([mobilretshjaelp.dk](https://mobilretshjaelp.dk/)) - Advokatvagten (Køge): Gratis, anonym, mundtlig rådgivning ved fremmøde i lokalområdet. Tjek lokale åbningstider"
+                        data-aliases="Ingen sikre alias-match gemt."
+                        data-signals="juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Ikke fundet</strong>
+                        <span class="heatmap-platform-meta">Tæller ikke med i vurderingen</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Claude"
+                        data-query="juridisk rådgivning Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: advokat, juridisk rådgivning, erhvervsrådgivning, boligkøb."
+                        data-answer="Her er en oversigt over de vigtigste muligheder for **juridisk rådgivning i Køge**: --- ## 🆓 Gratis juridisk rådgivning ### Advokatvagten Køge Hos Advokatvagten kan man gratis – og uden at oplyse sit navn – få et mundtligt råd om juridiske problemer. - 📍 **Adresse:** Hver onsdag kl. 16.00–17.00 i Rådhusstræde 10 C, 1. sal, 4600 Køge, hos Sundhed, Træning og Rehabilitering. - Advokatvagten er åben for alle – uanset økonomiske forhold – men man skal møde op personligt. - I knap 60% af sagerne får borgerne løst deres problemer på stedet. - 🌐 [advokatvagtenkoege.dk](https://advokatvagtenkoege.dk) --- ## ⚖️ Advokatkontorer i Køge ### 1. Ret&amp;Råd Advokater Køge Hos Ret&amp;Råd Advokater Køge er de specialiseret og yder juridisk rådgivning af høj kvalitet. Advokat Dorthe Westerdahl og advokat Jens Hessel er advokater og partnere. - De har gennem mere end 25 år rådgivet private, virksomheder og kommuner. - Advokaterne beskæftiger sig primært med erhvervsrådgivning til S/M virksomheder, selskaber, foreninger og offentlige myndigheder herunder kommuner. - 🌐 [ret-raad.dk/koege](https://www.ret-raad.dk/koege/) --- ### 2. DreistStorgaard Advokater Dit lokale advokatfirma i Køge, hvor du som både pr…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, erhvervsrådgivning og boligkøb"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="juridisk rådgivning Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, juridisk rådgivning, inkasso, juridisk."
+                        data-answer="Når du søger **juridisk rådgivning i Køge**, er der flere muligheder og områder, hvor du kan have brug for hjælp. Det er vigtigt at finde en rådgiver, der har erfaring inden for det specifikke retsområde, din sag falder ind under. **Hvad kan juridisk rådgivning i Køge dække over?** Juridisk rådgivning dækker et bredt spektrum af ydelser, herunder: 1. **Privatret / Familieret:** * Skilsmisse og separation * Børn: Forældremyndighed, bopæl og samvær * Bodeling ved skilsmisse eller dødsfald * Testamenter og arveret * Ægtepagter * Fremtidsfuldmagter * Gældsrådgivning for private 2. **Ejendomsret:** * Køb og salg af bolig (ejendomme, andelsboliger, ejerlejligheder) * Lejeret (lejers og udlejers rettigheder og pligter) * Tinglysning af skøder og andre dokumenter * Nabostridigheder * Servitutter 3. **Erhvervsret / Selskabsret:** * Oprettelse og stiftelse af selskaber (ApS, A/S, I/S, enkeltmandsvirksomhed) * Udarbejdelse af kontrakter (handelsaftaler, ansættelseskontrakter, lejekontrakter til erhverv) * Inkasso og inddrivelse af gæld * Ansættelsesret (opsigelser, bortvisninger, ansættelsesforhold) * Generationsskifte * Konkurrence- og markedsføringsret 4. **Strafferet:** * Forsvarer i stra…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, inkasso og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Google AI"
+                        data-query="juridisk rådgivning Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #4"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: advokat, juridisk rådgivning, testamente, juridisk."
+                        data-answer="Der er flere muligheder for juridisk rådgivning i Køge, der dækker en bred vifte af juridiske områder for både private og erhvervsdrivende. Her er nogle af de advokatfirmaer og jurister, der tilbyder rådgivning i Køge: * **DreistStorgaard Advokater** er et lokalt advokatfirma i Køge, der tilbyder kompetent og personlig juridisk rådgivning til både privatpersoner og erhvervsdrivende. De har erfaring med både private og erhvervsretlige sager og lægger vægt på skræddersyet rådgivning og nærværende kontakt. * **Ret&amp;Råd Advokater Køge** har over 25 års ekspertise og tilbyder specialiseret juridisk rådgivning. De rådgiver private, virksomheder og kommuner, og advokaterne Dorthe Westerdahl og Jens Hessel er partnere. Firmaet specialiserer sig inden for blandt andet byggeri og entreprise, mangler ved fast ejendom, regulering af fast ejendom, miljøret, fonde, foreninger, ejerforeninger, andelsboliger, køb af bolig og fast ejendom, ansættelse, lejekontrakter samt selskabsret. * **Advokatfirmaet Engelbrecht** i Køge tilbyder specialiseret juridisk rådgivning inden for en bred vifte af retsområder. De har stor erfaring med retssager og bistår klienter inden for familieret, dødsboer, testament…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, testamente og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #4</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Hvad er MLAW i Køge?</strong>
+                      <div class="muted-line">brand</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="Hvad er MLAW i Køge?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: ."
+                        data-answer="MLAW er Mieritz Advokatfirma – et advokatfirma i Køge. De rådgiver både private og virksomheder, har adresse på Stensbjergvej 1, 2.th., 4600 Køge, og driver også en podcast under navnet MLAW. ([mlaw.dk](https://mlaw.dk/))"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="Ingen tydelige kontekstsignaler gemt."
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="Hvad er MLAW i Køge?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: advokat, juridisk rådgivning, juridisk, rådgivning."
+                        data-answer="**MLAW** er det populære navn for **Mieritz Advokatfirma**, et advokatfirma beliggende i Køge. Her er en oversigt over, hvad de tilbyder: ### 🏛️ Om firmaet Mieritz Advokatfirma i Køge tilbyder specialiseret juridisk rådgivning til privatpersoner og virksomheder. Firmaets to partnere er advokat Christina Monefeldt Engestoft og advokat Jesper Køppen Fenger-Mieritz. Kundeporteføljen tæller godt 200 erhvervskunder, som betjenes fra firmaets adresse på Baltic Kaj i Køge Havn. ### ⚖️ Specialer og fokusområder Virksomheden har særligt fokus på iværksætteri, fast ejendom og SMV-ejerledede virksomheder. Mieritz Advokatfirma tilbyder juridisk rådgivning af højeste kvalitet inden for en bred vifte af områder, herunder erhvervsretlige sager med ejendomshandler, testamenter, ægtepagter mv. De har stor erfaring og møderet til at tage en sag hele vejen til Højesteret, hvis det bliver aktuelt. ### 🎯 Tilgang og værdier Hos Mieritz Advokatfirma er det vigtigt at være en sparringspartner i øjenhøjde. Derfor er det deres mål at give viden, der ruster deres kunder til at håndtere deres udfordringer, undgå konflikter og vide, hvornår der skal søges rådgivning. De gør bl.a. brug af kunstig intelligens (…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Gemini"
+                        data-query="Hvad er MLAW i Køge?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma, mlaw og rammer flere specifikke signaler om jeres rigtige kontekst: juridisk rådgivning, juridisk."
+                        data-answer="MLAW i Køge er et **advokatfirma** ved navn **MLAW Advokater A/S**. De tilbyder juridisk rådgivning og assistance inden for forskellige retsområder til både private, virksomheder og offentlige institutioner. Deres kontor i Køge ligger centralt."
+                        data-aliases="Advokatfirma og mlaw"
+                        data-signals="juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Google AI"
+                        data-query="Hvad er MLAW i Køge?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, juridisk, rådgivning."
+                        data-answer="MLAW in Køge refererer til Mieritz Advokatfirma, som er et advokatfirma beliggende på Baltic Kaj 1, 2., 4600 Køge, Danmark. Mieritz Advokatfirma tilbyder juridisk rådgivning inden for en række områder med fokus på klienternes ønsker, herunder iværksætteri, rådgivning til ejerledere samt fast ejendom. Firmaet udgiver også en podcast-serie kaldet &#34;MLAW&#34;, der handler om iværksætteri, jura og forretningsforståelse. Bag podcasten står advokaterne Jesper Fenger-Mieritz og Christina Monefeldt Engestoft samt kontorets øvrige personale."
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>Hvad er Mieritz Advokatfirma?</strong>
+                      <div class="muted-line">brand</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="ChatGPT"
+                        data-query="Hvad er Mieritz Advokatfirma?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: advokat, boligkøb."
+                        data-answer="Mieritz Advokatfirma er et dansk advokatfirma (ApS) med base i Køge. De rådgiver både private og virksomheder bl.a. om boligkøb, dødsbo/skifte, lejeret, skilsmisse, testamenter og ægtepagter samt erhvervslejeret, kontrakter, selskabsstiftelse og tvister. Firmaet ledes af advokat (H) Jesper Køppen Fenger‑Mieritz. Adresse: Stensbjergvej 1, 2.th., 4600 Køge. ([mlaw.dk](https://mlaw.dk/))"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="advokat og boligkøb"
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="Hvad er Mieritz Advokatfirma?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #2"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, juridisk, rådgivning."
+                        data-answer="Her er en oversigt over **Mieritz Advokatfirma**: --- ### 🏛️ Hvad er det? Mieritz Advokatfirma er et advokatfirma beliggende i Køge, der tilbyder specialiseret juridisk rådgivning til privatpersoner og virksomheder. --- ### 📍 Lokation Firmaet har adresse på Stensbjergvej 1, 2. th, 4600 Køge. De har desuden kontorer i andre byer, herunder Næstved og Haslev. --- ### ⚖️ Specialer og ydelser Mieritz Advokatfirma tilbyder juridisk rådgivning af højeste kvalitet inden for en bred vifte af områder, herunder erhvervsretlige sager med ejendomshandler, testamenter, ægtepagter mv., og de har stor erfaring og møderet til at tage sager hele vejen til Højesteret. Virksomheden har særligt fokus på iværksætteri, fast ejendom og SMV-ejerledede virksomheder. --- ### 🎯 Filosofi og tilgang Firmaets mål er at give kunderne viden, så de kan håndtere udfordringer nemt, undgå konflikter og vide, hvornår de skal søge hjælp. De ønsker, at deres juridiske rådgivning skal være værdifuld, skabe resultater og være let at forstå. Mieritz Advokatfirma tror på, at en fælles forståelse skaber det bedste udgangspunkt for et tillidsfuldt samarbejde, og de deler viden for at give klienterne forståelse for situationen…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #2</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Gemini"
+                        data-query="Hvad er Mieritz Advokatfirma?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, juridisk, rådgivning."
+                        data-answer="Mieritz Advokatfirma er et advokatfirma med kontorer i **København**, **Aarhus** og **Odense**. De specialiserer sig inden for **erhvervsret**, hvilket betyder, at de primært rådgiver virksomheder om juridiske forhold. Her er nogle af de kerneområder, de arbejder med: * **Virksomhedsret:** Generel rådgivning om oprettelse, drift og restrukturering af virksomheder. * **Kontraktsret:** Udarbejdelse, gennemgang og forhandling af aftaler. * **Immaterialret:** Beskyttelse af varemærker, design, patenter og ophavsret. * **Ansættelsesret:** Rådgivning om ansættelseskontrakter, opsigelser, afskedigelser og personalejuridiske spørgsmål. * **Konkurs- og insolvensret:** Bistand til virksomheder i økonomiske vanskeligheder, herunder rekonstruktion og konkurs. * **Tvistløsning og proces:** Repræsentation af klienter i retssager og andre tvistløsningsprocedurer. * **Fast ejendom:** Juridisk rådgivning i forbindelse med køb, salg og leje af erhvervsejendomme. Deres målsætning er at levere kvalificeret juridisk rådgivning med fokus på at skabe værdi for deres erhvervsklienter. Hvis du vil vide mere, kan du besøge deres hjemmeside: [https://mieritz.com/](https://mieritz.com/)"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Google AI"
+                        data-query="Hvad er Mieritz Advokatfirma?"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #1"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, erhvervsrådgivning, boligkøb, inkasso."
+                        data-answer="Mieritz Advokatfirma er et dansk advokatfirma, der tilbyder juridisk rådgivning af høj kvalitet til både private og erhvervskunder. Firmaet er grundlagt i 2007 med en ambition om at skabe en anderledes tilgang til juridisk rådgivning, baseret på ærlighed, gennemsigtighed og tillid. Firmaet har kontorer i Køge og Haslev. **For private tilbyder Mieritz Advokatfirma rådgivning inden for en række områder, herunder:** * Boligkøb * Dødsbobehandling * Rets- og voldgiftssager * Fremtidsfuldmagter * Lejeret * Enterprisekontrakter * Skilsmisse * Testamenter og ægtepagter **For erhvervskunder omfatter rådgivningen blandt andet:** * Erhvervsretlige sager, herunder ejendomshandler * Erhvervslejeret * Inkasso * Kontraktudarbejdelse * Omstrukturering * Stiftelse af selskab * Virksomhedshandel * Rets- og voldgiftssager * Erhvervsrådgivning på abonnementsbasis Mieritz Advokatfirma lægger vægt på &#34;rådgivning i øjenhøjde&#34; og at gøre jura tilgængeligt og forståeligt. De har en stærk fokus på digitalisering og AI, og tilbyder også undervisning, kurser og foredrag inden for AI og datasikkerhed. Firmaet udgiver desuden en podcast med titlen &#34;MLAW&#34;, der omhandler iværksætteri, jura, forretningsforståelse…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, erhvervsrådgivning, boligkøb og inkasso"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #1</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>advokatfirma i Køge for virksomheder</strong>
+                      <div class="muted-line">category</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="ChatGPT"
+                        data-query="advokatfirma i Køge for virksomheder"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: advokat, erhvervsrådgivning, inkasso, rådgivning."
+                        data-answer="Her er nogle erhvervsrettede advokatfirmaer i Køge og nærområdet, som arbejder med virksomheder: - DreistStorgaard Advokater (Køge) - Erhverv: selskabsret, ansættelsesret, køb/salg af virksomheder m.m. - Adresse: Bag Haverne 32, 4600 Køge. Tlf.: 56 63 44 66. ([dreiststorgaard.dk](https://dreiststorgaard.dk/koege/)) - Nørregaard Advokatfirma (Køge/Næstved) - Erhverv: inkasso, konkurs/rekonstruktion, virksomhedshandler, omdannelse, ansættelsesret, selskabsretlig rådgivning. - Kontor i Køge; se “Erhverv”-ydelser på deres side. ([noerregaard-advokatfirma.dk](https://noerregaard-advokatfirma.dk/om-os/)) - Mieritz Advokatfirma (Køge) - Tilbyder bl.a. erhvervsrådgivning og mulighed for abonnementsaftale for virksomheder. - Adresse: Stensbjergvej 1, 2.th., 4600 Køge. Tlf.: +45 32 42 64 00. ([mlaw.dk](https://mlaw.dk/)) - PARTNER Advokater (Køge/København) - Mindre erhvervsfokuseret firma; kontor i Køge (Stensbjergvej 7). - God mulighed, hvis du ønsker tæt kontakt til partner/advokat. ([dk.linkedin.com](https://dk.linkedin.com/company/partner-advokater)) Hvis du skriver par ord om dit behov (fx selskabsstiftelse, kontrakter, ansættelsesret, tvist/retssag, M&amp;A, eller inkasso), kan jeg pege…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="advokat, erhvervsrådgivning, inkasso og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-win"
+                        data-platform="Claude"
+                        data-query="advokatfirma i Køge for virksomheder"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #3"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Mieritz Advokatfirma, mlaw.dk og rammer også jeres faktiske kontekst: juridisk rådgivning, erhvervsrådgivning, inkasso, juridisk."
+                        data-answer="Her er en oversigt over **advokatfirmaer i Køge**, der hjælper virksomheder med juridisk rådgivning: --- ### 🏛️ 1. **Mieritz Advokatfirma (MLAW)** 🌐 [mlaw.dk](https://mlaw.dk) Mieritz Advokatfirma i Køge tilbyder specialiseret juridisk rådgivning til privatpersoner og virksomheder. De tilbyder bl.a. abonnementsaftaler skræddersyet til din virksomhed og tilpasset dine behov. Firmaet har stor erfaring og møderet til at tage sager hele vejen til Højesteret. --- ### 🏛️ 2. **Nørregaard Advokatfirma** 🌐 [noerregaard-advokatfirma.dk](https://noerregaard-advokatfirma.dk) Nørregaard Advokatfirma har en bred ekspertise inden for alle områder af erhvervs- og privatretten. De tilbyder bl.a. rådgivning inden for inkasso, konkurs og rekonstruktion, virksomhedshandler, omdannelse af virksomhed, ansættelsesret, selskabsretlig rådgivning og erhvervsudlejning. --- ### 🏛️ 3. **DreistStorgaard Advokater** 🌐 [dreiststorgaard.dk/koege](https://dreiststorgaard.dk/koege) DreistStorgaard Advokater er en full-service advokatvirksomhed med kontorer på tværs af Danmark, og deres kernekompetencer ligger inden for erhvervsrådgivning, privatrådgivning og inkasso. De fungerer som et lokalt advokatfirma i Køge me…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, erhvervsrådgivning, inkasso og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #3</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="advokatfirma i Køge for virksomheder"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, inkasso."
+                        data-answer="Her er en liste over advokatfirmaer i Køge, der generelt henvender sig til virksomheder. Da behovene kan variere meget, anbefaler jeg altid at kontakte et par stykker for at finde det bedste match for din specifikke virksomhed og problemstilling. **Nogle af de mere kendte advokatfirmaer i Køge med erfaring inden for erhvervsret inkluderer:** * **Advokatfirmaet Andersen &amp; Stender A/S:** De tilbyder en bred vifte af juridiske ydelser til virksomheder, herunder selskabsret, erhvervsret, ansættelsesret og retssager. * **Advokatfirmaet Grotum:** Dette firma har også et godt ry for at servicere virksomheder med rådgivning inden for forskellige erhvervsjuridiske områder. * **Ret&amp;Råd Køge:** Som en del af en større kæde har Ret&amp;Råd Køge ofte specialister inden for mange områder, herunder erhvervsret, herunder oprettelse af kontrakter, selskabsstiftelse og tvister. * **Advokatfirmaet Vestergaard &amp; Sverdrup:** De rådgiver generelt virksomheder om alt fra daglig drift til mere komplekse juridiske problemstillinger. **Når du skal vælge et advokatfirma, kan det være en god idé at overveje følgende:** * **Specialisering:** Har firmaet erfaring med netop den type juridiske problematik, din virks…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, inkasso og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Google AI"
+                        data-query="advokatfirma i Køge for virksomheder"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, erhvervsrådgivning, inkasso, juridisk."
+                        data-answer="Der findes flere advokatfirmaer i Køge, der tilbyder juridisk rådgivning til virksomheder. Her er nogle af dem: * **Advokathuset ApS:** De rådgiver primært små og mellemstore virksomheder samt private. Deres ydelser inkluderer blandt andet erhvervsrådgivning, selskabsstiftelse og overdragelse af virksomheder. * **DreistStorgaard Advokater:** Dette firma tilbyder juridisk rådgivning til både privatpersoner og erhvervsdrivende. De har erfaring inden for en lang række juridiske områder, herunder erhvervsforhold. * **Ret&amp;Råd Advokater Køge:** Med over 25 års erfaring rådgiver de private, virksomheder og kommuner. Deres specialer inkluderer erhvervsrådgivning til SMV&#39;er, selskaber og foreninger. * **Mieritz Advokatfirma:** De tilbyder specialiseret juridisk rådgivning til både privatpersoner og virksomheder, herunder erhvervsretlige sager som ejendomshandler og kontraktudarbejdelse. De tilbyder også erhvervsrådgivning, der dækker områder som ansættelsesret, erhvervslejeret og omstrukturering. * **PARTNER Advokater:** De tilbyder skræddersyet rådgivning til både privatpersoner og virksomheder. Deres ydelser for virksomheder inkluderer blandt andet selskabsstiftelse, inkasso og risikosty…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, erhvervsrådgivning, inkasso og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+                <article class="heatmap-query-card">
+                  <div class="heatmap-query-head">
+                    <div>
+                      <strong>hjælp til testamente i Køge</strong>
+                      <div class="muted-line">problem</div>
+                    </div>
+                    <span class="score-chip score-good">100%</span>
+                  </div>
+                  <div class="heatmap-platform-grid">
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="ChatGPT"
+                        data-query="hjælp til testamente i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Responses API + web search"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, testamente."
+                        data-answer="Selvfølgelig — hvad har du mest brug for i Køge-området? - finde en lokal advokat til at udarbejde testamente - få overblik over testaments-typer og typiske valg - klargøre dine ønsker i en tjekliste, før du møder advokaten/notaren Kort overblik (Danmark) - Gyldighed: Testamente kan underskrives foran notar (notartestamente) eller to uvildige vidner (vidnetestamente). Notartestamente anbefales, da det registreres, så Skifteretten automatisk finder det. Notargebyret er typisk 300 kr. pr. dokument. ([domstol.dk](https://www.domstol.dk/alle-emner/notar/notar-testamente/?utm_source=openai)) Hvor underskriver man nær Køge? - Notaren hører til byretten. For Køge møder man normalt hos Retten i Roskilde, Ved Ringen 1, 4000 Roskilde. Se rettens side for praktisk info og tider. ([partneradvokater.dk](https://partneradvokater.dk/privat/arv-og-testamente/?utm_source=openai)) Lokale muligheder for hjælp med testamente - Advokatfirma i Køge: Engelbrecht (Køge-afdeling). Rådgiver bl.a. om testamente/arv. ([advokatfirmaetengelbrecht.dk](https://www.advokatfirmaetengelbrecht.dk/koege?utm_source=openai)) - Landsdækkende advokat-ordning med lokale samarbejdspartnere: Det Gode Testamente – find en ad…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat og testamente"
+                      >
+                        <span class="heatmap-platform-name">ChatGPT</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Claude"
+                        data-query="hjælp til testamente i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Claude API + web search"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, juridisk rådgivning, testamente, juridisk."
+                        data-answer="Her er en oversigt over, hvordan du kan få hjælp til at oprette et testamente i Køge: --- ## 📜 Hjælp til testamente i Køge ### Hvad kan en advokat hjælpe dig med? Advokater tilbyder professionel rådgivning og hjælp til oprettelse af testamente, så din arv bliver fordelt, som du ønsker det. De rådgiver med udgangspunkt i din situation og afklarer, hvordan dine personlige forhold er, og hvad der har betydning for dig, når du går bort. Med et testamente har du medbestemmelse over, hvordan din arv skal fordeles blandt dine arvinger, og om det skal være arvemodtagerens særeje. --- ### 🏢 Advokater i Køge med speciale i testamente Her er nogle konkrete muligheder i Køge: #### 1. **DreistStorgaard Advokater** Er du i tvivl om reglerne i forhold til testamente og arveregler, kan du få juridisk rådgivning hos DreistStorgaard, som har advokater i Køge, Næstved og Aarhus. De bistår med oprettelse af testamente, overblik over arv og tilbyder en dødsboadvokat til behandling af dødsboer – og sikrer, at dine ønsker bliver respekteret og ført ud i livet. - 📞 Tlf.: 56 63 44 66 - 🌐 [dreiststorgaard.dk](https://dreiststorgaard.dk) --- #### 2. **Advokatfirmaet Engelbrecht** De har stor erfaring med te…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, juridisk rådgivning, testamente og juridisk"
+                      >
+                        <span class="heatmap-platform-name">Claude</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Gemini"
+                        data-query="hjælp til testamente i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="Gemini API + Google Search grounding"
+                        data-reason="Svaret matcher Advokatfirma og rammer flere specifikke signaler om jeres rigtige kontekst: advokat, testamente."
+                        data-answer="Hej! Det er en god og vigtig beslutning at få oprettet et testamente. At finde den rette juridiske hjælp i Køge er et godt sted at starte. **Hvorfor et testamente er vigtigt:** Uden et testamente fordeles din arv ifølge arveloven. Det betyder, at: * **Ugifte samlevende** arver ikke hinanden. * **Særbørn** (børn fra tidligere forhold) kan arve mere, end du ønsker, hvis du også har fællesbørn med en nuværende partner. * Du kan ikke sikre, at arv til dine børn bliver **særeje**, hvilket kan have betydning ved en eventuel skilsmisse. * Du kan ikke tilgodese **velgørende organisationer** eller andre personer, der ikke er dine nærmeste slægtninge. * Du kan ikke udpege en **værge** for dine mindreårige børn. **Hvad et testamente kan regulere:** * Fordeling af din arv (hvem skal arve hvad og hvor meget). * Særejebestemmelser (fx at arv til dine børn skal være deres særeje). * Værgemål for mindreårige børn. * Ønsker til begravelse/bisættelse. * Minimering af boafgift (arveafgift). **Sådan finder du hjælp til testamente i Køge:** 1. **Søg efter lokale advokater:** * Søg på Google efter &#34;advokat Køge testamente&#34;, &#34;arveret Køge&#34; eller &#34;advokatfirma Køge&#34;. * Kig efter advokatfirmaer, der speci…"
+                        data-aliases="Advokatfirma"
+                        data-signals="advokat, testamente og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Gemini</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                      <button
+                        type="button"
+                        class="heatmap-cell heatmap-platform-card heatmap-visible"
+                        data-platform="Google AI"
+                        data-query="hjælp til testamente i Køge"
+                        data-summary="Rigtigt match"
+                        data-meta="Tæller med som placering #5"
+                        data-method="API med Google Search grounding"
+                        data-reason="Svaret matcher Mieritz Advokatfirma og rammer også jeres faktiske kontekst: juridisk rådgivning, testamente, juridisk, rådgivning."
+                        data-answer="Hvis du søger hjælp til oprettelse af et testamente i Køge, er der flere advokatfirmaer og juridiske rådgivere, der kan assistere dig. Her er nogle af de muligheder, du kan overveje: * **Advokathuset ApS** tilbyder udfærdigelse af testamenter og anden rådgivning inden for privatretten. De har et erfarent team af advokater i Køge. * **Advokatfirmaet Engelbrecht** i Køge har stor erfaring med blandt andet testamenter og dødsboer. De lægger vægt på personlig og professionel rådgivning. * **PARTNER Advokater** i Køge kan hjælpe med at udforme et testamente, der sikrer dine ønsker for arvens fordeling. * **Mieritz Advokatfirma** tilbyder juridisk rådgivning af høj kvalitet, herunder vedrørende testamenter. * **Lavendla Jura Køge** har erfarne familiejurister, der kan hjælpe med testamenter, boopgørelser og arveskifte. De tilbyder både lokale fysiske møder og online-møder. * **DreistStorgaard Advokater** i Køge tilbyder rådgivning inden for arveret og bistår med oprettelse af testamente for at sikre, at arven fordeles efter dine ønsker. * **Nørregaard Advokatfirma** tilbyder specialiseret rådgivning inden for testamenter og har kontor i Køge. Et testamente giver dig mulighed for at best…"
+                        data-aliases="Mieritz Advokatfirma, Mieritz og Advokatfirma"
+                        data-signals="juridisk rådgivning, testamente, juridisk og rådgivning"
+                      >
+                        <span class="heatmap-platform-name">Google AI</span>
+                        <strong>Rigtigt match</strong>
+                        <span class="heatmap-platform-meta">Tæller med som placering #5</span>
+                      </button>
+                    
+                  </div>
+                </article>
+              
+            </div>
 
-      document.getElementById("unlock-form").addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const password = document.getElementById("password").value;
-        await unlock(password);
-      });
+            <aside class="heatmap-detail" id="heatmap-detail">
+              <div class="eyebrow">Vælg et felt</div>
+              <h3 id="heatmap-detail-title">Se hvorfor vi vurderer det sådan</h3>
+              <p id="heatmap-detail-summary">Klik på et platformssvar for at se både metode, vores vurdering og det konkrete svar.</p>
+              <div class="heatmap-detail-grid">
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Vores vurdering</span>
+                  <p id="heatmap-detail-verdict">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Kørt som</span>
+                  <p id="heatmap-detail-method">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Alias-match</span>
+                  <p id="heatmap-detail-aliases">Ingen valgt endnu.</p>
+                </div>
+                <div class="heatmap-detail-card">
+                  <span class="metric-label">Kontekstsignaler</span>
+                  <p id="heatmap-detail-signals">Ingen valgt endnu.</p>
+                </div>
+              </div>
+              <div class="detail-note" id="heatmap-detail-note">
+                Den konkrete begrundelse for vores klassificering vises her.
+              </div>
+              <div class="heatmap-answer-block">
+                <span class="metric-label">Modelens faktiske svar</span>
+                <blockquote class="heatmap-answer-quote" id="heatmap-detail-answer">Det konkrete platformsvar vises her.</blockquote>
+              </div>
+            </aside>
+          </div>
+        </details>
+      
+    </section>
+
+    <section class="data-panel data-panel-support">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Diagnose</div>
+          <h2>Det vigtigste vi baserer det på</h2>
+        </div>
+        <p>Her er de vigtigste fund, der forklarer hvorfor vi peger på netop de næste skridt.</p>
+      </div>
+
+      <div class="proof-grid">
+        
+          <article class="proof-card">
+            <span class="proof-label">Vigtig søgning</span>
+            <h3>Mieritz Advokatfirma vs DreistStorgaard Advokater</h3>
+            <p>I bliver nævnt på Claude og Google AI, men mangler stadig på ChatGPT og Gemini.</p>
+            <div class="detail-note detail-note-inline">Do you want a quick comparison of these two Danish law firms? What matters most to you: - Practice areas (e.g., real estate, corporate/M&amp;A, disputes, employment, private client) - Size and partner attention (boutique vs…</div>
+          </article>
+        
+          <article class="proof-card">
+            <span class="proof-label">Vigtig søgning</span>
+            <h3>inkasso advokat Køge</h3>
+            <p>I bliver nævnt på Claude og Gemini, men mangler stadig på ChatGPT og Google AI.</p>
+            <div class="detail-note detail-note-inline">Leder du efter en inkasso‑advokat i Køge? Her er 3 lokale muligheder du kan kontakte med det samme: - Advokathuset, Køge - Hjælper bl.a. med retssager og inkasso. Kontakt: cb@advokathuset-koege.dk, +45 23 74 86 17. ([hb…</div>
+          </article>
+        
+          <article class="proof-card">
+            <span class="proof-label">Teknisk problem</span>
+            <h3>Security headers</h3>
+            <p>Det svageste tekniske område scorer 10/100.</p>
+            <div class="detail-note detail-note-inline">Når det her halter, bliver siden sværere at bruge og sværere at forstå korrekt.</div>
+          </article>
+        
+          <article class="proof-card">
+            <span class="proof-label">Troværdighed</span>
+            <h3>De vigtigste troværdighedstegn er ikke tydelige nok endnu</h3>
+            <p>Det er især Google Business, LinkedIn og Instagram der gør billedet af jer uklart lige nu.</p>
+            <div class="detail-note detail-note-inline">Når Google, profiler og øvrige troværdighedstegn ikke fortæller den samme klare historie, bliver I sværere at vælge og sværere for AI at placere rigtigt.</div>
+          </article>
+        
+      </div>
+
+      
+        <details class="scenario-backlog executive-details">
+          <summary>Se mere dokumentation</summary>
+          <div class="evidence-grid">
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">technical_gap</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Image optimization</h3>
+                <p>Score 30/100</p>
+                <div class="muted-line">Kilde: images</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">technical_gap</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Security headers</h3>
+                <p>Score 10/100</p>
+                <div class="muted-line">Kilde: security_headers</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">Profil</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Linkedin signal</h3>
+                <p>https://www.linkedin.com/company/mlawdk</p>
+                <div class="muted-line">Kilde: linkedin</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">Profil</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Instagram signal</h3>
+                <p>https://www.instagram.com/mlaw.dk</p>
+                <div class="muted-line">Kilde: instagram</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>hjælp til testamente i Køge · Google AI</h3>
+                <p>Hvis du søger hjælp til oprettelse af et testamente i Køge, er der flere advokatfirmaer og juridiske rådgivere, der kan assistere dig. Her er nogle af de muligheder, du kan overveje: * **Advokathuset ApS** tilbyder udfærdigelse af testamenter og anden rådgivning inden for privatretten. De har et erfarent team af advokater i Køge. * **Advokatfirmaet Engelbre…</p>
+                <div class="muted-line">Kilde: Google AI</div>
+              </article>
+            
+              <article class="evidence-card">
+                <div class="evidence-meta">
+                  <span class="pill">ai_response</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>hjælp til testamente i Køge · Gemini</h3>
+                <p>Hej! Det er en god og vigtig beslutning at få oprettet et testamente. At finde den rette juridiske hjælp i Køge er et godt sted at starte. **Hvorfor et testamente er vigtigt:** Uden et testamente fordeles din arv ifølge arveloven. Det betyder, at: * **Ugifte samlevende** arver ikke hinanden. * **Særbørn** (børn fra tidligere forhold) kan arve mere, end du ø…</p>
+                <div class="muted-line">Kilde: Gemini</div>
+              </article>
+            
+          </div>
+        </details>
+      
+    </section>
+
+    <section class="data-panel data-panel-action">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Næste 30 Dage</div>
+          <h2>Det her skal I gøre først</h2>
+        </div>
+        <p>Tre prioriterede bevægelser med tydelig kobling til det, vi faktisk har set i søgningerne og fundene.</p>
+      </div>
+
+      <div class="decision-actions-grid">
+        
+          <article class="decision-action-card">
+            <div class="decision-step">1</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Mellem</span>
+                <span class="mini-pill">Godt bud</span>
+              </div>
+              <h3>Styrk de sider, der skal vinde søgningerne</h3>
+              <p class="decision-why">Det er den hurtigste vej til at gå fra løs tilstedeværelse til at blive valgt oftere, når nogen er tæt på at købe.</p>
+              <p>Start med 2-3 opdateringer af jeres vigtigste sider eller stærke sektioner, der matcher de søgninger, hvor I i dag enten mangler helt eller kun er synlige som kilde, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Mieritz Advokatfirma vs DreistStorgaard Advokater</span>
+                    
+                      <span class="mini-pill">inkasso advokat Køge</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Tilføj en kort beslutningssektion på jeres vigtigste ydelses-, case- eller Om os-side, som matcher søgningen &#34;Mieritz Advokatfirma vs DreistStorgaard Advokater&#34; i sprog og forklarer: hvornår man vælger jer, hvilke typer opgaver eller krav I løser bedst, og hvilke 2-3 proof points der underbygger det.</li>
+                    
+                      <li>Styrk den mest relevante eksisterende side eller tilføj en kort FAQ-, case- eller ydelsessektion der svarer direkte på søgningen &#34;inkasso advokat Køge&#34; med en klar forklaring, konkrete eksempler og et tydeligt næste skridt.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>2 opdateringer af kerne-sider eller sektioner</span>
+                
+                <span><strong>Mest sandsynligt</strong>+13%</span>
+                <span><strong>Spænd</strong>8-20%</span>
+              </div>
+            </div>
+          </article>
+        
+          <article class="decision-action-card">
+            <div class="decision-step">2</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Lille</span>
+                <span class="mini-pill">Stærkt grundlag</span>
+              </div>
+              <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
+              <p class="decision-why">Når jeres online aftryk er uklart, bliver I også sværere at vælge.</p>
+              <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Google Business</span>
+                    
+                      <span class="mini-pill">Linkedin</span>
+                    
+                      <span class="mini-pill">Instagram</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Opret og udfyld en Google Business Profile med virksomhedsnavn, kategori, adresse, telefon og link til websitet.</li>
+                    
+                      <li>Brug samme korte positionering på LinkedIn som på websitet: hvad I hjælper med, hvem I hjælper, og hvornår man typisk tager fat.</li>
+                    
+                      <li>Opdatér Instagram-bio og link, så den peger til en side med jeres hovedydelser i stedet for en generel forside.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>1 profil + 2 tekst-/bio-opdateringer</span>
+                
+                <span><strong>Mest sandsynligt</strong>+10%</span>
+                <span><strong>Spænd</strong>6-14%</span>
+              </div>
+            </div>
+          </article>
+        
+          <article class="decision-action-card">
+            <div class="decision-step">3</div>
+            <div class="decision-action-copy">
+              <div class="scenario-top">
+                <span class="pill">Indsats Mellem</span>
+                <span class="mini-pill">Stærkt grundlag</span>
+              </div>
+              <h3>Løs det største tekniske problem i security headers</h3>
+              <p class="decision-why">Når det tekniske halter, bliver siden sværere at bruge og sværere at læse korrekt.</p>
+              <p>Ret det tekniske område, der holder jer mest tilbage, så resten af forbedringerne får bedre effekt.</p>
+              
+                <div class="action-evidence-block">
+                  <span class="metric-label">Bygger især på</span>
+                  <div class="action-evidence-list">
+                    
+                      <span class="mini-pill">Security headers</span>
+                    
+                  </div>
+                </div>
+              
+              
+                <div class="action-examples-block">
+                  <span class="metric-label">Helt konkret</span>
+                  <ul class="action-examples-list">
+                    
+                      <li>Find den konkrete fejl bag security headers og ret den først, før I bygger mere indhold ovenpå.</li>
+                    
+                      <li>Mål siden igen bagefter og brug den nye måling som før/efter-bevis på forbedringen.</li>
+                    
+                  </ul>
+                </div>
+              
+              <div class="decision-action-meta">
+                
+                  <span><strong>Det skal laves</strong>1 teknisk rettelse</span>
+                
+                <span><strong>Mest sandsynligt</strong>+16%</span>
+                <span><strong>Spænd</strong>10-22%</span>
+              </div>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+
+    
+      <section class="data-panel data-panel-authority">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Authority & Profiler</div>
+            <h2>AI indexability: 61/100</h2>
+          </div>
+          <p>De kilder AI-modeller kigger i, når de skal svare om jer. Vægtet efter jeres branche <strong style="color: var(--color-ink-strong, #fff);">(local service)</strong>. 7 af 11 kilder bidrager aktivt.</p>
+        </div>
+
+        
+        
+        <h3 class="subhead">Sociale kanaler AI tjekker først</h3>
+        <div class="authority-grid">
+          
+            
+            
+            
+            <article class="authority-card authority-tone-watch">
+              <div class="authority-card-head">
+                <span class="authority-name">facebook</span>
+                <span class="score-chip score-watch">50</span>
+                
+              </div>
+              <a class="authority-link" href="https://www.facebook.com/mlaw.dk" target="_blank" rel="noopener">https://www.facebook.com/mlaw.dk</a>
+              <div class="authority-meta">
+                <span>Middel</span>
+                <span>Kilde: website</span>
+              </div>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-critical">
+              <div class="authority-card-head">
+                <span class="authority-name">google_business</span>
+                <span class="mini-pill">Ingen profil</span>
+              </div>
+              
+              <div class="authority-meta">
+                <span>Lav</span>
+                
+              </div>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-watch">
+              <div class="authority-card-head">
+                <span class="authority-name">instagram</span>
+                <span class="score-chip score-watch">70</span>
+                
+              </div>
+              <a class="authority-link" href="https://www.instagram.com/mlaw.dk" target="_blank" rel="noopener">https://www.instagram.com/mlaw.dk</a>
+              <div class="authority-meta">
+                <span>Høj sikkerhed</span>
+                <span>Kilde: website</span>
+              </div>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-good">
+              <div class="authority-card-head">
+                <span class="authority-name">linkedin</span>
+                <span class="score-chip score-good">100</span>
+                
+              </div>
+              <a class="authority-link" href="https://www.linkedin.com/company/mlawdk" target="_blank" rel="noopener">https://www.linkedin.com/company/mlawdk</a>
+              <div class="authority-meta">
+                <span>Høj sikkerhed</span>
+                <span>Kilde: website</span>
+              </div>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-critical">
+              <div class="authority-card-head">
+                <span class="authority-name">trustpilot</span>
+                <span class="score-chip score-critical">43</span>
+                
+              </div>
+              <a class="authority-link" href="https://dk.trustpilot.com/review/mlaw.dk" target="_blank" rel="noopener">https://dk.trustpilot.com/review/mlaw.dk</a>
+              <div class="authority-meta">
+                <span>Middel</span>
+                
+              </div>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-good">
+              <div class="authority-card-head">
+                <span class="authority-name">youtube</span>
+                <span class="score-chip score-good">100</span>
+                
+              </div>
+              <a class="authority-link" href="https://www.youtube.com/channel/UCVMif4Nh3kC2VWjsE5ryeFw" target="_blank" rel="noopener">https://www.youtube.com/channel/UCVMif4Nh3kC2VWjsE5ryeFw</a>
+              <div class="authority-meta">
+                
+                
+              </div>
+            </article>
+          
+        </div>
+        
+
+        
+        
+        <h3 class="subhead subhead-spaced">Eksterne autoritetskilder</h3>
+        <div class="authority-grid">
+          
+            
+            
+            
+            <article class="authority-card authority-tone-critical">
+              <div class="authority-card-head">
+                <span class="authority-name">Wikipedia</span>
+                <span class="mini-pill">Vægt 3%</span>
+              </div>
+              <div class="authority-score-row">
+                
+                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
+                
+                
+              </div>
+              <p class="authority-purpose">Primær træningskilde for LLMer.</p>
+              
+              <span class="authority-confidence">Lav</span>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-good">
+              <div class="authority-card-head">
+                <span class="authority-name">CVR (Erhvervsstyrelsen)</span>
+                <span class="mini-pill">Vægt 12%</span>
+              </div>
+              <div class="authority-score-row">
+                
+                  <strong class="authority-score">85/100</strong>
+                
+                
+              </div>
+              <p class="authority-purpose">Officiel virksomhedsregistrering.</p>
+              <a class="authority-link" href="https://datacvr.virk.dk/enhed/virksomhed/30242157" target="_blank" rel="noopener">https://datacvr.virk.dk/enhed/virksomhed/30242157</a>
+              <span class="authority-confidence">Høj sikkerhed</span>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-good">
+              <div class="authority-card-head">
+                <span class="authority-name">Proff.dk</span>
+                <span class="mini-pill">Vægt 10%</span>
+              </div>
+              <div class="authority-score-row">
+                
+                  <strong class="authority-score">75/100</strong>
+                
+                
+              </div>
+              <p class="authority-purpose">Offentlig finansiel profil.</p>
+              <a class="authority-link" href="https://www.proff.dk:443/firma/mieritz-advokatfirma-aps/k%C3%B8ge/advokater-og-juridiske-tjenester/0I06ZXI07U6" target="_blank" rel="noopener">https://www.proff.dk:443/firma/mieritz-advokatfirma-aps/k%C3%B8ge/advokater-og-juridiske-tjenester/0I06ZXI07U6</a>
+              <span class="authority-confidence">Høj sikkerhed</span>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-critical">
+              <div class="authority-card-head">
+                <span class="authority-name">Medie-omtale</span>
+                <span class="mini-pill">Vægt 4%</span>
+              </div>
+              <div class="authority-score-row">
+                
+                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
+                
+                
+              </div>
+              <p class="authority-purpose">Aktuel medieomtale (sidste 12 mdr).</p>
+              
+              <span class="authority-confidence">Lav</span>
+            </article>
+          
+            
+            
+            
+            <article class="authority-card authority-tone-critical">
+              <div class="authority-card-head">
+                <span class="authority-name">Wikidata</span>
+                <span class="mini-pill">Vægt 2%</span>
+              </div>
+              <div class="authority-score-row">
+                
+                  <strong class="authority-score authority-score-missing">Ikke fundet</strong>
+                
+                
+              </div>
+              <p class="authority-purpose">Struktureret faktabase bag Wikipedia.</p>
+              
+              <span class="authority-confidence">Lav</span>
+            </article>
+          
+        </div>
+        
+
+        
+        
+      </section>
+    
+
+    
+      <section class="data-panel data-panel-subtle cockpit-panel">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Næste Modelskift</div>
+            <h2>Sådan ser det næste løft typisk ud</h2>
+          </div>
+          <p>Her er de greb vi først ville prioritere, og det samlede løft vi typisk forventer, hvis de bliver gennemført. Det er vores bedste bud, ikke en garanti.</p>
+        </div>
+
+        <div class="forecast-layout">
+          <div class="scenario-column">
+            
+              <article class="scenario-card scenario-card-selected">
+                <div class="scenario-top">
+                  <span class="pill">Indsats M</span>
+                  <span class="mini-pill">Godt bud</span>
+                </div>
+                <h3>Styrk de sider, der skal vinde søgningerne</h3>
+                <p>Start med 2-3 opdateringer af jeres vigtigste sider eller stærke sektioner, der matcher de søgninger, hvor I i dag enten mangler helt eller kun er synlige som kilde, og gør det tydeligt hvem I hjælper, hvad I løser og hvordan et forløb starter.</p>
+                <div class="scenario-meta">
+                  <span>Synlighed +10</span>
+                  <span>Bredde +11%</span>
+                  <span>Mest sandsynligt +13%</span>
+                </div>
+              </article>
+            
+              <article class="scenario-card scenario-card-selected">
+                <div class="scenario-top">
+                  <span class="pill">Indsats S</span>
+                  <span class="mini-pill">Stærkt grundlag</span>
+                </div>
+                <h3>Gør jeres troværdighed tydelig på Google og LinkedIn</h3>
+                <p>Gør jeres vigtigste profiler ens og komplette, så kunder og AI-svar møder det samme klare billede af jer på tværs af Google, LinkedIn og resten af jeres online aftryk.</p>
+                <div class="scenario-meta">
+                  <span>Synlighed +4</span>
+                  <span>Bredde +4%</span>
+                  <span>Mest sandsynligt +10%</span>
+                </div>
+              </article>
+            
+
+            
+          </div>
+
+          <div class="forecast-column">
+            <div class="forecast-summary forecast-summary-executive">
+              <div class="forecast-kpi">
+                <span>Synlighed i AI-svar</span>
+                <strong id="forecast-ai-value">81</strong>
+                <small id="forecast-ai-delta">nu</small>
+              </div>
+              <div class="forecast-kpi">
+                <span>Hvor bredt I bliver nævnt</span>
+                <strong id="forecast-coverage-value">81</strong>
+                <small id="forecast-coverage-delta">nu</small>
+              </div>
+              <div class="forecast-kpi">
+                <span>Mulig effekt</span>
+                <strong id="forecast-impact-value">23%</strong>
+                <small>mere relevant kundeinteresse</small>
+              </div>
+            </div>
+
+            <div class="forecast-graph">
+              <div class="forecast-row">
+                <div class="forecast-label">Synlighed i AI-svar</div>
+                <div class="forecast-track">
+                  <div id="bar-ai-current" class="forecast-bar is-current" style="width: 81%"></div>
+                  <div id="bar-ai-projected" class="forecast-bar is-projected" style="width: 95%"></div>
+                  <div id="bar-ai-target" class="forecast-target" style="left: 95%"></div>
+                </div>
+              </div>
+              <div class="forecast-row">
+                <div class="forecast-label">Hvor bredt I bliver nævnt</div>
+                <div class="forecast-track">
+                  <div id="bar-coverage-current" class="forecast-bar is-current" style="width: 81%"></div>
+                  <div id="bar-coverage-projected" class="forecast-bar is-projected" style="width: 96%"></div>
+                  <div id="bar-coverage-target" class="forecast-target" style="left: 95%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="impact-panel">
+              <div>
+                <span>Muligt løft i relevant kundeinteresse</span>
+                <strong id="impact-base">23%</strong>
+              </div>
+              <div class="impact-band">
+                <span id="impact-low">Forsigtigt 14%</span>
+                <span id="impact-base-band">Mest sandsynligt 23%</span>
+                <span id="impact-high">Bedste fald 34%</span>
+              </div>
+              <p>Tallene er vores bedste skøn. De viser retning og størrelsesorden, ikke et løfte.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+
+    <section class="data-panel data-panel-subtle">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Konkurrentpres</div>
+          <h2>Sådan står I mod konkurrenterne</h2>
+        </div>
+      <p>I står ikke bagud på ren tilstedeværelse i denne gennemgang, men næste skridt er at blive valgt mere stabilt i de søgninger, der betyder mest.</p>
+    </div>
+
+    <div class="competitor-brief-grid">
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Jer lige nu</span>
+          <strong class="metric-title">8 gange nævnt</strong>
+          <p>I bliver valgt i AI-svar med en samlet score på 81/100 og bredde på 81%.</p>
+        </article>
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Førende konkurrent</span>
+          <strong class="metric-title">8 gange nævnt</strong>
+          <p>Nørregaard Advokatfirma har et teknisk udgangspunkt på 70/100.</p>
+        </article>
+      
+        <article class="competitor-brief-card">
+          <span class="metric-label">Det betyder</span>
+          <strong class="metric-title">Næste skridt</strong>
+          <p>Det er ikke nok bare at være med. Næste gevinst kommer fra at blive valgt oftere i de vigtigste søgninger.</p>
+        </article>
+      
+    </div>
+
+    
+      <div class="peer-list">
+        
+          <div class="peer-row">
+            <strong>Nørregaard Advokatfirma</strong>
+            <span>8 gange nævnt</span>
+          </div>
+        
+          <div class="peer-row">
+            <strong>DreistStorgaard Advokater</strong>
+            <span>7 gange nævnt</span>
+          </div>
+        
+          <div class="peer-row">
+            <strong>PARTNER Advokater</strong>
+            <span>7 gange nævnt</span>
+          </div>
+        
+      </div>
+    
+    </section>
+
+    
+      <section class="data-panel closing-room-panel">
+        <div>
+          <div class="eyebrow">Næste Skridt</div>
+          <h2>Brug roomet som arbejdsplan for de næste 30 dage</h2>
+          <p>Det her room samler status, konkurrentpres, authority-signaler og næste løft i ét sted. Hvis I vil, kan vi bruge det som udgangspunkt for en kort prioriteringsgennemgang.</p>
+        </div>
+        <div class="closing-room-actions">
+          <a class="button button-primary" href="./SitedokAI_ClientRoom_Mieritz_Advokatfirma.pdf">Hent Executive PDF</a>
+          <a class="button button-ghost" href="mailto:info@sitedokai.com">Book opfølgning</a>
+        </div>
+      </section>
+    
+
+  </div>
+
+  
+    <script>
+      (() => {
+        const detailTitle = document.getElementById("heatmap-detail-title");
+        const detailSummary = document.getElementById("heatmap-detail-summary");
+        const detailNote = document.getElementById("heatmap-detail-note");
+        const detailVerdict = document.getElementById("heatmap-detail-verdict");
+        const detailMethod = document.getElementById("heatmap-detail-method");
+        const detailAliases = document.getElementById("heatmap-detail-aliases");
+        const detailSignals = document.getElementById("heatmap-detail-signals");
+        const detailAnswer = document.getElementById("heatmap-detail-answer");
+        document.querySelectorAll(".heatmap-cell").forEach((button) => {
+          button.addEventListener("click", () => {
+            detailTitle.textContent = `${button.dataset.query} · ${button.dataset.platform}`;
+            detailSummary.textContent = button.dataset.meta || "Ingen opsummering.";
+            detailVerdict.textContent = button.dataset.summary || "Ingen vurdering gemt.";
+            detailMethod.textContent = button.dataset.method || "Ingen metode gemt.";
+            detailAliases.textContent = button.dataset.aliases || "Ingen aliasdata gemt.";
+            detailSignals.textContent = button.dataset.signals || "Ingen kontekstdata gemt.";
+            detailNote.textContent = button.dataset.reason || "Ingen begrundelse gemt.";
+            detailAnswer.textContent = button.dataset.answer || "Ingen svartekst gemt.";
+          });
+        });
+      })();
     </script>
+  
+
+      </main>
+    </div>
   </body>
 </html>

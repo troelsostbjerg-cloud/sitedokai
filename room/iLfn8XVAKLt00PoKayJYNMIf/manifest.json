@@ -1,0 +1,19 @@
+{
+  "token": "iLfn8XVAKLt00PoKayJYNMIf",
+  "client_slug": "demo",
+  "client_name": "EvigtUnivers",
+  "created_at": "2026-04-16T07:11:19+00:00",
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/iLfn8XVAKLt00PoKayJYNMIf/",
+  "public_pdf_url": "https://sitedokai.com/room/iLfn8XVAKLt00PoKayJYNMIf/SitedokAI_ClientRoom_EvigtUnivers.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_EvigtUnivers.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

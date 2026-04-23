@@ -1,0 +1,19 @@
+{
+  "token": "_iVJI-ThDyAsyi60aeS7Grp5",
+  "client_slug": "bifrostconnect",
+  "client_name": "BifrostConnect",
+  "created_at": "2026-04-15T16:49:17+00:00",
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/_iVJI-ThDyAsyi60aeS7Grp5/",
+  "public_pdf_url": "https://sitedokai.com/room/_iVJI-ThDyAsyi60aeS7Grp5/SitedokAI_ClientRoom_BifrostConnect.pdf",
+  "bundle_files": [
+    "index.html",
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_BifrostConnect.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
+  ]
+}

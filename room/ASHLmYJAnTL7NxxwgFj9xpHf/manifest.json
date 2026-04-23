@@ -1,13 +1,19 @@
 {
   "token": "ASHLmYJAnTL7NxxwgFj9xpHf",
+  "client_slug": "mlaw-prelive-20260416",
   "client_name": "Mieritz Advokatfirma",
   "created_at": "2026-04-16T09:05:50+00:00",
-  "mode": "encrypted_static",
-  "files": [
+  "access_mode": "link_and_password",
+  "requires_password": true,
+  "public_url": "https://sitedokai.com/room/ASHLmYJAnTL7NxxwgFj9xpHf/",
+  "public_pdf_url": "https://sitedokai.com/room/ASHLmYJAnTL7NxxwgFj9xpHf/SitedokAI_ClientRoom_Mieritz_Advokatfirma.pdf",
+  "bundle_files": [
     "index.html",
-    "room.enc.json",
-    "executive-pdf.html",
-    "executive-pdf.enc.json",
-    "studio.css"
+    "snapshot.json",
+    "studio.css",
+    "SitedokAI_ClientRoom_Mieritz_Advokatfirma.pdf"
+  ],
+  "local_only_files": [
+    "print.html"
   ]
 }
