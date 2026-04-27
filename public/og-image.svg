@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SitedokAI og-image</title>
-  <desc id="desc">SitedokAI AI-audit med Client Room i den nye lyse stil.</desc>
+  <title id="title">SiteDok og-image</title>
+  <desc id="desc">SiteDok hjælper små virksomheder med klarere, mere troværdige hjemmesider.</desc>
   <rect width="1200" height="630" fill="#FAF7F2"/>
   <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#E2D6C6"/>
   <g opacity="0.12">
@@ -23,21 +23,21 @@
     <line x1="90" y1="18" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
     <line x1="138" y1="54" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
   </g>
-  <text x="340" y="182" fill="#9F6A24" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">AI-AUDIT + CLIENT ROOM</text>
-  <text x="340" y="278" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">Forstå hvordan AI</text>
-  <text x="340" y="352" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">læser jeres website</text>
-  <text x="340" y="430" fill="#6D7882" font-family="Arial, sans-serif" font-size="32" font-weight="600">Status, bevis og næste skridt samlet i et roligt Client Room.</text>
+  <text x="340" y="182" fill="#9F6A24" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">HJEMMESIDE-TJEK · FIX · VISUELT LØFT</text>
+  <text x="340" y="278" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">Find det der får</text>
+  <text x="340" y="352" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">kunderne til at tøve</text>
+  <text x="340" y="430" fill="#6D7882" font-family="Arial, sans-serif" font-size="32" font-weight="600">Klarhed, tillid, synlighed, CTA og visuelt udtryk.</text>
   <g transform="translate(340 482)">
-    <rect width="232" height="60" rx="14" fill="#1F2A33"/>
+    <rect width="274" height="60" rx="14" fill="#1F2A33"/>
     <text x="39" y="39" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="800">Se eksempel</text>
   </g>
-  <g transform="translate(604 487)">
-    <rect width="160" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
-    <text x="32" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">4 platforme</text>
+  <g transform="translate(646 487)">
+    <rect width="176" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
+    <text x="33" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">2.495 kr.</text>
   </g>
-  <g transform="translate(786 487)">
-    <rect width="152" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
-    <text x="36" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">48 timer</text>
+  <g transform="translate(846 487)">
+    <rect width="196" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
+    <text x="33" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">48 timer</text>
   </g>
   <defs>
     <linearGradient id="bg" x1="69" y1="58" x2="1132" y2="595" gradientUnits="userSpaceOnUse">

@@ -14,9 +14,9 @@ interface Props {
 
 const {
   title,
-  description = 'Forstå hvordan AI læser jeres website. SitedokAI tester jeres synlighed på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med forklaring, prioritering og næste skridt.',
+  description = 'SiteDok hjælper små virksomheder med at finde og rette det, der får hjemmesiden til at miste kunder. Klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt udtryk.',
   canonical = Astro.url.href,
-  ogImage = '/og-image.png',
+  ogImage = '/og-image.svg',
   structuredData,
   noindex = false,
 } = Astro.props;
@@ -35,10 +35,10 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="SitedokAI" />
+    <meta name="author" content="SiteDok" />
     <meta name="robots" content={robotsContent} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SitedokAI" />
+    <meta property="og:site_name" content="SiteDok" />
     <meta property="og:locale" content="da_DK" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -52,29 +52,28 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=bricolage-grotesque:400,600,700,800&family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=newsreader:400,500,600,700&family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
     {schemaBlocks.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
     <title>{title}</title>
   </head>
-    <body class="bg-[#faf7f2] text-brand">
-      <slot />
+  <body class="bg-[#faf7f2] text-brand">
+    <slot />
 
-    <!-- Cookie-information banner (kun tekniske cookies) -->
-    <section id="cookie-banner" aria-label="Cookie-information" class="fixed bottom-0 left-0 right-0 bg-[#f7f2e8]/95 text-brand px-6 py-4 z-50 border-t border-[#d9cfbf] shadow-[0_-12px_40px_rgba(31,42,51,0.08)] hidden backdrop-blur">
-      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <section id="cookie-banner" aria-label="Cookie-information" class="fixed bottom-0 left-0 right-0 z-50 hidden border-t border-[#d9cfbf] bg-[#f7f2e8]/95 px-6 py-4 text-brand shadow-[0_-12px_40px_rgba(31,42,51,0.08)] backdrop-blur">
+      <div class="mx-auto flex max-w-5xl flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
         <p class="text-sm text-brand/72">
           Vi bruger kun nødvendige tekniske cookies for at sikre at hjemmesiden fungerer korrekt. Ingen tracking, ingen markedsføring.
           <a href="/privatlivspolitik" class="text-accent underline decoration-[rgba(159,106,36,0.35)] underline-offset-4 hover:text-brand">Læs mere</a>
         </p>
-        <div class="flex gap-2 flex-shrink-0">
-          <button id="cookie-decline" class="border border-[#d9cfbf] text-brand/70 px-4 py-2 text-sm font-bold hover:bg-white transition-colors whitespace-nowrap rounded-md">
+        <div class="flex flex-shrink-0 gap-2">
+          <button id="cookie-decline" class="whitespace-nowrap rounded-md border border-[#d9cfbf] px-4 py-2 text-sm font-bold text-brand/70 transition-colors hover:bg-white">
             Afvis
           </button>
-          <button id="cookie-accept" class="bg-brand text-white px-4 py-2 text-sm font-bold hover:bg-brand-light transition-colors whitespace-nowrap rounded-md">
+          <button id="cookie-accept" class="whitespace-nowrap rounded-md bg-brand px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-light">
             Acceptér
           </button>
         </div>
@@ -83,15 +82,53 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
     <script is:inline>
       (function() {
-        if (!localStorage.getItem('cookie-choice')) {
-          document.getElementById('cookie-banner').classList.remove('hidden');
-        }
-        function hideBanner(choice) {
-          localStorage.setItem('cookie-choice', choice);
-          document.getElementById('cookie-banner').classList.add('hidden');
-        }
+        var banner = document.getElementById('cookie-banner');
+        if (!(banner instanceof HTMLElement)) return;
+
+        var root = document.documentElement;
         var accept = document.getElementById('cookie-accept');
         var decline = document.getElementById('cookie-decline');
+
+        function readChoice() {
+          try {
+            return localStorage.getItem('cookie-choice');
+          } catch (error) {
+            return null;
+          }
+        }
+
+        function writeChoice(choice) {
+          try {
+            localStorage.setItem('cookie-choice', choice);
+          } catch (error) {
+            // Ignore storage failures and still let the user continue.
+          }
+        }
+
+        function syncBannerSpacing() {
+          var isVisible = !banner.classList.contains('hidden');
+          var height = isVisible ? banner.offsetHeight + 16 : 0;
+          root.style.setProperty('--cookie-banner-space', height + 'px');
+        }
+
+        function scheduleSpacingSync() {
+          window.requestAnimationFrame(syncBannerSpacing);
+        }
+
+        function hideBanner(choice) {
+          writeChoice(choice);
+          banner.classList.add('hidden');
+          scheduleSpacingSync();
+        }
+
+        if (!readChoice()) {
+          banner.classList.remove('hidden');
+        }
+
+        scheduleSpacingSync();
+        window.addEventListener('load', scheduleSpacingSync, { once: true });
+        window.addEventListener('resize', scheduleSpacingSync);
+
         if (accept) accept.addEventListener('click', function() { hideBanner('accepted'); });
         if (decline) decline.addEventListener('click', function() { hideBanner('declined'); });
       })();
@@ -100,21 +137,55 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <script is:inline>
       document.addEventListener('submit', (event) => {
         const form = event.target;
-
         if (!(form instanceof HTMLFormElement)) return;
 
         const websiteInput = form.querySelector('input[name="website"]');
-
         if (!(websiteInput instanceof HTMLInputElement)) return;
 
         const value = websiteInput.value.trim();
-
         if (!value) return;
 
         if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value)) {
           websiteInput.value = `https://${value.replace(/^\/+/, '')}`;
         }
       });
+    </script>
+
+    <script is:inline>
+      (function() {
+        function getHashTarget() {
+          var rawHash = window.location.hash;
+          if (!rawHash || rawHash.length <= 1) return null;
+
+          var id = decodeURIComponent(rawHash.slice(1));
+          return document.getElementById(id);
+        }
+
+        function alignHashTarget(forceImmediate) {
+          var target = getHashTarget();
+          if (!(target instanceof HTMLElement)) return;
+
+          var rootStyle = window.getComputedStyle(document.documentElement);
+          var scrollPaddingTop = parseFloat(rootStyle.scrollPaddingTop || '0') || 0;
+          var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var nextTop = Math.max(target.getBoundingClientRect().top + window.scrollY - scrollPaddingTop - 16, 0);
+
+          window.scrollTo({
+            top: nextTop,
+            behavior: forceImmediate || prefersReducedMotion ? 'auto' : 'smooth',
+          });
+        }
+
+        function scheduleHashAlignment(forceImmediate) {
+          window.requestAnimationFrame(function() {
+            alignHashTarget(forceImmediate);
+            window.setTimeout(function() { alignHashTarget(forceImmediate); }, 180);
+          });
+        }
+
+        window.addEventListener('hashchange', function() { scheduleHashAlignment(false); });
+        window.addEventListener('load', function() { scheduleHashAlignment(true); }, { once: true });
+      })();
     </script>
   </body>
 </html>

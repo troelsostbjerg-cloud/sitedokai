@@ -3,10 +3,44 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-canvas: #fbf7ef;
+    --color-brand: #202622;
+    --color-muted: #66706a;
+  }
+
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: clamp(6rem, 8vw, 8rem);
   }
   body {
-    @apply font-sans text-gray-600 antialiased;
+    @apply bg-canvas font-sans text-muted antialiased;
+    padding-bottom: var(--cookie-banner-space, 0px);
+    transition: padding-bottom 180ms ease;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgba(111, 138, 114, 0.22);
+    color: var(--color-brand);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      transition: none;
+    }
   }
 }

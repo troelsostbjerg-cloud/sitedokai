@@ -1,0 +1,39 @@
+---
+interface Props {
+  id: string;
+  icon: 'fix' | 'visual';
+  title: string;
+  price: string;
+  text: string;
+  href?: string;
+}
+
+const { id, icon, title, price, text, href = '/kontakt#afklaring' } = Astro.props;
+---
+
+<a id={id} href={href} class="group block rounded-[1.35rem] border border-border-soft bg-white/72 p-7 shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-accent/28 hover:bg-white">
+  <div class="flex items-center justify-between gap-6">
+    <div class="flex items-center gap-5">
+      <span class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full border border-accent/20 bg-accent-soft text-accent-dark">
+        {icon === 'fix' && (
+          <svg viewBox="0 0 32 32" class="h-8 w-8" fill="none" aria-hidden="true">
+            <path d="m20.5 5.5 6 6-4.1 4.1-6-6 4.1-4.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M16.3 9.6 6.5 19.4 5 27l7.6-1.5 9.8-9.8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+          </svg>
+        )}
+        {icon === 'visual' && (
+          <svg viewBox="0 0 32 32" class="h-8 w-8" fill="none" aria-hidden="true">
+            <path d="M16 4.5c1.2 5 3.7 7.5 8.5 8.5-4.8 1-7.3 3.5-8.5 8.5-1.2-5-3.7-7.5-8.5-8.5 4.8-1 7.3-3.5 8.5-8.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M24 21c.6 2.4 1.8 3.6 4 4-2.2.4-3.4 1.6-4 4-.6-2.4-1.8-3.6-4-4 2.2-.4 3.4-1.6 4-4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+          </svg>
+        )}
+      </span>
+      <div>
+        <h3 class="font-display text-3xl font-medium leading-tight tracking-tight text-brand">{title}</h3>
+        <p class="mt-1 font-display text-3xl font-medium leading-tight tracking-tight text-brand/86">{price}</p>
+        <p class="mt-2 text-base leading-relaxed text-muted">{text}</p>
+      </div>
+    </div>
+    <span class="hidden text-3xl leading-none text-accent-dark transition-transform duration-200 group-hover:translate-x-1 sm:block" aria-hidden="true">→</span>
+  </div>
+</a>
