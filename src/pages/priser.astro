@@ -4,96 +4,88 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const engagements = [
+const services = [
   {
-    tag: 'Entry product',
-    title: 'AI Audit',
+    tag: 'Hovedprodukt',
+    title: 'Hjemmeside-tjek',
     price: '2.495 kr',
-    summary: 'Fast produkt når virksomheden vil forstå status før der investeres mere.',
+    purpose: 'Find problemerne.',
     included: [
-      'AI-synlighed testet på ChatGPT, Gemini, Google AI og Claude',
-      'gennemgang af 1 website og op til 5 nøglesider',
-      'konkurrentbillede, teknisk baseline og Client Room + PDF',
+      'PDF-rapport',
+      'klarheds-score',
+      'tillids-score',
+      'synligheds-score',
+      'top 5 problemer',
+      'ny hero-tekst',
+      'forslag til servicestruktur',
+      '5-10 min video',
     ],
-    fit: 'Bedst når virksomheden er svær at forstå online, eller vil se hvor AI og kunder mister tråden først.',
-    cta: { label: 'Bestil AI Audit', href: '/kontakt#audit' },
+    cta: { label: 'Bestil Hjemmeside-tjek', href: '/hjemmeside-tjek#bestil' },
   },
   {
-    tag: 'Sprint',
-    title: 'Authority Sprint',
+    tag: 'Sekundær ydelse',
+    title: 'Hjemmeside-fix',
+    price: '6.500-12.500 kr',
+    purpose: 'Ret tekst, struktur og CTA.',
+    included: [
+      'omskrivning af forside',
+      'ny hero-sektion',
+      'serviceblokke',
+      'trust-sektion',
+      'FAQ',
+      'CTA’er',
+      'tekststruktur',
+    ],
+    cta: { label: 'Se Hjemmeside-fix', href: '/hjemmeside-fix' },
+  },
+  {
+    tag: 'Sekundær ydelse',
+    title: 'Visuelt løft',
     price: 'Fra 9.500 kr',
-    summary: 'Afgrænset sprint der skærper det virksomheden allerede ved, men ikke får forklaret skarpt nok online.',
-    included: ['side- og indholdsplan', 'udvalgte omskrivninger', 'proof- og case-struktur'],
-    fit: 'Bedst når websitet forklarer for bredt, for svagt eller uden tydelige beviser.',
-    cta: { label: 'Tal med os om sprint', href: '/kontakt#afklaring' },
-  },
-  {
-    tag: 'Room / Ops',
-    title: 'Room Build eller Workflow Sprint',
-    price: 'Fra 12.500 kr',
-    summary: 'Til dokumentation, onboarding og drift der er blevet for rodet til mapper, mails og manuelle overleveringer.',
-    included: ['room-struktur eller workflow-kort', 'status- og dokumentationsflow', 'let automation og tydelig ejerlogik'],
-    fit: 'Bedst når for meget bor i mapper, noter og menneskers hukommelse.',
-    cta: { label: 'Tal med os om room eller flow', href: '/kontakt#afklaring' },
-  },
-  {
-    tag: 'Build / Partner',
-    title: 'Dashboard, mini-app eller partnerrolle',
-    price: 'Efter afklaring',
-    summary: 'Når der skal bygges et rigtigt værktøj, eller når virksomheden mangler en rolig digital medspiller over tid.',
-    included: ['scope og løsningsretning', 'hosting, login og drift sat rigtigt op', 'mulig månedlig prioritering og QA'],
-    fit: 'Bedst når et room ikke længere er nok, eller når ledelsen mangler en fast digital sparringspartner.',
-    cta: { label: 'Start med afklaring', href: '/kontakt#afklaring' },
-  },
-];
-
-const principles = [
-  {
-    title: 'Start med det mindste rigtige format',
-    body: 'De fleste bør starte med audit eller et sprint. Det giver mere mening end at bygge for tidligt.',
-  },
-  {
-    title: 'Build sker kun når behovet er reelt',
-    body: 'Vi bygger dashboard eller mini-app, men kun når nogen faktisk skal bruge det som arbejdsværktøj.',
-  },
-  {
-    title: 'Pris følger scope og drift',
-    body: 'Jo tættere vi kommer på app, data, login og drift, desto vigtigere er afklaringen før pris.',
+    purpose: 'Ret design, billeder og professionelt udtryk.',
+    included: [
+      'visuelt førstehåndsindtryk',
+      'billedstil',
+      'layoutforbedringer',
+      'brand-assets',
+      'før/efter-præsentation',
+      'mere professionelt udtryk',
+    ],
+    cta: { label: 'Se Visuelt løft', href: '/visuelt-loeft' },
   },
 ];
 
 const faqs = [
   {
-    q: 'Kan man stadig bare købe AI Audit som produkt?',
-    a: 'Ja. AI Audit er stadig vores klareste entry product og kan bestilles direkte som fast produkt til 2.495 kr.',
+    q: 'Hvad skal jeg starte med?',
+    a: 'Start med Hjemmeside-tjek, hvis du ikke ved præcis hvad der skal rettes først. Start direkte med Hjemmeside-fix eller Visuelt løft, hvis problemet allerede er tydeligt.',
   },
   {
-    q: 'Hvorfor har I ikke faste priser på dashboard og mini-app?',
-    a: 'Fordi pris her afhænger mere af scope, hosting, data og drift end af design alene. Vi vil hellere være præcise end kunstigt simple.',
+    q: 'Er Hjemmeside-tjek bare en rapport?',
+    a: 'Nej. Rapporten er formatet, men pointen er beslutningen: hvad koster jer kunder lige nu, og hvad bør rettes først?',
   },
   {
-    q: 'Hvordan starter de fleste?',
-    a: 'De fleste starter med AI Audit eller en afklaringssamtale om sprint, room eller workflow. Build kommer typisk bagefter, ikke først.',
+    q: 'Kan I også rette siden bagefter?',
+    a: 'Ja. Hjemmeside-fix retter tekst, struktur og CTA. Visuelt løft retter design, billeder og professionelt udtryk.',
   },
 ];
 ---
 
 <Layout
-  title="Forløb og priser | SiteDok"
-  description="Se hvordan SiteDok arbejder med AI Audit, Authority Sprint, Room Build, Workflow Sprint og små dashboards. AI Audit starter ved 2.495 kr."
+  title="Ydelser og priser | SiteDok"
+  description="Hjemmeside-tjek til 2.495 kr, Hjemmeside-fix til 6.500-12.500 kr og Visuelt løft fra 9.500 kr."
 >
   <Nav />
   <main id="main">
     <section class="border-b border-[#e6ddd1] bg-white">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div class="max-w-3xl">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Forløb og pris</p>
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Ydelser og priser</p>
           <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-            Vælg det mindste rigtige samarbejdsformat.
+            Tre enkle måder at gøre hjemmesiden bedre på.
           </h1>
           <p class="mt-6 text-lg leading-relaxed text-brand/70">
-            SiteDok er bygget som en lille familie af ydelser. Nogle opgaver giver mening som et fast produkt. Andre skal scopes som sprint, room eller build.
-            Pointen er ikke at sælge størst muligt projekt, men at vælge det rigtige format først.
+            Start med at finde problemerne. Ret derefter tekst, struktur, CTA’er eller visuelt udtryk, hvis det er det næste rigtige skridt.
           </p>
         </div>
       </div>
@@ -101,75 +93,25 @@ const faqs = [
 
     <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div class="grid gap-5 lg:grid-cols-2">
-          {engagements.map((engagement) => (
-            <article class="rounded-[2rem] border border-[#e0d6c8] bg-white p-8 shadow-[0_24px_60px_rgba(31,42,51,0.05)]">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{engagement.tag}</p>
-                  <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{engagement.title}</h2>
-                </div>
-                <div class="rounded-full border border-[#d9ccb9] bg-[#faf6ef] px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-brand/70">
-                  {engagement.price}
-                </div>
-              </div>
-
-              <p class="mt-5 text-base leading-relaxed text-brand/70">{engagement.summary}</p>
-
-              <div class="mt-6 grid gap-3">
-                {engagement.included.map((item) => (
-                  <div class="rounded-[1rem] border border-[#e6ddd1] bg-[#fbf8f3] px-4 py-3 text-sm text-brand/70">{item}</div>
+        <div class="grid gap-5 lg:grid-cols-3">
+          {services.map((service) => (
+            <article class="flex flex-col rounded-xl border border-[#e0d6c8] bg-white p-7 shadow-[0_18px_46px_rgba(31,42,51,0.04)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{service.tag}</p>
+              <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{service.title}</h2>
+              <div class="mt-4 font-display text-3xl font-bold tracking-tight text-brand/80">{service.price}</div>
+              <p class="mt-4 text-base leading-relaxed text-brand/70">
+                <strong class="font-semibold text-brand">Formål:</strong> {service.purpose}
+              </p>
+              <div class="mt-6 grid gap-2">
+                {service.included.map((item) => (
+                  <div class="rounded-lg border border-[#e6ddd1] bg-[#fbf8f3] px-4 py-3 text-sm text-brand/70">{item}</div>
                 ))}
               </div>
-
-              <div class="mt-6 rounded-[1.2rem] border border-[#eadfce] bg-[#f7f0e4] p-4 text-sm leading-relaxed text-brand/72">
-                <strong class="block font-semibold text-brand">Bedst når:</strong>
-                <span class="mt-2 block">{engagement.fit}</span>
-              </div>
-
-              <a href={engagement.cta.href} class="mt-6 inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-                {engagement.cta.label}
+              <a href={service.cta.href} class="mt-6 inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+                {service.cta.label}
               </a>
             </article>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto grid max-w-6xl gap-5 px-6 py-20 md:grid-cols-3 md:py-24">
-        {principles.map((item) => (
-          <article class="rounded-[1.6rem] border border-[#e6ddd1] bg-[#fbf8f3] p-6 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
-            <h2 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h2>
-            <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.body}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-[#1f2a33] text-white">
-      <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
-        <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Startpunkt</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-              AI Audit er stadig den enkleste måde at komme i gang på.
-            </h2>
-            <p class="mt-5 text-base leading-relaxed text-white/72">
-              Når problemet endnu ikke er afgrænset, er audit næsten altid det bedste første køb. Den viser om næste rigtige bevægelse er indhold, room, workflow eller build.
-            </p>
-          </div>
-
-          <div class="rounded-[2rem] border border-white/10 bg-white/6 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Direkte bestilling</p>
-            <div class="mt-4 font-display text-5xl font-bold tracking-tight text-[#f3d2a3]">2.495 kr</div>
-            <p class="mt-4 text-sm leading-relaxed text-white/72">
-              Fast pris. Ingen abonnement. Client Room + PDF. Levering inden for 48 timer på hverdage.
-            </p>
-            <a href="/kontakt#audit" class="mt-6 inline-flex items-center justify-center rounded-full bg-[#d9b27a] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-[#e4c08e]">
-              Bestil AI Audit
-            </a>
-          </div>
         </div>
       </div>
     </section>

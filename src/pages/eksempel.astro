@@ -3,64 +3,133 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const scores = [
+  { label: 'Klarhed', value: '62/100', text: 'Det er for svært at se, hvem virksomheden hjælper, og hvad næste skridt er.' },
+  { label: 'Tillid', value: '58/100', text: 'Der mangler beviser, konkrete cases og tydelige tryghedssignaler tæt på CTAerne.' },
+  { label: 'Synlighed', value: '64/100', text: 'Ydelserne er nævnt, men strukturen gør siden sværere at forstå og indeksere.' },
+];
+
+const problems = [
+  'Heroen siger for lidt om konkret værdi og målgruppe.',
+  'CTAerne konkurrerer med hinanden og bruger uklare formuleringer.',
+  'Serviceafsnittet forklarer aktiviteter, men ikke kundens udbytte.',
+  'Tillid ligger for langt nede på siden og er for generisk.',
+  'Visuelt udtryk virker pænere end før, men ikke så professionelt som ydelsen.',
+];
+
+const fixes = [
+  'Ny hero med klar målgruppe, problem og primær handling.',
+  'Servicestruktur med 3 tydelige ydelser i kundens sprog.',
+  'Trust-sektion med cases, billeder, proces og lokale signaler.',
+  'Kort FAQ der fjerner de mest almindelige barrierer.',
+];
 ---
 
-<Layout title="Client Room-demo — SitedokAI" description="Se en fiktiv, men realistisk Client Room-demo fra SitedokAI. EvigtUnivers — AI-markedsposition 67/100, ni søgninger testet på fire AI-platforme.">
+<Layout
+  title="Eksempel på Hjemmeside-tjek | SiteDok"
+  description="Se et kort eksempel på hvordan SiteDok finder problemer med klarhed, tillid, synlighed, CTA, struktur og visuelt udtryk."
+>
   <Nav />
-  <main>
-    <section class="bg-[#faf7f2] border-b border-[#e6ddd1]">
-      <div class="max-w-5xl mx-auto px-6 pt-20 pb-12 md:pt-28 md:pb-16">
-        <p class="text-sm text-accent font-semibold uppercase tracking-wider mb-3">Demo</p>
-        <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand mb-4">
-          Sådan ser et Client Room ud i praksis
-        </h1>
-        <p class="text-brand/68 text-lg max-w-3xl leading-relaxed">
-          Det her er en fiktiv, men realistisk demo for <strong class="text-brand font-semibold">EvigtUnivers</strong> —
-          en opdigtet webshop med planeter, måner og astronomi-gaver, bygget i samme struktur, samme visualitet og samme beslutningslogik som den oplevelse rigtige kunder modtager.
-        </p>
-        <p class="mt-6 text-sm text-brand/46">
-          Fiktiv virksomhed · AI-markedsposition 67/100 · Ni søgninger · Fire AI-platforme · Konkurrentbenchmark mod Stjernehimmel.dk og Månelys ApS.
-        </p>
-      </div>
-    </section>
-
-    <section class="bg-[#f5efe5]">
-      <div class="max-w-7xl mx-auto px-4 md:px-6 pb-16 md:pb-24">
-        <div class="rounded-[2rem] overflow-hidden border border-[#e0d6c8] shadow-[0_34px_90px_rgba(31,42,51,0.1)] bg-white">
-          <iframe
-            src="/client-room-demo.html"
-            title="Client Room-demo for EvigtUnivers"
-            loading="lazy"
-            class="w-full block"
-            style="height: 90vh; min-height: 720px; border: 0; background: #f7f3ec;"
-          ></iframe>
-        </div>
-        <p class="mt-4 text-center text-xs text-brand/46">
-          Demoen er en levende kopi af det Client Room kunder modtager. Kunden er fiktiv, men flowet og præsentationen matcher den rigtige leverance.
-          <a href="/client-room-demo.html" target="_blank" rel="noopener" class="text-accent hover:text-brand transition-colors underline underline-offset-4">Åbn demoen i fuldt vindue</a>.
-        </p>
-      </div>
-    </section>
-
-    <section class="bg-white border-t border-[#e6ddd1]">
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20">
-        <div class="bg-[#f6f1e8] rounded-[2rem] p-10 md:p-14 text-center shadow-[0_24px_60px_rgba(31,42,51,0.06)] border border-[#e6ddd1]">
-          <p class="text-sm text-accent font-semibold uppercase tracking-wider mb-3">Næste skridt</p>
-          <h2 class="font-display text-2xl md:text-3xl font-extrabold text-brand mb-4">
-            Vil du have et Client Room for din egen virksomhed?
-          </h2>
-          <p class="text-brand/68 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Vi tester dit website på ChatGPT, Gemini, Google AI og Claude og leverer et Client Room med prioriterede næste skridt.
-            Du modtager en mail med et privat link og en adgangskode til dit firmas Client Room inden for 48 timer på hverdage.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/kontakt" class="inline-block bg-brand text-white px-8 py-3.5 font-bold text-lg hover:bg-brand-light transition-colors rounded-xl">
-              Bestil AI-audit
-            </a>
-            <a href="/demo-rapport.html" class="inline-block border border-[#d7ccbc] bg-white text-brand/78 px-8 py-3.5 font-bold text-lg hover:bg-[#faf7f2] hover:text-brand transition-colors rounded-xl">
-              Se eksporteksemplet
-            </a>
+  <main id="main">
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Eksempel</p>
+        <div class="mt-5 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div>
+            <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+              Et Hjemmeside-tjek viser hvad der får kunderne til at tøve.
+            </h1>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/70">
+              Eksemplet her er fiktivt, men viser formatet: en hurtig, konkret gennemgang af klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt førstehåndsindtryk.
+            </p>
           </div>
+          <div class="rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Fiktiv virksomhed</p>
+            <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">Nordkyst Byg</h2>
+            <p class="mt-3 text-sm leading-relaxed text-brand/70">
+              En lille håndværksvirksomhed med god faglighed, men en hjemmeside der gør det uklart, hvilke opgaver de helst vil have.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div class="grid gap-5 md:grid-cols-3">
+          {scores.map((score) => (
+            <article class="rounded-[1.8rem] border border-[#ddd1bf] bg-white p-7">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{score.label}</p>
+              <div class="mt-4 font-display text-4xl font-extrabold tracking-tight text-brand">{score.value}</div>
+              <p class="mt-4 text-sm leading-relaxed text-brand/70">{score.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Top 5 problemer</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            Rapporten prioriterer det, der koster mest tillid først.
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-brand/70">
+            Pointen er ikke at lave en lang liste med småfejl. Pointen er at gøre de vigtigste beslutninger lette at tage.
+          </p>
+        </div>
+        <ol class="grid gap-3">
+          {problems.map((problem, index) => (
+            <li class="flex gap-4 rounded-[1.4rem] border border-[#e6ddd1] bg-[#fbf8f3] p-5">
+              <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">{index + 1}</span>
+              <span class="text-base leading-relaxed text-brand/72">{problem}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e6ddd1] bg-[#fcfaf6]">
+      <div class="mx-auto grid max-w-6xl gap-8 px-6 py-16 md:py-24 lg:grid-cols-2">
+        <article class="rounded-[2rem] border border-[#ddd1bf] bg-white p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Ny hero-tekst</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">
+            “Få renovering og tømrerarbejde gjort ordentligt, uden at projektet bliver tungt at styre.”
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-brand/70">
+            En god hero gør det straks tydeligt, hvem siden er for, hvilket problem den løser, og hvad besøgende skal gøre bagefter.
+          </p>
+        </article>
+
+        <article class="rounded-[2rem] border border-[#ddd1bf] bg-[#1f2a33] p-8 text-white">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Forslag til servicestruktur</p>
+          <div class="mt-5 grid gap-3">
+            {fixes.map((fix) => (
+              <div class="rounded-[1rem] border border-white/10 bg-white/6 px-4 py-3 text-sm leading-relaxed text-white/74">{fix}</div>
+            ))}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="bg-white">
+      <div class="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Næste skridt</p>
+        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+          Vil du se, hvor din egen hjemmeside mister kunder?
+        </h2>
+        <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand/70">
+          Start med Hjemmeside-tjekket, hvis du vil have problemerne gjort konkrete, før du beslutter hvad der skal rettes.
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Bestil Hjemmeside-tjek
+          </a>
+          <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
+            Se hvad du får
+          </a>
         </div>
       </div>
     </section>

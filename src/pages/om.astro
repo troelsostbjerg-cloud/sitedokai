@@ -5,144 +5,139 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const principles = [
+  'Vi starter med det kunderne faktisk ser på hjemmesiden.',
+  'Vi gør problemet konkret, før vi anbefaler et fix.',
+  'Vi skriver i almindeligt dansk og prioriterer det, der kan flytte henvendelser.',
+  'Vi løfter tekst, struktur og visuelt udtryk uden at gøre projektet større end nødvendigt.',
+];
+
+const process = [
   {
-    title: 'Start med problemet',
-    text: 'Vi vælger ikke løsning først. Vi afklarer først om problemet handler om synlighed, tillid, dokumentation, workflow eller et værktøj der mangler.',
+    title: '1. Find hvor siden mister tillid',
+    text: 'Vi kigger på klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt førstehåndsindtryk.',
   },
   {
-    title: 'Pak det i et klart spor',
-    text: 'I stedet for et diffust bureauforløb bliver arbejdet pakket som AI Audit, sprint, room, build eller partnerforløb.',
+    title: '2. Gør næste skridt tydeligt',
+    text: 'Du får prioriterede fund og konkrete forslag, så du ikke står tilbage med en vag analyse.',
   },
   {
-    title: 'Byg det mindste rigtige lag',
-    text: 'Vi tror ikke på at alt skal være en platform. Mange problemer løses bedre med et room eller et afgrænset sprint.',
-  },
-  {
-    title: 'Fortsæt kun hvis det virker',
-    text: 'Hvis første lag giver værdi, bygger vi videre i samme struktur. Hvis ikke, stopper vi uden at opfinde mere arbejde.',
+    title: '3. Ret det vigtigste først',
+    text: 'Når det giver mening, hjælper SiteDok også med Hjemmeside-fix eller Visuelt løft.',
   },
 ];
 
-const formats = [
-  {
-    title: 'AI Audit',
-    body: 'Når virksomheden har brug for diagnose før noget andet.',
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Troels Østbjerg',
+  jobTitle: 'Founder',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SiteDok',
+    url: 'https://sitedokai.com',
   },
-  {
-    title: 'Authority Sprint',
-    body: 'Når websitet eller indholdet er for uklart til at bære salget ordentligt.',
-  },
-  {
-    title: 'Room Build / Workflow Sprint',
-    body: 'Når dokumentation, onboarding eller drift er blevet for rodet til mapper og mails.',
-  },
-  {
-    title: 'Dashboard / mini-app',
-    body: 'Når nogen faktisk skal arbejde i systemet og gøre noget aktivt.',
-  },
-];
-
-const trust = [
-  'Vi sælger ikke et åbent konsulenthus der kan være alt muligt for alle.',
-  'AI Audit er stadig entry product, ikke bare et historisk sidespor.',
-  'Vi bygger kun dashboard eller mini-app når behovet er reelt og drift kan sættes ordentligt op.',
-  'Familien af rooms holder samarbejdet genkendeligt på tværs af forskellige opgaver.',
-];
+  image: 'https://sitedokai.com/images/troels-ostbjerg-founder.png',
+  url: 'https://sitedokai.com/om',
+  description:
+    'Founder Troels Østbjerg bygger SiteDok for at hjælpe små virksomheder med klarere, mere troværdige og mere handlingsklare hjemmesider.',
+};
 ---
 
 <Layout
-  title="Metode | SiteDok"
-  description="Læs hvordan SiteDok arbejder med AI Audit, sprints, rooms og små systemer. Vi starter med problemet og bygger kun det næste lag der faktisk skal bruges."
+  title="Om SiteDok"
+  description="SiteDok hjælper små virksomheder med at finde og rette det, der får deres hjemmeside til at miste kunder."
+  ogImage="/images/troels-ostbjerg-founder.png"
+  structuredData={structuredData}
 >
   <Nav />
   <main id="main">
     <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <div class="mx-auto grid max-w-6xl gap-14 px-6 py-16 md:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div class="max-w-3xl">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Metode</p>
-          <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-            SiteDok er bygget som et smalt system af ydelser, ikke som et bredt bureau.
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Om SiteDok</p>
+          <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+            Vi hjælper små virksomheder med at få hjemmesider, der er lettere at forstå og vælge.
           </h1>
-          <p class="mt-6 text-lg leading-relaxed text-brand/70">
-            Vi hjælper små virksomheder med digital klarhed. Nogle gange starter det med AI-synlighed. Andre gange med dokumentation, workflow eller et værktøj der mangler.
-            Fællesnævneren er, at vi vælger det rigtige format først og bygger så lidt som muligt, men så rigtigt som nødvendigt.
+          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/72">
+            Mange virksomheder er gode i virkeligheden, men deres hjemmeside får dem til at virke mindre klare, mindre trygge eller mindre professionelle end de er.
           </p>
+          <p class="mt-4 max-w-2xl text-lg leading-relaxed text-brand/72">
+            SiteDok er lavet til at finde og rette de ting: tekst, struktur, CTAer, tillidssignaler, synlighed og visuelt udtryk.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+              Bestil Hjemmeside-tjek
+            </a>
+            <a href="mailto:info@sitedokai.com" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
+              info@sitedokai.com
+            </a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="absolute inset-0 rounded-[2rem] bg-[#f5eee2]"></div>
+          <article class="relative rounded-[2rem] border border-[#e2d8cb] bg-[#fcfaf6] p-5">
+            <img
+              src="/images/troels-ostbjerg-founder.png"
+              alt="Troels Østbjerg, founder af SiteDok"
+              class="aspect-[4/4.7] w-full rounded-[1.5rem] object-cover object-center"
+            />
+            <div class="border-t border-[#e7ddcf] px-2 pt-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Troels Østbjerg</p>
+              <p class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Founder</p>
+              <p class="mt-2 text-sm leading-relaxed text-brand/62">
+                Arbejder med praktiske forbedringer af hjemmesider, tekster og visuelle flader for små virksomheder.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
-      <div class="mx-auto grid max-w-6xl gap-5 px-6 py-20 md:grid-cols-2 md:py-28">
-        {principles.map((item) => (
-          <article class="rounded-[1.8rem] border border-[#e0d6c8] bg-white p-7 shadow-[0_18px_44px_rgba(31,42,51,0.04)]">
-            <h2 class="font-display text-3xl font-bold tracking-tight text-brand">{item.title}</h2>
-            <p class="mt-4 text-base leading-relaxed text-brand/70">{item.text}</p>
-          </article>
-        ))}
+    <section class="border-b border-[#e6ddd1] bg-[#f7f2e8]">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Arbejdsprincipper</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            Mindre støj. Mere klarhed. Mere konkret forbedring.
+          </h2>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {principles.map((item) => (
+            <article class="flex gap-4 rounded-[1.4rem] border border-[#e6ddd1] bg-white p-5">
+              <span class="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-accent"></span>
+              <p class="text-base leading-relaxed text-brand/72">{item}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
     <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div class="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-          <div class="max-w-2xl">
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Formater</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-              Vi arbejder i nogle få klare formater.
-            </h2>
-            <p class="mt-5 text-base leading-relaxed text-brand/70">
-              Det gør det lettere at forstå hvad man køber, og lettere for os at levere noget der faktisk kan bruges bagefter.
-            </p>
-          </div>
-
-          <div class="grid gap-4 md:grid-cols-2">
-            {formats.map((item) => (
-              <article class="rounded-[1.8rem] border border-[#e6ddd1] bg-[#fbf8f3] p-6 shadow-[0_16px_40px_rgba(31,42,51,0.03)]">
-                <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h3>
-                <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-[#1f2a33] text-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
-        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Hvorfor det er troværdigt</p>
-            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-              Fokus gør os mere brugbare, ikke mindre.
-            </h2>
-          </div>
-
-          <div class="grid gap-4">
-            {trust.map((item) => (
-              <article class="rounded-[1.5rem] border border-white/10 bg-white/6 p-5 text-sm leading-relaxed text-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                {item}
-              </article>
-            ))}
-          </div>
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Sådan arbejder vi</p>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {process.map((item) => (
+            <article class="rounded-[1.6rem] border border-[#e2d8cb] bg-[#fbf8f3] p-6">
+              <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h3>
+              <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.text}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
     <section class="bg-white">
-      <div class="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
-        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-4xl">
-          Klar til at finde det rigtige næste lag?
-        </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand/68">
-          Start med AI Audit hvis retningen er uklar. Start med kontakt hvis du allerede ved at problemet handler om et room, et workflow eller et lille system.
-        </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="/kontakt#audit" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-            Bestil AI Audit
-          </a>
-          <a href="/kontakt#afklaring" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
-            Tal med os om jeres case
-          </a>
+      <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
+        <div class="rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] px-8 py-10 text-center md:px-12 md:py-14">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Kort fortalt</p>
+          <blockquote class="mx-auto mt-5 max-w-3xl font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            “En hjemmeside skal hurtigt gøre det klart, hvorfor kunden kan stole på dig og hvad de skal gøre nu.”
+          </blockquote>
+          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand/68">
+            Det er den enkle ide bag SiteDok.
+          </p>
         </div>
       </div>
     </section>

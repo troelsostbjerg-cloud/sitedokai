@@ -1,0 +1,332 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Badge from '../components/site/Badge.astro';
+import Button from '../components/site/Button.astro';
+import Container from '../components/site/Container.astro';
+import ProcessStepCard from '../components/site/ProcessStepCard.astro';
+import SectionHeader from '../components/site/SectionHeader.astro';
+import '../styles/global.css';
+
+const improvementAreas = [
+  {
+    title: 'Layout',
+    text: 'Vi gør siden lettere at overskue, så kunden hurtigere forstår næste skridt.',
+  },
+  {
+    title: 'Billeder',
+    text: 'Vi sikrer, at billederne føles professionelle, ensartede og relevante.',
+  },
+  {
+    title: 'Farver',
+    text: 'Vi justerer farver og kontraster, så siden virker roligere og mere troværdig.',
+  },
+  {
+    title: 'Typografi',
+    text: 'Vi gør tekststørrelser og overskrifter mere rolige, læsbare og konsekvente.',
+  },
+  {
+    title: 'Visuel struktur',
+    text: 'Vi prioriterer indholdet, så siden føles mere klar fra første skærm.',
+  },
+  {
+    title: 'Brand-assets',
+    text: 'Vi samler en enkel visuel retning, så knapper, billeder og nøgleflader føles mere ensartede.',
+  },
+];
+
+const outcomes = [
+  'Mere professionelt udtryk',
+  'Bedre førstehåndsindtryk',
+  'Større tillid',
+];
+
+const process = [
+  {
+    title: 'Analyse',
+    text: 'Vi vurderer førstehåndsindtryk, layout, billeder, farver og visuel troværdighed.',
+  },
+  {
+    title: 'Designforslag',
+    text: 'Du får en konkret retning for, hvordan siden kan se mere professionel ud.',
+  },
+  {
+    title: 'Implementering',
+    text: 'Vi hjælper med de aftalte ændringer, så siden får et tydeligere visuelt udtryk.',
+  },
+];
+
+const fit = [
+  'Din side føles outdated',
+  'Du mangler troværdighed visuelt',
+  'Din side føles rodet eller tung',
+  'Billederne matcher ikke længere virksomheden',
+  'Du får færre henvendelser, end siden burde give',
+];
+
+const beforeItems = ['Mange små elementer', 'Uroligt billedevalg', 'Uklar prioritering'];
+const afterItems = ['Rolig første skærm', 'Ensartet billedstil', 'Tydelig visuel retning'];
+
+const ctaHref = '/kontakt#formular';
+const auditHref = '/hjemmeside-tjek';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Visuelt løft',
+  provider: {
+    '@type': 'Organization',
+    name: 'SiteDokAI',
+    url: 'https://sitedokai.com',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Danmark',
+  },
+  offers: {
+    '@type': 'Offer',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: '9500',
+      priceCurrency: 'DKK',
+    },
+  },
+  description: 'Vi forbedrer design, billeder og førstehåndsindtryk, så din hjemmeside virker professionel.',
+};
+---
+
+<Layout
+  title="Visuelt løft af hjemmeside | SiteDokAI"
+  description="Få et visuelt løft fra 9.500 kr. Vi forbedrer design, billeder og førstehåndsindtryk, så din hjemmeside virker professionel."
+  canonical="/visuelt-loeft"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="relative mx-auto max-w-[1480px] px-4 pb-6 pt-4 sm:px-6 lg:px-10">
+      <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/78 shadow-soft">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_16%_9%,rgba(255,255,255,0.94),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(223,232,220,0.68),transparent_30%),linear-gradient(135deg,rgba(255,253,248,0.92),rgba(246,240,230,0.6))]"></div>
+        <div class="relative grid min-w-0 gap-8 px-6 py-10 md:grid-cols-[0.92fr_1.08fr] md:items-center md:px-12 md:py-12 lg:px-14">
+          <div class="min-w-0 max-w-3xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Visuelt løft fra 9.500 kr.</p>
+            <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
+              Giv din hjemmeside et visuelt løft
+            </h1>
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+              Vi forbedrer design, billeder og førstehåndsindtryk, så din side virker professionel.
+            </p>
+
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button href={ctaHref}>Få vurderet dit visuelle udtryk</Button>
+              <Button href={auditHref} variant="secondary">Start med Hjemmeside-tjek</Button>
+            </div>
+
+            <div class="mt-6 flex flex-col gap-3 text-muted sm:flex-row">
+              <Badge>
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+                  <path d="M5.5 17.5c4.3-7.4 9.9-10 16-10-.9 6.1-3.5 11.6-10.9 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M13.8 11.8 5 20.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                Førstehåndsindtryk først
+              </Badge>
+              <Badge tone="plain">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+                  <path d="M4.5 6.5h15v11h-15v-11Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+                  <path d="M7.5 10h5M7.5 13.5h9" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+                </svg>
+                Design, billeder og udtryk
+              </Badge>
+            </div>
+          </div>
+
+          <div class="relative min-h-[370px] overflow-hidden rounded-[1.45rem] border border-border-soft bg-white/58 p-4 shadow-[0_18px_48px_rgba(32,38,34,0.06)] md:min-h-[470px] md:p-5">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_8%,rgba(223,232,220,0.72),transparent_34%),radial-gradient(circle_at_18%_82%,rgba(255,255,255,0.92),transparent_34%)]"></div>
+            <div class="relative grid h-full gap-4 sm:grid-cols-2 sm:items-center">
+              <article class="rounded-[1.15rem] border border-brand/10 bg-[#f0eee8] p-4 text-brand/72">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand/50">Før</p>
+                <div class="mt-4 rounded-[0.9rem] border border-brand/10 bg-white/55 p-3">
+                  <div class="h-20 rounded-[0.75rem] bg-[#d9d2c6]"></div>
+                  <div class="mt-4 grid gap-2">
+                    <div class="h-3 w-10/12 rounded bg-brand/18"></div>
+                    <div class="h-3 w-7/12 rounded bg-brand/14"></div>
+                    <div class="h-3 w-9/12 rounded bg-brand/10"></div>
+                  </div>
+                  <div class="mt-4 grid grid-cols-3 gap-2">
+                    <div class="h-12 rounded bg-[#ccc2b5]"></div>
+                    <div class="h-12 rounded bg-[#e4ded4]"></div>
+                    <div class="h-12 rounded bg-[#beb4a8]"></div>
+                  </div>
+                </div>
+                <div class="mt-4 grid gap-2">
+                  {beforeItems.map((item) => (
+                    <p class="rounded-[0.8rem] border border-brand/8 bg-white/50 px-3 py-2 text-sm leading-snug text-brand/58">{item}</p>
+                  ))}
+                </div>
+              </article>
+
+              <article class="rounded-[1.15rem] border border-accent/26 bg-surface p-4 shadow-[0_18px_46px_rgba(82,107,85,0.1)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-dark">Efter</p>
+                <div class="mt-4 rounded-[0.9rem] border border-accent/18 bg-white p-3">
+                  <div class="relative h-24 overflow-hidden rounded-[0.75rem] bg-accent-soft">
+                    <svg viewBox="0 0 360 140" class="absolute inset-0 h-full w-full" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M0 86c46-18 88-14 135 7 54 24 105 22 160-2 28-12 49-18 65-16v65H0Z" fill="#dfe8dc" />
+                      <path d="M0 108c62-30 119-31 181-4 58 25 110 22 179-10v46H0Z" fill="#9cac98" opacity="0.38" />
+                      <path d="M220 46 258 18l42 62 22-28 42 70H190Z" fill="#8fa08d" opacity="0.24" />
+                    </svg>
+                  </div>
+                  <div class="mt-4 grid gap-2">
+                    <div class="h-3 w-11/12 rounded bg-brand/72"></div>
+                    <div class="h-3 w-8/12 rounded bg-brand/20"></div>
+                  </div>
+                  <div class="mt-4 flex items-center gap-2">
+                    <div class="h-9 w-24 rounded-[0.65rem] bg-accent"></div>
+                    <div class="h-9 flex-1 rounded-[0.65rem] border border-border-soft bg-surface"></div>
+                  </div>
+                </div>
+                <div class="mt-4 grid gap-2">
+                  {afterItems.map((item) => (
+                    <p class="rounded-[0.8rem] border border-accent/18 bg-accent-soft/72 px-3 py-2 text-sm leading-snug text-accent-dark">{item}</p>
+                  ))}
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Container id="hvad-vi-forbedrer" class="py-7">
+      <SectionHeader
+        label="Hvad vi forbedrer"
+        title="Vi gør siden roligere, tydeligere og mere professionel ved første blik."
+        text="Fokus er det kunden ser og mærker med det samme: om siden virker opdateret, troværdig og let at tage alvorligt."
+      />
+      <div class="mt-7 grid gap-4 md:grid-cols-[1.1fr_0.9fr] lg:grid-cols-[1.25fr_0.75fr]">
+        <div class="grid gap-4 sm:grid-cols-2">
+          {improvementAreas.map((area, index) => (
+            <article class:list={['rounded-[1.25rem] border border-border-soft bg-white/72 p-5 shadow-soft', index === 0 ? 'sm:col-span-2' : '']}>
+              <span class="flex h-11 w-11 items-center justify-center rounded-[0.85rem] border border-accent/18 bg-accent-soft font-mono text-sm font-semibold text-accent-dark">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 class="mt-5 font-display text-3xl font-medium leading-tight tracking-tight text-brand">{area.title}</h3>
+              <p class="mt-3 max-w-xl text-base leading-relaxed text-muted">{area.text}</p>
+            </article>
+          ))}
+        </div>
+        <aside class="rounded-[1.35rem] border border-accent/24 bg-[linear-gradient(135deg,rgba(255,253,248,0.94),rgba(237,243,234,0.7))] p-7 shadow-soft">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Vigtigt</p>
+          <h2 class="mt-5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">Ingen tung designproces.</h2>
+          <p class="mt-4 text-base leading-relaxed text-muted">
+            Vi arbejder praktisk med det synlige udtryk: bedre prioritering, bedre billeder og en side der føles mere seriøs, før kunden når at tænke over hvorfor.
+          </p>
+        </aside>
+      </div>
+    </Container>
+
+    <Container id="hvad-du-faar" class="py-7">
+      <SectionHeader label="Hvad du får" />
+      <div class="mt-7 grid gap-5 md:grid-cols-3">
+        {outcomes.map((outcome) => (
+          <article class="rounded-[1.25rem] border border-border-soft bg-surface/76 p-6 shadow-soft">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full border border-accent/20 bg-accent-soft text-accent-dark">
+              <svg viewBox="0 0 28 28" class="h-7 w-7" fill="none" aria-hidden="true">
+                <path d="m8 14.4 3.8 3.8L20.5 9" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.25" opacity="0.5" />
+              </svg>
+            </div>
+            <h3 class="mt-5 font-display text-3xl font-medium leading-tight tracking-tight text-brand">{outcome}</h3>
+          </article>
+        ))}
+      </div>
+    </Container>
+
+    <Container id="foer-efter" class="py-7">
+      <div class="rounded-[1.45rem] border border-border-soft bg-white/62 p-5 shadow-soft md:p-7 lg:p-9">
+        <div class="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-center">
+          <SectionHeader
+            label="Før / efter"
+            title="Forskellen skal kunne ses med det samme."
+            text="Et visuelt løft handler ikke om at forklare design. Det handler om at kunden hurtigt føler, at virksomheden er professionel, aktiv og værd at kontakte."
+            align="left"
+          />
+          <div class="grid gap-4 md:grid-cols-2">
+            <article class="rounded-[1.2rem] border border-brand/10 bg-[#f0eee8] p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-brand/50">Før</p>
+              <h3 class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-brand/74">Siden føles ældre end virksomheden.</h3>
+              <p class="mt-4 text-base leading-relaxed text-brand/58">Det bliver sværere at skabe tillid, selv hvis ydelsen bag siden er god.</p>
+            </article>
+            <article class="rounded-[1.2rem] border border-accent/26 bg-accent-soft/62 p-5">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Efter</p>
+              <h3 class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-brand">Siden matcher det niveau, du vil sælge på.</h3>
+              <p class="mt-4 text-base leading-relaxed text-muted">Kunden får et roligt, professionelt førstehåndsindtryk og en tydelig vej videre.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </Container>
+
+    <Container id="forskel" class="py-7">
+      <div class="grid gap-6 rounded-[1.45rem] border border-border-soft bg-surface/76 px-6 py-9 shadow-soft md:px-10 md:py-11 lg:grid-cols-2">
+        <article>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Hjemmeside-fix</p>
+          <h2 class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-brand">Retter tekst, struktur og kontaktknapper.</h2>
+          <p class="mt-4 text-base leading-relaxed text-muted">Vælg fix, når siden primært er uklar, rodet i budskabet eller ikke leder kunden tydeligt videre.</p>
+        </article>
+        <article>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Visuelt løft</p>
+          <h2 class="mt-4 font-display text-3xl font-medium leading-tight tracking-tight text-brand">Retter design, billeder og førstehåndsindtryk.</h2>
+          <p class="mt-4 text-base leading-relaxed text-muted">Vælg visuelt løft, når virksomheden virker bedre i virkeligheden end den gør på hjemmesiden.</p>
+        </article>
+      </div>
+    </Container>
+
+    <Container id="proces" class="py-7">
+      <SectionHeader label="Proces" />
+      <div class="mt-7 grid gap-5 md:grid-cols-3">
+        {process.map((step, index) => (
+          <ProcessStepCard step={index + 1} title={step.title} text={step.text} />
+        ))}
+      </div>
+    </Container>
+
+    <Container id="hvem-det-er-til" class="py-7">
+      <div class="grid gap-6 rounded-[1.45rem] border border-border-soft bg-surface/76 px-6 py-9 shadow-soft md:px-10 md:py-11 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <SectionHeader
+          label="Hvem det er til"
+          title="Til virksomheder hvor første indtryk ikke længere følger med kvaliteten."
+          align="left"
+        />
+        <div class="grid gap-4">
+          {fit.map((item) => (
+            <div class="rounded-[1.1rem] border border-accent/20 bg-white/72 px-5 py-4 text-lg leading-snug text-brand shadow-[0_12px_28px_rgba(32,38,34,0.035)]">
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+
+    <Container id="faa-visuelt-loeft" class="pb-16 pt-7 md:pb-20">
+      <div class="relative overflow-hidden rounded-[1.55rem] border border-accent/26 bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(237,243,234,0.76))] px-6 py-9 shadow-soft md:px-10 md:py-11">
+        <div class="absolute inset-y-0 right-0 hidden w-1/2 bg-[radial-gradient(circle_at_72%_40%,rgba(111,138,114,0.16),transparent_42%)] lg:block"></div>
+        <div class="relative grid gap-7 lg:grid-cols-[0.82fr_auto] lg:items-center">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Visuelt løft</p>
+            <h2 class="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-tight text-brand md:text-5xl">
+              Klar til at få siden til at se mere professionel ud?
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+              Send dit link og skriv kort, hvad der føles visuelt svagt i dag. Så vurderer vi, om du bør starte med Hjemmeside-tjek eller gå direkte til et visuelt løft.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Button href={ctaHref}>Få vurderet dit visuelle udtryk</Button>
+            <Button href={auditHref} variant="secondary">Start med Hjemmeside-tjek</Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </main>
+  <Footer />
+</Layout>

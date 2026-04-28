@@ -1,6 +1,12 @@
 ---
 import Button from './Button.astro';
 
+interface Props {
+  ctaHref?: string;
+}
+
+const { ctaHref = '/hjemmeside-tjek' } = Astro.props;
+
 const features = [
   { title: 'PDF-rapport', icon: 'doc' },
   { title: 'Klarheds-score', icon: 'leaf' },
@@ -9,7 +15,7 @@ const features = [
   { title: 'Top 5 problemer', icon: 'list' },
   { title: 'Ny hero-tekst', icon: 'text' },
   { title: 'Forslag til servicestruktur', icon: 'structure' },
-  { title: '5-10 min video', icon: 'play' },
+  { title: '5–10 min video', icon: 'play' },
 ];
 ---
 
@@ -86,7 +92,7 @@ const features = [
     </div>
 
     <div class="lg:justify-self-start">
-      <Button href="/priser" class="w-full bg-accent-dark px-7 shadow-[0_18px_38px_rgba(82,107,85,0.22)] hover:bg-brand lg:w-auto">Se Hjemmeside-tjek</Button>
+      <Button href={ctaHref} class="w-full bg-accent-dark px-7 shadow-[0_18px_38px_rgba(82,107,85,0.22)] hover:bg-brand lg:w-auto">Se Hjemmeside-tjek</Button>
     </div>
   </div>
 </article>

@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout
+  title="Visuelt løft: når virksomheden er bedre end hjemmesiden viser | SiteDok"
+  description="SiteDok hjælper små virksomheder med visuelt løft af hjemmesider, billeder, layout og brand-assets."
+>
+  <Nav />
+  <main id="main">
+    <article class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-3xl px-6 py-20 md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Visuelt løft</p>
+        <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+          Når virksomheden er bedre end hjemmesiden viser.
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-brand/70">
+          Mange små virksomheder har styr på håndværket, servicen eller produktet. Problemet er bare, at hjemmesiden ikke giver samme indtryk.
+        </p>
+
+        <div class="prose prose-slate mt-10 max-w-none prose-headings:font-display prose-headings:text-brand prose-p:leading-relaxed prose-p:text-brand/72 prose-strong:text-brand">
+          <h2>Det visuelle førstehåndsindtryk betyder noget</h2>
+          <p>
+            Kunder vurderer hurtigt om en virksomhed virker professionel. Layout, billeder, farver, spacing og små detaljer kan afgøre, om siden føles tryg eller halvfærdig.
+          </p>
+
+          <h2>Visuelt løft er ikke pynt</h2>
+          <p>
+            Et visuelt løft handler om at få siden til at matche kvaliteten i virksomheden. Det kan være bedre billedstil, roligere layout, tydeligere serviceblokke, før/efter-præsentation eller en mere samlet brandflade.
+          </p>
+
+          <h2>Det bedste løft starter med klarhed</h2>
+          <p>
+            Design kan ikke redde en uklar side alene. Derfor kobler vi det visuelle arbejde med tekst, struktur, tillidssignaler og CTAer, så siden både ser bedre ud og bliver lettere at bruge.
+          </p>
+        </div>
+
+        <div class="mt-12 rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] p-8">
+          <h2 class="font-display text-3xl font-bold tracking-tight text-brand">
+            Har din hjemmeside brug for et mere professionelt udtryk?
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-brand/70">
+            Skriv kort hvad der føles forkert i dag, så finder vi den mindste tydelige forbedring.
+          </p>
+          <a href="/kontakt#formular" class="mt-6 inline-flex items-center justify-center rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Kontakt SiteDok
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

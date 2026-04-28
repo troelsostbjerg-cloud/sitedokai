@@ -6,63 +6,48 @@ import '../../styles/global.css';
 
 const posts = [
   {
-    slug: 'geo-hvad-er-det',
-    title: 'GEO: Det nye SEO der afgør om din virksomhed dukker op i ChatGPT',
-    description: 'Generative Engine Optimization er ikke fremtid. Det er nu. Her er hvad det er, og hvad du kan gøre ved det.',
-    date: '7. april 2026',
-    readtime: '5 min',
-    tag: 'GEO',
+    title: 'Synlighed starter med en hjemmeside der kan forstås',
+    description: 'Hvis siden ikke forklarer ydelser, beviser og næste skridt tydeligt, mister den både kunder og synlighed.',
+    href: '/blog/geo-hvad-er-det',
+    tag: 'Synlighed',
+  },
+  {
+    title: 'Visuelt løft: når virksomheden er bedre end hjemmesiden viser',
+    description: 'Om hjemmesider, billeder og brandflader der skal føles mere klare, troværdige og professionelle.',
+    href: '/blog/vi-hjaelper-ogsaa-med-hjemmesider-og-brand-assets',
+    tag: 'Visuelt løft',
   },
 ];
 ---
 
-<Layout title="Blog - SitedokAI" description="Guides og indsigt om AI-synlighed, GEO og hvad der afgør om din virksomhed dukker op i ChatGPT, Gemini, Google AI og Claude.">
+<Layout
+  title="Blog | SiteDok"
+  description="Korte tekster om hjemmesider, klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt løft."
+>
   <Nav />
-  <main>
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl">
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            Viden om AI-synlighed
-          </h1>
-          <p class="text-lg text-gray-500">
-            Guides og indsigt om GEO, AI-søgemaskiner og hvad der afgør om din virksomhed bliver fundet eller overset.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-50">
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
-        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <a href={`/blog/${post.slug}`} class="bg-white border border-gray-200 p-6 hover:border-accent transition-colors group block">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="text-xs font-bold text-accent bg-accent/10 px-2 py-1">{post.tag}</span>
-                <span class="text-xs text-gray-500">{post.readtime}</span>
-              </div>
-              <h2 class="font-display text-lg font-bold text-brand mb-3 group-hover:text-accent transition-colors leading-snug">
-                {post.title}
-              </h2>
-              <p class="text-sm text-gray-500 leading-relaxed mb-4">{post.description}</p>
-              <div class="text-xs text-gray-500">{post.date}</div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#f5efe5] border-t border-[#e6ddd1]">
-      <div class="max-w-5xl mx-auto px-6 py-16 md:py-20 text-center">
-        <h2 class="font-display text-2xl md:text-3xl font-bold text-brand mb-4">
-          Klar til at se din AI-synlighed?
-        </h2>
-        <p class="text-brand/64 mb-8 max-w-xl mx-auto leading-relaxed">
-          Teori er én ting. En konkret audit med status, konkurrentbillede og næste skridt er en anden.
+  <main id="main">
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Blog</p>
+        <h1 class="mt-5 max-w-4xl font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+          Praktiske noter om hjemmesider der skal skabe mere tillid.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/70">
+          Ingen tung teori. Bare konkrete vinkler på de ting, der gør en hjemmeside lettere at forstå, stole på og handle på.
         </p>
-        <a href="/kontakt" class="inline-block rounded-xl bg-brand text-white py-4 px-10 font-bold hover:bg-brand-light transition-colors">
-          Bestil AI-audit til 2.495 kr
-        </a>
+      </div>
+    </section>
+
+    <section class="bg-[#f6f1e8]">
+      <div class="mx-auto grid max-w-6xl gap-5 px-6 py-16 md:grid-cols-2 md:py-24">
+        {posts.map((post) => (
+          <a href={post.href} class="group rounded-[1.8rem] border border-[#ddd1bf] bg-white p-7 transition-colors hover:bg-[#fbf8f3]">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{post.tag}</p>
+            <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">{post.title}</h2>
+            <p class="mt-4 text-base leading-relaxed text-brand/70">{post.description}</p>
+            <span class="mt-6 inline-flex text-sm font-bold text-brand group-hover:text-accent">Læs artiklen</span>
+          </a>
+        ))}
       </div>
     </section>
   </main>

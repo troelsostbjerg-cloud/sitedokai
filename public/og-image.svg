@@ -1,48 +1,41 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SiteDok og-image</title>
-  <desc id="desc">SiteDok hjælper små virksomheder med klarere, mere troværdige hjemmesider.</desc>
-  <rect width="1200" height="630" fill="#FAF7F2"/>
-  <rect x="40" y="40" width="1120" height="550" rx="28" fill="url(#bg)" stroke="#E2D6C6"/>
-  <g opacity="0.12">
-    <path d="M0 120H1200" stroke="#C8B79E"/>
-    <path d="M0 240H1200" stroke="#C8B79E"/>
-    <path d="M0 360H1200" stroke="#C8B79E"/>
-    <path d="M0 480H1200" stroke="#C8B79E"/>
-    <path d="M160 0V630" stroke="#C8B79E"/>
-    <path d="M320 0V630" stroke="#C8B79E"/>
-    <path d="M480 0V630" stroke="#C8B79E"/>
-    <path d="M640 0V630" stroke="#C8B79E"/>
-    <path d="M800 0V630" stroke="#C8B79E"/>
-    <path d="M960 0V630" stroke="#C8B79E"/>
+  <title id="title">SiteDokAI — Gratis mini-tjek</title>
+  <desc id="desc">Find det, der får din hjemmeside til at miste kunder.</desc>
+  <rect width="1200" height="630" fill="#FBF7EF"/>
+  <rect x="52" y="52" width="1096" height="526" rx="42" fill="#FFFDF8" stroke="#E8DED0"/>
+  <circle cx="1040" cy="126" r="210" fill="#DFE8DC" opacity="0.55"/>
+  <circle cx="110" cy="500" r="230" fill="#FFFFFF" opacity="0.55"/>
+
+  <text x="112" y="136" fill="#526B55" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="0.18em">GRATIS MINI-TJEK FOR SMÅ VIRKSOMHEDER</text>
+  <text x="112" y="250" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">Find det, der får</text>
+  <text x="112" y="332" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">din hjemmeside til</text>
+  <text x="112" y="414" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">at miste kunder.</text>
+  <text x="116" y="482" fill="#66706A" font-family="Arial, sans-serif" font-size="29" font-weight="600">Klarhed · Tillid · Synlighed · Flere henvendelser</text>
+
+  <g transform="translate(780 300)">
+    <path d="M-40 110C40 70 100 82 176 114C246 143 320 132 438 78V230H-40Z" fill="#DFE8DC"/>
+    <path d="M-40 166C54 108 146 120 236 158C308 188 374 178 438 142V230H-40Z" fill="#8FA08D" opacity="0.35"/>
+    <path d="M168 18L230 108L264 66L354 190H94L168 18Z" fill="#9CAC98" opacity="0.28"/>
   </g>
-  <g transform="translate(118 125)">
-    <circle cx="90" cy="90" r="90" fill="#F6EFE4" stroke="#D7C7AE" stroke-width="2"/>
-    <circle cx="90" cy="90" r="70" stroke="#BF8742" stroke-opacity="0.45" stroke-width="2"/>
-    <circle cx="90" cy="90" r="48" stroke="#BF8742" stroke-opacity="0.28" stroke-width="2"/>
-    <circle cx="90" cy="90" r="18" fill="#1F2A33"/>
-    <line x1="90" y1="18" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
-    <line x1="138" y1="54" x2="90" y2="90" stroke="#9F6A24" stroke-width="3" stroke-linecap="round"/>
+
+  <g transform="translate(790 122)">
+    <rect width="275" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
+    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
+    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Uklart budskab</text>
   </g>
-  <text x="340" y="182" fill="#9F6A24" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0.08em">HJEMMESIDE-TJEK · FIX · VISUELT LØFT</text>
-  <text x="340" y="278" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">Find det der får</text>
-  <text x="340" y="352" fill="#1F2A33" font-family="Arial, sans-serif" font-size="70" font-weight="800">kunderne til at tøve</text>
-  <text x="340" y="430" fill="#6D7882" font-family="Arial, sans-serif" font-size="32" font-weight="600">Klarhed, tillid, synlighed, CTA og visuelt udtryk.</text>
-  <g transform="translate(340 482)">
-    <rect width="274" height="60" rx="14" fill="#1F2A33"/>
-    <text x="39" y="39" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="800">Se eksempel</text>
+  <g transform="translate(740 202)">
+    <rect width="304" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
+    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
+    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Tillid kan styrkes</text>
   </g>
-  <g transform="translate(646 487)">
-    <rect width="176" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
-    <text x="33" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">2.495 kr.</text>
+  <g transform="translate(825 282)">
+    <rect width="315" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
+    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
+    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Svær at forstå i Google</text>
   </g>
-  <g transform="translate(846 487)">
-    <rect width="196" height="48" rx="24" fill="#FFFFFF" stroke="#E2D6C6"/>
-    <text x="33" y="31" fill="#1F2A33" font-family="Arial, sans-serif" font-size="22" font-weight="700">48 timer</text>
+
+  <g transform="translate(112 522)">
+    <rect width="240" height="56" rx="16" fill="#6F8A72"/>
+    <text x="31" y="36" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="800">Få gratis mini-tjek</text>
   </g>
-  <defs>
-    <linearGradient id="bg" x1="69" y1="58" x2="1132" y2="595" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FCFAF6"/>
-      <stop offset="1" stop-color="#F2E8DA"/>
-    </linearGradient>
-  </defs>
 </svg>

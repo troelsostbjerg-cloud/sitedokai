@@ -1,5 +1,16 @@
 ---
-const problemCards = [
+interface ProblemCard {
+  title: string;
+  text: string;
+  icon: 'message' | 'shield' | 'search';
+  position: string;
+}
+
+interface Props {
+  problemCards?: ProblemCard[];
+}
+
+const defaultProblemCards: ProblemCard[] = [
   {
     title: 'Uklart budskab',
     text: 'Kunden forstår dig ikke hurtigt',
@@ -19,9 +30,11 @@ const problemCards = [
     position: 'right-[5%] bottom-[9%] md:right-[3%] md:bottom-[11%]',
   },
 ];
+
+const { problemCards = defaultProblemCards } = Astro.props;
 ---
 
-<div class="relative min-h-[340px] overflow-visible md:min-h-[450px]" aria-label="Abstrakt grønt landskab med typiske website-problemer">
+<div class="relative min-h-[340px] min-w-0 max-w-full overflow-hidden md:min-h-[450px] md:overflow-visible" aria-label="Abstrakt grønt landskab med typiske website-problemer">
   <div class="absolute inset-[-8%] rounded-[2rem] bg-[radial-gradient(circle_at_54%_8%,rgba(255,255,255,0.72),transparent_34%),radial-gradient(circle_at_76%_70%,rgba(111,138,114,0.16),transparent_42%)]"></div>
   <svg class="absolute inset-x-0 bottom-0 h-full w-full opacity-[0.82] [mask-image:radial-gradient(ellipse_at_62%_58%,black_0%,black_56%,transparent_86%)]" viewBox="0 0 760 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs>

@@ -63,7 +63,7 @@ const structuredData = {
             itemOffered: {
               '@type': 'Service',
               name: 'Hjemmeside-tjek',
-              description: 'Fuld gennemgang af klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt udtryk.',
+              description: 'Fuld gennemgang af klarhed, tillid, synlighed, tekst, struktur, kontaktknapper og visuelt udtryk.',
             },
           },
           {
@@ -77,7 +77,7 @@ const structuredData = {
             itemOffered: {
               '@type': 'Service',
               name: 'Hjemmeside-fix',
-              description: 'Ret tekst, struktur og CTA.',
+              description: 'Ret tekst, struktur og kontaktknapper.',
             },
           },
           {
@@ -125,7 +125,7 @@ const structuredData = {
         <FeatureCard
           icon="visibility"
           title="Synlighed"
-          text="Kan kunder, Google og AI forstå din side?"
+          text="Kan kunder og Google hurtigt forstå din side?"
         />
       </div>
     </Container>
@@ -141,7 +141,7 @@ const structuredData = {
       <PaidAuditCard />
     </Container>
 
-    <Container id="rette-det" class="pb-16 pt-7 md:pb-20">
+    <Container id="rette-det" class="pb-8 pt-7 md:pb-10">
       <SectionHeader label="Hvis du vil have os til at rette det" />
       <div class="mt-7 grid gap-5 lg:grid-cols-2">
         <SecondaryOfferCard
@@ -149,7 +149,8 @@ const structuredData = {
           icon="fix"
           title="Hjemmeside-fix"
           price="6.500-12.500 kr."
-          text="Retter tekst, struktur og CTA"
+          text="Retter tekst, struktur og kontaktknapper"
+          href="/hjemmeside-fix"
         />
         <SecondaryOfferCard
           id="visuelt-loeft"
@@ -157,7 +158,27 @@ const structuredData = {
           title="Visuelt løft"
           price="Fra 9.500 kr."
           text="Forbedrer design, billeder og førstehåndsindtryk"
+          href="/visuelt-loeft"
         />
+      </div>
+    </Container>
+
+    <Container id="klar-til-start" class="pb-16 pt-6 md:pb-20">
+      <div class="rounded-[1.6rem] border border-accent/28 bg-brand px-6 py-10 text-white shadow-[0_24px_70px_rgba(32,38,34,0.12)] md:px-10 md:py-12">
+        <div class="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/62">Klar til første skridt?</p>
+            <h2 class="mt-5 max-w-3xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-5xl">
+              Start med et gratis mini-tjek af din hjemmeside.
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
+              Du får 3 konkrete observationer og en klar vurdering af, hvad der bør rettes først.
+            </p>
+          </div>
+          <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-white bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-light hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px">
+            Få gratis mini-tjek
+          </a>
+        </div>
       </div>
     </Container>
   </main>

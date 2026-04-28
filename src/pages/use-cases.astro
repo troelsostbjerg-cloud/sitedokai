@@ -4,137 +4,65 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const serviceUseCases = [
+const cases = [
   {
-    tag: 'AI Audit',
-    summary: 'Når virksomheden har brug for et klart billede af hvordan den bliver læst, nævnt og valgt online.',
-    fit: 'God første indgang når problemet stadig er uklart.',
-    examples: [
-      {
-        title: 'Tømrerfirma i en mellemstor by',
-        body: 'Virksomheden dukker svagt op i ChatGPT og Gemini på lokale opgaver. Her giver AI Audit et klart billede af hvor de taber synlighed, og hvilke sider eller forklaringer der skal styrkes først.',
-      },
-      {
-        title: 'Mindre revisionshus',
-        body: 'AI nævner konkurrenter oftere end dem selv. Her er værdien at få en prioriteret side- og indholdsretning før der bruges tid på nye marketingaktiviteter.',
-      },
-    ],
+    tag: 'Hjemmeside-tjek',
+    title: 'Når du kan mærke at siden ikke konverterer, men ikke ved hvorfor',
+    body: 'Vi finder de vigtigste problemer med klarhed, tillid, synlighed, CTA, tekst og visuelt førstehåndsindtryk.',
+    result: 'Du får score, top 5 problemer, ny hero-tekst, forslag til servicestruktur og en kort video.',
   },
   {
-    tag: 'Authority Sprint',
-    summary: 'Når virksomheden egentlig er dygtig, men websitet ikke forklarer det skarpt nok til kunder eller AI.',
-    fit: 'Godt når der er stof nok, men forklaringen er for bred, for vag eller for flad.',
-    examples: [
-      {
-        title: 'VVS-firma med svage servicesider',
-        body: 'Her kan et sprint omsætte erfaring og faglighed til tydeligere servicebeskrivelser, FAQ og korte artikler der gør virksomheden lettere at forstå.',
-      },
-      {
-        title: 'Mindre B2B-rådgiver',
-        body: 'Her kan vi gøre cases, sammenligninger og beviser skarpere, så websitet bedre understøtter salget i stedet for bare at være præsentation.',
-      },
-    ],
+    tag: 'Hjemmeside-fix',
+    title: 'Når budskabet er uklart, og kunderne skal lede efter næste skridt',
+    body: 'Vi retter tekst, struktur og CTAer, så forsiden og de vigtigste serviceblokke bliver lettere at forstå.',
+    result: 'Du får omskrevet hero, serviceblokke, trust-sektion, FAQ og tydelige handlinger.',
   },
   {
-    tag: 'Room Build',
-    summary: 'Når overblik, dokumentation og næste skridt er spredt i mails, mapper og menneskers hukommelse.',
-    fit: 'Godt når virksomheden mangler et roligt arbejdsrum, ikke endnu en stor platform.',
-    examples: [
-      {
-        title: 'Fødevareproducent med dokumentationspres',
-        body: 'Et Compliance Room kan samle krav, mangler, dokumenter, ansvar og status på en måde der er lettere at drive end en voksende mailtråd.',
-      },
-      {
-        title: 'Bogholderi eller revisionshus med rodet onboarding',
-        body: 'Et Onboarding Room kan samle checklister, dokumentønsker, status og afleveringspunkter, så forløbet bliver lettere at følge for både team og kunde.',
-      },
-    ],
-  },
-  {
-    tag: 'Workflow Sprint',
-    summary: 'Når virksomheden mister tid og energi på manuelle overleveringer, ujævn opfølgning eller for mange små trin.',
-    fit: 'Godt når problemet handler om drift, ikke om at bygge et fuldt nyt system.',
-    examples: [
-      {
-        title: 'Maler- eller murerfirma med ujævn lead-opfølgning',
-        body: 'Et sprint kan samle intake, statusmodel og opfølgning, så virksomheden ikke mister henvendelser mellem formular, telefon og Facebook.',
-      },
-      {
-        title: 'Bogholderi med lang kundeonboarding',
-        body: 'Her kan vi stramme processen op med checklister, reminders og tydelig opgavestyring uden at udskifte hele deres CRM.',
-      },
-    ],
-  },
-  {
-    tag: 'Dashboard eller mini-app',
-    summary: 'Når et room ikke længere er nok, og nogen faktisk skal logge ind og arbejde i et lille værktøj.',
-    fit: 'Godt når data skal opdateres løbende, eller når systemet skal gøre noget aktivt.',
-    examples: [
-      {
-        title: 'Fødevareproducent med egenkontrol i papir eller Excel',
-        body: 'Et lille internt værktøj kan gøre checks, afvigelser og PDF-eksport lettere at drive i hverdagen uden at starte et tungt softwareprojekt.',
-      },
-      {
-        title: 'Ejendomsservicefirma med tilsyn i Messenger',
-        body: 'En lille tilsynsapp kan samle status, billeder og kommentarer ét sted, så arbejdet ikke drukner i chats og løse filer.',
-      },
-    ],
+    tag: 'Visuelt løft',
+    title: 'Når virksomheden er bedre end hjemmesiden får den til at se ud',
+    body: 'Vi løfter det professionelle udtryk med bedre billedstil, layout, brand-assets og før/efter-præsentation.',
+    result: 'Du får en mere rolig, troværdig og professionel retning, der matcher kvaliteten i virksomheden.',
   },
 ];
 
-const selectionRules = [
-  'Start med AI Audit når virksomheden ikke endnu ved hvad der skal laves.',
-  'Start med sprint når problemet er kendt og skal løses afgrænset.',
-  'Start med room når det vigtigste behov er struktur, dokumentation og overblik.',
-  'Start med dashboard eller mini-app når nogen faktisk skal arbejde i systemet og gøre noget aktivt.',
+const signals = [
+  'Besøgende forstår ikke hurtigt nok hvad I laver.',
+  'Siden har knapper, men ingen tydelig primær handling.',
+  'Ydelserne er skrevet indefra og ud i stedet for i kundens sprog.',
+  'Der mangler beviser, tryghed og konkrete eksempler.',
+  'Det visuelle udtryk føles gammelt, rodet eller for generisk.',
+  'Hjemmesiden siger noget andet end det I faktisk er bedst til.',
 ];
 ---
 
 <Layout
-  title="Use cases | SiteDok"
-  description="Se hvilke typer virksomheder og problemer SiteDok typisk hjælper med gennem AI Audit, Authority Sprint, rooms, workflow-sprints og små dashboards."
+  title="Ydelser i praksis | SiteDok"
+  description="Se hvornår Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft giver mening for små virksomheder."
 >
   <Nav />
   <main id="main">
-    <section class="border-b border-[#e6ddd1] bg-[#faf7f2]">
+    <section class="border-b border-[#e6ddd1] bg-white">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div class="max-w-4xl">
-          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Use cases</p>
-          <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-            Typiske problemer vi hjælper små virksomheder med.
-          </h1>
-          <p class="mt-6 text-lg leading-relaxed text-brand/70">
-            SiteDok er ikke bygget omkring én branche. Det er bygget omkring nogle få typer digitale problemer der går igen hos små virksomheder:
-            uklarhed, manglende beviser, rodet dokumentation, manuelle workflows og behovet for et lille arbejdsværktøj.
-          </p>
-        </div>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Ydelser i praksis</p>
+        <h1 class="mt-5 max-w-4xl font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+          Tre enkle måder at få hjemmesiden til at arbejde bedre.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/70">
+          SiteDok er til små virksomheder, hvor hjemmesiden skal være klarere, mere troværdig og lettere at handle på.
+        </p>
       </div>
     </section>
 
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <div class="grid gap-6">
-          {serviceUseCases.map((service) => (
-            <article class="rounded-[2rem] border border-[#e6ddd1] bg-[#fbf8f3] p-8 shadow-[0_20px_48px_rgba(31,42,51,0.04)]">
-              <div class="grid gap-8 lg:grid-cols-[0.86fr_1.14fr]">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{service.tag}</p>
-                  <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">{service.tag}</h2>
-                  <p class="mt-4 text-base leading-relaxed text-brand/70">{service.summary}</p>
-                  <div class="mt-6 rounded-[1.2rem] border border-[#eadfce] bg-white p-4 text-sm leading-relaxed text-brand/70">
-                    <strong class="block font-semibold text-brand">Typisk fit:</strong>
-                    <span class="mt-2 block">{service.fit}</span>
-                  </div>
-                </div>
-
-                <div class="grid gap-4 md:grid-cols-2">
-                  {service.examples.map((example) => (
-                    <article class="rounded-[1.4rem] border border-[#e6ddd1] bg-white p-5 shadow-[0_14px_36px_rgba(31,42,51,0.03)]">
-                      <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{example.title}</h3>
-                      <p class="mt-4 text-sm leading-relaxed text-brand/70">{example.body}</p>
-                    </article>
-                  ))}
-                </div>
+    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div class="grid gap-5 lg:grid-cols-3">
+          {cases.map((item) => (
+            <article class="rounded-[1.8rem] border border-[#ddd1bf] bg-white p-7">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{item.tag}</p>
+              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h2>
+              <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.body}</p>
+              <div class="mt-6 rounded-[1.1rem] border border-[#e6ddd1] bg-[#fbf8f3] p-4 text-sm leading-relaxed text-brand/72">
+                {item.result}
               </div>
             </article>
           ))}
@@ -142,38 +70,36 @@ const selectionRules = [
       </div>
     </section>
 
-    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
-      <div class="mx-auto max-w-5xl px-6 py-20 md:py-24">
-        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Sådan vælger vi format</p>
-        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-          Vi starter med det mindste rigtige format.
-        </h2>
-        <div class="mt-8 grid gap-4">
-          {selectionRules.map((item) => (
-            <article class="rounded-[1.4rem] border border-[#e0d6c8] bg-white p-5 text-base leading-relaxed text-brand/70 shadow-[0_14px_36px_rgba(31,42,51,0.03)]">
-              {item}
-            </article>
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Typiske signaler</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            Når hjemmesiden koster kunder, føles det ofte sådan her.
+          </h2>
+        </div>
+        <div class="grid gap-3">
+          {signals.map((signal) => (
+            <div class="rounded-[1.2rem] border border-[#e6ddd1] bg-[#fbf8f3] px-5 py-4 text-base leading-relaxed text-brand/72">
+              {signal}
+            </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-white">
-      <div class="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
-        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-4xl">
-          Usikker på hvor jeres case hører hjemme?
+    <section class="bg-[#1f2a33] text-white">
+      <div class="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Start enkelt</p>
+        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
+          Er du i tvivl, så start med Hjemmeside-tjek.
         </h2>
-        <p class="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-brand/68">
-          Start med AI Audit hvis retningen er uklar. Start med kontakt hvis I allerede ved at det handler om dokumentation, workflow eller et lille system.
+        <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/72">
+          Så får du problemerne prioriteret, før du beslutter om der skal fixes tekst, struktur eller visuelt udtryk.
         </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="/kontakt#audit" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-            Bestil AI Audit
-          </a>
-          <a href="/kontakt#afklaring" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
-            Tal med os om jeres case
-          </a>
-        </div>
+        <a href="/hjemmeside-tjek#bestil" class="mt-8 inline-flex items-center justify-center rounded-full bg-[#d9b27a] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-[#e4c08e]">
+          Bestil Hjemmeside-tjek
+        </a>
       </div>
     </section>
   </main>

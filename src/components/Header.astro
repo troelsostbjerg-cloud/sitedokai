@@ -2,12 +2,14 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Gratis mini-tjek', href: '/#gratis-mini' },
-  { label: 'Hjemmeside-tjek', href: '/#hjemmeside-tjek' },
-  { label: 'Hjemmeside-fix', href: '/#hjemmeside-fix' },
-  { label: 'Visuelt løft', href: '/#visuelt-loeft' },
+  { label: 'Gratis mini-tjek', href: '/gratis-mini-tjek' },
+  { label: 'Hjemmeside-tjek', href: '/hjemmeside-tjek' },
+  { label: 'Hjemmeside-fix', href: '/hjemmeside-fix' },
+  { label: 'Visuelt løft', href: '/visuelt-loeft' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
+
+const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-tjek' : '/gratis-mini-tjek';
 ---
 
 <a
@@ -32,7 +34,7 @@ const navItems = [
     </div>
 
     <div class="hidden lg:block">
-      <Button href="/kontakt?ydelse=gratis-mini-tjek" size="sm">Få gratis mini-tjek</Button>
+      <Button href={ctaHref} size="sm">Få gratis mini-tjek</Button>
     </div>
 
     <details class="group relative lg:hidden">
@@ -48,7 +50,7 @@ const navItems = [
               {item.label}
             </a>
           ))}
-          <Button href="/kontakt?ydelse=gratis-mini-tjek" class="mt-2 w-full">Få gratis mini-tjek</Button>
+          <Button href={ctaHref} class="mt-2 w-full">Få gratis mini-tjek</Button>
         </div>
       </div>
     </details>
