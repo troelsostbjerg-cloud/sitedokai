@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /studio/
 
 # Internal tools are not public launch pages.
 Disallow: /studio/
