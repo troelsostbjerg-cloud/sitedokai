@@ -5,14 +5,30 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#0f172a',
-          light: '#1e293b',
-          dark: '#020617',
+          DEFAULT: '#202622',
+          light: '#354039',
+          dark: '#151a17',
         },
         accent: {
-          DEFAULT: '#0e7490',
-          bright: '#06b6d4',
-          light: '#22d3ee',
+          DEFAULT: '#6f8a72',
+          bright: '#8fa68f',
+          light: '#dfe8dc',
+          soft: '#edf3ea',
+          dark: '#526b55',
+        },
+        canvas: {
+          DEFAULT: '#fbf7ef',
+          soft: '#f6f0e6',
+        },
+        surface: {
+          DEFAULT: '#fffdf8',
+          muted: '#f8f4ec',
+        },
+        muted: {
+          DEFAULT: '#66706a',
+        },
+        border: {
+          soft: '#e8ded0',
         },
         score: {
           green: '#22863a',
@@ -21,8 +37,13 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Newsreader', 'Georgia', 'serif'],
+        sans: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      boxShadow: {
+        soft: '0 22px 70px rgba(32, 38, 34, 0.055)',
+        card: '0 18px 45px rgba(32, 38, 34, 0.09)',
       },
     },
   },

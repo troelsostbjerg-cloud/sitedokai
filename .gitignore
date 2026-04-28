@@ -1,5 +1,13 @@
 node_modules/
 dist/
+build/
 .astro/
 .DS_Store
 .claude/
+test-results/
+.env
+.env.*
+!.env.example
+.dev.vars
+*.pem
+*.key

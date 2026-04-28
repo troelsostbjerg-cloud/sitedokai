@@ -4,153 +4,129 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const included = [
-  'AI-synlighed testet på ChatGPT, Gemini, Google AI og Claude',
-  'Gennemgang af 1 website og op til 5 nøglesider',
-  'Teknisk baseline for performance, struktur, SEO og sikkerhed',
-  'Interaktivt Client Room med status, konkurrentbillede og næste skridt',
-  'PDF-eksport til intern deling',
-  'Levering inden for 48 timer på hverdage',
-  'Ingen abonnement, ingen binding og ingen skjulte tillæg',
-];
-
-const trustBullets = [
-  'Sikker betaling via Stripe',
-  'Client Room + PDF-eksport',
-  'Levering uden abonnement eller login-cirkus',
-];
-
-const orderFlow = [
-  'Du udfylder formularen og går til betaling.',
-  'Du gennemfører betalingen sikkert via Stripe.',
-  'Vi tester website og nøglesider på tværs af AI-platforme og tekniske signaler.',
-  'Du modtager et Client Room inden for 48 timer på hverdage. PDF følger med som eksport.',
+const services = [
+  {
+    tag: 'Hovedprodukt',
+    title: 'Hjemmeside-tjek',
+    price: '2.495 kr',
+    purpose: 'Find problemerne.',
+    included: [
+      'PDF-rapport',
+      'klarheds-score',
+      'tillids-score',
+      'synligheds-score',
+      'top 5 problemer',
+      'ny hero-tekst',
+      'forslag til servicestruktur',
+      '5-10 min video',
+    ],
+    cta: { label: 'Bestil Hjemmeside-tjek', href: '/hjemmeside-tjek#bestil' },
+  },
+  {
+    tag: 'Sekundær ydelse',
+    title: 'Hjemmeside-fix',
+    price: '6.500-12.500 kr',
+    purpose: 'Ret tekst, struktur og CTA.',
+    included: [
+      'omskrivning af forside',
+      'ny hero-sektion',
+      'serviceblokke',
+      'trust-sektion',
+      'FAQ',
+      'CTA’er',
+      'tekststruktur',
+    ],
+    cta: { label: 'Se Hjemmeside-fix', href: '/hjemmeside-fix' },
+  },
+  {
+    tag: 'Sekundær ydelse',
+    title: 'Visuelt løft',
+    price: 'Fra 9.500 kr',
+    purpose: 'Ret design, billeder og professionelt udtryk.',
+    included: [
+      'visuelt førstehåndsindtryk',
+      'billedstil',
+      'layoutforbedringer',
+      'brand-assets',
+      'før/efter-præsentation',
+      'mere professionelt udtryk',
+    ],
+    cta: { label: 'Se Visuelt løft', href: '/visuelt-loeft' },
+  },
 ];
 
 const faqs = [
   {
-    q: 'Hvad koster auditen?',
-    a: 'Auditen koster 2.495 kr som engangsbeløb. Ingen abonnement. Ingen skjulte gebyrer.',
+    q: 'Hvad skal jeg starte med?',
+    a: 'Start med Hjemmeside-tjek, hvis du ikke ved præcis hvad der skal rettes først. Start direkte med Hjemmeside-fix eller Visuelt løft, hvis problemet allerede er tydeligt.',
   },
   {
-    q: 'Hvad får jeg konkret?',
-    a: 'Du får et interaktivt Client Room med AI-status, teknisk gennemgang, konkurrentblik og prioriterede næste skridt. PDF følger med som eksport.',
+    q: 'Er Hjemmeside-tjek bare en rapport?',
+    a: 'Nej. Rapporten er formatet, men pointen er beslutningen: hvad koster jer kunder lige nu, og hvad bør rettes først?',
   },
   {
-    q: 'Skal jeg booke et møde eller en gennemgang?',
-    a: 'Nej. Produktet er bevidst enkelt. Du bestiller auditen, vi leverer Client Room + PDF, og så kan du arbejde videre internt eller med din udvikler.',
-  },
-  {
-    q: 'Hvor hurtigt leverer I?',
-    a: 'Normalt inden for 48 timer på hverdage. Hvis din side er meget stor eller teknisk sær, siger vi det med det samme.',
+    q: 'Kan I også rette siden bagefter?',
+    a: 'Ja. Hjemmeside-fix retter tekst, struktur og CTA. Visuelt løft retter design, billeder og professionelt udtryk.',
   },
 ];
 ---
 
-<Layout title="Priser - SitedokAI" description="AI-audit til 2.495 kr. Fast pris, sikker betaling og levering i Client Room inden for 48 timer på hverdage.">
+<Layout
+  title="Ydelser og priser | SiteDok"
+  description="Hjemmeside-tjek til 2.495 kr, Hjemmeside-fix til 6.500-12.500 kr og Visuelt løft fra 9.500 kr."
+>
   <Nav />
-  <main>
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+  <main id="main">
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div class="max-w-3xl">
-          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Fast pris</div>
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-4">
-            AI-audit med Client Room til 2.495 kr
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Ydelser og priser</p>
+          <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+            Tre enkle måder at gøre hjemmesiden bedre på.
           </h1>
-          <p class="text-lg text-gray-500 leading-relaxed">
-            SitedokAI er ét produkt med én fast pris. Du bestiller auditen, betaler sikkert via Stripe og modtager et Client Room med de vigtigste svar. PDF følger med som eksport.
+          <p class="mt-6 text-lg leading-relaxed text-brand/70">
+            Start med at finde problemerne. Ret derefter tekst, struktur, CTA’er eller visuelt udtryk, hvis det er det næste rigtige skridt.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="bg-brand text-white border-b border-white/10">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
-        <div class="bg-brand-light p-8 md:p-10 ring-2 ring-accent ring-inset rounded-2xl">
-          <div class="text-sm font-bold text-white/80 mb-3">SitedokAI Audit</div>
-          <div class="font-display text-4xl md:text-5xl font-extrabold text-white mb-1">2.495 kr</div>
-          <div class="text-sm text-white/60 mb-8">Engangskøb, levering inden for 48 timer på hverdage</div>
-
-          <ul class="space-y-3 mb-8">
-            {included.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-white/70">
-                <svg class="w-4 h-4 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <a href="/kontakt" class="block text-center py-4 px-6 font-bold text-lg bg-amber-400 text-brand hover:bg-amber-300 transition-colors rounded-md mb-5">
-            Bestil AI-audit for 2.495 kr
-          </a>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {trustBullets.map((item) => (
-              <div class="border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white/70 text-center">
-                {item}
+    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        <div class="grid gap-5 lg:grid-cols-3">
+          {services.map((service) => (
+            <article class="flex flex-col rounded-xl border border-[#e0d6c8] bg-white p-7 shadow-[0_18px_46px_rgba(31,42,51,0.04)]">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{service.tag}</p>
+              <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">{service.title}</h2>
+              <div class="mt-4 font-display text-3xl font-bold tracking-tight text-brand/80">{service.price}</div>
+              <p class="mt-4 text-base leading-relaxed text-brand/70">
+                <strong class="font-semibold text-brand">Formål:</strong> {service.purpose}
+              </p>
+              <div class="mt-6 grid gap-2">
+                {service.included.map((item) => (
+                  <div class="rounded-lg border border-[#e6ddd1] bg-[#fbf8f3] px-4 py-3 text-sm text-brand/70">{item}</div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="space-y-6">
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-            <div class="text-sm font-semibold uppercase tracking-wider text-accent-bright mb-3">Hvad sker der efter bestilling?</div>
-            <ol class="space-y-4">
-              {orderFlow.map((item, index) => (
-                <li class="flex items-start gap-4 text-sm text-white/70 leading-relaxed">
-                  <span class="w-8 h-8 rounded-full bg-white/10 text-white font-bold flex items-center justify-center flex-shrink-0">{index + 1}</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-            <h2 class="font-display text-2xl font-bold text-white mb-4">Vil du se leverancen først?</h2>
-            <p class="text-white/70 text-sm leading-relaxed mb-5">
-              Se demoen og få en konkret fornemmelse af hvordan overblik, konkurrentbillede og næste skridt bliver præsenteret.
-            </p>
-            <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-accent-bright hover:text-accent-light transition-colors">
-              Se demoen
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12">
-          Ofte stillede spørgsmål
-        </h2>
-        <div class="space-y-8">
-          {faqs.map((faq) => (
-            <div class="border-b border-gray-200 pb-8">
-              <h3 class="font-display text-lg font-bold text-brand mb-3">{faq.q}</h3>
-              <p class="text-gray-500 leading-relaxed">{faq.a}</p>
-            </div>
+              <a href={service.cta.href} class="mt-6 inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+                {service.cta.label}
+              </a>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-gray-50">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-          Klar til at få din AI-synlighed vurderet?
-        </h2>
-        <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
-          Bestil auditen i dag og få en konkret leverance på dansk, uden abonnement og uden et langt bureauforløb bagefter.
-        </p>
-        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md">
-          Bestil AI-audit for 2.495 kr
-        </a>
+    <section class="bg-white">
+      <div class="mx-auto max-w-4xl px-6 py-20 md:py-24">
+        <h2 class="font-display text-3xl font-bold tracking-tight text-brand md:text-4xl">Ofte stillede spørgsmål</h2>
+        <div class="mt-10 space-y-8">
+          {faqs.map((faq) => (
+            <article class="border-b border-[#e6ddd1] pb-8">
+              <h3 class="font-display text-xl font-bold tracking-tight text-brand">{faq.q}</h3>
+              <p class="mt-3 text-base leading-relaxed text-brand/68">{faq.a}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   </main>

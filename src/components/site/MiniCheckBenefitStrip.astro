@@ -1,0 +1,43 @@
+---
+const benefits = [
+  { title: '3 hurtige observationer', icon: 'eye' },
+  { title: '1 tydeligt problem', icon: 'alert' },
+  { title: '1 konkret anbefaling', icon: 'idea' },
+  { title: 'Vurdering af næste skridt', icon: 'arrow' },
+];
+---
+
+<div class="rounded-[1.35rem] border border-border-soft bg-surface/76 px-6 py-8 shadow-soft md:px-10">
+  <div class="grid gap-7 md:grid-cols-4 md:divide-x md:divide-border-soft">
+    {benefits.map((benefit) => (
+      <div class="flex items-center gap-4 md:justify-center md:px-6">
+        <span class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-accent/20 bg-accent-soft text-accent-dark">
+          {benefit.icon === 'eye' && (
+            <svg viewBox="0 0 28 28" class="h-7 w-7" fill="none" aria-hidden="true">
+              <path d="M3.8 14s3.9-6.2 10.2-6.2S24.2 14 24.2 14 20.3 20.2 14 20.2 3.8 14 3.8 14Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              <circle cx="14" cy="14" r="3.1" stroke="currentColor" stroke-width="1.45" />
+            </svg>
+          )}
+          {benefit.icon === 'alert' && (
+            <svg viewBox="0 0 28 28" class="h-7 w-7" fill="none" aria-hidden="true">
+              <path d="M14 6v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M14 20.8v.1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+            </svg>
+          )}
+          {benefit.icon === 'idea' && (
+            <svg viewBox="0 0 28 28" class="h-7 w-7" fill="none" aria-hidden="true">
+              <path d="M14 4.8a7 7 0 0 0-4.1 12.7c.9.7 1.4 1.5 1.5 2.5h5.2c.1-1 .6-1.8 1.5-2.5A7 7 0 0 0 14 4.8Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              <path d="M11.8 23.2h4.4" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+            </svg>
+          )}
+          {benefit.icon === 'arrow' && (
+            <svg viewBox="0 0 28 28" class="h-7 w-7" fill="none" aria-hidden="true">
+              <path d="M5 14h17M15.8 7.8 22 14l-6.2 6.2" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          )}
+        </span>
+        <p class="max-w-[10rem] text-base leading-snug text-brand">{benefit.title}</p>
+      </div>
+    ))}
+  </div>
+</div>

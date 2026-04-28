@@ -1,0 +1,98 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  ctaHref?: string;
+}
+
+const { ctaHref = '/hjemmeside-tjek' } = Astro.props;
+
+const features = [
+  { title: 'PDF-rapport', icon: 'doc' },
+  { title: 'Klarheds-score', icon: 'leaf' },
+  { title: 'Tillids-score', icon: 'shield' },
+  { title: 'Synligheds-score', icon: 'bars' },
+  { title: 'Top 5 problemer', icon: 'list' },
+  { title: 'Ny hero-tekst', icon: 'text' },
+  { title: 'Forslag til servicestruktur', icon: 'structure' },
+  { title: '5–10 min video', icon: 'play' },
+];
+---
+
+<article id="hjemmeside-tjek" class="rounded-[1.45rem] border border-accent/42 bg-[linear-gradient(135deg,rgba(255,253,248,0.94),rgba(236,243,233,0.66))] p-4 shadow-soft md:p-6">
+  <div class="grid gap-5 lg:grid-cols-[0.72fr_1.28fr_auto] lg:items-center">
+    <div class="grid gap-3.5 sm:grid-cols-[4.75rem_1fr] lg:grid-cols-1">
+      <span class="flex h-16 w-16 items-center justify-center rounded-full border border-border-soft bg-white text-accent-dark shadow-[0_12px_28px_rgba(32,38,34,0.06)]">
+        <svg viewBox="0 0 34 34" class="h-8 w-8" fill="none" aria-hidden="true">
+          <path d="M9 5.5h12.2L27 11.3v17.2H9v-23Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+          <path d="M21 5.8v5.8h5.8M13 16h9M13 20h9M13 24h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <div>
+        <p class="text-sm text-muted">Vil du have den fulde gennemgang?</p>
+        <h2 class="mt-1.5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">Hjemmeside-tjek</h2>
+        <p class="mt-0.5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">2.495 kr.</p>
+        <p class="mt-2.5 max-w-sm text-base leading-relaxed text-muted">
+          Den fulde gennemgang, hvis mini-tjekket viser tydelige problemer.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid gap-x-4 gap-y-1.5 sm:grid-cols-2 xl:grid-cols-4">
+      {features.map((feature) => (
+        <div class="flex items-center gap-2.5 border-border-soft py-0.5 sm:border-b sm:pb-2.5 xl:[&:nth-last-child(-n+4)]:border-b-0 xl:[&:nth-last-child(-n+4)]:pb-0">
+          <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center text-accent-dark">
+            {feature.icon === 'doc' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M7 3.5h7l4 4v13H7v-17Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+                <path d="M14 3.8V8h4M9.5 12h5M9.5 15h5M9.5 18h3" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+              </svg>
+            )}
+            {feature.icon === 'leaf' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M5 14.2C8.6 7.9 13.3 5.7 19 5c-.8 5.7-3.1 10.4-9.5 14" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M13.5 10.5 5.5 19" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+              </svg>
+            )}
+            {feature.icon === 'shield' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M12 3.5 18.5 6v5.2c0 4-2.5 7.5-6.5 9.2-4-1.7-6.5-5.2-6.5-9.2V6L12 3.5Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              </svg>
+            )}
+            {feature.icon === 'bars' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M5 19v-6h3v6H5ZM10.5 19V6h3v13h-3ZM16 19v-9h3v9h-3Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              </svg>
+            )}
+            {feature.icon === 'list' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M8 7h11M8 12h11M8 17h11M4.5 7h.1M4.5 12h.1M4.5 17h.1" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" />
+              </svg>
+            )}
+            {feature.icon === 'text' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M5 5h14M12 5v14M8.5 19h7" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
+              </svg>
+            )}
+            {feature.icon === 'structure' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <path d="M12 5v6M7 19v-4h10v4M5.5 19h3M10.5 5h3M15.5 19h3" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            )}
+            {feature.icon === 'play' && (
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.45" />
+                <path d="m10.5 8.8 5 3.2-5 3.2V8.8Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
+              </svg>
+            )}
+          </span>
+          <span class="text-sm leading-snug text-brand/78">{feature.title}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="lg:justify-self-start">
+      <Button href={ctaHref} class="w-full bg-accent-dark px-7 shadow-[0_18px_38px_rgba(82,107,85,0.22)] hover:bg-brand lg:w-auto">Se Hjemmeside-tjek</Button>
+    </div>
+  </div>
+</article>

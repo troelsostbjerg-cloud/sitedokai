@@ -1,7 +1,9 @@
+import { ensureOrdersDb, insertCheckoutStarted } from "../_orders.js";
+
 const STRIPE_API_BASE = "https://api.stripe.com/v1";
-const AUDIT_AMOUNT_ORE = 249500;
-const DEFAULT_PRODUCT_NAME = "SitedokAI AI-audit";
-const DEFAULT_PRODUCT_DESCRIPTION = "AI-audit med Client Room og PDF-eksport";
+const WEBSITE_CHECK_AMOUNT_ORE = 249500;
+const DEFAULT_PRODUCT_NAME = "SiteDok Hjemmeside-tjek";
+const DEFAULT_PRODUCT_DESCRIPTION = "Hjemmeside-tjek med PDF-rapport, scores, top 5 problemer og kort video";
 const ALLOWED_PUBLIC_ORIGINS = new Set([
   "https://sitedokai.com",
   "https://www.sitedokai.com",
@@ -80,12 +82,12 @@ function renderErrorPage({ title, message, backHref }) {
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f7fb;
-        --panel: rgba(255, 255, 255, 0.96);
-        --ink: #0f172a;
-        --muted: #5b6475;
-        --border: rgba(15, 23, 42, 0.08);
-        --accent: #f59e0b;
+        --bg: #fbf7ef;
+        --panel: rgba(255, 253, 248, 0.96);
+        --ink: #202622;
+        --muted: #66706a;
+        --border: rgba(32, 38, 34, 0.10);
+        --accent: #6f8a72;
       }
       * { box-sizing: border-box; }
       body {
@@ -94,12 +96,12 @@ function renderErrorPage({ title, message, backHref }) {
         display: grid;
         place-items: center;
         padding: 24px;
-        font-family: Inter, system-ui, sans-serif;
+        font-family: Outfit, system-ui, sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(245, 158, 11, 0.16), transparent 22rem),
-          radial-gradient(circle at right 20%, rgba(14, 165, 233, 0.12), transparent 24rem),
-          linear-gradient(180deg, #eef4fb 0%, #f8fbff 100%);
+          radial-gradient(circle at top left, rgba(223, 232, 220, 0.55), transparent 22rem),
+          radial-gradient(circle at right 20%, rgba(111, 138, 114, 0.14), transparent 24rem),
+          linear-gradient(180deg, #fbf7ef 0%, #f7f2e8 100%);
       }
       main {
         width: min(100%, 520px);
@@ -107,10 +109,10 @@ function renderErrorPage({ title, message, backHref }) {
         border-radius: 28px;
         background: var(--panel);
         border: 1px solid var(--border);
-        box-shadow: 0 32px 80px rgba(15, 23, 42, 0.12);
+        box-shadow: 0 32px 80px rgba(32, 38, 34, 0.10);
       }
       .eyebrow {
-        color: #0ea5e9;
+        color: #526b55;
         text-transform: uppercase;
         letter-spacing: 0.16em;
         font-size: 0.72rem;
@@ -118,7 +120,7 @@ function renderErrorPage({ title, message, backHref }) {
       }
       h1 {
         margin: 14px 0 12px;
-        font-family: "Bricolage Grotesque", Inter, system-ui, sans-serif;
+        font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(2rem, 4vw, 2.8rem);
         line-height: 0.98;
       }
@@ -133,9 +135,9 @@ function renderErrorPage({ title, message, backHref }) {
         justify-content: center;
         margin-top: 24px;
         padding: 14px 20px;
-        border-radius: 999px;
+        border-radius: 14px;
         background: var(--accent);
-        color: #111827;
+        color: #ffffff;
         font-weight: 800;
         text-decoration: none;
       }
@@ -194,7 +196,7 @@ function buildCustomerPayload(form) {
   params.set("metadata[website]", form.website);
   params.set("metadata[notes]", form.notes);
   params.set("metadata[source_page]", form.sourcePage);
-  params.set("metadata[product]", "audit");
+  params.set("metadata[product]", "hjemmeside_tjek");
   return params;
 }
 
@@ -222,7 +224,7 @@ function buildCheckoutPayload({ customerId, publicOrigin, form, env }) {
   params.set("metadata[website]", form.website);
   params.set("metadata[notes]", noteForMetadata);
   params.set("metadata[source_page]", form.sourcePage);
-  params.set("metadata[product]", "audit");
+  params.set("metadata[product]", "hjemmeside_tjek");
   params.set("payment_intent_data[metadata][company_name]", form.companyName);
   params.set("payment_intent_data[metadata][contact_name]", form.contactName);
   params.set("payment_intent_data[metadata][email]", form.email);
@@ -240,11 +242,12 @@ function buildCheckoutPayload({ customerId, publicOrigin, form, env }) {
   params.set("invoice_creation[invoice_data][custom_fields][1][name]", "Kontakt");
   params.set("invoice_creation[invoice_data][custom_fields][1][value]", contactForInvoice);
 
-  if (env.STRIPE_AUDIT_PRICE_ID) {
-    params.set("line_items[0][price]", env.STRIPE_AUDIT_PRICE_ID);
+  const websiteCheckPriceId = env.STRIPE_WEBSITE_CHECK_PRICE_ID || env.STRIPE_AUDIT_PRICE_ID;
+  if (websiteCheckPriceId) {
+    params.set("line_items[0][price]", websiteCheckPriceId);
   } else {
     params.set("line_items[0][price_data][currency]", "dkk");
-    params.set("line_items[0][price_data][unit_amount]", String(AUDIT_AMOUNT_ORE));
+    params.set("line_items[0][price_data][unit_amount]", String(WEBSITE_CHECK_AMOUNT_ORE));
     params.set("line_items[0][price_data][product_data][name]", DEFAULT_PRODUCT_NAME);
     params.set("line_items[0][price_data][product_data][description]", DEFAULT_PRODUCT_DESCRIPTION);
   }
@@ -281,6 +284,19 @@ export async function onRequestPost(context) {
       500,
       "Checkout er ikke klar endnu",
       "Stripe-nøglen mangler i website-miljøet. Tilføj STRIPE_SECRET_KEY i Cloudflare Pages, og prøv igen.",
+      backHref,
+    );
+  }
+
+  try {
+    ensureOrdersDb(context.env);
+  } catch (error) {
+    return errorResponse(
+      500,
+      "Ordre-inbox er ikke klar endnu",
+      error instanceof Error
+        ? error.message
+        : "Vi kunne ikke forbinde checkout til ordre-inboxen.",
       backHref,
     );
   }
@@ -324,6 +340,25 @@ export async function onRequestPost(context) {
     if (!session?.url) {
       throw new Error("Stripe returnerede ikke en checkout-URL.");
     }
+
+    await insertCheckoutStarted(context.env.ORDERS_DB, {
+      checkout_session_id: session.id,
+      company_name: form.companyName,
+      contact_name: form.contactName,
+      email: form.email,
+      phone: form.phone,
+      website: form.website,
+      notes: form.notes,
+      source_page: form.sourcePage,
+      public_origin: publicOrigin,
+      checkout_url: session.url,
+      stripe_customer_id: customer.id,
+      amount_dkk: Math.round(WEBSITE_CHECK_AMOUNT_ORE / 100),
+      currency: "dkk",
+      checkout_created_at: session.created
+        ? new Date(Number(session.created) * 1000).toISOString()
+        : new Date().toISOString(),
+    });
 
     return Response.redirect(session.url, 303);
   } catch (error) {

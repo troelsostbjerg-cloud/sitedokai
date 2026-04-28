@@ -4,152 +4,140 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const pillars = [
+const principles = [
+  'Vi starter med det kunderne faktisk ser på hjemmesiden.',
+  'Vi gør problemet konkret, før vi anbefaler et fix.',
+  'Vi skriver i almindeligt dansk og prioriterer det, der kan flytte henvendelser.',
+  'Vi løfter tekst, struktur og visuelt udtryk uden at gøre projektet større end nødvendigt.',
+];
+
+const process = [
   {
-    title: '4 AI-platforme',
-    text: 'ChatGPT, Gemini, Google AI og Claude testes med relevante branchesøgninger og svaranalyse.',
+    title: '1. Find hvor siden mister tillid',
+    text: 'Vi kigger på klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt førstehåndsindtryk.',
   },
   {
-    title: 'Teknisk baseline',
-    text: 'Auditen vurderer blandt andet performance, struktur, indekserbarhed, sikkerhed og centrale SEO-signaler.',
+    title: '2. Gør næste skridt tydeligt',
+    text: 'Du får prioriterede fund og konkrete forslag, så du ikke står tilbage med en vag analyse.',
   },
   {
-    title: 'Klar prioritering',
-    text: 'Fundene sorteres og forklares på dansk, så det er tydeligt hvad der skal løses først, og hvorfor det betyder noget.',
+    title: '3. Ret det vigtigste først',
+    text: 'Når det giver mening, hjælper SiteDok også med Hjemmeside-fix eller Visuelt løft.',
   },
 ];
 
-const method = [
-  {
-    title: '1. Prompttests og svaranalyse',
-    text: 'Vi tester om virksomheden bliver nævnt, hvordan den beskrives, og hvilke konkurrenter der fylder i svarene.',
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Troels Østbjerg',
+  jobTitle: 'Founder',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SiteDok',
+    url: 'https://sitedokai.com',
   },
-  {
-    title: '2. Kilde- og synlighedstjek',
-    text: 'Vi ser på om AI-svar bygger på opdaterede kilder, samt om virksomhedsdata og vigtige sider er nemme at forstå.',
-  },
-  {
-    title: '3. Teknisk gennemgang',
-    text: 'Vi vurderer de signaler som påvirker crawlbarhed, performance, struktur og tillid i et AI-præget søgelandskab.',
-  },
-  {
-    title: '4. Prioriteret leverance',
-    text: 'Leverancen ender i et Client Room med de vigtigste anbefalinger i prioriteret rækkefølge, så teamet hurtigt kan handle på dem.',
-  },
-];
-
-const trust = [
-  'Fast produkt og fast pris. Ingen skjult upsell til et konsulentforløb.',
-  'Dansk leverance med tydelige fund, ikke generiske AI-buzzwords.',
-  'Ordre, support og levering håndteres fra info@sitedokai.com.',
-];
+  image: 'https://sitedokai.com/images/troels-ostbjerg-founder.png',
+  url: 'https://sitedokai.com/om',
+  description:
+    'Founder Troels Østbjerg bygger SiteDok for at hjælpe små virksomheder med klarere, mere troværdige og mere handlingsklare hjemmesider.',
+};
 ---
 
-<Layout title="Om SitedokAI" description="Se metoden bag SitedokAI. AI-auditen kombinerer prompttests, teknisk gennemgang og prioriterede anbefalinger i et Client Room med PDF-eksport.">
+<Layout
+  title="Om SiteDok"
+  description="SiteDok hjælper små virksomheder med at finde og rette det, der får deres hjemmeside til at miste kunder."
+  ogImage="/images/troels-ostbjerg-founder.png"
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-3xl mb-12">
-          <div class="text-sm font-semibold uppercase tracking-wider text-accent mb-4">Metode og troværdighed</div>
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold text-brand tracking-tight mb-6">
-            SitedokAI er bygget som en konkret leverance, ikke som et løst analyseunivers.
+  <main id="main">
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto grid max-w-6xl gap-14 px-6 py-16 md:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Om SiteDok</p>
+          <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+            Vi hjælper små virksomheder med at få hjemmesider, der er lettere at forstå og vælge.
           </h1>
-          <div class="space-y-4 text-lg text-gray-500 leading-relaxed">
-            <p>
-              Formålet er enkelt: at gøre det tydeligt om en virksomhed faktisk bliver fundet og anbefalet i AI-svar, og hvad der skal forbedres først, hvis svaret er nej.
-            </p>
-            <p>
-              Auditen samler prompttests, kildeanalyse og teknisk gennemgang i én leverance. Som kunde får du et Client Room, der gør det nemt at se hvor I står, og hvad der skal gøres først.
-            </p>
+          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/72">
+            Mange virksomheder er gode i virkeligheden, men deres hjemmeside får dem til at virke mindre klare, mindre trygge eller mindre professionelle end de er.
+          </p>
+          <p class="mt-4 max-w-2xl text-lg leading-relaxed text-brand/72">
+            SiteDok er lavet til at finde og rette de ting: tekst, struktur, CTAer, tillidssignaler, synlighed og visuelt udtryk.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+              Bestil Hjemmeside-tjek
+            </a>
+            <a href="mailto:info@sitedokai.com" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
+              info@sitedokai.com
+            </a>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {pillars.map((item) => (
-            <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-              <div class="font-display text-2xl font-extrabold text-brand mb-3">{item.title}</div>
-              <p class="text-sm text-gray-500 leading-relaxed">{item.text}</p>
+        <div class="relative">
+          <div class="absolute inset-0 rounded-[2rem] bg-[#f5eee2]"></div>
+          <article class="relative rounded-[2rem] border border-[#e2d8cb] bg-[#fcfaf6] p-5">
+            <img
+              src="/images/troels-ostbjerg-founder.png"
+              alt="Troels Østbjerg, founder af SiteDok"
+              class="aspect-[4/4.7] w-full rounded-[1.5rem] object-cover object-center"
+            />
+            <div class="border-t border-[#e7ddcf] px-2 pt-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Troels Østbjerg</p>
+              <p class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Founder</p>
+              <p class="mt-2 text-sm leading-relaxed text-brand/62">
+                Arbejder med praktiske forbedringer af hjemmesider, tekster og visuelle flader for små virksomheder.
+              </p>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-[#e6ddd1] bg-[#f7f2e8]">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Arbejdsprincipper</p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            Mindre støj. Mere klarhed. Mere konkret forbedring.
+          </h2>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {principles.map((item) => (
+            <article class="flex gap-4 rounded-[1.4rem] border border-[#e6ddd1] bg-white p-5">
+              <span class="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-accent"></span>
+              <p class="text-base leading-relaxed text-brand/72">{item}</p>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-brand text-white border-b border-white/10">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-3xl mb-12">
-          <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Sådan arbejder SitedokAI
-          </h2>
-          <p class="text-lg text-white/70 leading-relaxed">
-            Metoden er lavet til virksomheder, som har brug for et klart billede af deres AI-synlighed uden at købe et stort analyseforløb eller en tung platform først.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {method.map((item) => (
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 class="font-display text-xl font-bold mb-3">{item.title}</h3>
-              <p class="text-white/70 leading-relaxed text-sm">{item.text}</p>
-            </div>
+    <section class="border-b border-[#e6ddd1] bg-white">
+      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Sådan arbejder vi</p>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {process.map((item) => (
+            <article class="rounded-[1.6rem] border border-[#e2d8cb] bg-[#fbf8f3] p-6">
+              <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h3>
+              <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.text}</p>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
-        <div>
-          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-6">
-            Hvad gør leverancen troværdig?
-          </h2>
-          <p class="text-lg text-gray-500 leading-relaxed mb-8">
-            SitedokAI prøver ikke at være alt for alle. Produktet er afgrænset, leverancen er tydelig, og anbefalingerne er lavet til at kunne bruges i praksis.
+    <section class="bg-white">
+      <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
+        <div class="rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] px-8 py-10 text-center md:px-12 md:py-14">
+          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Kort fortalt</p>
+          <blockquote class="mx-auto mt-5 max-w-3xl font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
+            “En hjemmeside skal hurtigt gøre det klart, hvorfor kunden kan stole på dig og hvad de skal gøre nu.”
+          </blockquote>
+          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand/68">
+            Det er den enkle ide bag SiteDok.
           </p>
-          <ul class="space-y-4">
-            {trust.map((item) => (
-              <li class="flex items-start gap-3 text-gray-600 leading-relaxed">
-                <svg class="w-5 h-5 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8">
-          <div class="text-xs font-semibold uppercase tracking-wider text-accent mb-3">Eksempel på leverance</div>
-          <h3 class="font-display text-2xl font-bold text-brand mb-4">Fra bestilling til Client Room</h3>
-          <p class="text-sm text-gray-500 leading-relaxed mb-6">
-            Når du bestiller, gennemgår vi website og nøglesider og sender derefter et Client Room med score, fund og prioriteringer inden for 48 timer på hverdage. PDF følger med som eksport.
-          </p>
-          <a href="/eksempel" class="inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-accent transition-colors">
-            Se demoen
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-50">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
-          Klar til at få vurderet din AI-synlighed?
-        </h2>
-        <p class="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
-          Du får en konkret audit til 2.495 kr, leveret i et Client Room og uden abonnement eller skjult konsulentforløb.
-        </p>
-        <a href="/kontakt" class="inline-block bg-amber-400 text-brand py-4 px-10 font-bold text-lg hover:bg-amber-300 transition-colors rounded-md mb-6">
-          Bestil AI-audit for 2.495 kr
-        </a>
-        <div class="flex flex-wrap justify-center gap-3 text-sm text-gray-500">
-          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Sikker betaling via Stripe</span>
-          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Client Room + PDF-eksport</span>
-          <span class="bg-white border border-gray-200 rounded-full px-4 py-2">Levering inden for 48 timer på hverdage</span>
         </div>
       </div>
     </section>

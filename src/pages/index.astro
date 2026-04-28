@@ -1,33 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import WhyNotDIY from '../components/WhyNotDIY.astro';
-import ClientRoomPreview from '../components/ClientRoomPreview.astro';
-import Pricing from '../components/Pricing.astro';
-import FAQ from '../components/FAQ.astro';
-import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import Container from '../components/site/Container.astro';
+import FeatureCard from '../components/site/FeatureCard.astro';
+import HeroSection from '../components/site/HeroSection.astro';
+import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
+import PaidAuditCard from '../components/site/PaidAuditCard.astro';
+import SecondaryOfferCard from '../components/site/SecondaryOfferCard.astro';
+import SectionHeader from '../components/site/SectionHeader.astro';
 import '../styles/global.css';
-
-const faqs = [
-  {
-    q: 'Hvad får jeg for 2.495 kr?',
-    a: 'Du får en AI-audit af 1 website og op til 5 nøglesider, testet på 4 AI-platforme, leveret i et interaktivt Client Room med overblik, konkurrentbillede og prioriterede næste skridt. PDF følger med som eksport.',
-  },
-  {
-    q: 'Hvad er ikke med?',
-    a: 'Der er ingen implementering, intet abonnement og ingen tung platform. Du får diagnosen, de vigtigste næste skridt og en leverance der er let at dele internt.',
-  },
-  {
-    q: 'Hvad sker der efter bestilling?',
-    a: 'Du sender din URL og kontaktoplysninger, gennemfører betalingen via Stripe, og vi sender dit Client Room på mail som privat link inden for 48 timer på hverdage. PDF følger med som eksport, og der er ikke login.',
-  },
-  {
-    q: 'Hvorfor skal jeg kende min AI-synlighed?',
-    a: 'Stadig flere kunder bruger ChatGPT og lignende til at finde leverandører. Store virksomheder optimerer allerede aktivt for det. Hvis din virksomhed ikke dukker op, taber du kunder til konkurrenter der gør.',
-  },
-];
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -35,31 +17,23 @@ const structuredData = {
     {
       '@type': 'Organization',
       '@id': 'https://sitedokai.com/#organization',
-      name: 'SitedokAI',
+      name: 'SiteDokAI',
       url: 'https://sitedokai.com',
       logo: 'https://sitedokai.com/favicon.svg',
       email: 'info@sitedokai.com',
-      contactPoint: [
-        {
-          '@type': 'ContactPoint',
-          contactType: 'customer support',
-          email: 'info@sitedokai.com',
-          availableLanguage: ['da'],
-        },
-      ],
     },
     {
       '@type': 'WebSite',
       '@id': 'https://sitedokai.com/#website',
       url: 'https://sitedokai.com',
-      name: 'SitedokAI',
+      name: 'SiteDokAI',
       inLanguage: 'da-DK',
     },
     {
-      '@type': 'Service',
+      '@type': 'ProfessionalService',
       '@id': 'https://sitedokai.com/#service',
-      name: 'SitedokAI AI-audit',
-      serviceType: 'AI-audit med Client Room',
+      name: 'SiteDokAI',
+      serviceType: 'Gratis mini-tjek, Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft for små virksomheder',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -67,44 +41,146 @@ const structuredData = {
         '@type': 'Country',
         name: 'Danmark',
       },
-      description: 'AI-audit for 1 website og op til 5 nøglesider. Inkluderer vurdering på 4 AI-platforme, interaktivt Client Room og PDF-eksport.',
-      offers: {
-        '@type': 'Offer',
-        price: '2495',
-        priceCurrency: 'DKK',
-        availability: 'https://schema.org/InStock',
-        url: 'https://sitedokai.com/#contact',
+      email: 'info@sitedokai.com',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SiteDokAI ydelser',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'DKK',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Gratis mini-tjek',
+              description: 'Tre konkrete observationer og en anbefaling til næste skridt.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            price: '2495',
+            priceCurrency: 'DKK',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Hjemmeside-tjek',
+              description: 'Fuld gennemgang af klarhed, tillid, synlighed, tekst, struktur, kontaktknapper og visuelt udtryk.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              minPrice: '6500',
+              maxPrice: '12500',
+              priceCurrency: 'DKK',
+            },
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Hjemmeside-fix',
+              description: 'Ret tekst, struktur og kontaktknapper.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              minPrice: '9500',
+              priceCurrency: 'DKK',
+            },
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Visuelt løft',
+              description: 'Forbedr design, billeder og førstehåndsindtryk.',
+            },
+          },
+        ],
       },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': 'https://sitedokai.com/#faq',
-      mainEntity: faqs.map((faq) => ({
-        '@type': 'Question',
-        name: faq.q,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: faq.a,
-        },
-      })),
     },
   ],
 };
 ---
 
 <Layout
-  title="SitedokAI: Er din hjemmeside synlig i AI?"
-  description="Få en AI-audit fra SitedokAI. 2.495 kr for 1 website og op til 5 nøglesider på ChatGPT, Gemini, Google AI og Claude, leveret på mail som privat Client Room-link inden for 48 timer på hverdage."
+  title="SiteDokAI | Få gratis mini-tjek af din hjemmeside"
+  description="SiteDokAI hjælper små virksomheder med at finde det, der får hjemmesiden til at miste kunder. Start med et gratis mini-tjek, og gå videre til Hjemmeside-tjek hvis problemerne er tydelige."
   structuredData={structuredData}
 >
   <Nav />
-  <main id="main">
-    <Hero />
-    <ClientRoomPreview />
-    <WhyNotDIY />
-    <Pricing />
-    <FAQ faqs={faqs} />
-    <Contact />
+  <main id="main" class="bg-canvas text-brand">
+    <HeroSection />
+
+    <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
+      <SectionHeader label="Det kigger vi efter" />
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+        <FeatureCard
+          icon="clarity"
+          title="Klarhed"
+          text="Forstår kunden hurtigt, hvad du tilbyder?"
+        />
+        <FeatureCard
+          icon="trust"
+          title="Tillid"
+          text="Virker siden professionel og tryg nok til kontakt?"
+        />
+        <FeatureCard
+          icon="visibility"
+          title="Synlighed"
+          text="Kan kunder og Google hurtigt forstå din side?"
+        />
+      </div>
+    </Container>
+
+    <Container id="gratis-mini" class="pb-7 pt-3">
+      <SectionHeader label="Det får du gratis" uppercase={false} />
+      <div class="mt-6">
+        <MiniCheckBenefitStrip />
+      </div>
+    </Container>
+
+    <Container id="fuld-gennemgang" class="py-7">
+      <PaidAuditCard />
+    </Container>
+
+    <Container id="rette-det" class="pb-8 pt-7 md:pb-10">
+      <SectionHeader label="Hvis du vil have os til at rette det" />
+      <div class="mt-7 grid gap-5 lg:grid-cols-2">
+        <SecondaryOfferCard
+          id="hjemmeside-fix"
+          icon="fix"
+          title="Hjemmeside-fix"
+          price="6.500-12.500 kr."
+          text="Retter tekst, struktur og kontaktknapper"
+          href="/hjemmeside-fix"
+        />
+        <SecondaryOfferCard
+          id="visuelt-loeft"
+          icon="visual"
+          title="Visuelt løft"
+          price="Fra 9.500 kr."
+          text="Forbedrer design, billeder og førstehåndsindtryk"
+          href="/visuelt-loeft"
+        />
+      </div>
+    </Container>
+
+    <Container id="klar-til-start" class="pb-16 pt-6 md:pb-20">
+      <div class="rounded-[1.6rem] border border-accent/28 bg-brand px-6 py-10 text-white shadow-[0_24px_70px_rgba(32,38,34,0.12)] md:px-10 md:py-12">
+        <div class="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/62">Klar til første skridt?</p>
+            <h2 class="mt-5 max-w-3xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-5xl">
+              Start med et gratis mini-tjek af din hjemmeside.
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
+              Du får 3 konkrete observationer og en klar vurdering af, hvad der bør rettes først.
+            </p>
+          </div>
+          <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-white bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-light hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px">
+            Få gratis mini-tjek
+          </a>
+        </div>
+      </div>
+    </Container>
   </main>
   <Footer />
 </Layout>

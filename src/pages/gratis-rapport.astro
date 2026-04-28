@@ -5,130 +5,29 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Bestil AI-audit - SitedokAI" description="Bestil en AI-audit fra SitedokAI. Fast pris: 2.495 kr. Levering i Client Room inden for 48 timer på hverdage." canonical="/kontakt" noindex={true}>
+<Layout
+  title="Gratis rapport er lukket | SiteDok"
+  description="SiteDoks gamle gratis rapport er lukket. Start i stedet med Hjemmeside-tjek, hvis du vil finde problemerne på din hjemmeside."
+  noindex={true}
+>
   <Nav />
-  <main>
-    <section class="bg-brand text-white">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <div class="max-w-2xl mx-auto text-center">
-          <h1 class="font-display text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Bestil din AI-audit
-          </h1>
-          <p class="text-lg text-white/60 mb-10">
-            Fast pris: 2.495 kr. Du sender din URL, vi gennemgår siden, og du får et Client Room inden for 48 timer på hverdage. PDF følger med som eksport.
-          </p>
-
-          <form action="https://formsubmit.co/info@sitedokai.com" method="POST" class="max-w-lg mx-auto space-y-4">
-            <input type="hidden" name="_subject" value="Ny bestilling - SitedokAI audit" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_template" value="table" />
-
-            <div>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Dit navn"
-                required
-                aria-required="true"
-                aria-label="Dit navn"
-                class="w-full px-4 py-3 bg-brand-light border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Din email-adresse"
-                required
-                aria-required="true"
-                aria-label="Din email-adresse"
-                class="w-full px-4 py-3 bg-brand-light border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                inputmode="url"
-                autocomplete="url"
-                autocapitalize="none"
-                spellcheck="false"
-                id="website"
-                name="website"
-                placeholder="din-hjemmeside.dk"
-                required
-                aria-required="true"
-                aria-label="Din hjemmesides URL"
-                class="w-full px-4 py-3 bg-brand-light border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors"
-              />
-            </div>
-            <div>
-              <textarea
-                id="notes"
-                name="notes"
-                rows="4"
-                aria-label="Valgfrie noter om ydelse, område og fokus-sider"
-                placeholder="Valgfrit: vigtigste ydelse, primære område og evt. 1-3 sider vi skal fokusere på"
-                class="w-full px-4 py-3 bg-brand-light border border-white/20 text-white placeholder-white/40 focus:outline-none focus:border-accent transition-colors resize-vertical"
-              ></textarea>
-            </div>
-
-            <div class="flex items-start gap-3 text-left">
-              <input type="checkbox" id="gdpr" name="gdpr" required aria-required="true" class="mt-1" />
-              <label for="gdpr" class="text-sm text-white/50">
-                Jeg accepterer at SitedokAI gemmer mine oplysninger for at kunne levere auditen og kontakte mig om ordren.
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-amber-400 text-brand py-4 px-8 font-bold text-lg hover:bg-amber-300 transition-colors"
-            >
-              Bestil AI-audit til 2.495 kr
-            </button>
-            <p class="text-sm text-white/30">Ingen abonnement. Ingen tung platform. Kun en klar leverance.</p>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white border-b border-gray-200">
-      <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-12 text-center">
-          Sådan foregår det
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="border border-gray-200 p-8">
-            <div class="font-display text-xl font-bold text-brand mb-3">1. Du bestiller</div>
-            <p class="text-gray-500 leading-relaxed">
-              Du sender navn, email og website. Det tager under to minutter.
-            </p>
-          </div>
-          <div class="border border-gray-200 p-8">
-            <div class="font-display text-xl font-bold text-brand mb-3">2. Vi scanner</div>
-            <p class="text-gray-500 leading-relaxed">
-              Vi kører AI-synlighed, tekniske tests og benchmark mod relevante konkurrenter.
-            </p>
-          </div>
-          <div class="border border-gray-200 p-8">
-            <div class="font-display text-xl font-bold text-brand mb-3">3. Du får leverancen</div>
-            <p class="text-gray-500 leading-relaxed">
-              Du modtager et Client Room med score, fund og prioriterede næste skridt. PDF følger med som eksport.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-gray-50 border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-6 py-20 md:py-28 text-center">
-          <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-6">
-            Hvad vi ikke gør
-          </h2>
-        <div class="space-y-4 text-gray-500 leading-relaxed">
-          <p>Ingen abonnementsbinding. Ingen workshops. Ingen løbende konsulentforløb.</p>
-          <p>SitedokAI er en enkel audit-leverance. Du køber auditen, vi leverer Client Room + PDF, og så er arbejdet afsluttet.</p>
+  <main id="main">
+    <section class="bg-white">
+      <div class="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Opdateret ydelse</p>
+        <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
+          Den gamle gratis rapport er lukket.
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-brand/70">
+          SiteDok fokuserer nu på Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft. Hvis du vil finde de vigtigste problemer på din hjemmeside, er Hjemmeside-tjekket den rigtige start.
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
+            Bestil Hjemmeside-tjek
+          </a>
+          <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
+            Se hvad du får
+          </a>
         </div>
       </div>
     </section>

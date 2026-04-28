@@ -1,9 +1,10 @@
-<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="40" cy="40" r="40" fill="#0f172a"/>
-  <circle cx="40" cy="40" r="32" fill="none" stroke="#06b6d4" stroke-width="2.5"/>
-  <circle cx="40" cy="40" r="21" fill="none" stroke="#06b6d4" stroke-width="2" opacity="0.6"/>
-  <circle cx="40" cy="40" r="10" fill="#ffffff"/>
-  <line x1="40" y1="8" x2="40" y2="40" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-  <line x1="56.6" y1="23.4" x2="40" y2="40" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"/>
-  <line x1="72" y1="40" x2="40" y2="40" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SitedokAI favicon</title>
+  <desc id="desc">Circular SitedokAI scanner icon on a navy background.</desc>
+
+  <circle cx="40" cy="40" r="40" fill="#0F172A"/>
+  <circle cx="40" cy="40" r="27.5" fill="none" stroke="#22D3EE" stroke-width="4"/>
+  <path d="M24 40 A16 16 0 1 1 52 52" fill="none" stroke="#22D3EE" stroke-linecap="round" stroke-width="4" opacity="0.34"/>
+  <path d="M28 32 L40 20 L40 40 L66 40" fill="none" stroke="#67E8F9" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+  <circle cx="40" cy="40" r="7.5" fill="#FFFFFF"/>
 </svg>
