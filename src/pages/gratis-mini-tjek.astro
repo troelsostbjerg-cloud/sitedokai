@@ -65,7 +65,7 @@ const industries = [
 ];
 
 const miniCheckEmail = 'info@sitedokai.com';
-const miniCheckFormAction = `mailto:${miniCheckEmail}?subject=Gratis%20mini-tjek`;
+const miniCheckMailtoSubject = 'Gratis mini-tjek';
 const miniCheckDirectMailto = `mailto:${miniCheckEmail}?subject=${encodeURIComponent('Gratis mini-tjek')}&body=${encodeURIComponent(`Hej SiteDokAI,
 
 Jeg vil gerne have et gratis mini-tjek.
@@ -238,55 +238,74 @@ const structuredData = {
             <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Du får svar inden for 1–2 hverdage.</div>
             <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Hvis der ikke er et oplagt næste skridt, siger vi det direkte.</div>
             <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Vi bruger kun dine oplysninger til at lave mini-tjekket og svare dig tilbage.</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Hvis formularen driller, kan du bare skrive direkte til <a href={miniCheckDirectMailto} class="font-semibold text-brand underline decoration-accent/45 underline-offset-4 hover:decoration-accent">{miniCheckEmail}</a>.</div>
+            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.</div>
           </div>
           <p class="mt-5 max-w-lg text-sm leading-relaxed text-muted">
             Mini-tjekket er gratis, fordi det er den letteste måde at vurdere, om siden har tydelige problemer, før du bruger penge på en større gennemgang.
           </p>
         </div>
 
-        <form action={miniCheckFormAction} method="POST" enctype="text/plain" class="grid gap-4 rounded-[1.25rem] border border-border-soft bg-white/72 p-5 shadow-[0_14px_36px_rgba(32,38,34,0.045)] md:p-6">
+        <div
+          role="form"
+          aria-label="Gratis mini-tjek"
+          data-mailto-composer
+          data-mailto-to={miniCheckEmail}
+          data-mailto-subject={miniCheckMailtoSubject}
+          data-mailto-message="Jeg vil gerne have et gratis mini-tjek."
+          class="grid gap-4 rounded-[1.25rem] border border-border-soft bg-white/72 p-5 shadow-[0_14px_36px_rgba(32,38,34,0.045)] md:p-6"
+        >
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <label for="mini_check_name" class="mb-2 block text-sm font-semibold text-brand">Navn *</label>
-              <input type="text" id="mini_check_name" name="Navn" required autocomplete="name" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
+              <input type="text" id="mini_check_name" name="Navn" required aria-required="true" autocomplete="name" data-mailto-field data-mailto-required="true" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
             </div>
 
             <div>
               <label for="mini_check_email" class="mb-2 block text-sm font-semibold text-brand">Email *</label>
-              <input type="email" id="mini_check_email" name="Email" required autocomplete="email" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
+              <input type="email" id="mini_check_email" name="Email" required aria-required="true" autocomplete="email" data-mailto-field data-mailto-required="true" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
             </div>
           </div>
 
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <label for="mini_check_website" class="mb-2 block text-sm font-semibold text-brand">Hjemmeside-link *</label>
-              <input type="text" id="mini_check_website" name="Hjemmeside-link" required inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="dinvirksomhed.dk" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
+              <input type="text" id="mini_check_website" name="Hjemmeside-link" required aria-required="true" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="dinvirksomhed.dk" data-mailto-field data-mailto-required="true" data-mailto-normalize="url" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
             </div>
 
             <div>
               <label for="mini_check_industry" class="mb-2 block text-sm font-semibold text-brand">Branche</label>
-              <input type="text" id="mini_check_industry" name="Branche" autocomplete="organization-title" placeholder="Fx klinik, rådgiver eller håndværker" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
+              <input type="text" id="mini_check_industry" name="Branche" autocomplete="organization-title" placeholder="Fx klinik, rådgiver eller håndværker" data-mailto-field class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
             </div>
           </div>
 
           <div>
             <label for="mini_check_message" class="mb-2 block text-sm font-semibold text-brand">Kort besked</label>
-            <textarea id="mini_check_message" name="Kort besked" rows="4" placeholder="Skriv gerne hvad siden især skal hjælpe med." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
+            <textarea id="mini_check_message" name="Kort besked" rows="4" placeholder="Skriv gerne hvad siden især skal hjælpe med." data-mailto-field class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
           </div>
 
           <div>
-            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(83,112,88,0.18)] transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px sm:w-auto">
-              Få gratis mini-tjek
-            </button>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a href={miniCheckDirectMailto} data-mailto-link data-mailto-validate class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(83,112,88,0.18)] transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px sm:w-auto">
+                Send gratis mini-tjek
+              </a>
+              <a href={miniCheckDirectMailto} data-mailto-link class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/35 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px sm:w-auto">
+                Send direkte mail
+              </a>
+            </div>
+            <p data-mailto-error hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-[#e8cfc9] bg-[#fff8f5] px-4 py-3 text-sm leading-relaxed text-[#794035]">
+              Udfyld navn, email og hjemmeside-link, så laver vi mailen klar.
+            </p>
+            <p data-mailto-status hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-accent/22 bg-accent-soft/64 px-4 py-3 text-sm leading-relaxed text-brand/78">
+              Din mail åbner nu. Send den, så vender vi tilbage med 3 konkrete observationer.
+            </p>
             <p class="mt-3 text-sm leading-relaxed text-muted">
               Gratis og uforpligtende. Du får 3 konkrete observationer inden for 1–2 hverdage. Ingen salgsmøde kræves.
             </p>
             <p class="mt-3 rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
-              Åbner knappen ikke din mail-app? Send navn, link og branche direkte til <a href={miniCheckDirectMailto} class="font-semibold text-brand underline decoration-accent/45 underline-offset-4 hover:decoration-accent">{miniCheckEmail}</a>.
+              Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.
             </p>
           </div>
-        </form>
+        </div>
       </div>
     </Container>
   </main>

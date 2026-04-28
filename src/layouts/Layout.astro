@@ -150,6 +150,119 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
     <script is:inline>
       (function() {
+        var composers = document.querySelectorAll('[data-mailto-composer]');
+        if (!composers.length) return;
+
+        function normalizeUrl(value) {
+          var trimmed = value.trim();
+          if (!trimmed) return '';
+          if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(trimmed)) return trimmed;
+          return 'https://' + trimmed.replace(/^\/+/, '');
+        }
+
+        function getFieldValue(field) {
+          var value = field.value ? field.value.trim() : '';
+          if (field.getAttribute('data-mailto-normalize') === 'url') {
+            return normalizeUrl(value);
+          }
+          return value;
+        }
+
+        function composeMailto(root) {
+          var email = root.getAttribute('data-mailto-to') || 'info@sitedokai.com';
+          var subject = root.getAttribute('data-mailto-subject') || 'SiteDokAI henvendelse';
+          var message = root.getAttribute('data-mailto-message') || 'Jeg vil gerne høre om:';
+          var fields = root.querySelectorAll('[data-mailto-field]');
+          var lines = ['Hej SiteDokAI,', '', message, ''];
+
+          fields.forEach(function(field) {
+            var label = field.getAttribute('data-mailto-label') || field.getAttribute('name') || field.id || 'Felt';
+            lines.push(label + ': ' + getFieldValue(field));
+          });
+
+          lines.push('', 'Tak.');
+          return 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+        }
+
+        function updateLinks(root) {
+          var href = composeMailto(root);
+          root.querySelectorAll('[data-mailto-link]').forEach(function(link) {
+            link.setAttribute('href', href);
+          });
+        }
+
+        function getMissingRequired(root) {
+          return Array.from(root.querySelectorAll('[data-mailto-field][data-mailto-required="true"]')).filter(function(field) {
+            return !field.value || !field.value.trim();
+          });
+        }
+
+        function showError(root) {
+          var error = root.querySelector('[data-mailto-error]');
+          var status = root.querySelector('[data-mailto-status]');
+          if (status) status.hidden = true;
+          if (error) error.hidden = false;
+        }
+
+        function showStatus(root) {
+          var error = root.querySelector('[data-mailto-error]');
+          var status = root.querySelector('[data-mailto-status]');
+          if (error) error.hidden = true;
+          if (status) status.hidden = false;
+        }
+
+        function prepareMailtoOpen(root, link) {
+          updateLinks(root);
+
+          if (link.hasAttribute('data-mailto-validate')) {
+            var missing = getMissingRequired(root);
+            if (missing.length) {
+              showError(root);
+              return false;
+            }
+          }
+
+          showStatus(root);
+          return true;
+        }
+
+        composers.forEach(function(root) {
+          updateLinks(root);
+
+          root.querySelectorAll('[data-mailto-field]').forEach(function(field) {
+            field.addEventListener('input', function() {
+              updateLinks(root);
+            });
+            field.addEventListener('change', function() {
+              updateLinks(root);
+            });
+          });
+
+          root.querySelectorAll('[data-mailto-link]').forEach(function(link) {
+            link.addEventListener('pointerdown', function() {
+              prepareMailtoOpen(root, link);
+            });
+
+            link.addEventListener('keydown', function(event) {
+              if (event.key === 'Enter' || event.key === ' ') {
+                prepareMailtoOpen(root, link);
+              }
+            });
+
+            link.addEventListener('click', function(event) {
+              if (!prepareMailtoOpen(root, link)) {
+                var missing = getMissingRequired(root);
+                event.preventDefault();
+                if (missing.length) missing[0].focus();
+              }
+            });
+          });
+        });
+      })();
+    </script>
+
+    <script is:inline>
+      (function() {
         function getHashTarget() {
           var rawHash = window.location.hash;
           if (!rawHash || rawHash.length <= 1) return null;
