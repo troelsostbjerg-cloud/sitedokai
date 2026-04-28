@@ -150,8 +150,8 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
 
     <script is:inline>
       (function() {
-        var composers = document.querySelectorAll('[data-mailto-composer]');
-        if (!composers.length) return;
+        var forms = document.querySelectorAll('[data-ajax-email-form]');
+        if (!forms.length) return;
 
         function normalizeUrl(value) {
           var trimmed = value.trim();
@@ -160,102 +160,76 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
           return 'https://' + trimmed.replace(/^\/+/, '');
         }
 
-        function getFieldValue(field) {
-          var value = field.value ? field.value.trim() : '';
-          if (field.getAttribute('data-mailto-normalize') === 'url') {
-            return normalizeUrl(value);
+        function findStatus(form, type) {
+          return form.querySelector('[data-ajax-form-' + type + ']');
+        }
+
+        function showOnly(form, type) {
+          ['success', 'error', 'pending'].forEach(function(statusType) {
+            var status = findStatus(form, statusType);
+            if (status) status.hidden = statusType !== type;
+          });
+        }
+
+        function setSubmitState(form, isSubmitting) {
+          var button = form.querySelector('[data-ajax-submit]');
+          if (!(button instanceof HTMLButtonElement)) return;
+
+          if (!button.dataset.defaultLabel) {
+            button.dataset.defaultLabel = button.textContent.trim();
           }
-          return value;
+
+          button.disabled = isSubmitting;
+          button.textContent = isSubmitting
+            ? (form.getAttribute('data-pending-label') || 'Sender...')
+            : button.dataset.defaultLabel;
         }
 
-        function composeMailto(root) {
-          var email = root.getAttribute('data-mailto-to') || 'info@sitedokai.com';
-          var subject = root.getAttribute('data-mailto-subject') || 'SiteDokAI henvendelse';
-          var message = root.getAttribute('data-mailto-message') || 'Jeg vil gerne høre om:';
-          var fields = root.querySelectorAll('[data-mailto-field]');
-          var lines = ['Hej SiteDokAI,', '', message, ''];
-
-          fields.forEach(function(field) {
-            var label = field.getAttribute('data-mailto-label') || field.getAttribute('name') || field.id || 'Felt';
-            lines.push(label + ': ' + getFieldValue(field));
-          });
-
-          lines.push('', 'Tak.');
-          return 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+        function normalizeWebsiteField(form) {
+          var websiteInput = form.querySelector('input[name="website"]');
+          if (!(websiteInput instanceof HTMLInputElement)) return;
+          var value = normalizeUrl(websiteInput.value);
+          if (value) {
+            websiteInput.value = value;
+          }
         }
 
-        function updateLinks(root) {
-          var href = composeMailto(root);
-          root.querySelectorAll('[data-mailto-link]').forEach(function(link) {
-            link.setAttribute('href', href);
-          });
-        }
+        forms.forEach(function(form) {
+          form.addEventListener('submit', async function(event) {
+            event.preventDefault();
 
-        function getMissingRequired(root) {
-          return Array.from(root.querySelectorAll('[data-mailto-field][data-mailto-required="true"]')).filter(function(field) {
-            return !field.value || !field.value.trim();
-          });
-        }
-
-        function showError(root) {
-          var error = root.querySelector('[data-mailto-error]');
-          var status = root.querySelector('[data-mailto-status]');
-          if (status) status.hidden = true;
-          if (error) error.hidden = false;
-        }
-
-        function showStatus(root) {
-          var error = root.querySelector('[data-mailto-error]');
-          var status = root.querySelector('[data-mailto-status]');
-          if (error) error.hidden = true;
-          if (status) status.hidden = false;
-        }
-
-        function prepareMailtoOpen(root, link) {
-          updateLinks(root);
-
-          if (link.hasAttribute('data-mailto-validate')) {
-            var missing = getMissingRequired(root);
-            if (missing.length) {
-              showError(root);
-              return false;
+            if (!form.reportValidity()) {
+              return;
             }
-          }
 
-          showStatus(root);
-          return true;
-        }
+            normalizeWebsiteField(form);
+            showOnly(form, 'pending');
+            setSubmitState(form, true);
 
-        composers.forEach(function(root) {
-          updateLinks(root);
+            try {
+              var response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                  accept: 'application/json',
+                },
+                body: new FormData(form),
+              });
 
-          root.querySelectorAll('[data-mailto-field]').forEach(function(field) {
-            field.addEventListener('input', function() {
-              updateLinks(root);
-            });
-            field.addEventListener('change', function() {
-              updateLinks(root);
-            });
-          });
-
-          root.querySelectorAll('[data-mailto-link]').forEach(function(link) {
-            link.addEventListener('pointerdown', function() {
-              prepareMailtoOpen(root, link);
-            });
-
-            link.addEventListener('keydown', function(event) {
-              if (event.key === 'Enter' || event.key === ' ') {
-                prepareMailtoOpen(root, link);
+              if (!response.ok) {
+                throw new Error('Formularen kunne ikke sendes.');
               }
-            });
 
-            link.addEventListener('click', function(event) {
-              if (!prepareMailtoOpen(root, link)) {
-                var missing = getMissingRequired(root);
-                event.preventDefault();
-                if (missing.length) missing[0].focus();
+              form.reset();
+              showOnly(form, 'success');
+            } catch (error) {
+              var errorStatus = findStatus(form, 'error');
+              if (errorStatus && error instanceof Error && error.message) {
+                errorStatus.textContent = errorStatus.getAttribute('data-default-error') || errorStatus.textContent;
               }
-            });
+              showOnly(form, 'error');
+            } finally {
+              setSubmitState(form, false);
+            }
           });
         });
       })();
