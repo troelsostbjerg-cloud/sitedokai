@@ -1,15 +1,15 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">SiteDokAI — Gratis mini-tjek</title>
-  <desc id="desc">Find det, der får din hjemmeside til at miste kunder.</desc>
+  <desc id="desc">Find og ret det, der får din hjemmeside til at miste kunder.</desc>
   <rect width="1200" height="630" fill="#FBF7EF"/>
   <rect x="52" y="52" width="1096" height="526" rx="42" fill="#FFFDF8" stroke="#E8DED0"/>
   <circle cx="1040" cy="126" r="210" fill="#DFE8DC" opacity="0.55"/>
   <circle cx="110" cy="500" r="230" fill="#FFFFFF" opacity="0.55"/>
 
   <text x="112" y="136" fill="#526B55" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="0.18em">GRATIS MINI-TJEK FOR SMÅ VIRKSOMHEDER</text>
-  <text x="112" y="250" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">Find det, der får</text>
-  <text x="112" y="332" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">din hjemmeside til</text>
-  <text x="112" y="414" fill="#202622" font-family="Georgia, serif" font-size="74" font-weight="500">at miste kunder.</text>
+  <text x="112" y="250" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">Find og ret det,</text>
+  <text x="112" y="332" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">der får din hjemmeside</text>
+  <text x="112" y="414" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">til at miste kunder.</text>
   <text x="116" y="482" fill="#66706A" font-family="Arial, sans-serif" font-size="29" font-weight="600">Klarhed · Tillid · Synlighed · Flere henvendelser</text>
 
   <g transform="translate(780 300)">

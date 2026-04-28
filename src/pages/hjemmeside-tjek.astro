@@ -121,7 +121,7 @@ const faqs = [
   },
   {
     question: 'Hvad kan jeg bruge videoen til?',
-    answer: 'Videoen viser prioriteringen i almindeligt sprog, så du hurtigt kan se, hvad der bør rettes først — enten selv eller sammen med SiteDok.',
+    answer: 'Videoen viser prioriteringen i almindeligt sprog, så du hurtigt kan se, hvad der bør rettes først — enten selv eller sammen med SiteDokAI.',
   },
   {
     question: 'Er der binding bagefter?',
@@ -154,7 +154,7 @@ const structuredData = {
 
 <Layout
   title="Hjemmeside-tjek til 2.495 kr. | SiteDokAI"
-  description="Få en konkret gennemgang af din hjemmeside. Vi finder det, der får siden til at miste kunder, og viser præcis hvad du skal gøre."
+  description="Få en konkret gennemgang af din hjemmeside. Vi finder og prioriterer det, der får siden til at miste kunder, så du ved hvad der skal rettes først."
   canonical="/hjemmeside-tjek"
   structuredData={structuredData}
 >
@@ -439,7 +439,7 @@ const structuredData = {
           <div class="flex items-start gap-3">
             <input type="checkbox" id="gdpr" name="gdpr" required aria-required="true" class="mt-1" />
             <label for="gdpr" class="text-sm leading-relaxed text-muted">
-              Jeg accepterer at SiteDok bruger mine data til at levere Hjemmeside-tjekket og kontakte mig om ordren.
+              Jeg accepterer at SiteDokAI bruger mine data til at levere Hjemmeside-tjekket og kontakte mig om ordren.
             </label>
           </div>
 
@@ -452,7 +452,7 @@ const structuredData = {
           </p>
 
           <p class="text-xs leading-relaxed text-muted">
-            Når du klikker, opretter vi en Stripe-checkout med dine ordreoplysninger. Stripe sender kvittering, og SiteDok sender rapport og video.
+            Når du klikker, opretter vi en Stripe-checkout med dine ordreoplysninger. Stripe sender kvittering, og SiteDokAI sender rapport og video.
           </p>
           <p class="rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
             Hvis checkout ikke åbner, kan du stadig bestille manuelt: send firmanavn, website og kort note til <a href={checkoutFallbackMailto} class="font-semibold text-brand underline decoration-accent/45 underline-offset-4 hover:decoration-accent">{contactEmail}</a>.

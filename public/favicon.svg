@@ -1,6 +1,6 @@
 <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SiteDok favicon</title>
-  <desc id="desc">Warm SiteDok icon with a circular focus mark and directional pointer.</desc>
+  <title id="title">SiteDokAI favicon</title>
+  <desc id="desc">Warm SiteDokAI icon with a circular focus mark and directional pointer.</desc>
 
   <circle cx="40" cy="40" r="40" fill="#F3E8D5"/>
   <circle cx="40" cy="40" r="27.5" fill="none" stroke="#9F6A24" stroke-width="4"/>
