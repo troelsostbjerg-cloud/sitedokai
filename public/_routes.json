@@ -2,7 +2,8 @@
   "version": 1,
   "include": [
     "/api/*",
-    "/orders"
+    "/orders",
+    "/studio/*"
   ],
   "exclude": []
 }
