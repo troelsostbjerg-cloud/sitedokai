@@ -5,10 +5,12 @@ import Footer from '../components/Footer.astro';
 import Container from '../components/site/Container.astro';
 import FeatureCard from '../components/site/FeatureCard.astro';
 import HeroSection from '../components/site/HeroSection.astro';
+import MiniCheckPreview from '../components/site/MiniCheckPreview.astro';
 import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
 import PaidAuditCard from '../components/site/PaidAuditCard.astro';
 import SecondaryOfferCard from '../components/site/SecondaryOfferCard.astro';
 import SectionHeader from '../components/site/SectionHeader.astro';
+import TrustProofStrip from '../components/site/TrustProofStrip.astro';
 import '../styles/global.css';
 
 const structuredData = {
@@ -21,6 +23,13 @@ const structuredData = {
       url: 'https://sitedokai.com',
       logo: 'https://sitedokai.com/favicon.svg',
       email: 'info@sitedokai.com',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'info@sitedokai.com',
+        contactType: 'customer service',
+        availableLanguage: ['da-DK'],
+        areaServed: 'DK',
+      },
     },
     {
       '@type': 'WebSite',
@@ -42,6 +51,14 @@ const structuredData = {
         name: 'Danmark',
       },
       email: 'info@sitedokai.com',
+      knowsAbout: [
+        'klarhed på hjemmesider',
+        'tillid på hjemmesider',
+        'kontaktknapper',
+        'servicestruktur',
+        'førstehåndsindtryk',
+        'små virksomheders hjemmesider',
+      ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'SiteDokAI ydelser',
@@ -96,6 +113,36 @@ const structuredData = {
         ],
       },
     },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://sitedokai.com/#faq',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Hvad får jeg i et gratis mini-tjek?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Du får 3 konkrete observationer om klarhed, tillid og næste skridt på din hjemmeside.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Er gratis mini-tjek bindende?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Nej. Mini-tjekket er gratis og uforpligtende. Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Hvad koster et fuldt Hjemmeside-tjek?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Et fuldt Hjemmeside-tjek koster 2.495 kr. og gennemgår klarhed, tillid, handling, tekst, struktur, kontaktknapper og førstehåndsindtryk.',
+          },
+        },
+      ],
+    },
   ],
 };
 ---
@@ -108,6 +155,7 @@ const structuredData = {
   <Nav />
   <main id="main" class="bg-canvas text-brand">
     <HeroSection />
+    <TrustProofStrip class="pb-5 pt-1" />
 
     <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
       <SectionHeader
@@ -115,7 +163,7 @@ const structuredData = {
         title="Vi tjekker ikke kun hjemmesiden. Vi tjekker kundens oplevelse."
         text="Når en kunde lander på din hjemmeside, vurderer de hurtigt om de forstår dig, stoler på dig og vil kontakte dig. SiteDokAI er funderet i principper fra hjernevidenskab, beslutningspsykologi og adfærdsdesign — omsat til et konkret og praktisk Hjemmeside-tjek for små danske virksomheder."
       />
-      <div class="mt-6 grid gap-5 md:grid-cols-3">
+      <div class="mt-6 grid gap-5 md:grid-cols-[1.18fr_0.91fr_0.91fr]">
         <FeatureCard icon="clarity" title="Klarhed" text="Forstår kunden hurtigt, hvad du tilbyder?" />
         <FeatureCard icon="trust" title="Tillid" text="Virker siden professionel og tryg nok til kontakt?" />
         <FeatureCard icon="visibility" title="Handling" text="Er det nemt og naturligt at kontakte dig?" />
@@ -149,6 +197,8 @@ const structuredData = {
         <MiniCheckBenefitStrip />
       </div>
     </Container>
+
+    <MiniCheckPreview class="pb-7 pt-3" />
 
     <Container id="fuld-gennemgang" class="py-7">
       <PaidAuditCard />

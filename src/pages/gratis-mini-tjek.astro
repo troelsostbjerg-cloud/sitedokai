@@ -7,10 +7,12 @@ import Badge from '../components/site/Badge.astro';
 import Button from '../components/site/Button.astro';
 import Container from '../components/site/Container.astro';
 import FeatureCard from '../components/site/FeatureCard.astro';
+import MiniCheckPreview from '../components/site/MiniCheckPreview.astro';
 import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
 import PaidAuditCard from '../components/site/PaidAuditCard.astro';
 import ProcessStepCard from '../components/site/ProcessStepCard.astro';
 import SectionHeader from '../components/site/SectionHeader.astro';
+import TrustProofStrip from '../components/site/TrustProofStrip.astro';
 import '../styles/global.css';
 
 const steps = [
@@ -64,6 +66,15 @@ const industries = [
   'Lokale servicevirksomheder',
 ];
 
+const goals = [
+  'Flere henvendelser',
+  'Flere bookinger',
+  'Flere opkald',
+  'Flere tilbudsanmodninger',
+  'Mere tillid',
+  'Jeg ved ikke endnu',
+];
+
 const miniCheckEmail = 'info@sitedokai.com';
 const miniCheckFormAction = `https://formsubmit.co/ajax/${miniCheckEmail}`;
 const miniCheckDirectMailto = `mailto:${miniCheckEmail}?subject=${encodeURIComponent('Gratis mini-tjek')}&body=${encodeURIComponent(`Hej SiteDokAI,
@@ -80,23 +91,72 @@ Tak.`)}`;
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Gratis mini-tjek af hjemmeside',
-  provider: {
-    '@type': 'Organization',
-    name: 'SiteDokAI',
-    url: 'https://sitedokai.com',
-  },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Danmark',
-  },
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'DKK',
-  },
-  description: 'Få 3 konkrete observationer på, hvad der gør hjemmesiden uklar, utroværdig eller svær at handle på.',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://sitedokai.com/#organization',
+      name: 'SiteDokAI',
+      url: 'https://sitedokai.com',
+      email: 'info@sitedokai.com',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'info@sitedokai.com',
+        contactType: 'customer service',
+        availableLanguage: ['da-DK'],
+        areaServed: 'DK',
+      },
+    },
+    {
+      '@type': 'Service',
+      '@id': 'https://sitedokai.com/gratis-mini-tjek#service',
+      name: 'Gratis mini-tjek af hjemmeside',
+      serviceType: 'Gratis mini-tjek af hjemmeside for små virksomheder',
+      provider: {
+        '@id': 'https://sitedokai.com/#organization',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Danmark',
+      },
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'DKK',
+        availability: 'https://schema.org/InStock',
+      },
+      description: 'Få 3 konkrete observationer på, hvad der gør hjemmesiden uklar, utroværdig eller svær at handle på.',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://sitedokai.com/gratis-mini-tjek#faq',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Hvad får jeg i et gratis mini-tjek?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Du får 3 konkrete observationer på klarhed, tillid og næste skridt på din hjemmeside.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Hvornår får jeg svar?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Du får svar inden for 1-2 hverdage.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Er mini-tjekket bindende?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Nej. Mini-tjekket er gratis og uforpligtende.',
+          },
+        },
+      ],
+    },
+  ],
 };
 ---
 
@@ -156,6 +216,8 @@ const structuredData = {
       </div>
     </section>
 
+    <TrustProofStrip class="pb-5 pt-1" />
+
     <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
       <SectionHeader label="Det kigger vi efter" />
       <div class="mt-6 grid gap-5 md:grid-cols-3">
@@ -183,6 +245,8 @@ const structuredData = {
         <MiniCheckBenefitStrip />
       </div>
     </Container>
+
+    <MiniCheckPreview ctaHref="#faa-gratis-mini-tjek" class="pb-7 pt-3" />
 
     <Container id="hvem-det-er-for" class="py-7">
       <div class="rounded-[1.45rem] border border-border-soft bg-surface/72 px-6 py-9 shadow-soft md:px-10 md:py-11">
@@ -284,7 +348,20 @@ const structuredData = {
 
           <div>
             <label for="mini_check_message" class="mb-2 block text-sm font-semibold text-brand">Kort besked</label>
-            <textarea id="mini_check_message" name="message" rows="4" placeholder="Skriv gerne hvad siden især skal hjælpe med." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
+            <textarea id="mini_check_message" name="message" rows="4" placeholder="Skriv gerne hvad siden især skal hjælpe med, eller hvilken side vi skal kigge mest på." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
+          </div>
+
+          <div>
+            <label for="mini_check_goal" class="mb-2 block text-sm font-semibold text-brand">Hvad skal hjemmesiden helst skabe?</label>
+            <select id="mini_check_goal" name="goal" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16">
+              <option value="">Vælg hvis du ved det</option>
+              {goals.map((goal) => (
+                <option value={goal}>{goal}</option>
+              ))}
+            </select>
+            <p class="mt-2 text-sm leading-relaxed text-muted">
+              Feltet hjælper os med at vurdere siden ud fra kundens vigtigste handling.
+            </p>
           </div>
 
           <div>
