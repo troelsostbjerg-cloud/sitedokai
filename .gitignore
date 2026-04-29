@@ -11,3 +11,5 @@ test-results/
 .dev.vars
 *.pem
 *.key
+public/room/
+public/mockups/

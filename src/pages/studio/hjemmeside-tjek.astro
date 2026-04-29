@@ -43,7 +43,7 @@ const recommendationOptions = [
         <div class="mt-6 grid gap-3 md:grid-cols-3">
           <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Data gemmes lokalt i denne browser via localStorage.</div>
           <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Ingen crawler, AI-generering eller ekstern sending i MVP’en.</div>
-          <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Fokus: klarhed, tillid, synlighed og flere henvendelser.</div>
+          <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Fokus: klarhed, tillid, handling og flere henvendelser.</div>
         </div>
       </header>
 
@@ -248,7 +248,7 @@ const recommendationOptions = [
       const STORAGE_KEY = 'sitedokai.websiteChecks.v1';
       const STATUS_OPTIONS = statusOptions;
       const RECOMMENDATION_OPTIONS = recommendationOptions;
-      const EFFECT_OPTIONS = ['Flere henvendelser', 'Mere tillid', 'Bedre klarhed', 'Bedre synlighed'];
+      const EFFECT_OPTIONS = ['Flere henvendelser', 'Mere tillid', 'Bedre klarhed', 'Mere handling'];
       const PRIORITY_OPTIONS = ['Høj', 'Medium', 'Lav'];
 
       const dashboardView = document.getElementById('dashboard-view');
@@ -622,7 +622,7 @@ const recommendationOptions = [
               ${inputField('Tillids-score', 'scores.trust', { type: 'number', min: 1, max: 100 })}
             </div>
             <div class="mt-4 max-w-md">
-              ${inputField('Synligheds-score', 'scores.visibility', { type: 'number', min: 1, max: 100 })}
+              ${inputField('Handlings-score', 'scores.visibility', { type: 'number', min: 1, max: 100 })}
             </div>
             ${renderReadinessChecklist(check)}
           </div>
@@ -655,7 +655,7 @@ const recommendationOptions = [
               <div class="grid gap-4 md:grid-cols-3">
                 ${inputField('Klarheds-score 1–100', 'scores.clarity', { type: 'number', min: 1, max: 100, help: 'Forstår kunden hurtigt hvad virksomheden tilbyder?' })}
                 ${inputField('Tillids-score 1–100', 'scores.trust', { type: 'number', min: 1, max: 100, help: 'Føles siden tryg og professionel nok til kontakt?' })}
-                ${inputField('Synligheds-score 1–100', 'scores.visibility', { type: 'number', min: 1, max: 100, help: 'Er siden let at forstå for kunder og søgning?' })}
+                ${inputField('Handlings-score 1–100', 'scores.visibility', { type: 'number', min: 1, max: 100, help: 'Forstår kunden næste skridt, og føles det nemt og naturligt at kontakte virksomheden?' })}
               </div>
             `)}
 
@@ -710,7 +710,7 @@ const recommendationOptions = [
         if (scoreKey === 'trust') {
           return `Tillid handler om, om siden føles tryg, professionel og konkret nok til, at en ny kunde tør tage kontakt. Niveauet er ${level}.`;
         }
-        return `Synlighed handler om, om ydelser, område og relevans står klart nok til, at flere rigtige kunder kan finde og forstå virksomheden. Niveauet er ${level}.`;
+        return `Handling handler om, om kunden nemt forstår næste skridt og får lyst til at kontakte virksomheden. Niveauet er ${level}.`;
       }
 
       function reportSummary(check) {
@@ -883,7 +883,7 @@ const recommendationOptions = [
               <div>
                 <p class="text-xs font-bold uppercase tracking-[0.28em] text-accent-dark">SiteDokAI</p>
                 <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-7xl">Hjemmeside-tjek</h1>
-                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting på hjemmesiden, som kan påvirke klarhed, tillid, synlighed og antallet af henvendelser.</p>
+                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting på hjemmesiden, som kan påvirke klarhed, tillid, handling og antallet af henvendelser.</p>
               </div>
               <div class="grid gap-3 rounded-[1.1rem] border border-accent/18 bg-accent-soft/55 p-5 md:grid-cols-2">
                 <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-accent-dark">Kunde</p><p class="mt-1 text-lg font-semibold text-brand">${escapeHtml(textOrFallback(client.name))}</p></div>
@@ -901,11 +901,11 @@ const recommendationOptions = [
 
             <section class="report-section mt-8">
               <p class="text-xs font-bold uppercase tracking-[0.22em] text-accent-dark">Scores</p>
-              <h2 class="mt-3 font-display text-4xl font-medium tracking-tight text-brand">Klarhed, tillid og synlighed</h2>
+              <h2 class="mt-3 font-display text-4xl font-medium tracking-tight text-brand">Klarhed, tillid og handling</h2>
               <div class="mt-5 grid gap-4 md:grid-cols-3">
                 ${renderScoreCard('Klarheds-score', 'clarity', check.scores?.clarity)}
                 ${renderScoreCard('Tillids-score', 'trust', check.scores?.trust)}
-                ${renderScoreCard('Synligheds-score', 'visibility', check.scores?.visibility)}
+                ${renderScoreCard('Handlings-score', 'visibility', check.scores?.visibility)}
               </div>
             </section>
 
@@ -980,7 +980,7 @@ const recommendationOptions = [
         if (scoreKey === 'trust') {
           return `${label} ligger på ${score}. Det handler om, hvor tryg og professionel siden føles for en ny kunde. Kunden skal forstå, at I er et sikkert valg, og derfor bør siden vise mere konkret dokumentation, tydeligere proces og flere tillidssignaler.`;
         }
-        return `${label} ligger på ${score}. Det betyder, at siden kan blive lettere at forstå for både kunder og Google, uden at vi behøver gøre det teknisk eller kompliceret. Det vigtigste er at gøre ydelser, områder og relevante søgeord mere konkrete i sidens struktur og tekst.`;
+        return `${label} ligger på ${score}. Det handler om, hvor nemt kunden forstår næste skridt og får lyst til at kontakte virksomheden. Det vigtigste er at gøre kontaktvejen tydelig, tryg og naturlig.`;
       }
 
       function recommendationVideoReason(recommendation) {
@@ -1052,7 +1052,7 @@ const recommendationOptions = [
         return [
           `INTRO\nHej ${clientName}. Her får du en kort gennemgang af jeres hjemmeside og de vigtigste ting, jeg ville rette først for at skabe mere klarhed, mere tillid og flere henvendelser.`,
           `KORT OVERORDNET VURDERING\n${overview}${firstText ? `\n\nMit førstehåndsindtryk er: ${firstText}` : ''}\n\nNår en potentiel kunde lander på siden, skal de hurtigt kunne forstå hvad I hjælper med, hvorfor de kan stole på jer, og hvad de skal gøre som næste skridt.`,
-          `SCORE-GENNEMGANG\n${scoreScriptText('Klarheds-scoren', 'clarity', scores.clarity)}\n\n${scoreScriptText('Tillids-scoren', 'trust', scores.trust)}\n\n${scoreScriptText('Synligheds-scoren', 'visibility', scores.visibility)}`,
+          `SCORE-GENNEMGANG\n${scoreScriptText('Klarheds-scoren', 'clarity', scores.clarity)}\n\n${scoreScriptText('Tillids-scoren', 'trust', scores.trust)}\n\n${scoreScriptText('Handlings-scoren', 'visibility', scores.visibility)}`,
           `TOP-PROBLEMER\n${issueScript}`,
           `NY HERO-TEKST\nHer foreslår jeg en ny første sektion, hvor kunden hurtigere kan se, hvad I hjælper med, hvor I hjælper, og hvordan de tager kontakt.\n\nOverskrift: ${cleanText(hero.headline)}\nUndertekst: ${cleanText(hero.subtext)}\nPrimær CTA: ${cleanText(hero.primaryCta)}\nSekundær CTA: ${cleanText(hero.secondaryCta)}\n\nGrunden til at heroen virker bedre er: ${cleanText(hero.rationale)}`,
           `SERVICESTRUKTUR\n${serviceLines}\n\nPointen er at gøre siden lettere at forstå. Når ydelserne er samlet mere klart, bliver det nemmere for kunden at finde sig selv i indholdet, og det gør også siden lettere for Google at forstå uden at vi gør teksten teknisk.`,
