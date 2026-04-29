@@ -34,8 +34,8 @@ const included = [
     text: 'Virker siden tryg og professionel?',
   },
   {
-    title: 'Synligheds-score',
-    text: 'Er siden let at forstå for Google?',
+    title: 'Handlings-score',
+    text: 'Er det nemt og naturligt at kontakte dig?',
   },
   {
     title: 'Top 5 problemer',
@@ -84,7 +84,7 @@ const process = [
   },
   {
     title: 'Vi analyserer',
-    text: 'Vi gennemgår forsiden, vigtigste servicesider, kontaktflow, tekst, struktur, tillid og synlighed.',
+    text: 'Vi gennemgår forsiden, vigtigste servicesider, kontaktflow, tekst, struktur, tillid og kundens oplevelse.',
   },
   {
     title: 'Du får rapport + video',
@@ -117,7 +117,7 @@ const faqs = [
   },
   {
     question: 'Hvad betyder de tre scores?',
-    answer: 'Klarhed handler om, om kunden hurtigt forstår dit tilbud. Tillid handler om, om siden føles tryg og professionel. Synlighed handler om, om siden er let at forstå for kunder og søgning.',
+    answer: 'Klarhed handler om, om kunden hurtigt forstår dit tilbud. Tillid handler om, om siden føles tryg og professionel. Handling handler om, om næste skridt er tydeligt og nemt.',
   },
   {
     question: 'Hvad kan jeg bruge videoen til?',
@@ -148,13 +148,13 @@ const structuredData = {
     priceCurrency: 'DKK',
     availability: 'https://schema.org/InStock',
   },
-  description: 'Fuld gennemgang af klarhed, tillid, synlighed, top 5 problemer, ny hero-tekst, servicestruktur, PDF-rapport og kort video.',
+  description: 'Fuld gennemgang af klarhed, tillid, handling, top 5 problemer, ny hero-tekst, servicestruktur, PDF-rapport og kort video.',
 };
 ---
 
 <Layout
   title="Hjemmeside-tjek til 2.495 kr. | SiteDokAI"
-  description="Få en konkret gennemgang af din hjemmeside. Vi finder og prioriterer det, der får siden til at miste kunder, så du ved hvad der skal rettes først."
+  description="Find det, der får kunder til at falde fra. Vi finder og prioriterer det, der får siden til at miste kunder, så du ved hvad der skal rettes først."
   canonical="/hjemmeside-tjek"
   structuredData={structuredData}
 >
@@ -167,10 +167,10 @@ const structuredData = {
           <div class="max-w-3xl">
             <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Hjemmeside-tjek</p>
             <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
-              Få en konkret gennemgang af din hjemmeside
+              Find det, der får kunder til at falde fra
             </h1>
             <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              Vi gennemgår din hjemmeside for uklart budskab, svag tillid, dårlig struktur og skjulte friktioner — og giver dig en konkret prioriteret liste over det vigtigste at rette først.
+              Hjemmeside-tjekket finder de vigtigste ting, der kan koste dig henvendelser. Du får en konkret PDF-rapport, scores for klarhed, tillid og handling, de 5 vigtigste problemer, ny hero-tekst, forslag til servicestruktur og en kort video, der viser hvad du bør rette først.
             </p>
 
             <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -224,7 +224,7 @@ const structuredData = {
                   </div>
                   <div>
                     <div class="mb-2 flex items-center justify-between text-sm text-brand/72">
-                      <span>Synlighed</span>
+                      <span>Handling</span>
                       <span>59/100</span>
                     </div>
                     <div class="h-2 rounded-full bg-border-soft">
@@ -251,7 +251,7 @@ const structuredData = {
       <SectionHeader
         label="Hvad du får"
         title="En rapport du kan handle på med det samme."
-        text="Tjekket samler både scores, problemer og konkrete forslag, så du ikke kun får kritik, men en klar prioritering."
+        text="Tjekket samler scores for klarhed, tillid og handling, de 5 vigtigste problemer og konkrete forslag, så du får en klar prioritering."
       />
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {included.map((item) => (
@@ -299,8 +299,8 @@ const structuredData = {
         />
         <FeatureCard
           icon="visibility"
-          title="Synlighed"
-          text="Er tekst, struktur og services tydelige for både kunder og Google?"
+          title="Handling"
+          text="Er næste skridt tydeligt, trygt og nemt nok til at kunden faktisk kontakter dig?"
         />
       </div>
     </Container>

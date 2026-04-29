@@ -63,7 +63,7 @@ const structuredData = {
             itemOffered: {
               '@type': 'Service',
               name: 'Hjemmeside-tjek',
-              description: 'Fuld gennemgang af klarhed, tillid, synlighed, tekst, struktur, kontaktknapper og visuelt udtryk.',
+              description: 'Fuld gennemgang af klarhed, tillid, handling, tekst, struktur, kontaktknapper og kundens førstehåndsindtryk.',
             },
           },
           {
@@ -110,23 +110,36 @@ const structuredData = {
     <HeroSection />
 
     <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
-      <SectionHeader label="Det kigger vi efter" />
+      <SectionHeader
+        label="Kundens oplevelse"
+        title="Vi tjekker ikke kun hjemmesiden. Vi tjekker kundens oplevelse."
+        text="Når en kunde lander på din hjemmeside, vurderer de hurtigt om de forstår dig, stoler på dig og vil kontakte dig. SiteDokAI er funderet i principper fra hjernevidenskab, beslutningspsykologi og adfærdsdesign — omsat til et konkret og praktisk Hjemmeside-tjek for små danske virksomheder."
+      />
       <div class="mt-6 grid gap-5 md:grid-cols-3">
-        <FeatureCard
-          icon="clarity"
-          title="Klarhed"
-          text="Forstår kunden hurtigt, hvad du tilbyder?"
-        />
-        <FeatureCard
-          icon="trust"
-          title="Tillid"
-          text="Virker siden professionel og tryg nok til kontakt?"
-        />
-        <FeatureCard
-          icon="visibility"
-          title="Synlighed"
-          text="Kan kunder og Google hurtigt forstå din side?"
-        />
+        <FeatureCard icon="clarity" title="Klarhed" text="Forstår kunden hurtigt, hvad du tilbyder?" />
+        <FeatureCard icon="trust" title="Tillid" text="Virker siden professionel og tryg nok til kontakt?" />
+        <FeatureCard icon="visibility" title="Handling" text="Er det nemt og naturligt at kontakte dig?" />
+      </div>
+    </Container>
+
+    <Container id="metode" class="py-7">
+      <SectionHeader
+        label="Metode"
+        title="Vi vurderer din hjemmeside på 4 afgørende punkter"
+        text="SEO får folk ind på siden. SiteDokAI viser, hvorfor de ikke kontakter dig."
+      />
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {[
+          ['1. Opmærksomhed', 'Ser kunden hurtigt det vigtigste?'],
+          ['2. Forståelse', 'Forstår kunden hvad du tilbyder, hvem du hjælper, og hvorfor de skal vælge dig?'],
+          ['3. Tillid', 'Føles virksomheden professionel, tryg og troværdig?'],
+          ['4. Handling', 'Er det nemt og naturligt at kontakte dig?'],
+        ].map(([title, text]) => (
+          <article class="rounded-[1.15rem] border border-border-soft bg-white/68 p-5 shadow-soft">
+            <h3 class="font-display text-2xl font-medium leading-tight text-brand">{title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+          </article>
+        ))}
       </div>
     </Container>
 
