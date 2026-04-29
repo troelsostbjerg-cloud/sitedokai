@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Internal tools are not public launch pages.
+Disallow: /studio/
+
 Sitemap: https://sitedokai.com/sitemap.xml

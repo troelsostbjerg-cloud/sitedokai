@@ -26,9 +26,34 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://sitedokai.com/priser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://sitedokai.com/kontakt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/om</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/blog</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/blog/geo-hvad-er-det</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.45</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/blog/vi-hjaelper-ogsaa-med-hjemmesider-og-brand-assets</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.45</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/privatlivspolitik</loc>
