@@ -7,19 +7,19 @@ import '../styles/global.css';
 
 <Layout
   title="Privatlivspolitik | SiteDokAI"
-  description="SiteDokAIs privatlivspolitik. Læs hvordan vi behandler personoplysninger i forbindelse med AI Audit, Client Room, Hjemmeside-fix og Visuelt løft."
+  description="SiteDokAIs privatlivspolitik. Læs hvordan vi behandler personoplysninger i forbindelse med kontakt, screening og rådgivningsforløb."
 >
   <Nav />
-  <main id="main">
-    <section class="bg-white">
+  <main id="main" class="bg-canvas">
+    <section>
       <div class="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Privatlivspolitik</p>
-        <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-5xl">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Privatlivspolitik</p>
+        <h1 class="mt-5 font-display text-4xl font-semibold tracking-[-0.035em] text-brand md:text-5xl">
           Sådan behandler SiteDokAI dine oplysninger.
         </h1>
         <div class="prose prose-slate mt-10 max-w-none prose-headings:font-display prose-headings:text-brand prose-p:text-brand/72 prose-li:text-brand/72">
           <p>
-            SiteDokAI behandler kun de oplysninger, der er nødvendige for at levere vores ydelser og håndtere kontakt, betaling og kundeservice.
+            SiteDokAI behandler kun de oplysninger, der er nødvendige for at håndtere kontakt, screening, rådgivning og kundeservice.
           </p>
 
           <h2>Dataansvarlig</h2>
@@ -32,15 +32,15 @@ import '../styles/global.css';
           <ul>
             <li>Firmanavn, kontaktperson, email og eventuelt telefonnummer, hvis du selv sender det.</li>
             <li>Websiteadresse og oplysninger du selv skriver i formularen.</li>
-            <li>Betalings- og fakturainformation håndteret via Stripe.</li>
+            <li>Eventuel betalings- og fakturainformation, hvis et betalt forløb aftales.</li>
             <li>Kommunikation mellem dig og SiteDokAI.</li>
           </ul>
 
           <h2>Formål</h2>
           <ul>
-            <li>At levere AI Audit, Client Room, Hjemmeside-fix eller Visuelt løft.</li>
-            <li>At sende Client Room, PDF-eksport, afklarende spørgsmål og relevant opfølgning.</li>
-            <li>At håndtere betaling, kvittering og ordregrundlag.</li>
+            <li>At levere første samtale, screening, rådgivning eller aftalte forløb.</li>
+            <li>At sende afklarende spørgsmål, vurderinger og relevant opfølgning.</li>
+            <li>At håndtere betaling, kvittering og ordregrundlag, hvis et betalt forløb aftales.</li>
             <li>At forbedre SiteDokAIs ydelser og kundekommunikation.</li>
           </ul>
 
@@ -49,8 +49,8 @@ import '../styles/global.css';
             Vi bruger kun eksterne leverandører, når de er nødvendige for at modtage henvendelser, drive hjemmesiden eller håndtere betaling.
           </p>
           <ul>
-            <li><a href="https://formsubmit.co/privacy.pdf" rel="noreferrer">FormSubmit</a> bruges til gratis AI-tjek og kontaktformularer, så din henvendelse kan sendes til SiteDokAI.</li>
-            <li><a href="https://stripe.com/privacy" rel="noreferrer">Stripe</a> bruges til betaling, kvittering og fakturagrundlag ved betalte ydelser.</li>
+            <li><a href="https://formsubmit.co/privacy.pdf" rel="noreferrer">FormSubmit</a> bruges til screening- og kontaktformularer, så din henvendelse kan sendes til SiteDokAI.</li>
+            <li><a href="https://stripe.com/privacy" rel="noreferrer">Stripe</a> kan bruges til betaling, kvittering og fakturagrundlag ved betalte forløb.</li>
             <li><a href="https://www.cloudflare.com/privacypolicy/" rel="noreferrer">Cloudflare</a> bruges til hosting, sikkerhed, formularfunktioner og ordre-infrastruktur.</li>
           </ul>
           <p>

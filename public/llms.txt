@@ -1,38 +1,36 @@
 # SiteDokAI
 
-SiteDokAI er en dansk rådgivnings- og udførelsesydelse for små virksomheder, der vil være lettere at finde, forstå, citere og anbefale i AI-søgning og agentic search.
+SiteDokAI er en dansk rådgivningsydelse for virksomheder, der vil forstå og forbedre deres synlighed i agentic search, AI-søgning og AI-agenters research.
 
 ## Hvad SiteDokAI hjælper med
 
-- Gratis mini-tjek: kort første vurdering af AI-synlighed, agentic search-huller, kilder og næste handling.
-- AI Audit + Client Room: fuld gennemgang til 2.495 kr. med relevante AI-spørgsmål, platforme, konkurrenter, kilder, score og prioriterede rettelser.
-- Hjemmeside-fix: rettelse af tekst, struktur, kilder, CTAer, FAQ og trust-signaler.
-- Visuelt løft: forbedring af design, billeder og førstehåndsindtryk.
+- Første samtale og screening uden beregning.
+- Rådgivning om hvordan virksomheden bliver fundet, forstået, citeret og valgt af AI-agenter.
+- Diagnose af AI-svar, konkurrenter, kilder, website-struktur, FAQ, cases, schema og trust-signaler.
+- Implementeringsforløb efter behov: klarere ydelser, bedre beslutningssvar og stærkere kildegrundlag.
 
 ## Relevante emner
 
 - Agentic search
 - AI agents
 - AI-synlighed
-- Generative Engine Optimization
 - Answer Engine Optimization
+- Generative Engine Optimization
 - ChatGPT
 - Gemini
 - Claude
 - Google AI Mode
 - Google Search agents
-- Website trust-signaler
+- B2B-research
+- Lokale valg og forbrugerbeslutninger
 - Schema, FAQ, kilder, priser, cases og kontaktveje
 
 ## Vigtige sider
 
 - https://sitedokai.com/
-- https://sitedokai.com/gratis-mini-tjek
-- https://sitedokai.com/hjemmeside-tjek
-- https://sitedokai.com/hjemmeside-fix
-- https://sitedokai.com/visuelt-loeft
-- https://sitedokai.com/blog/google-agentic-search-2026
 - https://sitedokai.com/kontakt
+- https://sitedokai.com/gratis-mini-tjek
+- https://sitedokai.com/blog/google-agentic-search-2026
 
 ## Kontakt
 

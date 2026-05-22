@@ -16,7 +16,7 @@ interface Props {
 
 const {
   title,
-  description = 'SiteDokAI hjælper små virksomheder med at se om de bliver fundet, nævnt og anbefalet i AI-søgninger. AI Audit leveres som Client Room med kilder, konkurrenter og næste handlinger.',
+  description = 'SiteDokAI rådgiver virksomheder om agentic search, AI-synlighed og hvordan de bliver fundet, forstået og valgt af AI-agenter.',
   canonical = Astro.url.href,
   ogImage = '/og-image.svg',
   ogImageWidth = 1200,
@@ -58,7 +58,7 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=newsreader:400,500,600,700&family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
     {schemaBlocks.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}

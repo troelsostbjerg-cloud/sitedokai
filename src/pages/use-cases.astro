@@ -2,106 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import AdvisoryPage from '../components/site/AdvisoryPage.astro';
 import '../styles/global.css';
-
-const cases = [
-  {
-    tag: 'AI Audit',
-    title: 'Når kunder begynder at spørge AI i stedet for kun Google',
-    body: 'Vi tester om virksomheden bliver fundet, nævnt og anbefalet i relevante AI-søgninger.',
-    result: 'Du får Client Room med score, tabte søgninger, konkurrenter, kilder og næste handlinger.',
-  },
-  {
-    tag: 'Hjemmeside-fix',
-    title: 'Når budskabet er uklart, og kunderne skal lede efter næste skridt',
-    body: 'Vi retter tekst, struktur og CTAer, så forsiden og de vigtigste serviceblokke bliver lettere at forstå.',
-    result: 'Du får omskrevet hero, serviceblokke, trust-sektion, FAQ og tydelige handlinger.',
-  },
-  {
-    tag: 'Visuelt løft',
-    title: 'Når virksomheden er bedre end hjemmesiden får den til at se ud',
-    body: 'Vi løfter det professionelle udtryk med bedre billedstil, layout, brand-assets og før/efter-præsentation.',
-    result: 'Du får en mere rolig, troværdig og professionel retning, der matcher kvaliteten i virksomheden.',
-  },
-];
-
-const signals = [
-  'AI nævner konkurrenter oftere end jer.',
-  'Virksomheden findes på brand-søgninger, men ikke på kategori-spørgsmål.',
-  'Ydelserne er skrevet indefra og ud i stedet for i kundens sprog.',
-  'Der mangler beviser, tryghed og konkrete eksempler.',
-  'Det visuelle udtryk føles gammelt, rodet eller for generisk.',
-  'Hjemmesiden giver ikke AI nok klare kilder, cases eller trust-signaler.',
-];
 ---
 
 <Layout
-  title="Ydelser i praksis | SiteDokAI"
-  description="Se hvornår AI Audit, Client Room, Hjemmeside-fix og Visuelt løft giver mening for små virksomheder."
+  title="Hvornår agentic search betyder noget | SiteDokAI"
+  description="Eksempler på hvornår virksomheder bør undersøge agentic search, AI-synlighed og AI-agenters valg af leverandører."
+  canonical="/use-cases"
 >
   <Nav />
-  <main id="main">
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Ydelser i praksis</p>
-        <h1 class="mt-5 max-w-4xl font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-          Tre enkle måder at blive lettere at finde, forstå og vælge.
-        </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/70">
-          SiteDokAI er til små virksomheder, hvor AI, Google og kunder skal kunne forstå hvorfor virksomheden er det rigtige valg.
-        </p>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <div class="grid gap-5 lg:grid-cols-3">
-          {cases.map((item) => (
-            <article class="rounded-[1.8rem] border border-[#ddd1bf] bg-white p-7">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{item.tag}</p>
-              <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h2>
-              <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.body}</p>
-              <div class="mt-6 rounded-[1.1rem] border border-[#e6ddd1] bg-[#fbf8f3] p-4 text-sm leading-relaxed text-brand/72">
-                {item.result}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[0.95fr_1.05fr]">
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Typiske signaler</p>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-            Når hjemmesiden koster kunder, føles det ofte sådan her.
-          </h2>
-        </div>
-        <div class="grid gap-3">
-          {signals.map((signal) => (
-            <div class="rounded-[1.2rem] border border-[#e6ddd1] bg-[#fbf8f3] px-5 py-4 text-base leading-relaxed text-brand/72">
-              {signal}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#1f2a33] text-white">
-      <div class="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Start enkelt</p>
-        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-          Er du i tvivl, så start med gratis AI-tjek.
-        </h2>
-        <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/72">
-          Så får du 3 konkrete observationer, før du beslutter om der skal en fuld AI Audit, et tekst-fix eller et visuelt løft til.
-        </p>
-        <a href="/gratis-mini-tjek" class="mt-8 inline-flex items-center justify-center rounded-full bg-[#d9b27a] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-[#e4c08e]">
-          Få gratis AI-tjek
-        </a>
-      </div>
-    </section>
-  </main>
+  <AdvisoryPage
+    eyebrow="Hvornår det giver mening"
+    title="Når kunderne undersøger, sammenligner eller vælger med AI."
+    text="Agentic search er især relevant, når kunden ikke bare søger efter et navn, men beder AI finde en leverandør, vurdere muligheder eller forklare hvem der virker mest troværdig."
+    points={[
+      'B2B-købere der laver shortlists med AI.',
+      'Forbrugere der spørger efter lokale eller specialiserede valg.',
+      'Virksomheder hvor tillid, dokumentation og tydelige ydelser afgør valget.',
+    ]}
+    note="Hvis I lever af at blive valgt på ekspertise, lokal relevans, dokumentation eller rådgivning, er det værd at få screenet."
+  />
   <Footer />
 </Layout>

@@ -2,90 +2,36 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import Container from '../components/site/Container.astro';
-import FeatureCard from '../components/site/FeatureCard.astro';
-import HeroSection from '../components/site/HeroSection.astro';
-import MiniCheckPreview from '../components/site/MiniCheckPreview.astro';
-import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
-import ClientRoomPreview from '../components/ClientRoomPreview.astro';
-import PaidAuditCard from '../components/site/PaidAuditCard.astro';
-import SecondaryOfferCard from '../components/site/SecondaryOfferCard.astro';
-import SectionHeader from '../components/site/SectionHeader.astro';
-import TrustProofStrip from '../components/site/TrustProofStrip.astro';
+import ScreeningForm from '../components/site/ScreeningForm.astro';
 import Button from '../components/site/Button.astro';
 import '../styles/global.css';
 
-const methodPoints = [
-  ['1. Agent-opgaver', 'Hvilke opgaver kan kunder, indkøbere eller AI-assistenter give videre til en agent?'],
-  ['2. Kildegrundlag', 'Kan agenten finde entydige sider, priser, ydelser, beviser, cases og næste skridt?'],
-  ['3. Shortlist', 'Bliver virksomheden valgt, citeret eller sammenlignet korrekt med konkurrenterne?'],
-  ['4. Handling', 'Hvilke sider, data, tekster og trust-signaler bør rettes først for at lukke hullet?'],
-];
-
-const startPath = [
+const focusAreas = [
   {
-    eyebrow: 'Start her',
-    title: 'Gratis AI-tjek',
-    price: '0 kr.',
-    text: 'Første vurdering af om virksomheden dukker op i relevante AI-søgninger.',
+    title: 'Bliver virksomheden fundet?',
+    text: 'Vi tester de spørgsmål, kunder, indkøbere og AI-assistenter bruger, når de leder efter løsninger som jeres.',
   },
   {
-    eyebrow: 'Næste naturlige skridt',
-    title: 'AI Audit + Client Room',
-    price: '2.495 kr.',
-    text: 'Fuld test af spørgsmål, platforme, konkurrenter, kilder og næste handlinger.',
+    title: 'Kan AI forstå jer?',
+    text: 'Vi ser på ydelser, målgrupper, beviser, cases, priser, lokationer og de kilder en agent kan citere.',
   },
   {
-    eyebrow: 'Hvis du vil have det rettet',
-    title: 'Visibility Sprint eller fix',
-    price: 'fra 6.500 kr.',
-    text: 'Tekst, struktur, kilder, schema, landing pages og beviser, så AI har noget bedre at vælge.',
+    title: 'Bliver I valgt?',
+    text: 'Vi vurderer om I bliver anbefalet, fravalgt eller erstattet af konkurrenter i de svar, der former kundens shortlist.',
   },
 ];
 
-const agentMoments = [
-  {
-    label: 'B2B research',
-    title: 'Når en virksomhed beder en agent finde leverandører',
-    text: 'Agenten leder efter klare ydelser, branchematch, beviser, cases, kontaktveje og konkrete næste skridt.',
-  },
-  {
-    label: 'Forbruger-valg',
-    title: 'Når en kunde spørger efter det bedste lokale valg',
-    text: 'Agenten sammenligner muligheder, anmeldelser, priser, tilgængelighed og om hjemmesiden virker troværdig nok.',
-  },
-  {
-    label: 'Booking og handling',
-    title: 'Når Search går fra svar til handling',
-    text: 'Google har nu annonceret agentic booking, Search agents og en intelligent Search box. Det flytter synlighed tættere på beslutningen.',
-  },
+const advisoryProcess = [
+  ['01', 'Screening', 'Første samtale og kort screening uden beregning. Vi afklarer om der er et relevant problem at arbejde med.'],
+  ['02', 'Diagnose', 'Vi tester agentic search, AI-svar, kilder og konkurrentbillede omkring jeres vigtigste ydelser.'],
+  ['03', 'Forløb', 'Hvis det giver mening, rådgiver vi om struktur, indhold, beviser og website-ændringer, der gør jer lettere at vælge.'],
 ];
 
-const searchShiftFacts = [
-  {
-    source: 'Google I/O 2026',
-    metric: '1 mia.+',
-    text: 'Google skriver, at AI Mode har passeret 1 milliard månedlige brugere, og at Search agents kan arbejde i baggrunden.',
-    href: 'https://blog.google/products-and-platforms/products/search/search-io-2026/',
-  },
-  {
-    source: 'Gartner',
-    metric: '25%',
-    text: 'Gartner forudsagde, at traditionel søgevolumen ville falde 25% i 2026 på grund af AI-chatbots og virtuelle agenter.',
-    href: 'https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents',
-  },
-  {
-    source: 'BrightEdge',
-    metric: '88%',
-    text: 'BrightEdge rapporterer, at AI-agent requests i april 2026 nåede 88% af menneskelig organisk søgeaktivitet.',
-    href: 'https://www.brightedge.com/news/press-releases/brightedge-data-ai-search-reaching-tipping-point-ai-agents-2026',
-  },
-  {
-    source: 'Deloitte',
-    metric: '25% / 55%',
-    text: 'Deloitte fremhæver, at 25% af global e-commerce kan blive AI-agent enabled i 2030, og at 55% af digitale forbrugere vil starte produktresearch i LLM-platforme.',
-    href: 'https://www.deloitte.com/us/en/industries/consumer/articles/agentic-commerce-ai-shopping-agents-guide.html',
-  },
+const signals = [
+  'AI-svar i ChatGPT, Gemini, Claude og Google AI',
+  'Kilder, schema, FAQ, cases og beslutningssvar',
+  'Konkurrenter der bliver nævnt før jer',
+  'B2B-research, lokale valg og forbrugerbeslutninger',
 ];
 
 const structuredData = {
@@ -107,17 +53,10 @@ const structuredData = {
       },
     },
     {
-      '@type': 'WebSite',
-      '@id': 'https://sitedokai.com/#website',
-      url: 'https://sitedokai.com',
-      name: 'SiteDokAI',
-      inLanguage: 'da-DK',
-    },
-    {
       '@type': 'ProfessionalService',
       '@id': 'https://sitedokai.com/#service',
       name: 'SiteDokAI',
-      serviceType: 'Agentic search optimering, AI-synlighedstjek, AI Audit, Client Room, Hjemmeside-fix og Visuelt løft for små virksomheder',
+      serviceType: 'Rådgivning om agentic search og AI-synlighed',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -127,338 +66,143 @@ const structuredData = {
       },
       email: 'info@sitedokai.com',
       knowsAbout: [
-        'AI-synlighed',
         'Agentic search',
+        'AI-synlighed',
         'AI-agenter',
         'Answer Engine Optimization',
         'Generative Engine Optimization',
-        'Client Room',
         'ChatGPT',
         'Gemini',
         'Google AI',
         'Claude',
-        'små virksomheders digitale synlighed',
       ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'SiteDokAI ydelser',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'DKK',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Gratis AI-tjek',
-              description: 'Første vurdering af om virksomheden bliver fundet i relevante AI-søgninger.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            price: '2495',
-            priceCurrency: 'DKK',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'AI Audit + Client Room',
-              description: 'Fuld gennemgang af AI-synlighed, søgninger, platforme, konkurrenter, kilder og prioriterede handlinger.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '6500',
-              maxPrice: '12500',
-              priceCurrency: 'DKK',
-            },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Hjemmeside-fix',
-              description: 'Ret tekst, struktur, kilder og kontaktveje, så virksomheden står klarere for kunder og AI.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '9500',
-              priceCurrency: 'DKK',
-            },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Visuelt løft',
-              description: 'Forbedr design, billeder og førstehåndsindtryk.',
-            },
-          },
-        ],
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'DKK',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Første samtale og screening',
+          description: 'Uforpligtende første screening af om virksomheden har et relevant agentic search-problem.',
+        },
       },
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': 'https://sitedokai.com/#faq',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Hvad får jeg i et gratis AI-tjek?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Du får en kort vurdering af om virksomheden dukker op i relevante AI-søgninger, plus et anbefalet næste skridt.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Er gratis AI-tjek bindende?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Nej. AI-tjekket er gratis og uforpligtende. Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Hvad koster en fuld AI Audit?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'En fuld AI Audit koster 2.495 kr. og leveres som Client Room med søgninger, platforme, konkurrenter, kilder, score og prioriterede handlinger.',
-          },
-        },
-      ],
     },
   ],
 };
 ---
 
 <Layout
-  title="SiteDokAI | Agentic search for små virksomheder"
-  description="SiteDokAI tester om kunder og AI-agenter kan finde, forstå, citere og anbefale din virksomhed i ChatGPT, Gemini, Claude og Google Search."
+  title="SiteDokAI | Rådgivning om agentic search"
+  description="SiteDokAI rådgiver virksomheder om agentic search, AI-synlighed og hvordan de bliver fundet, forstået og valgt af AI-agenter. Første samtale og screening er uden beregning."
   structuredData={structuredData}
 >
   <Nav />
   <main id="main" class="bg-canvas text-brand">
-    <HeroSection />
-    <TrustProofStrip class="pb-5 pt-1" />
+    <section class="mx-auto grid min-w-0 max-w-6xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="min-w-0 text-sm leading-relaxed text-muted">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Agentic search rådgivning</p>
+        <p class="mt-8 max-w-xs">
+          For virksomheder der vil forstå, hvordan AI-agenter ændrer synlighed, research og valg af leverandører.
+        </p>
+      </aside>
 
-    <Container id="agentic-search" class="pb-4 pt-2">
-      <section class="overflow-hidden rounded-[1.55rem] border border-brand/14 bg-brand text-white shadow-[0_28px_80px_rgba(32,38,34,0.18)]">
-        <div class="flex flex-col gap-3 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between md:px-7">
-          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-light">Agentic search</p>
-          <a href="/blog/google-agentic-search-2026" class="text-sm font-semibold text-white/72 transition-colors hover:text-white">
-            Google I/O 2026 og fakta om skiftet
-          </a>
+      <div class="min-w-0">
+        <h1 class="max-w-5xl font-display text-5xl font-semibold leading-[0.94] tracking-[-0.045em] text-brand sm:text-6xl md:text-8xl md:tracking-[-0.055em]">
+          <span class="block">Bliv forstået</span>
+          <span class="block">og valgt i</span>
+          <span class="block">agentic search.</span>
+        </h1>
+        <p class="mt-8 max-w-[21rem] text-lg leading-relaxed text-brand/68 md:max-w-3xl md:text-2xl">
+          SiteDokAI rådgiver om AI-søgning, AI-agenter og Googles nye Search. Vi hjælper jer med at blive lettere at finde, sammenligne og vælge.
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href="/kontakt#screening">Book gratis screening</Button>
+          <Button href="/blog/google-agentic-search-2026" variant="secondary">Læs om Google-skiftet</Button>
         </div>
-        <div class="grid gap-0 lg:grid-cols-[0.92fr_1.08fr]">
-          <div class="border-b border-white/10 px-6 py-9 md:px-8 md:py-11 lg:border-b-0 lg:border-r">
-            <h2 class="max-w-2xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-6xl">
-              Det handler ikke længere kun om at blive fundet af mennesker.
+      </div>
+    </section>
+
+    <section id="agentic-search" class="border-y border-brand/10">
+      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div class="min-w-0">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Hvad vi rådgiver om</p>
+        </div>
+        <div class="grid min-w-0 gap-10">
+          <div>
+            <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
+              Søgemaskinen bliver en agent. Det gør jeres website til et kildegrundlag.
             </h2>
-            <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
-              Agentic search betyder, at en AI-agent kan undersøge markedet, sammenligne leverandører, følge med i ændringer og hjælpe kunden videre. Det rammer både virksomheder, der køber professionel hjælp, og forbrugere der leder efter et trygt valg.
+            <p class="mt-6 max-w-[21rem] text-lg leading-relaxed text-muted md:max-w-2xl">
+              Det handler ikke kun om private spørgsmål i ChatGPT. Både virksomheder og forbrugere bruger AI til research, sammenligning, shortlist og næste handling. Hvis jeres information er uklar, bliver I svære at anbefale.
             </p>
-            <div class="mt-7 grid gap-3">
-              {agentMoments.map((moment) => (
-                <article class="rounded-[1rem] border border-white/10 bg-white/[0.045] p-4">
-                  <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-light">{moment.label}</p>
-                  <h3 class="mt-2 text-lg font-semibold leading-tight text-white">{moment.title}</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-white/58">{moment.text}</p>
-                </article>
-              ))}
-            </div>
           </div>
 
-          <div class="relative min-h-[30rem] overflow-hidden bg-[radial-gradient(circle_at_70%_18%,rgba(143,166,143,0.18),transparent_28rem)] px-5 py-7 md:px-8">
-            <div class="absolute inset-x-0 top-0 h-px bg-white/12"></div>
-            <div class="grid gap-4">
-              <div class="rounded-[1rem] border border-white/12 bg-[#151a17]/88 p-4 shadow-[0_18px_55px_rgba(0,0,0,0.22)]">
-                <div class="mb-4 flex items-center justify-between gap-4">
-                  <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/45">Agent task</p>
-                  <span class="rounded-[0.65rem] border border-accent-light/30 bg-accent-light/10 px-2.5 py-1 text-xs font-semibold text-accent-light">live query</span>
-                </div>
-                <p class="text-lg leading-snug text-white">
-                  Find en pålidelig leverandør, der kan forklare ydelser, prisniveau, beviser og næste skridt klart.
-                </p>
-              </div>
-
-              <div class="grid gap-4 md:grid-cols-[0.82fr_1.18fr]">
-                <div class="rounded-[1rem] border border-white/12 bg-white/[0.04] p-4">
-                  <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/45">Agent checks</p>
-                  <ul class="mt-4 grid gap-3 text-sm text-white/70">
-                    <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent-light"></span> Ydelser forstået</li>
-                    <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-accent-light"></span> Beviser fundet</li>
-                    <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-white/28"></span> Pris og CTA uklare</li>
-                    <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-white/28"></span> FAQ mangler beslutningssvar</li>
-                  </ul>
-                </div>
-
-                <div class="rounded-[1rem] border border-white/12 bg-white/[0.04] p-4">
-                  <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/45">Shortlist signal</p>
-                  <div class="mt-5 grid gap-4">
-                    <div>
-                      <div class="mb-2 flex items-center justify-between text-sm text-white/62">
-                        <span>Kildeklarhed</span>
-                        <span>72</span>
-                      </div>
-                      <div class="h-2 rounded-full bg-white/10"><div class="h-2 w-[72%] rounded-full bg-accent-light"></div></div>
-                    </div>
-                    <div>
-                      <div class="mb-2 flex items-center justify-between text-sm text-white/62">
-                        <span>Valgbarhed</span>
-                        <span>58</span>
-                      </div>
-                      <div class="h-2 rounded-full bg-white/10"><div class="h-2 w-[58%] rounded-full bg-accent-light"></div></div>
-                    </div>
-                    <div>
-                      <div class="mb-2 flex items-center justify-between text-sm text-white/62">
-                        <span>Handling</span>
-                        <span>41</span>
-                      </div>
-                      <div class="h-2 rounded-full bg-white/10"><div class="h-2 w-[41%] rounded-full bg-white/36"></div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="rounded-[1rem] border border-accent-light/22 bg-accent-light/10 p-4">
-                <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-light">Næste rettelse</p>
-                <p class="mt-2 text-base leading-relaxed text-white/78">
-                  Gør ydelsessiderne mere agent-læsbare: problem, målgruppe, bevis, prisramme, område og næste handling skal kunne forstås uden et menneske på siden.
-                </p>
-              </div>
-            </div>
+          <div class="grid border-t border-brand/12 md:grid-cols-3">
+            {focusAreas.map((area) => (
+              <article class="border-b border-brand/12 py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                <h3 class="text-lg font-semibold tracking-[-0.015em] text-brand">{area.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{area.text}</p>
+              </article>
+            ))}
           </div>
         </div>
-      </section>
-    </Container>
-
-    <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
-      <SectionHeader
-        label="AI-synlighed"
-        title="Kunden spørger ikke kun Google længere, og Google bliver selv mere agentisk."
-        text="Flere køb starter som spørgsmål til AI. Nu bevæger Google Search sig også fra søgefelt til agent, booking og løbende overvågning. SiteDokAI viser om virksomheden dukker op i de svar, hvilke konkurrenter der nævnes i stedet, og hvad der skal rettes for at blive mere citerbar og anbefalbar."
-      />
-      <div class="mt-6 grid gap-5 md:grid-cols-[1.18fr_0.91fr_0.91fr]">
-        <FeatureCard icon="clarity" title="Findbarhed" text="Bliver virksomheden fundet i de spørgsmål, kunderne faktisk stiller?" />
-        <FeatureCard icon="trust" title="Anbefaling" text="Nævner AI jer som et relevant valg, eller bliver I overhalet af konkurrenter?" />
-        <FeatureCard icon="visibility" title="Kilder" text="Har AI nok klare kilder, beviser og struktureret indhold til at stole på jer?" />
       </div>
-    </Container>
+    </section>
 
-    <Container id="agentic-search-fakta" class="py-7">
-      <SectionHeader
-        label="Fakta"
-        title="Skiftet er allerede målbart."
-        text="Tallene nedenfor er eksterne kilder, ikke SiteDokAI-gætterier. De viser hvorfor agentic search bør behandles som et nyt synlighedslag, ikke bare endnu en AI-trend."
-      />
-      <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {searchShiftFacts.map((fact) => (
-          <a href={fact.href} target="_blank" rel="noreferrer" class="conversion-card rounded-[1.15rem] border border-border-soft bg-white/70 p-5 shadow-soft">
-            <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-dark">{fact.source}</p>
-            <p class="mt-4 font-display text-5xl font-medium leading-none tracking-tight text-brand">{fact.metric}</p>
-            <p class="mt-4 text-sm leading-relaxed text-muted">{fact.text}</p>
-          </a>
-        ))}
-      </div>
-    </Container>
-
-    <Container id="metode" class="py-7">
-      <SectionHeader
-        label="Metode"
-        title="Vi tester det nye lag mellem research, shortlist og handling."
-        text="Klassisk SEO handler om placeringer. Agentic search handler om svar, anbefalinger, kilder, beslutninger og opgaver der kan udføres på vegne af kunden. Derfor tester vi både spørgsmål, platforme, konkurrenter og jeres eget digitale fodaftryk."
-      />
-      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr]">
-        {methodPoints.map(([title, text]) => (
-          <article class="conversion-card rounded-[1.15rem] border border-border-soft bg-white/68 p-5 shadow-soft">
-            <h3 class="font-display text-2xl font-medium leading-tight text-brand">{title}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
-          </article>
-        ))}
-      </div>
-    </Container>
-
-    <Container id="gratis-mini" class="pb-7 pt-3">
-        <SectionHeader label="Det får du gratis" uppercase={false} />
-      <div class="mt-6">
-        <MiniCheckBenefitStrip />
-      </div>
-    </Container>
-
-    <MiniCheckPreview class="pb-7 pt-3" />
-
-    <ClientRoomPreview />
-
-    <Container id="vaelg-roeligt" class="py-7">
-      <div class="grid gap-7 rounded-[1.55rem] border border-border-soft bg-white/64 p-6 shadow-soft md:p-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Rolig start</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-medium leading-[1.03] tracking-tight text-brand md:text-5xl">
-            Start med synligheden, ikke med en stor rapport.
+    <section id="forloeb" class="border-b border-brand/10">
+      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div class="min-w-0">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Forløbet</p>
+        </div>
+        <div class="min-w-0">
+          <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
+            Først afklarer vi, om der overhovedet er noget at løse.
           </h2>
-          <p class="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Det gamle Client Room-spor kommer tilbage, men uden at vi gør det tungt. Først finder vi ud af, om problemet faktisk findes. Derefter bygger vi overblikket og handlingerne.
-          </p>
-          <div class="mt-7">
-            <Button href="/gratis-mini-tjek#faa-gratis-mini-tjek">Få gratis mini-tjek</Button>
+          <div class="mt-10 divide-y divide-brand/12 border-y border-brand/12">
+            {advisoryProcess.map(([number, title, text]) => (
+              <article class="grid gap-5 py-7 md:grid-cols-[5rem_0.8fr_1.4fr] md:items-start">
+                <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand/38">{number}</p>
+                <h3 class="text-xl font-semibold tracking-[-0.018em] text-brand">{title}</h3>
+                <p class="max-w-2xl text-base leading-relaxed text-muted">{text}</p>
+              </article>
+            ))}
           </div>
+          <p class="mt-8 max-w-[21rem] text-base leading-relaxed text-muted md:max-w-2xl">
+            Der er ingen fast pakke, vi presser ned over alle. Nogle har brug for en strategisk workshop. Andre har brug for at få omskrevet centrale sider, FAQ, schema, cases og beviser, så AI faktisk har noget at arbejde med.
+          </p>
         </div>
-        <div class="grid gap-3">
-          {startPath.map((step, index) => (
-            <article class="conversion-card grid gap-4 rounded-[1.15rem] border border-border-soft bg-surface/82 p-4 md:grid-cols-[2.75rem_1fr_auto] md:items-center">
-              <span class="flex h-11 w-11 items-center justify-center rounded-[0.85rem] bg-accent-soft text-sm font-semibold text-accent-dark">{index + 1}</span>
-              <div>
-                <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent-dark">{step.eyebrow}</p>
-                <h3 class="mt-1 font-display text-2xl font-medium leading-tight tracking-tight text-brand">{step.title}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">{step.text}</p>
-              </div>
-              <p class="font-display text-2xl font-medium leading-none tracking-tight text-brand md:text-right">{step.price}</p>
-            </article>
+      </div>
+    </section>
+
+    <section class="border-b border-brand/10">
+      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div class="min-w-0">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Signalområder</p>
+        </div>
+        <div class="grid min-w-0 gap-4 sm:grid-cols-2">
+          {signals.map((signal) => (
+            <p class="border-t border-brand/12 pt-4 text-base leading-relaxed text-brand/72">{signal}</p>
           ))}
         </div>
       </div>
-    </Container>
+    </section>
 
-    <Container id="fuld-gennemgang" class="py-7">
-      <PaidAuditCard />
-    </Container>
-
-    <Container id="rette-det" class="pb-8 pt-7 md:pb-10">
-      <SectionHeader label="Hvis du vil have os til at rette det" />
-      <div class="mt-7 grid gap-5 lg:grid-cols-2">
-        <SecondaryOfferCard
-          id="hjemmeside-fix"
-          icon="fix"
-          title="Hjemmeside-fix"
-          price="6.500-12.500 kr."
-          text="Retter tekst, struktur, kilder og kontaktknapper"
-          href="/hjemmeside-fix"
-        />
-        <SecondaryOfferCard
-          id="visuelt-loeft"
-          icon="visual"
-          title="Visuelt løft"
-          price="Fra 9.500 kr."
-          text="Forbedrer design, billeder, trust og førstehåndsindtryk"
-          href="/visuelt-loeft"
-        />
+    <section id="screening" class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <div class="min-w-0">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Gratis start</p>
       </div>
-    </Container>
-
-    <Container id="klar-til-start" class="pb-16 pt-6 md:pb-20">
-      <div class="rounded-[1.6rem] border border-accent/28 bg-brand px-6 py-10 text-white shadow-[0_24px_70px_rgba(32,38,34,0.12)] md:px-10 md:py-12">
-        <div class="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/62">Klar til første skridt?</p>
-            <h2 class="mt-5 max-w-3xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-5xl">
-              Få et roligt blik på det, AI og kunderne møder først.
-            </h2>
-            <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
-              Start med et gratis AI-tjek. Du får en konkret vurdering af, om virksomheden bliver fundet, nævnt og anbefalet i relevante AI-søgninger.
-            </p>
-          </div>
-          <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-white bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-light hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px">
-            Få gratis mini-tjek
-          </a>
+      <div class="min-w-0">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
+          Første samtale og screening er uden beregning.
+        </h2>
+        <p class="mt-6 max-w-[21rem] text-lg leading-relaxed text-muted md:max-w-2xl">
+          Send jeres hjemmeside og en kort note. Vi vender tilbage med en nøgtern vurdering af, om agentic search bør være et konkret fokus for jer nu.
+        </p>
+        <div class="mt-12">
+          <ScreeningForm sourcePage="/" />
         </div>
       </div>
-    </Container>
+    </section>
   </main>
   <Footer />
 </Layout>

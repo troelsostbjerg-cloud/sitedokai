@@ -5,9 +5,9 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#202622',
-          light: '#354039',
-          dark: '#151a17',
+          DEFAULT: '#111512',
+          light: '#252c27',
+          dark: '#0b0e0c',
         },
         accent: {
           DEFAULT: '#6f8a72',
@@ -17,15 +17,15 @@ export default {
           dark: '#526b55',
         },
         canvas: {
-          DEFAULT: '#fbf7ef',
-          soft: '#f6f0e6',
+          DEFAULT: '#f7f6f1',
+          soft: '#efede5',
         },
         surface: {
           DEFAULT: '#fffdf8',
           muted: '#f8f4ec',
         },
         muted: {
-          DEFAULT: '#66706a',
+          DEFAULT: '#62665f',
         },
         border: {
           soft: '#e8ded0',
@@ -37,7 +37,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Newsreader', 'Georgia', 'serif'],
+        display: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         sans: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },

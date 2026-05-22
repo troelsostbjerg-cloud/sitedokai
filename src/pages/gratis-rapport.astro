@@ -2,43 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import AdvisoryPage from '../components/site/AdvisoryPage.astro';
 import '../styles/global.css';
 ---
 
 <Layout
-  title="Gratis rapport er lukket | SiteDokAI"
-  description="SiteDokAIs gamle gratis rapport er lukket. Start i stedet med et gratis AI-tjek, hvis du vil se om virksomheden bliver fundet i AI."
-  noindex={true}
+  title="Gratis screening i stedet for rapport | SiteDokAI"
+  description="SiteDokAI starter med en første samtale og screening uden beregning frem for en tung standardrapport."
+  canonical="/gratis-rapport"
 >
   <Nav />
-  <main id="main" class="bg-canvas text-brand">
-    <section class="mx-auto max-w-[1480px] px-4 pb-16 pt-4 sm:px-6 lg:px-10">
-      <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/78 px-6 py-16 text-center shadow-soft md:px-10 md:py-24">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_16%_9%,rgba(255,255,255,0.94),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(223,232,220,0.66),transparent_30%)]"></div>
-        <div class="relative mx-auto max-w-3xl">
-          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Opdateret ydelse</p>
-          <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-6xl">
-            Den gamle gratis rapport er lukket
-          </h1>
-          <p class="mt-6 text-lg leading-relaxed text-muted">
-            SiteDokAI starter nu med et gratis AI-tjek: 3 konkrete observationer på AI-findbarhed, kilder og næste skridt. Hvis der er tydelige problemer, kan du bagefter vælge AI Audit + Client Room.
-          </p>
-          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-7 py-3.5 text-sm font-semibold text-white transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-              Få gratis AI-tjek
-            </a>
-            <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-7 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/35 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-              Se AI Audit
-            </a>
-          </div>
-          <div class="mx-auto mt-8 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
-            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Gratis første vurdering</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Svar inden 1–2 hverdage</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Ingen salgsmøde kræves</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+  <AdvisoryPage
+    eyebrow="Gratis start"
+    title="Vi starter med screening, ikke med en rapport."
+    text="En standardrapport kan hurtigt blive for tung. Derfor starter vi med en kort afklaring af om agentic search faktisk er et relevant problem for jer."
+    points={[
+      'Kort første vurdering uden beregning.',
+      'Ingen binding og ingen automatisk salgspakke.',
+      'Et konkret næste skridt, hvis der er noget at arbejde videre med.',
+    ]}
+    ctaHref="/kontakt#screening"
+  />
   <Footer />
 </Layout>

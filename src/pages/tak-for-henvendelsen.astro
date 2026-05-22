@@ -4,61 +4,29 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/site/Button.astro';
 import '../styles/global.css';
-
-const contactEmail = 'info@sitedokai.com';
-const followupMailto = `mailto:${contactEmail}?subject=${encodeURIComponent('Opfølgning på henvendelse')}&body=${encodeURIComponent(`Hej SiteDokAI,
-
-Jeg har lige sendt en henvendelse via sitedokai.com.
-
-Navn:
-Firma:
-Hjemmeside:
-Kort besked:
-
-Tak.`)}`;
 ---
 
 <Layout
   title="Tak for din henvendelse | SiteDokAI"
-  description="Tak for din henvendelse til SiteDokAI. Vi vender tilbage inden for 1-2 hverdage."
+  description="Tak for din henvendelse til SiteDokAI. Vi vender tilbage med næste skridt."
   canonical="/tak-for-henvendelsen"
   noindex={true}
 >
   <Nav />
   <main id="main" class="bg-canvas text-brand">
-    <section class="mx-auto max-w-5xl px-5 py-16 sm:px-6 md:py-24">
-      <div class="overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/82 shadow-soft">
-        <div class="grid gap-8 px-6 py-10 md:grid-cols-[0.95fr_1.05fr] md:items-center md:px-10 md:py-12">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Tak</p>
-            <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-6xl">
-              Vi har modtaget din henvendelse.
-            </h1>
-            <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-              Vi vender tilbage inden for 1-2 hverdage med næste bedste skridt. Hvis du har sendt et gratis AI-tjek, får du 3 konkrete observationer på AI-findbarhed, kilder og første næste skridt.
-            </p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/gratis-mini-tjek">Til gratis AI-tjek</Button>
-              <Button href="/hjemmeside-tjek" variant="secondary">Se AI Audit</Button>
-            </div>
-          </div>
-
-          <div class="rounded-[1.35rem] border border-accent/18 bg-white/68 p-5 shadow-[0_18px_42px_rgba(32,38,34,0.045)] md:p-6">
-            <p class="font-display text-2xl font-medium leading-tight tracking-tight text-brand">
-              Hvad sker der nu?
-            </p>
-            <div class="mt-5 grid gap-3 text-sm leading-relaxed text-brand/74">
-              <div class="rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3">
-                Vi læser henvendelsen manuelt og vurderer, hvad der giver mest mening først.
-              </div>
-              <div class="rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3">
-                Hvis der ikke er et oplagt næste skridt, siger vi det direkte.
-              </div>
-              <div class="rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3">
-                Har du brug for at tilføje noget, kan du skrive direkte til <a href={followupMailto} class="font-semibold text-brand underline decoration-accent/45 underline-offset-4 hover:decoration-accent">{contactEmail}</a>.
-              </div>
-            </div>
-          </div>
+    <section class="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="text-sm leading-relaxed text-muted">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Modtaget</p>
+      </aside>
+      <div>
+        <h1 class="max-w-4xl font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] text-brand md:text-7xl">
+          Tak. Vi har modtaget din henvendelse.
+        </h1>
+        <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/68">
+          Vi vender tilbage med et roligt næste skridt. Første samtale og screening er uden beregning.
+        </p>
+        <div class="mt-10">
+          <Button href="/">Til forsiden</Button>
         </div>
       </div>
     </section>

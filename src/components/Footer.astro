@@ -1,10 +1,8 @@
 ---
 const navItems = [
-  { label: 'Gratis mini-tjek', href: '/gratis-mini-tjek' },
-  { label: 'Hjemmeside-tjek', href: '/hjemmeside-tjek' },
-  { label: 'Agentic search', href: '/blog/google-agentic-search-2026' },
-  { label: 'Hjemmeside-fix', href: '/hjemmeside-fix' },
-  { label: 'Visuelt løft', href: '/visuelt-loeft' },
+  { label: 'Agentic search', href: '/#agentic-search' },
+  { label: 'Forløb', href: '/#forloeb' },
+  { label: 'Indsigter', href: '/blog/google-agentic-search-2026' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
 
@@ -14,46 +12,43 @@ const legalItems = [
 ];
 ---
 
-<footer class="bg-canvas px-4 pb-8 pt-6 text-brand sm:px-6 lg:px-10" role="contentinfo">
-  <div class="mx-auto max-w-[1480px] rounded-[1.35rem] border border-border-soft bg-white/58 px-6 py-12 shadow-soft md:px-10">
-    <div class="mb-10 grid grid-cols-1 gap-10 md:grid-cols-[1.3fr_0.8fr_0.9fr]">
+<footer class="border-t border-brand/10 bg-canvas px-5 py-10 text-brand sm:px-6" role="contentinfo">
+  <div class="mx-auto max-w-6xl">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.25fr_0.9fr_0.9fr]">
       <div>
-        <div class="mb-4 font-display text-3xl font-medium tracking-tight">SiteDokAI</div>
-        <p class="max-w-md text-sm leading-relaxed text-brand/62">
-          SiteDokAI hjælper små virksomheder med at se om de bliver fundet, forstået og anbefalet, når kunder og virksomheder bruger AI-agenter til research og valg.
+        <div class="mb-4 font-display text-2xl font-semibold tracking-[-0.03em]">SiteDokAI</div>
+        <p class="max-w-md text-sm leading-relaxed text-brand/58">
+          Rådgivning om agentic search, AI-synlighed og hvordan virksomheder bliver forstået, citeret og valgt af AI-agenter.
         </p>
-        <p class="mt-3 text-sm text-brand/62">
-          Vi tester agentic search, konkurrenter, kilder og digitale trust-signaler, og samler det i et konkret Client Room.
-        </p>
-        <a href="/gratis-mini-tjek" class="mt-6 inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-          Få gratis mini-tjek
+        <a href="/kontakt#screening" class="mt-6 inline-flex h-11 items-center justify-center bg-brand px-5 text-sm font-semibold text-white transition-colors hover:bg-brand-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px">
+          Gratis screening
         </a>
       </div>
 
       <div>
-        <h3 class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-brand/72">Navigation</h3>
+        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Navigation</h3>
         <div class="space-y-2">
           {navItems.map((item) => (
-            <p><a href={item.href} class="text-sm text-brand/62 transition-colors hover:text-accent-dark">{item.label}</a></p>
+            <p><a href={item.href} class="text-sm text-brand/58 transition-colors hover:text-brand">{item.label}</a></p>
           ))}
         </div>
       </div>
 
       <div>
-        <h3 class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-brand/72">Kontakt</h3>
-        <p class="mb-2 text-sm text-brand/62">
-          Email: <a href="mailto:info@sitedokai.com" class="text-accent-dark transition-colors hover:text-brand">info@sitedokai.com</a>
+        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Kontakt</h3>
+        <p class="mb-2 text-sm text-brand/58">
+          <a href="mailto:info@sitedokai.com" class="transition-colors hover:text-brand">info@sitedokai.com</a>
         </p>
-        <p class="text-sm text-brand/62">Danmark</p>
-        <p class="mt-2 text-sm text-brand/62">Svar inden for 1–2 hverdage</p>
+        <p class="text-sm text-brand/58">Danmark</p>
+        <p class="mt-2 text-sm text-brand/58">Første samtale og screening uden beregning.</p>
       </div>
     </div>
 
-    <div class="flex flex-col gap-4 border-t border-border-soft pt-7 text-center md:flex-row md:items-center md:justify-between md:text-left">
-      <p class="text-sm text-brand/62">&copy; 2026 SiteDokAI. Alle rettigheder forbeholdt.</p>
+    <div class="mt-10 flex flex-col gap-4 border-t border-brand/10 pt-7 text-center md:flex-row md:items-center md:justify-between md:text-left">
+      <p class="text-sm text-brand/48">&copy; 2026 SiteDokAI. Alle rettigheder forbeholdt.</p>
       <div class="flex flex-wrap justify-center gap-4 md:justify-end">
         {legalItems.map((item) => (
-          <a href={item.href} class="text-sm text-brand/62 transition-colors hover:text-accent-dark">
+          <a href={item.href} class="text-sm text-brand/48 transition-colors hover:text-brand">
             {item.label}
           </a>
         ))}

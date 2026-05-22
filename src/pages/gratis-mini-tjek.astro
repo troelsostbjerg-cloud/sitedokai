@@ -2,407 +2,47 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import AbstractLandscapeVisual from '../components/site/AbstractLandscapeVisual.astro';
-import Badge from '../components/site/Badge.astro';
-import Button from '../components/site/Button.astro';
-import Container from '../components/site/Container.astro';
-import FeatureCard from '../components/site/FeatureCard.astro';
-import MiniCheckPreview from '../components/site/MiniCheckPreview.astro';
-import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
-import PaidAuditCard from '../components/site/PaidAuditCard.astro';
-import ProcessStepCard from '../components/site/ProcessStepCard.astro';
-import SectionHeader from '../components/site/SectionHeader.astro';
-import TrustProofStrip from '../components/site/TrustProofStrip.astro';
+import AdvisoryPage from '../components/site/AdvisoryPage.astro';
 import '../styles/global.css';
-
-const steps = [
-  {
-    title: 'Du sender link og branche',
-    text: 'Kun det nødvendige: navn, email, hjemmeside, branche og evt. vigtigste konkurrenter.',
-  },
-  {
-    title: 'Vi tester de første AI-spørgsmål',
-    text: 'Vi vurderer om virksomheden bliver fundet, nævnt eller sprunget over i relevante AI-søgninger.',
-  },
-  {
-    title: 'Du får 3 konkrete observationer',
-    text: 'Kort og brugbart: hvilke spørgsmål, kilder eller sider der ser mest kritiske ud.',
-  },
-  {
-    title: 'Du får anbefalet næste skridt',
-    text: 'Hvis hullet er tydeligt, kan du vælge en fuld AI Audit + Client Room til 2.495 kr.',
-  },
-];
-
-const miniCheckProblemCards = [
-  {
-    title: 'Ikke nævnt',
-    text: 'AI anbefaler konkurrenter i stedet for virksomheden.',
-    icon: 'message',
-    position: 'left-[5%] top-[9%] md:left-[14%] md:top-[8%]',
-  },
-  {
-    title: 'Svage kilder',
-    text: 'AI mangler tydelige beviser, cases eller fakta at stole på.',
-    icon: 'shield',
-    position: 'left-[5%] top-[39%] md:left-[3%] md:top-[39%]',
-  },
-  {
-    title: 'Uklart fodaftryk',
-    text: 'Google, AI og kunder forstår ikke tydeligt nok hvad virksomheden bør vælges for.',
-    icon: 'search',
-    position: 'right-[5%] bottom-[9%] md:right-[3%] md:bottom-[11%]',
-  },
-];
-
-const industries = [
-  'Håndværkere',
-  'Klinikker',
-  'Rådgivere',
-  'Behandlere',
-  'Installatører',
-  'Rengøring',
-  'Byggeri',
-  'Lokale servicevirksomheder',
-];
-
-const goals = [
-  'Flere henvendelser',
-  'Flere bookinger',
-  'Flere opkald',
-  'Flere tilbudsanmodninger',
-  'Mere tillid',
-  'Jeg ved ikke endnu',
-];
-
-const miniCheckEmail = 'info@sitedokai.com';
-const miniCheckFormAction = `https://formsubmit.co/${miniCheckEmail}`;
-const miniCheckAjaxAction = `https://formsubmit.co/ajax/${miniCheckEmail}`;
-const miniCheckNextUrl = 'https://sitedokai.com/tak-for-henvendelsen?type=mini-tjek';
-const miniCheckDirectMailto = `mailto:${miniCheckEmail}?subject=${encodeURIComponent('Gratis AI-tjek')}&body=${encodeURIComponent(`Hej SiteDokAI,
-
-Jeg vil gerne have et gratis AI-tjek.
-
-Navn:
-Firma:
-Hjemmeside:
-Branche:
-Kort note:
-
-Tak.`)}`;
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://sitedokai.com/#organization',
-      name: 'SiteDokAI',
-      url: 'https://sitedokai.com',
-      email: 'info@sitedokai.com',
-      contactPoint: {
-        '@type': 'ContactPoint',
-        email: 'info@sitedokai.com',
-        contactType: 'customer service',
-        availableLanguage: ['da-DK'],
-        areaServed: 'DK',
-      },
-    },
-    {
-      '@type': 'Service',
-      '@id': 'https://sitedokai.com/gratis-mini-tjek#service',
-      name: 'Gratis AI-tjek af hjemmeside',
-      serviceType: 'Gratis AI-synlighedstjek for små virksomheder',
-      provider: {
-        '@id': 'https://sitedokai.com/#organization',
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Danmark',
-      },
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'DKK',
-        availability: 'https://schema.org/InStock',
-      },
-      description: 'Få en kort vurdering af om virksomheden bliver fundet, nævnt og anbefalet i relevante AI-søgninger.',
-    },
-    {
-      '@type': 'FAQPage',
-      '@id': 'https://sitedokai.com/gratis-mini-tjek#faq',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Hvad får jeg i et gratis AI-tjek?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Du får 3 konkrete observationer om AI-synlighed, kilder og anbefalet næste skridt.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Hvornår får jeg svar?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Du får svar inden for 1-2 hverdage.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Er AI-tjekket bindende?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Nej. AI-tjekket er gratis og uforpligtende.',
-          },
-        },
-      ],
-    },
-  ],
+  '@type': 'Service',
+  name: 'Første samtale og screening',
+  serviceType: 'Gratis screening af agentic search og AI-synlighed',
+  provider: {
+    '@type': 'Organization',
+    name: 'SiteDokAI',
+    url: 'https://sitedokai.com',
+    email: 'info@sitedokai.com',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'DKK',
+  },
 };
 ---
 
 <Layout
-  title="Gratis mini-tjek af agentic search | SiteDokAI"
-  description="Bliver din virksomhed fundet og valgt af AI-agenter? Få 3 konkrete observationer om synlighed, kilder og næste skridt."
+  title="Gratis screening af agentic search | SiteDokAI"
+  description="Book en første samtale og screening uden beregning. SiteDokAI vurderer om din virksomhed bør arbejde konkret med agentic search og AI-synlighed."
   canonical="/gratis-mini-tjek"
   structuredData={structuredData}
 >
   <Nav />
-  <main id="main" class="bg-canvas text-brand">
-    <section class="relative mx-auto max-w-[1480px] px-4 pb-6 pt-4 sm:px-6 lg:px-10">
-      <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/78 shadow-soft">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_8%,rgba(255,255,255,0.92),transparent_34%),radial-gradient(circle_at_82%_16%,rgba(223,232,220,0.62),transparent_28%)]"></div>
-        <div class="relative grid min-w-0 gap-8 px-6 py-10 md:grid-cols-[0.94fr_1.06fr] md:items-center md:px-12 md:py-12 lg:px-14">
-          <div class="min-w-0 max-w-3xl">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis mini-tjek af agentic search</p>
-            <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
-              Kan AI-agenter finde og vælge din virksomhed?
-            </h1>
-            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              Få 3 konkrete observationer om hvor AI kan finde jer, hvor I mangler beviser, og hvad der bør testes eller rettes næste gang.
-            </p>
-
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="#faa-gratis-mini-tjek">Få gratis mini-tjek</Button>
-              <Button href="/hjemmeside-tjek" variant="secondary">Se fuld AI Audit</Button>
-            </div>
-
-            <div class="mt-6 flex flex-col gap-3 text-muted sm:flex-row">
-              <Badge>
-                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-                  <path d="m6.8 12.4 3.1 3.1 7.3-7.8" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
-                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.25" opacity="0.55" />
-                </svg>
-                Gratis første vurdering
-              </Badge>
-              <Badge tone="plain">
-                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-                  <path d="M7 12.2 10.4 15.6 17.5 8" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M5.5 5.5h13v13h-13z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round" opacity="0.55" />
-                </svg>
-                Ingen binding
-              </Badge>
-              <Badge tone="plain">
-                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-                  <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.35" opacity="0.62" />
-                  <path d="M12 7.5V12l3 2.2" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                Svar inden 1–2 hverdage
-              </Badge>
-            </div>
-          </div>
-
-          <AbstractLandscapeVisual problemCards={miniCheckProblemCards} />
-        </div>
-      </div>
-    </section>
-
-    <TrustProofStrip class="pb-5 pt-1" />
-
-    <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
-      <SectionHeader label="Det kigger vi efter" />
-      <div class="mt-6 grid gap-5 md:grid-cols-3">
-        <FeatureCard
-          icon="clarity"
-          title="Findbarhed"
-          text="Kan AI-agenten finde virksomheden i relevante research- og købsspørgsmål?"
-        />
-        <FeatureCard
-          icon="trust"
-          title="Kilder"
-          text="Er der nok bevis, cases og struktur til at agenten kan stole på jer?"
-        />
-        <FeatureCard
-          icon="visibility"
-          title="Valg"
-          text="Bliver I nævnt, shortlistet, anbefalet eller sprunget over?"
-        />
-      </div>
-    </Container>
-
-    <Container id="det-faar-du-gratis" class="pb-7 pt-3">
-      <SectionHeader label="Det får du gratis" uppercase={false} />
-      <div class="mt-6">
-        <MiniCheckBenefitStrip />
-      </div>
-    </Container>
-
-    <MiniCheckPreview ctaHref="#faa-gratis-mini-tjek" class="pb-7 pt-3" />
-
-    <Container id="hvem-det-er-for" class="py-7">
-      <div class="rounded-[1.45rem] border border-border-soft bg-surface/72 px-6 py-9 shadow-soft md:px-10 md:py-11">
-        <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
-          <SectionHeader
-            label="For små virksomheder"
-            title="Til små virksomheder, der vil vide om AI finder dem."
-            text="AI-tjekket er lavet til lokale servicevirksomheder, hvor hjemmesiden skal give klare svar, troværdige kilder og stærke nok signaler til at blive nævnt."
-            align="left"
-          />
-          <div class="flex flex-wrap gap-2.5 lg:justify-end">
-            {industries.map((industry) => (
-              <span class="rounded-[0.85rem] border border-accent/18 bg-accent-soft/72 px-3.5 py-2 text-sm leading-none text-accent-dark">
-                {industry}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Container>
-
-    <Container id="saadan-foregaar-det" class="py-7">
-      <SectionHeader label="Sådan foregår det" />
-      <div class="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {steps.map((step, index) => (
-          <ProcessStepCard step={index + 1} title={step.title} text={step.text} />
-        ))}
-      </div>
-    </Container>
-
-    <Container id="fuld-gennemgang" class="pb-16 pt-7 md:pb-20">
-      <SectionHeader
-        label="Hvis AI-tjekket viser tydelige huller"
-        text="Så er AI Audit + Client Room til 2.495 kr. det naturlige næste skridt."
-        uppercase={false}
-      />
-      <div class="mt-7">
-        <PaidAuditCard ctaHref="/hjemmeside-tjek" />
-      </div>
-    </Container>
-
-    <Container id="faa-gratis-mini-tjek" class="pb-16 pt-0 md:pb-20">
-      <div class="grid gap-8 rounded-[1.55rem] border border-accent/26 bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(237,243,234,0.74))] px-6 py-9 shadow-soft md:px-10 md:py-11 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis og uforpligtende</p>
-          <h2 class="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-tight text-brand md:text-5xl">
-            Få gratis AI-tjek
-          </h2>
-          <p class="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Send dit link, så kigger vi hurtigt på AI-findbarhed, kilder og de første relevante spørgsmål.
-          </p>
-          <div class="mt-5 grid gap-3">
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Du får svar inden for 1-2 hverdage.</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Hvis der ikke er et oplagt næste skridt, siger vi det direkte.</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Vi bruger kun dine oplysninger til at lave AI-tjekket og svare dig tilbage.</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.</div>
-          </div>
-          <p class="mt-5 max-w-lg text-sm leading-relaxed text-muted">
-            AI-tjekket er gratis, fordi det er den letteste måde at vurdere, om der er et tydeligt synlighedsproblem, før du bruger penge på en større gennemgang.
-          </p>
-        </div>
-
-        <form
-          action={miniCheckFormAction}
-          method="POST"
-          data-ajax-email-form
-          data-ajax-action={miniCheckAjaxAction}
-          data-lead-backup-action="/api/leads"
-          data-lead-type="gratis-mini-tjek"
-          data-pending-label="Sender..."
-          class="grid gap-4 rounded-[1.25rem] border border-border-soft bg-white/72 p-5 shadow-[0_14px_36px_rgba(32,38,34,0.045)] md:p-6"
-        >
-          <input type="hidden" name="_subject" value="Gratis AI-tjek fra sitedokai.com" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value={miniCheckNextUrl} />
-          <input type="hidden" name="source_page" value="/gratis-mini-tjek" />
-          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" />
-          <noscript>
-            <p class="rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
-              Formularen virker bedst med JavaScript. Du kan også sende direkte til <a href={miniCheckDirectMailto} class="font-semibold underline decoration-accent/45 underline-offset-4">info@sitedokai.com</a> med link til din hjemmeside.
-            </p>
-          </noscript>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="mini_check_name" class="mb-2 block text-sm font-semibold text-brand">Navn *</label>
-              <input type="text" id="mini_check_name" name="name" required autocomplete="name" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
-            </div>
-
-            <div>
-              <label for="mini_check_email" class="mb-2 block text-sm font-semibold text-brand">Email *</label>
-              <input type="email" id="mini_check_email" name="email" required autocomplete="email" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
-            </div>
-          </div>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="mini_check_website" class="mb-2 block text-sm font-semibold text-brand">Hjemmeside-link *</label>
-              <input type="text" id="mini_check_website" name="website" required inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="dinvirksomhed.dk" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
-            </div>
-
-            <div>
-              <label for="mini_check_industry" class="mb-2 block text-sm font-semibold text-brand">Branche</label>
-              <input type="text" id="mini_check_industry" name="branche" autocomplete="organization-title" placeholder="Fx klinik, rådgiver eller håndværker" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16" />
-            </div>
-          </div>
-
-          <div>
-            <label for="mini_check_message" class="mb-2 block text-sm font-semibold text-brand">Kort besked</label>
-            <textarea id="mini_check_message" name="message" rows="4" placeholder="Skriv gerne hvilken ydelse, branche eller konkurrenter AI bør forstå." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
-          </div>
-
-          <div>
-            <label for="mini_check_goal" class="mb-2 block text-sm font-semibold text-brand">Hvad skal AI helst forstå?</label>
-            <select id="mini_check_goal" name="goal" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16">
-              <option value="">Vælg hvis du ved det</option>
-              {goals.map((goal) => (
-                <option value={goal}>{goal}</option>
-              ))}
-            </select>
-            <p class="mt-2 text-sm leading-relaxed text-muted">
-              Feltet hjælper os med at vurdere siden ud fra de spørgsmål, kunderne sandsynligvis stiller.
-            </p>
-          </div>
-
-          <div>
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button type="submit" data-ajax-submit class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(83,112,88,0.18)] transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px disabled:cursor-wait disabled:opacity-75 sm:w-auto">
-                Send gratis AI-tjek
-              </button>
-              <a href={miniCheckDirectMailto} class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/35 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px sm:w-auto">
-                Send direkte mail
-              </a>
-            </div>
-            <p data-ajax-form-pending hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-accent/22 bg-accent-soft/64 px-4 py-3 text-sm leading-relaxed text-brand/78">
-              Sender dit AI-tjek sikkert...
-            </p>
-            <p data-ajax-form-success hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-accent/22 bg-accent-soft/64 px-4 py-3 text-sm leading-relaxed text-brand/78">
-              Tak. Vi har modtaget dit link og vender tilbage med 3 konkrete observationer.
-            </p>
-            <p data-ajax-form-error hidden aria-live="polite" data-default-error="Der skete en fejl. Prøv igen, eller brug direkte mail-linket." class="mt-3 rounded-[0.85rem] border border-[#e8cfc9] bg-[#fff8f5] px-4 py-3 text-sm leading-relaxed text-[#794035]">
-              Der skete en fejl. Prøv igen, eller brug direkte mail-linket.
-            </p>
-            <p class="mt-3 text-sm leading-relaxed text-muted">
-              Gratis og uforpligtende. Du får 3 konkrete observationer inden for 1-2 hverdage. Ingen salgsmøde kræves.
-            </p>
-            <p class="mt-3 rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
-              Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.
-            </p>
-          </div>
-        </form>
-      </div>
-    </Container>
-  </main>
+  <AdvisoryPage
+    eyebrow="Gratis screening"
+    title="Første samtale og screening uden beregning."
+    text="Vi starter ikke med en stor rapport. Vi starter med at afklare, om AI-agenter overhovedet kan finde, forstå og vælge virksomheden i de situationer, der betyder noget."
+    points={[
+      'Send hjemmeside, firma og kort note.',
+      'Vi vurderer de første agentic search-signaler.',
+      'Du får et ærligt forslag til næste skridt eller besked om, at der ikke er et oplagt forløb.',
+    ]}
+    note="Screeningen er til både B2B-virksomheder og lokale virksomheder, hvor kunder begynder at bruge AI til research, sammenligning og valg."
+    showForm={true}
+    sourcePage="/gratis-mini-tjek"
+  />
   <Footer />
 </Layout>

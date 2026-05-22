@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --color-canvas: #fbf7ef;
-    --color-brand: #202622;
-    --color-muted: #66706a;
+    --color-canvas: #f7f6f1;
+    --color-brand: #111512;
+    --color-muted: #62665f;
   }
 
   html {
@@ -15,25 +15,26 @@
   }
   body {
     @apply bg-canvas font-sans text-muted antialiased;
-    background-image:
-      radial-gradient(circle at 12% 0%, rgba(255, 253, 248, 0.82), transparent 28rem),
-      radial-gradient(circle at 88% 12%, rgba(223, 232, 220, 0.34), transparent 24rem);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(247, 246, 241, 0));
     padding-bottom: var(--cookie-banner-space, 0px);
     transition: padding-bottom 180ms ease;
+    overflow-x: hidden;
   }
 
   h1,
   h2,
   h3 {
+    max-width: 100%;
+    overflow-wrap: break-word;
     text-wrap: balance;
   }
 
   p {
-    text-wrap: pretty;
+    overflow-wrap: anywhere;
   }
 
   ::selection {
-    background: rgba(111, 138, 114, 0.22);
+    background: rgba(17, 21, 18, 0.14);
     color: var(--color-brand);
   }
 

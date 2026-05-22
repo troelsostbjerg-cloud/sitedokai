@@ -1,0 +1,115 @@
+---
+interface Props {
+  sourcePage?: string;
+  title?: string;
+  text?: string;
+  submitLabel?: string;
+  interest?: string;
+}
+
+const {
+  sourcePage = Astro.url.pathname,
+  title = 'Første samtale og screening',
+  text = 'Send et link og en kort note. Så vurderer vi, om der er et reelt agentic search-spor at arbejde videre med.',
+  submitLabel = 'Send til screening',
+  interest = 'Første samtale og screening',
+} = Astro.props;
+
+const contactEmail = 'info@sitedokai.com';
+const formAction = `https://formsubmit.co/${contactEmail}`;
+const ajaxAction = `https://formsubmit.co/ajax/${contactEmail}`;
+const nextUrl = 'https://sitedokai.com/tak-for-henvendelsen?type=screening';
+const directMailto = `mailto:${contactEmail}?subject=${encodeURIComponent('Første samtale og screening')}&body=${encodeURIComponent(`Hej SiteDokAI,
+
+Jeg vil gerne høre om agentic search og en mulig screening.
+
+Navn:
+Firma:
+Hjemmeside:
+Kort note:
+
+Tak.`)}`;
+---
+
+<form
+  action={formAction}
+  method="POST"
+  data-ajax-email-form
+  data-ajax-action={ajaxAction}
+  data-lead-backup-action="/api/leads"
+  data-lead-type="screening"
+  data-pending-label="Sender..."
+  class="grid gap-5 border-t border-brand/12 pt-7"
+>
+  <input type="hidden" name="_subject" value="Ny screening-henvendelse fra sitedokai.com" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_next" value={nextUrl} />
+  <input type="hidden" name="source_page" value={sourcePage} />
+  <input type="hidden" name="interest" value={interest} />
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" />
+
+  <div>
+    <p class="text-sm font-semibold text-brand">{title}</p>
+    <p class="mt-2 max-w-xl text-sm leading-relaxed text-muted">{text}</p>
+  </div>
+
+  <noscript>
+    <p class="border border-brand/12 bg-white px-4 py-3 text-sm leading-relaxed text-brand/74">
+      Formularen virker bedst med JavaScript. Du kan også sende direkte til <a href={directMailto} class="font-semibold underline decoration-brand/25 underline-offset-4">info@sitedokai.com</a>.
+    </p>
+  </noscript>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Navn
+      <input required type="text" name="name" autocomplete="name" class="h-12 border border-brand/12 bg-white px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/45 focus:border-brand/40" />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Email
+      <input required type="email" name="email" autocomplete="email" class="h-12 border border-brand/12 bg-white px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/45 focus:border-brand/40" />
+    </label>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Hjemmeside
+      <input required type="text" name="website" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="dinvirksomhed.dk" class="h-12 border border-brand/12 bg-white px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/45 focus:border-brand/40" />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Firma
+      <input type="text" name="company" autocomplete="organization" class="h-12 border border-brand/12 bg-white px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/45 focus:border-brand/40" />
+    </label>
+  </div>
+
+  <label class="grid gap-2 text-sm font-medium text-brand">
+    Hvad vil du gerne afklare?
+    <textarea name="message" rows="4" placeholder="Fx om AI finder jer, hvorfor konkurrenter bliver nævnt, eller om der giver mening at lave et forløb." class="min-h-32 resize-y border border-brand/12 bg-white px-4 py-3 text-base font-normal leading-relaxed text-brand outline-none transition-colors placeholder:text-muted/45 focus:border-brand/40"></textarea>
+  </label>
+
+  <div>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <button type="submit" data-ajax-submit class="inline-flex h-12 items-center justify-center bg-brand px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px disabled:cursor-wait disabled:opacity-70">
+        {submitLabel}
+      </button>
+      <a href={directMailto} class="inline-flex h-12 items-center justify-center border border-brand/14 bg-transparent px-6 text-sm font-semibold text-brand transition-colors hover:border-brand/35 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px">
+        Send direkte mail
+      </a>
+    </div>
+
+    <p data-ajax-form-pending hidden aria-live="polite" class="mt-4 border border-brand/12 bg-white px-4 py-3 text-sm leading-relaxed text-brand/74">
+      Sender din henvendelse...
+    </p>
+    <p data-ajax-form-success hidden aria-live="polite" class="mt-4 border border-brand/12 bg-white px-4 py-3 text-sm leading-relaxed text-brand/74">
+      Tak. Vi har modtaget den og vender tilbage med et roligt næste skridt.
+    </p>
+    <p data-ajax-form-error hidden aria-live="polite" data-default-error="Der skete en fejl. Prøv igen, eller brug direkte mail-linket." class="mt-4 border border-[#e8cfc9] bg-[#fff8f5] px-4 py-3 text-sm leading-relaxed text-[#794035]">
+      Der skete en fejl. Prøv igen, eller brug direkte mail-linket.
+    </p>
+    <p class="mt-4 text-xs leading-relaxed text-muted">
+      Første samtale og screening er uden beregning og uden binding.
+    </p>
+  </div>
+</form>

@@ -2,16 +2,14 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Gratis mini-tjek', href: '/gratis-mini-tjek' },
-  { label: 'Hjemmeside-tjek', href: '/hjemmeside-tjek' },
-  { label: 'Agentic search', href: '/blog/google-agentic-search-2026' },
-  { label: 'Hjemmeside-fix', href: '/hjemmeside-fix' },
-  { label: 'Visuelt løft', href: '/visuelt-loeft' },
+  { label: 'Agentic search', href: '/#agentic-search' },
+  { label: 'Forløb', href: '/#forloeb' },
+  { label: 'Indsigter', href: '/blog/google-agentic-search-2026' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-tjek' : '/gratis-mini-tjek';
+const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/kontakt#screening';
 ---
 
 <a
@@ -21,13 +19,13 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
   Gå til hovedindhold
 </a>
 
-<header class="relative z-20 px-4 pb-2 pt-5 sm:px-6 lg:px-10">
-  <nav class="mx-auto flex max-w-[1480px] items-center justify-between gap-4 rounded-[1.25rem] border border-border-soft bg-white/76 px-5 py-3 shadow-soft backdrop-blur-md" aria-label="Hovednavigation">
-    <a href="/" class="font-display text-3xl font-medium tracking-tight text-brand md:text-[2rem]">
+<header class="relative z-20 border-b border-brand/10 bg-canvas/92 px-5 backdrop-blur sm:px-6">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 py-5" aria-label="Hovednavigation">
+    <a href="/" class="font-display text-2xl font-semibold tracking-[-0.03em] text-brand">
       SiteDokAI
     </a>
 
-    <div class="hidden items-center gap-8 lg:flex">
+    <div class="hidden items-center gap-8 md:flex">
       {navItems.map((item) => {
         const isActive = currentPath === item.href;
         return (
@@ -35,8 +33,8 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
             href={item.href}
             aria-current={isActive ? 'page' : undefined}
             class:list={[
-              'text-sm font-medium transition-colors hover:text-accent-dark',
-              isActive ? 'text-accent-dark' : 'text-brand/78',
+              'text-sm font-medium transition-colors hover:text-brand',
+              isActive ? 'text-brand' : 'text-brand/54',
             ]}
           >
             {item.label}
@@ -45,17 +43,17 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
       })}
     </div>
 
-    <div class="hidden lg:block">
-      <Button href={ctaHref} size="sm">Få gratis mini-tjek</Button>
+    <div class="hidden md:block">
+      <Button href={ctaHref} size="sm">Gratis screening</Button>
     </div>
 
-    <details class="group relative lg:hidden">
-      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-[0.85rem] border border-border-soft bg-surface text-brand [&::-webkit-details-marker]:hidden" aria-label="Åbn menu">
+    <details class="group relative md:hidden">
+      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center border border-brand/12 bg-white text-brand [&::-webkit-details-marker]:hidden" aria-label="Åbn menu">
         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
           <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         </svg>
       </summary>
-      <div class="absolute right-0 top-14 w-[min(20rem,calc(100vw-2rem))] rounded-[1rem] border border-border-soft bg-white p-3 shadow-card">
+      <div class="absolute right-0 top-14 w-[min(20rem,calc(100vw-2rem))] border border-brand/12 bg-white p-3 shadow-card">
         <div class="grid gap-1">
           {navItems.map((item) => {
             const isActive = currentPath === item.href;
@@ -64,15 +62,15 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
                 class:list={[
-                  'rounded-[0.8rem] px-4 py-3 text-sm font-medium transition-colors hover:bg-accent-soft hover:text-brand',
-                  isActive ? 'bg-accent-soft text-brand' : 'text-brand/78',
+                  'px-4 py-3 text-sm font-medium transition-colors hover:bg-canvas hover:text-brand',
+                  isActive ? 'bg-canvas text-brand' : 'text-brand/70',
                 ]}
               >
                 {item.label}
               </a>
             );
           })}
-          <Button href={ctaHref} class="mt-2 w-full">Få gratis mini-tjek</Button>
+          <Button href={ctaHref} class="mt-2 w-full">Gratis screening</Button>
         </div>
       </div>
     </details>
