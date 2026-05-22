@@ -1,40 +1,15 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SiteDokAI — Gratis AI-tjek</title>
-  <desc id="desc">Se om AI-agenten finder og anbefaler din virksomhed.</desc>
-  <rect width="1200" height="630" fill="#FBF7EF"/>
-  <rect x="52" y="52" width="1096" height="526" rx="42" fill="#FFFDF8" stroke="#E8DED0"/>
-  <circle cx="1040" cy="126" r="210" fill="#DFE8DC" opacity="0.55"/>
-  <circle cx="110" cy="500" r="230" fill="#FFFFFF" opacity="0.55"/>
-
-  <text x="112" y="136" fill="#526B55" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="0.18em">GRATIS AI-TJEK FOR SMÅ VIRKSOMHEDER</text>
-  <text x="112" y="250" fill="#202622" font-family="Georgia, serif" font-size="68" font-weight="500">Bliver din virksomhed</text>
-  <text x="112" y="330" fill="#202622" font-family="Georgia, serif" font-size="68" font-weight="500">valgt af AI-agenten?</text>
-  <text x="116" y="412" fill="#66706A" font-family="Arial, sans-serif" font-size="29" font-weight="600">Kilder · Shortlist · Konkurrenter · Næste handling</text>
-
-  <g transform="translate(780 300)">
-    <path d="M-40 110C40 70 100 82 176 114C246 143 320 132 438 78V230H-40Z" fill="#DFE8DC"/>
-    <path d="M-40 166C54 108 146 120 236 158C308 188 374 178 438 142V230H-40Z" fill="#8FA08D" opacity="0.35"/>
-    <path d="M168 18L230 108L264 66L354 190H94L168 18Z" fill="#9CAC98" opacity="0.28"/>
-  </g>
-
-  <g transform="translate(790 122)">
-    <rect width="275" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Fundet?</text>
-  </g>
-  <g transform="translate(740 202)">
-    <rect width="304" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Shortlist?</text>
-  </g>
-  <g transform="translate(825 282)">
-    <rect width="315" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Mangler bevis?</text>
-  </g>
-
-  <g transform="translate(112 522)">
-    <rect width="240" height="56" rx="16" fill="#6F8A72"/>
-    <text x="31" y="36" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="800">Få gratis AI-tjek</text>
-  </g>
+  <title id="title">SiteDokAI - agentic search rådgivning</title>
+  <desc id="desc">Rådgivning om at blive fundet, forstået og valgt af AI-agenter.</desc>
+  <rect width="1200" height="630" fill="#F7F6F1"/>
+  <path d="M88 120H1112" stroke="#111512" stroke-opacity="0.14"/>
+  <path d="M88 510H1112" stroke="#111512" stroke-opacity="0.14"/>
+  <text x="88" y="92" fill="#111512" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.04em">SiteDokAI</text>
+  <text x="88" y="218" fill="#111512" font-family="Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="-0.055em">Bliv forstået og valgt</text>
+  <text x="88" y="300" fill="#111512" font-family="Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="-0.055em">i agentic search.</text>
+  <text x="92" y="380" fill="#62665F" font-family="Arial, sans-serif" font-size="30" font-weight="400">Rådgivning om AI-synlighed, kilder og valgbarhed.</text>
+  <text x="92" y="552" fill="#111512" font-family="Arial, sans-serif" font-size="24" font-weight="700">Første samtale og screening uden beregning</text>
+  <circle cx="1036" cy="384" r="74" stroke="#111512" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="1036" cy="384" r="10" fill="#111512"/>
+  <path d="M930 384H1022M1050 384H1142" stroke="#111512" stroke-opacity="0.42" stroke-width="2"/>
 </svg>
