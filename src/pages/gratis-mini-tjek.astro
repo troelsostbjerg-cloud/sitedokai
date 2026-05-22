@@ -18,38 +18,38 @@ import '../styles/global.css';
 const steps = [
   {
     title: 'Du sender link og branche',
-    text: 'Kun det nødvendige: navn, email, hjemmeside og evt. hvad siden skal hjælpe med.',
+    text: 'Kun det nødvendige: navn, email, hjemmeside, branche og evt. vigtigste konkurrenter.',
   },
   {
-    title: 'Vi kigger på de første barrierer',
-    text: 'Vi vurderer klarhed, tillid og om næste skridt er let at forstå for en ny kunde.',
+    title: 'Vi tester de første AI-spørgsmål',
+    text: 'Vi vurderer om virksomheden bliver fundet, nævnt eller sprunget over i relevante AI-søgninger.',
   },
   {
     title: 'Du får 3 konkrete observationer',
-    text: 'Kort og brugbart — ikke en teknisk rapport og ikke et langt salgsmøde.',
+    text: 'Kort og brugbart: hvilke spørgsmål, kilder eller sider der ser mest kritiske ud.',
   },
   {
     title: 'Du får anbefalet næste skridt',
-    text: 'Hvis problemerne er tydelige, kan du vælge et fuldt Hjemmeside-tjek til 2.495 kr.',
+    text: 'Hvis hullet er tydeligt, kan du vælge en fuld AI Audit + Client Room til 2.495 kr.',
   },
 ];
 
 const miniCheckProblemCards = [
   {
-    title: 'Uklart budskab',
-    text: 'Kunden forstår ikke hurtigt nok, hvad du tilbyder.',
+    title: 'Ikke nævnt',
+    text: 'AI anbefaler konkurrenter i stedet for virksomheden.',
     icon: 'message',
     position: 'left-[5%] top-[9%] md:left-[14%] md:top-[8%]',
   },
   {
-    title: 'Tillid kan styrkes',
-    text: 'Siden giver ikke nok tryghed til at tage kontakt.',
+    title: 'Svage kilder',
+    text: 'AI mangler tydelige beviser, cases eller fakta at stole på.',
     icon: 'shield',
     position: 'left-[5%] top-[39%] md:left-[3%] md:top-[39%]',
   },
   {
-    title: 'Svær at finde eller forstå',
-    text: 'Google og kunder forstår ikke hurtigt nok, hvad du tilbyder.',
+    title: 'Uklart fodaftryk',
+    text: 'Google, AI og kunder forstår ikke tydeligt nok hvad virksomheden bør vælges for.',
     icon: 'search',
     position: 'right-[5%] bottom-[9%] md:right-[3%] md:bottom-[11%]',
   },
@@ -76,10 +76,12 @@ const goals = [
 ];
 
 const miniCheckEmail = 'info@sitedokai.com';
-const miniCheckFormAction = `https://formsubmit.co/ajax/${miniCheckEmail}`;
-const miniCheckDirectMailto = `mailto:${miniCheckEmail}?subject=${encodeURIComponent('Gratis mini-tjek')}&body=${encodeURIComponent(`Hej SiteDokAI,
+const miniCheckFormAction = `https://formsubmit.co/${miniCheckEmail}`;
+const miniCheckAjaxAction = `https://formsubmit.co/ajax/${miniCheckEmail}`;
+const miniCheckNextUrl = 'https://sitedokai.com/tak-for-henvendelsen?type=mini-tjek';
+const miniCheckDirectMailto = `mailto:${miniCheckEmail}?subject=${encodeURIComponent('Gratis AI-tjek')}&body=${encodeURIComponent(`Hej SiteDokAI,
 
-Jeg vil gerne have et gratis mini-tjek.
+Jeg vil gerne have et gratis AI-tjek.
 
 Navn:
 Firma:
@@ -109,8 +111,8 @@ const structuredData = {
     {
       '@type': 'Service',
       '@id': 'https://sitedokai.com/gratis-mini-tjek#service',
-      name: 'Gratis mini-tjek af hjemmeside',
-      serviceType: 'Gratis mini-tjek af hjemmeside for små virksomheder',
+      name: 'Gratis AI-tjek af hjemmeside',
+      serviceType: 'Gratis AI-synlighedstjek for små virksomheder',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -124,7 +126,7 @@ const structuredData = {
         priceCurrency: 'DKK',
         availability: 'https://schema.org/InStock',
       },
-      description: 'Få 3 konkrete observationer på, hvad der gør hjemmesiden uklar, utroværdig eller svær at handle på.',
+      description: 'Få en kort vurdering af om virksomheden bliver fundet, nævnt og anbefalet i relevante AI-søgninger.',
     },
     {
       '@type': 'FAQPage',
@@ -132,10 +134,10 @@ const structuredData = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Hvad får jeg i et gratis mini-tjek?',
+          name: 'Hvad får jeg i et gratis AI-tjek?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Du får 3 konkrete observationer på klarhed, tillid og næste skridt på din hjemmeside.',
+            text: 'Du får 3 konkrete observationer om AI-synlighed, kilder og anbefalet næste skridt.',
           },
         },
         {
@@ -148,10 +150,10 @@ const structuredData = {
         },
         {
           '@type': 'Question',
-          name: 'Er mini-tjekket bindende?',
+          name: 'Er AI-tjekket bindende?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Nej. Mini-tjekket er gratis og uforpligtende.',
+            text: 'Nej. AI-tjekket er gratis og uforpligtende.',
           },
         },
       ],
@@ -161,8 +163,8 @@ const structuredData = {
 ---
 
 <Layout
-  title="Gratis mini-tjek af din hjemmeside | SiteDokAI"
-  description="Mister din hjemmeside kunder? Få 3 konkrete observationer på, hvad der gør siden uklar, utroværdig eller svær at handle på."
+  title="Gratis AI-tjek af din hjemmeside | SiteDokAI"
+  description="Bliver din virksomhed fundet i AI? Få 3 konkrete observationer om synlighed, kilder og næste skridt."
   canonical="/gratis-mini-tjek"
   structuredData={structuredData}
 >
@@ -173,17 +175,17 @@ const structuredData = {
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_8%,rgba(255,255,255,0.92),transparent_34%),radial-gradient(circle_at_82%_16%,rgba(223,232,220,0.62),transparent_28%)]"></div>
         <div class="relative grid min-w-0 gap-8 px-6 py-10 md:grid-cols-[0.94fr_1.06fr] md:items-center md:px-12 md:py-12 lg:px-14">
           <div class="min-w-0 max-w-3xl">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis mini-tjek af din hjemmeside</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis AI-tjek af din hjemmeside</p>
             <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
-              Mister din hjemmeside kunder?
+              Bliver din virksomhed fundet i AI?
             </h1>
             <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              Få 3 konkrete observationer på, hvad der gør siden uklar, utroværdig eller svær at handle på.
+              Få 3 konkrete observationer om hvor AI kan finde jer, hvor I mangler beviser, og hvad der bør testes næste gang.
             </p>
 
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="#faa-gratis-mini-tjek">Få gratis mini-tjek</Button>
-              <Button href="/hjemmeside-tjek" variant="secondary">Se fuldt Hjemmeside-tjek</Button>
+              <Button href="#faa-gratis-mini-tjek">Få gratis AI-tjek</Button>
+              <Button href="/hjemmeside-tjek" variant="secondary">Se fuld AI Audit</Button>
             </div>
 
             <div class="mt-6 flex flex-col gap-3 text-muted sm:flex-row">
@@ -223,18 +225,18 @@ const structuredData = {
       <div class="mt-6 grid gap-5 md:grid-cols-3">
         <FeatureCard
           icon="clarity"
-          title="Klarhed"
-          text="Forstår kunden hurtigt, hvad du tilbyder?"
+          title="Findbarhed"
+          text="Kan AI-agenten finde virksomheden i relevante søgninger?"
         />
         <FeatureCard
           icon="trust"
-          title="Tillid"
-          text="Virker siden professionel og tryg nok til kontakt?"
+          title="Kilder"
+          text="Er der nok bevis til at agenten kan stole på jer?"
         />
         <FeatureCard
           icon="visibility"
-          title="Handling"
-          text="Er det nemt og naturligt at kontakte dig?"
+          title="Valg"
+          text="Bliver I nævnt, shortlistet eller sprunget over?"
         />
       </div>
     </Container>
@@ -253,8 +255,8 @@ const structuredData = {
         <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
           <SectionHeader
             label="For små virksomheder"
-            title="Til små virksomheder, der får for få henvendelser fra hjemmesiden."
-            text="Mini-tjekket er lavet til lokale servicevirksomheder, hvor hjemmesiden skal skabe tillid, forklare ydelsen hurtigt og gøre det let at tage kontakt."
+            title="Til små virksomheder, der vil vide om AI finder dem."
+            text="AI-tjekket er lavet til lokale servicevirksomheder, hvor hjemmesiden skal give klare svar, troværdige kilder og stærke nok signaler til at blive nævnt."
             align="left"
           />
           <div class="flex flex-wrap gap-2.5 lg:justify-end">
@@ -279,8 +281,8 @@ const structuredData = {
 
     <Container id="fuld-gennemgang" class="pb-16 pt-7 md:pb-20">
       <SectionHeader
-        label="Hvis mini-tjekket viser tydelige problemer"
-        text="Så er Hjemmeside-tjek til 2.495 kr. det naturlige næste skridt."
+        label="Hvis AI-tjekket viser tydelige huller"
+        text="Så er AI Audit + Client Room til 2.495 kr. det naturlige næste skridt."
         uppercase={false}
       />
       <div class="mt-7">
@@ -293,19 +295,19 @@ const structuredData = {
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis og uforpligtende</p>
           <h2 class="mt-5 font-display text-4xl font-medium leading-[1.02] tracking-tight text-brand md:text-5xl">
-            Få gratis mini-tjek
+            Få gratis AI-tjek
           </h2>
           <p class="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Send dit link, så kigger vi hurtigt på siden og giver dig 3 konkrete observationer.
+            Send dit link, så kigger vi hurtigt på AI-findbarhed, kilder og de første relevante spørgsmål.
           </p>
           <div class="mt-5 grid gap-3">
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Du får svar inden for 1–2 hverdage.</div>
+            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Du får svar inden for 1-2 hverdage.</div>
             <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Hvis der ikke er et oplagt næste skridt, siger vi det direkte.</div>
-            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Vi bruger kun dine oplysninger til at lave mini-tjekket og svare dig tilbage.</div>
+            <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Vi bruger kun dine oplysninger til at lave AI-tjekket og svare dig tilbage.</div>
             <div class="rounded-[1rem] border border-accent/18 bg-white/62 px-4 py-3 text-sm leading-relaxed text-brand/74">Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.</div>
           </div>
           <p class="mt-5 max-w-lg text-sm leading-relaxed text-muted">
-            Mini-tjekket er gratis, fordi det er den letteste måde at vurdere, om siden har tydelige problemer, før du bruger penge på en større gennemgang.
+            AI-tjekket er gratis, fordi det er den letteste måde at vurdere, om der er et tydeligt synlighedsproblem, før du bruger penge på en større gennemgang.
           </p>
         </div>
 
@@ -313,14 +315,23 @@ const structuredData = {
           action={miniCheckFormAction}
           method="POST"
           data-ajax-email-form
+          data-ajax-action={miniCheckAjaxAction}
+          data-lead-backup-action="/api/leads"
+          data-lead-type="gratis-mini-tjek"
           data-pending-label="Sender..."
           class="grid gap-4 rounded-[1.25rem] border border-border-soft bg-white/72 p-5 shadow-[0_14px_36px_rgba(32,38,34,0.045)] md:p-6"
         >
-          <input type="hidden" name="_subject" value="Gratis mini-tjek fra sitedokai.com" />
+          <input type="hidden" name="_subject" value="Gratis AI-tjek fra sitedokai.com" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={miniCheckNextUrl} />
           <input type="hidden" name="source_page" value="/gratis-mini-tjek" />
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" />
+          <noscript>
+            <p class="rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
+              Formularen virker bedst med JavaScript. Du kan også sende direkte til <a href={miniCheckDirectMailto} class="font-semibold underline decoration-accent/45 underline-offset-4">info@sitedokai.com</a> med link til din hjemmeside.
+            </p>
+          </noscript>
 
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
@@ -348,11 +359,11 @@ const structuredData = {
 
           <div>
             <label for="mini_check_message" class="mb-2 block text-sm font-semibold text-brand">Kort besked</label>
-            <textarea id="mini_check_message" name="message" rows="4" placeholder="Skriv gerne hvad siden især skal hjælpe med, eller hvilken side vi skal kigge mest på." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
+            <textarea id="mini_check_message" name="message" rows="4" placeholder="Skriv gerne hvilken ydelse, branche eller konkurrenter AI bør forstå." class="w-full resize-y rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand placeholder:text-muted/45 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16"></textarea>
           </div>
 
           <div>
-            <label for="mini_check_goal" class="mb-2 block text-sm font-semibold text-brand">Hvad skal hjemmesiden helst skabe?</label>
+            <label for="mini_check_goal" class="mb-2 block text-sm font-semibold text-brand">Hvad skal AI helst forstå?</label>
             <select id="mini_check_goal" name="goal" class="w-full rounded-[0.95rem] border border-border-soft bg-surface px-4 py-3 text-brand transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/16">
               <option value="">Vælg hvis du ved det</option>
               {goals.map((goal) => (
@@ -360,21 +371,21 @@ const structuredData = {
               ))}
             </select>
             <p class="mt-2 text-sm leading-relaxed text-muted">
-              Feltet hjælper os med at vurdere siden ud fra kundens vigtigste handling.
+              Feltet hjælper os med at vurdere siden ud fra de spørgsmål, kunderne sandsynligvis stiller.
             </p>
           </div>
 
           <div>
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
               <button type="submit" data-ajax-submit class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-6 py-3.5 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(83,112,88,0.18)] transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px disabled:cursor-wait disabled:opacity-75 sm:w-auto">
-                Send gratis mini-tjek
+                Send gratis AI-tjek
               </button>
               <a href={miniCheckDirectMailto} class="inline-flex w-full items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/35 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px sm:w-auto">
                 Send direkte mail
               </a>
             </div>
             <p data-ajax-form-pending hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-accent/22 bg-accent-soft/64 px-4 py-3 text-sm leading-relaxed text-brand/78">
-              Sender dit mini-tjek sikkert...
+              Sender dit AI-tjek sikkert...
             </p>
             <p data-ajax-form-success hidden aria-live="polite" class="mt-3 rounded-[0.85rem] border border-accent/22 bg-accent-soft/64 px-4 py-3 text-sm leading-relaxed text-brand/78">
               Tak. Vi har modtaget dit link og vender tilbage med 3 konkrete observationer.
@@ -383,7 +394,7 @@ const structuredData = {
               Der skete en fejl. Prøv igen, eller brug direkte mail-linket.
             </p>
             <p class="mt-3 text-sm leading-relaxed text-muted">
-              Gratis og uforpligtende. Du får 3 konkrete observationer inden for 1–2 hverdage. Ingen salgsmøde kræves.
+              Gratis og uforpligtende. Du får 3 konkrete observationer inden for 1-2 hverdage. Ingen salgsmøde kræves.
             </p>
             <p class="mt-3 rounded-[0.85rem] border border-accent/18 bg-accent-soft/45 px-4 py-3 text-sm leading-relaxed text-brand/74">
               Virker knappen ikke? Send direkte til info@sitedokai.com med link til din hjemmeside.

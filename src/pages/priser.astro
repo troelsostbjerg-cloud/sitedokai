@@ -7,20 +7,20 @@ import '../styles/global.css';
 const services = [
   {
     tag: 'Hovedprodukt',
-    title: 'Hjemmeside-tjek',
+    title: 'AI Audit + Client Room',
     price: '2.495 kr',
-    purpose: 'Find problemerne.',
+    purpose: 'Find ud af om virksomheden bliver fundet og anbefalet i AI.',
     included: [
-      'PDF-rapport',
-      'klarheds-score',
-      'tillids-score',
-      'handlings-score',
-      'top 5 problemer',
-      'ny hero-tekst',
-      'forslag til servicestruktur',
-      '5-10 min video',
+      'privat Client Room',
+      'AI-synlighedsscore',
+      'ChatGPT, Gemini, Claude og Google AI',
+      'tabte søgninger',
+      'konkurrentbillede',
+      'kilder og trust',
+      'prioriterede handlinger',
+      'Executive PDF',
     ],
-    cta: { label: 'Bestil Hjemmeside-tjek', href: '/hjemmeside-tjek#bestil' },
+    cta: { label: 'Bestil AI Audit', href: '/hjemmeside-tjek#bestil' },
   },
   {
     tag: 'Sekundær ydelse',
@@ -33,7 +33,7 @@ const services = [
       'serviceblokke',
       'trust-sektion',
       'FAQ',
-      'CTA’er',
+      'CTAer',
       'tekststruktur',
     ],
     cta: { label: 'Se Hjemmeside-fix', href: '/hjemmeside-fix' },
@@ -58,11 +58,11 @@ const services = [
 const faqs = [
   {
     q: 'Hvad skal jeg starte med?',
-    a: 'Start med Hjemmeside-tjek, hvis du ikke ved præcis hvad der skal rettes først. Start direkte med Hjemmeside-fix eller Visuelt løft, hvis problemet allerede er tydeligt.',
+    a: 'Start med gratis AI-tjek, hvis du ikke ved om problemet findes. Gå videre til AI Audit + Client Room, Hjemmeside-fix eller Visuelt løft, når problemet er tydeligt.',
   },
   {
-    q: 'Er Hjemmeside-tjek bare en rapport?',
-    a: 'Nej. Rapporten er formatet, men pointen er beslutningen: hvad koster jer kunder lige nu, og hvad bør rettes først?',
+    q: 'Er AI Audit bare en rapport?',
+    a: 'Nej. Client Room er hovedleverancen. PDFen er kun den korte eksport, når status og næste handlinger skal deles.',
   },
   {
     q: 'Kan I også rette siden bagefter?',
@@ -73,7 +73,7 @@ const faqs = [
 
 <Layout
   title="Ydelser og priser | SiteDokAI"
-  description="Hjemmeside-tjek til 2.495 kr, Hjemmeside-fix til 6.500-12.500 kr og Visuelt løft fra 9.500 kr."
+  description="AI Audit + Client Room til 2.495 kr, Hjemmeside-fix til 6.500-12.500 kr og Visuelt løft fra 9.500 kr."
 >
   <Nav />
   <main id="main">
@@ -82,10 +82,10 @@ const faqs = [
         <div class="max-w-3xl">
           <p class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-accent">Ydelser og priser</p>
           <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-            Tre enkle måder at gøre hjemmesiden bedre på.
+            Først findbarhed i AI. Derefter rettelser.
           </h1>
           <p class="mt-6 text-lg leading-relaxed text-brand/70">
-            Start med at finde problemerne. Ret derefter tekst, struktur, CTA’er eller visuelt udtryk, hvis det er det næste rigtige skridt.
+            Start med at se om virksomheden bliver fundet, nævnt og anbefalet i AI. Ret derefter tekst, kilder, struktur eller visuelt udtryk, hvis det er det næste rigtige skridt.
           </p>
         </div>
       </div>

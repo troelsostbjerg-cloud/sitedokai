@@ -2,13 +2,15 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Gratis mini-tjek', href: '/gratis-mini-tjek' },
-  { label: 'Hjemmeside-tjek', href: '/hjemmeside-tjek' },
+  { label: 'Gratis AI-tjek', href: '/gratis-mini-tjek' },
+  { label: 'AI Audit', href: '/hjemmeside-tjek' },
+  { label: 'Client Room', href: '/eksempel' },
+  { label: 'Use cases', href: '/use-cases' },
   { label: 'Hjemmeside-fix', href: '/hjemmeside-fix' },
-  { label: 'Visuelt løft', href: '/visuelt-loeft' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
 
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-tjek' : '/gratis-mini-tjek';
 ---
 
@@ -26,15 +28,25 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
     </a>
 
     <div class="hidden items-center gap-8 lg:flex">
-      {navItems.map((item) => (
-        <a href={item.href} class="text-sm font-medium text-brand/78 transition-colors hover:text-accent-dark">
-          {item.label}
-        </a>
-      ))}
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href;
+        return (
+          <a
+            href={item.href}
+            aria-current={isActive ? 'page' : undefined}
+            class:list={[
+              'text-sm font-medium transition-colors hover:text-accent-dark',
+              isActive ? 'text-accent-dark' : 'text-brand/78',
+            ]}
+          >
+            {item.label}
+          </a>
+        );
+      })}
     </div>
 
     <div class="hidden lg:block">
-      <Button href={ctaHref} size="sm">Få gratis mini-tjek</Button>
+      <Button href={ctaHref} size="sm">Få gratis AI-tjek</Button>
     </div>
 
     <details class="group relative lg:hidden">
@@ -45,12 +57,22 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
       </summary>
       <div class="absolute right-0 top-14 w-[min(20rem,calc(100vw-2rem))] rounded-[1rem] border border-border-soft bg-white p-3 shadow-card">
         <div class="grid gap-1">
-          {navItems.map((item) => (
-            <a href={item.href} class="rounded-[0.8rem] px-4 py-3 text-sm font-medium text-brand/78 transition-colors hover:bg-accent-soft hover:text-brand">
-              {item.label}
-            </a>
-          ))}
-          <Button href={ctaHref} class="mt-2 w-full">Få gratis mini-tjek</Button>
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href;
+            return (
+              <a
+                href={item.href}
+                aria-current={isActive ? 'page' : undefined}
+                class:list={[
+                  'rounded-[0.8rem] px-4 py-3 text-sm font-medium transition-colors hover:bg-accent-soft hover:text-brand',
+                  isActive ? 'bg-accent-soft text-brand' : 'text-brand/78',
+                ]}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+          <Button href={ctaHref} class="mt-2 w-full">Få gratis AI-tjek</Button>
         </div>
       </div>
     </details>

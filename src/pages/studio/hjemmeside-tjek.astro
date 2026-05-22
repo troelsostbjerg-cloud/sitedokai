@@ -10,63 +10,113 @@ const recommendationOptions = [
   'Ny struktur anbefales',
   'Ny hjemmeside bør overvejes',
 ];
+const dashboardFilterOptions = ['Alle', ...statusOptions];
 ---
 
 <Layout
-  title="Internt Hjemmeside-tjek studio | SiteDokAI"
-  description="Internt audit-studio til manuelle SiteDokAI Hjemmeside-tjek."
+  title="SiteDok Operations CRM | AI Audit"
+  description="Internt CRM og audit-studio til manuelle SiteDokAI AI Audits."
   canonical="/studio/hjemmeside-tjek"
   noindex={true}
 >
-  <main id="main" class="min-h-screen bg-canvas px-4 py-6 text-brand sm:px-6 lg:px-10">
-    <div class="mx-auto max-w-[1480px]">
-      <header class="rounded-[1.6rem] border border-border-soft bg-surface/86 p-6 shadow-soft md:p-8">
-        <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+  <main id="main" class="studio-enterprise min-h-[100dvh] px-3 py-3 text-brand sm:px-4 lg:px-5">
+    <div class="enterprise-shell mx-auto max-w-[1720px]">
+      <aside class="enterprise-rail" aria-label="SiteDok CRM navigation">
+        <div>
+          <a href="/" class="enterprise-brand" aria-label="SiteDokAI forside">
+            <span class="enterprise-brand-mark">SD</span>
+            <span>
+              <strong>SiteDok</strong>
+              <small>Operations CRM</small>
+            </span>
+          </a>
+
+          <nav class="enterprise-nav" aria-label="Studio">
+            <button type="button" data-action="show-dashboard" data-nav-view="dashboard" class="enterprise-nav-link is-active">Oversigt</button>
+            <button type="button" data-action="show-create" data-nav-view="create" class="enterprise-nav-link">Ny sag</button>
+            <button type="button" data-action="back-to-editor" data-nav-view="editor" class="enterprise-nav-link">Editor</button>
+            <button type="button" data-action="show-report" data-nav-view="report" class="enterprise-nav-link">Rapport</button>
+            <button type="button" data-action="show-analytics" data-nav-view="analytics" class="enterprise-nav-link">Rapporter</button>
+            <button type="button" data-action="show-video" data-nav-view="video" class="enterprise-nav-link">Video-script</button>
+          </nav>
+        </div>
+
+        <div class="enterprise-rail-card">
+          <p class="enterprise-label">Driftsstatus</p>
+          <strong>Lokal arbejdsflade</strong>
+          <span>Data gemmes i denne browsers localStorage. Ingen crawler, ekstern sending eller AI-generering i denne MVP.</span>
+        </div>
+      </aside>
+
+      <div class="enterprise-workspace">
+        <header class="enterprise-topbar">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Internt værktøj</p>
-            <h1 class="mt-4 font-display text-4xl font-medium leading-[1.02] tracking-tight text-brand md:text-6xl">
-              Hjemmeside-tjek studio
-            </h1>
-            <p class="mt-4 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
-              Et manuelt audit-værktøj til at oprette, redigere og kvalitetssikre professionelle Hjemmeside-tjek til små danske servicevirksomheder.
-            </p>
+            <p class="enterprise-kicker">Internt arbejdsrum</p>
+            <h1>AI Audit CRM</h1>
+            <p>Opret, styr og kvalitetssikre professionelle AI Audits med samme rolige kontrol som et dyrt enterprise-system.</p>
           </div>
-          <div class="flex flex-wrap gap-3">
-            <button type="button" data-action="show-dashboard" class="inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:border-accent-dark hover:bg-accent-dark">
-              Dashboard
+          <div class="enterprise-topbar-actions">
+            <button type="button" data-action="show-dashboard" class="enterprise-button enterprise-button-secondary">Dashboard</button>
+            <button type="button" data-action="show-analytics" class="enterprise-button enterprise-button-secondary">Rapporter</button>
+            <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary">Opret nyt tjek</button>
+          </div>
+        </header>
+
+        <section class="enterprise-metrics" aria-label="CRM status">
+          <article>
+            <span>Alle sager</span>
+            <strong id="dashboard-total">0</strong>
+            <small>Lokale tjek</small>
+          </article>
+          <article>
+            <span>I produktion</span>
+            <strong id="dashboard-active">0</strong>
+            <small>Under analyse</small>
+          </article>
+          <article>
+            <span>QA-kø</span>
+            <strong id="dashboard-review">0</strong>
+            <small>Klar til review</small>
+          </article>
+          <article>
+            <span>Færdige</span>
+            <strong id="dashboard-done">0</strong>
+            <small>Leveret internt</small>
+          </article>
+        </section>
+
+        <section id="dashboard-view" class="enterprise-panel">
+          <div class="enterprise-section-head">
+            <div>
+              <p class="enterprise-label">Dashboard</p>
+              <h2>Pipeline for AI Audit</h2>
+              <p>Oversigt over kunder, status og næste tjek der skal åbnes.</p>
+            </div>
+            <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary">
+              Opret ny AI Audit
             </button>
-            <button type="button" data-action="show-create" class="inline-flex items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-5 py-3 text-sm font-semibold text-brand transition hover:border-accent/35 hover:bg-accent-soft">
-              Opret nyt tjek
-            </button>
           </div>
-        </div>
-        <div class="mt-6 grid gap-3 md:grid-cols-3">
-          <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Data gemmes lokalt i denne browser via localStorage.</div>
-          <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Ingen crawler, AI-generering eller ekstern sending i MVP’en.</div>
-          <div class="rounded-[1rem] border border-accent/18 bg-accent-soft/55 px-4 py-3 text-sm leading-relaxed text-brand/76">Fokus: klarhed, tillid, handling og flere henvendelser.</div>
-        </div>
-      </header>
 
-      <section id="dashboard-view" class="mt-6 rounded-[1.45rem] border border-border-soft bg-white/72 p-5 shadow-soft md:p-7">
-        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Dashboard</p>
-            <h2 class="mt-3 font-display text-3xl font-medium tracking-tight text-brand md:text-4xl">Hjemmeside-tjek</h2>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Oversigt over kunder, status og næste tjek der skal åbnes.</p>
+          <div class="enterprise-command-bar">
+            <label class="enterprise-search">
+              <span>Søg i sager</span>
+              <input id="dashboard-search" type="search" placeholder="Kunde, website, branche eller lokation" autocomplete="off" />
+            </label>
+            <div id="dashboard-filters" class="enterprise-filter-group" aria-label="Filtrer efter status">
+              {dashboardFilterOptions.map((option) => (
+                <button type="button" data-dashboard-filter={option} class:list={['enterprise-filter', option === 'Alle' && 'is-active']}>{option}</button>
+              ))}
+            </div>
           </div>
-          <button type="button" data-action="show-create" class="inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:border-accent-dark hover:bg-accent-dark">
-            Opret nyt Hjemmeside-tjek
-          </button>
-        </div>
 
-        <div id="dashboard-list" class="mt-6"></div>
-      </section>
+          <div id="dashboard-list" class="mt-5"></div>
+        </section>
 
-      <section id="create-view" class="mt-6 hidden rounded-[1.45rem] border border-border-soft bg-white/72 p-5 shadow-soft md:p-7">
+        <section id="create-view" class="enterprise-panel hidden">
         <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Nyt tjek</p>
-            <h2 class="mt-3 font-display text-3xl font-medium tracking-tight text-brand md:text-4xl">Opret Hjemmeside-tjek</h2>
+            <h2 class="mt-3 font-display text-3xl font-medium tracking-tight text-brand md:text-4xl">Opret AI Audit</h2>
             <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">Start med kundeinfo. Alt kan redigeres bagefter i rapport-editoren.</p>
           </div>
           <button type="button" data-action="show-dashboard" class="rounded-[0.85rem] border border-border-soft bg-surface px-4 py-2.5 text-sm font-semibold text-brand hover:border-accent/35">
@@ -125,15 +175,1045 @@ const recommendationOptions = [
         <div id="report-shell"></div>
       </section>
 
+      <section id="analytics-view" class="mt-6 hidden">
+        <div id="analytics-shell"></div>
+      </section>
+
       <section id="video-view" class="mt-6 hidden">
         <div id="video-shell"></div>
       </section>
+      </div>
     </div>
   </main>
 
   <style is:global>
+    .studio-enterprise {
+      --crm-blue-900: #18385f;
+      --crm-blue-800: #1f4d7c;
+      --crm-blue-700: #2f6fb2;
+      --crm-blue-600: #3e80c2;
+      --crm-blue-100: #eaf4ff;
+      --crm-blue-050: #f5f9ff;
+      --crm-ink: #172233;
+      --crm-muted: rgba(23, 34, 51, 0.62);
+      --crm-border: rgba(89, 119, 157, 0.18);
+      --crm-surface: rgba(255, 255, 255, 0.84);
+      --crm-soft-surface: rgba(247, 251, 255, 0.78);
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 94% 2%, rgba(84, 151, 215, 0.18), transparent 28rem),
+        radial-gradient(circle at 6% 88%, rgba(191, 220, 244, 0.34), transparent 28rem),
+        linear-gradient(135deg, #edf4fb 0%, #f7fbff 48%, #eef5fb 100%);
+      font-family: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .enterprise-shell {
+      display: grid;
+      grid-template-columns: 282px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .enterprise-rail,
+    .enterprise-topbar,
+    .enterprise-panel,
+    .enterprise-metrics article {
+      border: 1px solid var(--crm-border);
+      background: var(--crm-surface);
+      box-shadow: 0 24px 60px rgba(38, 74, 112, 0.09);
+      backdrop-filter: blur(18px);
+    }
+
+    .enterprise-rail {
+      position: sticky;
+      top: 12px;
+      display: flex;
+      min-height: calc(100dvh - 24px);
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 22px;
+      padding: 14px;
+    }
+
+    .enterprise-brand {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      border-radius: 16px;
+      padding: 10px;
+      color: var(--crm-ink);
+      text-decoration: none;
+    }
+
+    .enterprise-brand-mark {
+      display: inline-flex;
+      height: 42px;
+      width: 42px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--crm-blue-900), var(--crm-blue-600));
+      color: #f7fbff;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .enterprise-brand strong,
+    .enterprise-brand small {
+      display: block;
+    }
+
+    .enterprise-brand strong {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .enterprise-brand small {
+      margin-top: 2px;
+      color: var(--crm-muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    .enterprise-nav {
+      display: grid;
+      gap: 6px;
+      margin-top: 18px;
+    }
+
+    .enterprise-nav-link {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      background: transparent;
+      color: rgba(23, 34, 51, 0.68);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 11px 12px;
+      text-align: left;
+      transition:
+        background-color 180ms ease,
+        color 180ms ease,
+        transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .enterprise-nav-link:hover,
+    .enterprise-nav-link.is-active {
+      background: rgba(62, 128, 194, 0.1);
+      color: var(--crm-blue-900);
+    }
+
+    .enterprise-nav-link:active,
+    .enterprise-button:active,
+    .enterprise-filter:active,
+    .studio-enterprise button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .enterprise-rail-card {
+      border: 1px solid rgba(62, 128, 194, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(234, 244, 255, 0.88), rgba(255, 255, 255, 0.78));
+      padding: 14px;
+    }
+
+    .enterprise-rail-card strong,
+    .enterprise-rail-card span {
+      display: block;
+    }
+
+    .enterprise-rail-card strong {
+      margin-top: 7px;
+      color: var(--crm-ink);
+      font-size: 0.96rem;
+      line-height: 1.25;
+    }
+
+    .enterprise-rail-card span {
+      margin-top: 8px;
+      color: var(--crm-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .enterprise-workspace {
+      min-width: 0;
+    }
+
+    .enterprise-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      border-radius: 24px;
+      padding: clamp(18px, 2vw, 26px);
+    }
+
+    .enterprise-kicker,
+    .enterprise-label {
+      color: var(--crm-blue-800);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .enterprise-topbar h1,
+    .enterprise-section-head h2 {
+      color: var(--crm-ink);
+      font-family: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+    }
+
+    .enterprise-topbar h1 {
+      margin-top: 10px;
+      font-size: clamp(1.9rem, 3.1vw, 3.35rem);
+    }
+
+    .enterprise-topbar p:not(.enterprise-kicker),
+    .enterprise-section-head p:not(.enterprise-label) {
+      max-width: 68ch;
+      color: var(--crm-muted);
+      font-size: 0.96rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .enterprise-topbar p:not(.enterprise-kicker) {
+      margin-top: 12px;
+    }
+
+    .enterprise-topbar-actions,
+    .enterprise-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .enterprise-topbar-actions {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .enterprise-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      font-weight: 800;
+      padding: 0.72rem 1rem;
+      text-decoration: none;
+      transition:
+        border-color 180ms ease,
+        background-color 180ms ease,
+        color 180ms ease,
+        transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 180ms ease;
+      white-space: nowrap;
+    }
+
+    .enterprise-button-primary {
+      border: 1px solid var(--crm-blue-800);
+      background: linear-gradient(180deg, var(--crm-blue-700), var(--crm-blue-800));
+      color: #f7fbff;
+      box-shadow: 0 14px 30px rgba(31, 77, 124, 0.22);
+    }
+
+    .enterprise-button-primary:hover {
+      background: linear-gradient(180deg, var(--crm-blue-600), var(--crm-blue-800));
+      border-color: var(--crm-blue-900);
+    }
+
+    .enterprise-button-secondary {
+      border: 1px solid rgba(89, 119, 157, 0.18);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--crm-ink);
+    }
+
+    .enterprise-button-secondary:hover {
+      border-color: rgba(62, 128, 194, 0.34);
+      background: rgba(234, 244, 255, 0.82);
+    }
+
+    .enterprise-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .enterprise-metrics article {
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .enterprise-metrics span,
+    .enterprise-metrics small {
+      display: block;
+      color: rgba(23, 34, 51, 0.56);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .enterprise-metrics strong {
+      display: block;
+      margin-top: 9px;
+      color: var(--crm-ink);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: clamp(1.7rem, 3vw, 2.45rem);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .enterprise-metrics small {
+      margin-top: 8px;
+    }
+
+    .enterprise-panel {
+      margin-top: 14px;
+      border-radius: 24px;
+      padding: clamp(18px, 2vw, 28px);
+    }
+
+    .enterprise-section-head {
+      align-items: flex-end;
+    }
+
+    .enterprise-section-head h2 {
+      margin-top: 8px;
+      font-size: clamp(1.6rem, 2.5vw, 2.35rem);
+    }
+
+    .enterprise-section-head p:not(.enterprise-label) {
+      margin-top: 8px;
+    }
+
+    .enterprise-command-bar {
+      display: grid;
+      grid-template-columns: minmax(260px, 420px) minmax(0, 1fr);
+      gap: 12px;
+      align-items: end;
+      margin-top: 22px;
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 18px;
+      background: rgba(244, 249, 255, 0.76);
+      padding: 12px;
+    }
+
+    .enterprise-search {
+      display: grid;
+      gap: 7px;
+      color: rgba(23, 34, 51, 0.62);
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .enterprise-search input,
+    .studio-enterprise input,
+    .studio-enterprise textarea,
+    .studio-enterprise select {
+      border-color: rgba(89, 119, 157, 0.23) !important;
+      background-color: rgba(255, 255, 255, 0.82) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .enterprise-search input {
+      width: 100%;
+      border: 1px solid rgba(89, 119, 157, 0.23);
+      border-radius: 12px;
+      color: var(--crm-ink);
+      font-size: 0.93rem;
+      font-weight: 600;
+      outline: none;
+      padding: 0.8rem 0.9rem;
+    }
+
+    .enterprise-search input:focus,
+    .studio-enterprise input:focus,
+    .studio-enterprise textarea:focus,
+    .studio-enterprise select:focus {
+      border-color: rgba(62, 128, 194, 0.62) !important;
+      box-shadow: 0 0 0 3px rgba(62, 128, 194, 0.16) !important;
+    }
+
+    .enterprise-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .enterprise-filter {
+      border: 1px solid rgba(89, 119, 157, 0.17);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.62);
+      color: rgba(23, 34, 51, 0.64);
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.58rem 0.76rem;
+      transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .enterprise-filter:hover,
+    .enterprise-filter.is-active {
+      border-color: rgba(31, 77, 124, 0.22);
+      background: var(--crm-blue-800);
+      color: #f7fbff;
+    }
+
+    .crm-table-shell {
+      overflow: hidden;
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .crm-table-scroll {
+      overflow-x: auto;
+    }
+
+    .crm-enterprise-table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+    }
+
+    .crm-enterprise-table th,
+    .crm-enterprise-table td {
+      border-bottom: 1px solid rgba(89, 119, 157, 0.13);
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .crm-enterprise-table th {
+      background: rgba(244, 249, 255, 0.86);
+      color: rgba(23, 34, 51, 0.54);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .crm-enterprise-table td {
+      color: rgba(23, 34, 51, 0.76);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .crm-enterprise-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .crm-enterprise-table tbody tr {
+      transition: background-color 150ms ease;
+    }
+
+    .crm-enterprise-table tbody tr:hover {
+      background: rgba(234, 244, 255, 0.62);
+    }
+
+    .crm-primary-cell strong,
+    .crm-primary-cell a {
+      display: block;
+    }
+
+    .crm-primary-cell strong {
+      color: var(--crm-ink);
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+    }
+
+    .crm-primary-cell a {
+      margin-top: 4px;
+      color: var(--crm-blue-800);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-decoration-color: rgba(82, 107, 85, 0.28);
+      text-underline-offset: 4px;
+    }
+
+    .crm-muted-line {
+      color: rgba(23, 34, 51, 0.52);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .crm-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .crm-action {
+      border-radius: 11px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.58rem 0.75rem;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(89, 119, 157, 0.2);
+      border-radius: 999px;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 0.42rem 0.62rem;
+      white-space: nowrap;
+    }
+
+    .status-chip--done {
+      border-color: rgba(38, 122, 118, 0.22);
+      background: rgba(227, 247, 246, 0.9);
+      color: #236966;
+    }
+
+    .status-chip--review {
+      border-color: rgba(47, 111, 178, 0.25);
+      background: rgba(234, 244, 255, 0.94);
+      color: var(--crm-blue-800);
+    }
+
+    .status-chip--active {
+      border-color: rgba(47, 111, 178, 0.24);
+      background: rgba(239, 246, 255, 0.94);
+      color: #285f9a;
+    }
+
+    .status-chip--new {
+      border-color: rgba(89, 119, 157, 0.18);
+      background: rgba(255, 255, 255, 0.74);
+      color: rgba(23, 34, 51, 0.56);
+    }
+
+    .enterprise-empty {
+      border: 1px dashed rgba(62, 128, 194, 0.34);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(234, 244, 255, 0.68), rgba(255, 255, 255, 0.82));
+      padding: clamp(24px, 4vw, 44px);
+      text-align: center;
+    }
+
+    .enterprise-empty h3 {
+      color: var(--crm-ink);
+      font-family: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .enterprise-empty p {
+      margin: 10px auto 0;
+      max-width: 58ch;
+      color: var(--crm-muted);
+      font-size: 0.94rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .enterprise-editor-card {
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 45px rgba(38, 74, 112, 0.06);
+      padding: clamp(18px, 2vw, 24px);
+    }
+
+    .enterprise-editor-card h3,
+    .enterprise-issue-card h4 {
+      font-family: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .enterprise-issue-card {
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 18px;
+      background: rgba(247, 251, 255, 0.78);
+      padding: 16px;
+    }
+
+    .analytics-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .analytics-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 18px;
+      background: rgba(244, 249, 255, 0.74);
+      padding: 12px;
+    }
+
+    .analytics-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .analytics-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .analytics-grid--two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analytics-card {
+      border: 1px solid rgba(89, 119, 157, 0.16);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 45px rgba(38, 74, 112, 0.06);
+      padding: clamp(16px, 2vw, 22px);
+    }
+
+    .analytics-card h3 {
+      color: var(--crm-ink);
+      font-size: clamp(1.18rem, 1.5vw, 1.55rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .analytics-card p {
+      color: var(--crm-muted);
+      font-size: 0.86rem;
+      font-weight: 600;
+      line-height: 1.58;
+    }
+
+    .analytics-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .analytics-kpi {
+      border: 1px solid rgba(89, 119, 157, 0.14);
+      border-radius: 16px;
+      background: rgba(247, 251, 255, 0.82);
+      padding: 14px;
+    }
+
+    .analytics-kpi span,
+    .analytics-kpi small {
+      display: block;
+      color: rgba(23, 34, 51, 0.56);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .analytics-kpi strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--crm-ink);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: clamp(1.35rem, 2vw, 2rem);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .analytics-kpi small {
+      margin-top: 8px;
+    }
+
+    .chart-stack {
+      display: grid;
+      gap: 11px;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: minmax(112px, 0.8fr) minmax(0, 1.4fr) 46px;
+      gap: 10px;
+      align-items: center;
+      color: rgba(23, 34, 51, 0.68);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .chart-track {
+      height: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(89, 119, 157, 0.13);
+    }
+
+    .chart-fill {
+      display: block;
+      height: 100%;
+      width: var(--value, 0%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--crm-blue-600), var(--crm-blue-900));
+    }
+
+    .chart-value {
+      color: var(--crm-blue-800);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.76rem;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .pipeline-funnel {
+      display: grid;
+      gap: 9px;
+    }
+
+    .pipeline-step {
+      display: grid;
+      grid-template-columns: minmax(116px, 0.84fr) minmax(0, 1.4fr) 44px;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid rgba(89, 119, 157, 0.12);
+      border-radius: 14px;
+      background: rgba(247, 251, 255, 0.68);
+      padding: 10px;
+    }
+
+    .pipeline-step-name {
+      color: rgba(23, 34, 51, 0.7);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .heatmap {
+      display: grid;
+      grid-template-columns: minmax(126px, 1.35fr) repeat(3, minmax(78px, 1fr));
+      gap: 7px;
+      width: 100%;
+      min-width: 0;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .heatmap-heading,
+    .heatmap-label,
+    .heatmap-cell {
+      min-height: 44px;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .heatmap-heading {
+      color: rgba(23, 34, 51, 0.5);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .heatmap-label {
+      border: 1px solid rgba(89, 119, 157, 0.13);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--crm-ink);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .heatmap-label span {
+      display: block;
+      margin-top: 3px;
+      color: var(--crm-muted);
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .heatmap-cell {
+      border: 1px solid rgba(47, 111, 178, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0)),
+        rgba(47, 111, 178, var(--heat, 0.14));
+      color: var(--crm-ink);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .report-type-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .report-type-card {
+      display: flex;
+      min-height: 142px;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(89, 119, 157, 0.14);
+      border-radius: 18px;
+      background: rgba(247, 251, 255, 0.8);
+      padding: 14px;
+    }
+
+    .report-type-card strong {
+      color: var(--crm-ink);
+      font-size: 0.92rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .report-type-card span {
+      margin-top: 8px;
+      color: var(--crm-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .report-type-card small {
+      color: var(--crm-blue-800);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .radar-card {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .radar-chart {
+      width: min(100%, 270px);
+      aspect-ratio: 1;
+    }
+
+    .radar-chart text {
+      fill: rgba(23, 34, 51, 0.62);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 7px;
+      font-weight: 800;
+    }
+
+    .radar-score-strip {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .radar-score-strip span {
+      display: grid;
+      gap: 4px;
+      border: 1px solid rgba(89, 119, 157, 0.14);
+      border-radius: 13px;
+      background: rgba(247, 251, 255, 0.78);
+      color: rgba(23, 34, 51, 0.58);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 9px;
+    }
+
+    .radar-score-strip strong {
+      color: var(--crm-blue-800);
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .insight-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .insight-item {
+      border: 1px solid rgba(89, 119, 157, 0.14);
+      border-radius: 15px;
+      background: rgba(247, 251, 255, 0.76);
+      padding: 13px;
+    }
+
+    .insight-item strong,
+    .insight-item span {
+      display: block;
+    }
+
+    .insight-item strong {
+      color: var(--crm-ink);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .insight-item span {
+      margin-top: 6px;
+      color: var(--crm-muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .studio-enterprise .bg-accent,
+    .studio-enterprise .hover\:bg-accent-dark:hover {
+      background-color: var(--crm-blue-700) !important;
+    }
+
+    .studio-enterprise .bg-accent-soft,
+    .studio-enterprise .hover\:bg-accent-soft:hover {
+      background-color: var(--crm-blue-100) !important;
+    }
+
+    .studio-enterprise .text-accent-dark,
+    .studio-enterprise .hover\:text-accent-dark:hover {
+      color: var(--crm-blue-800) !important;
+    }
+
+    .studio-enterprise .border-accent,
+    .studio-enterprise .hover\:border-accent-dark:hover {
+      border-color: var(--crm-blue-700) !important;
+    }
+
+    .studio-enterprise .text-brand {
+      color: var(--crm-ink) !important;
+    }
+
+    .studio-enterprise .text-muted {
+      color: var(--crm-muted) !important;
+    }
+
+    @media (max-width: 1180px) {
+      .enterprise-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .enterprise-rail {
+        position: static;
+        min-height: auto;
+      }
+
+      .enterprise-nav {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .enterprise-nav-link {
+        width: auto;
+      }
+
+      .enterprise-rail-card {
+        margin-top: 14px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .enterprise-topbar,
+      .enterprise-section-head,
+      .enterprise-topbar-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .enterprise-topbar-actions,
+      .enterprise-section-head .enterprise-button {
+        width: 100%;
+      }
+
+      .enterprise-button {
+        width: 100%;
+      }
+
+      .enterprise-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .enterprise-command-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .analytics-layout,
+      .analytics-grid--two,
+      .report-type-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .analytics-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .enterprise-filter-group {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .enterprise-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .analytics-kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-row,
+      .pipeline-step {
+        grid-template-columns: 1fr;
+      }
+
+      .heatmap {
+        grid-template-columns: minmax(86px, 1fr) repeat(3, minmax(54px, 0.78fr));
+        gap: 6px;
+      }
+
+      .heatmap-heading,
+      .heatmap-label,
+      .heatmap-cell {
+        min-height: 40px;
+        padding: 8px;
+      }
+
+      .radar-score-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-value {
+        text-align: left;
+      }
+
+      .enterprise-panel,
+      .enterprise-topbar,
+      .enterprise-rail {
+        border-radius: 18px;
+      }
+    }
+
     .report-page {
-      color: #202622;
+      color: var(--crm-ink);
     }
 
     .report-cover {
@@ -158,7 +1238,7 @@ const recommendationOptions = [
     .report-score-fill {
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg, #6f8a72 0%, #435c47 100%);
+      background: linear-gradient(90deg, var(--crm-blue-600) 0%, var(--crm-blue-900) 100%);
     }
 
     .video-script-body {
@@ -192,6 +1272,7 @@ const recommendationOptions = [
       #dashboard-view,
       #create-view,
       #editor-view,
+      #analytics-view,
       #video-view,
       .report-warning,
       .report-actions {
@@ -255,12 +1336,26 @@ const recommendationOptions = [
       const createView = document.getElementById('create-view');
       const editorView = document.getElementById('editor-view');
       const reportView = document.getElementById('report-view');
+      const analyticsView = document.getElementById('analytics-view');
       const videoView = document.getElementById('video-view');
       const dashboardList = document.getElementById('dashboard-list');
       const editorShell = document.getElementById('editor-shell');
       const reportShell = document.getElementById('report-shell');
+      const analyticsShell = document.getElementById('analytics-shell');
       const videoShell = document.getElementById('video-shell');
       const createForm = document.getElementById('create-form');
+      const shell = document.querySelector('.studio-enterprise');
+      const navButtons = Array.from(document.querySelectorAll('[data-nav-view]'));
+      const dashboardSearch = document.getElementById('dashboard-search');
+      const dashboardFilterButtons = Array.from(document.querySelectorAll('[data-dashboard-filter]'));
+      const dashboardStats = {
+        total: document.getElementById('dashboard-total'),
+        active: document.getElementById('dashboard-active'),
+        review: document.getElementById('dashboard-review'),
+        done: document.getElementById('dashboard-done'),
+      };
+      let dashboardFilter = 'Alle';
+      let dashboardQuery = '';
 
       const emptyIssue = () => ({ title: '', why: '', change: '', priority: 'Medium', effect: 'Flere henvendelser' });
 
@@ -332,6 +1427,7 @@ const recommendationOptions = [
 
       function saveState() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        renderDashboardStats();
       }
 
       function normalizeWebsite(value) {
@@ -409,70 +1505,550 @@ const recommendationOptions = [
       }
 
       function show(view) {
+        syncShellState(view);
         dashboardView.classList.toggle('hidden', view !== 'dashboard');
         createView.classList.toggle('hidden', view !== 'create');
         editorView.classList.toggle('hidden', view !== 'editor');
         reportView.classList.toggle('hidden', view !== 'report');
+        analyticsView.classList.toggle('hidden', view !== 'analytics');
         videoView.classList.toggle('hidden', view !== 'video');
         if (view === 'dashboard') renderDashboard();
         if (view === 'editor') renderEditor();
         if (view === 'report') renderReport();
+        if (view === 'analytics') renderAnalytics();
         if (view === 'video') renderVideoScript();
         if (view === 'report') {
           window.history.replaceState(null, '', '#rapport');
+        } else if (view === 'analytics') {
+          window.history.replaceState(null, '', '#rapporter');
         } else if (view === 'video') {
           window.history.replaceState(null, '', '#video-script');
-        } else if (window.location.hash === '#rapport' || window.location.hash === '#video-script') {
+        } else if (['#rapport', '#rapporter', '#video-script'].includes(window.location.hash)) {
           window.history.replaceState(null, '', window.location.pathname);
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       function statusTone(status) {
-        if (status === 'Færdig') return 'bg-accent-soft text-accent-dark border-accent/20';
-        if (status === 'Klar til review') return 'bg-white text-brand border-accent/28';
-        if (status === 'Under analyse') return 'bg-[#fff7e8] text-[#7a4b12] border-[#e4c98f]';
-        return 'bg-surface text-muted border-border-soft';
+        if (status === 'Færdig') return 'status-chip--done';
+        if (status === 'Klar til review') return 'status-chip--review';
+        if (status === 'Under analyse') return 'status-chip--active';
+        return 'status-chip--new';
+      }
+
+      function syncShellState(view) {
+        if (shell) shell.dataset.view = view;
+        navButtons.forEach((button) => {
+          button.classList.toggle('is-active', button.dataset.navView === view);
+        });
+      }
+
+      function renderDashboardStats() {
+        const checks = state?.checks || [];
+        const values = {
+          total: checks.length,
+          active: checks.filter((check) => check.status === 'Under analyse').length,
+          review: checks.filter((check) => check.status === 'Klar til review').length,
+          done: checks.filter((check) => check.status === 'Færdig').length,
+        };
+
+        Object.entries(values).forEach(([key, value]) => {
+          if (dashboardStats[key]) dashboardStats[key].textContent = String(value);
+        });
+      }
+
+      function syncDashboardFilters() {
+        dashboardFilterButtons.forEach((button) => {
+          button.classList.toggle('is-active', button.dataset.dashboardFilter === dashboardFilter);
+        });
+      }
+
+      function matchesDashboardQuery(check) {
+        const query = dashboardQuery.trim().toLowerCase();
+        if (!query) return true;
+        const client = check.client || {};
+        return [
+          client.name,
+          client.website,
+          client.industry,
+          client.location,
+          check.status,
+          check.recommendation,
+        ].some((value) => String(value || '').toLowerCase().includes(query));
       }
 
       function renderDashboard() {
         if (!dashboardList) return;
+        renderDashboardStats();
+        syncDashboardFilters();
         if (!state.checks.length) {
           dashboardList.innerHTML = `
-            <div class="rounded-[1.25rem] border border-dashed border-accent/28 bg-accent-soft/38 p-8 text-center">
-              <h3 class="font-display text-3xl font-medium text-brand">Ingen hjemmeside-tjek endnu.</h3>
-              <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted">Opret første tjek, så kan du udfylde scores, problemer, hero-forslag og anbefalet næste skridt manuelt.</p>
-              <button type="button" data-action="show-create" class="mt-6 inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:border-accent-dark hover:bg-accent-dark">Opret første tjek</button>
+            <div class="enterprise-empty">
+              <p class="enterprise-label">Tom pipeline</p>
+              <h3>Ingen hjemmeside-tjek endnu</h3>
+              <p>Opret første tjek, så kan du udfylde scores, problemer, hero-forslag og anbefalet næste skridt manuelt.</p>
+              <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary mt-6">Opret første tjek</button>
             </div>`;
           return;
         }
 
-        const rows = state.checks
+        const sortedChecks = state.checks
           .slice()
-          .sort((a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt)))
-          .map((check) => `
-            <article class="grid gap-4 rounded-[1.15rem] border border-border-soft bg-surface/72 p-5 md:grid-cols-[1.1fr_1fr_0.8fr_0.7fr_auto] md:items-center">
-              <div>
-                <h3 class="font-display text-2xl font-medium tracking-tight text-brand">${escapeHtml(check.client?.name || 'Uden navn')}</h3>
-                <a href="${escapeHtml(check.client?.website || '#')}" target="_blank" rel="noreferrer" class="mt-1 block break-all text-sm font-semibold text-accent-dark underline decoration-accent/35 underline-offset-4">${escapeHtml(check.client?.website || 'Intet website')}</a>
-              </div>
-              <div class="text-sm leading-relaxed text-muted">
-                <div><span class="font-semibold text-brand/74">Branche:</span> ${escapeHtml(check.client?.industry || '—')}</div>
-                <div><span class="font-semibold text-brand/74">Lokation:</span> ${escapeHtml(check.client?.location || '—')}</div>
-              </div>
-              <div>
-                <span class="inline-flex rounded-full border px-3 py-1.5 text-xs font-bold ${statusTone(check.status)}">${escapeHtml(check.status || 'Ikke startet')}</span>
-              </div>
-              <div class="text-sm text-muted">${formatDate(check.createdAt)}</div>
-              <div class="flex flex-wrap gap-2">
-                <button type="button" data-action="open-check" data-id="${escapeHtml(check.id)}" class="inline-flex items-center justify-center rounded-[0.85rem] border border-accent bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:border-accent-dark hover:bg-accent-dark">Åbn tjek</button>
-                <button type="button" data-action="show-report" data-id="${escapeHtml(check.id)}" class="inline-flex items-center justify-center rounded-[0.85rem] border border-border-soft bg-white px-4 py-2.5 text-sm font-semibold text-brand transition hover:border-accent/35 hover:bg-accent-soft">Rapport</button>
-              </div>
-            </article>
+          .sort((a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt)));
+        const filteredChecks = sortedChecks.filter((check) => {
+          const matchesStatus = dashboardFilter === 'Alle' || check.status === dashboardFilter;
+          return matchesStatus && matchesDashboardQuery(check);
+        });
+
+        if (!filteredChecks.length) {
+          dashboardList.innerHTML = `
+            <div class="enterprise-empty">
+              <p class="enterprise-label">Ingen match</p>
+              <h3>Ingen sager matcher filteret</h3>
+              <p>Prøv en bredere søgning, eller skift statusfilteret tilbage til alle sager.</p>
+            </div>`;
+          return;
+        }
+
+        const rows = filteredChecks.map((check) => `
+            <tr>
+              <td class="crm-primary-cell">
+                <strong>${escapeHtml(check.client?.name || 'Uden navn')}</strong>
+                <a href="${escapeHtml(check.client?.website || '#')}" target="_blank" rel="noreferrer">${escapeHtml(check.client?.website || 'Intet website')}</a>
+              </td>
+              <td>
+                <div>${escapeHtml(check.client?.industry || '—')}</div>
+                <div class="crm-muted-line">${escapeHtml(check.client?.location || '—')}</div>
+              </td>
+              <td><span class="status-chip ${statusTone(check.status)}">${escapeHtml(check.status || 'Ikke startet')}</span></td>
+              <td class="crm-muted-line">${formatDate(check.updatedAt || check.createdAt)}</td>
+              <td class="crm-muted-line">${escapeHtml(check.recommendation || '—')}</td>
+              <td>
+                <div class="crm-actions">
+                  <button type="button" data-action="open-check" data-id="${escapeHtml(check.id)}" class="enterprise-button enterprise-button-primary crm-action">Åbn</button>
+                  <button type="button" data-action="show-report" data-id="${escapeHtml(check.id)}" class="enterprise-button enterprise-button-secondary crm-action">Rapport</button>
+                </div>
+              </td>
+            </tr>
           `)
           .join('');
 
-        dashboardList.innerHTML = `<div class="grid gap-3">${rows}</div>`;
+        dashboardList.innerHTML = `
+          <div class="crm-table-shell">
+            <div class="crm-table-scroll">
+              <table class="crm-enterprise-table">
+                <thead>
+                  <tr>
+                    <th>Kunde</th>
+                    <th>Segment</th>
+                    <th>Status</th>
+                    <th>Opdateret</th>
+                    <th>Anbefaling</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>
+          </div>`;
+      }
+
+      function average(values) {
+        const cleanValues = values.map(Number).filter((value) => Number.isFinite(value));
+        if (!cleanValues.length) return 0;
+        return Math.round(cleanValues.reduce((sum, value) => sum + value, 0) / cleanValues.length);
+      }
+
+      function averageCheckScore(check) {
+        return average([
+          clampScore(check?.scores?.clarity),
+          clampScore(check?.scores?.trust),
+          clampScore(check?.scores?.visibility),
+        ]);
+      }
+
+      function scoreAverages(checks) {
+        return {
+          clarity: average(checks.map((check) => clampScore(check.scores?.clarity))),
+          trust: average(checks.map((check) => clampScore(check.scores?.trust))),
+          visibility: average(checks.map((check) => clampScore(check.scores?.visibility))),
+        };
+      }
+
+      function averageTotalScore(checks) {
+        return average(checks.map(averageCheckScore));
+      }
+
+      function industryName(check) {
+        return cleanText(check?.client?.industry) || 'Ikke angivet';
+      }
+
+      function industryGroups(checks) {
+        const groups = new Map();
+        checks.forEach((check) => {
+          const name = industryName(check);
+          const key = name.toLowerCase();
+          const group = groups.get(key) || { name, checks: [] };
+          group.checks.push(check);
+          groups.set(key, group);
+        });
+        return Array.from(groups.values())
+          .map((group) => {
+            const averages = scoreAverages(group.checks);
+            const recommendationCounts = countBy(group.checks, (check) => check.recommendation || 'Ikke valgt');
+            return {
+              ...group,
+              averages,
+              averageScore: averageTotalScore(group.checks),
+              primaryWeakness: weakestScoreLabel(averages),
+              topRecommendation: topCount(recommendationCounts)?.label || 'Ikke valgt',
+            };
+          })
+          .sort((a, b) => b.checks.length - a.checks.length || b.averageScore - a.averageScore);
+      }
+
+      function countBy(items, getKey) {
+        return items.reduce((map, item) => {
+          const key = cleanText(getKey(item)) || 'Ikke angivet';
+          map.set(key, (map.get(key) || 0) + 1);
+          return map;
+        }, new Map());
+      }
+
+      function topCount(map) {
+        return Array.from(map.entries())
+          .map(([label, value]) => ({ label, value }))
+          .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, 'da-DK'))[0] || null;
+      }
+
+      function weakestScoreLabel(averages) {
+        const labels = [
+          { key: 'clarity', label: 'Klarhed', value: averages.clarity },
+          { key: 'trust', label: 'Tillid', value: averages.trust },
+          { key: 'visibility', label: 'Handling', value: averages.visibility },
+        ];
+        return labels.sort((a, b) => a.value - b.value)[0]?.label || 'Klarhed';
+      }
+
+      function percentage(value, max) {
+        if (!max) return 0;
+        return Math.max(0, Math.min(100, Math.round((Number(value || 0) / max) * 100)));
+      }
+
+      function renderKpi(label, value, note) {
+        return `
+          <article class="analytics-kpi">
+            <span>${escapeHtml(label)}</span>
+            <strong>${escapeHtml(value)}</strong>
+            <small>${escapeHtml(note)}</small>
+          </article>`;
+      }
+
+      function renderChartRow(label, value, max, suffix = '') {
+        const width = percentage(value, max);
+        return `
+          <div class="chart-row">
+            <span>${escapeHtml(label)}</span>
+            <span class="chart-track"><span class="chart-fill" style="--value: ${width}%"></span></span>
+            <span class="chart-value">${escapeHtml(value)}${escapeHtml(suffix)}</span>
+          </div>`;
+      }
+
+      function renderStatusFunnel(checks) {
+        const max = Math.max(1, checks.length);
+        return `
+          <div class="pipeline-funnel">
+            ${STATUS_OPTIONS.map((status) => {
+              const count = checks.filter((check) => check.status === status).length;
+              return `
+                <div class="pipeline-step">
+                  <span class="pipeline-step-name">${escapeHtml(status)}</span>
+                  <span class="chart-track"><span class="chart-fill" style="--value: ${percentage(count, max)}%"></span></span>
+                  <span class="chart-value">${count}</span>
+                </div>`;
+            }).join('')}
+          </div>`;
+      }
+
+      function renderRecommendationBars(checks) {
+        const counts = RECOMMENDATION_OPTIONS.map((recommendation) => ({
+          label: recommendation,
+          value: checks.filter((check) => check.recommendation === recommendation).length,
+        }));
+        const max = Math.max(1, ...counts.map((item) => item.value));
+        return `<div class="chart-stack">${counts.map((item) => renderChartRow(item.label, item.value, max)).join('')}</div>`;
+      }
+
+      function renderIndustryBars(groups) {
+        const max = Math.max(1, ...groups.map((group) => group.averageScore));
+        return `
+          <div class="chart-stack">
+            ${groups.slice(0, 8).map((group) => renderChartRow(`${group.name} (${group.checks.length})`, group.averageScore, max, '')).join('')}
+          </div>`;
+      }
+
+      function renderHeatmap(groups) {
+        if (!groups.length) {
+          return '<p class="mt-4 text-sm leading-relaxed text-muted">Der mangler branchedata, før heatmap kan vises.</p>';
+        }
+        const columns = [
+          ['clarity', 'Klarhed'],
+          ['trust', 'Tillid'],
+          ['visibility', 'Handling'],
+        ];
+        const rows = groups.slice(0, 7).map((group) => `
+          <div class="heatmap-label">${escapeHtml(group.name)}<span>${group.checks.length} sag${group.checks.length === 1 ? '' : 'er'}</span></div>
+          ${columns.map(([key]) => {
+            const score = group.averages[key];
+            const heat = (0.08 + ((100 - score) / 100) * 0.34).toFixed(2);
+            return `<div class="heatmap-cell" style="--heat: ${heat}">${score}</div>`;
+          }).join('')}
+        `).join('');
+        return `
+          <div class="heatmap mt-4">
+            <div class="heatmap-heading">Branche</div>
+            ${columns.map(([, label]) => `<div class="heatmap-heading">${escapeHtml(label)}</div>`).join('')}
+            ${rows}
+          </div>`;
+      }
+
+      function renderReportTypeCards() {
+        const reportTypes = [
+          ['Drift', 'Pipeline-overblik', 'Hvad skal håndteres i dag, og hvor stopper sagerne?'],
+          ['Kunde', 'Kundeanalyse', 'Klarhed, tillid, handling og konkrete næste skridt.'],
+          ['Marked', 'Branche-benchmark', 'Sammenligner scores og svagheder på tværs af brancher.'],
+          ['Salg', 'Produkt-fit', 'Matcher brancher og sager til Hjemmeside-fix eller Visuelt løft.'],
+          ['Ledelse', 'Månedlig Intelligence', 'Opsummerer mønstre, muligheder og fokus for næste måned.'],
+        ];
+        return `
+          <div class="report-type-grid">
+            ${reportTypes.map(([tag, title, description]) => `
+              <article class="report-type-card">
+                <div>
+                  <small>${escapeHtml(tag)}</small>
+                  <strong class="mt-3 block">${escapeHtml(title)}</strong>
+                  <span>${escapeHtml(description)}</span>
+                </div>
+              </article>`).join('')}
+          </div>`;
+      }
+
+      function radarPoint(index, score, radius = 34, center = 50) {
+        const angle = (-90 + index * 120) * (Math.PI / 180);
+        const distance = radius * (clampScore(score) / 100);
+        return [center + Math.cos(angle) * distance, center + Math.sin(angle) * distance];
+      }
+
+      function renderRadarChart(check) {
+        const scores = [
+          clampScore(check?.scores?.clarity),
+          clampScore(check?.scores?.trust),
+          clampScore(check?.scores?.visibility),
+        ];
+        const polygon = scores.map((score, index) => radarPoint(index, score).map((value) => value.toFixed(2)).join(',')).join(' ');
+        const rings = [34, 23, 12].map((radius) => [0, 1, 2].map((index) => radarPoint(index, 100, radius).map((value) => value.toFixed(2)).join(',')).join(' '));
+        return `
+          <svg class="radar-chart" viewBox="0 0 100 100" role="img" aria-label="Radar-diagram for kundeanalyse">
+            ${rings.map((points) => `<polygon points="${points}" fill="none" stroke="rgba(89,119,157,0.2)" stroke-width="0.8"></polygon>`).join('')}
+            <line x1="50" y1="50" x2="50" y2="16" stroke="rgba(89,119,157,0.22)" stroke-width="0.7"></line>
+            <line x1="50" y1="50" x2="79.44" y2="67" stroke="rgba(89,119,157,0.22)" stroke-width="0.7"></line>
+            <line x1="50" y1="50" x2="20.56" y2="67" stroke="rgba(89,119,157,0.22)" stroke-width="0.7"></line>
+            <polygon points="${polygon}" fill="rgba(47,111,178,0.28)" stroke="var(--crm-blue-800)" stroke-width="1.6"></polygon>
+            <circle cx="50" cy="16" r="1.8" fill="var(--crm-blue-800)"></circle>
+            <circle cx="79.44" cy="67" r="1.8" fill="var(--crm-blue-800)"></circle>
+            <circle cx="20.56" cy="67" r="1.8" fill="var(--crm-blue-800)"></circle>
+            <text x="50" y="8" text-anchor="middle">Klarhed</text>
+            <text x="91" y="73" text-anchor="end">Tillid</text>
+            <text x="9" y="73" text-anchor="start">Handling</text>
+          </svg>
+          <div class="radar-score-strip">
+            <span>Klarhed <strong>${scores[0]}</strong></span>
+            <span>Tillid <strong>${scores[1]}</strong></span>
+            <span>Handling <strong>${scores[2]}</strong></span>
+          </div>`;
+      }
+
+      function renderInsights(checks, groups) {
+        const averages = scoreAverages(checks);
+        const opportunity = groups.slice().sort((a, b) => a.averageScore - b.averageScore || b.checks.length - a.checks.length)[0];
+        const strongest = groups.slice().sort((a, b) => b.averageScore - a.averageScore || b.checks.length - a.checks.length)[0];
+        const topRecommendation = topCount(countBy(checks, (check) => check.recommendation || 'Ikke valgt'));
+        const reviewCount = checks.filter((check) => check.status === 'Klar til review').length;
+        const lowestLabel = weakestScoreLabel(averages);
+        const insights = [
+          {
+            title: 'Næste salgsfokus',
+            body: opportunity
+              ? `${opportunity.name} har lavest gennemsnitlig score (${opportunity.averageScore}). Svageste område er ${opportunity.primaryWeakness.toLowerCase()}, og top-fit er ${opportunity.topRecommendation}.`
+              : 'Der mangler data nok til at vælge en branche endnu.',
+          },
+          {
+            title: 'Produkt-fit lige nu',
+            body: topRecommendation
+              ? `${topRecommendation.label} er den mest almindelige anbefaling på tværs af sagerne (${topRecommendation.value}).`
+              : 'Der mangler anbefalinger på sagerne.',
+          },
+          {
+            title: 'QA-risiko',
+            body: reviewCount
+              ? `${reviewCount} sag${reviewCount === 1 ? '' : 'er'} ligger klar til review og bør kvalitetssikres før kundeudsendelse.`
+              : 'Der er ingen sager i QA-kø lige nu.',
+          },
+          {
+            title: 'Markedssvaghed',
+            body: `På tværs af alle sager er ${lowestLabel.toLowerCase()} det svageste område. Brug det i næste månedlige prioritering.`,
+          },
+          {
+            title: 'Stærkeste branche',
+            body: strongest
+              ? `${strongest.name} performer bedst i datasættet med gennemsnit ${strongest.averageScore}. Brug den som benchmark mod svagere brancher.`
+              : 'Der mangler branchegrupper endnu.',
+          },
+        ];
+        return `<div class="insight-list">${insights.map((item) => `
+          <article class="insight-item">
+            <strong>${escapeHtml(item.title)}</strong>
+            <span>${escapeHtml(item.body)}</span>
+          </article>`).join('')}</div>`;
+      }
+
+      function renderProblemSignals(checks) {
+        const completeIssues = checks.flatMap((check) => getCompleteIssues(check));
+        const effectCounts = countBy(completeIssues, (issue) => issue.effect || 'Ikke angivet');
+        const items = Array.from(effectCounts.entries())
+          .map(([label, value]) => ({ label, value }))
+          .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, 'da-DK'));
+        if (!items.length) {
+          return '<p class="mt-4 text-sm leading-relaxed text-muted">Der mangler færdige problemfelter, før problemområder kan samles på tværs.</p>';
+        }
+        const max = Math.max(1, ...items.map((item) => item.value));
+        return `<div class="chart-stack mt-4">${items.map((item) => renderChartRow(item.label, item.value, max)).join('')}</div>`;
+      }
+
+      function renderIndustryFit(groups) {
+        if (!groups.length) {
+          return '<p class="mt-4 text-sm leading-relaxed text-muted">Tilføj branche og anbefalinger på sagerne, så kan CRM’et vise produkt-fit pr. branche.</p>';
+        }
+        return `
+          <div class="insight-list">
+            ${groups.slice(0, 6).map((group) => `
+              <article class="insight-item">
+                <strong>${escapeHtml(group.name)} -> ${escapeHtml(group.topRecommendation)}</strong>
+                <span>${group.checks.length} sag${group.checks.length === 1 ? '' : 'er'} · gennemsnit ${group.averageScore} · svagest på ${escapeHtml(group.primaryWeakness.toLowerCase())}</span>
+              </article>`).join('')}
+          </div>`;
+      }
+
+      function renderAnalytics() {
+        if (!analyticsShell) return;
+        const checks = state.checks.slice();
+        const groups = industryGroups(checks);
+        const activeCheck = getActiveCheck() || checks[0] || null;
+        const readinessCount = checks.filter((check) => checkReportReadiness(check).ready).length;
+        const avgScore = averageTotalScore(checks);
+        const activeCount = checks.filter((check) => ['Under analyse', 'Klar til review'].includes(check.status)).length;
+
+        if (!checks.length) {
+          analyticsShell.innerHTML = `
+            <div class="enterprise-panel !mt-0">
+              <div class="enterprise-section-head">
+                <div>
+                  <p class="enterprise-label">Rapporter</p>
+                  <h2>Drift, kundeanalyse og brancheintelligens</h2>
+                  <p>Rapportmodulet er klar. Når der kommer sager i CRM’et, kan det vise pipeline, brancher, produkt-fit og visuelle diagrammer.</p>
+                </div>
+                <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary">Opret første sag</button>
+              </div>
+              <div class="mt-5">${renderReportTypeCards()}</div>
+              <div class="enterprise-empty mt-5">
+                <p class="enterprise-label">Ingen rapportdata</p>
+                <h3>Opret eller importér sager først</h3>
+                <p>Så beregner CRM’et automatisk scores på tværs af brancher, anbefalinger og problemområder.</p>
+              </div>
+            </div>`;
+          return;
+        }
+
+        analyticsShell.innerHTML = `
+          <div class="analytics-shell">
+            <section class="enterprise-panel !mt-0">
+              <div class="enterprise-section-head">
+                <div>
+                  <p class="enterprise-label">Rapporter</p>
+                  <h2>Drift, kundeanalyse og brancheintelligens</h2>
+                  <p>Et samlet beslutningslag oven på CRM’et: hvad kræver handling, hvilke brancher har samme mønstre, og hvor passer SiteDok-produkterne bedst?</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" data-action="show-dashboard" class="enterprise-button enterprise-button-secondary">Til dashboard</button>
+                  <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary">Ny sag</button>
+                </div>
+              </div>
+
+              <div class="mt-5">${renderReportTypeCards()}</div>
+
+              <div class="analytics-kpi-grid mt-5">
+                ${renderKpi('Sager', checks.length, `${activeCount} aktive`)}
+                ${renderKpi('Gns. score', avgScore || '—', 'Klarhed/tillid/handling')}
+                ${renderKpi('Brancher', groups.length, 'Med CRM-data')}
+                ${renderKpi('Klar til kunde', readinessCount, 'Rapport-klar')}
+              </div>
+            </section>
+
+            <div class="analytics-layout">
+              <div class="analytics-grid">
+                <article class="analytics-card">
+                  <p class="enterprise-label">1. Daglig drift</p>
+                  <h3 class="mt-2">Pipeline-overblik</h3>
+                  <p class="mt-2">Viser hvor sagerne ligger, så morgenrunden kan starte med de sager der kræver næste handling.</p>
+                  <div class="mt-5">${renderStatusFunnel(checks)}</div>
+                </article>
+
+                <article class="analytics-card">
+                  <p class="enterprise-label">3. Brancheanalyse</p>
+                  <h3 class="mt-2">Branche-benchmark</h3>
+                  <p class="mt-2">Gennemsnitlig website-score pr. branche. Brug den til at se hvor markedet er svagest.</p>
+                  <div class="mt-5">${renderIndustryBars(groups)}</div>
+                  <p class="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-accent-dark">Problem-heatmap</p>
+                  <p class="mt-2">Mørkere blå felter betyder lavere score og større forbedringspotentiale.</p>
+                  ${renderHeatmap(groups)}
+                </article>
+
+                <article class="analytics-card">
+                  <p class="enterprise-label">4. Produkt-fit</p>
+                  <h3 class="mt-2">Hvilke ydelser passer bedst?</h3>
+                  <p class="mt-2">Samler anbefalinger på tværs af sager, så du kan se hvor Hjemmeside-fix og Visuelt løft naturligt dukker op.</p>
+                  <div class="mt-5">${renderRecommendationBars(checks)}</div>
+                  ${renderIndustryFit(groups)}
+                </article>
+              </div>
+
+              <aside class="analytics-grid">
+                <article class="analytics-card radar-card">
+                  <div>
+                    <p class="enterprise-label">2. Kundeanalyse</p>
+                    <h3 class="mt-2">${escapeHtml(activeCheck?.client?.name || 'Aktiv sag')}</h3>
+                    <p class="mt-2">${escapeHtml(activeCheck?.client?.industry || 'Branche mangler')} · ${escapeHtml(activeCheck?.recommendation || 'Anbefaling mangler')}</p>
+                  </div>
+                  ${activeCheck ? renderRadarChart(activeCheck) : ''}
+                  <button type="button" data-action="back-to-editor" class="enterprise-button enterprise-button-secondary">Åbn aktiv sag</button>
+                </article>
+
+                <article class="analytics-card">
+                  <p class="enterprise-label">5. Intelligence</p>
+                  <h3 class="mt-2">Månedlig SiteDok Intelligence</h3>
+                  <p class="mt-2">Kort ledelsesrapport: hvor er markedet svagt, hvor ligger salgsfokus, og hvad skal prioriteres næste måned?</p>
+                  ${renderInsights(checks, groups)}
+                </article>
+
+                <article class="analytics-card">
+                  <p class="enterprise-label">Tværgående mønstre</p>
+                  <h3 class="mt-2">Hvad koster typisk henvendelser?</h3>
+                  <p class="mt-2">Samler de færdige problemkort efter forventet effekt på tværs af kunder og brancher.</p>
+                  ${renderProblemSignals(checks)}
+                </article>
+              </aside>
+            </div>
+          </div>`;
       }
 
       function inputField(label, path, options = {}) {
@@ -507,9 +2083,9 @@ const recommendationOptions = [
 
       function card(title, body, note = '') {
         return `
-          <section class="rounded-[1.25rem] border border-border-soft bg-white/76 p-5 shadow-[0_14px_36px_rgba(32,38,34,0.035)] md:p-6">
+          <section class="enterprise-editor-card">
             <div class="mb-5">
-              <h3 class="font-display text-3xl font-medium tracking-tight text-brand">${escapeHtml(title)}</h3>
+              <h3 class="text-3xl text-brand">${escapeHtml(title)}</h3>
               ${note ? `<p class="mt-2 text-sm leading-relaxed text-muted">${escapeHtml(note)}</p>` : ''}
             </div>
             ${body}
@@ -518,10 +2094,10 @@ const recommendationOptions = [
 
       function renderIssues(check) {
         return check.issues.map((issue, index) => `
-          <article class="rounded-[1.1rem] border border-border-soft bg-surface/72 p-4">
+          <article class="enterprise-issue-card">
             <div class="mb-4 flex items-center justify-between gap-3">
-              <h4 class="font-display text-2xl font-medium text-brand">Problem ${index + 1}</h4>
-              <span class="rounded-full border border-accent/18 bg-accent-soft px-3 py-1 text-xs font-bold text-accent-dark">Top 5</span>
+              <h4 class="text-2xl text-brand">Problem ${index + 1}</h4>
+              <span class="status-chip status-chip--done">Top 5</span>
             </div>
             <div class="grid gap-4 md:grid-cols-2">
               ${inputField('Titel', `issues.${index}.title`)}
@@ -573,7 +2149,7 @@ const recommendationOptions = [
           : 'Rapporten mangler stadig vigtige felter, før den bør sendes til kunden.';
         const rows = readiness.items.map((item) => `
           <li class="flex items-start gap-2 rounded-[0.85rem] border border-white/55 bg-white/62 px-3 py-2 text-sm font-semibold text-brand/78">
-            <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${item.ok ? 'bg-accent text-white' : 'bg-[#f1d9a3] text-[#755116]'}">${item.ok ? '✓' : '!'}</span>
+            <span class="mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center rounded-full px-1 text-[10px] ${item.ok ? 'bg-accent text-white' : 'bg-[#f1d9a3] text-[#755116]'}">${item.ok ? 'OK' : '!'}</span>
             <span>${escapeHtml(item.label)}</span>
           </li>
         `).join('');
@@ -602,11 +2178,11 @@ const recommendationOptions = [
         }
 
         editorShell.innerHTML = `
-          <div class="rounded-[1.45rem] border border-border-soft bg-surface/86 p-5 shadow-soft md:p-7">
+          <div class="enterprise-panel !mt-0 bg-surface/86">
             <div class="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Rapport-editor</p>
-                <h2 class="mt-3 font-display text-4xl font-medium tracking-tight text-brand md:text-5xl">${escapeHtml(check.client?.name || 'Hjemmeside-tjek')}</h2>
+                <h2 class="mt-3 font-sans text-4xl font-bold tracking-[-0.025em] text-brand md:text-5xl">${escapeHtml(check.client?.name || 'AI Audit')}</h2>
                 <p class="mt-2 break-all text-sm font-semibold text-accent-dark">${escapeHtml(check.client?.website || '')}</p>
                 <p class="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Gemmes automatisk i denne browser</p>
               </div>
@@ -719,15 +2295,15 @@ const recommendationOptions = [
         }
         const firstIssue = getCompleteIssues(check)[0];
         const firstIssueText = firstIssue ? ` Det første oplagte fokuspunkt er: ${escapeHtml(firstIssue.title)}.` : '';
-        return `Hjemmeside-tjekket peger på, at den største gevinst ligger i at gøre siden tydeligere, mere tillidsvækkende og lettere at handle på.${firstIssueText}<br><br>Start med de ændringer, der gør det nemmere for en ny besøgende at forstå ydelsen, mærke tryghed og tage næste skridt uden friktion.`;
+        return `AI Audit peger på, at den største gevinst ligger i at gøre virksomheden lettere at finde, dokumentere og vælge i en AI-agentens research.${firstIssueText}<br><br>Start med de ændringer, der gør det nemmere for agenten at forstå ydelsen, se beviser og pege kunden mod næste skridt uden friktion.`;
       }
 
       function recommendationExplanation(recommendation) {
         if (recommendation === 'Hjemmeside-fix') {
-          return 'Hjemmeside-tjekket viser, at den største gevinst ligger i at rette tekst, struktur og kontaktknapper, så siden bliver tydeligere og mere salgsorienteret.';
+          return 'AI Audit viser, at den største gevinst ligger i at rette tekst, struktur og kontaktknapper, så virksomheden bliver lettere at finde, dokumentere og vælge.';
         }
         if (recommendation === 'Visuelt løft') {
-          return 'Hjemmeside-tjekket viser, at førstehåndsindtryk, layout, billeder og professionelt udtryk bør styrkes for at skabe mere tillid.';
+          return 'AI Audit viser, at førstehåndsindtryk, layout, billeder og professionelt udtryk bør styrkes for at skabe mere tillid og bedre kildegrundlag.';
         }
         if (recommendation === 'Kun små tekstrettelser') {
           return 'Der er ikke nødvendigvis brug for en stor løsning. De vigtigste forbedringer kan starte med tydeligere tekst, stærkere kontaktknapper og bedre struktur.';
@@ -840,7 +2416,7 @@ const recommendationOptions = [
           reportShell.innerHTML = `
             <div class="rounded-[1.25rem] border border-border-soft bg-white/76 p-6">
               <h2 class="font-display text-3xl font-medium text-brand">Ingen rapport endnu.</h2>
-              <p class="mt-3 text-sm leading-relaxed text-muted">Opret et Hjemmeside-tjek først, så kan rapporten vises her.</p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en AI Audit først, så kan rapporten vises her.</p>
               <button type="button" data-action="show-create" class="mt-5 rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white">Opret tjek</button>
             </div>`;
           return;
@@ -882,8 +2458,8 @@ const recommendationOptions = [
             <section class="report-cover grid gap-8 rounded-[1.25rem] border border-border-soft bg-white/78 p-7 md:p-10">
               <div>
                 <p class="text-xs font-bold uppercase tracking-[0.28em] text-accent-dark">SiteDokAI</p>
-                <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-7xl">Hjemmeside-tjek</h1>
-                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting på hjemmesiden, som kan påvirke klarhed, tillid, handling og antallet af henvendelser.</p>
+                <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-7xl">AI Audit</h1>
+                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting, som kan påvirke om AI-agenten finder, forstår og anbefaler virksomheden.</p>
               </div>
               <div class="grid gap-3 rounded-[1.1rem] border border-accent/18 bg-accent-soft/55 p-5 md:grid-cols-2">
                 <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-accent-dark">Kunde</p><p class="mt-1 text-lg font-semibold text-brand">${escapeHtml(textOrFallback(client.name))}</p></div>
@@ -1064,7 +2640,7 @@ const recommendationOptions = [
       function renderVideoChecklist(status) {
         return status.items.map((item) => `
           <li class="flex items-start gap-2 rounded-[0.85rem] border border-white/55 bg-white/64 px-3 py-2 text-sm font-semibold text-brand/78">
-            <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${item.ok ? 'bg-accent text-white' : 'bg-[#f1d9a3] text-[#755116]'}">${item.ok ? '✓' : '!'}</span>
+            <span class="mt-0.5 inline-flex h-5 min-w-8 shrink-0 items-center justify-center rounded-full px-1 text-[10px] ${item.ok ? 'bg-accent text-white' : 'bg-[#f1d9a3] text-[#755116]'}">${item.ok ? 'OK' : '!'}</span>
             <span>${escapeHtml(item.label)}</span>
           </li>
         `).join('');
@@ -1078,7 +2654,7 @@ const recommendationOptions = [
           videoShell.innerHTML = `
             <div class="rounded-[1.25rem] border border-border-soft bg-white/76 p-6">
               <h2 class="font-display text-3xl font-medium text-brand">Intet video-script endnu.</h2>
-              <p class="mt-3 text-sm leading-relaxed text-muted">Opret et Hjemmeside-tjek først.</p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en AI Audit først.</p>
               <button type="button" data-action="show-create" class="mt-5 rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white">Opret tjek</button>
             </div>`;
           return;
@@ -1176,6 +2752,7 @@ const recommendationOptions = [
         if (action === 'show-dashboard') show('dashboard');
         if (action === 'show-create') show('create');
         if (action === 'back-to-editor') show('editor');
+        if (action === 'show-analytics') show('analytics');
         if (action === 'print-report') window.print();
         if (action === 'open-check') {
           activeId = actionTarget.dataset.id;
@@ -1253,7 +2830,7 @@ const recommendationOptions = [
         if (action === 'delete-check') {
           const check = getActiveCheck();
           if (!check) return;
-          if (!confirm(`Slet Hjemmeside-tjek for ${check.client?.name || 'kunden'}?`)) return;
+          if (!confirm(`Slet AI Audit for ${check.client?.name || 'kunden'}?`)) return;
           state.checks = state.checks.filter((item) => item.id !== check.id);
           activeId = state.checks[0]?.id || null;
           saveState();
@@ -1302,9 +2879,32 @@ const recommendationOptions = [
         });
       }
 
-      if ((window.location.hash === '#rapport' || window.location.hash === '#video-script') && state.checks.length) {
+      if (dashboardSearch) {
+        dashboardSearch.addEventListener('input', (event) => {
+          dashboardQuery = event.target.value || '';
+          renderDashboard();
+        });
+      }
+
+      dashboardFilterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          dashboardFilter = button.dataset.dashboardFilter || 'Alle';
+          renderDashboard();
+        });
+      });
+
+      renderDashboardStats();
+      syncShellState('dashboard');
+
+      if (['#rapport', '#rapporter', '#video-script'].includes(window.location.hash)) {
         if (!activeId && state.checks.length === 1) activeId = state.checks[0].id;
-        show(window.location.hash === '#video-script' ? 'video' : 'report');
+        if (window.location.hash === '#video-script') {
+          show('video');
+        } else if (window.location.hash === '#rapporter') {
+          show('analytics');
+        } else {
+          show('report');
+        }
       } else {
         renderDashboard();
       }

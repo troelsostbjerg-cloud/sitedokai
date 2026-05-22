@@ -1,5 +1,9 @@
 # SiteDokAI opslag — ny positionering
 
+Status: Draft til manuel brug. Ikke postet, sendt eller publiceret.
+
+Primær CTA for alle opslag: `Få gratis mini-tjek` → https://sitedokai.com/gratis-mini-tjek
+
 ## Opslag 1 — SEO er ikke nok
 SEO får folk ind på siden. Men hvad sker der bagefter?
 
@@ -11,7 +15,7 @@ Mere trafik hjælper ikke nok, hvis siden ikke får kunden til at forstå, stole
 
 SiteDokAI kigger på det øjeblik, hvor kunden allerede er på siden — og vurderer, hvad der kan få dem til at falde fra.
 
-CTA: Få et Hjemmeside-tjek og se, hvad der kan koste dig henvendelser.
+CTA: Få gratis mini-tjek og se, hvad der kan koste dig henvendelser: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 2 — Pæn hjemmeside er ikke nok
 Din hjemmeside kan godt se pæn ud — og stadig miste kunder.
@@ -26,7 +30,7 @@ Det er om kunden hurtigt forstår:
 
 Hvis de ting ikke står klart, kan selv en flot side skabe tvivl.
 
-CTA: Vi finder de 5 vigtigste ting, der kan holde kunder tilbage.
+CTA: Få gratis mini-tjek og se, hvad der kan holde kunder tilbage: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 3 — Kundens hjerne beslutter hurtigt
 Kunden beslutter sig hurtigere, end du tror.
@@ -41,7 +45,7 @@ Hvis svaret ikke er tydeligt, ryger de ofte videre til en konkurrent.
 
 Derfor handler en god hjemmeside ikke kun om udseende. Den skal hjælpe kunden med at træffe en tryg beslutning.
 
-CTA: SiteDokAI tjekker din hjemmeside med fokus på kundens oplevelse.
+CTA: Få gratis mini-tjek med fokus på kundens oplevelse: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 4 — Tvivl koster henvendelser
 Tvivl er dyrt på en hjemmeside.
@@ -53,7 +57,7 @@ De går bare videre.
 
 Et Hjemmeside-tjek viser, hvor siden skaber friktion — og hvad der bør rettes først.
 
-CTA: Få vist, hvor din hjemmeside skaber tvivl.
+CTA: Få gratis mini-tjek og se, hvor din hjemmeside skaber tvivl: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 5 — Mere trafik løser ikke alt
 Flere besøgende hjælper ikke, hvis siden ikke skaber tillid.
@@ -69,7 +73,7 @@ Men ofte ligger problemet i selve hjemmesiden:
 
 Før du bruger flere penge på annoncer eller SEO, kan det give mening at se på, hvad der sker med dem, der allerede besøger siden.
 
-CTA: Vi hjælper dig med at finde det, der bremser kunden.
+CTA: Få gratis mini-tjek og find det, der bremser kunden: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 6 — Hjemmesiden set med kundens øjne
 Hvornår har du sidst set din hjemmeside med kundens øjne?
@@ -83,7 +87,7 @@ Det, der virker oplagt for dig, kan være uklart for en ny besøgende.
 
 SiteDokAI gennemgår siden ud fra kundens første oplevelse — ikke ud fra intern viden.
 
-CTA: Få et konkret Hjemmeside-tjek med kundens oplevelse i centrum.
+CTA: Få gratis mini-tjek med kundens oplevelse i centrum: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 7 — Lokale servicevirksomheder
 For håndværkere, klinikker og lokale servicevirksomheder er tillid alt.
@@ -99,7 +103,7 @@ Små ting kan gøre stor forskel:
 - enkel kontakt
 - klart næste skridt
 
-CTA: SiteDokAI finder de ting, der svækker tilliden på din hjemmeside.
+CTA: Få gratis mini-tjek og se, hvad der svækker tilliden på din hjemmeside: https://sitedokai.com/gratis-mini-tjek
 
 ## Opslag 8 — Hjemmeside-tjekket
 Vi laver ikke bare en teknisk rapport.
@@ -114,4 +118,4 @@ Du får et praktisk Hjemmeside-tjek med:
 
 Målet er enkelt: Du skal vide, hvad der bør rettes først, så flere besøgende bliver til henvendelser.
 
-CTA: Få overblik over hvad der bør rettes først.
+CTA: Få gratis mini-tjek og få overblik over første skridt: https://sitedokai.com/gratis-mini-tjek

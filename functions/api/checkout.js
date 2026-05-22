@@ -2,8 +2,8 @@ import { ensureOrdersDb, insertCheckoutStarted } from "../_orders.js";
 
 const STRIPE_API_BASE = "https://api.stripe.com/v1";
 const WEBSITE_CHECK_AMOUNT_ORE = 249500;
-const DEFAULT_PRODUCT_NAME = "SiteDok Hjemmeside-tjek";
-const DEFAULT_PRODUCT_DESCRIPTION = "Hjemmeside-tjek med PDF-rapport, scores, top 5 problemer og kort video";
+const DEFAULT_PRODUCT_NAME = "SiteDok AI Audit + Client Room";
+const DEFAULT_PRODUCT_DESCRIPTION = "AI Audit med Client Room, AI-synlighed, konkurrenter, kilder og Executive PDF";
 const ALLOWED_PUBLIC_ORIGINS = new Set([
   "https://sitedokai.com",
   "https://www.sitedokai.com",
@@ -64,6 +64,26 @@ function normalizePublicOrigin(value) {
     return ALLOWED_PUBLIC_ORIGINS.has(url.origin) ? url.origin : "";
   } catch {
     return "";
+  }
+}
+
+function isAllowedRequestSource(value) {
+  const candidate = String(value || "").trim();
+  if (!candidate) {
+    return true;
+  }
+  return Boolean(normalizePublicOrigin(candidate));
+}
+
+function fallbackPathFromReferer(referer) {
+  if (!referer) {
+    return "/kontakt";
+  }
+
+  try {
+    return normalizeReturnPath(new URL(referer).pathname, "/kontakt");
+  } catch {
+    return "/kontakt";
   }
 }
 
@@ -196,7 +216,7 @@ function buildCustomerPayload(form) {
   params.set("metadata[website]", form.website);
   params.set("metadata[notes]", form.notes);
   params.set("metadata[source_page]", form.sourcePage);
-  params.set("metadata[product]", "hjemmeside_tjek");
+  params.set("metadata[product]", "ai_audit_client_room");
   return params;
 }
 
@@ -216,7 +236,7 @@ function buildCheckoutPayload({ customerId, publicOrigin, form, env }) {
   params.set("customer_update[address]", "auto");
   params.set("payment_method_types[0]", "card");
   params.set("billing_address_collection", "required");
-  params.set("phone_number_collection[enabled]", form.phone ? "false" : "true");
+  params.set("phone_number_collection[enabled]", "false");
   params.set("invoice_creation[enabled]", "true");
   params.set("metadata[company_name]", form.companyName);
   params.set("metadata[contact_name]", form.contactName);
@@ -224,7 +244,8 @@ function buildCheckoutPayload({ customerId, publicOrigin, form, env }) {
   params.set("metadata[website]", form.website);
   params.set("metadata[notes]", noteForMetadata);
   params.set("metadata[source_page]", form.sourcePage);
-  params.set("metadata[product]", "hjemmeside_tjek");
+  params.set("metadata[product]", "ai_audit_client_room");
+  params.set("metadata[product_label]", DEFAULT_PRODUCT_NAME);
   params.set("payment_intent_data[metadata][company_name]", form.companyName);
   params.set("payment_intent_data[metadata][contact_name]", form.contactName);
   params.set("payment_intent_data[metadata][email]", form.email);
@@ -242,7 +263,7 @@ function buildCheckoutPayload({ customerId, publicOrigin, form, env }) {
   params.set("invoice_creation[invoice_data][custom_fields][1][name]", "Kontakt");
   params.set("invoice_creation[invoice_data][custom_fields][1][value]", contactForInvoice);
 
-  const websiteCheckPriceId = env.STRIPE_WEBSITE_CHECK_PRICE_ID || env.STRIPE_AUDIT_PRICE_ID;
+  const websiteCheckPriceId = env.STRIPE_AUDIT_PRICE_ID || env.STRIPE_WEBSITE_CHECK_PRICE_ID;
   if (websiteCheckPriceId) {
     params.set("line_items[0][price]", websiteCheckPriceId);
   } else {
@@ -267,17 +288,36 @@ function readForm(formData, fallbackPath) {
     returnPath: normalizeReturnPath(formData.get("return_path"), fallbackPath),
     siteOrigin: normalizePublicOrigin(formData.get("site_origin")),
     acceptedTerms: formData.has("gdpr"),
+    botField: normalizeText(formData.get("website_extra"), 200),
   };
 }
 
 export async function onRequestPost(context) {
   const requestOrigin = new URL(context.request.url).origin;
   const referer = context.request.headers.get("referer");
-  const fallbackPath = referer ? new URL(referer).pathname : "/kontakt";
+  const fallbackPath = fallbackPathFromReferer(referer);
   const formData = await context.request.formData();
   const form = readForm(formData, fallbackPath);
   const publicOrigin = form.siteOrigin || requestOrigin;
   const backHref = `${publicOrigin}${form.returnPath}`;
+
+  if (!isAllowedRequestSource(context.request.headers.get("origin")) || !isAllowedRequestSource(referer)) {
+    return errorResponse(
+      403,
+      "Bestillingen kunne ikke startes",
+      "Checkout kan kun startes fra SiteDokAIs egne sider. Prøv igen fra sitedokai.com, eller skriv direkte til info@sitedokai.com.",
+      backHref,
+    );
+  }
+
+  if (form.botField) {
+    return errorResponse(
+      400,
+      "Bestillingen kunne ikke startes",
+      "Prøv igen, eller skriv direkte til info@sitedokai.com, så hjælper vi manuelt.",
+      backHref,
+    );
+  }
 
   if (!context.env.STRIPE_SECRET_KEY) {
     return errorResponse(

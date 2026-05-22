@@ -2,56 +2,88 @@
 import AbstractLandscapeVisual from './AbstractLandscapeVisual.astro';
 import Badge from './Badge.astro';
 import Button from './Button.astro';
+
+const firstStepItems = [
+  'AI-agentens opgaver testet',
+  'Client Room som overblik',
+  'ingen binding',
+];
 ---
 
 <section class="relative mx-auto max-w-[1480px] px-4 pb-6 pt-4 sm:px-6 lg:px-10">
-  <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/78 shadow-soft">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_8%,rgba(255,255,255,0.92),transparent_34%),radial-gradient(circle_at_82%_16%,rgba(223,232,220,0.62),transparent_28%)]"></div>
-    <div class="relative grid gap-8 px-6 py-10 md:grid-cols-[0.94fr_1.06fr] md:items-center md:px-12 md:py-12 lg:px-14">
+  <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/82 shadow-soft">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_13%_7%,rgba(255,255,255,0.94),transparent_34%),radial-gradient(circle_at_88%_10%,rgba(223,232,220,0.64),transparent_29%),linear-gradient(135deg,rgba(255,253,248,0.98),rgba(251,247,239,0.74))]"></div>
+    <div class="relative grid gap-9 px-6 py-10 md:grid-cols-[0.92fr_1.08fr] md:items-center md:px-12 md:py-12 lg:px-14">
       <div class="max-w-3xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Hjemmeside-tjek for små virksomheder</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Gratis AI-synlighedstjek</p>
         <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
-          Mister din hjemmeside kunder, når de først er landet på siden?
+          Find ud af om kunderne finder dig i AI.
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-          SiteDokAI finder de ting, der skaber tvivl, forvirring eller manglende tillid hos kunden — så flere af dine besøgende bliver til henvendelser.
+          SiteDokAI tester om AI-agenten finder, nævner og anbefaler din virksomhed i søgninger på ChatGPT, Gemini, Claude og Google AI. Start med et gratis tjek og se de vigtigste huller, før du køber noget.
         </p>
 
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button href="/gratis-mini-tjek">Få gratis mini-tjek</Button>
-          <Button href="/hjemmeside-tjek" variant="secondary">Se Hjemmeside-tjek til 2.495 kr.</Button>
+          <Button href="/gratis-mini-tjek">Få gratis AI-tjek</Button>
+          <Button href="/eksempel" variant="secondary">Se Client Room-demo</Button>
         </div>
 
-        <div class="mt-6 flex flex-col gap-3 text-muted sm:flex-row">
+        <div class="mt-6 grid gap-3 text-muted sm:grid-cols-3">
           <Badge>
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
               <path d="m6.8 12.4 3.1 3.1 7.3-7.8" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
               <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.25" opacity="0.55" />
             </svg>
-            Gratis første vurdering
+            Gratis første AI-tjek
           </Badge>
           <Badge tone="plain">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
               <path d="M6 8.5h12v10H6zM8.5 8.5V6h7v2.5" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round" />
               <path d="M8.5 13h7" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" />
             </svg>
-            Fuldt tjek fra 2.495 kr.
+            Testet på tværs
           </Badge>
           <Badge tone="plain">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.35" opacity="0.62" />
               <path d="M12 7.5V12l3 2.2" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            Svar inden 1–2 hverdage
+            Svar inden 1-2 hverdage
           </Badge>
         </div>
 
         <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
-          Mange virksomheder fokuserer på at få flere besøgende. Men hvis hjemmesiden er uklar, rodet eller ikke skaber tillid, hjælper mere trafik ikke nok. Vi tjekker din hjemmeside ud fra, hvordan en potentiel kunde faktisk oplever den.
+          Google Search og AI-assistenter bliver mere handlingsorienterede. Det gør spørgsmålet enkelt: bliver I valgt, citeret eller sprunget over, når kunden spørger en AI-agent om hjælp?
         </p>
       </div>
 
-      <AbstractLandscapeVisual />
+      <div class="relative min-w-0">
+        <AbstractLandscapeVisual />
+        <article class="hero-proof-card relative z-10 mt-5 rounded-[1.35rem] border border-accent/20 bg-white p-5 shadow-[0_22px_64px_rgba(32,38,34,0.08)] lg:absolute lg:bottom-7 lg:left-7 lg:mt-0 lg:max-w-[24rem]">
+          <div class="flex items-start justify-between gap-4 border-b border-border-soft pb-4">
+            <div>
+              <p class="text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-accent-dark">Dit første svar</p>
+              <h2 class="mt-2 font-display text-3xl font-medium leading-none tracking-tight text-brand">AI-tjek</h2>
+            </div>
+            <span class="rounded-[0.8rem] border border-accent/20 bg-accent-soft px-3 py-2 text-sm font-semibold leading-none text-accent-dark">0 kr.</span>
+          </div>
+          <ul class="mt-4 grid gap-3">
+            {firstStepItems.map((item) => (
+              <li class="flex items-center gap-3 text-sm font-medium leading-snug text-brand/78">
+                <span class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-[0.55rem] bg-accent-soft text-accent-dark">
+                  <svg viewBox="0 0 18 18" class="h-4 w-4" fill="none" aria-hidden="true">
+                    <path d="m4.6 9.3 2.5 2.5 6.1-6.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p class="mt-4 text-sm leading-relaxed text-muted">
+            Hvis hullet er tydeligt, kan du bagefter vælge AI Audit med Client Room til 2.495 kr.
+          </p>
+        </article>
+      </div>
     </div>
   </div>
 </section>

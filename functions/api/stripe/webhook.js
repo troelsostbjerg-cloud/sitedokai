@@ -1,5 +1,7 @@
 import { reconcileStripeSession } from "../../_orders.js";
 
+const STRIPE_SIGNATURE_TOLERANCE_SECONDS = 300;
+
 function bytesToHex(bytes) {
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
@@ -33,29 +35,58 @@ function timingSafeEqual(left, right) {
   return mismatch === 0;
 }
 
+function parseStripeSignatureHeader(signatureHeader) {
+  const parsed = {
+    timestamp: null,
+    signatures: [],
+  };
+
+  for (const chunk of signatureHeader.split(",")) {
+    const separatorIndex = chunk.indexOf("=");
+    if (separatorIndex === -1) {
+      continue;
+    }
+
+    const key = chunk.slice(0, separatorIndex).trim();
+    const value = chunk.slice(separatorIndex + 1).trim();
+    if (!key || !value) {
+      continue;
+    }
+
+    if (key === "t" && parsed.timestamp === null) {
+      parsed.timestamp = Number(value);
+    }
+
+    if (key === "v1") {
+      parsed.signatures.push(value);
+    }
+  }
+
+  return parsed;
+}
+
+function isRecentStripeTimestamp(timestamp) {
+  if (!Number.isFinite(timestamp)) {
+    return false;
+  }
+
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  return Math.abs(nowSeconds - timestamp) <= STRIPE_SIGNATURE_TOLERANCE_SECONDS;
+}
+
 async function verifyStripeSignature(secret, rawPayload, signatureHeader) {
   if (!signatureHeader) {
     return false;
   }
 
-  const parts = Object.fromEntries(
-    signatureHeader
-      .split(",")
-      .map((chunk) => chunk.trim())
-      .filter(Boolean)
-      .map((chunk) => {
-        const [key, value] = chunk.split("=", 2);
-        return [key, value];
-      }),
-  );
-
-  if (!parts.t || !parts.v1) {
+  const { timestamp, signatures } = parseStripeSignatureHeader(signatureHeader);
+  if (!isRecentStripeTimestamp(timestamp) || signatures.length === 0) {
     return false;
   }
 
-  const signedPayload = `${parts.t}.${rawPayload}`;
+  const signedPayload = `${timestamp}.${rawPayload}`;
   const expected = await hmacSha256(secret, signedPayload);
-  return timingSafeEqual(expected, parts.v1);
+  return signatures.some((signature) => timingSafeEqual(expected, signature));
 }
 
 function jsonResponse(status, payload) {

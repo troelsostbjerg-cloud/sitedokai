@@ -9,26 +9,41 @@ interface Props {
 const { ctaHref = '/gratis-mini-tjek#faa-gratis-mini-tjek', class: className = '' } = Astro.props;
 
 const observations = [
-  'Det første budskab bliver lettere at forstå.',
-  'Tillid vises tættere på næste skridt.',
-  'Kontaktvejen bliver mere konkret for kunden.',
+  {
+    area: 'AI-søgning',
+    title: 'Virksomheden mangler i kategori-søgninger',
+    text: 'Når kunden spørger efter en leverandør i branchen, nævner AI konkurrenter først.',
+  },
+  {
+    area: 'Kilder',
+    title: 'AI kan ikke se nok troværdige beviser',
+    text: 'Cases, anmeldelser og strukturerede fakta bør ligge tydeligere på websitet.',
+  },
+  {
+    area: 'Handling',
+    title: 'Der mangler en klar plan for at blive nævnt',
+    text: 'De første rettelser skal kobles direkte til de tabte spørgsmål og kilder.',
+  },
 ];
 ---
 
 <section class:list={['mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-10', className]} aria-labelledby="mini-tjek-preview-title">
-  <div class="grid gap-7 rounded-[1.6rem] border border-border-soft bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(237,243,234,0.76))] px-6 py-9 shadow-soft md:px-10 md:py-11 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+  <div class="grid gap-7 rounded-[1.6rem] border border-border-soft bg-[linear-gradient(135deg,rgba(255,253,248,0.97),rgba(237,243,234,0.78))] px-6 py-9 shadow-soft md:px-10 md:py-11 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
     <div>
-      <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Eksempel på mini-tjek</p>
+      <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Så konkret bliver det</p>
       <h2 id="mini-tjek-preview-title" class="mt-5 max-w-2xl font-display text-4xl font-medium leading-[1.02] tracking-tight text-brand md:text-5xl">
-        Sådan ser dit gratis mini-tjek ud.
+        Et AI-tjek skal vise præcis hvor I bliver fundet.
       </h2>
       <p class="mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-        Du får en kort vurdering med 3 konkrete observationer, så du hurtigt kan se, hvor hjemmesiden kan blive tydeligere, tryggere og lettere at handle på.
+        Du får ikke en lang teknisk rapport. Du får en kort vurdering af om AI kan finde, forstå og anbefale virksomheden i de spørgsmål, kunderne faktisk stiller.
       </p>
       <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-        <Button href={ctaHref}>Få gratis mini-tjek</Button>
-        <Button href="/hjemmeside-tjek" variant="secondary">Se Hjemmeside-tjek til 2.495 kr.</Button>
+        <Button href={ctaHref}>Få gratis AI-tjek</Button>
+        <Button href="/hjemmeside-tjek" variant="secondary">Se AI Audit til 2.495 kr.</Button>
       </div>
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-muted">
+        Hvis tjekket viser tydelige huller, anbefaler vi først da en fuld AI Audit med Client Room.
+      </p>
     </div>
 
     <div class="relative min-w-0">
@@ -36,17 +51,17 @@ const observations = [
       <article class="relative overflow-hidden rounded-[1.4rem] border border-border-soft bg-surface p-5 shadow-[0_22px_60px_rgba(32,38,34,0.08)] md:p-6">
         <div class="flex flex-col gap-4 border-b border-border-soft pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p class="text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-accent-dark">SiteDok gratis mini-tjek</p>
-            <h3 class="mt-2 font-display text-4xl font-medium leading-none tracking-tight text-brand">Din hjemmeside</h3>
+              <p class="text-[0.7rem] font-semibold uppercase tracking-[0.26em] text-accent-dark">SiteDokAI AI-tjek</p>
+              <h3 class="mt-2 font-display text-4xl font-medium leading-none tracking-tight text-brand">Første AI-status</h3>
           </div>
-          <span class="rounded-[0.8rem] border border-accent/18 bg-accent-soft px-3 py-2 text-sm font-semibold leading-none text-accent-dark">3 observationer</span>
+              <span class="rounded-[0.8rem] border border-accent/18 bg-accent-soft px-3 py-2 text-sm font-semibold leading-none text-accent-dark">Gratis</span>
         </div>
 
-        <div class="mt-5 grid gap-3 sm:grid-cols-3">
+        <div class="mt-5 grid gap-3 md:grid-cols-3">
           {[
-            ['Klarhed', 'Stærk retning'],
-            ['Tillid', 'Kan styrkes'],
-            ['Handling', 'Tydeligt næste skridt'],
+            ['Findbarhed', 'Ujævn'],
+            ['Anbefaling', 'Mangler bevis'],
+            ['Kilder', 'Kan styrkes'],
           ].map(([label, value]) => (
             <div class="rounded-[0.95rem] border border-border-soft bg-canvas/70 px-4 py-3">
               <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand/46">{label}</p>
@@ -58,16 +73,21 @@ const observations = [
         <div class="mt-5 grid gap-3">
           {observations.map((observation, index) => (
             <div class="grid grid-cols-[2.35rem_1fr] gap-3 rounded-[1rem] border border-accent/16 bg-[linear-gradient(135deg,rgba(237,243,234,0.86),rgba(255,253,248,0.9))] p-3.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-accent-dark text-sm font-bold text-white">{index + 1}</span>
-              <p class="text-sm leading-relaxed text-brand/78">{observation}</p>
+              <span class="flex h-9 w-9 items-center justify-center rounded-[0.8rem] bg-accent-dark text-sm font-bold text-white">{index + 1}</span>
+              <div>
+                <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent-dark">{observation.area}</p>
+                <h4 class="mt-1 font-display text-xl font-medium leading-tight tracking-tight text-brand">{observation.title}</h4>
+                <p class="mt-1 text-sm leading-relaxed text-brand/72">{observation.text}</p>
+              </div>
             </div>
           ))}
         </div>
 
         <div class="mt-5 rounded-[1rem] bg-brand px-4 py-4 text-white">
-          <p class="font-display text-2xl font-medium leading-tight">Anbefalet næste skridt</p>
+          <p class="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/54">Anbefalet næste skridt</p>
+          <p class="mt-2 font-display text-2xl font-medium leading-tight">Luk de tabte AI-søgninger først</p>
           <p class="mt-2 text-sm leading-relaxed text-white/72">
-            Hvis mini-tjekket viser tydelige problemer, er Hjemmeside-tjek til 2.495 kr. det naturlige næste skridt.
+            Hvis du vil have en fuld prioriteret plan, er AI Audit med Client Room til 2.495 kr. det naturlige næste skridt.
           </p>
         </div>
       </article>

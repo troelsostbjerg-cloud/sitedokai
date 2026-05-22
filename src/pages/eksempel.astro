@@ -2,134 +2,208 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ClientRoomPreview from '../components/ClientRoomPreview.astro';
 import '../styles/global.css';
 
-const scores = [
-  { label: 'Klarhed', value: '62/100', text: 'Det er for svært at se, hvem virksomheden hjælper, og hvad næste skridt er.' },
-  { label: 'Tillid', value: '58/100', text: 'Der mangler beviser, konkrete cases og tydelige tryghedssignaler tæt på CTAerne.' },
-  { label: 'Handling', value: '64/100', text: 'Næste skridt er nævnt, men kontaktvejen kan gøres tydeligere og mere tryg.' },
+const agentTaskRows = [
+  {
+    category: 'Discovery',
+    found: 'Ja',
+    shortlisted: 'Delvist',
+    recommended: 'Nej',
+    winner: 'Ingen klar vinder',
+    sources: ['Forside', 'Google-resultat', 'CVR'],
+    missing: 'Side der svarer på konkrete kundesituationer',
+    firstFix: 'Skriv en tydelig ydelsesblok med problem, område og næste skridt.',
+    tone: 'watch',
+  },
+  {
+    category: 'Shortlist',
+    found: 'Ja',
+    shortlisted: 'Nej',
+    recommended: 'Nej',
+    winner: 'Konkurrent med flere anmeldelser',
+    sources: ['Anmeldelser', 'Service-side', 'Google Business'],
+    missing: 'Sammenlignelige beviser og tydelige cases',
+    firstFix: 'Tilføj tre cases eller kundetyper med konkret resultat.',
+    tone: 'lost',
+  },
+  {
+    category: 'Comparison',
+    found: 'Ja',
+    shortlisted: 'Ja',
+    recommended: 'Nej',
+    winner: 'Konkurrent med bedre dokumentation',
+    sources: ['FAQ', 'Prisramme', 'Eksterne omtaler'],
+    missing: 'Forklaring af hvorfor kunden skal vælge jer frem for alternativet',
+    firstFix: 'Lav en valgsektion med prisramme, proces og trust-beviser.',
+    tone: 'lost',
+  },
+  {
+    category: 'Trust check',
+    found: 'Ja',
+    shortlisted: 'Delvist',
+    recommended: 'Delvist',
+    winner: 'Afventer bevis',
+    sources: ['CVR', 'Kontaktdata', 'LinkedIn'],
+    missing: 'Anmeldelser, opdaterede profiler og synlige referencer',
+    firstFix: 'Saml trust-signaler tæt på kontaktformular og ydelsessider.',
+    tone: 'watch',
+  },
+  {
+    category: 'Fit check',
+    found: 'Ja',
+    shortlisted: 'Ja',
+    recommended: 'Ja, for smal opgave',
+    winner: 'Virksomheden',
+    sources: ['Ydelsestekst', 'Om-side', 'Kontaktmulighed'],
+    missing: 'Mere præcist fravalg af kunder der ikke passer',
+    firstFix: 'Beskriv hvilke opgaver I er bedst til, og hvilke I ikke tager.',
+    tone: 'good',
+  },
+  {
+    category: 'Action',
+    found: 'Ja',
+    shortlisted: 'Ja',
+    recommended: 'Næsten',
+    winner: 'Virksomheden efter rettelser',
+    sources: ['CTA', 'Kontaktform', 'Service-side'],
+    missing: 'Lav-friktion CTA på de sider agenten bruger som bevis',
+    firstFix: 'Kobl hver vigtig side til en konkret handling: ring, book eller send link.',
+    tone: 'good',
+  },
 ];
 
-const problems = [
-  'Heroen siger for lidt om konkret værdi og målgruppe.',
-  'CTAerne konkurrerer med hinanden og bruger uklare formuleringer.',
-  'Serviceafsnittet forklarer aktiviteter, men ikke kundens udbytte.',
-  'Tillid ligger for langt nede på siden og er for generisk.',
-  'Visuelt udtryk virker pænere end før, men ikke så professionelt som ydelsen.',
+const proofStack = [
+  'Agentens kildegrundlag vises først, så kunden kan se hvad vurderingen bygger på.',
+  'Shortlist, anbefaling og fravalg skilles ad, fordi de kræver forskellige rettelser.',
+  'Konkurrenten der vinder vises kun som internt test-/demo-input, ikke som public kundedata.',
+  'PDF er en eksport af samme beslutningsrum, ikke hovedleverancen.',
 ];
 
-const fixes = [
-  'Ny hero med klar målgruppe, problem og primær handling.',
-  'Servicestruktur med 3 tydelige ydelser i kundens sprog.',
-  'Trust-sektion med cases, billeder, proces og lokale signaler.',
-  'Kort FAQ der fjerner de mest almindelige barrierer.',
-];
+const toneClass = {
+  good: 'border-accent/24 bg-accent-soft text-accent-dark',
+  watch: 'border-[#e0c489]/34 bg-[#fbf2df] text-[#7b6331]',
+  lost: 'border-[#e7c9b6] bg-[#fff4ee] text-[#965c36]',
+};
 ---
 
 <Layout
-  title="Eksempel på Hjemmeside-tjek | SiteDokAI"
-  description="Se et kort eksempel på hvordan SiteDokAI finder problemer med klarhed, tillid, handling, CTA, struktur og visuelt udtryk."
+  title="Client Room-demo | SiteDokAI"
+  description="Se hvordan SiteDokAI omsætter agent-opgaver, shortlist, kilder, konkurrenter og næste handlinger til et konkret Client Room."
+  canonical="/eksempel"
 >
   <Nav />
-  <main id="main">
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Eksempel</p>
-        <div class="mt-5 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div>
-            <h1 class="font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-              Et Hjemmeside-tjek viser hvad der får kunderne til at tøve.
+  <main id="main" class="bg-canvas text-brand">
+    <section class="relative mx-auto max-w-[1480px] px-4 pb-7 pt-4 sm:px-6 lg:px-10">
+      <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/82 shadow-soft">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_14%_10%,rgba(255,255,255,0.94),transparent_33%),radial-gradient(circle_at_84%_12%,rgba(223,232,220,0.7),transparent_31%)]"></div>
+        <div class="relative grid gap-10 px-6 py-10 md:grid-cols-[0.86fr_1.14fr] md:items-center md:px-12 md:py-14 lg:px-14">
+          <div class="max-w-3xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Client Room-demo</p>
+            <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.97] tracking-tight text-brand sm:text-6xl lg:text-7xl">
+              Se hvorfor agenten vælger eller fravælger jer.
             </h1>
-            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/70">
-              Eksemplet her er fiktivt, men viser formatet: en hurtig, konkret gennemgang af klarhed, tillid, handling, tekst, struktur, CTA og visuelt førstehåndsindtryk.
+            <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+              Client Room omsætter AI-agentens research til et læsbart beslutningsrum. Kunden kan se om virksomheden blev fundet, kom på shortlist, blev anbefalet, hvem der vandt i stedet, og hvilket bevis der mangler.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] bg-brand px-6 py-3.5 text-sm font-semibold text-white transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-brand-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px">
+                Få gratis AI-tjek
+              </a>
+              <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-dark active:translate-y-px">
+                Se AI Audit
+              </a>
+            </div>
+          </div>
+
+          <div class="rounded-[1.45rem] border border-border-soft bg-white/72 p-5 shadow-[0_24px_70px_rgba(32,38,34,0.08)]">
+            <div class="rounded-[1.15rem] border border-accent/20 bg-[linear-gradient(135deg,rgba(237,243,234,0.84),rgba(255,253,248,0.94))] p-5">
+              <p class="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-accent-dark">Fiktivt room-udsnit</p>
+              <h2 class="mt-3 font-display text-4xl font-medium leading-none tracking-tight text-brand">Agent-valg 61/100</h2>
+              <p class="mt-4 text-sm leading-relaxed text-muted">
+                Virksomheden bliver fundet, men mister shortlist og anbefaling, fordi konkurrenter har tydeligere beviser.
+              </p>
+              <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                <div class="rounded-[1rem] border border-border-soft bg-white/78 p-4">
+                  <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent-dark">Konkurrent vandt</p>
+                  <p class="mt-2 font-display text-2xl font-medium leading-tight text-brand">2 agent-opgaver</p>
+                </div>
+                <div class="rounded-[1rem] border border-border-soft bg-white/78 p-4">
+                  <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent-dark">Mangler bevis</p>
+                  <p class="mt-2 font-display text-2xl font-medium leading-tight text-brand">Cases + anmeldelser</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ClientRoomPreview />
+
+    <section class="mx-auto max-w-[1480px] px-4 py-8 sm:px-6 lg:px-10">
+      <div class="rounded-[1.6rem] border border-border-soft bg-white/64 p-5 shadow-soft md:p-8">
+        <div class="grid gap-7 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Agent-opgaver</p>
+            <h2 class="mt-5 max-w-xl font-display text-4xl font-medium leading-[1.03] tracking-tight text-brand md:text-5xl">
+              Beviset kommer for anbefalingen.
+            </h2>
+            <p class="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+              Tabellen er demo-copy. I et rigtigt Client Room kommer tallene fra testdata, offentlige kilder og manuelle QA-noter. Den er bygget til ikke-tekniske kunder, der skal kunne se situationen hurtigt.
             </p>
           </div>
-          <div class="rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] p-6">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Fiktiv virksomhed</p>
-            <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-brand">Nordkyst Byg</h2>
-            <p class="mt-3 text-sm leading-relaxed text-brand/70">
-              En lille håndværksvirksomhed med god faglighed, men en hjemmeside der gør det uklart, hvilke opgaver de helst vil have.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="border-b border-[#e6ddd1] bg-[#f6f1e8]">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <div class="grid gap-5 md:grid-cols-3">
-          {scores.map((score) => (
-            <article class="rounded-[1.8rem] border border-[#ddd1bf] bg-white p-7">
-              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">{score.label}</p>
-              <div class="mt-4 font-display text-4xl font-extrabold tracking-tight text-brand">{score.value}</div>
-              <p class="mt-4 text-sm leading-relaxed text-brand/70">{score.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+          <div class="grid gap-3">
+            {agentTaskRows.map((row) => (
+              <article class="rounded-[1.05rem] border border-border-soft bg-surface/82 p-4">
+                <div class="flex flex-col gap-3 border-b border-border-soft pb-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="rounded-[0.72rem] border border-accent/18 bg-accent-soft/66 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-accent-dark">{row.category}</span>
+                    <span class:list={['rounded-[0.72rem] border px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em]', toneClass[row.tone]]}>Vinder: {row.winner}</span>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-brand/56">
+                    <span>Fundet: {row.found}</span>
+                    <span>Shortlist: {row.shortlisted}</span>
+                    <span>Anbefalet: {row.recommended}</span>
+                  </div>
+                </div>
 
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:py-24 lg:grid-cols-[0.95fr_1.05fr]">
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Top 5 problemer</p>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-            Rapporten prioriterer det, der koster mest tillid først.
-          </h2>
-          <p class="mt-5 text-base leading-relaxed text-brand/70">
-            Pointen er ikke at lave en lang liste med småfejl. Pointen er at gøre de vigtigste beslutninger lette at tage.
-          </p>
-        </div>
-        <ol class="grid gap-3">
-          {problems.map((problem, index) => (
-            <li class="flex gap-4 rounded-[1.4rem] border border-[#e6ddd1] bg-[#fbf8f3] p-5">
-              <span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">{index + 1}</span>
-              <span class="text-base leading-relaxed text-brand/72">{problem}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-[#fcfaf6]">
-      <div class="mx-auto grid max-w-6xl gap-8 px-6 py-16 md:py-24 lg:grid-cols-2">
-        <article class="rounded-[2rem] border border-[#ddd1bf] bg-white p-8">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Ny hero-tekst</p>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand">
-            “Få renovering og tømrerarbejde gjort ordentligt, uden at projektet bliver tungt at styre.”
-          </h2>
-          <p class="mt-5 text-base leading-relaxed text-brand/70">
-            En god hero gør det straks tydeligt, hvem siden er for, hvilket problem den løser, og hvad besøgende skal gøre bagefter.
-          </p>
-        </article>
-
-        <article class="rounded-[2rem] border border-[#ddd1bf] bg-[#1f2a33] p-8 text-white">
-          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[#d9b27a]">Forslag til servicestruktur</p>
-          <div class="mt-5 grid gap-3">
-            {fixes.map((fix) => (
-              <div class="rounded-[1rem] border border-white/10 bg-white/6 px-4 py-3 text-sm leading-relaxed text-white/74">{fix}</div>
+                <div class="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_1fr]">
+                  <div>
+                    <p class="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand/45">Kilder brugt</p>
+                    <p class="mt-2 text-sm leading-relaxed text-brand/72">{row.sources.join(', ')}</p>
+                  </div>
+                  <div>
+                    <p class="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand/45">Manglende bevis</p>
+                    <p class="mt-2 text-sm leading-relaxed text-brand/72">{row.missing}</p>
+                  </div>
+                  <div>
+                    <p class="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-accent-dark">Rettes først</p>
+                    <p class="mt-2 text-sm font-medium leading-relaxed text-brand/78">{row.firstFix}</p>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section class="bg-white">
-      <div class="mx-auto max-w-5xl px-6 py-16 text-center md:py-24">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Næste skridt</p>
-        <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-          Vil du se, hvor din egen hjemmeside mister kunder?
-        </h2>
-        <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand/70">
-          Start med Hjemmeside-tjekket, hvis du vil have problemerne gjort konkrete, før du beslutter hvad der skal rettes.
-        </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-            Bestil Hjemmeside-tjek
-          </a>
-          <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
-            Se hvad du får
-          </a>
+    <section class="mx-auto max-w-[1480px] px-4 pb-16 pt-4 sm:px-6 md:pb-20 lg:px-10">
+      <div class="grid gap-7 rounded-[1.55rem] border border-border-soft bg-surface/74 p-6 shadow-soft md:p-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Leverance</p>
+          <h2 class="mt-5 font-display text-4xl font-medium leading-tight tracking-tight text-brand md:text-5xl">Det kunden kan handle på.</h2>
+        </div>
+        <div class="grid gap-3">
+          {proofStack.map((item, index) => (
+            <article class="grid grid-cols-[2.6rem_1fr] gap-3 rounded-[1rem] border border-border-soft bg-white/72 p-4">
+              <span class="flex h-10 w-10 items-center justify-center rounded-[0.8rem] bg-accent-soft text-sm font-semibold text-accent-dark">{index + 1}</span>
+              <p class="self-center text-sm font-medium leading-relaxed text-brand/78">{item}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

@@ -7,27 +7,35 @@ import '../styles/global.css';
 
 <Layout
   title="Gratis rapport er lukket | SiteDokAI"
-  description="SiteDokAIs gamle gratis rapport er lukket. Start i stedet med Hjemmeside-tjek, hvis du vil finde problemerne på din hjemmeside."
+  description="SiteDokAIs gamle gratis rapport er lukket. Start i stedet med et gratis AI-tjek, hvis du vil se om virksomheden bliver fundet i AI."
   noindex={true}
 >
   <Nav />
-  <main id="main">
-    <section class="bg-white">
-      <div class="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Opdateret ydelse</p>
-        <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-          Den gamle gratis rapport er lukket.
-        </h1>
-        <p class="mt-6 text-lg leading-relaxed text-brand/70">
-          SiteDokAI fokuserer nu på Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft. Hvis du vil finde de vigtigste problemer på din hjemmeside, er Hjemmeside-tjekket den rigtige start.
-        </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-            Bestil Hjemmeside-tjek
-          </a>
-          <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-7 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
-            Se hvad du får
-          </a>
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto max-w-[1480px] px-4 pb-16 pt-4 sm:px-6 lg:px-10">
+      <div class="relative overflow-hidden rounded-[1.8rem] border border-border-soft bg-surface/78 px-6 py-16 text-center shadow-soft md:px-10 md:py-24">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_16%_9%,rgba(255,255,255,0.94),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(223,232,220,0.66),transparent_30%)]"></div>
+        <div class="relative mx-auto max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Opdateret ydelse</p>
+          <h1 class="mt-5 text-balance font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-6xl">
+            Den gamle gratis rapport er lukket
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-muted">
+            SiteDokAI starter nu med et gratis AI-tjek: 3 konkrete observationer på AI-findbarhed, kilder og næste skridt. Hvis der er tydelige problemer, kan du bagefter vælge AI Audit + Client Room.
+          </p>
+          <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-7 py-3.5 text-sm font-semibold text-white transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              Få gratis AI-tjek
+            </a>
+            <a href="/hjemmeside-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-border-soft bg-white px-7 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/35 hover:bg-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              Se AI Audit
+            </a>
+          </div>
+          <div class="mx-auto mt-8 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
+            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Gratis første vurdering</div>
+            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Svar inden 1–2 hverdage</div>
+            <div class="rounded-[1rem] border border-accent/18 bg-white/64 px-4 py-3 text-sm leading-relaxed text-brand/74">Ingen salgsmøde kræves</div>
+          </div>
         </div>
       </div>
     </section>

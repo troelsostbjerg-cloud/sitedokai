@@ -7,33 +7,33 @@ const { class: className = '' } = Astro.props;
 
 const proofs = [
   {
-    title: 'Se før du køber',
-    text: 'Du får et konkret eksempel på formatet: kort vurdering, 3 observationer og anbefalet næste skridt.',
+    title: 'Gratis og konkret',
+    text: 'Du får 3 observationer om AI-findbarhed, kilder og de første tabte søgninger.',
     icon: 'preview',
   },
   {
     title: 'Ingen binding',
-    text: 'Mini-tjekket er gratis. Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
+    text: 'Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
     icon: 'check',
   },
   {
-    title: 'Svar inden 1-2 hverdage',
-    text: 'Du får en manuel første vurdering, ikke et automatisk standardsvar.',
+    title: 'Manuelt læst',
+    text: 'En rigtig vurdering af synlighed, tillid og kilder. Ikke et automatisk standardsvar.',
     icon: 'clock',
   },
   {
-    title: 'Ægte tillid først',
-    text: 'Kundeudtalelser, anmeldelser og cases bliver kun vist, når de er ægte.',
+    title: 'Klar vej videre',
+    text: 'Hvis der er tydelige problemer, ved du at AI Audit + Client Room koster 2.495 kr.',
     icon: 'trust',
   },
 ];
 ---
 
-<section class:list={['mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-10', className]} aria-label="Tryghed før gratis mini-tjek">
+<section class:list={['mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-10', className]} aria-label="Tryghed før gratis AI-tjek">
   <div class="rounded-[1.35rem] border border-border-soft bg-white/64 px-4 py-4 shadow-soft backdrop-blur-sm md:px-5">
     <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       {proofs.map((proof) => (
-        <article class="grid grid-cols-[2.75rem_1fr] gap-3 rounded-[1rem] border border-transparent px-3 py-3 transition duration-200 hover:border-accent/18 hover:bg-accent-soft/40">
+        <article class="grid grid-cols-[2.75rem_1fr] gap-3 rounded-[1rem] border border-transparent px-3 py-3 transition duration-200 hover:-translate-y-0.5 hover:border-accent/18 hover:bg-accent-soft/40">
           <span class="flex h-11 w-11 items-center justify-center rounded-[0.85rem] border border-accent/18 bg-accent-soft/78 text-accent-dark">
             {proof.icon === 'preview' && (
               <svg viewBox="0 0 28 28" class="h-6 w-6" fill="none" aria-hidden="true">
@@ -69,4 +69,3 @@ const proofs = [
     </div>
   </div>
 </section>
-

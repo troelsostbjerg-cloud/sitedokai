@@ -1,0 +1,69 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'I sender website og kontaktoplysninger',
+    desc: 'Vi skal kun bruge det nødvendige for at kunne vurdere omfang og koble bestillingen til den rigtige virksomhed.',
+  },
+  {
+    num: '02',
+    title: 'Betalingen gennemføres sikkert',
+    desc: 'Betalingen kører via Stripe, så bestilling, kvittering og faktura hænger sammen fra start.',
+  },
+  {
+    num: '03',
+    title: 'Vi gennemgår website og søgninger',
+    desc: 'Vi tester AI-synlighed på 4 platforme, gennemgår op til 5 nøglesider og laver teknisk baseline.',
+  },
+  {
+    num: '04',
+    title: 'I modtager Client Room',
+    desc: 'I modtager en mail med privat link og adgangskode inden for 48 timer på hverdage. PDF følger med som eksport af samme leverance.',
+  },
+];
+
+const trust = [
+  'Ingen abonnement og ingen binding',
+  'Manuel kvalitetssikring før leverancen sendes',
+  'Tryg bestilling med sikker betaling og svar på mail',
+];
+---
+
+<section id="how-it-works" class="bg-white border-b border-gray-200">
+  <div class="max-w-5xl mx-auto px-6 py-20 md:py-28">
+    <div class="max-w-3xl mb-16">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-brand tracking-tight mb-4">
+        Hvad sker der hvis I går videre?
+      </h2>
+      <p class="text-lg text-gray-500 leading-relaxed">
+        Flowet er gjort enkelt med vilje. Produktet skal være let at forstå, let at bestille og let at dele internt bagefter.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 md:gap-8 mb-12">
+      {steps.map((step, i) => (
+        <div class="relative">
+          {i < steps.length - 1 && (
+            <div class="hidden xl:block absolute top-8 left-full w-full h-px bg-gray-200 -translate-x-4" />
+          )}
+          <div class="font-display text-5xl font-extrabold text-gray-200 mb-4" aria-hidden="true">{step.num}</div>
+          <h3 class="font-display text-lg font-bold text-brand mb-2">{step.title}</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {trust.map((item) => (
+          <div class="flex items-start gap-3 bg-white border border-gray-200 rounded-xl p-4 text-sm text-gray-600">
+            <svg class="w-5 h-5 mt-0.5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

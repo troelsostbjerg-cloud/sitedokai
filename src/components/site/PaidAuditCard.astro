@@ -8,14 +8,14 @@ interface Props {
 const { ctaHref = '/hjemmeside-tjek' } = Astro.props;
 
 const features = [
-  { title: 'PDF-rapport', icon: 'doc' },
-  { title: 'Klarheds-score', icon: 'leaf' },
-  { title: 'Tillids-score', icon: 'shield' },
-  { title: 'Handlings-score', icon: 'bars' },
-  { title: 'Top 5 problemer', icon: 'list' },
-  { title: 'Ny hero-tekst', icon: 'text' },
-  { title: 'Forslag til servicestruktur', icon: 'structure' },
-  { title: '5–10 min video', icon: 'play' },
+  { title: 'Client Room', icon: 'doc' },
+  { title: 'AI-synlighed', icon: 'leaf' },
+  { title: 'Kilde-score', icon: 'shield' },
+  { title: 'Platform coverage', icon: 'bars' },
+  { title: 'Tabte søgninger', icon: 'list' },
+  { title: 'Konkurrentbillede', icon: 'text' },
+  { title: 'Prioriterede handlinger', icon: 'structure' },
+  { title: 'Executive PDF', icon: 'play' },
 ];
 ---
 
@@ -29,11 +29,11 @@ const features = [
         </svg>
       </span>
       <div>
-        <p class="text-sm text-muted">Vil du have den fulde gennemgang?</p>
-        <h2 class="mt-1.5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">Hjemmeside-tjek</h2>
+        <p class="text-sm text-muted">Vil du have den fulde AI-gennemgang?</p>
+        <h2 class="mt-1.5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">AI Audit</h2>
         <p class="mt-0.5 font-display text-4xl font-medium leading-tight tracking-tight text-brand">2.495 kr.</p>
         <p class="mt-2.5 max-w-sm text-base leading-relaxed text-muted">
-          Finder de vigtigste ting, der kan koste dig henvendelser — med konkret prioritering, ny hero-tekst, servicestruktur og kort video.
+          Tester om virksomheden bliver fundet, nævnt og anbefalet i AI, og samler beviser, konkurrenter og næste handlinger i et Client Room.
         </p>
       </div>
     </div>
@@ -92,7 +92,7 @@ const features = [
     </div>
 
     <div class="lg:justify-self-start">
-      <Button href={ctaHref} class="w-full bg-accent-dark px-7 shadow-[0_18px_38px_rgba(82,107,85,0.22)] hover:bg-brand lg:w-auto">Se Hjemmeside-tjek</Button>
+      <Button href={ctaHref} class="w-full bg-accent-dark px-7 shadow-[0_18px_38px_rgba(82,107,85,0.22)] hover:bg-brand lg:w-auto">Se AI Audit</Button>
     </div>
   </div>
 </article>

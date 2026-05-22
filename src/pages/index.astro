@@ -7,11 +7,41 @@ import FeatureCard from '../components/site/FeatureCard.astro';
 import HeroSection from '../components/site/HeroSection.astro';
 import MiniCheckPreview from '../components/site/MiniCheckPreview.astro';
 import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
+import ClientRoomPreview from '../components/ClientRoomPreview.astro';
 import PaidAuditCard from '../components/site/PaidAuditCard.astro';
 import SecondaryOfferCard from '../components/site/SecondaryOfferCard.astro';
 import SectionHeader from '../components/site/SectionHeader.astro';
 import TrustProofStrip from '../components/site/TrustProofStrip.astro';
+import Button from '../components/site/Button.astro';
 import '../styles/global.css';
+
+const methodPoints = [
+  ['1. AI-spørgsmål', 'Hvilke købsspørgsmål stiller kunderne i ChatGPT, Gemini, Claude og Google AI?'],
+  ['2. Synlighed', 'Bliver virksomheden nævnt, anbefalet eller kun brugt som kilde?'],
+  ['3. Konkurrenter', 'Hvem bliver valgt i stedet, og hvilke beviser bruger AI til at vælge dem?'],
+  ['4. Handling', 'Hvilke sider, kilder og tekster bør rettes først for at lukke hullet?'],
+];
+
+const startPath = [
+  {
+    eyebrow: 'Start her',
+    title: 'Gratis AI-tjek',
+    price: '0 kr.',
+    text: 'Første vurdering af om virksomheden dukker op i relevante AI-søgninger.',
+  },
+  {
+    eyebrow: 'Næste naturlige skridt',
+    title: 'AI Audit + Client Room',
+    price: '2.495 kr.',
+    text: 'Fuld test af spørgsmål, platforme, konkurrenter, kilder og næste handlinger.',
+  },
+  {
+    eyebrow: 'Hvis du vil have det rettet',
+    title: 'Visibility Sprint eller fix',
+    price: 'fra 6.500 kr.',
+    text: 'Tekst, struktur, kilder, schema, landing pages og beviser, så AI har noget bedre at vælge.',
+  },
+];
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -42,7 +72,7 @@ const structuredData = {
       '@type': 'ProfessionalService',
       '@id': 'https://sitedokai.com/#service',
       name: 'SiteDokAI',
-      serviceType: 'Gratis mini-tjek, Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft for små virksomheder',
+      serviceType: 'AI-synlighedstjek, AI Audit, Client Room, Hjemmeside-fix og Visuelt løft for små virksomheder',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -52,12 +82,14 @@ const structuredData = {
       },
       email: 'info@sitedokai.com',
       knowsAbout: [
-        'klarhed på hjemmesider',
-        'tillid på hjemmesider',
-        'kontaktknapper',
-        'servicestruktur',
-        'førstehåndsindtryk',
-        'små virksomheders hjemmesider',
+        'AI-synlighed',
+        'Generative Engine Optimization',
+        'Client Room',
+        'ChatGPT',
+        'Gemini',
+        'Google AI',
+        'Claude',
+        'små virksomheders digitale synlighed',
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -69,8 +101,8 @@ const structuredData = {
             priceCurrency: 'DKK',
             itemOffered: {
               '@type': 'Service',
-              name: 'Gratis mini-tjek',
-              description: 'Tre konkrete observationer og en anbefaling til næste skridt.',
+              name: 'Gratis AI-tjek',
+              description: 'Første vurdering af om virksomheden bliver fundet i relevante AI-søgninger.',
             },
           },
           {
@@ -79,8 +111,8 @@ const structuredData = {
             priceCurrency: 'DKK',
             itemOffered: {
               '@type': 'Service',
-              name: 'Hjemmeside-tjek',
-              description: 'Fuld gennemgang af klarhed, tillid, handling, tekst, struktur, kontaktknapper og kundens førstehåndsindtryk.',
+              name: 'AI Audit + Client Room',
+              description: 'Fuld gennemgang af AI-synlighed, søgninger, platforme, konkurrenter, kilder og prioriterede handlinger.',
             },
           },
           {
@@ -94,7 +126,7 @@ const structuredData = {
             itemOffered: {
               '@type': 'Service',
               name: 'Hjemmeside-fix',
-              description: 'Ret tekst, struktur og kontaktknapper.',
+              description: 'Ret tekst, struktur, kilder og kontaktveje, så virksomheden står klarere for kunder og AI.',
             },
           },
           {
@@ -119,26 +151,26 @@ const structuredData = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'Hvad får jeg i et gratis mini-tjek?',
+          name: 'Hvad får jeg i et gratis AI-tjek?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Du får 3 konkrete observationer om klarhed, tillid og næste skridt på din hjemmeside.',
+            text: 'Du får en kort vurdering af om virksomheden dukker op i relevante AI-søgninger, plus et anbefalet næste skridt.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Er gratis mini-tjek bindende?',
+          name: 'Er gratis AI-tjek bindende?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Nej. Mini-tjekket er gratis og uforpligtende. Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
+            text: 'Nej. AI-tjekket er gratis og uforpligtende. Hvis der ikke er et oplagt næste skridt, siger vi det direkte.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Hvad koster et fuldt Hjemmeside-tjek?',
+          name: 'Hvad koster en fuld AI Audit?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Et fuldt Hjemmeside-tjek koster 2.495 kr. og gennemgår klarhed, tillid, handling, tekst, struktur, kontaktknapper og førstehåndsindtryk.',
+            text: 'En fuld AI Audit koster 2.495 kr. og leveres som Client Room med søgninger, platforme, konkurrenter, kilder, score og prioriterede handlinger.',
           },
         },
       ],
@@ -148,8 +180,8 @@ const structuredData = {
 ---
 
 <Layout
-  title="SiteDokAI | Få gratis mini-tjek af din hjemmeside"
-  description="SiteDokAI hjælper små virksomheder med at finde og rette det, der får hjemmesiden til at miste kunder. Start med et gratis mini-tjek, og gå videre til Hjemmeside-tjek hvis problemerne er tydelige."
+  title="SiteDokAI | Se om din virksomhed bliver fundet i AI"
+  description="SiteDokAI tester om små virksomheder bliver fundet, nævnt og anbefalet i ChatGPT, Gemini, Claude og Google AI. Start med et gratis AI-tjek."
   structuredData={structuredData}
 >
   <Nav />
@@ -159,31 +191,26 @@ const structuredData = {
 
     <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
       <SectionHeader
-        label="Kundens oplevelse"
-        title="Vi tjekker ikke kun hjemmesiden. Vi tjekker kundens oplevelse."
-        text="Når en kunde lander på din hjemmeside, vurderer de hurtigt om de forstår dig, stoler på dig og vil kontakte dig. SiteDokAI er funderet i principper fra hjernevidenskab, beslutningspsykologi og adfærdsdesign — omsat til et konkret og praktisk Hjemmeside-tjek for små danske virksomheder."
+        label="AI-synlighed"
+        title="Kunden spørger ikke kun Google længere."
+        text="Flere køb starter som spørgsmål til AI. SiteDokAI viser om virksomheden dukker op i de svar, hvilke konkurrenter der nævnes i stedet, og hvad der skal rettes for at blive mere citerbar og anbefalbar."
       />
       <div class="mt-6 grid gap-5 md:grid-cols-[1.18fr_0.91fr_0.91fr]">
-        <FeatureCard icon="clarity" title="Klarhed" text="Forstår kunden hurtigt, hvad du tilbyder?" />
-        <FeatureCard icon="trust" title="Tillid" text="Virker siden professionel og tryg nok til kontakt?" />
-        <FeatureCard icon="visibility" title="Handling" text="Er det nemt og naturligt at kontakte dig?" />
+        <FeatureCard icon="clarity" title="Findbarhed" text="Bliver virksomheden fundet i de spørgsmål, kunderne faktisk stiller?" />
+        <FeatureCard icon="trust" title="Anbefaling" text="Nævner AI jer som et relevant valg, eller bliver I overhalet af konkurrenter?" />
+        <FeatureCard icon="visibility" title="Kilder" text="Har AI nok klare kilder, beviser og struktureret indhold til at stole på jer?" />
       </div>
     </Container>
 
     <Container id="metode" class="py-7">
       <SectionHeader
         label="Metode"
-        title="Vi vurderer din hjemmeside på 4 afgørende punkter"
-        text="SEO får folk ind på siden. SiteDokAI viser, hvorfor de ikke kontakter dig."
+        title="Vi tester det nye lag mellem søgning og valg."
+        text="Klassisk SEO handler om placeringer. AI-synlighed handler om svar, anbefalinger, kilder og beslutninger. Derfor tester vi både spørgsmål, platforme, konkurrenter og jeres eget digitale fodaftryk."
       />
-      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {[
-          ['1. Opmærksomhed', 'Ser kunden hurtigt det vigtigste?'],
-          ['2. Forståelse', 'Forstår kunden hvad du tilbyder, hvem du hjælper, og hvorfor de skal vælge dig?'],
-          ['3. Tillid', 'Føles virksomheden professionel, tryg og troværdig?'],
-          ['4. Handling', 'Er det nemt og naturligt at kontakte dig?'],
-        ].map(([title, text]) => (
-          <article class="rounded-[1.15rem] border border-border-soft bg-white/68 p-5 shadow-soft">
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr]">
+        {methodPoints.map(([title, text]) => (
+          <article class="conversion-card rounded-[1.15rem] border border-border-soft bg-white/68 p-5 shadow-soft">
             <h3 class="font-display text-2xl font-medium leading-tight text-brand">{title}</h3>
             <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
           </article>
@@ -192,13 +219,45 @@ const structuredData = {
     </Container>
 
     <Container id="gratis-mini" class="pb-7 pt-3">
-      <SectionHeader label="Det får du gratis" uppercase={false} />
+        <SectionHeader label="Det får du gratis" uppercase={false} />
       <div class="mt-6">
         <MiniCheckBenefitStrip />
       </div>
     </Container>
 
     <MiniCheckPreview class="pb-7 pt-3" />
+
+    <ClientRoomPreview />
+
+    <Container id="vaelg-roeligt" class="py-7">
+      <div class="grid gap-7 rounded-[1.55rem] border border-border-soft bg-white/64 p-6 shadow-soft md:p-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-accent-dark">Rolig start</p>
+          <h2 class="mt-5 max-w-xl font-display text-4xl font-medium leading-[1.03] tracking-tight text-brand md:text-5xl">
+            Start med synligheden, ikke med en stor rapport.
+          </h2>
+          <p class="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+            Det gamle Client Room-spor kommer tilbage, men uden at vi gør det tungt. Først finder vi ud af, om problemet faktisk findes. Derefter bygger vi overblikket og handlingerne.
+          </p>
+          <div class="mt-7">
+            <Button href="/gratis-mini-tjek#faa-gratis-mini-tjek">Få gratis AI-tjek</Button>
+          </div>
+        </div>
+        <div class="grid gap-3">
+          {startPath.map((step, index) => (
+            <article class="conversion-card grid gap-4 rounded-[1.15rem] border border-border-soft bg-surface/82 p-4 md:grid-cols-[2.75rem_1fr_auto] md:items-center">
+              <span class="flex h-11 w-11 items-center justify-center rounded-[0.85rem] bg-accent-soft text-sm font-semibold text-accent-dark">{index + 1}</span>
+              <div>
+                <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-accent-dark">{step.eyebrow}</p>
+                <h3 class="mt-1 font-display text-2xl font-medium leading-tight tracking-tight text-brand">{step.title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">{step.text}</p>
+              </div>
+              <p class="font-display text-2xl font-medium leading-none tracking-tight text-brand md:text-right">{step.price}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </Container>
 
     <Container id="fuld-gennemgang" class="py-7">
       <PaidAuditCard />
@@ -212,7 +271,7 @@ const structuredData = {
           icon="fix"
           title="Hjemmeside-fix"
           price="6.500-12.500 kr."
-          text="Retter tekst, struktur og kontaktknapper"
+          text="Retter tekst, struktur, kilder og kontaktknapper"
           href="/hjemmeside-fix"
         />
         <SecondaryOfferCard
@@ -220,7 +279,7 @@ const structuredData = {
           icon="visual"
           title="Visuelt løft"
           price="Fra 9.500 kr."
-          text="Forbedrer design, billeder og førstehåndsindtryk"
+          text="Forbedrer design, billeder, trust og førstehåndsindtryk"
           href="/visuelt-loeft"
         />
       </div>
@@ -232,14 +291,14 @@ const structuredData = {
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/62">Klar til første skridt?</p>
             <h2 class="mt-5 max-w-3xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-5xl">
-              Start med et gratis mini-tjek af din hjemmeside.
+              Få et roligt blik på det, AI og kunderne møder først.
             </h2>
             <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
-              Du får 3 konkrete observationer og en klar vurdering af, hvad der bør rettes først.
+              Start med et gratis AI-tjek. Du får en konkret vurdering af, om virksomheden bliver fundet, nævnt og anbefalet i relevante AI-søgninger.
             </p>
           </div>
           <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-white bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-light hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px">
-            Få gratis mini-tjek
+            Få gratis AI-tjek
           </a>
         </div>
       </div>

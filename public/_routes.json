@@ -3,7 +3,12 @@
   "include": [
     "/api/*",
     "/orders",
-    "/studio/*"
+    "/studio",
+    "/studio/*",
+    "/room",
+    "/room/*",
+    "/mockups",
+    "/mockups/*"
   ],
   "exclude": []
 }

@@ -2,6 +2,11 @@ User-agent: *
 Allow: /
 
 # Internal tools are not public launch pages.
+Disallow: /studio
 Disallow: /studio/
+Disallow: /room
+Disallow: /room/
+Disallow: /mockups
+Disallow: /mockups/
 
 Sitemap: https://sitedokai.com/sitemap.xml
