@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SiteDokAI agentic search wide card</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #151a17;
+        color: #fffdf8;
+        font-family: "Outfit", Avenir, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        padding: 54px 62px;
+        background:
+          radial-gradient(circle at 78% 14%, rgba(143, 166, 143, 0.28), transparent 270px),
+          radial-gradient(circle at 10% 92%, rgba(223, 232, 220, 0.12), transparent 260px),
+          #151a17;
+      }
+
+      .frame {
+        position: absolute;
+        inset: 34px;
+        border: 1px solid rgba(255, 253, 248, 0.14);
+        border-radius: 30px;
+      }
+
+      .grid {
+        position: absolute;
+        inset: 34px;
+        background-image:
+          linear-gradient(rgba(255, 253, 248, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 253, 248, 0.06) 1px, transparent 1px);
+        background-size: 76px 76px;
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.86), transparent 86%);
+        border-radius: 30px;
+      }
+
+      .brand {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 28px;
+        font-weight: 760;
+        letter-spacing: -0.02em;
+      }
+
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #dfe8dc;
+        box-shadow: 0 0 0 8px rgba(223, 232, 220, 0.1);
+      }
+
+      h1 {
+        position: relative;
+        z-index: 1;
+        margin: 82px 0 0;
+        max-width: 720px;
+        color: #fffdf8;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 74px;
+        font-weight: 500;
+        line-height: 0.97;
+        letter-spacing: -0.03em;
+      }
+
+      .lead {
+        position: relative;
+        z-index: 1;
+        margin: 24px 0 0;
+        max-width: 610px;
+        color: rgba(255, 253, 248, 0.66);
+        font-size: 24px;
+        line-height: 1.28;
+      }
+
+      .panel {
+        position: absolute;
+        right: 62px;
+        top: 88px;
+        z-index: 2;
+        width: 382px;
+        border: 1px solid rgba(255, 253, 248, 0.15);
+        border-radius: 26px;
+        background: rgba(32, 38, 34, 0.94);
+        box-shadow: 0 30px 82px rgba(0, 0, 0, 0.38);
+        padding: 24px;
+      }
+
+      .panel-title {
+        color: rgba(255, 253, 248, 0.45);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .bar {
+        margin-top: 20px;
+      }
+
+      .bar-head {
+        display: flex;
+        justify-content: space-between;
+        color: rgba(255, 253, 248, 0.72);
+        font-size: 17px;
+      }
+
+      .track {
+        margin-top: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 253, 248, 0.09);
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+        border-radius: inherit;
+        background: #dfe8dc;
+      }
+
+      .cta {
+        position: absolute;
+        left: 62px;
+        bottom: 56px;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        background: #fffdf8;
+        color: #202622;
+        padding: 17px 24px;
+        font-size: 19px;
+        font-weight: 760;
+      }
+
+      .link {
+        position: absolute;
+        right: 62px;
+        bottom: 62px;
+        z-index: 1;
+        color: rgba(255, 253, 248, 0.55);
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" aria-label="SiteDokAI agentic search wide social card">
+      <div class="frame"></div>
+      <div class="grid"></div>
+      <header class="brand">
+        <span class="dot"></span>
+        <span>SiteDokAI</span>
+      </header>
+
+      <h1>Agentic search er ikke kun fremtid.</h1>
+      <p class="lead">Google gør Search mere handlingsorienteret. Nu skal virksomheden kunne forstås af både mennesker og AI-agenter.</p>
+
+      <section class="panel">
+        <p class="panel-title">Agent visibility</p>
+        <div class="bar">
+          <div class="bar-head"><span>Findbarhed</span><span>72</span></div>
+          <div class="track"><div class="fill" style="width:72%"></div></div>
+        </div>
+        <div class="bar">
+          <div class="bar-head"><span>Kilder</span><span>58</span></div>
+          <div class="track"><div class="fill" style="width:58%"></div></div>
+        </div>
+        <div class="bar">
+          <div class="bar-head"><span>Shortlist</span><span>41</span></div>
+          <div class="track"><div class="fill" style="width:41%; opacity:.55"></div></div>
+        </div>
+      </section>
+
+      <div class="cta">Få gratis mini-tjek</div>
+      <div class="link">sitedokai.com/gratis-mini-tjek</div>
+    </main>
+  </body>
+</html>

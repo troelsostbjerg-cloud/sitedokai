@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+const sources = [
+  {
+    name: 'Google: A new era for AI Search',
+    href: 'https://blog.google/products-and-platforms/products/search/search-io-2026/',
+    note: 'Google I/O 2026, AI Mode, Search agents og intelligent Search box.',
+  },
+  {
+    name: 'Gartner: Search volume will drop 25%',
+    href: 'https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents',
+    note: 'Prognose om skift fra traditionel søgning til chatbots og virtuelle agenter.',
+  },
+  {
+    name: 'BrightEdge: AI agent traffic tipping point',
+    href: 'https://www.brightedge.com/news/press-releases/brightedge-data-ai-search-reaching-tipping-point-ai-agents-2026',
+    note: 'Data om AI-agent requests, bot policies og AI-medieret beslutningstagning.',
+  },
+  {
+    name: 'Deloitte: Agentic commerce',
+    href: 'https://www.deloitte.com/us/en/industries/consumer/articles/agentic-commerce-ai-shopping-agents-guide.html',
+    note: 'Analyse af AI-assistenter, agentic commerce og agent-ready data.',
+  },
+];
+
+const takeaways = [
+  {
+    number: '1',
+    title: 'Google gør Search mere agentisk',
+    text: 'Google annoncerede 19. maj 2026 en intelligent Search box, Search agents og agentic booking. Det flytter Search fra kun at vise links til også at forstå opgaver, holde øje og hjælpe brugeren videre.',
+  },
+  {
+    number: '2',
+    title: 'Synlighed bliver et dataproblem',
+    text: 'Hvis en agent skal vælge en leverandør, skal den kunne finde klare ydelser, prisrammer, beviser, anmeldelser, cases, FAQ, lokationer og næste handlinger. Uklar marketingtekst bliver sværere at anbefale.',
+  },
+  {
+    number: '3',
+    title: 'Både B2B og forbrugere bliver ramt',
+    text: 'Det handler ikke kun om private ChatGPT-spørgsmål. Virksomheder bruger AI til research, shortlisting og leverandørsammenligning, mens forbrugere bruger AI til lokale valg, produktresearch og booking.',
+  },
+];
+---
+
+<Layout
+  title="Google I/O 2026 og agentic search | SiteDokAI"
+  description="Google har annonceret Search agents og en intelligent Search box. Her er hvad agentic search betyder for danske virksomheder."
+  canonical="/blog/google-agentic-search-2026"
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <article>
+      <section class="mx-auto max-w-[1480px] px-4 pb-6 pt-4 sm:px-6 lg:px-10">
+        <div class="overflow-hidden rounded-[1.65rem] border border-brand/14 bg-brand text-white shadow-[0_28px_80px_rgba(32,38,34,0.18)]">
+          <div class="border-b border-white/10 px-6 py-4 md:px-8">
+            <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-light">Analyse · 22. maj 2026</p>
+          </div>
+          <div class="grid gap-0 lg:grid-cols-[1fr_0.86fr]">
+            <div class="px-6 py-11 md:px-10 md:py-14">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-light">Agentic search</p>
+              <h1 class="mt-5 max-w-4xl font-display text-5xl font-medium leading-[0.98] tracking-tight md:text-7xl">
+                Google gør søgning til noget, der kan handle på vegne af kunden.
+              </h1>
+              <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/68">
+                Det nye spørgsmål for virksomheder er ikke kun: “kan kunden finde os?” Det er: “kan en AI-agent forstå os godt nok til at vælge, citere og anbefale os?”
+              </p>
+            </div>
+            <aside class="border-t border-white/10 bg-white/[0.04] p-6 md:p-8 lg:border-l lg:border-t-0">
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/45">Kort sagt</p>
+              <div class="mt-5 grid gap-4">
+                <div class="rounded-[1rem] border border-white/12 bg-[#151a17]/88 p-4">
+                  <p class="font-display text-4xl font-medium leading-none text-white">1 mia.+</p>
+                  <p class="mt-2 text-sm leading-relaxed text-white/58">Google skriver, at AI Mode har passeret 1 milliard månedlige brugere.</p>
+                </div>
+                <div class="rounded-[1rem] border border-white/12 bg-[#151a17]/88 p-4">
+                  <p class="font-display text-4xl font-medium leading-none text-white">24/7</p>
+                  <p class="mt-2 text-sm leading-relaxed text-white/58">Search agents kan overvåge emner og give syntetiserede opdateringer i baggrunden.</p>
+                </div>
+                <div class="rounded-[1rem] border border-accent-light/22 bg-accent-light/10 p-4">
+                  <p class="font-display text-4xl font-medium leading-none text-white">Nu</p>
+                  <p class="mt-2 text-sm leading-relaxed text-white/62">Agent-ready indhold bliver en praktisk del af synlighed, ikke kun et fremtidsscenarie.</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-4xl px-6 py-12 md:py-16">
+        <div class="grid gap-6">
+          {takeaways.map((item) => (
+            <section class="rounded-[1.25rem] border border-border-soft bg-white/70 p-6 shadow-soft md:grid md:grid-cols-[4rem_1fr] md:gap-6">
+              <p class="font-display text-5xl font-medium leading-none text-accent-dark">{item.number}</p>
+              <div>
+                <h2 class="font-display text-3xl font-medium leading-tight tracking-tight text-brand">{item.title}</h2>
+                <p class="mt-3 text-base leading-relaxed text-muted">{item.text}</p>
+              </div>
+            </section>
+          ))}
+        </div>
+
+        <div class="mt-12 space-y-7 text-base leading-relaxed text-brand/74">
+          <h2 class="font-display text-4xl font-medium leading-tight tracking-tight text-brand">Hvad Google annoncerede</h2>
+          <p>
+            På Google I/O den 19. maj 2026 beskrev Google en ny æra for AI Search. AI Mode bliver opgraderet med Gemini 3.5 Flash som standardmodel, og Google introducerer en intelligent Search box, der kan tage tekst, billeder, filer, videoer og Chrome-tabs som input.
+          </p>
+          <p>
+            Den vigtigste del for virksomheder er Search agents. Google beskriver agenter, der kan oprettes, tilpasses og køre i baggrunden for at følge emner, finde ændringer og give syntetiserede opdateringer. Google udvider også agentic booking og nævner blandt andet lokale oplevelser, services, home repair, beauty og pet care.
+          </p>
+
+          <h2 class="font-display text-4xl font-medium leading-tight tracking-tight text-brand">Hvorfor det betyder noget for danske virksomheder</h2>
+          <p>
+            Mange hjemmesider er stadig skrevet til et menneske, der allerede kender virksomheden. Agentic search kræver noget andet: tydelige ydelser, beviser, sammenlignelige fakta, lokale signaler, FAQ, anmeldelser, struktur og kontaktveje, som kan forstås uden at agenten skal gætte.
+          </p>
+          <p>
+            Det gælder især B2B. Når en medarbejder eller indkøber beder en agent finde mulige leverandører, bliver hjemmesiden et kildegrundlag. Hvis agenten ikke kan forklare hvorfor virksomheden passer til opgaven, kommer den sjældent på den første shortlist.
+          </p>
+
+          <h2 class="font-display text-4xl font-medium leading-tight tracking-tight text-brand">Det skal ikke blive teknisk for teknikkens skyld</h2>
+          <p>
+            SiteDokAI’s tilgang er lavpraktisk: gør virksomheden lettere at finde, forstå, citere og vælge. Det betyder bedre ydelsessider, skarpere FAQ, tydeligere pris- og kontaktinformation, stærkere trust-signaler, bedre schema og et mere konsistent digitalt fodaftryk.
+          </p>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-6xl px-6 pb-16">
+        <div class="rounded-[1.45rem] border border-border-soft bg-white/68 p-6 shadow-soft md:p-8">
+          <div class="grid gap-8 md:grid-cols-[0.75fr_1.25fr]">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Kilder</p>
+              <h2 class="mt-4 font-display text-4xl font-medium leading-tight tracking-tight text-brand">
+                De eksterne signaler bag artiklen.
+              </h2>
+            </div>
+            <div class="grid gap-3">
+              {sources.map((source) => (
+                <a href={source.href} target="_blank" rel="noreferrer" class="rounded-[1rem] border border-border-soft bg-surface/80 p-4 transition-colors hover:border-accent/35 hover:bg-white">
+                  <h3 class="font-semibold text-brand">{source.name}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-muted">{source.note}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-[1480px] px-4 pb-16 sm:px-6 lg:px-10">
+        <div class="rounded-[1.6rem] border border-accent/28 bg-surface px-6 py-10 shadow-soft md:px-10">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Næste skridt</p>
+          <h2 class="mt-4 max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight text-brand md:text-5xl">
+            Start med at se om en AI-agent overhovedet kan vælge jer.
+          </h2>
+          <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+            Send din hjemmeside og få et gratis mini-tjek med 3 konkrete observationer om agentic search, kilder og næste handling.
+          </p>
+          <a href="/gratis-mini-tjek" class="mt-7 inline-flex items-center justify-center rounded-[0.9rem] border border-accent bg-accent px-6 py-3.5 text-sm font-semibold text-white transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-dark hover:bg-accent-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+            Få gratis mini-tjek
+          </a>
+        </div>
+      </section>
+    </article>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">SiteDokAI agentic search social card</title>
+  <desc id="desc">Social graphic about being chosen by AI agents.</desc>
+  <defs>
+    <radialGradient id="glow-a" cx="72%" cy="12%" r="45%">
+      <stop offset="0%" stop-color="#8fa68f" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8fa68f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-b" cx="12%" cy="88%" r="36%">
+      <stop offset="0%" stop-color="#dfe8dc" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#dfe8dc" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="92" height="92" patternUnits="userSpaceOnUse">
+      <path d="M 92 0 L 0 0 0 92" fill="none" stroke="#fffdf8" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="panel-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="30" stdDeviation="28" flood-color="#000000" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1080" fill="#151a17"/>
+  <rect width="1080" height="1080" fill="url(#glow-a)"/>
+  <rect width="1080" height="1080" fill="url(#glow-b)"/>
+  <rect x="52" y="52" width="976" height="976" rx="34" fill="url(#grid)" opacity="0.8"/>
+  <rect x="52.5" y="52.5" width="975" height="975" rx="34" fill="none" stroke="#fffdf8" stroke-opacity="0.14"/>
+
+  <text x="68" y="101" fill="#fffdf8" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="-0.6">SiteDokAI</text>
+  <rect x="770" y="68" width="242" height="48" rx="18" fill="#8fa68f" fill-opacity="0.13" stroke="#8fa68f" stroke-opacity="0.45"/>
+  <text x="791" y="99" fill="#dfe8dc" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="18" font-weight="700">agentic search</text>
+
+  <text x="68" y="282" fill="#fffdf8" font-family="Georgia, Times New Roman, serif" font-size="94" font-weight="500" letter-spacing="-2.5">
+    <tspan x="68" dy="0">Bliver du</tspan>
+    <tspan x="68" dy="94">valgt af</tspan>
+    <tspan x="68" dy="94">AI-agenten?</tspan>
+  </text>
+  <text x="68" y="610" fill="#fffdf8" fill-opacity="0.66" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="29">
+    <tspan x="68" dy="0">Kunder og virksomheder bruger AI</tspan>
+    <tspan x="68" dy="38">til at researche, sammenligne og vælge.</tspan>
+  </text>
+
+  <g filter="url(#panel-shadow)">
+    <rect x="596" y="652" width="396" height="250" rx="28" fill="#202622" fill-opacity="0.94" stroke="#fffdf8" stroke-opacity="0.15"/>
+    <text x="621" y="696" fill="#fffdf8" fill-opacity="0.45" font-family="JetBrains Mono, Menlo, monospace" font-size="13" letter-spacing="2.2">AGENT CHECKS</text>
+    <line x1="621" y1="730" x2="967" y2="730" stroke="#fffdf8" stroke-opacity="0.09"/>
+    <text x="621" y="766" fill="#fffdf8" fill-opacity="0.76" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22">Findbarhed</text>
+    <text x="901" y="766" fill="#dfe8dc" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22" font-weight="700">klar</text>
+    <line x1="621" y1="792" x2="967" y2="792" stroke="#fffdf8" stroke-opacity="0.09"/>
+    <text x="621" y="828" fill="#fffdf8" fill-opacity="0.76" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22">Kilder</text>
+    <text x="890" y="828" fill="#dfe8dc" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22" font-weight="700">testes</text>
+    <line x1="621" y1="854" x2="967" y2="854" stroke="#fffdf8" stroke-opacity="0.09"/>
+    <text x="621" y="890" fill="#fffdf8" fill-opacity="0.76" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22">Shortlist</text>
+    <text x="891" y="890" fill="#dfe8dc" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22" font-weight="700">måles</text>
+  </g>
+
+  <rect x="68" y="942" width="238" height="58" rx="20" fill="#fffdf8"/>
+  <text x="92" y="978" fill="#202622" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="22" font-weight="800">Få gratis mini-tjek</text>
+  <text x="842" y="978" fill="#fffdf8" fill-opacity="0.54" font-family="Avenir Next, Avenir, Arial, sans-serif" font-size="20">sitedokai.com</text>
+</svg>

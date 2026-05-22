@@ -2,10 +2,10 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Gratis AI-tjek', href: '/gratis-mini-tjek' },
+  { label: 'Gratis mini-tjek', href: '/gratis-mini-tjek' },
   { label: 'AI Audit', href: '/hjemmeside-tjek' },
+  { label: 'Agentic search', href: '/blog/google-agentic-search-2026' },
   { label: 'Client Room', href: '/eksempel' },
-  { label: 'Use cases', href: '/use-cases' },
   { label: 'Hjemmeside-fix', href: '/hjemmeside-fix' },
   { label: 'Kontakt', href: '/kontakt' },
 ];
@@ -46,7 +46,7 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
     </div>
 
     <div class="hidden lg:block">
-      <Button href={ctaHref} size="sm">Få gratis AI-tjek</Button>
+      <Button href={ctaHref} size="sm">Få gratis mini-tjek</Button>
     </div>
 
     <details class="group relative lg:hidden">
@@ -72,7 +72,7 @@ const ctaHref = Astro.url.pathname === '/gratis-mini-tjek' ? '#faa-gratis-mini-t
               </a>
             );
           })}
-          <Button href={ctaHref} class="mt-2 w-full">Få gratis AI-tjek</Button>
+          <Button href={ctaHref} class="mt-2 w-full">Få gratis mini-tjek</Button>
         </div>
       </div>
     </details>

@@ -56,6 +56,11 @@
     <priority>0.55</priority>
   </url>
   <url>
+    <loc>https://sitedokai.com/blog/google-agentic-search-2026</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://sitedokai.com/blog/geo-hvad-er-det</loc>
     <changefreq>monthly</changefreq>
     <priority>0.45</priority>
