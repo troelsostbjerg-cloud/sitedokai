@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import AIServicePage from '../components/site/AIServicePage.astro';
+import { breadcrumbSchema, faqSchema, findService, serviceSchema } from '../data/aiContent';
+import '../styles/global.css';
+
+const service = findService('ai-workflow-sprint');
+
+if (!service) {
+  throw new Error('AI Workflow Sprint data missing');
+}
+
+const structuredData = [
+  serviceSchema(service),
+  faqSchema(service.path, service.faq),
+  breadcrumbSchema([
+    { name: 'Forside', path: '/' },
+    { name: 'Ydelser', path: '/#ydelser' },
+    { name: service.name, path: service.path },
+  ]),
+];
+---
+
+<Layout
+  title={`${service.name} | SiteDokAI`}
+  description={service.description}
+  canonical={service.path}
+  structuredData={structuredData}
+>
+  <Nav />
+  <AIServicePage service={service} />
+  <Footer />
+</Layout>

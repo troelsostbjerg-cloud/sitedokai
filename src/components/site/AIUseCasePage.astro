@@ -1,0 +1,83 @@
+---
+import ScreeningForm from './ScreeningForm.astro';
+import type { UseCase } from '../../data/aiContent';
+
+interface Props {
+  useCase: UseCase;
+}
+
+const { useCase } = Astro.props;
+---
+
+<main id="main" class="bg-canvas text-brand">
+  <section class="mx-auto grid min-w-0 max-w-7xl gap-12 px-5 pb-14 pt-12 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.72fr_1.28fr]">
+    <aside class="min-w-0 text-sm leading-relaxed text-muted">
+      <nav aria-label="Brødkrumme" class="text-xs">
+        <ol class="flex flex-wrap gap-2">
+          <li><a href="/" class="text-brand/55 transition-colors hover:text-brand">Forside</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li><a href="/use-cases" class="text-brand/55 transition-colors hover:text-brand">Use cases</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li class="text-brand">{useCase.title}</li>
+        </ol>
+      </nav>
+      <p class="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-accent">{useCase.eyebrow}</p>
+      <p class="mt-8 max-w-xs">
+        Brug disse sider som konkrete eksempler på, hvor AI-workflows giver mening i drift, rapportering og kundeprocesser.
+      </p>
+    </aside>
+
+    <div class="min-w-0">
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+        {useCase.title}
+      </h1>
+      <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+        {useCase.description}
+      </p>
+
+      <div class="mt-12 grid gap-5">
+        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Problemet</p>
+          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/80">{useCase.problem}</p>
+        </article>
+        <article class="rounded-[1.35rem] border border-accent/25 bg-accent/10 p-5 md:p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Workflowet</p>
+          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/85">{useCase.workflow}</p>
+        </article>
+        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Output</p>
+          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/80">{useCase.output}</p>
+        </article>
+      </div>
+
+      <section class="mt-14">
+        <h2 class="font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          Gode signaler på at casen er værd at teste
+        </h2>
+        <div class="mt-7 grid gap-3 md:grid-cols-2">
+          {useCase.signals.map((signal) => (
+            <p class="rounded-[1rem] border border-brand/10 bg-panel-soft p-4 text-sm leading-relaxed text-brand/75">{signal}</p>
+          ))}
+        </div>
+      </section>
+
+      <section class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          Har I en version af den her proces?
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+          Send en kort beskrivelse. Vi vurderer om den passer til en Manual Work Audit eller en mindre workflow-skitse først.
+        </p>
+        <div class="mt-10">
+          <ScreeningForm
+            sourcePage={useCase.path}
+            title="Use case til vurdering"
+            text="Beskriv jeres version af processen, og hvor ofte den gentager sig."
+            submitLabel="Send use case"
+            interest={useCase.title}
+          />
+        </div>
+      </section>
+    </div>
+  </section>
+</main>

@@ -64,20 +64,23 @@ const services = [
   },
 ];
 
-const servicePages = {
+const servicePages: Record<string, { id: string; path: string; url: string; price: string }> = {
   'Manual Work Audit': {
     id: 'manual-work-audit',
-    url: 'https://sitedokai.com/hjemmeside-tjek',
+    path: '/manual-work-audit',
+    url: 'https://sitedokai.com/manual-work-audit',
     price: '15000',
   },
   'AI Workflow Sprint': {
     id: 'ai-workflow-sprint',
-    url: 'https://sitedokai.com/hjemmeside-fix',
+    path: '/ai-workflow-sprint',
+    url: 'https://sitedokai.com/ai-workflow-sprint',
     price: '35000',
   },
   'AI Operations Partner': {
     id: 'ai-operations-partner',
-    url: 'https://sitedokai.com/visuelt-loeft',
+    path: '/ai-operations-partner',
+    url: 'https://sitedokai.com/ai-operations-partner',
     price: '10000',
   },
 };
@@ -113,6 +116,7 @@ const serviceSchema = services.map((service) => {
 });
 
 const aiProofItems = [
+  ['AI-klar side', 'Synlig dokumentation af hvordan vi tester vores egen AI-discoverability.', '/ai-klar'],
   ['llms.txt', 'Kort, maskinlæsbar profil for AI-agenter og research-værktøjer.', '/llms.txt'],
   ['Schema', 'Struktureret data for organisation, website og de tre ydelser.', null],
   ['Sitemap', 'Indekserbare servicesider, cases og proof-of-work samlet i sitemap.', '/sitemap.xml'],
@@ -420,7 +424,9 @@ const structuredData = {
           </p>
 
           <div class="mt-12 grid gap-5 lg:grid-cols-[1.08fr_0.96fr_0.96fr]">
-            {services.map((service) => (
+            {services.map((service) => {
+              const page = servicePages[service.name];
+              return (
               <article class:list={[
                 'flex min-w-0 flex-col rounded-[1.5rem] border p-5 sm:p-6',
                 service.highlighted ? 'border-accent/50 bg-accent/10' : 'border-brand/10 bg-panel-soft',
@@ -440,12 +446,13 @@ const structuredData = {
                   ))}
                 </ul>
                 <div class="mt-auto pt-7">
-                  <Button href="#kontakt" variant={service.highlighted ? 'primary' : 'secondary'} class="w-full">
+                  <Button href={page.path} variant={service.highlighted ? 'primary' : 'secondary'} class="w-full">
                     {service.cta}
                   </Button>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

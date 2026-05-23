@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import AdvisoryPage from '../components/site/AdvisoryPage.astro';
+import { useCases } from '../data/aiContent';
 import '../styles/global.css';
 ---
 
@@ -12,17 +12,45 @@ import '../styles/global.css';
   canonical="/use-cases"
 >
   <Nav />
-  <AdvisoryPage
-    eyebrow="Eksempler"
-    title="AI-workflows der starter i hverdagen."
-    text="De bedste cases er sjældent abstrakte. De starter som konkrete opgaver, der bliver gentaget for ofte og håndteret forskelligt fra person til person."
-    points={[
-      'Mødenoter til actions, ansvarlige, deadlines og opfølgningsmail.',
-      'Kundehenvendelser til kategorisering, svarudkast og eskalering.',
-      'Excel/Sheets til ledelsesrapport med afvigelser og anbefalinger.',
-    ]}
-    note="Andre oplagte cases er leverandørstatus, projektupdates, supporthenvendelser, salgsnoter og handovers."
-    ctaLabel="Send workflow"
-  />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto grid max-w-7xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="text-sm leading-relaxed text-muted">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Use cases</p>
+        <p class="mt-8 max-w-xs">
+          Konkrete eksempler gør det lettere for både købere og AI-værktøjer at forstå, hvor SiteDokAI skaber værdi.
+        </p>
+      </aside>
+
+      <div>
+        <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+          AI-workflows der starter i hverdagen.
+        </h1>
+        <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+          De bedste cases er sjældent abstrakte. De starter som konkrete opgaver, der bliver gentaget for ofte og håndteret forskelligt fra person til person.
+        </p>
+
+        <div class="mt-12 grid gap-5">
+          {useCases.map((useCase) => (
+            <a href={useCase.path} class="group rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 transition-colors hover:border-accent/35 hover:bg-white/[0.06] md:p-6">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">{useCase.eyebrow}</p>
+              <h2 class="mt-4 max-w-3xl text-2xl font-semibold text-brand group-hover:text-accent">{useCase.title}</h2>
+              <p class="mt-4 max-w-3xl text-sm leading-relaxed text-muted">{useCase.description}</p>
+              <p class="mt-6 text-sm font-semibold text-brand">Se workflow</p>
+            </a>
+          ))}
+        </div>
+
+        <section class="mt-14 rounded-[1.5rem] border border-accent/25 bg-accent/10 p-6 md:p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI-svarstruktur</p>
+          <h2 class="mt-5 max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+            Hver case svarer på problem, workflow, output og gode signaler.
+          </h2>
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
+            Det er bevidst. Det gør siden lettere at scanne for mennesker, og lettere at citere korrekt for AI-assistenter og søgemaskiner.
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
   <Footer />
 </Layout>

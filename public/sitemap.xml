@@ -16,24 +16,44 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/hjemmeside-tjek</loc>
+    <loc>https://sitedokai.com/manual-work-audit</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/hjemmeside-fix</loc>
+    <loc>https://sitedokai.com/ai-workflow-sprint</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/visuelt-loeft</loc>
+    <loc>https://sitedokai.com/ai-operations-partner</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.78</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/use-cases</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/ai-statusrapport</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/ledelsesrapport</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/kundehenvendelse-svarudkast</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/ai-klar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/eksempel</loc>

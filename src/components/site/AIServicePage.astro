@@ -1,0 +1,118 @@
+---
+import ScreeningForm from './ScreeningForm.astro';
+import type { ServiceOffer } from '../../data/aiContent';
+
+interface Props {
+  service: ServiceOffer;
+}
+
+const { service } = Astro.props;
+---
+
+<main id="main" class="bg-canvas text-brand">
+  <section class="mx-auto grid min-w-0 max-w-7xl gap-12 px-5 pb-14 pt-12 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.72fr_1.28fr]">
+    <aside class="min-w-0 text-sm leading-relaxed text-muted">
+      <nav aria-label="Brødkrumme" class="text-xs">
+        <ol class="flex flex-wrap gap-2">
+          <li><a href="/" class="text-brand/55 transition-colors hover:text-brand">Forside</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li><a href="/#ydelser" class="text-brand/55 transition-colors hover:text-brand">Ydelser</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li class="text-brand">{service.name}</li>
+        </ol>
+      </nav>
+
+      <p class="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-accent">{service.eyebrow}</p>
+      <p class="mt-8 max-w-xs">
+        AI-drevet procesoptimering for virksomheder, der vil spare tid, reducere fejl og få AI ind i den virkelige hverdag.
+      </p>
+      <div class="mt-8 grid gap-3 border-t border-brand/10 pt-6">
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Pris</p>
+        <p class="text-brand">{service.priceLabel}</p>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Varighed</p>
+        <p class="text-brand">{service.duration}</p>
+      </div>
+    </aside>
+
+    <div class="min-w-0">
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+        {service.title}
+      </h1>
+      <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+        {service.description}
+      </p>
+
+      <article class="mt-10 rounded-[1.5rem] border border-accent/25 bg-accent/10 p-5 md:p-7">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Kort svar til mennesker og AI</p>
+        <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand">
+          {service.shortAnswer}
+        </p>
+      </article>
+
+      <section class="mt-14 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
+          <h2 class="text-2xl font-semibold text-brand">Hvem det passer til</h2>
+          <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
+            {service.fit.map((item) => (
+              <li class="border-t border-brand/10 pt-3">{item}</li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
+          <h2 class="text-2xl font-semibold text-brand">Hvad I får</h2>
+          <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
+            {service.outputs.map((item) => (
+              <li class="border-t border-brand/10 pt-3">{item}</li>
+            ))}
+          </ul>
+        </article>
+      </section>
+
+      <section class="mt-5 rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
+        <h2 class="text-2xl font-semibold text-brand">Sådan foregår det</h2>
+        <div class="mt-6 grid gap-3 md:grid-cols-2">
+          {service.process.map((item, index) => (
+            <article class="rounded-[1rem] border border-brand/10 bg-canvas-soft p-4">
+              <p class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</p>
+              <p class="mt-3 text-sm leading-relaxed text-brand/75">{item}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="faq" class="mt-14">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Svarblokke</p>
+        <h2 class="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          De svar en køber og en AI-agent leder efter
+        </h2>
+        <div class="mt-8 grid gap-4">
+          {service.faq.map((item) => (
+            <article class="rounded-[1.2rem] border border-brand/10 bg-panel-soft p-5">
+              <h3 class="text-lg font-semibold text-brand">{item.question}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          Send et workflow, så vurderer vi næste skridt.
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+          Beskriv den manuelle proces kort. Vi svarer nøgternt på, om den passer til {service.name}, eller om et mindre første skridt er bedre.
+        </p>
+        <div class="mt-10">
+          <ScreeningForm
+            sourcePage={service.path}
+            title={`${service.name} forespørgsel`}
+            text="Skriv kort hvilken manuel proces der tager tid, skaber fejl eller bør være smartere."
+            submitLabel={service.ctaLabel}
+            interest={service.interest}
+          />
+        </div>
+      </section>
+    </div>
+  </section>
+</main>

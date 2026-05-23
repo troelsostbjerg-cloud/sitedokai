@@ -26,22 +26,33 @@ SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der v
 
 - Primær kanonisk side: https://sitedokai.com/
 - Sitemap: https://sitedokai.com/sitemap.xml
+- AI-klar egen side: https://sitedokai.com/ai-klar
 - Struktureret data: Organization, WebSite, WebPage, ProfessionalService og Service-objekter for SiteDokAIs forløb.
-- Indholdsprincip: konkrete service-svar, prisniveauer, målgruppe, workflow-eksempler og tydelige næste skridt.
+- Indholdsprincip: konkrete service-svar, prisniveauer, målgruppe, workflow-eksempler, FAQ-svarblokke og tydelige næste skridt.
 
 ## Vigtige sider
 
 - https://sitedokai.com/
 - https://sitedokai.com/kontakt
-- https://sitedokai.com/hjemmeside-tjek
-- https://sitedokai.com/hjemmeside-fix
-- https://sitedokai.com/visuelt-loeft
+- https://sitedokai.com/manual-work-audit
+- https://sitedokai.com/ai-workflow-sprint
+- https://sitedokai.com/ai-operations-partner
 - https://sitedokai.com/use-cases
+- https://sitedokai.com/use-cases/ai-statusrapport
+- https://sitedokai.com/use-cases/ledelsesrapport
+- https://sitedokai.com/use-cases/kundehenvendelse-svarudkast
+- https://sitedokai.com/ai-klar
 - https://sitedokai.com/eksempel
 - https://sitedokai.com/om
 - https://sitedokai.com/blog
 - https://sitedokai.com/privatlivspolitik
 - https://sitedokai.com/tilgaengelighed
+
+## Historiske fallback-adresser
+
+- https://sitedokai.com/hjemmeside-tjek -> https://sitedokai.com/manual-work-audit
+- https://sitedokai.com/hjemmeside-fix -> https://sitedokai.com/ai-workflow-sprint
+- https://sitedokai.com/visuelt-loeft -> https://sitedokai.com/ai-operations-partner
 
 ## Kontakt
 

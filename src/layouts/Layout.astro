@@ -30,7 +30,7 @@ const canonicalUrl = canonical.startsWith('http') ? canonical : new URL(canonica
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 const ogImageType = ogImageUrl.endsWith('.png') ? 'image/png' : ogImageUrl.endsWith('.jpg') || ogImageUrl.endsWith('.jpeg') ? 'image/jpeg' : undefined;
 const schemaBlocks = !structuredData ? [] : Array.isArray(structuredData) ? structuredData : [structuredData];
-const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
+const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
 ---
 
 <!doctype html>
