@@ -64,6 +64,61 @@ const services = [
   },
 ];
 
+const servicePages = {
+  'Manual Work Audit': {
+    id: 'manual-work-audit',
+    url: 'https://sitedokai.com/hjemmeside-tjek',
+    price: '15000',
+  },
+  'AI Workflow Sprint': {
+    id: 'ai-workflow-sprint',
+    url: 'https://sitedokai.com/hjemmeside-fix',
+    price: '35000',
+  },
+  'AI Operations Partner': {
+    id: 'ai-operations-partner',
+    url: 'https://sitedokai.com/visuelt-loeft',
+    price: '10000',
+  },
+};
+
+const serviceSchema = services.map((service) => {
+  const page = servicePages[service.name];
+  return {
+    '@type': 'Service',
+    '@id': `https://sitedokai.com/#${page.id}`,
+    name: service.name,
+    url: page.url,
+    serviceType: service.name,
+    description: service.text,
+    provider: {
+      '@id': 'https://sitedokai.com/#organization',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Danmark',
+    },
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: 'Virksomheder med manuelle workflows, gentagne driftsopgaver og praktiske AI-implementeringsbehov',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: page.url,
+      price: page.price,
+      priceCurrency: 'DKK',
+      availability: 'https://schema.org/InStock',
+    },
+  };
+});
+
+const aiProofItems = [
+  ['llms.txt', 'Kort, maskinlæsbar profil for AI-agenter og research-værktøjer.', '/llms.txt'],
+  ['Schema', 'Struktureret data for organisation, website og de tre ydelser.', null],
+  ['Sitemap', 'Indekserbare servicesider, cases og proof-of-work samlet i sitemap.', '/sitemap.xml'],
+  ['Konkret copy', 'Klare svar på hvad vi gør, hvem det er for, prisniveau og næste skridt.', null],
+];
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -74,6 +129,18 @@ const structuredData = {
       url: 'https://sitedokai.com',
       logo: 'https://sitedokai.com/favicon.svg',
       email: 'info@sitedokai.com',
+      founder: {
+        '@id': 'https://sitedokai.com/#troels-ostbjerg',
+      },
+      knowsAbout: [
+        'AI-drevet procesoptimering',
+        'AI workflows',
+        'workflow automation',
+        'operations automation',
+        'proceskortlægning',
+        'AI implementering',
+        'human approval workflows',
+      ],
       contactPoint: {
         '@type': 'ContactPoint',
         email: 'info@sitedokai.com',
@@ -81,6 +148,46 @@ const structuredData = {
         availableLanguage: ['da-DK'],
         areaServed: 'DK',
       },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://sitedokai.com/#troels-ostbjerg',
+      name: 'Troels Østbjerg',
+      jobTitle: 'Founder og AI operations partner',
+      worksFor: {
+        '@id': 'https://sitedokai.com/#organization',
+      },
+      knowsAbout: ['operations', 'supply chain', 'procesoptimering', 'AI workflows', 'praktisk AI-implementering'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://sitedokai.com/#website',
+      name: 'SiteDokAI',
+      url: 'https://sitedokai.com/',
+      inLanguage: 'da-DK',
+      publisher: {
+        '@id': 'https://sitedokai.com/#organization',
+      },
+      description: 'Dansk website om AI-drevet procesoptimering, Manual Work Audit og praktiske AI-workflows.',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://sitedokai.com/#webpage',
+      url: 'https://sitedokai.com/',
+      name: 'SiteDokAI — AI-drevet procesoptimering og brugbare AI-workflows',
+      isPartOf: {
+        '@id': 'https://sitedokai.com/#website',
+      },
+      about: {
+        '@id': 'https://sitedokai.com/#service',
+      },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: 'https://sitedokai.com/og-image.svg',
+        width: 1200,
+        height: 630,
+      },
+      inLanguage: 'da-DK',
     },
     {
       '@type': 'ProfessionalService',
@@ -104,17 +211,21 @@ const structuredData = {
         'AI implementering',
         'no-code AI',
       ],
-      offers: {
-        '@type': 'Offer',
-        price: '15000',
-        priceCurrency: 'DKK',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Manual Work Audit',
-          description: 'Kortlægning af manuelle workflows og prioritering af de bedste AI-pilots.',
-        },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'SiteDokAI forløb',
+        itemListElement: serviceSchema.map((service) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@id': service['@id'],
+          },
+          price: service.offers.price,
+          priceCurrency: 'DKK',
+          url: service.url,
+        })),
       },
     },
+    ...serviceSchema,
   ],
 };
 ---
@@ -355,6 +466,35 @@ const structuredData = {
               SiteDokAI startede som et praktisk AI-projekt: en automatiseret pipeline, der analyserede hvordan virksomheder blev forstået i AI-svar på tværs af ChatGPT, Perplexity, Gemini og Claude. Det var ikke tænkt som marketing-teori. Det var et eksempel på måden vi arbejder på: se et problem, kortlæg processen, byg en workflow, lever et beslutningsgrundlag.
             </p>
             <p class="mt-7 text-sm font-semibold text-brand">Har I et lignende manuelt analyseflow? Lad os kortlægge det.</p>
+          </article>
+
+          <article class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-6 md:p-8">
+            <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI-klar egen side</p>
+                <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+                  SiteDokAI skal også være let for AI at forstå.
+                </h2>
+                <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+                  Derfor er siden bygget med klare service-svar, struktureret data, sitemap og en åben AI-profil, så både mennesker, Google og AI-agenter kan aflæse hvad vi gør, hvem det er for, og hvordan man tager næste skridt.
+                </p>
+              </div>
+              <div class="grid gap-3">
+                {aiProofItems.map(([title, text, href]) => (
+                  href ? (
+                    <a href={href} class="group rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4 transition-colors hover:border-accent/40 hover:bg-panel-soft">
+                      <span class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</span>
+                      <span class="mt-2 block text-sm leading-relaxed text-brand/75 group-hover:text-brand">{text}</span>
+                    </a>
+                  ) : (
+                    <div class="rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4">
+                      <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</p>
+                      <p class="mt-2 text-sm leading-relaxed text-brand/75">{text}</p>
+                    </div>
+                  )
+                ))}
+              </div>
+            </div>
           </article>
 
           <article class="grid gap-5 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:grid-cols-2 md:p-8">

@@ -51,13 +51,18 @@ const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
       <Button href={ctaHref} size="sm">Book audit</Button>
     </div>
 
-    <details class="group relative lg:hidden">
-      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-brand/10 bg-panel-soft text-brand [&::-webkit-details-marker]:hidden" aria-label="Åbn menu">
+    <details class="group relative lg:hidden" data-mobile-menu>
+      <summary
+        class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-brand/10 bg-panel-soft text-brand transition-colors hover:bg-panel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
+        aria-label="Åbn menu"
+        aria-expanded="false"
+        aria-controls="site-mobile-menu-panel"
+      >
         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" aria-hidden="true">
           <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         </svg>
       </summary>
-      <div class="absolute right-0 top-14 w-[min(21rem,calc(100vw-2rem))] rounded-2xl border border-brand/10 bg-canvas-soft p-3 shadow-card">
+      <div id="site-mobile-menu-panel" class="absolute right-0 top-14 z-30 max-h-[min(31rem,calc(100dvh-8rem))] w-[min(21rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-brand/10 bg-canvas-soft p-3 shadow-card">
         <div class="grid gap-1">
           {navItems.map((item) => {
             const isActive = currentPath === item.href;
@@ -80,3 +85,56 @@ const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
     </details>
   </nav>
 </header>
+
+<script is:inline>
+  (function() {
+    var menus = document.querySelectorAll('[data-mobile-menu]');
+    if (!menus.length) return;
+
+    menus.forEach(function(menu) {
+      var summary = menu.querySelector('summary');
+
+      function syncExpandedState() {
+        if (summary) {
+          summary.setAttribute('aria-expanded', menu.hasAttribute('open') ? 'true' : 'false');
+        }
+      }
+
+      function closeMenu() {
+        if (!menu.hasAttribute('open')) return;
+        menu.removeAttribute('open');
+        syncExpandedState();
+        if (summary instanceof HTMLElement) {
+          summary.blur();
+        }
+      }
+
+      menu.addEventListener('toggle', syncExpandedState);
+
+      menu.addEventListener('click', function(event) {
+        var target = event.target;
+        if (!(target instanceof Element)) return;
+
+        var link = target.closest('a[href]');
+        if (!link || !menu.contains(link)) return;
+
+        window.setTimeout(closeMenu, 0);
+      });
+
+      document.addEventListener('click', function(event) {
+        var target = event.target;
+        if (!(target instanceof Node)) return;
+        if (!menu.hasAttribute('open') || menu.contains(target)) return;
+
+        closeMenu();
+      });
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key !== 'Escape') return;
+        closeMenu();
+      });
+
+      syncExpandedState();
+    });
+  })();
+</script>

@@ -40,7 +40,9 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="SiteDokAI" />
+    <meta name="application-name" content="SiteDokAI" />
     <meta name="robots" content={robotsContent} />
+    <meta name="theme-color" content="#07111d" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SiteDokAI" />
     <meta property="og:locale" content="da_DK" />
@@ -56,6 +58,8 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="SiteDokAI AI-readable profile" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
