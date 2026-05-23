@@ -1,15 +1,24 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SiteDokAI - agentic search rådgivning</title>
-  <desc id="desc">Rådgivning om at blive fundet, forstået og valgt af AI-agenter.</desc>
-  <rect width="1200" height="630" fill="#F7F6F1"/>
-  <path d="M88 120H1112" stroke="#111512" stroke-opacity="0.14"/>
-  <path d="M88 510H1112" stroke="#111512" stroke-opacity="0.14"/>
-  <text x="88" y="92" fill="#111512" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.04em">SiteDokAI</text>
-  <text x="88" y="218" fill="#111512" font-family="Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="-0.055em">Bliv forstået og valgt</text>
-  <text x="88" y="300" fill="#111512" font-family="Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="-0.055em">i agentic search.</text>
-  <text x="92" y="380" fill="#62665F" font-family="Arial, sans-serif" font-size="30" font-weight="400">Rådgivning om AI-synlighed, kilder og valgbarhed.</text>
-  <text x="92" y="552" fill="#111512" font-family="Arial, sans-serif" font-size="24" font-weight="700">Første samtale og screening uden beregning</text>
-  <circle cx="1036" cy="384" r="74" stroke="#111512" stroke-opacity="0.18" stroke-width="2"/>
-  <circle cx="1036" cy="384" r="10" fill="#111512"/>
-  <path d="M930 384H1022M1050 384H1142" stroke="#111512" stroke-opacity="0.42" stroke-width="2"/>
+  <title id="title">SiteDokAI - AI-drevet procesoptimering</title>
+  <desc id="desc">Fra manuelt rod til brugbare AI-workflows.</desc>
+  <rect width="1200" height="630" fill="#07111D"/>
+  <path d="M0 0h1200v630H0z" fill="url(#grid)" opacity="0.5"/>
+  <rect x="72" y="72" width="1056" height="486" rx="42" fill="#0D1B2A" stroke="#F3F8FF" stroke-opacity="0.16" stroke-width="2"/>
+  <rect x="820" y="132" width="224" height="58" rx="18" fill="#65F0B8" fill-opacity="0.12" stroke="#65F0B8" stroke-opacity="0.38"/>
+  <rect x="820" y="226" width="224" height="58" rx="18" fill="#FFFFFF" fill-opacity="0.045" stroke="#F3F8FF" stroke-opacity="0.13"/>
+  <rect x="820" y="320" width="224" height="58" rx="18" fill="#FFFFFF" fill-opacity="0.045" stroke="#F3F8FF" stroke-opacity="0.13"/>
+  <path d="M932 190v36M932 284v36" stroke="#65F0B8" stroke-width="3" stroke-linecap="round"/>
+  <text x="96" y="148" fill="#65F0B8" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="0.16em">SITEDOKAI</text>
+  <text x="96" y="270" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-0.04em">Fra manuelt rod</text>
+  <text x="96" y="354" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-0.04em">til brugbare</text>
+  <text x="96" y="438" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-0.04em">AI-workflows</text>
+  <text x="100" y="510" fill="#9FB3C8" font-family="Arial, sans-serif" font-size="30">AI-drevet procesoptimering for virksomheder</text>
+  <text x="850" y="168" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="18" font-weight="700">Manual input</text>
+  <text x="846" y="262" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="18" font-weight="700">AI struktur</text>
+  <text x="848" y="356" fill="#F3F8FF" font-family="Arial, sans-serif" font-size="18" font-weight="700">Klar handling</text>
+  <defs>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" stroke="#F3F8FF" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
 </svg>

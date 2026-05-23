@@ -14,8 +14,8 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
 ---
 
 <Layout
-  title="SiteDok Operations CRM | AI Audit"
-  description="Internt CRM og audit-studio til manuelle SiteDokAI AI Audits."
+  title="SiteDok Operations CRM | Manual Work Audit"
+  description="Internt CRM og audit-studio til manuelle SiteDokAI workflow-audits."
   canonical="/studio/hjemmeside-tjek"
   noindex={true}
 >
@@ -52,8 +52,8 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
         <header class="enterprise-topbar">
           <div>
             <p class="enterprise-kicker">Internt arbejdsrum</p>
-            <h1>AI Audit CRM</h1>
-            <p>Opret, styr og kvalitetssikre professionelle AI Audits med samme rolige kontrol som et dyrt enterprise-system.</p>
+            <h1>Manual Work Audit CRM</h1>
+            <p>Opret, styr og kvalitetssikre workflow-audits med samme rolige kontrol som et dyrt enterprise-system.</p>
           </div>
           <div class="enterprise-topbar-actions">
             <button type="button" data-action="show-dashboard" class="enterprise-button enterprise-button-secondary">Dashboard</button>
@@ -89,11 +89,11 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
           <div class="enterprise-section-head">
             <div>
               <p class="enterprise-label">Dashboard</p>
-              <h2>Pipeline for AI Audit</h2>
+              <h2>Pipeline for Manual Work Audit</h2>
               <p>Oversigt over kunder, status og næste tjek der skal åbnes.</p>
             </div>
             <button type="button" data-action="show-create" class="enterprise-button enterprise-button-primary">
-              Opret ny AI Audit
+              Opret ny audit
             </button>
           </div>
 
@@ -116,7 +116,7 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
         <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Nyt tjek</p>
-            <h2 class="mt-3 font-display text-3xl font-medium tracking-tight text-brand md:text-4xl">Opret AI Audit</h2>
+            <h2 class="mt-3 font-display text-3xl font-medium tracking-tight text-brand md:text-4xl">Opret Manual Work Audit</h2>
             <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">Start med kundeinfo. Alt kan redigeres bagefter i rapport-editoren.</p>
           </div>
           <button type="button" data-action="show-dashboard" class="rounded-[0.85rem] border border-border-soft bg-surface px-4 py-2.5 text-sm font-semibold text-brand hover:border-accent/35">
@@ -2182,7 +2182,7 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
             <div class="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark">Rapport-editor</p>
-                <h2 class="mt-3 font-sans text-4xl font-bold tracking-[-0.025em] text-brand md:text-5xl">${escapeHtml(check.client?.name || 'AI Audit')}</h2>
+                <h2 class="mt-3 font-sans text-4xl font-bold tracking-[-0.025em] text-brand md:text-5xl">${escapeHtml(check.client?.name || 'Manual Work Audit')}</h2>
                 <p class="mt-2 break-all text-sm font-semibold text-accent-dark">${escapeHtml(check.client?.website || '')}</p>
                 <p class="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Gemmes automatisk i denne browser</p>
               </div>
@@ -2295,15 +2295,15 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
         }
         const firstIssue = getCompleteIssues(check)[0];
         const firstIssueText = firstIssue ? ` Det første oplagte fokuspunkt er: ${escapeHtml(firstIssue.title)}.` : '';
-        return `AI Audit peger på, at den største gevinst ligger i at gøre virksomheden lettere at finde, dokumentere og vælge i en AI-agentens research.${firstIssueText}<br><br>Start med de ændringer, der gør det nemmere for agenten at forstå ydelsen, se beviser og pege kunden mod næste skridt uden friktion.`;
+        return `Workflow-gennemgangen peger på, at den største gevinst ligger i at gøre processen lettere at forstå, dokumentere og handle på.${firstIssueText}<br><br>Start med de ændringer, der gør det nemmere at se input, ansvar, beviser og næste skridt uden friktion.`;
       }
 
       function recommendationExplanation(recommendation) {
         if (recommendation === 'Hjemmeside-fix') {
-          return 'AI Audit viser, at den største gevinst ligger i at rette tekst, struktur og kontaktknapper, så virksomheden bliver lettere at finde, dokumentere og vælge.';
+          return 'Manual Work Audit viser, at den største gevinst ligger i at rette tekst, struktur og kontaktknapper, så processen bliver lettere at forstå, dokumentere og handle på.';
         }
         if (recommendation === 'Visuelt løft') {
-          return 'AI Audit viser, at førstehåndsindtryk, layout, billeder og professionelt udtryk bør styrkes for at skabe mere tillid og bedre kildegrundlag.';
+          return 'Manual Work Audit viser, at førstehåndsindtryk, layout, billeder og professionelt udtryk bør styrkes for at skabe mere tillid og bedre procesgrundlag.';
         }
         if (recommendation === 'Kun små tekstrettelser') {
           return 'Der er ikke nødvendigvis brug for en stor løsning. De vigtigste forbedringer kan starte med tydeligere tekst, stærkere kontaktknapper og bedre struktur.';
@@ -2416,7 +2416,7 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
           reportShell.innerHTML = `
             <div class="rounded-[1.25rem] border border-border-soft bg-white/76 p-6">
               <h2 class="font-display text-3xl font-medium text-brand">Ingen rapport endnu.</h2>
-              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en AI Audit først, så kan rapporten vises her.</p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en Manual Work Audit først, så kan rapporten vises her.</p>
               <button type="button" data-action="show-create" class="mt-5 rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white">Opret tjek</button>
             </div>`;
           return;
@@ -2458,8 +2458,8 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
             <section class="report-cover grid gap-8 rounded-[1.25rem] border border-border-soft bg-white/78 p-7 md:p-10">
               <div>
                 <p class="text-xs font-bold uppercase tracking-[0.28em] text-accent-dark">SiteDokAI</p>
-                <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-7xl">AI Audit</h1>
-                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting, som kan påvirke om AI-agenten finder, forstår og anbefaler virksomheden.</p>
+                <h1 class="mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-brand md:text-7xl">Manual Work Audit</h1>
+                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/76">Denne rapport viser de vigtigste ting, som kan påvirke om processen er forståelig, dokumenteret og let at handle på.</p>
               </div>
               <div class="grid gap-3 rounded-[1.1rem] border border-accent/18 bg-accent-soft/55 p-5 md:grid-cols-2">
                 <div><p class="text-xs font-bold uppercase tracking-[0.16em] text-accent-dark">Kunde</p><p class="mt-1 text-lg font-semibold text-brand">${escapeHtml(textOrFallback(client.name))}</p></div>
@@ -2654,7 +2654,7 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
           videoShell.innerHTML = `
             <div class="rounded-[1.25rem] border border-border-soft bg-white/76 p-6">
               <h2 class="font-display text-3xl font-medium text-brand">Intet video-script endnu.</h2>
-              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en AI Audit først.</p>
+              <p class="mt-3 text-sm leading-relaxed text-muted">Opret en Manual Work Audit først.</p>
               <button type="button" data-action="show-create" class="mt-5 rounded-[0.9rem] border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white">Opret tjek</button>
             </div>`;
           return;
@@ -2830,7 +2830,7 @@ const dashboardFilterOptions = ['Alle', ...statusOptions];
         if (action === 'delete-check') {
           const check = getActiveCheck();
           if (!check) return;
-          if (!confirm(`Slet AI Audit for ${check.client?.name || 'kunden'}?`)) return;
+          if (!confirm(`Slet Manual Work Audit for ${check.client?.name || 'kunden'}?`)) return;
           state.checks = state.checks.filter((item) => item.id !== check.id);
           activeId = state.checks[0]?.id || null;
           saveState();

@@ -1,36 +1,33 @@
 # SiteDokAI
 
-SiteDokAI er en dansk rådgivningsydelse for virksomheder, der vil forstå og forbedre deres synlighed i agentic search, AI-søgning og AI-agenters research.
+SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der vil finde manuelle processer, der stjæler tid, og bygge praktiske AI-workflows, som sparer tid, reducerer fejl og faktisk bliver brugt.
 
 ## Hvad SiteDokAI hjælper med
 
-- Første samtale og screening uden beregning.
-- Rådgivning om hvordan virksomheden bliver fundet, forstået, citeret og valgt af AI-agenter.
-- Diagnose af AI-svar, konkurrenter, kilder, website-struktur, FAQ, cases, schema og trust-signaler.
-- Implementeringsforløb efter behov: klarere ydelser, bedre beslutningssvar og stærkere kildegrundlag.
+- Manual Work Audit: kortlægning af manuelle workflows og prioritering af de bedste AI-pilots.
+- AI Workflow Sprint: bygning af én konkret AI-workflow på et reelt hverdagsproblem.
+- AI Operations Partner: løbende hjælp til backlog, forbedringer, dokumentation, træning og adoption.
+- Procesoptimering i mails, Excel/Sheets, Teams/Slack, SharePoint/Drive, CRM, rapportering, opfølgninger og handovers.
 
 ## Relevante emner
 
-- Agentic search
-- AI agents
-- AI-synlighed
-- Answer Engine Optimization
-- Generative Engine Optimization
-- ChatGPT
-- Gemini
-- Claude
-- Google AI Mode
-- Google Search agents
-- B2B-research
-- Lokale valg og forbrugerbeslutninger
-- Schema, FAQ, kilder, priser, cases og kontaktveje
+- AI-drevet procesoptimering
+- AI workflows
+- workflow automation
+- operations automation
+- proceskortlægning
+- AI implementering
+- no-code AI
+- manual process automation
+- human approval workflows
+- adoption og effektmåling
 
 ## Vigtige sider
 
 - https://sitedokai.com/
 - https://sitedokai.com/kontakt
-- https://sitedokai.com/gratis-mini-tjek
-- https://sitedokai.com/blog/google-agentic-search-2026
+- https://sitedokai.com/privatlivspolitik
+- https://sitedokai.com/tilgaengelighed
 
 ## Kontakt
 

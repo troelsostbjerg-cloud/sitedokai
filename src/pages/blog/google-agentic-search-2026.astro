@@ -2,94 +2,27 @@
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import Button from '../../components/site/Button.astro';
+import AdvisoryPage from '../../components/site/AdvisoryPage.astro';
 import '../../styles/global.css';
-
-const sources = [
-  ['Google', 'A new era for AI Search', 'https://blog.google/products-and-platforms/products/search/search-io-2026/'],
-  ['Gartner', 'Search volume will drop 25%', 'https://www.gartner.com/en/newsroom/press-releases/2024-02-19-gartner-predicts-search-engine-volume-will-drop-25-percent-by-2026-due-to-ai-chatbots-and-other-virtual-agents'],
-  ['BrightEdge', 'AI search reaching tipping point', 'https://www.brightedge.com/news/press-releases/brightedge-data-ai-search-reaching-tipping-point-ai-agents-2026'],
-  ['Deloitte', 'Agentic commerce', 'https://www.deloitte.com/us/en/industries/consumer/articles/agentic-commerce-ai-shopping-agents-guide.html'],
-];
 ---
 
 <Layout
-  title="Google I/O 2026 og agentic search | SiteDokAI"
-  description="Google har annonceret Search agents og en intelligent Search box. Her er hvad agentic search betyder for virksomheder."
+  title="Proof-of-work: AI-søgning som procesprojekt | SiteDokAI"
+  description="Et tidligere SiteDokAI-projekt om AI-søgning bruges nu som proof-of-work for praktisk AI-procesbygning."
   canonical="/blog/google-agentic-search-2026"
 >
   <Nav />
-  <main id="main" class="bg-canvas text-brand">
-    <article class="mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
-      <aside class="text-sm leading-relaxed text-muted">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Analyse · 22. maj 2026</p>
-        <p class="mt-8 max-w-xs">
-          Google, Gartner, BrightEdge og Deloitte peger alle på samme retning: AI bliver et nyt lag mellem virksomhed og kunde.
-        </p>
-      </aside>
-
-      <div>
-        <h1 class="max-w-5xl font-display text-5xl font-semibold leading-[0.98] tracking-[-0.04em] text-brand md:text-7xl">
-          Google gør Search mere agentisk. Det ændrer hvad en hjemmeside skal kunne.
-        </h1>
-
-        <div class="mt-10 max-w-3xl space-y-7 text-lg leading-relaxed text-brand/70">
-          <p>
-            På Google I/O den 19. maj 2026 beskrev Google en ny æra for AI Search med AI Mode, en intelligent Search box og Search agents, der kan følge emner og arbejde i baggrunden.
-          </p>
-          <p>
-            Det betyder, at synlighed ikke kun handler om placeringer i en klassisk søgeresultatside. En AI-agent skal kunne forstå ydelser, beviser, cases, priser, lokationer og næste handlinger uden at gætte.
-          </p>
-          <p>
-            For virksomheder rammer det både B2B-research og forbrugerbeslutninger. Kunden kan bede AI finde leverandører, sammenligne muligheder eller pege på et trygt valg. Hvis virksomheden er uklar, bliver den svær at anbefale.
-          </p>
-        </div>
-
-        <section class="mt-14 border-y border-brand/12">
-          <div class="grid divide-y divide-brand/12 md:grid-cols-3 md:divide-x md:divide-y-0">
-            <div class="py-6 md:px-6 md:first:pl-0">
-              <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand/38">Google</p>
-              <p class="mt-3 text-2xl font-semibold tracking-[-0.02em] text-brand">Search agents</p>
-              <p class="mt-2 text-sm leading-relaxed text-muted">AI-søgning flytter fra svar til opgaver, overvågning og handling.</p>
-            </div>
-            <div class="py-6 md:px-6">
-              <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand/38">Gartner</p>
-              <p class="mt-3 text-2xl font-semibold tracking-[-0.02em] text-brand">25%</p>
-              <p class="mt-2 text-sm leading-relaxed text-muted">Forudsagde fald i traditionel søgevolumen i 2026 på grund af AI-chatbots og virtuelle agenter.</p>
-            </div>
-            <div class="py-6 md:px-6 md:last:pr-0">
-              <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand/38">Deloitte</p>
-              <p class="mt-3 text-2xl font-semibold tracking-[-0.02em] text-brand">Agent-ready</p>
-              <p class="mt-2 text-sm leading-relaxed text-muted">Agentic commerce kræver data og indhold, som assistenter kan bruge i købsrejsen.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="mt-14">
-          <h2 class="max-w-3xl font-display text-4xl font-semibold leading-tight tracking-[-0.035em] text-brand md:text-5xl">
-            Den praktiske konsekvens: jeres website bliver et kildegrundlag.
-          </h2>
-          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
-            Derfor rådgiver SiteDokAI ikke kun om “AI-tekster”. Vi kigger på struktur, beviser, FAQ, cases, lokal relevans, schema og de beslutningssvar, der gør virksomheden lettere at citere og vælge.
-          </p>
-          <div class="mt-10">
-            <Button href="/kontakt#screening">Book gratis screening</Button>
-          </div>
-        </section>
-
-        <section class="mt-16">
-          <h2 class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Kilder</h2>
-          <div class="mt-5 divide-y divide-brand/12 border-y border-brand/12">
-            {sources.map(([source, title, href]) => (
-              <a href={href} target="_blank" rel="noreferrer" class="grid gap-2 py-4 text-sm transition-colors hover:text-brand md:grid-cols-[8rem_1fr]">
-                <span class="text-brand/45">{source}</span>
-                <span class="font-medium text-brand">{title}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-      </div>
-    </article>
-  </main>
+  <AdvisoryPage
+    eyebrow="Proof-of-work"
+    title="Et tidligere AI-søgningsprojekt blev bygget som en workflow, ikke som marketingteori."
+    text="SiteDokAI startede med en pipeline, der undersøgte hvordan virksomheder blev forstået i AI-svar. Det er nu proof-of-work for arbejdsformen: find et uklart problem, kortlæg processen, byg en konkret workflow og lever et beslutningsgrundlag."
+    points={[
+      'Problem: virksomheder vidste ikke hvordan AI-svar beskrev dem.',
+      'Workflow: testspørgsmål, svarindsamling, strukturering, vurdering og rapport.',
+      'Læring: værdien lå i proceskortlægning og brugbart beslutningsgrundlag.',
+    ]}
+    note="Agentic search er derfor ikke længere SiteDokAIs hovedprodukt. Det er et eksempel på, hvordan praktiske AI-workflows kan bygges rundt om et rigtigt problem."
+    ctaLabel="Send workflow"
+  />
   <Footer />
 </Layout>

@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    --color-canvas: #f7f6f1;
-    --color-brand: #111512;
-    --color-muted: #62665f;
+    --color-canvas: #07111d;
+    --color-brand: #f3f8ff;
+    --color-muted: #9fb3c8;
   }
 
   html {
@@ -15,7 +15,9 @@
   }
   body {
     @apply bg-canvas font-sans text-muted antialiased;
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(247, 246, 241, 0));
+    background-image:
+      linear-gradient(180deg, rgba(101, 240, 184, 0.055), rgba(7, 17, 29, 0) 28rem),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(7, 17, 29, 0));
     padding-bottom: var(--cookie-banner-space, 0px);
     transition: padding-bottom 180ms ease;
     overflow-x: hidden;
@@ -34,7 +36,7 @@
   }
 
   ::selection {
-    background: rgba(17, 21, 18, 0.14);
+    background: rgba(101, 240, 184, 0.22);
     color: var(--color-brand);
   }
 
@@ -49,8 +51,8 @@
 
   .conversion-card:hover,
   .hero-proof-card:hover {
-    border-color: rgba(111, 138, 114, 0.32);
-    box-shadow: 0 18px 52px rgba(32, 38, 34, 0.075);
+    border-color: rgba(101, 240, 184, 0.32);
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
     transform: translateY(-2px);
   }
 

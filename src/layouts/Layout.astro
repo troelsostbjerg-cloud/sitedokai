@@ -16,7 +16,7 @@ interface Props {
 
 const {
   title,
-  description = 'SiteDokAI rådgiver virksomheder om agentic search, AI-synlighed og hvordan de bliver fundet, forstået og valgt af AI-agenter.',
+  description = 'SiteDokAI hjælper virksomheder med at finde manuelle processer, der stjæler tid, og bygge praktiske AI-workflows, som sparer tid, reducerer fejl og faktisk bliver brugt.',
   canonical = Astro.url.href,
   ogImage = '/og-image.svg',
   ogImageWidth = 1200,
@@ -64,17 +64,17 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     ))}
     <title>{title}</title>
   </head>
-  <body class="bg-[#faf7f2] text-brand">
-    <section id="cookie-banner" aria-label="Cookie-information" class="z-50 hidden border-b border-[#d9cfbf] bg-[#f7f2e8]/96 px-3 py-2 text-brand backdrop-blur sm:px-6 sm:py-2.5">
-      <div class="mx-auto flex max-w-5xl items-center justify-between gap-2.5">
-        <p class="min-w-0 text-[12px] leading-tight text-brand/72 sm:text-sm sm:leading-relaxed">
-          Kun nødvendige cookies. <span class="hidden sm:inline">Ingen tracking.</span> <a href="/privatlivspolitik" class="text-accent underline decoration-[rgba(159,106,36,0.35)] underline-offset-4 hover:text-brand">Læs mere</a>
+  <body class="bg-canvas text-brand">
+    <section id="cookie-banner" aria-label="Cookie-information" class="z-50 hidden border-b border-brand/10 bg-canvas/95 px-3 py-2 text-brand backdrop-blur sm:px-6 sm:py-2.5">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-2.5">
+        <p class="min-w-0 text-[12px] leading-tight text-brand/70 sm:text-sm sm:leading-relaxed">
+          Kun nødvendige cookies. <span class="hidden sm:inline">Ingen tracking.</span> <a href="/privatlivspolitik" class="text-accent underline decoration-accent/30 underline-offset-4 hover:text-brand">Læs mere</a>
         </p>
         <div class="flex flex-shrink-0 gap-1.5 sm:gap-2">
-          <button id="cookie-decline" class="whitespace-nowrap rounded-[0.65rem] border border-[#d9cfbf] px-2.5 py-1.5 text-[11px] font-bold leading-none text-brand/70 transition-colors hover:bg-white sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
+          <button id="cookie-decline" class="whitespace-nowrap rounded-[0.65rem] border border-brand/10 px-2.5 py-1.5 text-[11px] font-bold leading-none text-brand/70 transition-colors hover:bg-panel-soft sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
             Afvis
           </button>
-          <button id="cookie-accept" class="whitespace-nowrap rounded-[0.65rem] bg-brand px-3 py-1.5 text-[11px] font-bold leading-none text-white transition-colors hover:bg-brand-light sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
+          <button id="cookie-accept" class="whitespace-nowrap rounded-[0.65rem] bg-accent px-3 py-1.5 text-[11px] font-bold leading-none text-canvas transition-colors hover:bg-accent-bright sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
             OK
           </button>
         </div>

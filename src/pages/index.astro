@@ -6,32 +6,62 @@ import ScreeningForm from '../components/site/ScreeningForm.astro';
 import Button from '../components/site/Button.astro';
 import '../styles/global.css';
 
-const focusAreas = [
-  {
-    title: 'Bliver virksomheden fundet?',
-    text: 'Vi tester de spørgsmål, kunder, indkøbere og AI-assistenter bruger, når de leder efter løsninger som jeres.',
-  },
-  {
-    title: 'Kan AI forstå jer?',
-    text: 'Vi ser på ydelser, målgrupper, beviser, cases, priser, lokationer og de kilder en agent kan citere.',
-  },
-  {
-    title: 'Bliver I valgt?',
-    text: 'Vi vurderer om I bliver anbefalet, fravalgt eller erstattet af konkurrenter i de svar, der former kundens shortlist.',
-  },
+const problemCards = [
+  ['01', 'Status skal jagtes manuelt', 'Folk bruger tid på at finde seneste status i mails, møder og løse beskeder.'],
+  ['02', 'Data flyttes mellem systemer', 'Excel, CRM, Teams og rapporter holdes sammen af copy-paste og menneskelig hukommelse.'],
+  ['03', 'Rapporter bygges fra bunden', 'De samme tal, noter og afvigelser samles igen og igen uden fast flow.'],
+  ['04', 'Møder bruges på opdateringer', 'Beslutningstid bliver spist af statusrunder, fordi overblikket ikke findes før mødet.'],
+  ['05', 'Handover sker i løse noter', 'Vigtig kontekst forsvinder mellem salg, levering, support, finance eller projektteams.'],
+  ['06', 'Kunder behandles forskelligt', 'Svar, vurderinger og næste skridt afhænger for meget af hvem der sidder med sagen.'],
+  ['07', 'Viden ligger hos én person', 'Processen virker, så længe den rigtige person husker detaljerne.'],
+  ['08', 'AI bruges kun som ad hoc-chat', 'Der er testet lidt, men AI er ikke blevet en del af den faktiske drift.'],
 ];
 
-const advisoryProcess = [
-  ['01', 'Screening', 'Første samtale og kort screening uden beregning. Vi afklarer om der er et relevant problem at arbejde med.'],
-  ['02', 'Diagnose', 'Vi tester agentic search, AI-svar, kilder og konkurrentbillede omkring jeres vigtigste ydelser.'],
-  ['03', 'Forløb', 'Hvis det giver mening, rådgiver vi om struktur, indhold, beviser og website-ændringer, der gør jer lettere at vælge.'],
+const workflowExamples = [
+  ['Møde -> actions -> opfølgning', 'Fra løse mødenoter til klare actions, ansvarlige, deadlines og opfølgningsmail.'],
+  ['Kundehenvendelse -> svarudkast', 'AI kategoriserer, finder kontekst og skriver et forslag, som et menneske godkender.'],
+  ['Excel -> ledelsesrapport', 'Gentagne tal og statuspunkter bliver struktureret til en fast rapport med afvigelser og anbefalinger.'],
+  ['Leverandørstatus -> exception summary', 'Statusser, mails og afvigelser samles til et overblik over hvad der kræver handling.'],
+  ['Interviews -> procesdokumentation', 'Teams fortæller hvordan arbejdet reelt foregår. AI hjælper med at gøre det til brugbar dokumentation.'],
+  ['Projektstatus -> beslutningsoplæg', 'Fra spredte opdateringer til én samlet status med risici, beslutninger og næste skridt.'],
 ];
 
-const signals = [
-  'AI-svar i ChatGPT, Gemini, Claude og Google AI',
-  'Kilder, schema, FAQ, cases og beslutningssvar',
-  'Konkurrenter der bliver nævnt før jer',
-  'B2B-research, lokale valg og forbrugerbeslutninger',
+const methodSteps = [
+  ['01', 'Find friktionen', 'Vi finder de opgaver, hvor tid, energi og overblik forsvinder.'],
+  ['02', 'Kortlæg workflowet', 'Vi mapper den faktiske arbejdsgang, ikke den pæne proces på papiret.'],
+  ['03', 'Prioritér efter effekt', 'Vi scorer mulighederne efter tid sparet, fejlrisiko, kompleksitet og adoption chance.'],
+  ['04', 'Byg lille', 'Vi bygger én brugbar AI-workflow, tester den og justerer den med de mennesker, der skal bruge den.'],
+  ['05', 'Forankr og mål', 'Vi dokumenterer, træner og måler på timer sparet, færre fejl og faktisk brug.'],
+];
+
+const services = [
+  {
+    name: 'Manual Work Audit',
+    price: 'Fra 15.000 kr.',
+    duration: '5 arbejdsdage',
+    text: 'Vi kortlægger jeres manuelle workflows, finder hvor tiden forsvinder og prioriterer de 3 bedste AI-pilots.',
+    cta: 'Book audit',
+    highlighted: true,
+    includes: ['interviews', 'workflow mapping', 'automationsvurdering', 'prioriteret backlog', 'top 3 pilots', 'prototype-skitse'],
+  },
+  {
+    name: 'AI Workflow Sprint',
+    price: 'Fra 35.000 kr.',
+    duration: '10 arbejdsdage',
+    text: 'Vi bygger én konkret AI-workflow på et hverdagsproblem, tester den med brugerne og gør den klar til drift.',
+    cta: 'Byg første workflow',
+    highlighted: false,
+    includes: ['procesdesign', 'prototype/workflow', 'human approval step', 'dokumentation', 'brugertræning', 'effektmåling'],
+  },
+  {
+    name: 'AI Operations Partner',
+    price: 'Fra 10.000 kr./md.',
+    duration: 'Løbende',
+    text: 'Fast hjælp til at holde forbedringerne i gang, optimere workflows og sikre adoption.',
+    cta: 'Tal om løbende hjælp',
+    highlighted: false,
+    includes: ['månedlig backlog', 'workflow-forbedringer', 'nye små automations', 'dokumentation', 'træning', 'status på effekt'],
+  },
 ];
 
 const structuredData = {
@@ -56,7 +86,7 @@ const structuredData = {
       '@type': 'ProfessionalService',
       '@id': 'https://sitedokai.com/#service',
       name: 'SiteDokAI',
-      serviceType: 'Rådgivning om agentic search og AI-synlighed',
+      serviceType: 'AI workflow automation, process optimization, AI implementation',
       provider: {
         '@id': 'https://sitedokai.com/#organization',
       },
@@ -66,24 +96,22 @@ const structuredData = {
       },
       email: 'info@sitedokai.com',
       knowsAbout: [
-        'Agentic search',
-        'AI-synlighed',
-        'AI-agenter',
-        'Answer Engine Optimization',
-        'Generative Engine Optimization',
-        'ChatGPT',
-        'Gemini',
-        'Google AI',
-        'Claude',
+        'AI procesoptimering',
+        'AI workflows',
+        'workflow automation',
+        'operations automation',
+        'proceskortlægning',
+        'AI implementering',
+        'no-code AI',
       ],
       offers: {
         '@type': 'Offer',
-        price: '0',
+        price: '15000',
         priceCurrency: 'DKK',
         itemOffered: {
           '@type': 'Service',
-          name: 'Første samtale og screening',
-          description: 'Uforpligtende første screening af om virksomheden har et relevant agentic search-problem.',
+          name: 'Manual Work Audit',
+          description: 'Kortlægning af manuelle workflows og prioritering af de bedste AI-pilots.',
         },
       },
     },
@@ -92,114 +120,323 @@ const structuredData = {
 ---
 
 <Layout
-  title="SiteDokAI | Rådgivning om agentic search"
-  description="SiteDokAI rådgiver virksomheder om agentic search, AI-synlighed og hvordan de bliver fundet, forstået og valgt af AI-agenter. Første samtale og screening er uden beregning."
+  title="SiteDokAI — AI-drevet procesoptimering og brugbare AI-workflows"
+  description="SiteDokAI hjælper virksomheder med at finde manuelle processer, der stjæler tid, og bygge praktiske AI-workflows, som sparer tid, reducerer fejl og faktisk bliver brugt."
+  canonical="/"
   structuredData={structuredData}
 >
   <Nav />
   <main id="main" class="bg-canvas text-brand">
-    <section class="mx-auto grid min-w-0 max-w-6xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
-      <aside class="min-w-0 text-sm leading-relaxed text-muted">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Agentic search rådgivning</p>
-        <p class="mt-8 max-w-xs">
-          For virksomheder der vil forstå, hvordan AI-agenter ændrer synlighed, research og valg af leverandører.
-        </p>
-      </aside>
+    <section class="relative overflow-hidden border-b border-brand/10">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(243,248,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(243,248,255,0.035)_1px,transparent_1px)] bg-[size:56px_56px]" aria-hidden="true"></div>
+      <div class="relative mx-auto grid min-w-0 max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-6 md:pb-24 md:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div class="min-w-0">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI-workflows der starter i virkeligheden</p>
+          <h1 class="mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.94] text-brand sm:text-6xl md:text-7xl">
+            Fra manuelt rod til brugbare AI-workflows
+          </h1>
+          <p class="mt-7 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+            SiteDokAI hjælper virksomheder med at finde de processer, hvor tid forsvinder i mails, Excel, opfølgninger, rapportering og uklare handovers, og bygger praktiske AI-workflows, der sparer tid og faktisk bliver brugt.
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button href="#kontakt">Book en Manual Work Audit</Button>
+            <Button href="#kontakt" variant="secondary">Send et workflow, der irriterer jer</Button>
+          </div>
+          <div class="mt-8 grid gap-3 border-l border-accent/40 pl-5 text-sm leading-relaxed text-brand/75 sm:grid-cols-3 sm:border-l-0 sm:border-t sm:pl-0 sm:pt-5">
+            <p>Ingen AI-strategi-teater.</p>
+            <p>Ingen store IT-projekter fra dag ét.</p>
+            <p>Én konkret proces. Én konkret workflow. Målbar effekt.</p>
+          </div>
+        </div>
 
-      <div class="min-w-0">
-        <h1 class="max-w-5xl font-display text-5xl font-semibold leading-[0.94] tracking-[-0.045em] text-brand sm:text-6xl md:text-8xl md:tracking-[-0.055em]">
-          <span class="block">Bliv forstået</span>
-          <span class="block">og valgt i</span>
-          <span class="block">agentic search.</span>
-        </h1>
-        <p class="mt-8 max-w-[21rem] text-lg leading-relaxed text-brand/68 md:max-w-3xl md:text-2xl">
-          SiteDokAI rådgiver om AI-søgning, AI-agenter og Googles nye Search. Vi hjælper jer med at blive lettere at finde, sammenligne og vælge.
-        </p>
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button href="/kontakt#screening">Book gratis screening</Button>
-          <Button href="/blog/google-agentic-search-2026" variant="secondary">Læs om Google-skiftet</Button>
+        <aside class="min-w-0 lg:pl-4" aria-label="Workflow-eksempel">
+          <div class="hero-proof-card rounded-[1.75rem] border border-brand/10 bg-panel/80 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.22)] backdrop-blur">
+            <div class="rounded-[1.25rem] border border-brand/10 bg-canvas-soft p-5 sm:p-6">
+              <div class="flex items-center justify-between gap-4 border-b border-brand/10 pb-5">
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">Operations cockpit</p>
+                  <h2 class="mt-2 text-xl font-semibold text-brand">Manual Work Audit</h2>
+                </div>
+                <div class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">live map</div>
+              </div>
+
+              <div class="mt-5 grid gap-3">
+                {['Manual input', 'AI-assisteret strukturering', 'Menneskelig godkendelse', 'Klar rapport / mail / handover'].map((item, index) => (
+                  <div class="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-2xl border border-brand/10 bg-white/[0.035] p-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 font-mono text-xs text-accent">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span class="text-sm font-medium text-brand/90">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-5 grid gap-3 rounded-2xl border border-brand/10 bg-white/[0.035] p-4 sm:grid-cols-3">
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Før</p>
+                  <p class="mt-2 text-sm text-brand">12 manuelle statusmails</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Efter</p>
+                  <p class="mt-2 text-sm text-brand">1 samlet AI-status med actions</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Effekt</p>
+                  <p class="mt-2 text-sm text-brand">Mindre jagt, hurtigere beslutning</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="problemet" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Problemet</p>
+        </div>
+        <div>
+          <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+            De fleste virksomheder har ikke et AI-problem. De har et procesproblem.
+          </h2>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+            AI skaber sjældent værdi, hvis processen bag er uklar. Mange teams starter med værktøjet: ChatGPT, Copilot, Claude, Gemini, Make eller Zapier. Men det rigtige spørgsmål er ikke "hvilket AI-værktøj skal vi bruge?" Det rigtige spørgsmål er: "Hvilket manuelt arbejde gentager vi hele tiden, og hvorfor findes det stadig?"
+          </p>
+          <div class="mt-12 grid gap-4 md:grid-cols-2">
+            {problemCards.map(([number, title, text]) => (
+              <article class="conversion-card rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
+                <p class="font-mono text-xs text-accent">{number}</p>
+                <h3 class="mt-5 text-lg font-semibold text-brand">{title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="agentic-search" class="border-y border-brand/10">
-      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
-        <div class="min-w-0">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Hvad vi rådgiver om</p>
+    <section id="det-fikser-vi" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Det fikser vi</p>
         </div>
-        <div class="grid min-w-0 gap-10">
+        <div>
+          <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+            Det kedelige arbejde er ofte det dyreste
+          </h2>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+            Ikke fordi det kræver høj ekspertise. Men fordi det gentages hele tiden, skaber fejl, stopper flowet og tager energi fra det arbejde, mennesker faktisk burde bruge hjernen på.
+          </p>
+
+          <div class="mt-12 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+            <div class="grid gap-4">
+              {workflowExamples.map(([title, text]) => (
+                <article class="conversion-card rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
+                  <h3 class="text-lg font-semibold text-brand">{title}</h3>
+                  <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+                </article>
+              ))}
+            </div>
+
+            <aside class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-5 lg:sticky lg:top-28 lg:self-start">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Audit output</p>
+              <h3 class="mt-4 text-2xl font-semibold text-brand">Top 3 workflows</h3>
+              <div class="mt-6 grid gap-4">
+                {[
+                  ['Ugentlig statusrapport', 'høj effekt / lav kompleksitet'],
+                  ['Kundehenvendelser', 'høj effekt / medium kompleksitet'],
+                  ['Handover mellem salg og levering', 'medium effekt / lav kompleksitet'],
+                ].map(([title, score], index) => (
+                  <div class="border-t border-brand/10 pt-4">
+                    <p class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</p>
+                    <p class="mt-2 font-medium text-brand">{title}</p>
+                    <p class="mt-1 text-sm text-muted">{score}</p>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-7 rounded-2xl border border-brand/10 bg-canvas-soft p-4">
+                <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Estimeret effekt</p>
+                <p class="mt-3 text-sm leading-relaxed text-brand/80">
+                  4-8 timer sparet pr. uge, færre glemte actions og hurtigere opfølgning.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metode" class="border-b border-brand/10">
+      <div class="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
+        <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
-              Søgemaskinen bliver en agent. Det gør jeres website til et kildegrundlag.
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Metode</p>
+          </div>
+          <div>
+            <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+              Friction -> Flow Framework
             </h2>
-            <p class="mt-6 max-w-[21rem] text-lg leading-relaxed text-muted md:max-w-2xl">
-              Det handler ikke kun om private spørgsmål i ChatGPT. Både virksomheder og forbrugere bruger AI til research, sammenligning, shortlist og næste handling. Hvis jeres information er uklar, bliver I svære at anbefale.
+            <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+              Vi starter med at finde friktionen. Derefter bygger vi små, konkrete workflows, der passer til den måde teamet faktisk arbejder på.
             </p>
           </div>
+        </div>
 
-          <div class="grid border-t border-brand/12 md:grid-cols-3">
-            {focusAreas.map((area) => (
-              <article class="border-b border-brand/12 py-7 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
-                <h3 class="text-lg font-semibold tracking-[-0.015em] text-brand">{area.title}</h3>
-                <p class="mt-3 text-sm leading-relaxed text-muted">{area.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="forloeb" class="border-b border-brand/10">
-      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
-        <div class="min-w-0">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Forløbet</p>
-        </div>
-        <div class="min-w-0">
-          <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
-            Først afklarer vi, om der overhovedet er noget at løse.
-          </h2>
-          <div class="mt-10 divide-y divide-brand/12 border-y border-brand/12">
-            {advisoryProcess.map(([number, title, text]) => (
-              <article class="grid gap-5 py-7 md:grid-cols-[5rem_0.8fr_1.4fr] md:items-start">
-                <p class="font-mono text-xs uppercase tracking-[0.18em] text-brand/38">{number}</p>
-                <h3 class="text-xl font-semibold tracking-[-0.018em] text-brand">{title}</h3>
-                <p class="max-w-2xl text-base leading-relaxed text-muted">{text}</p>
-              </article>
-            ))}
-          </div>
-          <p class="mt-8 max-w-[21rem] text-base leading-relaxed text-muted md:max-w-2xl">
-            Der er ingen fast pakke, vi presser ned over alle. Nogle har brug for en strategisk workshop. Andre har brug for at få omskrevet centrale sider, FAQ, schema, cases og beviser, så AI faktisk har noget at arbejde med.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-brand/10">
-      <div class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
-        <div class="min-w-0">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Signalområder</p>
-        </div>
-        <div class="grid min-w-0 gap-4 sm:grid-cols-2">
-          {signals.map((signal) => (
-            <p class="border-t border-brand/12 pt-4 text-base leading-relaxed text-brand/72">{signal}</p>
+        <div class="mt-14 grid gap-4 lg:grid-cols-5">
+          {methodSteps.map(([number, title, text]) => (
+            <article class="rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
+              <p class="font-mono text-xs text-accent">{number}</p>
+              <h3 class="mt-8 text-lg font-semibold text-brand">{title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+            </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="screening" class="mx-auto grid min-w-0 max-w-6xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
-      <div class="min-w-0">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/45">Gratis start</p>
+    <section id="ydelser" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Ydelser</p>
+        </div>
+        <div>
+          <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+            Start småt. Bevis værdien. Byg videre.
+          </h2>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+            Den bedste AI-implementering starter ikke med et stort roadmap. Den starter med et konkret workflow, et tydeligt problem og en løsning, folk kan bruge med det samme.
+          </p>
+
+          <div class="mt-12 grid gap-5 lg:grid-cols-[1.08fr_0.96fr_0.96fr]">
+            {services.map((service) => (
+              <article class:list={[
+                'flex min-w-0 flex-col rounded-[1.5rem] border p-5 sm:p-6',
+                service.highlighted ? 'border-accent/50 bg-accent/10' : 'border-brand/10 bg-panel-soft',
+              ]}>
+                <div>
+                  <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">{service.duration}</p>
+                  <h3 class="mt-5 text-2xl font-semibold text-brand">{service.name}</h3>
+                  <p class="mt-3 font-mono text-sm text-accent">{service.price}</p>
+                  <p class="mt-5 text-sm leading-relaxed text-muted">{service.text}</p>
+                </div>
+                <ul class="mt-7 grid gap-2 border-t border-brand/10 pt-5 text-sm text-brand/75">
+                  {service.includes.map((item) => (
+                    <li class="flex gap-2">
+                      <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-auto pt-7">
+                  <Button href="#kontakt" variant={service.highlighted ? 'primary' : 'secondary'} class="w-full">
+                    {service.cta}
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-      <div class="min-w-0">
-        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight tracking-[-0.03em] text-brand md:text-6xl">
-          Første samtale og screening er uden beregning.
+    </section>
+
+    <section id="eksempler" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Eksempler</p>
+        </div>
+        <div class="grid gap-6">
+          <article class="rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Proof-of-work</p>
+            <h2 class="mt-5 max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+              AI brugt på rigtige problemer
+            </h2>
+            <p class="mt-6 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
+              SiteDokAI startede som et praktisk AI-projekt: en automatiseret pipeline, der analyserede hvordan virksomheder blev forstået i AI-svar på tværs af ChatGPT, Perplexity, Gemini og Claude. Det var ikke tænkt som marketing-teori. Det var et eksempel på måden vi arbejder på: se et problem, kortlæg processen, byg en workflow, lever et beslutningsgrundlag.
+            </p>
+            <p class="mt-7 text-sm font-semibold text-brand">Har I et lignende manuelt analyseflow? Lad os kortlægge det.</p>
+          </article>
+
+          <article class="grid gap-5 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:grid-cols-2 md:p-8">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-muted">Ikke det her</p>
+              <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-muted">
+                {['AI-strategi til skuffen', 'Generiske workshops', 'Tool-demoer uden procesforståelse', 'SEO/marketing forklædt som AI', 'Store IT-projekter før problemet er forstået', 'Automatisering af noget, der burde fjernes helt'].map((item) => (
+                  <li class="border-t border-brand/10 pt-3">{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Det her</p>
+              <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-brand/80">
+                {['Én konkret proces', 'Én konkret workflow', 'Én prioriteret backlog', 'Menneskelig godkendelse hvor det er nødvendigt', 'Praktisk dokumentation', 'Måling på tid, fejl og brug'].map((item) => (
+                  <li class="border-t border-accent/30 pt-3">{item}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="om-troels" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Om Troels</p>
+        </div>
+        <div class="grid gap-8 lg:grid-cols-[1fr_0.75fr]">
+          <div>
+            <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+              Bygget af en operationsmand, ikke en AI-teoretiker
+            </h2>
+            <div class="mt-7 grid max-w-3xl gap-5 text-base leading-relaxed text-muted md:text-lg">
+              <p>
+                SiteDokAI er bygget af Troels Østbjerg. Jeg har brugt 10+ år i operations, supply chain og komplekse samarbejder, hvor hverdagen ofte bliver holdt sammen af mails, Excel, manuelle opfølgninger og folk der bare "kan huske hvordan man gør".
+              </p>
+              <p>
+                Min styrke er at finde det arbejde, der burde være smartere, kortlægge hvordan det faktisk foregår og bygge løsninger, mennesker kan bruge i en travl hverdag.
+              </p>
+              <p>
+                Jeg bruger AI som værktøj til at fjerne friktion, ikke som show. Ingen lange strategiforløb, ingen buzzword-slides, ingen "AI transformation" uden konkret workflow.
+              </p>
+            </div>
+          </div>
+          <aside class="rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">AI Operations Partner</p>
+            <ul class="mt-7 grid gap-4 text-sm leading-relaxed text-brand/80">
+              {[
+                '10+ års erfaring med operations, supply chain og procesoptimering.',
+                'Hands-on AI power-user med praktisk workflow-bygning.',
+                'Stærk i broen mellem forretning, drift og teknologi.',
+                'Fokus på adoption: løsningen skal bruges, ikke bare vises.',
+              ].map((item) => (
+                <li class="border-t border-brand/10 pt-4">{item}</li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Kontakt</p>
+      </div>
+      <div>
+        <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+          Send det workflow, der irriterer jer mest
         </h2>
-        <p class="mt-6 max-w-[21rem] text-lg leading-relaxed text-muted md:max-w-2xl">
-          Send jeres hjemmeside og en kort note. Vi vender tilbage med en nøgtern vurdering af, om agentic search bør være et konkret fokus for jer nu.
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+          Skriv kort hvad I bruger for meget tid på. Det kan være statusmails, rapporter, opfølgninger, kundehenvendelser, handovers eller noget helt andet. Vi svarer med en nøgtern vurdering af, om det egner sig til en AI-workflow.
         </p>
         <div class="mt-12">
-          <ScreeningForm sourcePage="/" />
+          <ScreeningForm
+            sourcePage="/"
+            title="Workflow til vurdering"
+            text="Beskriv den manuelle proces, der tager tid, skaber fejl eller bare burde være smartere."
+            submitLabel="Send workflow"
+            interest="Manual Work Audit"
+          />
         </div>
       </div>
     </section>

@@ -21,32 +21,32 @@ const {
   note,
   showForm = false,
   sourcePage = Astro.url.pathname,
-  ctaLabel = 'Book gratis screening',
-  ctaHref = '/kontakt#screening',
+  ctaLabel = 'Send workflow',
+  ctaHref = '/#kontakt',
 } = Astro.props;
 ---
 
 <main id="main" class="bg-canvas text-brand">
-  <section class="mx-auto grid min-w-0 max-w-6xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.78fr_1.22fr]">
+  <section class="mx-auto grid min-w-0 max-w-7xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.78fr_1.22fr]">
     <aside class="min-w-0 text-sm leading-relaxed text-muted">
-      <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">{eyebrow}</p>
+      <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">{eyebrow}</p>
       <p class="mt-8 max-w-xs">
-        Rådgivning om hvordan virksomheder bliver fundet, forstået og valgt i AI-søgning og agentic search.
+        AI-drevet procesoptimering for virksomheder, der vil spare tid, reducere fejl og få AI ind i den virkelige hverdag.
       </p>
     </aside>
 
     <div class="min-w-0">
-      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] tracking-[-0.03em] text-brand sm:text-5xl md:text-7xl">
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
         {title}
       </h1>
-      <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/68">
+      <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
         {text}
       </p>
 
       {points.length > 0 && (
-        <div class="mt-12 grid border-y border-brand/12 md:grid-cols-3">
+        <div class="mt-12 grid border-y border-brand/10 md:grid-cols-3">
           {points.map((point) => (
-            <p class="border-b border-brand/12 py-5 text-sm leading-relaxed text-brand/72 last:border-b-0 md:border-b-0 md:border-r md:px-5 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+            <p class="border-b border-brand/10 py-5 text-sm leading-relaxed text-brand/70 last:border-b-0 md:border-b-0 md:border-r md:px-5 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
               {point}
             </p>
           ))}
@@ -60,11 +60,11 @@ const {
       )}
 
       <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-        <a href={ctaHref} class="inline-flex h-12 items-center justify-center bg-brand px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px">
+        <a href={ctaHref} class="inline-flex h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
           {ctaLabel}
         </a>
-        <a href="/#agentic-search" class="inline-flex h-12 items-center justify-center border border-brand/14 px-6 text-sm font-semibold text-brand transition-colors hover:border-brand/35 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:translate-y-px">
-          Se hvad vi rådgiver om
+        <a href="/#ydelser" class="inline-flex h-12 items-center justify-center rounded-xl border border-brand/20 px-6 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Se ydelser
         </a>
       </div>
 

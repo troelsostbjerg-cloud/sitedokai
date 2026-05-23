@@ -6,43 +6,43 @@ import '../../styles/global.css';
 
 const posts = [
   {
-    title: 'Google I/O 2026: agentic search rykker ind i Search',
-    description: 'Hvad Googles nye Search-agenter betyder for virksomheder, kilder og valgbarhed.',
+    title: 'Proof-of-work: AI-søgning som procesprojekt',
+    description: 'Den gamle AI-søgnings-pipeline er nu et eksempel på SiteDokAIs arbejdsform: find problemet, kortlæg flowet, byg beslutningsgrundlag.',
     href: '/blog/google-agentic-search-2026',
   },
   {
-    title: 'Synlighed starter med en hjemmeside der kan forstås',
-    description: 'Hvorfor klare ydelser, beviser og næste skridt bliver vigtigere, når AI læser med.',
+    title: 'Klar struktur før værktøjer',
+    description: 'Hvorfor AI først skaber værdi, når processen bag er forståelig.',
     href: '/blog/geo-hvad-er-det',
   },
   {
-    title: 'Når virksomheden er bedre end hjemmesiden viser',
-    description: 'Om første indtryk, trust og det kildegrundlag AI og kunder møder.',
+    title: 'Når hverdagen holdes sammen af manuelle overleveringer',
+    description: 'Om første indtryk, tillid og de små huller i arbejdsgange, der skaber friktion.',
     href: '/blog/vi-hjaelper-ogsaa-med-hjemmesider-og-brand-assets',
   },
 ];
 ---
 
 <Layout
-  title="Indsigter om agentic search | SiteDokAI"
-  description="Korte noter om agentic search, AI-synlighed og hvordan virksomheder bliver lettere at forstå og vælge."
+  title="Noter og proof-of-work | SiteDokAI"
+  description="Korte noter og proof-of-work fra SiteDokAI om AI-workflows, procesoptimering og praktisk AI."
   canonical="/blog"
 >
   <Nav />
   <main id="main" class="bg-canvas text-brand">
-    <section class="mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
+    <section class="mx-auto grid max-w-7xl gap-12 px-5 pb-16 pt-16 sm:px-6 md:pb-24 md:pt-24 lg:grid-cols-[0.72fr_1.28fr]">
       <aside class="text-sm leading-relaxed text-muted">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Indsigter</p>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Indsigter</p>
       </aside>
       <div>
-        <h1 class="max-w-4xl font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] text-brand md:text-7xl">
-          Noter om AI-søgning, agenter og valgbarhed.
+        <h1 class="max-w-4xl font-display text-5xl font-semibold leading-[0.98] text-brand md:text-7xl">
+          Noter om workflows, friktion og praktisk AI.
         </h1>
-        <div class="mt-12 divide-y divide-brand/12 border-y border-brand/12">
+        <div class="mt-12 divide-y divide-brand/10 border-y border-brand/10">
           {posts.map((post) => (
             <a href={post.href} class="group grid gap-4 py-7 md:grid-cols-[1fr_auto] md:items-center">
               <div>
-                <h2 class="text-2xl font-semibold tracking-[-0.02em] text-brand">{post.title}</h2>
+                <h2 class="text-2xl font-semibold text-brand">{post.title}</h2>
                 <p class="mt-2 max-w-2xl text-base leading-relaxed text-muted">{post.description}</p>
               </div>
               <span class="text-sm font-semibold text-brand/50 transition-colors group-hover:text-brand">Læs</span>

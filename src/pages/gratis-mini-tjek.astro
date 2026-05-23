@@ -8,8 +8,8 @@ import '../styles/global.css';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Første samtale og screening',
-  serviceType: 'Gratis screening af agentic search og AI-synlighed',
+  name: 'Workflow-vurdering',
+  serviceType: 'Indledende vurdering af manuel proces og AI-workflow potentiale',
   provider: {
     '@type': 'Organization',
     name: 'SiteDokAI',
@@ -25,24 +25,25 @@ const structuredData = {
 ---
 
 <Layout
-  title="Gratis screening af agentic search | SiteDokAI"
-  description="Book en første samtale og screening uden beregning. SiteDokAI vurderer om din virksomhed bør arbejde konkret med agentic search og AI-synlighed."
+  title="Send workflow | SiteDokAI"
+  description="Send den manuelle proces, der irriterer jer mest. SiteDokAI vurderer nøgternt, om den egner sig til en praktisk AI-workflow."
   canonical="/gratis-mini-tjek"
   structuredData={structuredData}
 >
   <Nav />
   <AdvisoryPage
-    eyebrow="Gratis screening"
-    title="Første samtale og screening uden beregning."
-    text="Vi starter ikke med en stor rapport. Vi starter med at afklare, om AI-agenter overhovedet kan finde, forstå og vælge virksomheden i de situationer, der betyder noget."
+    eyebrow="Gratis start"
+    title="Send det workflow, der irriterer jer mest."
+    text="Vi starter med virkeligheden: statusmails, rapporter, opfølgninger, kundehenvendelser, handovers eller noget andet, der gentages for meget."
     points={[
-      'Send hjemmeside, firma og kort note.',
-      'Vi vurderer de første agentic search-signaler.',
-      'Du får et ærligt forslag til næste skridt eller besked om, at der ikke er et oplagt forløb.',
+      'Beskriv processen kort og konkret.',
+      'Vi vurderer om den egner sig til AI-workflow, automatisering eller bare bedre struktur.',
+      'Du får et roligt forslag til næste skridt eller besked om, at det ikke er oplagt.',
     ]}
-    note="Screeningen er til både B2B-virksomheder og lokale virksomheder, hvor kunder begynder at bruge AI til research, sammenligning og valg."
+    note="Det er ikke en gratis workshop. Det er en kort, praktisk vurdering af om der er noget reelt at arbejde videre med."
     showForm={true}
     sourcePage="/gratis-mini-tjek"
+    ctaLabel="Send workflow"
   />
   <Footer />
 </Layout>
