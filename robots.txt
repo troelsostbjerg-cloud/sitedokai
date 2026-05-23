@@ -10,3 +10,4 @@ Disallow: /mockups
 Disallow: /mockups/
 
 Sitemap: https://sitedokai.com/sitemap.xml
+# AI-readable profile: https://sitedokai.com/llms.txt
