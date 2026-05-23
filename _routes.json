@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*",
+    "/orders",
+    "/studio",
+    "/studio/*",
+    "/room",
+    "/room/*",
+    "/mockups",
+    "/mockups/*"
+  ],
+  "exclude": []
+}

@@ -16,14 +16,24 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/blog/google-agentic-search-2026</loc>
+    <loc>https://sitedokai.com/hjemmeside-tjek</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/hjemmeside-fix</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/priser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/blog</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.35</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/privatlivspolitik</loc>
