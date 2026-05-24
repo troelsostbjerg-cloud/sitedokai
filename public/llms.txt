@@ -8,6 +8,7 @@ SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der v
 - AI Workflow Sprint: bygning af én konkret AI-workflow på et reelt hverdagsproblem.
 - AI Operations Partner: løbende hjælp til backlog, forbedringer, dokumentation, træning og adoption.
 - Procesoptimering i mails, Excel/Sheets, Teams/Slack, SharePoint/Drive, CRM, rapportering, opfølgninger og handovers.
+- 10 use cases for processer som status, rapportering, kundehenvendelser, mødeopfølgning, leverandørstatus, tilbudsafklaring, onboarding, CRM-opfølgning, reklamationer og procesdokumentation.
 
 ## Relevante emner
 
@@ -41,6 +42,13 @@ SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der v
 - https://sitedokai.com/use-cases/ai-statusrapport
 - https://sitedokai.com/use-cases/ledelsesrapport
 - https://sitedokai.com/use-cases/kundehenvendelse-svarudkast
+- https://sitedokai.com/use-cases/moede-actions-opfoelgning
+- https://sitedokai.com/use-cases/leverandoerstatus-undtagelser
+- https://sitedokai.com/use-cases/tilbudsanmodning-afklaring
+- https://sitedokai.com/use-cases/ny-kunde-onboarding
+- https://sitedokai.com/use-cases/crm-opfoelgning-naeste-skridt
+- https://sitedokai.com/use-cases/reklamation-sagsoverblik
+- https://sitedokai.com/use-cases/procesdokumentation-interviews
 - https://sitedokai.com/ai-klar
 - https://sitedokai.com/eksempel
 - https://sitedokai.com/om

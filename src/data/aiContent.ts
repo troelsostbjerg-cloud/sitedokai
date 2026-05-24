@@ -160,10 +160,10 @@ export const useCases = [
   {
     id: 'ai-statusrapport',
     path: '/use-cases/ai-statusrapport',
-    title: 'Fra statusmails til AI-statusrapport',
+    title: 'Fra statusmails til beslutningsklar ugeopsamling',
     eyebrow: 'Use case',
     description:
-      'Samler mails, noter og opdateringer til en fast status med actions, risici og næste beslutning.',
+      'Samler mails, noter og opdateringer til en fast status med handlinger, risici og næste beslutning.',
     problem:
       'Status ligger spredt i mails, Teams, mødenoter og menneskers hukommelse. Det gør møder længere og beslutninger langsommere.',
     workflow:
@@ -201,6 +201,111 @@ export const useCases = [
     output:
       'Et svarudkast, en kategori, et foreslået næste skridt og tydelig markering af hvad et menneske skal tjekke.',
     signals: ['mange gentagne spørgsmål', 'klar tone of voice', 'kendte regler', 'behov for godkendelse'],
+  },
+  {
+    id: 'moede-actions-opfoelgning',
+    path: '/use-cases/moede-actions-opfoelgning',
+    title: 'Fra mødenoter til actions og opfølgning',
+    eyebrow: 'Use case',
+    description:
+      'Gør mødenoter, beslutninger og løse aftaler til en klar actionliste med ansvarlige, deadlines og opfølgningsmail.',
+    problem:
+      'Møder ender med gode intentioner, men actions ligger i forskellige notesbøger, chatbeskeder og kalendere. Opfølgningen afhænger af, hvem der husker hvad.',
+    workflow:
+      'AI læser mødenoter eller transskription, skiller beslutninger fra diskussion, foreslår actions, ansvarlige og deadlines og laver et opfølgningsudkast, som mødeejer godkender.',
+    output:
+      'En kort mødeopsamling, en prioriteret actionliste, åbne spørgsmål og et udkast til opfølgning sendt fra den ansvarlige person.',
+    signals: ['mange interne møder', 'samme opfølgning gentages', 'actions bliver væk', 'mødeejer bruger tid på referat'],
+  },
+  {
+    id: 'leverandoerstatus-undtagelser',
+    path: '/use-cases/leverandoerstatus-undtagelser',
+    title: 'Fra leverandørstatus til undtagelsesoverblik',
+    eyebrow: 'Use case',
+    description:
+      'Samler leverandørmails, forsinkelser og ændringer til et overblik over det, der faktisk kræver handling.',
+    problem:
+      'Status fra leverandører kommer i forskellige formater og ender som manuel gennemlæsning, copy-paste og jagt på det vigtigste.',
+    workflow:
+      'AI læser faste statusmails eller uploadede lister, finder afvigelser, grupperer årsager og markerer de leverancer, hvor en person skal beslutte næste skridt.',
+    output:
+      'Et undtagelsesoverblik med forsinkelser, risiko, foreslået handling og en kort tekst der kan sendes videre internt.',
+    signals: ['mange leverandørmails', 'afvigelser skjules i tekst', 'copy-paste til statusark', 'indkøb eller drift jagter overblik'],
+  },
+  {
+    id: 'tilbudsanmodning-afklaring',
+    path: '/use-cases/tilbudsanmodning-afklaring',
+    title: 'Fra tilbudsanmodning til afklaringsliste',
+    eyebrow: 'Use case',
+    description:
+      'Læser kundeforespørgsler, finder manglende information og laver et første udkast til afklaring eller tilbudsstruktur.',
+    problem:
+      'Salg eller projektledelse bruger tid på at forstå uklare forespørgsler, finde manglende oplysninger og skrive de samme afklarende spørgsmål igen.',
+    workflow:
+      'AI gennemgår forespørgslen, matcher den mod faste kriterier, fremhæver mangler og foreslår enten en afklaringsmail eller en struktureret tilbudskladde.',
+    output:
+      'En afklaringsliste, risikopunkter, anbefalet næste skridt og et udkast til mail eller tilbudsstruktur.',
+    signals: ['mange ens forespørgsler', 'tilbud forsinkes af manglende info', 'klar vurderingsmodel findes', 'salg skriver meget manuelt'],
+  },
+  {
+    id: 'ny-kunde-onboarding',
+    path: '/use-cases/ny-kunde-onboarding',
+    title: 'Fra ny kunde til onboarding-overblik',
+    eyebrow: 'Use case',
+    description:
+      'Omsætter salgsnoter, kontraktpunkter og interne aftaler til en praktisk onboarding-plan.',
+    problem:
+      'Vigtig kontekst forsvinder mellem salg, levering og support. Den nye kunde starter med spørgsmål, som allerede burde være besvaret.',
+    workflow:
+      'AI samler salgsnoter, aftaler, scope og kendte risici i en onboarding-skabelon med opgaver, ansvarlige og information der mangler.',
+    output:
+      'En onboarding-plan med første skridt, interne opgaver, kundespørgsmål, risici og en kort velkomstmail.',
+    signals: ['handover mellem salg og drift', 'gentagne kundestarter', 'manglende kontekst giver fejl', 'flere teams skal koordinere'],
+  },
+  {
+    id: 'crm-opfoelgning-naeste-skridt',
+    path: '/use-cases/crm-opfoelgning-naeste-skridt',
+    title: 'Fra CRM-noter til næste bedste opfølgning',
+    eyebrow: 'Use case',
+    description:
+      'Gør løse CRM-noter og kontaktpunkter til konkrete opfølgningsforslag, så muligheder ikke går kolde.',
+    problem:
+      'CRM bliver opdateret ujævnt, og næste skridt ligger ofte i en note, en mailtråd eller hos sælgeren selv.',
+    workflow:
+      'AI læser noter, seneste kontakt, tilbudsstatus og aftaler, vurderer hvad der mangler og foreslår næste handling med et kort udkast.',
+    output:
+      'En prioriteret opfølgningsliste med forslag til handling, mailudkast og tydelige sager der kræver menneskelig vurdering.',
+    signals: ['mange åbne muligheder', 'CRM-noter er uens', 'opfølgning afhænger af hukommelse', 'gentagne salgsbeskeder'],
+  },
+  {
+    id: 'reklamation-sagsoverblik',
+    path: '/use-cases/reklamation-sagsoverblik',
+    title: 'Fra reklamation til sagsoverblik',
+    eyebrow: 'Use case',
+    description:
+      'Samler kundens besked, intern historik og kendte regler til et sagsoverblik med næste skridt.',
+    problem:
+      'Reklamationer kræver ofte manuel læsning af historik, billeder, mails, interne noter og betingelser før nogen tør svare.',
+    workflow:
+      'AI strukturerer sagen, trækker relevante fakta ud, markerer manglende dokumentation og foreslår en intern vurdering før kunden får svar.',
+    output:
+      'Et sagsoverblik med tidslinje, fakta, mangler, anbefalet handling og et svarudkast til godkendelse.',
+    signals: ['mange ens sager', 'behov for ensartet vurdering', 'historik ligger spredt', 'kundesvar kræver godkendelse'],
+  },
+  {
+    id: 'procesdokumentation-interviews',
+    path: '/use-cases/procesdokumentation-interviews',
+    title: 'Fra interviews til procesdokumentation',
+    eyebrow: 'Use case',
+    description:
+      'Gør medarbejderinterviews og skærmoptagelser til brugbar procesdokumentation, der kan forbedres og trænes på.',
+    problem:
+      'Processen findes kun i hovedet på erfarne medarbejdere. Nye kolleger lærer via sidemandsoplæring, og små undtagelser bliver aldrig dokumenteret.',
+    workflow:
+      'AI hjælper med at strukturere interviewnoter, beskrive trin, undtagelser, beslutningsregler og forslag til hvor workflowet kan forenkles.',
+    output:
+      'En procesbeskrivelse med trin, roller, input, output, undtagelser, friktion og oplagte forbedringspunkter.',
+    signals: ['viden ligger hos få personer', 'oplæring tager lang tid', 'processen har mange undtagelser', 'ingen ejer dokumentationen'],
   },
 ] as const;
 

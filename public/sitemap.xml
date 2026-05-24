@@ -51,6 +51,41 @@
     <priority>0.68</priority>
   </url>
   <url>
+    <loc>https://sitedokai.com/use-cases/moede-actions-opfoelgning</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/leverandoerstatus-undtagelser</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/tilbudsanmodning-afklaring</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/ny-kunde-onboarding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/crm-opfoelgning-naeste-skridt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/reklamation-sagsoverblik</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
+    <loc>https://sitedokai.com/use-cases/procesdokumentation-interviews</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.68</priority>
+  </url>
+  <url>
     <loc>https://sitedokai.com/ai-klar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>

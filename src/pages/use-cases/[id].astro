@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import AIUseCasePage from '../../components/site/AIUseCasePage.astro';
+import { breadcrumbSchema, useCases, useCaseSchema, type UseCase } from '../../data/aiContent';
+import '../../styles/global.css';
+
+interface Props {
+  useCase: UseCase;
+}
+
+export function getStaticPaths() {
+  const staticUseCaseIds = new Set(['ai-statusrapport', 'ledelsesrapport', 'kundehenvendelse-svarudkast']);
+
+  return useCases
+    .filter((useCase) => !staticUseCaseIds.has(useCase.id))
+    .map((useCase) => ({
+      params: { id: useCase.id },
+      props: { useCase },
+    }));
+}
+
+const { useCase } = Astro.props;
+
+const structuredData = [
+  useCaseSchema(useCase),
+  breadcrumbSchema([
+    { name: 'Forside', path: '/' },
+    { name: 'Use cases', path: '/use-cases' },
+    { name: useCase.title, path: useCase.path },
+  ]),
+];
+---
+
+<Layout
+  title={`${useCase.title} | SiteDokAI`}
+  description={useCase.description}
+  canonical={useCase.path}
+  structuredData={structuredData}
+>
+  <Nav />
+  <AIUseCasePage useCase={useCase} />
+  <Footer />
+</Layout>
