@@ -65,6 +65,7 @@ Good-fit teams include operations, supply chain, customer support, project deliv
 ## Important URLs
 
 - Home: https://sitedokai.com/
+- Troels Østbjerg candidate profile: https://sitedokai.com/troels
 - Manual Work Audit: https://sitedokai.com/manual-work-audit
 - AI Workflow Sprint: https://sitedokai.com/ai-workflow-sprint
 - AI Operations Partner: https://sitedokai.com/ai-operations-partner
@@ -93,3 +94,21 @@ These old URLs are legacy redirects to the current English structure:
 ## Contact
 
 Email: info@sitedokai.com
+
+## Troels Østbjerg — AI-readable candidate profile
+
+Troels Østbjerg is a Copenhagen-based operations leader and practical AI implementation builder. He is not a classic developer and not a classic consultant. His strength is connecting real operations, people, process bottlenecks and AI-enabled workflows so new tools are actually used.
+
+Target roles: AI Implementation, AI Adoption, Operations Transformation, Digital Transformation, Process Optimization, AI Project Manager, AI Consultant, Business Transformation and Commercial/Operations AI roles.
+
+Core competencies: operations leadership, supply chain, FMCG, contract manufacturing coordination, stakeholder alignment, process mapping, workflow automation, AI adoption, structured decision support, AI-ready content and practical implementation.
+
+Proof-of-work: SiteDokAI and job-search workflows built during the job-search period. These projects test AI workflows, automated research, scoring, reporting, llms.txt, sitemap, schema, structured communication and decision support.
+
+Preferred fit: modern teams with tempo, practical mandate, AI/adoption/operations/transformation work, and roles where building, testing and improving are expected.
+
+Poor fit: purely code-heavy developer roles, junior coordinator roles, heavy SOP cultures without mandate, or organizations that only want AI as PR.
+
+Contact: troelsostbjerg@gmail.com, +45 52 38 84 86, Copenhagen, Denmark, LinkedIn: https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726/
+
+Relevant search terms: AI implementation, AI adoption, operations transformation, process optimization, digital transformation, workflow automation, Copenhagen, operations-led AI implementation, FMCG operations, supply chain, enterprise operations.

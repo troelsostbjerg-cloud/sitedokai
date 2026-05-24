@@ -10,6 +10,10 @@ interface Props {
   ogImage?: string;
   ogImageWidth?: number | string;
   ogImageHeight?: number | string;
+  ogLocale?: string;
+  lang?: string;
+  themeColor?: string;
+  cookieTheme?: 'light' | 'dark';
   structuredData?: StructuredData | StructuredData[];
   noindex?: boolean;
 }
@@ -21,6 +25,10 @@ const {
   ogImage = '/og-image.svg',
   ogImageWidth = 1200,
   ogImageHeight = 630,
+  ogLocale = 'en_US',
+  lang = 'en',
+  themeColor = '#f5f0e8',
+  cookieTheme = 'light',
   structuredData,
   noindex = false,
 } = Astro.props;
@@ -34,7 +42,7 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,10 +50,10 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
     <meta name="author" content="SiteDokAI" />
     <meta name="application-name" content="SiteDokAI" />
     <meta name="robots" content={robotsContent} />
-    <meta name="theme-color" content="#f5f0e8" />
+    <meta name="theme-color" content={themeColor} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SiteDokAI" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
@@ -69,16 +77,57 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
     <title>{title}</title>
   </head>
   <body class="bg-canvas text-brand">
-    <section id="cookie-banner" aria-label="Cookie information" class="z-50 hidden border-b border-brand/10 bg-canvas/95 px-3 py-2 text-brand backdrop-blur sm:px-6 sm:py-2.5">
+    <section
+      id="cookie-banner"
+      aria-label="Cookie information"
+      class:list={[
+        'z-50 hidden border-b px-3 py-2 backdrop-blur sm:px-6 sm:py-2.5',
+        cookieTheme === 'dark'
+          ? 'border-white/10 bg-[#121713]/95 text-[#f3efe5]'
+          : 'border-brand/10 bg-canvas/95 text-brand',
+      ]}
+    >
       <div class="mx-auto flex max-w-7xl items-center justify-between gap-2.5">
-        <p class="min-w-0 text-[12px] leading-tight text-brand/70 sm:text-sm sm:leading-relaxed">
-          Necessary cookies only. <span class="hidden sm:inline">No tracking.</span> <a href="/privacy-policy" class="text-accent underline decoration-accent/30 underline-offset-4 hover:text-brand">Read more</a>
+        <p
+          class:list={[
+            'min-w-0 text-[12px] leading-tight sm:text-sm sm:leading-relaxed',
+            cookieTheme === 'dark' ? 'text-[#d8d2c5]/75' : 'text-brand/70',
+          ]}
+        >
+          Necessary cookies only. <span class="hidden sm:inline">No tracking.</span>
+          <a
+            href="/privacy-policy"
+            class:list={[
+              'underline underline-offset-4',
+              cookieTheme === 'dark'
+                ? 'text-[#b6c8b8] decoration-[#96b391]/40 hover:text-[#f3efe5]'
+                : 'text-accent decoration-accent/30 hover:text-brand',
+            ]}
+          >
+            Read more
+          </a>
         </p>
         <div class="flex flex-shrink-0 gap-1.5 sm:gap-2">
-          <button id="cookie-decline" class="whitespace-nowrap rounded-[0.65rem] border border-brand/10 px-2.5 py-1.5 text-[11px] font-bold leading-none text-brand/70 transition-colors hover:bg-panel-soft sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
+          <button
+            id="cookie-decline"
+            class:list={[
+              'whitespace-nowrap rounded-[0.65rem] border px-2.5 py-1.5 text-[11px] font-bold leading-none transition-colors sm:px-4 sm:py-2 sm:text-sm sm:leading-normal',
+              cookieTheme === 'dark'
+                ? 'border-white/10 text-[#d8d2c5]/75 hover:bg-white/10'
+                : 'border-brand/10 text-brand/70 hover:bg-panel-soft',
+            ]}
+          >
             Reject
           </button>
-          <button id="cookie-accept" class="whitespace-nowrap rounded-[0.65rem] bg-accent px-3 py-1.5 text-[11px] font-bold leading-none text-canvas transition-colors hover:bg-accent-bright sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
+          <button
+            id="cookie-accept"
+            class:list={[
+              'whitespace-nowrap rounded-[0.65rem] px-3 py-1.5 text-[11px] font-bold leading-none transition-colors sm:px-4 sm:py-2 sm:text-sm sm:leading-normal',
+              cookieTheme === 'dark'
+                ? 'bg-[#96b391] text-[#121713] hover:bg-[#b5c9ab]'
+                : 'bg-accent text-canvas hover:bg-accent-bright',
+            ]}
+          >
             Accept
           </button>
         </div>
