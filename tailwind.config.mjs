@@ -5,34 +5,34 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#f3f8ff',
-          light: '#ffffff',
-          dark: '#cfe1f2',
+          DEFAULT: '#1e261f',
+          light: '#3a463c',
+          dark: '#121713',
         },
         accent: {
-          DEFAULT: '#65f0b8',
-          bright: '#94ffd2',
-          light: '#c8ffe7',
-          soft: 'rgba(101, 240, 184, 0.1)',
-          dark: '#38b989',
+          DEFAULT: '#557461',
+          bright: '#6f927d',
+          light: '#dce8df',
+          soft: 'rgba(85, 116, 97, 0.1)',
+          dark: '#344d3c',
         },
         canvas: {
-          DEFAULT: '#07111d',
-          soft: '#0d1b2a',
+          DEFAULT: '#f5f0e8',
+          soft: '#ebe3d6',
         },
         panel: {
-          DEFAULT: '#122235',
-          soft: 'rgba(255, 255, 255, 0.045)',
+          DEFAULT: '#fffaf1',
+          soft: 'rgba(30, 38, 31, 0.045)',
         },
         surface: {
-          DEFAULT: '#122235',
-          muted: '#0d1b2a',
+          DEFAULT: '#fffaf1',
+          muted: '#ebe3d6',
         },
         muted: {
-          DEFAULT: '#9fb3c8',
+          DEFAULT: '#697268',
         },
         border: {
-          soft: 'rgba(207, 231, 255, 0.14)',
+          soft: 'rgba(30, 38, 31, 0.14)',
         },
         score: {
           green: '#22863a',
@@ -46,8 +46,8 @@ export default {
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       boxShadow: {
-        soft: '0 22px 70px rgba(0, 0, 0, 0.18)',
-        card: '0 18px 45px rgba(0, 0, 0, 0.22)',
+        soft: '0 22px 70px rgba(42, 35, 24, 0.12)',
+        card: '0 18px 45px rgba(42, 35, 24, 0.14)',
       },
     },
   },

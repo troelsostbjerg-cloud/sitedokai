@@ -28,7 +28,10 @@ Firma:
 Hjemmeside:
 Workflow der irriterer os:
 Hvor ofte sker det:
-Hvad bruger vi i dag:
+Værktøjer vi bruger i dag:
+Hvem er involveret:
+Hvad går galt i dag:
+Godt output ville være:
 
 Tak.`)}`;
 ---
@@ -104,18 +107,27 @@ Tak.`)}`;
     </label>
 
     <label class="grid gap-2 text-sm font-medium text-brand">
-      Hvad bruger I i dag?
-      <select name="current_tools" class="h-12 rounded-xl border border-brand/10 bg-panel-soft px-4 text-base font-normal text-brand outline-none transition-colors focus:border-accent/70">
-        <option value="">Vælg primært værktøj</option>
-        <option value="Excel/Sheets">Excel/Sheets</option>
-        <option value="Outlook/Gmail">Outlook/Gmail</option>
-        <option value="Teams/Slack">Teams/Slack</option>
-        <option value="SharePoint/Drive">SharePoint/Drive</option>
-        <option value="CRM">CRM</option>
-        <option value="andet">Andet</option>
-      </select>
+      Hvilke værktøjer bruger I i dag?
+      <input type="text" name="current_tools" placeholder="Fx Excel, Teams, CRM, SharePoint, Outlook" class="h-12 rounded-xl border border-brand/10 bg-panel-soft px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70" />
     </label>
   </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Hvem er involveret?
+      <input type="text" name="involved_people" placeholder="Fx operations, finance, kundeservice, ledelse" class="h-12 rounded-xl border border-brand/10 bg-panel-soft px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70" />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Hvad går galt i dag?
+      <input type="text" name="current_failure" placeholder="Fx fejl, ventetid, dobbeltarbejde, uklart ejerskab" class="h-12 rounded-xl border border-brand/10 bg-panel-soft px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70" />
+    </label>
+  </div>
+
+  <label class="grid gap-2 text-sm font-medium text-brand">
+    Hvad ville et godt output være?
+    <textarea name="desired_output" rows="3" placeholder="Fx én status med actions, ansvarlige, deadlines og beslutninger." class="min-h-28 resize-y rounded-xl border border-brand/10 bg-panel-soft px-4 py-3 text-base font-normal leading-relaxed text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70"></textarea>
+  </label>
 
   <div>
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -137,7 +149,7 @@ Tak.`)}`;
       Der skete en fejl. Prøv igen, eller skriv direkte til info@sitedokai.com.
     </p>
     <p class="mt-4 text-xs leading-relaxed text-muted">
-      Du kan også skrive direkte til <a href={directMailto} class="font-semibold text-brand underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>.
+      Vi svarer med en nøgtern vurdering, også hvis AI ikke er første skridt. Du kan også skrive direkte til <a href={directMailto} class="font-semibold text-brand underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>.
     </p>
   </div>
 </form>

@@ -4,6 +4,8 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import ScreeningForm from '../components/site/ScreeningForm.astro';
 import Button from '../components/site/Button.astro';
+import RoiCalculator from '../components/site/RoiCalculator.astro';
+import { useCases } from '../data/aiContent';
 import '../styles/global.css';
 
 const problemCards = [
@@ -17,51 +19,110 @@ const problemCards = [
   ['08', 'AI bruges kun som ad hoc-chat', 'Der er testet lidt, men AI er ikke blevet en del af den faktiske drift.'],
 ];
 
-const workflowExamples = [
-  ['Møde -> actions -> opfølgning', 'Fra løse mødenoter til klare actions, ansvarlige, deadlines og opfølgningsmail.'],
-  ['Kundehenvendelse -> svarudkast', 'AI kategoriserer, finder kontekst og skriver et forslag, som et menneske godkender.'],
-  ['Excel -> ledelsesrapport', 'Gentagne tal og statuspunkter bliver struktureret til en fast rapport med afvigelser og anbefalinger.'],
-  ['Leverandørstatus -> exception summary', 'Statusser, mails og afvigelser samles til et overblik over hvad der kræver handling.'],
-  ['Interviews -> procesdokumentation', 'Teams fortæller hvordan arbejdet reelt foregår. AI hjælper med at gøre det til brugbar dokumentation.'],
-  ['Projektstatus -> beslutningsoplæg', 'Fra spredte opdateringer til én samlet status med risici, beslutninger og næste skridt.'],
+const beforeAfterExamples = [
+  {
+    before: 'Status jagtes i mails, Teams og løse noter.',
+    after: 'Én samlet AI-status med actions, ansvarlige og deadlines.',
+    effect: 'Færre statusmøder og hurtigere beslutning.',
+  },
+  {
+    before: 'Excel-tal kopieres manuelt ind i ledelsesrapporten.',
+    after: 'Rapportkladde med afvigelser, forklaring og næste beslutning.',
+    effect: 'Mindre formatarbejde og mere tid til vurdering.',
+  },
+  {
+    before: 'Kundehenvendelser besvares forskelligt fra person til person.',
+    after: 'Svarudkast med kontekst, kategori og human approval.',
+    effect: 'Mere ens kvalitet uden at fjerne ansvar.',
+  },
+];
+
+const maturitySignals = [
+  'Gentages den ugentligt eller dagligt?',
+  'Bruger flere personer tid på den?',
+  'Flytter I data mellem systemer?',
+  'Opstår der fejl eller ventetid?',
+  'Kan output beskrives i en fast skabelon?',
+];
+
+const targetTeams = [
+  ['Operations', 'Status, ansvar, afvigelser og opfølgninger på tværs af hverdagen.'],
+  ['Supply chain', 'Leverandørstatus, undtagelser, forecast-noter og handovers.'],
+  ['Kundeservice', 'Henvendelser, svarudkast, kategorisering og eskalering.'],
+  ['Projektteams', 'Mødenoter, beslutninger, risici, actions og ugerytme.'],
+  ['Finance', 'Rapportering, afvigelser, datakontrol og faste forklaringer.'],
+  ['Salg/Customer Success', 'CRM-noter, næste skridt, tilbudsafklaring og kundeoverdragelse.'],
+  ['Ledelse', 'Beslutningsoplæg, statusoverblik og bedre ejerskab uden flere møder.'],
 ];
 
 const methodSteps = [
-  ['01', 'Find friktionen', 'Vi finder de opgaver, hvor tid, energi og overblik forsvinder.'],
-  ['02', 'Kortlæg workflowet', 'Vi mapper den faktiske arbejdsgang, ikke den pæne proces på papiret.'],
-  ['03', 'Prioritér efter effekt', 'Vi scorer mulighederne efter tid sparet, fejlrisiko, kompleksitet og adoption chance.'],
-  ['04', 'Byg lille', 'Vi bygger én brugbar AI-workflow, tester den og justerer den med de mennesker, der skal bruge den.'],
-  ['05', 'Forankr og mål', 'Vi dokumenterer, træner og måler på timer sparet, færre fejl og faktisk brug.'],
+  ['01', 'Manuel friktion', 'Find hvor tid, kvalitet og ejerskab forsvinder i mails, Excel, Teams, CRM og rapporter.'],
+  ['02', 'Workflow mapping', 'Kortlæg den faktiske arbejdsgang, input, undtagelser og menneskerne omkring processen.'],
+  ['03', 'Prioritering', 'Scor muligheder efter tid sparet, fejlrisiko, kompleksitet og chance for adoption.'],
+  ['04', 'AI-assisteret workflow', 'Byg én lille arbejdsgang med tydelig input, logik, output og brugssituation.'],
+  ['05', 'Human approval', 'Læg menneskelig godkendelse ind, hvor risiko, kvalitet eller tone kræver det.'],
+  ['06', 'Målt effekt', 'Mål på timer sparet, færre fejl, hurtigere beslutning og faktisk brug i hverdagen.'],
 ];
 
 const services = [
   {
     name: 'Manual Work Audit',
-    price: 'Fra 15.000 kr.',
+    price: 'Fra 15.000 kr. ekskl. moms',
     duration: '5 arbejdsdage',
+    step: '1. Find friktionen',
+    bestFor: 'Nye kunder og teams, der vil vide hvor AI giver mening først.',
     text: 'Vi kortlægger jeres manuelle workflows, finder hvor tiden forsvinder og prioriterer de 3 bedste AI-pilots.',
-    cta: 'Book audit',
+    cta: 'Se Manual Work Audit',
     highlighted: true,
-    includes: ['interviews', 'workflow mapping', 'automationsvurdering', 'prioriteret backlog', 'top 3 pilots', 'prototype-skitse'],
+    includes: ['workshop/interviews', 'proceskort', 'prioriteret backlog', 'top 3 AI-pilots', 'første workflow-skitse', 'målepunkter'],
+    notIncluded: 'Ingen bygget automation, tool-indkøb eller stort roadmap.',
+    nextStep: 'Beslut om første workflow skal bygges i en sprint.',
   },
   {
     name: 'AI Workflow Sprint',
-    price: 'Fra 35.000 kr.',
+    price: 'Fra 35.000 kr. ekskl. moms',
     duration: '10 arbejdsdage',
+    step: '2. Byg første workflow',
+    bestFor: 'Teams med én konkret proces, der allerede er værd at løse.',
     text: 'Vi bygger én konkret AI-workflow på et hverdagsproblem, tester den med brugerne og gør den klar til drift.',
     cta: 'Byg første workflow',
     highlighted: false,
-    includes: ['procesdesign', 'prototype/workflow', 'human approval step', 'dokumentation', 'brugertræning', 'effektmåling'],
+    includes: ['workflow-design', 'AI-logik/promptstruktur', 'automation/prototype', 'test', 'dokumentation', 'træning og effektmåling'],
+    notIncluded: 'Ingen fuld systemudskiftning eller blind fuldautomatisering.',
+    nextStep: 'Test i hverdagen, mål effekt og beslut næste forbedring.',
   },
   {
     name: 'AI Operations Partner',
-    price: 'Fra 10.000 kr./md.',
+    price: 'Fra 10.000 kr./md. ekskl. moms',
     duration: 'Løbende',
+    step: '3. Hold forbedringer i gang',
+    bestFor: 'Virksomheder med de første workflows og behov for løbende drift.',
     text: 'Fast hjælp til at holde forbedringerne i gang, optimere workflows og sikre adoption.',
     cta: 'Tal om løbende hjælp',
     highlighted: false,
-    includes: ['månedlig backlog', 'workflow-forbedringer', 'nye små automations', 'dokumentation', 'træning', 'status på effekt'],
+    includes: ['månedlig backlog', 'workflow-forbedringer', 'dokumentation', 'træning', 'adoption', 'status på effekt'],
+    notIncluded: 'Ingen passiv rådgiverretainer uden konkrete forbedringer.',
+    nextStep: 'Fast rytme for prioritering, forbedring, dokumentation og måling.',
   },
+];
+
+const auditOutputPanels = [
+  ['Proceskort', 'Hvem gør hvad, hvornår, med hvilke input og hvor ventetiden opstår.'],
+  ['Prioriteret backlog', 'Muligheder sorteret efter effekt, kompleksitet, risiko og adoption.'],
+  ['Top 3 AI-pilots', 'De første workflow-kandidater med tydelig begrundelse.'],
+  ['Workflow-skitse', 'Input, AI-logik, human approval, output og næste brugerhandling.'],
+  ['Estimeret effekt', 'Et nøgternt estimat på tid, fejl, beslutningstid og brugbarhed.'],
+];
+
+const faqItems = [
+  ['Skal vi have valgt AI-værktøj først?', 'Nej. Vi starter med arbejdet, ikke værktøjet. Når processen er klar, vælger vi den enkleste løsning, ofte i værktøjer I allerede bruger.'],
+  ['Hvad hvis vores proces er rodet?', 'Så er auditten ofte endnu mere relevant. Hvis processen er uklar, bliver AI bare hurtigere rod. Først gør vi arbejdet forståeligt.'],
+  ['Kan I arbejde med vores eksisterende systemer?', 'Ja, hvis det er praktisk og sikkert. Typisk starter vi med mails, Excel/Sheets, Teams/Slack, SharePoint/Drive, CRM eller faste eksportfiler.'],
+  ['Er det fuldautomatisering?', 'Ikke nødvendigvis. Mange gode workflows er AI-assisterede med human approval, så tempoet stiger uden at ansvar og kvalitet forsvinder.'],
+  ['Hvordan måler vi effekt?', 'Vi måler på tid sparet, færre fejl, mindre ventetid, hurtigere beslutning og om workflowet faktisk bliver brugt.'],
+  ['Hvor meget tid skal vores team bruge?', 'En Manual Work Audit kræver typisk korte interviews med 3-6 nøglepersoner og adgang til eksempler på det manuelle arbejde.'],
+  ['Hvad sker der efter auditten?', 'I får et beslutningsgrundlag: proceskort, backlog, top 3 pilots og anbefaling til første workflow. I kan bygge videre med os eller selv.'],
+  ['Hvad hvis processen ikke egner sig til AI?', 'Så siger vi det. Nogle flows skal fjernes, forenkles eller dokumenteres før AI giver mening.'],
 ];
 
 const servicePages: Record<string, { id: string; path: string; url: string; price: string }> = {
@@ -178,7 +239,7 @@ const structuredData = {
       '@type': 'WebPage',
       '@id': 'https://sitedokai.com/#webpage',
       url: 'https://sitedokai.com/',
-      name: 'SiteDokAI — AI-drevet procesoptimering og brugbare AI-workflows',
+      name: 'SiteDokAI — Find manuelt arbejde og byg AI-workflows, folk bruger',
       isPartOf: {
         '@id': 'https://sitedokai.com/#website',
       },
@@ -229,55 +290,68 @@ const structuredData = {
         })),
       },
     },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://sitedokai.com/#faq',
+      mainEntity: faqItems.map(([question, answer]) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      })),
+    },
     ...serviceSchema,
   ],
 };
 ---
 
 <Layout
-  title="SiteDokAI — AI-drevet procesoptimering og brugbare AI-workflows"
-  description="SiteDokAI hjælper virksomheder med at finde manuelle processer, der stjæler tid, og bygge praktiske AI-workflows, som sparer tid, reducerer fejl og faktisk bliver brugt."
+  title="SiteDokAI — Find manuelt arbejde og byg AI-workflows, folk bruger"
+  description="SiteDokAI hjælper danske B2B-teams med Manual Work Audit, AI Workflow Sprint og AI Operations Partner for praktiske AI-workflows i drift, rapportering, CRM, mails og handovers."
   canonical="/"
   structuredData={structuredData}
 >
   <Nav />
   <main id="main" class="bg-canvas text-brand">
     <section class="relative overflow-hidden border-b border-brand/10">
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(243,248,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(243,248,255,0.035)_1px,transparent_1px)] bg-[size:56px_56px]" aria-hidden="true"></div>
-      <div class="relative mx-auto grid min-w-0 max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-6 md:pb-24 md:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(30,38,31,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(30,38,31,0.045)_1px,transparent_1px)] bg-[size:56px_56px]" aria-hidden="true"></div>
+      <div class="relative mx-auto grid min-w-0 max-w-7xl gap-10 px-5 pb-16 pt-14 sm:px-6 md:pb-24 md:pt-20 lg:grid-cols-2 lg:items-center">
         <div class="min-w-0">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI-workflows der starter i virkeligheden</p>
-          <h1 class="mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.94] text-brand sm:text-6xl md:text-7xl">
-            Fra manuelt rod til brugbare AI-workflows
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI operations der starter i virkeligheden</p>
+          <h1 class="mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.96] text-brand sm:text-6xl md:text-6xl">
+            Find det manuelle arbejde, der stjæler tid — og byg AI&#8209;workflows, folk faktisk bruger.
           </h1>
           <p class="mt-7 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-            SiteDokAI hjælper virksomheder med at finde de processer, hvor tid forsvinder i mails, Excel, opfølgninger, rapportering og uklare handovers, og bygger praktiske AI-workflows, der sparer tid og faktisk bliver brugt.
+            Vi starter i mails, Excel, Teams, CRM, rapportering, opfølgninger og handovers. Ikke med strategi-slides. Ikke med tool-demoer. Én konkret proces først.
           </p>
           <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Button href="#kontakt">Book en Manual Work Audit</Button>
-            <Button href="#kontakt" variant="secondary">Send et workflow, der irriterer jer</Button>
+            <Button href="#kontakt">Send det workflow, der irriterer jer mest</Button>
+            <Button href="/manual-work-audit" variant="secondary">Se om en Manual Work Audit passer</Button>
           </div>
-          <div class="mt-8 grid gap-3 border-l border-accent/40 pl-5 text-sm leading-relaxed text-brand/75 sm:grid-cols-3 sm:border-l-0 sm:border-t sm:pl-0 sm:pt-5">
-            <p>Ingen AI-strategi-teater.</p>
-            <p>Ingen store IT-projekter fra dag ét.</p>
-            <p>Én konkret proces. Én konkret workflow. Målbar effekt.</p>
+          <div class="mt-8 grid gap-3 border-l border-accent/40 pl-5 text-sm leading-relaxed text-brand/75 sm:grid-cols-4 sm:border-l-0 sm:border-t sm:pl-0 sm:pt-5">
+            <p>10+ års operations.</p>
+            <p>Manual Work Audit fra 15.000 kr.</p>
+            <p>5 arbejdsdage.</p>
+            <p>Human approval hvor det kræves.</p>
           </div>
         </div>
 
         <aside class="min-w-0 lg:pl-4" aria-label="Workflow-eksempel">
-          <div class="hero-proof-card rounded-[1.75rem] border border-brand/10 bg-panel/80 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.22)] backdrop-blur">
-            <div class="rounded-[1.25rem] border border-brand/10 bg-canvas-soft p-5 sm:p-6">
+          <div class="hero-proof-card rounded-[1.75rem] border border-brand/10 bg-panel/88 p-4 shadow-[0_30px_90px_rgba(42,35,24,0.14)] backdrop-blur">
+            <div class="rounded-[1.25rem] border border-brand/10 bg-canvas-soft/80 p-5 sm:p-6">
               <div class="flex items-center justify-between gap-4 border-b border-brand/10 pb-5">
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">Operations cockpit</p>
                   <h2 class="mt-2 text-xl font-semibold text-brand">Manual Work Audit</h2>
                 </div>
-                <div class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">live map</div>
+                <div class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">audit mockup</div>
               </div>
 
               <div class="mt-5 grid gap-3">
-                {['Manual input', 'AI-assisteret strukturering', 'Menneskelig godkendelse', 'Klar rapport / mail / handover'].map((item, index) => (
-                  <div class="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-2xl border border-brand/10 bg-white/[0.035] p-3">
+                {['12 statusmails og løse noter', 'AI samler og strukturerer status', 'Menneske godkender actions', 'Klar status med ansvar og deadlines'].map((item, index) => (
+                  <div class="grid grid-cols-[2.5rem_1fr] items-center gap-3 rounded-2xl border border-brand/10 bg-panel/80 p-3">
                     <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 font-mono text-xs text-accent">
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -286,18 +360,18 @@ const structuredData = {
                 ))}
               </div>
 
-              <div class="mt-5 grid gap-3 rounded-2xl border border-brand/10 bg-white/[0.035] p-4 sm:grid-cols-3">
+              <div class="mt-5 grid gap-3 rounded-2xl border border-brand/10 bg-panel/80 p-4 sm:grid-cols-3">
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Før</p>
-                  <p class="mt-2 text-sm text-brand">12 manuelle statusmails</p>
+                  <p class="mt-2 text-sm text-brand">12 statusmails, løse noter, uklart ejerskab.</p>
                 </div>
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Efter</p>
-                  <p class="mt-2 text-sm text-brand">1 samlet AI-status med actions</p>
+                  <p class="mt-2 text-sm text-brand">Én samlet AI-status med actions, ansvarlige og deadlines.</p>
                 </div>
                 <div>
                   <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Effekt</p>
-                  <p class="mt-2 text-sm text-brand">Mindre jagt, hurtigere beslutning</p>
+                  <p class="mt-2 text-sm text-brand">Mindre jagt, hurtigere beslutning.</p>
                 </div>
               </div>
             </div>
@@ -334,49 +408,87 @@ const structuredData = {
     <section id="det-fikser-vi" class="border-b border-brand/10">
       <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Det fikser vi</p>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Før og efter</p>
         </div>
         <div>
           <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
-            Det kedelige arbejde er ofte det dyreste
+            Det kedelige arbejde er ofte det dyreste.
           </h2>
           <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
             Ikke fordi det kræver høj ekspertise. Men fordi det gentages hele tiden, skaber fejl, stopper flowet og tager energi fra det arbejde, mennesker faktisk burde bruge hjernen på.
           </p>
 
-          <div class="mt-12 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div class="grid gap-4">
-              {workflowExamples.map(([title, text]) => (
-                <article class="conversion-card rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
+          <div class="mt-12 grid gap-5 lg:grid-cols-3">
+            {beforeAfterExamples.map((example) => (
+              <article class="conversion-card rounded-[1.35rem] border border-brand/10 bg-panel p-5">
+                <div>
+                  <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">Før</p>
+                  <p class="mt-2 text-sm leading-relaxed text-brand/75">{example.before}</p>
+                </div>
+                <div class="mt-5 border-t border-brand/10 pt-5">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Efter</p>
+                  <p class="mt-2 text-sm leading-relaxed text-brand">{example.after}</p>
+                </div>
+                <div class="mt-5 rounded-[1rem] border border-accent/25 bg-accent/10 p-4">
+                  <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Effekt</p>
+                  <p class="mt-2 text-sm leading-relaxed text-brand/80">{example.effect}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-14 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+            <article class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-6 md:p-7">
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Mini-diagnose</p>
+              <h3 class="mt-4 max-w-xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+                Er jeres proces moden til AI?
+              </h3>
+              <div class="mt-7 grid gap-3">
+                {maturitySignals.map((signal, index) => (
+                  <p class="grid grid-cols-[2.25rem_1fr] items-start gap-3 rounded-[1rem] border border-brand/10 bg-panel/75 p-4 text-sm leading-relaxed text-brand/80">
+                    <span class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</span>
+                    <span>{signal}</span>
+                  </p>
+                ))}
+              </div>
+              <p class="mt-6 text-sm leading-relaxed text-muted">
+                Tre ja-svar er ofte nok til at undersøge processen. Ikke til at automatisere blindt, men til at kortlægge den ordentligt.
+              </p>
+            </article>
+
+            <article class="rounded-[1.5rem] border border-brand/10 bg-panel p-6 md:p-7">
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Audit-output mockup</p>
+              <h3 class="mt-4 max-w-xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+                Hvad får vi konkret?
+              </h3>
+              <div class="mt-7 grid gap-3">
+                {auditOutputPanels.map(([title, text], index) => (
+                  <div class="grid gap-3 rounded-[1rem] border border-brand/10 bg-canvas-soft/70 p-4 md:grid-cols-[4rem_1fr]">
+                    <p class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</p>
+                    <div>
+                      <p class="font-semibold text-brand">{title}</p>
+                      <p class="mt-2 text-sm leading-relaxed text-muted">{text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-14">
+            <RoiCalculator />
+          </div>
+
+          <div class="mt-14">
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Typiske teams vi hjælper</p>
+            <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {targetTeams.map(([title, text]) => (
+                <article class="conversion-card rounded-[1.2rem] border border-brand/10 bg-panel-soft p-5">
                   <h3 class="text-lg font-semibold text-brand">{title}</h3>
                   <p class="mt-3 text-sm leading-relaxed text-muted">{text}</p>
                 </article>
               ))}
             </div>
-
-            <aside class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-5 lg:sticky lg:top-28 lg:self-start">
-              <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Audit output</p>
-              <h3 class="mt-4 text-2xl font-semibold text-brand">Top 3 workflows</h3>
-              <div class="mt-6 grid gap-4">
-                {[
-                  ['Ugentlig statusrapport', 'høj effekt / lav kompleksitet'],
-                  ['Kundehenvendelser', 'høj effekt / medium kompleksitet'],
-                  ['Handover mellem salg og levering', 'medium effekt / lav kompleksitet'],
-                ].map(([title, score], index) => (
-                  <div class="border-t border-brand/10 pt-4">
-                    <p class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</p>
-                    <p class="mt-2 font-medium text-brand">{title}</p>
-                    <p class="mt-1 text-sm text-muted">{score}</p>
-                  </div>
-                ))}
-              </div>
-              <div class="mt-7 rounded-2xl border border-brand/10 bg-canvas-soft p-4">
-                <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Estimeret effekt</p>
-                <p class="mt-3 text-sm leading-relaxed text-brand/80">
-                  4-8 timer sparet pr. uge, færre glemte actions og hurtigere opfølgning.
-                </p>
-              </div>
-            </aside>
           </div>
         </div>
       </div>
@@ -390,7 +502,7 @@ const structuredData = {
           </div>
           <div>
             <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
-              Friction -> Flow Framework
+              Friction → Flow Framework
             </h2>
             <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
               Vi starter med at finde friktionen. Derefter bygger vi små, konkrete workflows, der passer til den måde teamet faktisk arbejder på.
@@ -398,7 +510,7 @@ const structuredData = {
           </div>
         </div>
 
-        <div class="mt-14 grid gap-4 lg:grid-cols-5">
+        <div class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {methodSteps.map(([number, title, text]) => (
             <article class="rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
               <p class="font-mono text-xs text-accent">{number}</p>
@@ -429,15 +541,25 @@ const structuredData = {
               return (
               <article class:list={[
                 'flex min-w-0 flex-col rounded-[1.5rem] border p-5 sm:p-6',
-                service.highlighted ? 'border-accent/50 bg-accent/10' : 'border-brand/10 bg-panel-soft',
+                service.highlighted ? 'border-accent/50 bg-accent/10 shadow-soft' : 'border-brand/10 bg-panel',
               ]}>
                 <div>
-                  <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">{service.duration}</p>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{service.step}</p>
+                    {service.highlighted && <span class="rounded-md border border-accent/30 bg-panel px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-accent">Anbefalet start</span>}
+                  </div>
                   <h3 class="mt-5 text-2xl font-semibold text-brand">{service.name}</h3>
-                  <p class="mt-3 font-mono text-sm text-accent">{service.price}</p>
+                  <div class="mt-5 grid gap-3 border-y border-brand/10 py-4 text-sm">
+                    <p><span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">Pris</span><br /><span class="font-semibold text-brand">{service.price}</span></p>
+                    <p><span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">Varighed</span><br /><span class="font-semibold text-brand">{service.duration}</span></p>
+                    <p><span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">Bedst til</span><br /><span class="text-brand/75">{service.bestFor}</span></p>
+                  </div>
                   <p class="mt-5 text-sm leading-relaxed text-muted">{service.text}</p>
                 </div>
-                <ul class="mt-7 grid gap-2 border-t border-brand/10 pt-5 text-sm text-brand/75">
+                <div class="mt-7">
+                  <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Output</p>
+                </div>
+                <ul class="mt-3 grid gap-2 text-sm text-brand/75">
                   {service.includes.map((item) => (
                     <li class="flex gap-2">
                       <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent"></span>
@@ -445,6 +567,16 @@ const structuredData = {
                     </li>
                   ))}
                 </ul>
+                <div class="mt-6 grid gap-4 border-t border-brand/10 pt-5 text-sm leading-relaxed">
+                  <div>
+                    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Ikke inkluderet</p>
+                    <p class="mt-2 text-brand/70">{service.notIncluded}</p>
+                  </div>
+                  <div>
+                    <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">Næste skridt</p>
+                    <p class="mt-2 text-brand/70">{service.nextStep}</p>
+                  </div>
+                </div>
                 <div class="mt-auto pt-7">
                   <Button href={page.path} variant={service.highlighted ? 'primary' : 'secondary'} class="w-full">
                     {service.cta}
@@ -461,62 +593,111 @@ const structuredData = {
     <section id="eksempler" class="border-b border-brand/10">
       <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Eksempler</p>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Use cases</p>
         </div>
-        <div class="grid gap-6">
-          <article class="rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
-            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Proof-of-work</p>
+        <div class="grid gap-14">
+          <div>
+            <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+              Eksempelcases, ikke testimonials.
+            </h2>
+            <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+              Vi opfinder ikke kundelogoer eller resultater. De her cases er konkrete eksempler på processer, der ofte egner sig til en Manual Work Audit eller en AI Workflow Sprint.
+            </p>
+            <div class="mt-10 grid gap-4 md:grid-cols-2">
+              {useCases.slice(0, 8).map((useCase) => (
+                <a href={useCase.path} class="conversion-card group rounded-[1.25rem] border border-brand/10 bg-panel p-5">
+                  <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">Eksempelcase</p>
+                  <h3 class="mt-4 text-xl font-semibold text-brand group-hover:text-accent">{useCase.title}</h3>
+                  <div class="mt-5 grid gap-3 text-sm leading-relaxed">
+                    <p><span class="font-semibold text-brand">Problem:</span> <span class="text-muted">{useCase.problem}</span></p>
+                    <p><span class="font-semibold text-brand">Workflow:</span> <span class="text-muted">{useCase.workflow}</span></p>
+                    <p><span class="font-semibold text-brand">Output:</span> <span class="text-muted">{useCase.output}</span></p>
+                  </div>
+                  <p class="mt-5 text-sm font-semibold text-brand">Send jeres version af processen</p>
+                </a>
+              ))}
+            </div>
+            <div class="mt-7">
+              <Button href="/use-cases" variant="secondary">Se alle use cases</Button>
+            </div>
+          </div>
+
+          <article class="rounded-[1.5rem] border border-brand/10 bg-panel p-6 md:p-8">
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Proof, ikke powerpoint</p>
             <h2 class="mt-5 max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
-              AI brugt på rigtige problemer
+              SiteDokAI er selv bygget AI-klar.
             </h2>
             <p class="mt-6 max-w-3xl text-base leading-relaxed text-muted md:text-lg">
-              SiteDokAI startede som et praktisk AI-projekt: en automatiseret pipeline, der analyserede hvordan virksomheder blev forstået i AI-svar på tværs af ChatGPT, Perplexity, Gemini og Claude. Det var ikke tænkt som marketing-teori. Det var et eksempel på måden vi arbejder på: se et problem, kortlæg processen, byg en workflow, lever et beslutningsgrundlag.
+              Proof-of-work er ikke en slide. SiteDokAI har en konkret AI-discoverability-pipeline, klare servicesider, llms.txt, sitemap og schema, så både mennesker, Google og AI-agenter kan forstå ydelser, prisniveau og næste skridt.
             </p>
-            <p class="mt-7 text-sm font-semibold text-brand">Har I et lignende manuelt analyseflow? Lad os kortlægge det.</p>
-          </article>
-
-          <article class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-6 md:p-8">
-            <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-              <div>
-                <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">AI-klar egen side</p>
-                <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
-                  SiteDokAI skal også være let for AI at forstå.
-                </h2>
-                <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-                  Derfor er siden bygget med klare service-svar, struktureret data, sitemap og en åben AI-profil, så både mennesker, Google og AI-agenter kan aflæse hvad vi gør, hvem det er for, og hvordan man tager næste skridt.
-                </p>
-              </div>
-              <div class="grid gap-3">
-                {aiProofItems.map(([title, text, href]) => (
-                  href ? (
-                    <a href={href} class="group rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4 transition-colors hover:border-accent/40 hover:bg-panel-soft">
-                      <span class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</span>
-                      <span class="mt-2 block text-sm leading-relaxed text-brand/75 group-hover:text-brand">{text}</span>
-                    </a>
-                  ) : (
-                    <div class="rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4">
-                      <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</p>
-                      <p class="mt-2 text-sm leading-relaxed text-brand/75">{text}</p>
-                    </div>
-                  )
-                ))}
-              </div>
+            <div class="mt-8 grid gap-3 md:grid-cols-4">
+              {['AI-søgecheck', 'Indholdsstruktur', 'Schema + llms.txt', 'Klar næste handling'].map((item, index) => (
+                <div class="rounded-[1rem] border border-brand/10 bg-canvas-soft/70 p-4">
+                  <p class="font-mono text-xs text-accent">{String(index + 1).padStart(2, '0')}</p>
+                  <p class="mt-3 text-sm font-semibold text-brand">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-6 grid gap-3 md:grid-cols-2">
+              {aiProofItems.map(([title, text, href]) => (
+                href ? (
+                  <a href={href} class="group rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4 transition-colors hover:border-accent/40 hover:bg-panel-soft">
+                    <span class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</span>
+                    <span class="mt-2 block text-sm leading-relaxed text-brand/75 group-hover:text-brand">{text}</span>
+                  </a>
+                ) : (
+                  <div class="rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4">
+                    <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent">{title}</p>
+                    <p class="mt-2 text-sm leading-relaxed text-brand/75">{text}</p>
+                  </div>
+                )
+              ))}
             </div>
           </article>
 
-          <article class="grid gap-5 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:grid-cols-2 md:p-8">
+          <div class="grid gap-5 lg:grid-cols-2">
+            <article class="rounded-[1.5rem] border border-accent/25 bg-accent/10 p-6 md:p-8">
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Human approval</p>
+              <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+                AI foreslår. Mennesker godkender.
+              </h2>
+              <p class="mt-6 text-base leading-relaxed text-muted md:text-lg">
+                Gode workflows er ofte ikke fuldautomatiske. AI samler, strukturerer og foreslår. Mennesker godkender, retter og tager ansvar, når kvalitet, risiko, tone eller beslutninger kræver det.
+              </p>
+            </article>
+
+            <article class="rounded-[1.5rem] border border-brand/10 bg-panel p-6 md:p-8">
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Data og sikkerhed</p>
+              <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+                Hvad med data, adgang og sikkerhed?
+              </h2>
+              <div class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
+                {[
+                  'AI skal ikke have adgang til alt. Vi starter med nødvendige input.',
+                  'Eksisterende værktøjer bruges først, hvis de er nok.',
+                  'Det skal være tydeligt hvad der sendes til AI, og hvorfor.',
+                  'Output godkendes af mennesker, når risiko eller kvalitet kræver det.',
+                  'Processen dokumenteres, så fejl kan spores og rettes.',
+                ].map((item) => (
+                  <p class="border-t border-brand/10 pt-3">{item}</p>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <article class="grid gap-5 rounded-[1.5rem] border border-brand/10 bg-panel p-6 md:grid-cols-2 md:p-8">
             <div>
-              <p class="font-mono text-xs uppercase tracking-[0.22em] text-muted">Ikke det her</p>
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-muted">Ikke for jer hvis</p>
               <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-muted">
-                {['AI-strategi til skuffen', 'Generiske workshops', 'Tool-demoer uden procesforståelse', 'SEO/marketing forklædt som AI', 'Store IT-projekter før problemet er forstået', 'Automatisering af noget, der burde fjernes helt'].map((item) => (
+                {['I vil have et stort AI-roadmap uden konkret implementering.', 'I vil automatisere alt uden menneskelig kontrol.', 'I leder efter generiske tool-demoer.', 'I vil starte et stort IT-projekt før problemet er forstået.', 'I vil måle på hype i stedet for tid, fejl og brug.'].map((item) => (
                   <li class="border-t border-brand/10 pt-3">{item}</li>
                 ))}
               </ul>
             </div>
             <div>
-              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Det her</p>
+              <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">For jer hvis</p>
               <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-brand/80">
-                {['Én konkret proces', 'Én konkret workflow', 'Én prioriteret backlog', 'Menneskelig godkendelse hvor det er nødvendigt', 'Praktisk dokumentation', 'Måling på tid, fejl og brug'].map((item) => (
+                {['I vil starte med én konkret proces.', 'I vil fjerne eller forenkle arbejde før det automatiseres.', 'I vil have en brugbar workflow, ikke en demo.', 'I vil måle på faktisk effekt.', 'I vil holde ansvar og human approval i flowet.'].map((item) => (
                   <li class="border-t border-accent/30 pt-3">{item}</li>
                 ))}
               </ul>
@@ -531,9 +712,9 @@ const structuredData = {
         <div>
           <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Om Troels</p>
         </div>
-        <div class="grid gap-8 lg:grid-cols-[1fr_0.75fr]">
-          <div>
-            <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+        <div class="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(17rem,0.65fr)]">
+          <div class="min-w-0">
+            <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
               Bygget af en operationsmand, ikke en AI-teoretiker
             </h2>
             <div class="mt-7 grid max-w-3xl gap-5 text-base leading-relaxed text-muted md:text-lg">
@@ -548,7 +729,7 @@ const structuredData = {
               </p>
             </div>
           </div>
-          <aside class="rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6">
+          <aside class="min-w-0 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6">
             <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">AI Operations Partner</p>
             <ul class="mt-7 grid gap-4 text-sm leading-relaxed text-brand/80">
               {[
@@ -565,6 +746,27 @@ const structuredData = {
       </div>
     </section>
 
+    <section id="faq" class="border-b border-brand/10">
+      <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">FAQ</p>
+        </div>
+        <div>
+          <h2 class="max-w-4xl font-display text-3xl font-semibold leading-tight text-brand md:text-6xl">
+            Korte svar på de spørgsmål, der plejer at stoppe beslutningen.
+          </h2>
+          <div class="mt-10 grid gap-4">
+            {faqItems.map(([question, answer]) => (
+              <article class="rounded-[1.2rem] border border-brand/10 bg-panel p-5">
+                <h3 class="text-lg font-semibold text-brand">{question}</h3>
+                <p class="mt-3 max-w-3xl text-sm leading-relaxed text-muted">{answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="kontakt" class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
       <div>
         <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Kontakt</p>
@@ -574,7 +776,7 @@ const structuredData = {
           Send det workflow, der irriterer jer mest
         </h2>
         <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
-          Skriv kort hvad I bruger for meget tid på. Det kan være statusmails, rapporter, opfølgninger, kundehenvendelser, handovers eller noget helt andet. Vi svarer med en nøgtern vurdering af, om det egner sig til en AI-workflow.
+          Beskriv workflowet, hvor ofte det sker, hvilke værktøjer I bruger, hvem der er involveret, hvad der går galt, og hvad et godt output ville være. Vi svarer med en nøgtern vurdering, også hvis AI ikke er første skridt.
         </p>
         <div class="mt-12">
           <ScreeningForm

@@ -7,6 +7,92 @@ interface Props {
 }
 
 const { useCase } = Astro.props;
+
+const useCaseDetails: Record<UseCase['id'], { pain: string; input: string; approval: string; effect: string; service: string }> = {
+  'ai-statusrapport': {
+    pain: 'Operations, projektledelse, ledelse og teams der bruger møder på at finde seneste status.',
+    input: 'Statusmails, Teams-tråde, mødenoter, projektlister og faste opdateringsfelter.',
+    approval: 'Mødeejer eller projektansvarlig godkender actions, deadlines og beslutningspunkter før de deles.',
+    effect: 'Mindre statusjagt, færre opfølgningsmøder og hurtigere beslutninger.',
+    service: 'Manual Work Audit som første skridt, AI Workflow Sprint hvis kilder og skabelon er klare.',
+  },
+  ledelsesrapport: {
+    pain: 'Finance, operations og ledelse, hvor rapportering bliver samlet manuelt hver uge eller måned.',
+    input: 'Excel/Sheets, eksportfiler, KPI-noter, afvigelser og tidligere rapporter.',
+    approval: 'Fagansvarlig godkender forklaringer, anbefalinger og tal før rapporten sendes videre.',
+    effect: 'Mindre copy-paste, mere ens forklaring af afvigelser og bedre beslutningsgrundlag.',
+    service: 'Manual Work Audit hvis rapportflowet er uklart, AI Workflow Sprint hvis format og datakilder er faste.',
+  },
+  'kundehenvendelse-svarudkast': {
+    pain: 'Kundeservice, salg og Customer Success, hvor mange henvendelser kræver samme vurdering igen og igen.',
+    input: 'Kundemail, CRM-historik, produktregler, tidligere svar og interne retningslinjer.',
+    approval: 'Medarbejder godkender svar, tone og eskalering før kunden får noget.',
+    effect: 'Hurtigere første svar, mere ens kvalitet og tydeligere eskalering.',
+    service: 'AI Workflow Sprint, typisk efter en kort audit af regler, tone og risikogrænser.',
+  },
+  'moede-actions-opfoelgning': {
+    pain: 'Projektteams, ledere og mødeejere, der mister actions efter møder.',
+    input: 'Mødenoter, transskription, agenda, deltagerliste og tidligere actionlog.',
+    approval: 'Mødeejer godkender ansvarlige, deadlines og opfølgningsmail.',
+    effect: 'Færre glemte aftaler, kortere opfølgningstid og tydeligere ejerskab.',
+    service: 'AI Workflow Sprint hvis teamet allerede har en fast møderytme.',
+  },
+  'leverandoerstatus-undtagelser': {
+    pain: 'Supply chain, indkøb og operations, hvor afvigelser gemmer sig i mails og statusark.',
+    input: 'Leverandørmails, statusfiler, forsinkelsesnoter, ordrelister og kendte risikokategorier.',
+    approval: 'Indkøb eller operations godkender foreslået handling, eskalering og intern besked.',
+    effect: 'Mindre gennemlæsning, hurtigere reaktion på undtagelser og bedre overblik.',
+    service: 'Manual Work Audit først, især hvis leverandørinput kommer i mange formater.',
+  },
+  'tilbudsanmodning-afklaring': {
+    pain: 'Salg, projektledelse og rådgivere, der bruger tid på uklare forespørgsler.',
+    input: 'Kundeforespørgsel, krav, bilag, tidligere tilbud, scope-kriterier og prislogik.',
+    approval: 'Sælger eller projektansvarlig godkender afklaringsspørgsmål og næste skridt.',
+    effect: 'Hurtigere kvalificering, færre manglende oplysninger og bedre tilbudsstart.',
+    service: 'AI Workflow Sprint når vurderingskriterierne kan beskrives tydeligt.',
+  },
+  'ny-kunde-onboarding': {
+    pain: 'Salg, delivery, kundeservice og ledelse, hvor viden går tabt mellem aftale og opstart.',
+    input: 'Salgsnoter, kontrakt, scope, kundemail, interne aftaler og kendte risici.',
+    approval: 'Delivery-ansvarlig godkender onboarding-plan, mangler og første kundebesked.',
+    effect: 'Færre misforståelser, hurtigere opstart og mere ens handover.',
+    service: 'Manual Work Audit hvis handover er forskellig fra kunde til kunde.',
+  },
+  'crm-opfoelgning-naeste-skridt': {
+    pain: 'Salg og Customer Success, hvor muligheder går kolde, fordi næste handling ligger i løse noter.',
+    input: 'CRM-noter, mails, seneste kontakt, tilbudsstatus og aftaler.',
+    approval: 'Sælger godkender prioritering, mailudkast og næste handling.',
+    effect: 'Mindre tabt opfølgning, bedre prioritering og mere stabil salgsrytme.',
+    service: 'AI Workflow Sprint hvis CRM-data er tilgængelige og næste-skridt-logikken er tydelig.',
+  },
+  'reklamation-sagsoverblik': {
+    pain: 'Kundeservice, kvalitet og finance, hvor sager kræver manuel læsning af historik og regler.',
+    input: 'Kundebesked, billeder, ordredata, tidligere mails, betingelser og interne noter.',
+    approval: 'Ansvarlig medarbejder godkender vurdering og svar, før kunden kontaktes.',
+    effect: 'Hurtigere sagsforståelse, mere ens vurdering og færre oversete detaljer.',
+    service: 'Manual Work Audit først, fordi data, ansvar og risiko skal afklares.',
+  },
+  'procesdokumentation-interviews': {
+    pain: 'Operations, HR, ledelse og teams, hvor vigtig viden ligger hos få erfarne personer.',
+    input: 'Interviews, skærmoptagelser, eksisterende SOPer, noter og undtagelser.',
+    approval: 'Procesejer godkender trin, regler og undtagelser før dokumentationen bruges til træning.',
+    effect: 'Hurtigere oplæring, mindre personafhængighed og bedre grundlag for forbedringer.',
+    service: 'Manual Work Audit som naturligt første skridt.',
+  },
+};
+
+const detail = useCaseDetails[useCase.id];
+
+const workflowBlocks = [
+  ['Problemet', useCase.problem],
+  ['Hvem mærker smerten?', detail.pain],
+  ['Input', detail.input],
+  ['Workflow', useCase.workflow],
+  ['Human approval', detail.approval],
+  ['Output', useCase.output],
+  ['Typisk effekt', detail.effect],
+  ['Relevant ydelse', detail.service],
+];
 ---
 
 <main id="main" class="bg-canvas text-brand">
@@ -35,19 +121,18 @@ const { useCase } = Astro.props;
         {useCase.description}
       </p>
 
-      <div class="mt-12 grid gap-5">
-        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-          <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Problemet</p>
-          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/80">{useCase.problem}</p>
-        </article>
-        <article class="rounded-[1.35rem] border border-accent/25 bg-accent/10 p-5 md:p-6">
-          <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Workflowet</p>
-          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/85">{useCase.workflow}</p>
-        </article>
-        <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-          <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Output</p>
-          <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand/80">{useCase.output}</p>
-        </article>
+      <div class="mt-12 grid gap-4">
+        {workflowBlocks.map(([title, text], index) => (
+          <article class:list={[
+            'rounded-[1.35rem] border p-5 md:p-6',
+            title === 'Workflow' || title === 'Human approval' ? 'border-accent/25 bg-accent/10' : 'border-brand/10 bg-panel-soft',
+          ]}>
+            <div class="grid gap-4 md:grid-cols-[7rem_1fr]">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">{String(index + 1).padStart(2, '0')} / {title}</p>
+              <p class="max-w-3xl text-base leading-relaxed text-brand/80 md:text-lg">{text}</p>
+            </div>
+          </article>
+        ))}
       </div>
 
       <section class="mt-14">

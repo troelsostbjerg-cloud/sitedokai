@@ -4,11 +4,29 @@ SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der v
 
 ## Hvad SiteDokAI hjælper med
 
-- Manual Work Audit: kortlægning af manuelle workflows og prioritering af de bedste AI-pilots.
-- AI Workflow Sprint: bygning af én konkret AI-workflow på et reelt hverdagsproblem.
-- AI Operations Partner: løbende hjælp til backlog, forbedringer, dokumentation, træning og adoption.
+- Manual Work Audit: 5 arbejdsdage fra 15.000 kr. ekskl. moms. Kortlægger manuelle workflows og leverer proceskort, prioriteret backlog og top 3 AI-pilots.
+- AI Workflow Sprint: 10 arbejdsdage fra 35.000 kr. ekskl. moms. Designer, bygger og tester én konkret AI-workflow på et reelt hverdagsproblem.
+- AI Operations Partner: løbende fra 10.000 kr./md. ekskl. moms. Hjælper med backlog, forbedringer, dokumentation, træning, adoption og måling efter de første workflows.
 - Procesoptimering i mails, Excel/Sheets, Teams/Slack, SharePoint/Drive, CRM, rapportering, opfølgninger og handovers.
 - 10 use cases for processer som status, rapportering, kundehenvendelser, mødeopfølgning, leverandørstatus, tilbudsafklaring, onboarding, CRM-opfølgning, reklamationer og procesdokumentation.
+
+## Grundprincipper
+
+- Proces før værktøj.
+- Én konkret proces før stort roadmap.
+- Start småt, bevis værdien og byg videre.
+- Mål på tid sparet, færre fejl og faktisk brug.
+- Human approval hvor risiko eller kvalitet kræver det.
+- Fjern eller forenkle arbejde før det automatiseres.
+- Ingen AI-strategi-teater og ingen generiske workshops uden output.
+
+## Hvornår en proces typisk er moden til AI
+
+- Den gentages ugentligt eller dagligt.
+- Flere personer bruger tid på den.
+- Data flyttes mellem systemer.
+- Fejl eller ventetid opstår ofte.
+- Output kan beskrives i en fast skabelon.
 
 ## Relevante emner
 

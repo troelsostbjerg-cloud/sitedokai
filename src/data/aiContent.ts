@@ -28,6 +28,13 @@ export const services = [
       'Top 3 AI-pilots vurderet på effekt, kompleksitet og adoption.',
       'Skitse til den første workflow med input, regler, menneskelig godkendelse og output.',
     ],
+    notIncluded: [
+      'Ingen bygget automation.',
+      'Ingen tool-indkøb eller systemudskiftning.',
+      'Ingen stort roadmap uden prioriteret første skridt.',
+    ],
+    nextStep:
+      'Efter auditten beslutter I, om første workflow skal bygges i en AI Workflow Sprint, forenkles manuelt eller parkeres.',
     process: [
       'Interview med 3-6 nøglepersoner.',
       'Kortlægning af gentagne opgaver og friktion.',
@@ -79,6 +86,13 @@ export const services = [
       'Test med de mennesker, der skal bruge løsningen.',
       'Dokumentation, træning og målepunkter for effekt.',
     ],
+    notIncluded: [
+      'Ingen blind fuldautomatisering.',
+      'Ingen større IT-projekt før flowet er bevist.',
+      'Ingen løbende drift efter sprinten uden særskilt aftale.',
+    ],
+    nextStep:
+      'Efter sprinten måler I brug, fejl og tid sparet, og beslutter om workflowet skal forankres, forbedres eller udvides.',
     process: [
       'Vælg et konkret workflow og afgræns scope.',
       'Beskriv input, regler, undtagelser, godkendelse og output.',
@@ -130,6 +144,13 @@ export const services = [
       'Nye små automatiseringer, hvor de giver mening.',
       'Dokumentation, træning og status på effekt.',
     ],
+    notIncluded: [
+      'Ingen passiv rådgiverretainer uden konkret backlog.',
+      'Ingen support på alt IT.',
+      'Ingen automatisering af processer, der bør fjernes først.',
+    ],
+    nextStep:
+      'Vi aftaler en fast rytme for prioritering, forbedring, dokumentation, træning og status på effekt.',
     process: [
       'Gennemgå aktuel backlog og brug af eksisterende workflows.',
       'Prioriter de næste forbedringer efter effekt og adoption.',
