@@ -1,0 +1,164 @@
+---
+interface Props {
+  sourcePage?: string;
+  title?: string;
+  text?: string;
+  submitLabel?: string;
+  interest?: string;
+}
+
+const {
+  sourcePage = Astro.url.pathname,
+  title = 'Send the workflow that annoys your team most.',
+  text = 'Describe the workflow, how often it happens, which tools it touches, who is involved, what goes wrong, and what a good output would look like. We will reply with a sober next step, including if AI is not the right first step.',
+  submitLabel = 'Send your workflow',
+  interest = 'Manual Work Audit',
+} = Astro.props;
+
+const contactEmail = 'info@sitedokai.com';
+const formAction = `https://formsubmit.co/${contactEmail}`;
+const ajaxAction = `https://formsubmit.co/ajax/${contactEmail}`;
+const nextUrl = 'https://sitedokai.com/thank-you?type=workflow';
+const directMailto = `mailto:${contactEmail}?subject=${encodeURIComponent('Workflow for SiteDokAI')}&body=${encodeURIComponent(`Hi SiteDokAI,
+
+I would like a sober view on a recurring workflow that may be suitable for a practical AI workflow.
+
+Name:
+Company:
+Website:
+Which workflow annoys the team most:
+How often it happens:
+Tools involved:
+Who is involved:
+What goes wrong today:
+What a good output would look like:
+Anything else:
+
+Thanks.`)}`;
+
+const inputClass = 'h-12 rounded-xl border border-brand/10 bg-panel-soft px-4 text-base font-normal text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+const textAreaClass = 'resize-y rounded-xl border border-brand/10 bg-panel-soft px-4 py-3 text-base font-normal leading-relaxed text-brand outline-none transition-colors placeholder:text-muted/50 focus:border-accent/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+---
+
+<form
+  action={formAction}
+  method="POST"
+  data-ajax-email-form
+  data-ajax-action={ajaxAction}
+  data-lead-backup-action="/api/leads"
+  data-lead-type="workflow"
+  data-pending-label="Sending..."
+  class="grid gap-5 border-t border-brand/10 pt-7"
+>
+  <input type="hidden" name="_subject" value="New workflow enquiry from sitedokai.com" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_next" value={nextUrl} />
+  <input type="hidden" name="source_page" value={sourcePage} />
+  <input type="hidden" name="interest" value={interest} />
+  <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+  <div>
+    <h2 class="text-xl font-semibold leading-tight text-brand">{title}</h2>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted">{text}</p>
+  </div>
+
+  <noscript>
+    <p class="rounded-xl border border-brand/10 bg-panel-soft px-4 py-3 text-sm leading-relaxed text-brand/75">
+      This form works best with JavaScript. You can also send the workflow directly to <a href={directMailto} class="font-semibold underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>.
+    </p>
+  </noscript>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Name
+      <input required type="text" name="name" autocomplete="name" class={inputClass} />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Email
+      <input required type="email" name="email" autocomplete="email" class={inputClass} />
+    </label>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-[0.9fr_1.1fr]">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Company
+      <input type="text" name="company" autocomplete="organization" class={inputClass} />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Website
+      <input type="text" name="website" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="company.com" class={inputClass} />
+    </label>
+  </div>
+
+  <label class="grid gap-2 text-sm font-medium text-brand">
+    Which workflow annoys your team most?
+    <textarea required name="workflow" rows="5" placeholder="For example status updates, reporting, customer replies, handovers or follow-ups that always need to be chased manually." class:list={[textAreaClass, 'min-h-36']}></textarea>
+  </label>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      How often does it happen?
+      <select name="frequency" class={inputClass}>
+        <option value="">Choose frequency</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="not sure">Not sure</option>
+      </select>
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Which tools does it involve?
+      <input type="text" name="current_tools" placeholder="Email, Excel, Teams, CRM, Slack, SharePoint" class={inputClass} />
+    </label>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      Who is involved?
+      <input type="text" name="involved_people" placeholder="Operations, finance, support, sales, leadership" class={inputClass} />
+    </label>
+
+    <label class="grid gap-2 text-sm font-medium text-brand">
+      What goes wrong today?
+      <input type="text" name="current_failure" placeholder="Errors, waiting time, duplicate work, unclear ownership" class={inputClass} />
+    </label>
+  </div>
+
+  <label class="grid gap-2 text-sm font-medium text-brand">
+    What would a good output look like?
+    <textarea name="desired_output" rows="3" placeholder="For example one status summary with actions, owners, deadlines and decisions." class:list={[textAreaClass, 'min-h-28']}></textarea>
+  </label>
+
+  <label class="grid gap-2 text-sm font-medium text-brand">
+    Anything else we should know?
+    <textarea name="notes" rows="3" placeholder="Context, constraints, current tools, examples or risks." class:list={[textAreaClass, 'min-h-24']}></textarea>
+  </label>
+
+  <div>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <button type="submit" data-ajax-submit class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px disabled:cursor-wait disabled:opacity-70">
+        {submitLabel}
+      </button>
+      <a href={directMailto} class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 bg-transparent px-6 py-3 text-center text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+        Email info@sitedokai.com
+      </a>
+    </div>
+
+    <p data-ajax-form-pending hidden aria-live="polite" class="mt-4 rounded-xl border border-brand/10 bg-panel-soft px-4 py-3 text-sm leading-relaxed text-brand/75">
+      Sending your workflow...
+    </p>
+    <p data-ajax-form-success hidden aria-live="polite" class="mt-4 rounded-xl border border-brand/10 bg-panel-soft px-4 py-3 text-sm leading-relaxed text-brand/75">
+      Thanks. We received your workflow and will reply with a practical next step.
+    </p>
+    <p data-ajax-form-error hidden aria-live="polite" data-default-error="Something went wrong. Please try again or email info@sitedokai.com directly." class="mt-4 rounded-xl border border-[#b95a54]/40 bg-[#b95a54]/10 px-4 py-3 text-sm leading-relaxed text-brand">
+      Something went wrong. Please try again or email info@sitedokai.com directly.
+    </p>
+    <p class="mt-4 text-xs leading-relaxed text-muted">
+      You can also send the workflow directly to <a href={directMailto} class="font-semibold text-brand underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>.
+    </p>
+  </div>
+</form>

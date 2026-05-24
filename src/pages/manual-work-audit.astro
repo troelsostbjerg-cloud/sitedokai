@@ -16,16 +16,16 @@ const structuredData = [
   serviceSchema(service),
   faqSchema(service.path, service.faq),
   breadcrumbSchema([
-    { name: 'Forside', path: '/' },
-    { name: 'Ydelser', path: '/#ydelser' },
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/#services' },
     { name: service.name, path: service.path },
   ]),
 ];
 ---
 
 <Layout
-  title={`${service.name} | SiteDokAI`}
-  description={service.description}
+  title="Manual Work Audit — Find the workflows where AI can help"
+  description="A 5-business-day audit that maps recurring manual workflows, prioritizes AI opportunities and gives your team the top 3 workflows to start with."
   canonical={service.path}
   structuredData={structuredData}
 >

@@ -16,16 +16,16 @@ const structuredData = [
   serviceSchema(service),
   faqSchema(service.path, service.faq),
   breadcrumbSchema([
-    { name: 'Forside', path: '/' },
-    { name: 'Ydelser', path: '/#ydelser' },
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/#services' },
     { name: service.name, path: service.path },
   ]),
 ];
 ---
 
 <Layout
-  title={`${service.name} | SiteDokAI`}
-  description={service.description}
+  title="AI Operations Partner — Keep AI improvements moving"
+  description="Ongoing practical support for AI workflow backlog, improvements, documentation, adoption and effect measurement."
   canonical={service.path}
   structuredData={structuredData}
 >

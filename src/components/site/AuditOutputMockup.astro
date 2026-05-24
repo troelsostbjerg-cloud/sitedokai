@@ -1,0 +1,25 @@
+---
+const outputs = [
+  ['Process map', 'Who does what, when, with which input and where waiting time appears.'],
+  ['Prioritized backlog', 'Workflow opportunities ranked by effect, complexity, risk and adoption.'],
+  ['Top 3 candidates', 'The first AI workflow candidates with a clear reason for each one.'],
+  ['Workflow sketch', 'Input, AI logic, human approval, output and next user action.'],
+  ['Measurement points', 'A sober view of time, errors, decision speed and actual use.'],
+];
+---
+
+<article class="overflow-hidden rounded-[1.45rem] border border-brand/10 bg-panel-soft shadow-soft">
+  <div class="border-b border-brand/10 bg-canvas/70 px-5 py-4">
+    <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent">Audit output mockup</p>
+    <h3 class="mt-2 text-2xl font-semibold text-brand">Manual Work Audit package</h3>
+  </div>
+  <div class="grid divide-y divide-brand/10">
+    {outputs.map(([title, text], index) => (
+      <div class="grid gap-4 p-5 md:grid-cols-[4rem_0.65fr_1fr] md:items-start">
+        <p class="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-brand/42">{String(index + 1).padStart(2, '0')}</p>
+        <p class="font-semibold text-brand">{title}</p>
+        <p class="text-sm leading-relaxed text-brand/68">{text}</p>
+      </div>
+    ))}
+  </div>
+</article>

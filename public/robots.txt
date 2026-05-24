@@ -11,3 +11,4 @@ Disallow: /mockups/
 
 Sitemap: https://sitedokai.com/sitemap.xml
 # AI-readable profile: https://sitedokai.com/llms.txt
+# Legacy Danish paths redirect to canonical English pages.

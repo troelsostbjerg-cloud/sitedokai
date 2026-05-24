@@ -1,87 +1,95 @@
 # SiteDokAI
 
-SiteDokAI er en dansk founder-led AI operations practice for virksomheder, der vil finde manuelle processer, der stjæler tid, og bygge praktiske AI-workflows, som sparer tid, reducerer fejl og faktisk bliver brugt.
+SiteDokAI is a founder-led AI operations practice for operations-heavy B2B teams that want to turn recurring manual work into practical, human-approved AI workflows.
 
-## Hvad SiteDokAI hjælper med
+Core positioning: AI Operations for Manual Work.
 
-- Manual Work Audit: 5 arbejdsdage fra 15.000 kr. ekskl. moms. Kortlægger manuelle workflows og leverer proceskort, prioriteret backlog og top 3 AI-pilots.
-- AI Workflow Sprint: 10 arbejdsdage fra 35.000 kr. ekskl. moms. Designer, bygger og tester én konkret AI-workflow på et reelt hverdagsproblem.
-- AI Operations Partner: løbende fra 10.000 kr./md. ekskl. moms. Hjælper med backlog, forbedringer, dokumentation, træning, adoption og måling efter de første workflows.
-- Procesoptimering i mails, Excel/Sheets, Teams/Slack, SharePoint/Drive, CRM, rapportering, opfølgninger og handovers.
-- 10 use cases for processer som status, rapportering, kundehenvendelser, mødeopfølgning, leverandørstatus, tilbudsafklaring, onboarding, CRM-opfølgning, reklamationer og procesdokumentation.
+Sharper positioning line: Turn recurring manual work into AI workflows your team actually uses.
 
-## Grundprincipper
+SiteDokAI does not start with AI tools. SiteDokAI starts with the work.
 
-- Proces før værktøj.
-- Én konkret proces før stort roadmap.
-- Start småt, bevis værdien og byg videre.
-- Mål på tid sparet, færre fejl og faktisk brug.
-- Human approval hvor risiko eller kvalitet kræver det.
-- Fjern eller forenkle arbejde før det automatiseres.
-- Ingen AI-strategi-teater og ingen generiske workshops uden output.
+Central belief: Most companies do not have an AI problem. They have a workflow problem. If the process is unclear, AI only scales the mess faster.
 
-## Hvornår en proces typisk er moden til AI
+Language: English.
+Primary market: International / Europe-first.
+Company base: Denmark.
+Contact email: info@sitedokai.com.
 
-- Den gentages ugentligt eller dagligt.
-- Flere personer bruger tid på den.
-- Data flyttes mellem systemer.
-- Fejl eller ventetid opstår ofte.
-- Output kan beskrives i en fast skabelon.
+## Services
 
-## Relevante emner
+- Manual Work Audit: from DKK 15,000 excl. VAT. Duration: 5 business days. Purpose: find recurring manual workflows where AI and better structure can create value. Output: process map, prioritized workflow backlog, top 3 AI workflow candidates, first workflow sketch, fit/risk/adoption score, suggested next step and measurement points. Recommended first step for new clients.
+- AI Workflow Sprint: from DKK 35,000 excl. VAT. Duration: 10 business days. Purpose: design, build and test one practical AI-assisted workflow for a real operational problem. Output: workflow design, AI logic or prompt structure, automation or prototype, human approval step, testing with users, documentation, training and effect measurement.
+- AI Operations Partner: from DKK 10,000/month excl. VAT. Duration: ongoing. Purpose: keep AI workflow improvements running after the first audit or sprint. Output: monthly AI/process backlog, workflow improvements, documentation, training, adoption support, measurement and practical sparring between operations, people and technology.
 
-- AI-drevet procesoptimering
-- AI workflows
-- workflow automation
-- operations automation
-- proceskortlægning
-- AI implementering
-- no-code AI
-- manual process automation
-- human approval workflows
-- adoption og effektmåling
+## Ideal customers
 
-## AI-læsbar opsætning
+Operations-heavy B2B teams in small and mid-market companies where recurring coordination work still lives in email, spreadsheets, Teams, Slack, CRM notes, project updates, support queues, supplier communication, onboarding, reporting or handovers.
 
-- Primær kanonisk side: https://sitedokai.com/
+Good-fit teams include operations, supply chain, customer support, project delivery, finance, sales operations, customer success, leadership teams and founder-led companies with growing operational complexity.
+
+## Principles
+
+- Start with the work, not the tool.
+- One workflow before a large roadmap.
+- AI drafts. People approve.
+- Remove or simplify work before automating it.
+- Use the minimum necessary input.
+- Existing tools first where practical.
+- Measure time saved, fewer errors, fewer follow-ups, faster decisions and actual use.
+- No fake client logos, testimonials, revenue numbers, aggregate ratings or unsupported compliance claims.
+- No tracking pixels or non-essential cookies.
+
+## Workflow examples
+
+- From status emails to decision-ready weekly updates: https://sitedokai.com/workflow-examples/ai-status-report
+- From spreadsheets to management reports: https://sitedokai.com/workflow-examples/management-report
+- From customer request to reply draft: https://sitedokai.com/workflow-examples/customer-reply-draft
+- From meeting notes to actions and follow-up: https://sitedokai.com/workflow-examples/meeting-actions-follow-up
+- From supplier updates to exception overview: https://sitedokai.com/workflow-examples/supplier-status-exceptions
+- From RFQ to clarification list: https://sitedokai.com/workflow-examples/rfq-clarification
+- From new customer to onboarding brief: https://sitedokai.com/workflow-examples/new-customer-onboarding
+- From CRM notes to next best follow-up: https://sitedokai.com/workflow-examples/crm-follow-up-next-step
+- From complaint to case brief: https://sitedokai.com/workflow-examples/complaint-case-brief
+- From interviews to process documentation: https://sitedokai.com/workflow-examples/process-documentation
+
+## AI readiness setup
+
+- Canonical English service pages.
+- Visible answer blocks and FAQ content.
+- Structured data: Organization, WebSite, ProfessionalService, Service, Offer, FAQPage, BreadcrumbList and WebPage where content is visible.
 - Sitemap: https://sitedokai.com/sitemap.xml
-- AI-klar egen side: https://sitedokai.com/ai-klar
-- Struktureret data: Organization, WebSite, WebPage, ProfessionalService og Service-objekter for SiteDokAIs forløb.
-- Indholdsprincip: konkrete service-svar, prisniveauer, målgruppe, workflow-eksempler, FAQ-svarblokke og tydelige næste skridt.
+- llms.txt: https://sitedokai.com/llms.txt
+- Clear workflow example pages.
+- No hidden AI trickery. The structure is designed to be correctly understood, cited and summarized.
 
-## Vigtige sider
+## Important URLs
 
-- https://sitedokai.com/
-- https://sitedokai.com/kontakt
-- https://sitedokai.com/manual-work-audit
-- https://sitedokai.com/ai-workflow-sprint
-- https://sitedokai.com/ai-operations-partner
-- https://sitedokai.com/use-cases
-- https://sitedokai.com/use-cases/ai-statusrapport
-- https://sitedokai.com/use-cases/ledelsesrapport
-- https://sitedokai.com/use-cases/kundehenvendelse-svarudkast
-- https://sitedokai.com/use-cases/moede-actions-opfoelgning
-- https://sitedokai.com/use-cases/leverandoerstatus-undtagelser
-- https://sitedokai.com/use-cases/tilbudsanmodning-afklaring
-- https://sitedokai.com/use-cases/ny-kunde-onboarding
-- https://sitedokai.com/use-cases/crm-opfoelgning-naeste-skridt
-- https://sitedokai.com/use-cases/reklamation-sagsoverblik
-- https://sitedokai.com/use-cases/procesdokumentation-interviews
-- https://sitedokai.com/ai-klar
-- https://sitedokai.com/eksempel
-- https://sitedokai.com/om
-- https://sitedokai.com/blog
-- https://sitedokai.com/privatlivspolitik
-- https://sitedokai.com/tilgaengelighed
+- Home: https://sitedokai.com/
+- Manual Work Audit: https://sitedokai.com/manual-work-audit
+- AI Workflow Sprint: https://sitedokai.com/ai-workflow-sprint
+- AI Operations Partner: https://sitedokai.com/ai-operations-partner
+- Pricing: https://sitedokai.com/pricing
+- Workflow examples: https://sitedokai.com/workflow-examples
+- AI readiness: https://sitedokai.com/ai-readiness
+- About: https://sitedokai.com/about
+- Contact: https://sitedokai.com/contact
+- Privacy policy: https://sitedokai.com/privacy-policy
+- Accessibility: https://sitedokai.com/accessibility
 
-## Historiske fallback-adresser
+## Legacy redirects
 
-- https://sitedokai.com/hjemmeside-tjek -> https://sitedokai.com/manual-work-audit
-- https://sitedokai.com/hjemmeside-fix -> https://sitedokai.com/ai-workflow-sprint
-- https://sitedokai.com/visuelt-loeft -> https://sitedokai.com/ai-operations-partner
+These old URLs are legacy redirects to the current English structure:
 
-## Kontakt
+- /priser -> /pricing
+- /om -> /about
+- /kontakt -> /contact
+- /use-cases -> /workflow-examples
+- /ai-klar -> /ai-readiness
+- /hjemmeside-tjek -> /manual-work-audit
+- /hjemmeside-fix -> /ai-workflow-sprint
+- /visuelt-loeft -> /ai-operations-partner
+- /gratis-mini-tjek -> /contact
+
+## Contact
 
 Email: info@sitedokai.com
-Sprog: dansk
-Primært marked: Danmark

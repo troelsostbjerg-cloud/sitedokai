@@ -1,0 +1,92 @@
+---
+import WorkflowScreeningForm from './WorkflowScreeningForm.astro';
+import type { WorkflowExample } from '../../data/aiContent';
+
+interface Props {
+  workflowExample: WorkflowExample;
+}
+
+const { workflowExample } = Astro.props;
+
+const blocks = [
+  ['The broken workflow', workflowExample.brokenWorkflow],
+  ['Who feels the pain', workflowExample.whoFeelsPain],
+  ['Typical inputs', workflowExample.typicalInputs.join(', ')],
+  ['AI-assisted workflow', workflowExample.aiAssistedWorkflow],
+  ['Human approval', workflowExample.humanApproval],
+  ['Output', workflowExample.output],
+  ['Good-fit signals', workflowExample.goodFitSignals.join(', ')],
+  ['Metrics to track', workflowExample.metrics.join(', ')],
+  ['Recommended starting service', workflowExample.recommendedService],
+];
+---
+
+<main id="main" class="bg-canvas text-brand">
+  <section class="mx-auto grid min-w-0 max-w-7xl gap-12 px-5 pb-14 pt-12 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.72fr_1.28fr]">
+    <aside class="min-w-0 text-sm leading-relaxed text-muted">
+      <nav aria-label="Breadcrumb" class="text-xs">
+        <ol class="flex flex-wrap gap-2">
+          <li><a href="/" class="text-brand/55 transition-colors hover:text-brand">Home</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li><a href="/workflow-examples" class="text-brand/55 transition-colors hover:text-brand">Workflow examples</a></li>
+          <li aria-hidden="true" class="text-brand/30">/</li>
+          <li class="text-brand">{workflowExample.title}</li>
+        </ol>
+      </nav>
+      <p class="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-accent">{workflowExample.eyebrow}</p>
+      <p class="mt-8 max-w-xs">
+        These are workflow patterns, not fake customer cases. Use them to recognize recurring manual work in daily operations.
+      </p>
+    </aside>
+
+    <div class="min-w-0">
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+        {workflowExample.title}
+      </h1>
+      <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+        {workflowExample.description}
+      </p>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <a href="#workflow-screening" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Send your workflow
+        </a>
+        <a href="/manual-work-audit" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Start with a Manual Work Audit
+        </a>
+      </div>
+
+      <div class="mt-12 grid gap-4">
+        {blocks.map(([title, text], index) => (
+          <article class:list={[
+            'rounded-[1.35rem] border p-5 md:p-6',
+            title === 'AI-assisted workflow' || title === 'Human approval' ? 'border-accent/25 bg-accent/10' : 'border-brand/10 bg-panel-soft',
+          ]}>
+            <div class="grid gap-4 md:grid-cols-[8.5rem_1fr]">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">{String(index + 1).padStart(2, '0')} / {title}</p>
+              <p class="max-w-3xl text-base leading-relaxed text-brand/80 md:text-lg">{text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <section id="workflow-screening" class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          Send your version of this workflow.
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+          Describe how this pattern shows up in your team. SiteDokAI will reply with a practical next step, including if AI is not the right first step.
+        </p>
+        <div class="mt-10">
+          <WorkflowScreeningForm
+            sourcePage={workflowExample.path}
+            title="Workflow example enquiry"
+            text="Describe your version of the workflow, where it happens and what a useful output would look like."
+            submitLabel="Send your workflow"
+            interest={workflowExample.title}
+          />
+        </div>
+      </section>
+    </div>
+  </section>
+</main>

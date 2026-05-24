@@ -1,0 +1,31 @@
+---
+const points = [
+  'AI should reduce friction, not remove accountability.',
+  'Critical output needs review.',
+  'The workflow should show what AI changed and why.',
+  'The user should always know the next action.',
+  'Automation is only useful when the process is understood.',
+];
+---
+
+<section class="rounded-[1.55rem] border border-accent/24 bg-[linear-gradient(145deg,rgba(220,232,223,0.72),rgba(255,250,241,0.95))] p-6 md:p-8">
+  <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div>
+      <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Human approval</p>
+      <h2 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
+        AI drafts. People approve.
+      </h2>
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-brand/70 md:text-lg">
+        Good AI workflows are often not fully automated. AI can collect, structure, classify and draft. People approve, correct and take responsibility where quality, risk, tone or decisions matter.
+      </p>
+    </div>
+    <div class="grid gap-3">
+      {points.map((point, index) => (
+        <div class="grid gap-4 rounded-xl border border-brand/10 bg-canvas/64 p-4 md:grid-cols-[3rem_1fr]">
+          <p class="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-accent">{String(index + 1).padStart(2, '0')}</p>
+          <p class="text-sm font-medium leading-relaxed text-brand/76">{point}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

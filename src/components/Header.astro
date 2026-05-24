@@ -2,35 +2,36 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Problemet', href: '/#problemet' },
-  { label: 'Sådan virker det', href: '/#metode' },
-  { label: 'Ydelser', href: '/#ydelser' },
-  { label: 'Use cases', href: '/use-cases' },
-  { label: 'Om', href: '/#om-troels' },
-  { label: 'Kontakt', href: '/#kontakt' },
+  { label: 'Problem', href: '/#problem' },
+  { label: 'Method', href: '/#method' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Workflow examples', href: '/workflow-examples' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
+const ctaHref = currentPath === '/contact' ? '#workflow-screening' : '/contact#workflow-screening';
 ---
 
 <a
   href="#main"
   class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-panel focus:px-4 focus:py-3 focus:text-brand"
 >
-  Gå til hovedindhold
+  Skip to main content
 </a>
 
 <header class="sticky top-0 z-20 border-b border-brand/10 bg-canvas/88 px-5 backdrop-blur-xl sm:px-6">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 py-4" aria-label="Hovednavigation">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 py-4" aria-label="Main navigation">
     <a href="/" class="min-w-0 text-brand">
       <span class="block font-display text-2xl font-semibold leading-none">SiteDokAI</span>
-      <span class="mt-1 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:block">AI operations i praksis</span>
+      <span class="mt-1 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:block">AI operations for manual work</span>
     </a>
 
     <div class="hidden items-center gap-5 lg:flex">
       {navItems.map((item) => {
-        const isActive = currentPath === item.href;
+        const itemPath = item.href.split('#')[0] || '/';
+        const isActive = itemPath !== '/' && currentPath === itemPath;
         return (
           <a
             href={item.href}
@@ -47,13 +48,13 @@ const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
     </div>
 
     <div class="hidden lg:block">
-      <Button href={ctaHref} size="sm">Send workflow</Button>
+      <Button href={ctaHref} size="sm">Send your workflow</Button>
     </div>
 
     <details class="group relative lg:hidden" data-mobile-menu>
       <summary
         class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-brand/10 bg-panel-soft text-brand transition-colors hover:bg-panel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden"
-        aria-label="Åbn menu"
+        aria-label="Open menu"
         aria-expanded="false"
         aria-controls="site-mobile-menu-panel"
       >
@@ -64,7 +65,8 @@ const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
       <div id="site-mobile-menu-panel" class="absolute right-0 top-14 z-30 max-h-[min(31rem,calc(100dvh-8rem))] w-[min(21rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-brand/10 bg-canvas-soft p-3 shadow-card">
         <div class="grid gap-1">
           {navItems.map((item) => {
-            const isActive = currentPath === item.href;
+            const itemPath = item.href.split('#')[0] || '/';
+            const isActive = itemPath !== '/' && currentPath === itemPath;
             return (
               <a
                 href={item.href}
@@ -78,7 +80,7 @@ const ctaHref = Astro.url.pathname === '/kontakt' ? '#screening' : '/#kontakt';
               </a>
             );
           })}
-          <Button href={ctaHref} class="mt-2 w-full">Send workflow</Button>
+          <Button href={ctaHref} class="mt-2 w-full">Send your workflow</Button>
         </div>
       </div>
     </details>

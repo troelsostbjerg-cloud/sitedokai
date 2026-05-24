@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import ServiceCard from '../components/site/ServiceCard.astro';
+import WorkflowScreeningForm from '../components/site/WorkflowScreeningForm.astro';
+import { absoluteUrl, breadcrumbSchema, services } from '../data/aiContent';
+import '../styles/global.css';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl('/pricing')}#webpage`,
+    url: absoluteUrl('/pricing'),
+    name: 'Pricing — SiteDokAI',
+    description:
+      'Clear starting prices for practical AI operations work: audits, workflow sprints and ongoing AI operations support.',
+    inLanguage: 'en',
+  },
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Pricing', path: '/pricing' },
+  ]),
+];
+---
+
+<Layout
+  title="Pricing — Manual Work Audit, AI Workflow Sprint and AI Operations Partner"
+  description="Clear starting prices for practical AI operations work: audits, workflow sprints and ongoing AI operations support."
+  canonical="/pricing"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
+      <div class="max-w-3xl">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Pricing</p>
+        <h1 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+          Clear starting prices for practical AI operations work.
+        </h1>
+        <p class="mt-7 text-lg leading-relaxed text-brand/72 md:text-xl">
+          Manual Work Audit is the recommended first buying decision. It gives the team a practical view of where AI actually makes sense before a sprint or ongoing support starts.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 lg:grid-cols-3">
+        {services.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+      <section id="workflow-screening" class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+        <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+          Not sure where to start?
+        </h2>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+          Send the workflow. SiteDokAI will reply with a sober next step, including if a Manual Work Audit is not the right first move.
+        </p>
+        <div class="mt-10">
+          <WorkflowScreeningForm sourcePage="/pricing" />
+        </div>
+      </section>
+    </section>
+  </main>
+  <Footer />
+</Layout>

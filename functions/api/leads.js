@@ -8,6 +8,11 @@ const ALLOWED_PUBLIC_ORIGINS = new Set([
 ]);
 
 const ALLOWED_LEAD_TYPES = new Set([
+  "workflow",
+  "contact",
+  "manual-work-audit",
+  "ai-workflow-sprint",
+  "ai-operations-partner",
   "gratis-mini-tjek",
   "kontakt",
   "hjemmeside-tjek",
@@ -64,7 +69,7 @@ function normalizeWebsite(value) {
 
 function normalizeLeadType(value) {
   const candidate = normalizeText(value, 80);
-  return ALLOWED_LEAD_TYPES.has(candidate) ? candidate : "kontakt";
+  return ALLOWED_LEAD_TYPES.has(candidate) ? candidate : "contact";
 }
 
 function normalizePath(value) {
@@ -165,7 +170,21 @@ function buildLeadRecord(payload, request) {
   const email = normalizeEmail(payload.email);
   const leadType = normalizeLeadType(payload.lead_type || payload.interest);
   const website = normalizeWebsite(payload.website);
-  const message = normalizeMultiline(payload.message || payload.notes);
+  const messageParts = [
+    ["Workflow", payload.workflow],
+    ["Frequency", payload.frequency],
+    ["Tools", payload.current_tools],
+    ["People involved", payload.involved_people],
+    ["What goes wrong today", payload.current_failure],
+    ["Good output", payload.desired_output],
+    ["Notes", payload.notes || payload.message],
+  ]
+    .map(([label, value]) => {
+      const normalized = normalizeMultiline(value, 1200);
+      return normalized ? `${label}: ${normalized}` : "";
+    })
+    .filter(Boolean);
+  const message = normalizeMultiline(messageParts.join("\n\n"), 3000);
   const sourcePage = normalizePath(payload.source_page || url.pathname);
   const publicOrigin = normalizeOrigin(payload.public_origin)
     || normalizeOrigin(request.headers.get("origin"))

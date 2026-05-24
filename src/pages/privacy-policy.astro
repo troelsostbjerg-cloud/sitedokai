@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Privacy policy — SiteDokAI"
+  description="SiteDokAI privacy policy for contact, workflow screening, advisory work and necessary website operations."
+  canonical="/privacy-policy"
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Privacy policy</p>
+      <h1 class="mt-5 font-display text-4xl font-semibold leading-[1.04] text-brand md:text-5xl">
+        How SiteDokAI handles your information.
+      </h1>
+      <div class="mt-10 grid gap-8 text-base leading-relaxed text-brand/72">
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Data controller</h2>
+          <p class="mt-3">SiteDokAI. Email: <a href="mailto:info@sitedokai.com" class="font-semibold underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>.</p>
+          <p class="mt-3">Company based in Denmark.</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Information we may process</h2>
+          <ul class="mt-3 list-disc space-y-2 pl-5">
+            <li>Name, email, company, website and information you submit through the workflow screening form.</li>
+            <li>Communication between you and SiteDokAI.</li>
+            <li>Payment and invoice information if a paid service is agreed.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Purpose</h2>
+          <ul class="mt-3 list-disc space-y-2 pl-5">
+            <li>To reply to workflow enquiries and suggest a practical next step.</li>
+            <li>To deliver agreed audits, sprints, advisory work and customer communication.</li>
+            <li>To handle payment, receipts and order records where relevant.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Necessary cookies only</h2>
+          <p class="mt-3">SiteDokAI does not add analytics, tracking pixels or non-essential cookies. The cookie banner stores only your cookie choice locally in the browser.</p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Technical providers</h2>
+          <ul class="mt-3 list-disc space-y-2 pl-5">
+            <li><a href="https://formsubmit.co/privacy.pdf" rel="noreferrer" class="font-semibold underline decoration-brand/30 underline-offset-4">FormSubmit</a> is used for contact and workflow screening form delivery.</li>
+            <li><a href="https://stripe.com/privacy" rel="noreferrer" class="font-semibold underline decoration-brand/30 underline-offset-4">Stripe</a> may be used for payment, receipts and invoice records if a paid service is agreed.</li>
+            <li><a href="https://www.cloudflare.com/privacypolicy/" rel="noreferrer" class="font-semibold underline decoration-brand/30 underline-offset-4">Cloudflare</a> is used for hosting, security and necessary infrastructure.</li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-brand">Retention and rights</h2>
+          <p class="mt-3">Information is kept only as long as needed to respond, deliver agreed work, document orders and meet bookkeeping obligations. You can ask for access, correction, deletion or restriction by emailing info@sitedokai.com.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

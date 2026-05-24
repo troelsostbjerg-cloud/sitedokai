@@ -1,34 +1,30 @@
 ---
 const navItems = [
-  { label: 'Problemet', href: '/#problemet' },
-  { label: 'Sådan virker det', href: '/#metode' },
-  { label: 'Ydelser', href: '/#ydelser' },
-  { label: 'Use cases', href: '/use-cases' },
-  { label: 'AI-klar side', href: '/ai-klar' },
-  { label: 'Kontakt', href: '/#kontakt' },
-];
-
-const legalItems = [
-  { label: 'Privatlivspolitik', href: '/privatlivspolitik' },
-  { label: 'Tilgængelighed', href: '/tilgaengelighed' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Workflow examples', href: '/workflow-examples' },
+  { label: 'AI readiness', href: '/ai-readiness' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Privacy policy', href: '/privacy-policy' },
+  { label: 'Accessibility', href: '/accessibility' },
 ];
 ---
 
-<footer class="border-t border-brand/10 bg-canvas px-5 py-10 text-brand sm:px-6" role="contentinfo">
+<footer class="border-t border-brand/10 bg-canvas px-5 pb-24 pt-10 text-brand sm:px-6 lg:pb-10" role="contentinfo">
   <div class="mx-auto max-w-7xl">
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.25fr_0.9fr_0.9fr]">
       <div>
         <div class="mb-4 font-display text-2xl font-semibold">SiteDokAI</div>
         <p class="max-w-md text-sm leading-relaxed text-brand/60">
-          Founder-led AI operations for virksomheder, der vil finde manuelle processer og bygge workflows, som faktisk bliver brugt.
+          Founder-led AI operations for teams that want to turn recurring manual work into practical, human-approved AI workflows.
         </p>
-        <a href="/#kontakt" class="mt-6 inline-flex h-11 items-center justify-center rounded-xl border border-accent/40 bg-accent px-5 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-          Send workflow
+        <a href="/contact#workflow-screening" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent/40 bg-accent px-5 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Send your workflow
         </a>
       </div>
 
       <div>
-        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Navigation</h3>
+        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Links</h3>
         <div class="space-y-2">
           {navItems.map((item) => (
             <p><a href={item.href} class="text-sm text-brand/60 transition-colors hover:text-brand">{item.label}</a></p>
@@ -37,24 +33,19 @@ const legalItems = [
       </div>
 
       <div>
-        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Kontakt</h3>
+        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Contact</h3>
         <p class="mb-2 text-sm text-brand/60">
           <a href="mailto:info@sitedokai.com" class="transition-colors hover:text-brand">info@sitedokai.com</a>
         </p>
-        <p class="text-sm text-brand/60">Danmark</p>
-        <p class="mt-2 text-sm text-brand/60">Manual Work Audit fra 15.000 kr. ekskl. moms.</p>
+        <p class="text-sm text-brand/60">Company based in Denmark.</p>
+        <p class="mt-2 text-sm text-brand/60">International / Europe-first work.</p>
+        <p class="mt-2 text-sm text-brand/60">Manual Work Audit from DKK 15,000 excl. VAT.</p>
       </div>
     </div>
 
     <div class="mt-10 flex flex-col gap-4 border-t border-brand/10 pt-7 text-center md:flex-row md:items-center md:justify-between md:text-left">
-      <p class="text-sm text-brand/50">&copy; 2026 SiteDokAI. Alle rettigheder forbeholdt.</p>
-      <div class="flex flex-wrap justify-center gap-4 md:justify-end">
-        {legalItems.map((item) => (
-          <a href={item.href} class="text-sm text-brand/50 transition-colors hover:text-brand">
-            {item.label}
-          </a>
-        ))}
-      </div>
+      <p class="text-sm text-brand/50">&copy; 2026 SiteDokAI. All rights reserved.</p>
+      <p class="text-sm text-brand/50">Necessary cookies only. No tracking.</p>
     </div>
   </div>
 </footer>

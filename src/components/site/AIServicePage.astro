@@ -1,5 +1,6 @@
 ---
-import ScreeningForm from './ScreeningForm.astro';
+import WorkflowScreeningForm from './WorkflowScreeningForm.astro';
+import HumanApprovalBlock from './HumanApprovalBlock.astro';
 import type { ServiceOffer } from '../../data/aiContent';
 
 interface Props {
@@ -12,11 +13,11 @@ const { service } = Astro.props;
 <main id="main" class="bg-canvas text-brand">
   <section class="mx-auto grid min-w-0 max-w-7xl gap-12 px-5 pb-14 pt-12 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.72fr_1.28fr]">
     <aside class="min-w-0 text-sm leading-relaxed text-muted">
-      <nav aria-label="Brødkrumme" class="text-xs">
+      <nav aria-label="Breadcrumb" class="text-xs">
         <ol class="flex flex-wrap gap-2">
-          <li><a href="/" class="text-brand/55 transition-colors hover:text-brand">Forside</a></li>
+          <li><a href="/" class="text-brand/55 transition-colors hover:text-brand">Home</a></li>
           <li aria-hidden="true" class="text-brand/30">/</li>
-          <li><a href="/#ydelser" class="text-brand/55 transition-colors hover:text-brand">Ydelser</a></li>
+          <li><a href="/#services" class="text-brand/55 transition-colors hover:text-brand">Services</a></li>
           <li aria-hidden="true" class="text-brand/30">/</li>
           <li class="text-brand">{service.name}</li>
         </ol>
@@ -24,12 +25,12 @@ const { service } = Astro.props;
 
       <p class="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-accent">{service.eyebrow}</p>
       <p class="mt-8 max-w-xs">
-        AI-drevet procesoptimering for virksomheder, der vil spare tid, reducere fejl og få AI ind i den virkelige hverdag.
+        SiteDokAI starts with the work, maps the workflow and designs AI assistance only where it can safely help.
       </p>
       <div class="mt-8 grid gap-3 border-t border-brand/10 pt-6">
-        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Pris</p>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Price</p>
         <p class="text-brand">{service.priceLabel}</p>
-        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Varighed</p>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">Duration</p>
         <p class="text-brand">{service.duration}</p>
       </div>
     </aside>
@@ -42,8 +43,17 @@ const { service } = Astro.props;
         {service.description}
       </p>
 
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <a href="#workflow-screening" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          {service.ctaLabel}
+        </a>
+        <a href="/workflow-examples" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          See workflow examples
+        </a>
+      </div>
+
       <article class="mt-10 rounded-[1.5rem] border border-accent/25 bg-accent/10 p-5 md:p-7">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Kort svar til mennesker og AI</p>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Short answer</p>
         <p class="mt-4 max-w-3xl text-lg leading-relaxed text-brand">
           {service.shortAnswer}
         </p>
@@ -51,7 +61,8 @@ const { service } = Astro.props;
 
       <section class="mt-14 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
         <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-          <h2 class="text-2xl font-semibold text-brand">Hvem det passer til</h2>
+          <h2 class="text-2xl font-semibold text-brand">Best for</h2>
+          <p class="mt-5 text-sm leading-relaxed text-brand/72">{service.bestFor}</p>
           <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
             {service.fit.map((item) => (
               <li class="border-t border-brand/10 pt-3">{item}</li>
@@ -60,7 +71,7 @@ const { service } = Astro.props;
         </article>
 
         <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-          <h2 class="text-2xl font-semibold text-brand">Hvad I får konkret</h2>
+          <h2 class="text-2xl font-semibold text-brand">Output</h2>
           <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
             {service.outputs.map((item) => (
               <li class="border-t border-brand/10 pt-3">{item}</li>
@@ -71,7 +82,7 @@ const { service } = Astro.props;
 
       <section class="mt-5 grid gap-5 lg:grid-cols-2">
         <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-          <h2 class="text-2xl font-semibold text-brand">Ikke inkluderet</h2>
+          <h2 class="text-2xl font-semibold text-brand">Not included</h2>
           <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/75">
             {service.notIncluded.map((item) => (
               <li class="border-t border-brand/10 pt-3">{item}</li>
@@ -80,7 +91,7 @@ const { service } = Astro.props;
         </article>
 
         <article class="rounded-[1.35rem] border border-accent/25 bg-accent/10 p-5 md:p-6">
-          <h2 class="text-2xl font-semibold text-brand">Næste skridt</h2>
+          <h2 class="text-2xl font-semibold text-brand">Next step</h2>
           <p class="mt-6 border-t border-accent/25 pt-4 text-sm leading-relaxed text-brand/75">
             {service.nextStep}
           </p>
@@ -88,7 +99,7 @@ const { service } = Astro.props;
       </section>
 
       <section class="mt-5 rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-        <h2 class="text-2xl font-semibold text-brand">Sådan foregår det</h2>
+        <h2 class="text-2xl font-semibold text-brand">How it works</h2>
         <div class="mt-6 grid gap-3 md:grid-cols-2">
           {service.process.map((item, index) => (
             <article class="rounded-[1rem] border border-brand/10 bg-canvas-soft p-4">
@@ -99,10 +110,16 @@ const { service } = Astro.props;
         </div>
       </section>
 
+      {service.id === 'ai-workflow-sprint' && (
+        <section class="mt-14">
+          <HumanApprovalBlock />
+        </section>
+      )}
+
       <section id="faq" class="mt-14">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Svarblokke</p>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">FAQ</p>
         <h2 class="mt-4 max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
-          De svar en køber og en AI-agent leder efter
+          Clear answers for buyers and AI assistants.
         </h2>
         <div class="mt-8 grid gap-4">
           {service.faq.map((item) => (
@@ -114,18 +131,18 @@ const { service } = Astro.props;
         </div>
       </section>
 
-      <section class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+      <section id="workflow-screening" class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
         <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
-          Send et workflow, så vurderer vi næste skridt.
+          Send the workflow behind this need.
         </h2>
         <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-          Beskriv den manuelle proces kort. Vi svarer nøgternt på, om den passer til {service.name}, eller om et mindre første skridt er bedre.
+          Describe the recurring work, the tools it touches and what goes wrong. SiteDokAI will reply with a practical next step.
         </p>
         <div class="mt-10">
-          <ScreeningForm
+          <WorkflowScreeningForm
             sourcePage={service.path}
-            title={`${service.name} forespørgsel`}
-            text="Skriv kort hvilken manuel proces der tager tid, skaber fejl eller bør være smartere."
+            title={`${service.name} enquiry`}
+            text="Describe the workflow, how often it happens and what a useful output would look like."
             submitLabel={service.ctaLabel}
             interest={service.interest}
           />

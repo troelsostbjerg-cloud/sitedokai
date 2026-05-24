@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WorkflowScreeningForm from '../components/site/WorkflowScreeningForm.astro';
+import { absoluteUrl, breadcrumbSchema } from '../data/aiContent';
+import '../styles/global.css';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': `${absoluteUrl('/contact')}#webpage`,
+    url: absoluteUrl('/contact'),
+    name: 'Send your workflow — SiteDokAI',
+    description:
+      'Send SiteDokAI the workflow that annoys your team most and get a sober view on whether AI, better structure or a Manual Work Audit is the right next step.',
+    inLanguage: 'en',
+  },
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
+  ]),
+];
+---
+
+<Layout
+  title="Send your workflow — SiteDokAI"
+  description="Send SiteDokAI the workflow that annoys your team most and get a sober view on whether AI, better structure or a Manual Work Audit is the right next step."
+  canonical="/contact"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="text-sm leading-relaxed text-muted">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Workflow screening</p>
+        <p class="mt-8 max-w-xs">
+          Send the workflow that annoys your team most. SiteDokAI will reply with a practical next step.
+        </p>
+        <p class="mt-8 max-w-xs">
+          Email fallback: <a href="mailto:info@sitedokai.com" class="font-semibold text-brand underline decoration-brand/30 underline-offset-4">info@sitedokai.com</a>
+        </p>
+      </aside>
+      <div>
+        <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+          Send the workflow that annoys your team most.
+        </h1>
+        <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+          Describe the workflow, how often it happens, which tools it touches, who is involved, what goes wrong, and what a good output would look like.
+        </p>
+        <div id="workflow-screening" class="mt-14 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+          <WorkflowScreeningForm sourcePage="/contact" />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

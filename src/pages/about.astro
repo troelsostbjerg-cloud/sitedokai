@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WorkflowScreeningForm from '../components/site/WorkflowScreeningForm.astro';
+import { absoluteUrl, breadcrumbSchema, personSchema } from '../data/aiContent';
+import '../styles/global.css';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@graph': [
+      personSchema(),
+      {
+        '@type': 'WebPage',
+        '@id': `${absoluteUrl('/about')}#webpage`,
+        url: absoluteUrl('/about'),
+        name: 'About SiteDokAI — Practical AI operations by Troels Østbjerg',
+        description:
+          'SiteDokAI is a founder-led AI operations practice built by Troels Østbjerg, focused on practical workflows, operations, adoption and measurable effect.',
+        inLanguage: 'en',
+      },
+    ],
+  },
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]),
+];
+---
+
+<Layout
+  title="About SiteDokAI — Practical AI operations by Troels Østbjerg"
+  description="SiteDokAI is a founder-led AI operations practice built by Troels Østbjerg, focused on practical workflows, operations, adoption and measurable effect."
+  canonical="/about"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="mx-auto grid max-w-7xl gap-12 px-5 py-16 sm:px-6 md:py-24 lg:grid-cols-[0.72fr_1.28fr]">
+      <aside class="text-sm leading-relaxed text-muted">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">About</p>
+        <p class="mt-8 max-w-xs">
+          Founder-led AI operations for manual workflows. Company based in Denmark. International / Europe-first work.
+        </p>
+      </aside>
+      <div>
+        <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+          Built by an operations person, not an AI theorist.
+        </h1>
+        <div class="mt-8 grid gap-5 text-lg leading-relaxed text-brand/72">
+          <p>
+            SiteDokAI is built by Troels Østbjerg. I have spent 10+ years in operations, supply chain and complex collaboration, where the real work often happens in email threads, spreadsheets, follow-ups, handovers and people’s memory.
+          </p>
+          <p>
+            My job is to find the recurring work that should be simpler, map how it actually happens, and build AI-assisted workflows people can use in a busy day.
+          </p>
+          <p class="text-2xl font-semibold leading-tight text-brand">AI is the tool. The workflow is the starting point.</p>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            '10+ years in operations, supply chain and process improvement',
+            'Practical AI workflow builder',
+            'Strong bridge between business, operations and technology',
+            'Focus on adoption: the workflow must be used, not just demonstrated',
+          ].map((item) => (
+            <p class="rounded-xl border border-brand/10 bg-panel-soft p-4 text-sm font-medium leading-relaxed text-brand/72">{item}</p>
+          ))}
+        </div>
+        <section id="workflow-screening" class="mt-16 rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
+          <h2 class="max-w-3xl font-display text-3xl font-semibold leading-tight text-brand md:text-5xl">
+            Send a workflow from your team.
+          </h2>
+          <div class="mt-10">
+            <WorkflowScreeningForm sourcePage="/about" />
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

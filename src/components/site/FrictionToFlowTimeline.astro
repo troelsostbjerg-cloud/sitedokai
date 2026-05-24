@@ -1,0 +1,40 @@
+---
+const steps = [
+  {
+    title: 'Manual friction',
+    text: 'Find where time, quality and ownership disappear.',
+  },
+  {
+    title: 'Workflow mapping',
+    text: 'Map the real process, not the process people wish they had.',
+  },
+  {
+    title: 'Prioritization',
+    text: 'Score opportunities by time saved, risk, complexity and adoption.',
+  },
+  {
+    title: 'AI-assisted workflow',
+    text: 'Design the smallest useful workflow with clear input, logic and output.',
+  },
+  {
+    title: 'Human approval',
+    text: 'Add review where quality, risk, tone or responsibility matter.',
+  },
+  {
+    title: 'Measured effect',
+    text: 'Track time saved, fewer errors, faster decisions and actual use.',
+  },
+];
+---
+
+<div class="grid gap-3">
+  {steps.map((step, index) => (
+    <article class="grid gap-4 rounded-[1.2rem] border border-brand/10 bg-panel-soft p-4 md:grid-cols-[5rem_1fr] md:p-5">
+      <p class="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-accent">{String(index + 1).padStart(2, '0')}</p>
+      <div>
+        <h3 class="text-lg font-semibold text-brand">{step.title}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-brand/68">{step.text}</p>
+      </div>
+    </article>
+  ))}
+</div>

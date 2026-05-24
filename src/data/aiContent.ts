@@ -1,61 +1,83 @@
 export const siteBaseUrl = 'https://sitedokai.com';
+export const contactEmail = 'info@sitedokai.com';
+
+export const ctaLabels = {
+  primary: 'Send your workflow',
+  audit: 'Start with a Manual Work Audit',
+  examples: 'See workflow examples',
+  partner: 'Talk about ongoing support',
+} as const;
 
 export const services = [
   {
     id: 'manual-work-audit',
     name: 'Manual Work Audit',
     path: '/manual-work-audit',
-    oldPath: '/hjemmeside-tjek',
-    eyebrow: 'Manual Work Audit',
-    title: 'Find de manuelle workflows, der stjæler mest tid.',
+    legacyPath: '/hjemmeside-tjek',
+    eyebrow: 'Recommended first step',
+    title: 'Find the workflows where AI can safely help.',
     description:
-      'På 5 arbejdsdage kortlægger SiteDokAI manuelle workflows og prioriterer de 3 bedste AI-pilots.',
+      'A 5-business-day audit that maps recurring manual workflows, prioritizes AI opportunities and gives your team the top 3 workflows to start with.',
     shortAnswer:
-      'Manual Work Audit er en 5-dages kortlægning af jeres manuelle arbejde. Outputtet er et proceskort, en prioriteret backlog og de 3 bedste AI-workflows at starte med.',
-    priceLabel: 'Fra 15.000 kr. ekskl. moms',
+      'Manual Work Audit maps messy recurring workflows, scores where AI and better structure can create value, and gives your team a practical starting point before anything is built.',
+    priceLabel: 'From DKK 15,000 excl. VAT',
     priceValue: '15000',
-    duration: '5 arbejdsdage',
-    ctaLabel: 'Book audit',
+    duration: '5 business days',
+    ctaLabel: ctaLabels.audit,
     interest: 'Manual Work Audit',
+    recommended: true,
+    bestFor:
+      'Teams that want to know where AI actually makes sense before buying tools, launching a big roadmap or automating the wrong work.',
     fit: [
-      'I bruger for meget tid på statusmails, rapportering, copy-paste eller opfølgning.',
-      'I har testet AI, men mangler et konkret sted at starte.',
-      'I vil have et beslutningsgrundlag før I bygger noget.',
+      'Recurring work lives in email, spreadsheets, Teams, Slack, CRM notes or reports.',
+      'The team has tried AI, but still does not know where it belongs in daily operations.',
+      'You need a decision-ready view before building or buying anything.',
+      'Ownership, quality or follow-up keeps disappearing between people and systems.',
     ],
     outputs: [
-      'Kort proceskort over den faktiske arbejdsgang.',
-      'Prioriteret backlog med 10 mulige forbedringer.',
-      'Top 3 AI-pilots vurderet på effekt, kompleksitet og adoption.',
-      'Skitse til den første workflow med input, regler, menneskelig godkendelse og output.',
+      'Process map',
+      'Prioritized workflow backlog',
+      'Top 3 AI workflow candidates',
+      'First workflow sketch',
+      'Fit, risk and adoption score',
+      'Suggested next step',
+      'Measurement points',
     ],
     notIncluded: [
-      'Ingen bygget automation.',
-      'Ingen tool-indkøb eller systemudskiftning.',
-      'Ingen stort roadmap uden prioriteret første skridt.',
+      'No built automation',
+      'No tool purchase',
+      'No full system replacement',
+      'No giant AI roadmap',
     ],
     nextStep:
-      'Efter auditten beslutter I, om første workflow skal bygges i en AI Workflow Sprint, forenkles manuelt eller parkeres.',
+      'After the audit, you decide whether the first workflow should be simplified manually, built in an AI Workflow Sprint or parked because AI is not the right first step.',
     process: [
-      'Interview med 3-6 nøglepersoner.',
-      'Kortlægning af gentagne opgaver og friktion.',
-      'Scoring af muligheder efter tid sparet, fejlrisiko og brugervenlighed.',
-      'Nedkogt anbefaling med næste skridt.',
+      'Collect examples of the recurring workflow and the tools it touches.',
+      'Interview the people who do the work, wait for the work or approve the output.',
+      'Map the real process, including exceptions, delays and ownership gaps.',
+      'Score opportunities by effect, risk, complexity and adoption.',
+      'Recommend the first workflow, measurement points and safest next step.',
     ],
     faq: [
       {
-        question: 'Hvad er en Manual Work Audit?',
+        question: 'What is a Manual Work Audit?',
         answer:
-          'Det er en kort, praktisk analyse af manuelle arbejdsgange, hvor vi finder de steder AI og bedre struktur kan spare tid uden at starte et stort IT-projekt.',
+          'A Manual Work Audit is a 5-business-day review of recurring manual work. It maps the real workflow, prioritizes AI opportunities and gives your team the top 3 workflows to start with.',
       },
       {
-        question: 'Hvad får vi ud af auditten?',
+        question: 'Do we need to choose an AI tool first?',
         answer:
-          'I får et proceskort, en prioriteret backlog og de 3 mest oplagte AI-workflows at starte med.',
+          'No. SiteDokAI starts with the work. Once the workflow is clear, the simplest useful tool choice becomes easier.',
       },
       {
-        question: 'Hvornår giver auditten mening?',
+        question: 'What if our workflow is messy?',
         answer:
-          'Den giver mest mening, når arbejdet gentages ofte, involverer flere personer eller skaber fejl, ventetid og uklart ejerskab.',
+          'That is often the reason to start with an audit. If the workflow is unclear, AI usually scales the mess faster.',
+      },
+      {
+        question: 'What happens after the audit?',
+        answer:
+          'You receive a process map, prioritized backlog, top 3 workflow candidates, a first workflow sketch and a recommended next step.',
       },
     ],
   },
@@ -63,57 +85,67 @@ export const services = [
     id: 'ai-workflow-sprint',
     name: 'AI Workflow Sprint',
     path: '/ai-workflow-sprint',
-    oldPath: '/hjemmeside-fix',
-    eyebrow: 'AI Workflow Sprint',
-    title: 'Byg én konkret AI-workflow, der kan bruges i hverdagen.',
+    legacyPath: '/hjemmeside-fix',
+    eyebrow: 'Build one workflow',
+    title: 'Build one practical AI workflow for a real operational problem.',
     description:
-      'På 10 arbejdsdage bygger SiteDokAI én konkret AI-workflow, der løser et reelt hverdagsproblem.',
+      'A 10-business-day sprint to design, build and test one human-approved AI workflow for a real operational problem.',
     shortAnswer:
-      'AI Workflow Sprint er et 10-dages forløb, hvor vi designer, bygger og tester én konkret AI-workflow på et hverdagsproblem, som allerede koster tid.',
-    priceLabel: 'Fra 35.000 kr. ekskl. moms',
+      'AI Workflow Sprint turns one selected workflow into a practical AI-assisted workflow with clear input, logic, human approval, output, testing and documentation.',
+    priceLabel: 'From DKK 35,000 excl. VAT',
     priceValue: '35000',
-    duration: '10 arbejdsdage',
-    ctaLabel: 'Byg første workflow',
+    duration: '10 business days',
+    ctaLabel: ctaLabels.primary,
     interest: 'AI Workflow Sprint',
+    recommended: false,
+    bestFor:
+      'Teams with one concrete workflow that repeats often enough to justify design, build, testing and adoption work.',
     fit: [
-      'I har et tydeligt workflow med gentagelser, ventetid eller fejl.',
-      'I vil have en praktisk prototype eller workflow, ikke et strategidokument.',
-      'I accepterer human approval, hvor kvalitet eller risiko kræver det.',
+      'A specific workflow has already been selected.',
+      'The output can be described clearly enough to test.',
+      'Users are available to review and approve the workflow before it is used.',
+      'The goal is a practical prototype or working workflow, not a strategy document.',
     ],
     outputs: [
-      'Workflow-design fra trigger til output.',
-      'AI-logik, promptstruktur eller automationsflow i de relevante værktøjer.',
-      'Test med de mennesker, der skal bruge løsningen.',
-      'Dokumentation, træning og målepunkter for effekt.',
+      'Workflow design',
+      'AI logic or prompt structure',
+      'Automation or prototype',
+      'Human approval step',
+      'Testing with users',
+      'Documentation',
+      'Training',
+      'Effect measurement',
     ],
     notIncluded: [
-      'Ingen blind fuldautomatisering.',
-      'Ingen større IT-projekt før flowet er bevist.',
-      'Ingen løbende drift efter sprinten uden særskilt aftale.',
+      'No blind full automation',
+      'No large IT transformation project',
+      'No replacement of core systems unless already agreed',
+      'No ongoing support after the sprint without a separate agreement',
     ],
     nextStep:
-      'Efter sprinten måler I brug, fejl og tid sparet, og beslutter om workflowet skal forankres, forbedres eller udvides.',
+      'After the sprint, the team measures actual use, errors, time saved and the next improvement decision.',
     process: [
-      'Vælg et konkret workflow og afgræns scope.',
-      'Beskriv input, regler, undtagelser, godkendelse og output.',
-      'Byg en brugbar prototype eller workflow.',
-      'Test, juster og gør flowet klar til drift.',
+      'Confirm the workflow scope, user group, risk level and success criteria.',
+      'Define input, AI logic, rules, exceptions, approval and output.',
+      'Build the smallest useful workflow in or around the tools the team already uses.',
+      'Test with real users, adjust the workflow and document how it should be used.',
+      'Agree how effect will be measured after the sprint.',
     ],
     faq: [
       {
-        question: 'Hvad er en AI Workflow Sprint?',
+        question: 'Is this full automation?',
         answer:
-          'Det er et kort byggeforløb, hvor én konkret manuel proces bliver omsat til en testet AI-assisteret arbejdsgang.',
+          'Not necessarily. Many useful workflows are AI-assisted rather than fully automated. AI drafts, structures or classifies; people approve where quality, risk or responsibility matters.',
       },
       {
-        question: 'Skal vi have bestemt software på forhånd?',
+        question: 'What tools can this work with?',
         answer:
-          'Nej. Vi starter med jeres proces og vælger derefter den enkleste tekniske løsning, ofte med værktøjer I allerede bruger.',
+          'Typical inputs include email, spreadsheets, Teams, Slack, CRM notes, reports, shared documents and exports from existing systems.',
       },
       {
-        question: 'Er workflowet fuldautomatisk?',
+        question: 'How do you measure effect?',
         answer:
-          'Ikke altid. De bedste flows har ofte et menneskeligt godkendelsestrin, så AI sparer tid uden at fjerne ansvar.',
+          'The sprint defines simple measurement points such as time saved, fewer follow-ups, fewer errors, faster decisions and actual use by the team.',
       },
     ],
   },
@@ -121,245 +153,443 @@ export const services = [
     id: 'ai-operations-partner',
     name: 'AI Operations Partner',
     path: '/ai-operations-partner',
-    oldPath: '/visuelt-loeft',
-    eyebrow: 'AI Operations Partner',
-    title: 'Hold AI-forbedringerne i gang efter den første workflow.',
+    legacyPath: '/visuelt-loeft',
+    eyebrow: 'Ongoing support',
+    title: 'Keep AI workflow improvements moving after the first audit or sprint.',
     description:
-      'Løbende hjælp til at holde AI-forbedringer i gang, optimere workflows og sikre at løsningerne faktisk bliver brugt.',
+      'Ongoing practical support for AI workflow backlog, improvements, documentation, adoption and effect measurement.',
     shortAnswer:
-      'AI Operations Partner er løbende praktisk hjælp til backlog, forbedringer, dokumentation, træning og adoption efter de første AI-workflows er i gang.',
-    priceLabel: 'Fra 10.000 kr. pr. måned ekskl. moms',
+      'AI Operations Partner keeps practical AI workflow improvement running through a monthly backlog, workflow upgrades, documentation, training, adoption support and measured effect.',
+    priceLabel: 'From DKK 10,000/month excl. VAT',
     priceValue: '10000',
-    duration: 'Løbende',
-    ctaLabel: 'Tal om løbende hjælp',
+    duration: 'Ongoing',
+    ctaLabel: ctaLabels.partner,
     interest: 'AI Operations Partner',
+    recommended: false,
+    bestFor:
+      'Teams that already have workflow candidates or first AI workflows and need a practical partner between operations, people and technology.',
     fit: [
-      'I har allerede identificeret eller bygget de første AI-workflows.',
-      'I vil undgå at forbedringerne stopper efter et enkelt projekt.',
-      'I har brug for en praktisk partner mellem drift, mennesker og teknologi.',
+      'The first audit or workflow sprint has created a backlog.',
+      'The team needs steady improvement, documentation and adoption support.',
+      'AI work should stay close to daily operations instead of becoming a side project.',
+      'Leadership wants sober measurement rather than a one-off demonstration.',
     ],
     outputs: [
-      'Månedlig AI- og procesbacklog.',
-      'Forbedringer af eksisterende workflows.',
-      'Nye små automatiseringer, hvor de giver mening.',
-      'Dokumentation, træning og status på effekt.',
+      'Monthly AI and process backlog',
+      'Workflow improvements',
+      'Documentation',
+      'Training',
+      'Adoption support',
+      'Measurement',
+      'Practical sparring between operations, people and technology',
     ],
     notIncluded: [
-      'Ingen passiv rådgiverretainer uden konkret backlog.',
-      'Ingen support på alt IT.',
-      'Ingen automatisering af processer, der bør fjernes først.',
+      'No passive advisory retainer without a concrete backlog',
+      'No generic IT support',
+      'No automation of work that should be removed first',
+      'No unsupported compliance or security certification claims',
     ],
     nextStep:
-      'Vi aftaler en fast rytme for prioritering, forbedring, dokumentation, træning og status på effekt.',
+      'Agree a monthly rhythm for backlog review, workflow improvement, documentation, training and effect measurement.',
     process: [
-      'Gennemgå aktuel backlog og brug af eksisterende workflows.',
-      'Prioriter de næste forbedringer efter effekt og adoption.',
-      'Byg, juster eller dokumenter i korte runder.',
-      'Rapporter nøgternt på brug, tid sparet og næste beslutning.',
+      'Review current workflow use, blockers and adoption signals.',
+      'Prioritize the next improvements by effect, risk and team capacity.',
+      'Build, adjust or document workflows in short cycles.',
+      'Report what changed, what was used and what decision comes next.',
     ],
     faq: [
       {
-        question: 'Hvad laver en AI Operations Partner?',
+        question: 'What does ongoing support include?',
         answer:
-          'Vi holder forbedringsarbejdet i gang med backlog, workflow-optimering, dokumentation, træning og praktisk sparring.',
+          'It includes practical backlog work, workflow improvements, documentation, training, adoption support, measurement and sparring between operations, people and technology.',
       },
       {
-        question: 'Er det en retainer?',
+        question: 'When does this make sense?',
         answer:
-          'Ja. Det er bedst som en fast månedlig ramme, når der allerede er konkrete workflows at forbedre og forankre.',
+          'It makes sense after an audit or first workflow sprint, when there is a real backlog and a need to keep improvements moving.',
       },
       {
-        question: 'Hvem passer det til?',
+        question: 'Is this a replacement for an internal AI team?',
         answer:
-          'Det passer til virksomheder, der vil have AI ind i driften gradvist og ansvarligt uden at opbygge et stort internt AI-team fra dag ét.',
+          'No. It is a practical operating partner for teams that need momentum without turning AI improvement into a large internal program.',
       },
     ],
   },
 ] as const;
 
-export const useCases = [
+export const workflowExamples = [
   {
-    id: 'ai-statusrapport',
-    path: '/use-cases/ai-statusrapport',
-    title: 'Fra statusmails til beslutningsklar ugeopsamling',
-    eyebrow: 'Use case',
+    id: 'ai-status-report',
+    path: '/workflow-examples/ai-status-report',
+    title: 'From status emails to decision-ready weekly updates',
+    eyebrow: 'Workflow example',
     description:
-      'Samler mails, noter og opdateringer til en fast status med handlinger, risici og næste beslutning.',
-    problem:
-      'Status ligger spredt i mails, Teams, mødenoter og menneskers hukommelse. Det gør møder længere og beslutninger langsommere.',
-    workflow:
-      'AI samler input fra faste kilder, strukturerer status efter en aftalt skabelon, markerer manglende information og foreslår actions, som et menneske godkender.',
+      'Turn scattered emails, notes and updates into one AI-assisted status summary with actions, owners, deadlines and decisions.',
+    brokenWorkflow:
+      'Status is chased across email, Teams, Slack and loose notes. Meetings become status collection instead of decision time.',
+    whoFeelsPain:
+      'Operations teams, project delivery, leadership teams and anyone who owns weekly coordination.',
+    typicalInputs: ['Status emails', 'Teams or Slack threads', 'Meeting notes', 'Project lists', 'CRM updates'],
+    aiAssistedWorkflow:
+      'AI gathers fixed inputs, summarizes progress, flags missing information, extracts actions and drafts a decision-ready update.',
+    humanApproval:
+      'The workflow owner reviews actions, owners, deadlines and decision points before anything is shared.',
     output:
-      'Én samlet statusrapport med fremdrift, afvigelser, ansvarlige, deadlines og beslutninger der kræver opmærksomhed.',
-    signals: ['gentages ugentligt', 'mange inputkilder', 'meget jagt på status', 'klar skabelon mulig'],
+      'A weekly status report with progress, risks, owners, deadlines, open questions and decisions needed.',
+    goodFitSignals: ['Weekly status rhythm', 'Many input sources', 'Repeated follow-up chasing', 'A stable update format is possible'],
+    metrics: ['Time spent collecting status', 'Number of follow-up messages', 'Decision delay', 'Meeting time used for updates'],
+    recommendedService: 'Manual Work Audit',
   },
   {
-    id: 'ledelsesrapport',
-    path: '/use-cases/ledelsesrapport',
-    title: 'Fra Excel til ledelsesrapport',
-    eyebrow: 'Use case',
+    id: 'management-report',
+    path: '/workflow-examples/management-report',
+    title: 'From spreadsheets to management reports',
+    eyebrow: 'Workflow example',
     description:
-      'Gør gentagne tal, noter og afvigelser til en fast rapport med forklaring og anbefalede næste skridt.',
-    problem:
-      'Tal findes, men rapporten bygges manuelt hver gang. Det koster tid og gør forklaringer afhængige af den person, der samler materialet.',
-    workflow:
-      'AI læser faste inputfelter, finder afvigelser, sammenligner med tidligere perioder og skriver et første udkast til forklaring og anbefaling.',
+      'Turn spreadsheet numbers, comments and recurring variance explanations into a report draft ready for human judgement.',
+    brokenWorkflow:
+      'Numbers exist, but the management report is rebuilt manually every week or month.',
+    whoFeelsPain:
+      'Finance, operations, leadership and teams where reporting depends on copy-paste and personal memory.',
+    typicalInputs: ['Spreadsheets', 'Exports', 'KPI comments', 'Previous reports', 'Variance notes'],
+    aiAssistedWorkflow:
+      'AI reads fixed inputs, identifies variances, compares against previous periods and drafts explanations and decision points.',
+    humanApproval:
+      'The responsible person checks figures, judgement, context and recommendations before the report is used.',
     output:
-      'En rapportkladde med nøgletal, afvigelser, kommentarer og beslutningspunkter klar til faglig gennemgang.',
-    signals: ['samme rapport hver uge/måned', 'mange copy-paste trin', 'afvigelser skal forklares', 'ledertid bruges på format'],
+      'A report draft with metrics, variances, explanations, open questions and suggested decisions.',
+    goodFitSignals: ['Same report repeats', 'Manual formatting takes time', 'Variances need explanation', 'Leadership wants decision points'],
+    metrics: ['Report preparation time', 'Correction rounds', 'Missing explanations', 'Time available for judgement'],
+    recommendedService: 'Manual Work Audit',
   },
   {
-    id: 'kundehenvendelse-svarudkast',
-    path: '/use-cases/kundehenvendelse-svarudkast',
-    title: 'Fra kundehenvendelse til svarudkast',
-    eyebrow: 'Use case',
+    id: 'customer-reply-draft',
+    path: '/workflow-examples/customer-reply-draft',
+    title: 'From customer request to reply draft',
+    eyebrow: 'Workflow example',
     description:
-      'Kategoriserer henvendelser, finder kontekst og laver svarudkast med menneskelig godkendelse.',
-    problem:
-      'Kunder får forskellige svar, og medarbejdere bruger tid på at finde historik, regler og næste skridt.',
-    workflow:
-      'AI kategoriserer henvendelsen, finder relevant kontekst, foreslår svar og markerer sager, der skal eskaleres.',
+      'Classify customer requests, retrieve context and draft a response with a clear human approval step.',
+    brokenWorkflow:
+      'Customers receive different answers depending on who handles the request and how much context they can find.',
+    whoFeelsPain:
+      'Customer support, sales operations and Customer Success teams handling repeated questions or cases.',
+    typicalInputs: ['Customer email', 'CRM history', 'Product rules', 'Previous replies', 'Internal guidelines'],
+    aiAssistedWorkflow:
+      'AI categorizes the request, finds relevant context, drafts a reply and marks anything that should be escalated.',
+    humanApproval:
+      'A team member approves tone, facts, escalation and responsibility before the customer receives anything.',
     output:
-      'Et svarudkast, en kategori, et foreslået næste skridt og tydelig markering af hvad et menneske skal tjekke.',
-    signals: ['mange gentagne spørgsmål', 'klar tone of voice', 'kendte regler', 'behov for godkendelse'],
+      'A reply draft with category, context, suggested next step and clear checks for the human reviewer.',
+    goodFitSignals: ['Repeated request types', 'Known rules', 'Need for consistent tone', 'Human responsibility must remain clear'],
+    metrics: ['First response time', 'Escalation quality', 'Correction rate', 'Consistency across replies'],
+    recommendedService: 'AI Workflow Sprint',
   },
   {
-    id: 'moede-actions-opfoelgning',
-    path: '/use-cases/moede-actions-opfoelgning',
-    title: 'Fra mødenoter til actions og opfølgning',
-    eyebrow: 'Use case',
+    id: 'meeting-actions-follow-up',
+    path: '/workflow-examples/meeting-actions-follow-up',
+    title: 'From meeting notes to actions and follow-up',
+    eyebrow: 'Workflow example',
     description:
-      'Gør mødenoter, beslutninger og løse aftaler til en klar actionliste med ansvarlige, deadlines og opfølgningsmail.',
-    problem:
-      'Møder ender med gode intentioner, men actions ligger i forskellige notesbøger, chatbeskeder og kalendere. Opfølgningen afhænger af, hvem der husker hvad.',
-    workflow:
-      'AI læser mødenoter eller transskription, skiller beslutninger fra diskussion, foreslår actions, ansvarlige og deadlines og laver et opfølgningsudkast, som mødeejer godkender.',
+      'Turn notes, transcripts and loose agreements into actions, owners, deadlines and a follow-up draft.',
+    brokenWorkflow:
+      'Meetings end with good intentions, but actions live in notebooks, chat messages and memory.',
+    whoFeelsPain:
+      'Meeting owners, project managers, leadership teams and cross-functional delivery teams.',
+    typicalInputs: ['Meeting notes', 'Transcript', 'Agenda', 'Participant list', 'Previous action log'],
+    aiAssistedWorkflow:
+      'AI separates decisions from discussion, extracts actions, suggests owners and drafts follow-up.',
+    humanApproval:
+      'The meeting owner approves actions, owners, deadlines and the follow-up message.',
     output:
-      'En kort mødeopsamling, en prioriteret actionliste, åbne spørgsmål og et udkast til opfølgning sendt fra den ansvarlige person.',
-    signals: ['mange interne møder', 'samme opfølgning gentages', 'actions bliver væk', 'mødeejer bruger tid på referat'],
+      'A short meeting summary, prioritized action list, open questions and a follow-up draft.',
+    goodFitSignals: ['Many recurring meetings', 'Actions are often lost', 'Follow-up depends on one person', 'Meeting notes already exist'],
+    metrics: ['Actions completed on time', 'Follow-up preparation time', 'Missed agreements', 'Repeat discussion in later meetings'],
+    recommendedService: 'AI Workflow Sprint',
   },
   {
-    id: 'leverandoerstatus-undtagelser',
-    path: '/use-cases/leverandoerstatus-undtagelser',
-    title: 'Fra leverandørstatus til undtagelsesoverblik',
-    eyebrow: 'Use case',
+    id: 'supplier-status-exceptions',
+    path: '/workflow-examples/supplier-status-exceptions',
+    title: 'From supplier updates to exception overview',
+    eyebrow: 'Workflow example',
     description:
-      'Samler leverandørmails, forsinkelser og ændringer til et overblik over det, der faktisk kræver handling.',
-    problem:
-      'Status fra leverandører kommer i forskellige formater og ender som manuel gennemlæsning, copy-paste og jagt på det vigtigste.',
-    workflow:
-      'AI læser faste statusmails eller uploadede lister, finder afvigelser, grupperer årsager og markerer de leverancer, hvor en person skal beslutte næste skridt.',
+      'Turn supplier emails, delays and changes into an exception overview that shows what needs action.',
+    brokenWorkflow:
+      'Supplier status arrives in different formats and the important exceptions hide inside email text and spreadsheets.',
+    whoFeelsPain:
+      'Supply chain, procurement, operations and teams coordinating with external suppliers.',
+    typicalInputs: ['Supplier emails', 'Status files', 'Order lists', 'Delay notes', 'Known risk categories'],
+    aiAssistedWorkflow:
+      'AI reads incoming status, detects exceptions, groups reasons and suggests which deliveries need action.',
+    humanApproval:
+      'Procurement or operations approves the proposed action, escalation and internal update.',
     output:
-      'Et undtagelsesoverblik med forsinkelser, risiko, foreslået handling og en kort tekst der kan sendes videre internt.',
-    signals: ['mange leverandørmails', 'afvigelser skjules i tekst', 'copy-paste til statusark', 'indkøb eller drift jagter overblik'],
+      'An exception overview with delays, risk, suggested action and a short internal update draft.',
+    goodFitSignals: ['Many supplier emails', 'Exceptions are hidden in text', 'Manual copy-paste to status sheets', 'Operations needs a clearer overview'],
+    metrics: ['Exception detection time', 'Late escalation', 'Manual copy-paste time', 'Supplier follow-up volume'],
+    recommendedService: 'Manual Work Audit',
   },
   {
-    id: 'tilbudsanmodning-afklaring',
-    path: '/use-cases/tilbudsanmodning-afklaring',
-    title: 'Fra tilbudsanmodning til afklaringsliste',
-    eyebrow: 'Use case',
+    id: 'rfq-clarification',
+    path: '/workflow-examples/rfq-clarification',
+    title: 'From RFQ to clarification list',
+    eyebrow: 'Workflow example',
     description:
-      'Læser kundeforespørgsler, finder manglende information og laver et første udkast til afklaring eller tilbudsstruktur.',
-    problem:
-      'Salg eller projektledelse bruger tid på at forstå uklare forespørgsler, finde manglende oplysninger og skrive de samme afklarende spørgsmål igen.',
-    workflow:
-      'AI gennemgår forespørgslen, matcher den mod faste kriterier, fremhæver mangler og foreslår enten en afklaringsmail eller en struktureret tilbudskladde.',
+      'Read customer requests, identify missing information and draft clarification questions or a quote structure.',
+    brokenWorkflow:
+      'Sales or delivery spends time understanding unclear requests and rewriting the same clarification questions.',
+    whoFeelsPain:
+      'Sales operations, project delivery, consulting teams and technical specialists receiving repeated RFQs.',
+    typicalInputs: ['Customer request', 'Requirements', 'Attachments', 'Previous quotes', 'Scope criteria'],
+    aiAssistedWorkflow:
+      'AI reviews the request, compares it with fixed criteria, highlights missing information and drafts clarification questions.',
+    humanApproval:
+      'The responsible person approves questions, risk points and the recommended next step.',
     output:
-      'En afklaringsliste, risikopunkter, anbefalet næste skridt og et udkast til mail eller tilbudsstruktur.',
-    signals: ['mange ens forespørgsler', 'tilbud forsinkes af manglende info', 'klar vurderingsmodel findes', 'salg skriver meget manuelt'],
+      'A clarification list, risk points, recommended next step and a draft email or quote structure.',
+    goodFitSignals: ['Many similar requests', 'Missing information delays quotes', 'Scope criteria are known', 'Sales writes similar messages repeatedly'],
+    metrics: ['Time to qualify request', 'Missing information loops', 'Quote preparation time', 'Clarification quality'],
+    recommendedService: 'AI Workflow Sprint',
   },
   {
-    id: 'ny-kunde-onboarding',
-    path: '/use-cases/ny-kunde-onboarding',
-    title: 'Fra ny kunde til onboarding-overblik',
-    eyebrow: 'Use case',
+    id: 'new-customer-onboarding',
+    path: '/workflow-examples/new-customer-onboarding',
+    title: 'From new customer to onboarding brief',
+    eyebrow: 'Workflow example',
     description:
-      'Omsætter salgsnoter, kontraktpunkter og interne aftaler til en praktisk onboarding-plan.',
-    problem:
-      'Vigtig kontekst forsvinder mellem salg, levering og support. Den nye kunde starter med spørgsmål, som allerede burde være besvaret.',
-    workflow:
-      'AI samler salgsnoter, aftaler, scope og kendte risici i en onboarding-skabelon med opgaver, ansvarlige og information der mangler.',
+      'Turn sales notes, agreements and internal context into a practical onboarding plan.',
+    brokenWorkflow:
+      'Important context disappears between sales, delivery and support. The customer starts with questions that should already be answered.',
+    whoFeelsPain:
+      'Sales, delivery, Customer Success, support and leadership teams responsible for a clean handover.',
+    typicalInputs: ['Sales notes', 'Contract points', 'Scope', 'Customer emails', 'Internal commitments'],
+    aiAssistedWorkflow:
+      'AI gathers context into an onboarding template with tasks, risks, missing information and next actions.',
+    humanApproval:
+      'The delivery owner approves onboarding tasks, risks, missing information and the first customer message.',
     output:
-      'En onboarding-plan med første skridt, interne opgaver, kundespørgsmål, risici og en kort velkomstmail.',
-    signals: ['handover mellem salg og drift', 'gentagne kundestarter', 'manglende kontekst giver fejl', 'flere teams skal koordinere'],
+      'An onboarding brief with first steps, internal tasks, customer questions, risks and a welcome draft.',
+    goodFitSignals: ['Frequent handover between sales and delivery', 'Repeated customer starts', 'Context is lost', 'Multiple teams coordinate'],
+    metrics: ['Handover preparation time', 'Missing context incidents', 'Customer onboarding delay', 'Rework in first delivery phase'],
+    recommendedService: 'Manual Work Audit',
   },
   {
-    id: 'crm-opfoelgning-naeste-skridt',
-    path: '/use-cases/crm-opfoelgning-naeste-skridt',
-    title: 'Fra CRM-noter til næste bedste opfølgning',
-    eyebrow: 'Use case',
+    id: 'crm-follow-up-next-step',
+    path: '/workflow-examples/crm-follow-up-next-step',
+    title: 'From CRM notes to next best follow-up',
+    eyebrow: 'Workflow example',
     description:
-      'Gør løse CRM-noter og kontaktpunkter til konkrete opfølgningsforslag, så muligheder ikke går kolde.',
-    problem:
-      'CRM bliver opdateret ujævnt, og næste skridt ligger ofte i en note, en mailtråd eller hos sælgeren selv.',
-    workflow:
-      'AI læser noter, seneste kontakt, tilbudsstatus og aftaler, vurderer hvad der mangler og foreslår næste handling med et kort udkast.',
+      'Turn loose CRM notes and contact history into concrete follow-up suggestions so opportunities do not go cold.',
+    brokenWorkflow:
+      'CRM is updated unevenly and the next step often lives in a note, an email thread or the salesperson’s memory.',
+    whoFeelsPain:
+      'Sales operations, sales teams and Customer Success teams managing many open opportunities.',
+    typicalInputs: ['CRM notes', 'Emails', 'Last contact', 'Quote status', 'Agreed next steps'],
+    aiAssistedWorkflow:
+      'AI reads notes and contact history, finds missing information and suggests the next action with a short draft.',
+    humanApproval:
+      'The owner approves priority, wording and next action before contacting the customer.',
     output:
-      'En prioriteret opfølgningsliste med forslag til handling, mailudkast og tydelige sager der kræver menneskelig vurdering.',
-    signals: ['mange åbne muligheder', 'CRM-noter er uens', 'opfølgning afhænger af hukommelse', 'gentagne salgsbeskeder'],
+      'A prioritized follow-up list with suggested action, email draft and cases that need human judgement.',
+    goodFitSignals: ['Many open opportunities', 'CRM notes vary by person', 'Follow-up depends on memory', 'Repeated sales messages'],
+    metrics: ['Lost follow-up count', 'Time since last contact', 'CRM note completeness', 'Follow-up preparation time'],
+    recommendedService: 'AI Workflow Sprint',
   },
   {
-    id: 'reklamation-sagsoverblik',
-    path: '/use-cases/reklamation-sagsoverblik',
-    title: 'Fra reklamation til sagsoverblik',
-    eyebrow: 'Use case',
+    id: 'complaint-case-brief',
+    path: '/workflow-examples/complaint-case-brief',
+    title: 'From complaint to case brief',
+    eyebrow: 'Workflow example',
     description:
-      'Samler kundens besked, intern historik og kendte regler til et sagsoverblik med næste skridt.',
-    problem:
-      'Reklamationer kræver ofte manuel læsning af historik, billeder, mails, interne noter og betingelser før nogen tør svare.',
-    workflow:
-      'AI strukturerer sagen, trækker relevante fakta ud, markerer manglende dokumentation og foreslår en intern vurdering før kunden får svar.',
+      'Collect customer message, history and internal rules into a case brief with a recommended next step.',
+    brokenWorkflow:
+      'Complaint handling requires manual reading of history, images, emails, notes and conditions before anyone feels ready to reply.',
+    whoFeelsPain:
+      'Customer support, quality teams, finance and operations teams handling repeated complaint types.',
+    typicalInputs: ['Customer message', 'Order data', 'Images', 'Previous emails', 'Terms or internal guidelines'],
+    aiAssistedWorkflow:
+      'AI structures the case, extracts facts, flags missing documentation and drafts an internal assessment.',
+    humanApproval:
+      'The responsible person approves the assessment and customer reply before anything is sent.',
     output:
-      'Et sagsoverblik med tidslinje, fakta, mangler, anbefalet handling og et svarudkast til godkendelse.',
-    signals: ['mange ens sager', 'behov for ensartet vurdering', 'historik ligger spredt', 'kundesvar kræver godkendelse'],
+      'A case brief with timeline, facts, missing documentation, recommended action and reply draft.',
+    goodFitSignals: ['Repeated complaint categories', 'Need for consistent assessment', 'History is spread out', 'Replies require approval'],
+    metrics: ['Case preparation time', 'Missing documentation', 'Escalation quality', 'Correction rate'],
+    recommendedService: 'Manual Work Audit',
   },
   {
-    id: 'procesdokumentation-interviews',
-    path: '/use-cases/procesdokumentation-interviews',
-    title: 'Fra interviews til procesdokumentation',
-    eyebrow: 'Use case',
+    id: 'process-documentation',
+    path: '/workflow-examples/process-documentation',
+    title: 'From interviews to process documentation',
+    eyebrow: 'Workflow example',
     description:
-      'Gør medarbejderinterviews og skærmoptagelser til brugbar procesdokumentation, der kan forbedres og trænes på.',
-    problem:
-      'Processen findes kun i hovedet på erfarne medarbejdere. Nye kolleger lærer via sidemandsoplæring, og små undtagelser bliver aldrig dokumenteret.',
-    workflow:
-      'AI hjælper med at strukturere interviewnoter, beskrive trin, undtagelser, beslutningsregler og forslag til hvor workflowet kan forenkles.',
+      'Turn interviews, recordings and practical know-how into usable process documentation and improvement points.',
+    brokenWorkflow:
+      'The process lives inside experienced employees. New people learn through shadowing, and exceptions are rarely documented.',
+    whoFeelsPain:
+      'Operations, HR, team leads and companies where key knowledge depends on a few people.',
+    typicalInputs: ['Interviews', 'Screen recordings', 'Existing SOPs', 'Notes', 'Exceptions'],
+    aiAssistedWorkflow:
+      'AI structures interview notes, describes steps, captures exceptions and suggests where the workflow can be simplified.',
+    humanApproval:
+      'The process owner approves steps, rules, exceptions and training use before documentation is shared.',
     output:
-      'En procesbeskrivelse med trin, roller, input, output, undtagelser, friktion og oplagte forbedringspunkter.',
-    signals: ['viden ligger hos få personer', 'oplæring tager lang tid', 'processen har mange undtagelser', 'ingen ejer dokumentationen'],
+      'A process description with steps, roles, inputs, outputs, exceptions, friction and improvement ideas.',
+    goodFitSignals: ['Knowledge sits with a few people', 'Training takes too long', 'The process has many exceptions', 'No one owns documentation'],
+    metrics: ['Training time', 'Number of undocumented exceptions', 'Support questions from new employees', 'Process owner review time'],
+    recommendedService: 'Manual Work Audit',
   },
 ] as const;
 
-export const aiSelfTests = [
+export const aiReadinessItems = [
   {
-    name: 'Kanoniske servicesider',
-    status: 'Aktiv',
-    detail: '/manual-work-audit, /ai-workflow-sprint og /ai-operations-partner svarer direkte på hvad, hvem, output og pris.',
+    name: 'Canonical service pages',
+    status: 'Active',
+    detail:
+      '/manual-work-audit, /ai-workflow-sprint and /ai-operations-partner answer what the service is, who it fits, what it produces, price, duration and next step.',
   },
   {
-    name: 'llms.txt',
-    status: 'Aktiv',
-    detail: "En kort AI-læsbar profil beskriver SiteDokAI, ydelser, use cases og vigtige URL'er.",
+    name: 'Visible answer blocks',
+    status: 'Active',
+    detail:
+      'FAQ and service sections are written as direct answers so people, search engines and AI assistants can summarize the offer correctly.',
   },
   {
-    name: 'Schema.org',
-    status: 'Aktiv',
-    detail: 'Siderne bruger Organization, Service, Offer, WebPage, FAQPage og BreadcrumbList hvor indholdet er synligt.',
+    name: 'Structured data',
+    status: 'Active',
+    detail:
+      'Core pages use Organization, WebSite, ProfessionalService, Service, Offer, FAQPage, BreadcrumbList and WebPage where the content is visible.',
   },
   {
     name: 'Sitemap',
-    status: 'Aktiv',
-    detail: 'Sitemap peger på de kanoniske sider, så crawler og AI-researchværktøjer finder den rigtige struktur.',
+    status: 'Active',
+    detail:
+      'The sitemap points to canonical English service, pricing, workflow example, AI readiness, contact and legal pages.',
   },
   {
-    name: 'Menneske før maskine',
-    status: 'Aktiv',
-    detail: 'AI-optimeringen er ikke skjult teknik. Den samme struktur gør siden lettere at forstå for købere.',
+    name: 'llms.txt',
+    status: 'Active',
+    detail:
+      'A plain English AI-readable profile explains positioning, services, workflow examples, customers, principles, URLs and contact details.',
+  },
+  {
+    name: 'No hidden AI trickery',
+    status: 'Active',
+    detail:
+      'The same structure that helps AI assistants also helps human buyers understand the offer faster.',
   },
 ] as const;
 
+export const homepageFaq = [
+  {
+    question: 'What does SiteDokAI do?',
+    answer:
+      'SiteDokAI helps operations-heavy B2B teams turn recurring manual work into practical, human-approved AI workflows.',
+  },
+  {
+    question: 'What is a Manual Work Audit?',
+    answer:
+      'It is a 5-business-day audit that maps recurring manual workflows, prioritizes AI opportunities and identifies the top 3 workflows to start with.',
+  },
+  {
+    question: 'Do we need to choose an AI tool first?',
+    answer:
+      'No. SiteDokAI starts with the work, then chooses the simplest useful workflow and tool setup.',
+  },
+  {
+    question: 'What if our workflow is messy?',
+    answer:
+      'That is often the point. If the workflow is unclear, AI usually scales the mess faster. The audit makes the work understandable first.',
+  },
+  {
+    question: 'Is this full automation?',
+    answer:
+      'Not by default. Many workflows are AI-assisted with a human approval step where quality, risk, tone or responsibility matters.',
+  },
+  {
+    question: 'What tools can you work with?',
+    answer:
+      'Typical workflows touch email, spreadsheets, Teams, Slack, CRM notes, reports, shared documents, support queues and system exports.',
+  },
+  {
+    question: 'How do you measure effect?',
+    answer:
+      'Effect is measured with practical signals such as time saved, fewer follow-ups, fewer errors, faster decisions and actual use by the team.',
+  },
+  {
+    question: 'What happens after the audit?',
+    answer:
+      'You receive a process map, prioritized backlog, top 3 AI workflow candidates, a first workflow sketch and a recommended next step.',
+  },
+  {
+    question: 'Can you work with customer support, operations, finance or sales teams?',
+    answer:
+      'Yes. The strongest fit is operations-heavy teams where recurring coordination work still lives in email, spreadsheets, CRM notes, meetings, reports or handovers.',
+  },
+  {
+    question: 'What if AI is not the right first step?',
+    answer:
+      'SiteDokAI says so. Some work should be removed, simplified or documented before AI is useful.',
+  },
+  {
+    question: 'Do you replace people?',
+    answer:
+      'No. The point is to reduce friction and help people approve better drafts, summaries, actions and decision notes.',
+  },
+  {
+    question: 'How much time does our team need to spend?',
+    answer:
+      'A Manual Work Audit usually needs short interviews with key people and examples of the recurring workflow.',
+  },
+  {
+    question: 'What data does AI need access to?',
+    answer:
+      'The starting point is the minimum data needed to understand and test the workflow. SiteDokAI does not connect everything to AI by default.',
+  },
+  {
+    question: 'Can this work with existing tools?',
+    answer:
+      'Often yes. SiteDokAI usually starts around the tools the team already uses before suggesting new systems.',
+  },
+  {
+    question: 'Why not just use ChatGPT or Copilot directly?',
+    answer:
+      'Chat tools can help individuals, but recurring operational work needs a clear trigger, input, rules, human approval, output and measurement.',
+  },
+] as const;
+
+export const legacyRedirects = [
+  { from: '/priser', to: '/pricing', label: 'Pricing' },
+  { from: '/om', to: '/about', label: 'About' },
+  { from: '/kontakt', to: '/contact', label: 'Contact' },
+  { from: '/use-cases', to: '/workflow-examples', label: 'Workflow examples' },
+  { from: '/ai-klar', to: '/ai-readiness', label: 'AI readiness' },
+  { from: '/hjemmeside-tjek', to: '/manual-work-audit', label: 'Manual Work Audit' },
+  { from: '/hjemmeside-fix', to: '/ai-workflow-sprint', label: 'AI Workflow Sprint' },
+  { from: '/visuelt-loeft', to: '/ai-operations-partner', label: 'AI Operations Partner' },
+  { from: '/gratis-mini-tjek', to: '/contact', label: 'Send your workflow' },
+  { from: '/gratis-rapport', to: '/manual-work-audit', label: 'Manual Work Audit' },
+  { from: '/eksempel', to: '/manual-work-audit', label: 'Manual Work Audit' },
+  { from: '/privatlivspolitik', to: '/privacy-policy', label: 'Privacy policy' },
+  { from: '/tilgaengelighed', to: '/accessibility', label: 'Accessibility' },
+  { from: '/tak', to: '/thank-you', label: 'Thank you' },
+  { from: '/tak-for-henvendelsen', to: '/thank-you', label: 'Thank you' },
+] as const;
+
+export const legacyWorkflowRedirects = [
+  { from: '/use-cases/ai-statusrapport', to: '/workflow-examples/ai-status-report', label: 'AI status report' },
+  { from: '/use-cases/ledelsesrapport', to: '/workflow-examples/management-report', label: 'Management report' },
+  { from: '/use-cases/kundehenvendelse-svarudkast', to: '/workflow-examples/customer-reply-draft', label: 'Customer reply draft' },
+  { from: '/use-cases/moede-actions-opfoelgning', to: '/workflow-examples/meeting-actions-follow-up', label: 'Meeting actions follow-up' },
+  { from: '/use-cases/leverandoerstatus-undtagelser', to: '/workflow-examples/supplier-status-exceptions', label: 'Supplier status exceptions' },
+  { from: '/use-cases/tilbudsanmodning-afklaring', to: '/workflow-examples/rfq-clarification', label: 'RFQ clarification' },
+  { from: '/use-cases/ny-kunde-onboarding', to: '/workflow-examples/new-customer-onboarding', label: 'New customer onboarding' },
+  { from: '/use-cases/crm-opfoelgning-naeste-skridt', to: '/workflow-examples/crm-follow-up-next-step', label: 'CRM follow-up next step' },
+  { from: '/use-cases/reklamation-sagsoverblik', to: '/workflow-examples/complaint-case-brief', label: 'Complaint case brief' },
+  { from: '/use-cases/procesdokumentation-interviews', to: '/workflow-examples/process-documentation', label: 'Process documentation' },
+] as const;
+
 export type ServiceOffer = (typeof services)[number];
-export type UseCase = (typeof useCases)[number];
+export type WorkflowExample = (typeof workflowExamples)[number];
 
 export function absoluteUrl(path: string) {
   return new URL(path, siteBaseUrl).href;
@@ -369,8 +599,8 @@ export function findService(id: string) {
   return services.find((service) => service.id === id);
 }
 
-export function findUseCase(id: string) {
-  return useCases.find((useCase) => useCase.id === id);
+export function findWorkflowExample(id: string) {
+  return workflowExamples.find((workflowExample) => workflowExample.id === id);
 }
 
 export function breadcrumbSchema(items: Array<{ name: string; path: string }>) {
@@ -402,38 +632,119 @@ export function faqSchema(path: string, faq: ReadonlyArray<{ question: string; a
   };
 }
 
+export function organizationSchema() {
+  return {
+    '@type': 'Organization',
+    '@id': `${siteBaseUrl}/#organization`,
+    name: 'SiteDokAI',
+    url: siteBaseUrl,
+    logo: absoluteUrl('/favicon.svg'),
+    email: contactEmail,
+    founder: {
+      '@id': `${siteBaseUrl}/#troels-ostbjerg`,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: contactEmail,
+      contactType: 'customer enquiries',
+      availableLanguage: ['en'],
+      areaServed: ['Europe', 'International'],
+    },
+  };
+}
+
+export function websiteSchema() {
+  return {
+    '@type': 'WebSite',
+    '@id': `${siteBaseUrl}/#website`,
+    name: 'SiteDokAI',
+    url: `${siteBaseUrl}/`,
+    inLanguage: 'en',
+    publisher: {
+      '@id': `${siteBaseUrl}/#organization`,
+    },
+    description:
+      'SiteDokAI helps operations-heavy B2B teams turn recurring manual work into practical AI workflows people actually use.',
+  };
+}
+
+export function professionalServiceSchema() {
+  return {
+    '@type': 'ProfessionalService',
+    '@id': `${siteBaseUrl}/#professional-service`,
+    name: 'SiteDokAI',
+    url: siteBaseUrl,
+    serviceType: 'AI operations for manual workflows',
+    email: contactEmail,
+    provider: {
+      '@id': `${siteBaseUrl}/#organization`,
+    },
+    areaServed: [
+      { '@type': 'Place', name: 'Europe' },
+      { '@type': 'Place', name: 'International' },
+    ],
+    knowsAbout: [
+      'AI operations',
+      'manual workflow improvement',
+      'human-in-the-loop AI workflows',
+      'operations process mapping',
+      'AI workflow implementation',
+      'workflow automation',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'SiteDokAI services',
+      itemListElement: services.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@id': `${absoluteUrl(service.path)}#service`,
+        },
+        price: service.priceValue,
+        priceCurrency: 'DKK',
+        url: absoluteUrl(service.path),
+      })),
+    },
+  };
+}
+
+export function personSchema() {
+  return {
+    '@type': 'Person',
+    '@id': `${siteBaseUrl}/#troels-ostbjerg`,
+    name: 'Troels Østbjerg',
+    jobTitle: 'Founder, SiteDokAI',
+    worksFor: {
+      '@id': `${siteBaseUrl}/#organization`,
+    },
+    knowsAbout: ['operations', 'supply chain', 'process improvement', 'AI workflows', 'AI operations'],
+  };
+}
+
 export function serviceSchema(service: ServiceOffer) {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${siteBaseUrl}/#organization`,
-        name: 'SiteDokAI',
-        url: siteBaseUrl,
-        email: 'info@sitedokai.com',
-        founder: {
-          '@type': 'Person',
-          name: 'Troels Østbjerg',
-        },
-      },
+      organizationSchema(),
+      websiteSchema(),
+      professionalServiceSchema(),
       {
         '@type': 'Service',
         '@id': `${absoluteUrl(service.path)}#service`,
         name: service.name,
         serviceType: service.name,
         url: absoluteUrl(service.path),
-        description: service.shortAnswer,
+        description: service.description,
         provider: {
           '@id': `${siteBaseUrl}/#organization`,
         },
-        areaServed: {
-          '@type': 'Country',
-          name: 'Danmark',
-        },
+        areaServed: [
+          { '@type': 'Place', name: 'Europe' },
+          { '@type': 'Place', name: 'International' },
+        ],
         audience: {
           '@type': 'BusinessAudience',
-          audienceType: 'Virksomheder med manuelle workflows, gentagne driftsopgaver og praktiske AI-implementeringsbehov',
+          audienceType:
+            'Operations-heavy B2B teams with recurring manual work in email, spreadsheets, CRM notes, reports, follow-ups or handovers',
         },
         offers: {
           '@type': 'Offer',
@@ -447,42 +758,35 @@ export function serviceSchema(service: ServiceOffer) {
         '@type': 'WebPage',
         '@id': `${absoluteUrl(service.path)}#webpage`,
         url: absoluteUrl(service.path),
-        name: `${service.name} | SiteDokAI`,
+        name: `${service.name} — SiteDokAI`,
         description: service.description,
-        inLanguage: 'da-DK',
+        inLanguage: 'en',
         about: {
           '@id': `${absoluteUrl(service.path)}#service`,
         },
         isPartOf: {
-          '@type': 'WebSite',
           '@id': `${siteBaseUrl}/#website`,
-          name: 'SiteDokAI',
-          url: `${siteBaseUrl}/`,
         },
       },
     ],
   };
 }
 
-export function useCaseSchema(useCase: UseCase) {
+export function workflowExampleSchema(workflowExample: WorkflowExample) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    '@id': `${absoluteUrl(useCase.path)}#webpage`,
-    url: absoluteUrl(useCase.path),
-    name: `${useCase.title} | SiteDokAI`,
-    description: useCase.description,
-    inLanguage: 'da-DK',
+    '@id': `${absoluteUrl(workflowExample.path)}#webpage`,
+    url: absoluteUrl(workflowExample.path),
+    name: `${workflowExample.title} — SiteDokAI`,
+    description: workflowExample.description,
+    inLanguage: 'en',
     isPartOf: {
       '@type': 'WebSite',
       '@id': `${siteBaseUrl}/#website`,
       name: 'SiteDokAI',
       url: `${siteBaseUrl}/`,
     },
-    about: [
-      'AI workflow',
-      'AI-drevet procesoptimering',
-      'manual process automation',
-    ],
+    about: ['AI operations', 'manual workflow improvement', 'human-approved AI workflows'],
   };
 }
