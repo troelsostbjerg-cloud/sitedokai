@@ -82,3 +82,26 @@
     }
   }
 }
+
+@layer components {
+  .lab-chip {
+    @apply inline-flex min-h-10 items-center justify-center rounded-xl border border-brand/10 bg-panel-soft px-4 py-2 text-sm font-semibold text-brand/60 transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent/30 hover:bg-accent-soft hover:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px;
+  }
+
+  .lab-chip[aria-pressed='true'] {
+    @apply border-accent/45 bg-accent text-canvas hover:bg-accent-bright hover:text-canvas;
+  }
+
+  .lab-dark-input {
+    @apply h-12 rounded-xl border border-white/10 bg-white/[0.08] px-4 text-base text-canvas outline-none transition-colors focus:border-accent-light/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-light;
+  }
+
+  .lab-dark-input option {
+    color: #1e261f;
+  }
+
+  .lab-selector-panel[hidden],
+  [data-case-card][hidden] {
+    display: none;
+  }
+}

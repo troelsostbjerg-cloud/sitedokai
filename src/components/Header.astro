@@ -2,16 +2,16 @@
 import Button from './site/Button.astro';
 
 const navItems = [
-  { label: 'Problem', href: '/#problem' },
-  { label: 'Method', href: '/#method' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Workflow examples', href: '/workflow-examples' },
+  { label: 'Submit', href: '/submit' },
+  { label: 'Cases', href: '/cases' },
+  { label: 'Method', href: '/method' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Hire Troels', href: '/hire' },
+  { label: 'Privacy', href: '/privacy' },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
-const ctaHref = currentPath === '/contact' ? '#workflow-screening' : '/contact#workflow-screening';
+const ctaHref = currentPath === '/submit' ? '#workflow-form' : '/submit#workflow-form';
 ---
 
 <a
@@ -24,8 +24,8 @@ const ctaHref = currentPath === '/contact' ? '#workflow-screening' : '/contact#w
 <header class="sticky top-0 z-20 border-b border-brand/10 bg-canvas/88 px-5 backdrop-blur-xl sm:px-6">
   <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 py-4" aria-label="Main navigation">
     <a href="/" class="min-w-0 text-brand">
-      <span class="block font-display text-2xl font-semibold leading-none">SiteDokAI</span>
-      <span class="mt-1 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:block">AI operations for manual work</span>
+      <span class="block font-display text-2xl font-semibold leading-none">SiteDokAILab</span>
+      <span class="mt-1 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:block">Free workflow reviews</span>
     </a>
 
     <div class="hidden items-center gap-5 lg:flex">
@@ -48,7 +48,7 @@ const ctaHref = currentPath === '/contact' ? '#workflow-screening' : '/contact#w
     </div>
 
     <div class="hidden lg:block">
-      <Button href={ctaHref} size="sm">Send your workflow</Button>
+      <Button href={ctaHref} size="sm">Submit a workflow</Button>
     </div>
 
     <details class="group relative lg:hidden" data-mobile-menu>
@@ -80,7 +80,7 @@ const ctaHref = currentPath === '/contact' ? '#workflow-screening' : '/contact#w
               </a>
             );
           })}
-          <Button href={ctaHref} class="mt-2 w-full">Send your workflow</Button>
+          <Button href={ctaHref} class="mt-2 w-full">Submit a workflow</Button>
         </div>
       </div>
     </details>

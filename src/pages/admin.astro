@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Local backlog - SiteDokAILab"
+  description="Local development backlog for SiteDokAILab workflow submissions stored in this browser."
+  canonical="/admin"
+  noindex={true}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="border-b border-brand/10 px-5 py-16 sm:px-6 md:py-20">
+      <div class="mx-auto max-w-7xl">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Dev-only local backlog</p>
+        <h1 class="mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-6xl">
+          Local workflow submissions in this browser.
+        </h1>
+        <p class="mt-6 max-w-2xl text-base leading-relaxed text-brand/68 md:text-lg">
+          This page reads local preview submissions from browser storage. Production submissions live in the configured Cloudflare database, not here.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-5 py-12 sm:px-6 md:py-16">
+      <div class="mx-auto grid max-w-7xl gap-5" data-local-backlog>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm leading-relaxed text-brand/64" data-backlog-count>No local submissions loaded.</p>
+          <button type="button" class="inline-flex min-h-11 w-fit items-center justify-center rounded-xl border border-brand/20 px-5 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px" data-clear-backlog>
+            Clear local backlog
+          </button>
+        </div>
+        <div class="grid gap-4" data-backlog-list></div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script is:inline>
+    (function() {
+      var root = document.querySelector('[data-local-backlog]');
+      if (!root) return;
+
+      var list = root.querySelector('[data-backlog-list]');
+      var count = root.querySelector('[data-backlog-count]');
+      var clear = root.querySelector('[data-clear-backlog]');
+      var key = 'sitedokailab.workflowSubmissions';
+
+      function readItems() {
+        try {
+          return JSON.parse(window.localStorage.getItem(key) || '[]');
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function writeItems(items) {
+        window.localStorage.setItem(key, JSON.stringify(items));
+      }
+
+      function escape(value) {
+        return String(value || '').replace(/[&<>"']/g, function(character) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+          }[character];
+        });
+      }
+
+      function render() {
+        var items = readItems();
+        if (count) {
+          count.textContent = items.length
+            ? items.length + ' local submission' + (items.length === 1 ? '' : 's') + ' stored in this browser.'
+            : 'No local submissions in this browser yet.';
+        }
+        if (!list) return;
+
+        if (!items.length) {
+          list.innerHTML = '<p class="rounded-[1.2rem] border border-brand/10 bg-panel p-5 text-sm leading-relaxed text-brand/66">Submit a test workflow on /submit in local preview, then come back here.</p>';
+          return;
+        }
+
+        list.innerHTML = items.map(function(item) {
+          var payload = item.payload || {};
+          return [
+            '<article class="rounded-[1.35rem] border border-brand/10 bg-panel p-5">',
+            '<div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">',
+            '<div>',
+            '<p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent">' + escape(item.status || 'new') + '</p>',
+            '<h2 class="mt-2 text-2xl font-semibold text-brand">' + escape(payload.workflow_title || 'Untitled workflow') + '</h2>',
+            '</div>',
+            '<p class="text-sm text-brand/50">' + escape(item.created_at || '') + '</p>',
+            '</div>',
+            '<dl class="mt-5 grid gap-3 text-sm leading-relaxed text-brand/68 md:grid-cols-2">',
+            '<div><dt class="font-semibold text-brand">Company</dt><dd>' + escape(payload.company) + '</dd></div>',
+            '<div><dt class="font-semibold text-brand">Permission</dt><dd>' + escape(payload.permission_to_publish) + '</dd></div>',
+            '<div><dt class="font-semibold text-brand">Workflow</dt><dd>' + escape(payload.workflow_description) + '</dd></div>',
+            '<div><dt class="font-semibold text-brand">Pain</dt><dd>' + escape(payload.workflow_pain) + '</dd></div>',
+            '</dl>',
+            '</article>',
+          ].join('');
+        }).join('');
+      }
+
+      if (clear) {
+        clear.addEventListener('click', function() {
+          writeItems([]);
+          render();
+        });
+      }
+
+      render();
+    })();
+  </script>
+</Layout>

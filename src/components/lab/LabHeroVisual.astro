@@ -1,0 +1,82 @@
+---
+const messyInputs = ['Emails', 'Spreadsheets', 'Teams messages', 'Meeting notes', 'CRM notes', 'Someone remembers it'];
+const labSteps = ['Map', 'Simplify', 'AI assist', 'Human approval', 'Measure'];
+const outputs = ['Clear diagnosis', 'AI fit', 'First step', 'Risk', 'Better workflow'];
+---
+
+<div
+  class="hero-proof-card relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-brand-dark p-4 text-canvas shadow-card md:p-6"
+  role="img"
+  aria-label="A visual process showing messy workflow inputs moving through SiteDokAILab into a practical review output."
+>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(111,146,125,0.26),transparent_22rem),radial-gradient(circle_at_88%_4%,rgba(245,240,232,0.12),transparent_20rem)]" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(rgba(245,240,232,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(245,240,232,0.055)_1px,transparent_1px)] bg-[size:42px_42px]" aria-hidden="true"></div>
+
+  <div class="relative grid gap-5">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent-light">Live process lab</p>
+        <p class="mt-2 max-w-sm text-sm leading-relaxed text-canvas/70">
+          Messy inputs become a practical mini-review, not a 58-slide ritual.
+        </p>
+      </div>
+      <div class="hidden rounded-full border border-white/10 bg-white/[0.08] px-3 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-canvas/70 sm:block">
+        Human approval stays in
+      </div>
+    </div>
+
+    <div class="grid gap-3 lg:grid-cols-[0.9fr_auto_1fr_auto_0.9fr] lg:items-center">
+      <div class="rounded-[1.35rem] border border-white/10 bg-white/[0.07] p-4">
+        <p class="text-sm font-semibold text-canvas">Messy input</p>
+        <div class="mt-4 grid gap-2">
+          {messyInputs.map((item, index) => (
+            <div
+              class="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2 text-xs text-canvas/72"
+              style={`transform: translateX(${index % 2 === 0 ? '-4px' : '6px'});`}
+            >
+              <span>{item}</span>
+              <span class="font-mono text-canvas/[0.38]">{String(index + 1).padStart(2, '0')}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hidden h-px w-12 bg-accent-light/45 lg:block" aria-hidden="true"></div>
+
+      <div class="rounded-[1.35rem] border border-accent-light/30 bg-accent-light/[0.12] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]">
+        <p class="text-sm font-semibold text-canvas">SiteDokAILab</p>
+        <div class="mt-4 grid gap-2">
+          {labSteps.map((item, index) => (
+            <div class="grid grid-cols-[2rem_1fr] items-center gap-3 rounded-xl bg-brand/45 px-3 py-2">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-light font-mono text-xs font-semibold text-brand-dark">
+                {index + 1}
+              </span>
+              <span class="text-sm text-canvas/[0.86]">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hidden h-px w-12 bg-accent-light/45 lg:block" aria-hidden="true"></div>
+
+      <div class="rounded-[1.35rem] border border-white/10 bg-canvas p-4 text-brand">
+        <p class="text-sm font-semibold">Mini-review output</p>
+        <div class="mt-4 grid gap-2">
+          {outputs.map((item) => (
+            <div class="rounded-xl border border-brand/10 bg-panel px-3 py-2 text-sm text-brand/72">
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-[1.15rem] border border-white/10 bg-white/[0.07] p-4">
+      <div class="grid gap-3 text-xs leading-relaxed text-canvas/72 sm:grid-cols-3">
+        <p><span class="font-semibold text-canvas">No magic AI dust.</span> Start with the workflow.</p>
+        <p><span class="font-semibold text-canvas">No fake case claims.</span> Examples stay labelled.</p>
+        <p><span class="font-semibold text-canvas">No blind automation.</span> People approve sensitive output.</p>
+      </div>
+    </div>
+  </div>
+</div>

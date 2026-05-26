@@ -1,11 +1,13 @@
 ---
+import { contactEmail } from '../data/labContent';
+
 const navItems = [
-  { label: 'Services', href: '/#services' },
-  { label: 'Workflow examples', href: '/workflow-examples' },
-  { label: 'AI readiness', href: '/ai-readiness' },
+  { label: 'Submit a workflow', href: '/submit' },
+  { label: 'Case library', href: '/cases' },
+  { label: 'Method', href: '/method' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Privacy policy', href: '/privacy-policy' },
+  { label: 'Hire Troels', href: '/hire' },
+  { label: 'Privacy', href: '/privacy' },
   { label: 'Accessibility', href: '/accessibility' },
 ];
 ---
@@ -14,12 +16,12 @@ const navItems = [
   <div class="mx-auto max-w-7xl">
     <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.25fr_0.9fr_0.9fr]">
       <div>
-        <div class="mb-4 font-display text-2xl font-semibold">SiteDokAI</div>
+        <div class="mb-4 font-display text-2xl font-semibold">SiteDokAILab</div>
         <p class="max-w-md text-sm leading-relaxed text-brand/60">
-          Founder-led AI operations for teams that want to turn recurring manual work into practical, human-approved AI workflows.
+          A free workflow and AI process lab where companies can send messy recurring work and get a practical mini-review from Troels.
         </p>
-        <a href="/contact#workflow-screening" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent/40 bg-accent px-5 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-          Send your workflow
+        <a href="/submit" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent/40 bg-accent px-5 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Submit a workflow
         </a>
       </div>
 
@@ -35,16 +37,16 @@ const navItems = [
       <div>
         <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Contact</h3>
         <p class="mb-2 text-sm text-brand/60">
-          <a href="mailto:info@sitedokai.com" class="transition-colors hover:text-brand">info@sitedokai.com</a>
+          <a href={`mailto:${contactEmail}`} class="transition-colors hover:text-brand">{contactEmail}</a>
         </p>
         <p class="text-sm text-brand/60">Company based in Denmark.</p>
-        <p class="mt-2 text-sm text-brand/60">International / Europe-first work.</p>
-        <p class="mt-2 text-sm text-brand/60">Manual Work Audit from DKK 15,000 excl. VAT.</p>
+        <p class="mt-2 text-sm text-brand/60">Built while Troels is looking for his next role.</p>
+        <p class="mt-2 text-sm text-brand/60">Free workflow mini-reviews. No sales pitch.</p>
       </div>
     </div>
 
     <div class="mt-10 flex flex-col gap-4 border-t border-brand/10 pt-7 text-center md:flex-row md:items-center md:justify-between md:text-left">
-      <p class="text-sm text-brand/50">&copy; 2026 SiteDokAI. All rights reserved.</p>
+      <p class="text-sm text-brand/50">&copy; 2026 SiteDokAILab. All rights reserved.</p>
       <p class="text-sm text-brand/50">Necessary cookies only. No tracking.</p>
     </div>
   </div>

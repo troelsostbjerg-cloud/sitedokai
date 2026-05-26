@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { absoluteUrl, contactEmail, siteBaseUrl } from '../data/labContent';
+import '../styles/global.css';
+
+const sections = [
+  {
+    title: 'Do not submit sensitive data',
+    text:
+      'Remove names, customer details, financial numbers, internal secrets, personal data and confidential documents before submitting. I do not need them to spot workflow friction.',
+  },
+  {
+    title: 'What happens after you submit',
+    text:
+      'Troels may reply with a practical mini-review if the submission is relevant. This is a practical workflow review, not a full consultancy engagement.',
+  },
+  {
+    title: 'Public cases require permission',
+    text:
+      'Public cases are only published if permission is given. They are anonymized and should remove company, person and sensitive operational details.',
+  },
+  {
+    title: 'Your submission is not sold',
+    text:
+      'Submissions are used to review workflows, reply to relevant cases and, when permission allows it, create anonymized learning examples.',
+  },
+  {
+    title: 'No legal or financial advice',
+    text:
+      'SiteDokAILab is not legal, compliance, security or financial advice. It is a practical workflow review and first-step recommendation.',
+  },
+  {
+    title: 'Contact',
+    text:
+      `Questions or deletion requests can be sent to ${contactEmail}.`,
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'PrivacyPolicy',
+  '@id': `${siteBaseUrl}/privacy#webpage`,
+  url: absoluteUrl('/privacy'),
+  name: 'Privacy and case handling - SiteDokAILab',
+  inLanguage: 'en',
+};
+---
+
+<Layout
+  title="Privacy and case handling - SiteDokAILab"
+  description="Plain-language privacy and case handling rules for SiteDokAILab workflow submissions."
+  canonical="/privacy"
+  structuredData={structuredData}
+>
+  <Nav />
+  <main id="main" class="bg-canvas text-brand">
+    <section class="border-b border-brand/10 px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Privacy / case handling</p>
+        <h1 class="mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
+          Plain rules before you send a workflow.
+        </h1>
+        <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
+          Keep the secrets out. The review works better when the process is clear and the sensitive details are gone.
+        </p>
+      </div>
+    </section>
+
+    <section class="px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
+        {sections.map((item) => (
+          <article class="rounded-[1.35rem] border border-brand/10 bg-panel p-5 md:p-6">
+            <h2 class="text-2xl font-semibold text-brand">{item.title}</h2>
+            <p class="mt-4 text-base leading-relaxed text-brand/68">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-brand/10 bg-canvas-soft px-5 py-14 sm:px-6">
+      <div class="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 class="text-2xl font-semibold text-brand">Ready to remove the sensitive bits?</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-brand/66">
+            Send the workflow in plain language. No customer names, no prices, no internal secrets.
+          </p>
+        </div>
+        <a href="/submit" class="inline-flex min-h-12 w-fit items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+          Submit a workflow
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

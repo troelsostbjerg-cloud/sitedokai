@@ -1,0 +1,121 @@
+---
+import { caseFilters, caseStudies } from '../../data/labContent';
+---
+
+<section class="grid gap-8" data-case-library>
+  <div class="flex flex-wrap gap-2" role="group" aria-label="Filter case library">
+    {caseFilters.map((filter, index) => (
+      <button
+        type="button"
+        class="lab-chip"
+        data-case-filter={filter}
+        aria-pressed={index === 0 ? 'true' : 'false'}
+      >
+        {filter}
+      </button>
+    ))}
+  </div>
+
+  <div class="grid gap-5 lg:grid-cols-2" data-case-grid>
+    {caseStudies.map((item) => (
+      <article
+        class="conversion-card grid gap-5 rounded-[1.45rem] border border-brand/10 bg-panel p-5 md:p-6"
+        data-case-card
+        data-case-category={item.category}
+      >
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent">{item.category}</p>
+            <h2 class="mt-3 text-2xl font-semibold leading-tight text-brand">{item.title}</h2>
+          </div>
+          <span class="w-fit rounded-lg border border-brand/10 bg-canvas px-3 py-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-brand/[0.52]">
+            {item.status === 'example' ? 'Example case' : item.status}
+          </span>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <h3 class="text-sm font-semibold text-brand">Problem</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/66">{item.problem}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-brand">Root cause</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/66">{item.likelyRootCause}</p>
+          </div>
+        </div>
+
+        <div class="rounded-[1.1rem] border border-brand/10 bg-canvas p-4">
+          <h3 class="text-sm font-semibold text-brand">Process sketch</h3>
+          <ol class="mt-3 grid gap-2">
+            {item.processSketch.map((step, index) => (
+              <li class="grid grid-cols-[1.8rem_1fr] gap-2 text-sm leading-relaxed text-brand/70">
+                <span class="font-mono text-brand/[0.38]">{index + 1}</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <h3 class="text-sm font-semibold text-brand">AI opportunity</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/66">{item.aiOpportunity}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold text-brand">Human approval</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/66">{item.humanApprovalPoint}</p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="rounded-xl border border-[#b95a54]/25 bg-[#b95a54]/10 p-4">
+            <h3 class="text-sm font-semibold text-brand">Risk</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/68">{item.risk}</p>
+          </div>
+          <div class="rounded-xl border border-accent/20 bg-accent-soft p-4">
+            <h3 class="text-sm font-semibold text-brand">First fix</h3>
+            <p class="mt-2 text-sm leading-relaxed text-brand/72">{item.firstStep}</p>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <p class="rounded-[1.1rem] border border-brand/10 bg-canvas-soft p-4 text-sm leading-relaxed text-brand/66" data-case-empty hidden>
+    No cases match that filter yet. This is a live lab, so the library should get more useful as real anonymized cases are approved.
+  </p>
+</section>
+
+<script is:inline>
+  (function() {
+    var roots = document.querySelectorAll('[data-case-library]');
+
+    roots.forEach(function(root) {
+      var buttons = root.querySelectorAll('[data-case-filter]');
+      var cards = root.querySelectorAll('[data-case-card]');
+      var empty = root.querySelector('[data-case-empty]');
+
+      function activate(filter) {
+        var visibleCount = 0;
+
+        buttons.forEach(function(button) {
+          button.setAttribute('aria-pressed', button.getAttribute('data-case-filter') === filter ? 'true' : 'false');
+        });
+
+        cards.forEach(function(card) {
+          var isVisible = filter === 'All' || card.getAttribute('data-case-category') === filter;
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (empty) empty.hidden = visibleCount !== 0;
+      }
+
+      buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          activate(button.getAttribute('data-case-filter') || 'All');
+        });
+      });
+    });
+  })();
+</script>

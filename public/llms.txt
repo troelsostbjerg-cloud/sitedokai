@@ -1,114 +1,94 @@
-# SiteDokAI
+# SiteDokAILab
 
-SiteDokAI is a founder-led AI operations practice for operations-heavy B2B teams that want to turn recurring manual work into practical, human-approved AI workflows.
+SiteDokAILab is a free workflow and AI process lab run by Troels Østbjerg while he is looking for his next role.
 
-Core positioning: AI Operations for Manual Work.
+Core positioning: Free workflow reviews for teams drowning in manual work.
 
-Sharper positioning line: Turn recurring manual work into AI workflows your team actually uses.
+Sharper positioning line: Send me your messy workflow. I will tell you where AI can actually help.
 
-SiteDokAI does not start with AI tools. SiteDokAI starts with the work.
-
-Central belief: Most companies do not have an AI problem. They have a workflow problem. If the process is unclear, AI only scales the mess faster.
+SiteDokAILab does not start with AI tools. It starts with recurring work that wastes time, creates confusion or keeps almost becoming an AI idea.
 
 Language: English.
-Primary market: International / Europe-first.
+Primary audience: companies with messy workflows, hiring managers, recruiters and Troels' network.
 Company base: Denmark.
-Contact email: info@sitedokai.com.
+Contact email: troelsostbjerg@gmail.com.
 
-## Services
+## What companies can submit
 
-- Manual Work Audit: from DKK 15,000 excl. VAT. Duration: 5 business days. Purpose: find recurring manual workflows where AI and better structure can create value. Output: process map, prioritized workflow backlog, top 3 AI workflow candidates, first workflow sketch, fit/risk/adoption score, suggested next step and measurement points. Recommended first step for new clients.
-- AI Workflow Sprint: from DKK 35,000 excl. VAT. Duration: 10 business days. Purpose: design, build and test one practical AI-assisted workflow for a real operational problem. Output: workflow design, AI logic or prompt structure, automation or prototype, human approval step, testing with users, documentation, training and effect measurement.
-- AI Operations Partner: from DKK 10,000/month excl. VAT. Duration: ongoing. Purpose: keep AI workflow improvements running after the first audit or sprint. Output: monthly AI/process backlog, workflow improvements, documentation, training, adoption support, measurement and practical sparring between operations, people and technology.
+- Weekly reporting chaos
+- Customer requests stuck in inboxes
+- Supplier follow-ups
+- Repeated meeting notes and action tracking
+- Manual spreadsheet updates
+- CRM follow-up gaps
+- Handover problems
+- AI ideas nobody has made concrete yet
 
-## Ideal customers
+## What a mini-review covers
 
-Operations-heavy B2B teams in small and mid-market companies where recurring coordination work still lives in email, spreadsheets, Teams, Slack, CRM notes, project updates, support queues, supplier communication, onboarding, reporting or handovers.
+- Diagnosis: what the real problem seems to be
+- Workflow sketch: the simple version of the process
+- AI fit: where AI could help and where it should not
+- Risk / watch-out: what could break, confuse people or create bad automation
+- First step: one practical thing the company can do without buying a tool
 
-Good-fit teams include operations, supply chain, customer support, project delivery, finance, sales operations, customer success, leadership teams and founder-led companies with growing operational complexity.
+This is a mini-review, not a full implementation project.
 
-## Principles
+## Method
 
-- Start with the work, not the tool.
-- One workflow before a large roadmap.
-- AI drafts. People approve.
-- Remove or simplify work before automating it.
-- Use the minimum necessary input.
-- Existing tools first where practical.
-- Measure time saved, fewer errors, fewer follow-ups, faster decisions and actual use.
-- No fake client logos, testimonials, revenue numbers, aggregate ratings or unsupported compliance claims.
-- No tracking pixels or non-essential cookies.
+Mess -> Map -> Simplify -> Assist -> Approve -> Measure.
 
-## Workflow examples
+- Mess: start with the annoying reality, not the tool.
+- Map: who does what, where information moves, and where it gets stuck.
+- Simplify: remove unnecessary steps before adding AI.
+- Assist: decide where AI can summarize, draft, classify, compare, extract or flag.
+- Approve: decide where a human must still review, decide or own the outcome.
+- Measure: define whether the new workflow saves time, reduces errors or improves decisions.
 
-- From status emails to decision-ready weekly updates: https://sitedokai.com/workflow-examples/ai-status-report
-- From spreadsheets to management reports: https://sitedokai.com/workflow-examples/management-report
-- From customer request to reply draft: https://sitedokai.com/workflow-examples/customer-reply-draft
-- From meeting notes to actions and follow-up: https://sitedokai.com/workflow-examples/meeting-actions-follow-up
-- From supplier updates to exception overview: https://sitedokai.com/workflow-examples/supplier-status-exceptions
-- From RFQ to clarification list: https://sitedokai.com/workflow-examples/rfq-clarification
-- From new customer to onboarding brief: https://sitedokai.com/workflow-examples/new-customer-onboarding
-- From CRM notes to next best follow-up: https://sitedokai.com/workflow-examples/crm-follow-up-next-step
-- From complaint to case brief: https://sitedokai.com/workflow-examples/complaint-case-brief
-- From interviews to process documentation: https://sitedokai.com/workflow-examples/process-documentation
+## Case handling
 
-## AI readiness setup
+- Public cases are only published if permission is given.
+- Public cases are anonymized.
+- Example cases must be labelled as example cases.
+- Do not submit confidential, personal or sensitive data.
+- Remove names, customer details, financial numbers and internal secrets before submitting.
+- Submissions are not sold.
+- SiteDokAILab is not legal, compliance, security or financial advice.
 
-- Canonical English service pages.
-- Visible answer blocks and FAQ content.
-- Structured data: Organization, WebSite, ProfessionalService, Service, Offer, FAQPage, BreadcrumbList and WebPage where content is visible.
-- Sitemap: https://sitedokai.com/sitemap.xml
-- llms.txt: https://sitedokai.com/llms.txt
-- Clear workflow example pages.
-- No hidden AI trickery. The structure is designed to be correctly understood, cited and summarized.
+## Troels Østbjerg
+
+Troels Østbjerg is a Copenhagen-based operations leader and practical AI implementation builder.
+
+Target roles: AI Implementation Lead, AI Adoption Lead, Operations Transformation Manager, Digital Transformation / Project Manager, Workflow Automation Lead and Business Operations / Process Improvement roles.
+
+Core competencies: operations leadership, supply chain, FMCG operations, stakeholder alignment, process mapping, workflow automation, AI adoption, human-in-the-loop design, structured decision support and practical implementation.
+
+Proof-of-work route: https://sitedokai.com/hire
+
+LinkedIn: https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726/
 
 ## Important URLs
 
 - Home: https://sitedokai.com/
-- Troels Østbjerg candidate profile: https://sitedokai.com/troels
-- Manual Work Audit: https://sitedokai.com/manual-work-audit
-- AI Workflow Sprint: https://sitedokai.com/ai-workflow-sprint
-- AI Operations Partner: https://sitedokai.com/ai-operations-partner
-- Pricing: https://sitedokai.com/pricing
-- Workflow examples: https://sitedokai.com/workflow-examples
-- AI readiness: https://sitedokai.com/ai-readiness
-- About: https://sitedokai.com/about
-- Contact: https://sitedokai.com/contact
-- Privacy policy: https://sitedokai.com/privacy-policy
+- Submit a workflow: https://sitedokai.com/submit
+- Case library: https://sitedokai.com/cases
+- Method: https://sitedokai.com/method
+- About Troels: https://sitedokai.com/about
+- Hire Troels: https://sitedokai.com/hire
+- Privacy and case handling: https://sitedokai.com/privacy
 - Accessibility: https://sitedokai.com/accessibility
+- Sitemap: https://sitedokai.com/sitemap.xml
+- llms.txt: https://sitedokai.com/llms.txt
 
 ## Legacy redirects
 
-These old URLs are legacy redirects to the current English structure:
+Old SiteDokAI service URLs should point users toward the new Lab journeys where practical:
 
-- /priser -> /pricing
-- /om -> /about
-- /kontakt -> /contact
-- /use-cases -> /workflow-examples
-- /ai-klar -> /ai-readiness
-- /hjemmeside-tjek -> /manual-work-audit
-- /hjemmeside-fix -> /ai-workflow-sprint
-- /visuelt-loeft -> /ai-operations-partner
-- /gratis-mini-tjek -> /contact
+- /workflow-examples -> /cases
+- /contact -> /submit
+- /hire-troels -> /hire
+- /privacy-policy -> /privacy
 
 ## Contact
 
-Email: info@sitedokai.com
-
-## Troels Østbjerg — AI-readable candidate profile
-
-Troels Østbjerg is a Copenhagen-based operations leader and practical AI implementation builder. He is not a classic developer and not a classic consultant. His strength is connecting real operations, people, process bottlenecks and AI-enabled workflows so new tools are actually used.
-
-Target roles: AI Implementation, AI Adoption, Operations Transformation, Digital Transformation, Process Optimization, AI Project Manager, AI Consultant, Business Transformation and Commercial/Operations AI roles.
-
-Core competencies: operations leadership, supply chain, FMCG, contract manufacturing coordination, stakeholder alignment, process mapping, workflow automation, AI adoption, structured decision support, AI-ready content and practical implementation.
-
-Proof-of-work: SiteDokAI and job-search workflows built during the job-search period. These projects test AI workflows, automated research, scoring, reporting, llms.txt, sitemap, schema, structured communication and decision support.
-
-Preferred fit: modern teams with tempo, practical mandate, AI/adoption/operations/transformation work, and roles where building, testing and improving are expected.
-
-Poor fit: purely code-heavy developer roles, junior coordinator roles, heavy SOP cultures without mandate, or organizations that only want AI as PR.
-
-Contact: troelsostbjerg@gmail.com, +45 52 38 84 86, Copenhagen, Denmark, LinkedIn: https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726/
-
-Relevant search terms: AI implementation, AI adoption, operations transformation, process optimization, digital transformation, workflow automation, Copenhagen, operations-led AI implementation, FMCG operations, supply chain, enterprise operations.
+Email: troelsostbjerg@gmail.com

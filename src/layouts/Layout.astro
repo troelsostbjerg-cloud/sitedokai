@@ -20,7 +20,7 @@ interface Props {
 
 const {
   title,
-  description = 'SiteDokAI helps operations-heavy B2B teams turn recurring manual work in email, spreadsheets, CRM, reports and handovers into practical AI workflows people actually use.',
+  description = 'Send in a recurring workflow, manual process or AI idea. Troels Østbjerg reviews where the friction is, whether AI can help, and what the first practical step should be.',
   canonical = Astro.url.href,
   ogImage = '/og-image.svg',
   ogImageWidth = 1200,
@@ -47,12 +47,12 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="SiteDokAI" />
-    <meta name="application-name" content="SiteDokAI" />
+    <meta name="author" content="Troels Østbjerg" />
+    <meta name="application-name" content="SiteDokAILab" />
     <meta name="robots" content={robotsContent} />
     <meta name="theme-color" content={themeColor} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SiteDokAI" />
+    <meta property="og:site_name" content="SiteDokAILab" />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -66,7 +66,7 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="SiteDokAI AI-readable profile" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="SiteDokAILab AI-readable profile" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
@@ -96,7 +96,7 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
         >
           Necessary cookies only. <span class="hidden sm:inline">No tracking.</span>
           <a
-            href="/privacy-policy"
+            href="/privacy"
             class:list={[
               'underline underline-offset-4',
               cookieTheme === 'dark'

@@ -2,117 +2,66 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import OperationsWorkflowCockpit from '../components/site/OperationsWorkflowCockpit.astro';
-import BeforeAfterCard from '../components/site/BeforeAfterCard.astro';
-import FrictionToFlowTimeline from '../components/site/FrictionToFlowTimeline.astro';
-import ServiceCard from '../components/site/ServiceCard.astro';
-import WorkflowExampleCard from '../components/site/WorkflowExampleCard.astro';
-import ProofWithoutPretending from '../components/site/ProofWithoutPretending.astro';
-import HumanApprovalBlock from '../components/site/HumanApprovalBlock.astro';
-import GovernanceCards from '../components/site/GovernanceCards.astro';
-import WorkflowScreeningForm from '../components/site/WorkflowScreeningForm.astro';
-import MobileStickyCTA from '../components/site/MobileStickyCTA.astro';
+import AIFitChecker from '../components/lab/AIFitChecker.astro';
+import LabHeroVisual from '../components/lab/LabHeroVisual.astro';
+import WorkflowTypeSelector from '../components/lab/WorkflowTypeSelector.astro';
 import {
   absoluteUrl,
-  homepageFaq,
-  organizationSchema,
-  personSchema,
-  professionalServiceSchema,
-  services,
+  caseStudies,
+  labMeta,
+  messySubmissions,
+  outputSteps,
   siteBaseUrl,
-  websiteSchema,
-  workflowExamples,
-} from '../data/aiContent';
+} from '../data/labContent';
 import '../styles/global.css';
 
-const trustBar = [
-  '10+ years in operations',
-  '5-business-day Manual Work Audit',
-  'From DKK 15,000 excl. VAT',
-  'Human approval by design',
-  'No tool-first projects',
-];
+const previewCases = caseStudies.slice(0, 4);
 
-const problemCards = [
-  ['Status has to be chased manually', 'People spend time finding the latest status across emails, messages and loose notes.'],
-  ['Data is moved between systems', 'Spreadsheets, CRM notes, reports and shared documents are held together by copy-paste.'],
-  ['Reports are rebuilt from scratch', 'The same numbers, comments and explanations are assembled again and again.'],
-  ['Meetings are used for updates instead of decisions', 'Decision time disappears because the overview does not exist before the meeting.'],
-  ['Handovers live in loose notes', 'Important context disappears between sales, delivery, support, finance or project teams.'],
-  ['AI is only used as ad hoc chat', 'People experiment with prompts, but the work itself has not changed.'],
-];
-
-const beforeAfterExamples = [
-  {
-    before: 'Status is chased across email, Teams and loose notes.',
-    after: 'One AI-assisted status summary with actions, owners and deadlines.',
-    effect: 'Fewer status meetings and faster decisions.',
-  },
-  {
-    before: 'Spreadsheet numbers are copied into management reports by hand.',
-    after: 'A report draft with variances, explanations and decision points.',
-    effect: 'Less formatting work and more time for judgement.',
-  },
-  {
-    before: 'Customer requests are answered differently depending on who handles them.',
-    after: 'Reply drafts with context, category, suggested next step and human approval.',
-    effect: 'More consistent quality without removing responsibility.',
-  },
-];
-
-const auditOutputs = [
-  'Process map',
-  'Prioritized backlog',
-  'Top 3 AI workflow candidates',
-  'First workflow sketch',
-  'Fit/risk/adoption score',
-  'Measurement points',
-  'Recommended next step',
-];
-
-const auditNotIncluded = [
-  'No built automation',
-  'No tool purchase',
-  'No full system replacement',
-  'No giant AI roadmap',
-];
-
-const goodFit = [
-  'You want to start with one concrete workflow',
-  'You want to remove or simplify work before automating it',
-  'You want practical AI inside daily operations',
-  'You want human approval where quality or risk matters',
-  'You want to measure effect, not excitement',
-];
-
-const badFit = [
-  'You want a big AI roadmap with no implementation',
-  'You want to automate everything without review',
-  'You are looking for generic AI tool demos',
-  'You want workshops without output',
-  'You want hype instead of measured workflow improvement',
+const howItWorks = [
+  'Submit a workflow',
+  'Troels reviews it',
+  'You receive a mini-review',
+  'If allowed, it becomes an anonymized case in the public library',
+  'Hiring teams can see how Troels thinks',
 ];
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
-    organizationSchema(),
-    personSchema(),
-    websiteSchema(),
-    professionalServiceSchema(),
+    {
+      '@type': 'WebSite',
+      '@id': `${siteBaseUrl}/#website`,
+      url: siteBaseUrl,
+      name: labMeta.name,
+      description: labMeta.description,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteBaseUrl}/#troels`,
+      name: 'Troels Østbjerg',
+      url: absoluteUrl('/about'),
+      knowsAbout: [
+        'AI implementation',
+        'AI adoption',
+        'Operations transformation',
+        'Workflow automation',
+        'Process improvement',
+        'Digital transformation',
+      ],
+    },
     {
       '@type': 'WebPage',
       '@id': `${siteBaseUrl}/#webpage`,
-      url: `${siteBaseUrl}/`,
-      name: 'SiteDokAI — AI operations for manual workflows',
-      description:
-        'SiteDokAI helps operations-heavy B2B teams turn recurring manual work in email, spreadsheets, CRM, reports and handovers into practical AI workflows people actually use.',
+      url: siteBaseUrl,
+      name: labMeta.title,
+      description: labMeta.description,
       inLanguage: 'en',
       isPartOf: {
         '@id': `${siteBaseUrl}/#website`,
       },
       about: {
-        '@id': `${siteBaseUrl}/#professional-service`,
+        '@id': `${siteBaseUrl}/#troels`,
       },
       primaryImageOfPage: {
         '@type': 'ImageObject',
@@ -121,42 +70,13 @@ const structuredData = {
         height: 630,
       },
     },
-    {
-      '@type': 'FAQPage',
-      '@id': `${siteBaseUrl}/#faq`,
-      mainEntity: homepageFaq.map((item) => ({
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: item.answer,
-        },
-      })),
-    },
-    ...services.map((service) => ({
-      '@type': 'Service',
-      '@id': `${absoluteUrl(service.path)}#service`,
-      name: service.name,
-      serviceType: service.name,
-      url: absoluteUrl(service.path),
-      description: service.description,
-      provider: {
-        '@id': `${siteBaseUrl}/#organization`,
-      },
-      offers: {
-        '@type': 'Offer',
-        url: absoluteUrl(service.path),
-        price: service.priceValue,
-        priceCurrency: 'DKK',
-      },
-    })),
   ],
 };
 ---
 
 <Layout
-  title="SiteDokAI — AI operations for manual workflows"
-  description="SiteDokAI helps operations-heavy B2B teams turn recurring manual work in email, spreadsheets, CRM, reports and handovers into practical AI workflows people actually use."
+  title={labMeta.title}
+  description={labMeta.description}
   canonical="/"
   structuredData={structuredData}
 >
@@ -164,55 +84,59 @@ const structuredData = {
   <main id="main" class="bg-canvas text-brand">
     <section class="relative overflow-hidden border-b border-brand/10">
       <div class="absolute inset-0 bg-[linear-gradient(rgba(30,38,31,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(30,38,31,0.045)_1px,transparent_1px)] bg-[size:56px_56px]" aria-hidden="true"></div>
-      <div class="relative mx-auto grid max-w-7xl gap-10 px-5 pb-14 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+      <div class="relative mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p class="max-w-2xl font-mono text-xs uppercase tracking-[0.22em] text-accent">
-            AI operations for work that still runs on email, spreadsheets and memory.
+            Free workflow reviews for teams drowning in manual work.
           </p>
           <h1 class="mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-7xl">
-            Turn recurring manual work into AI workflows your team actually uses.
+            Send me your messy workflow. I will tell you where AI can actually help.
           </h1>
           <p class="mt-7 max-w-2xl text-lg leading-relaxed text-brand/72 md:text-xl">
-            SiteDokAI maps the work behind status updates, reports, handovers, customer replies and follow-ups, then builds small, human-approved AI workflows that save time without creating chaos.
+            SiteDokAILab is a free process lab for companies stuck in recurring manual work, messy handovers, repeated status updates, spreadsheet chaos, email ping-pong or AI ideas that have not become useful yet.
           </p>
           <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href="/contact#workflow-screening" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-              Send your workflow
+            <a href="/submit" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              Submit a workflow
             </a>
-            <a href="/manual-work-audit" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-              Start with a Manual Work Audit
+            <a href="/cases" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              See example reviews
             </a>
           </div>
+          <p class="mt-6 max-w-xl text-sm leading-relaxed text-brand/58">
+            Free while I am looking for my next role. No sales pitch. No fake AI magic. Just practical workflow thinking.
+          </p>
         </div>
-        <OperationsWorkflowCockpit />
-      </div>
-      <div class="relative mx-auto max-w-7xl px-5 pb-8 sm:px-6">
-        <div class="grid gap-2 rounded-[1.25rem] border border-brand/10 bg-panel/80 p-3 sm:grid-cols-2 md:grid-cols-5">
-          {trustBar.map((item) => (
-            <p class="rounded-lg border border-brand/10 bg-canvas/56 px-3 py-2 text-center text-xs font-semibold leading-relaxed text-brand/66">{item}</p>
-          ))}
-        </div>
+        <LabHeroVisual />
       </div>
     </section>
 
-    <section id="problem" class="px-5 py-16 sm:px-6 md:py-24">
+    <section class="px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <WorkflowTypeSelector />
+      </div>
+    </section>
+
+    <section class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
       <div class="mx-auto max-w-7xl">
         <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <aside>
-            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Problem</p>
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">What you can submit</p>
             <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-              Most companies do not have an AI problem. They have a workflow problem.
+              What kind of mess can you send?
             </h2>
             <p class="mt-6 max-w-xl text-base leading-relaxed text-brand/70 md:text-lg">
-              AI rarely creates value when the process behind it is unclear. Many teams start with tools: ChatGPT, Copilot, Claude, Gemini, Make, Zapier. The better question is: which recurring manual work keeps stealing time, and why does it still exist?
+              The best AI use case usually starts as a boring repeated task. Send the work that keeps coming back and still somehow belongs to three people and one spreadsheet.
             </p>
           </aside>
+
           <div class="grid gap-4 md:grid-cols-2">
-            {problemCards.map(([title, text], index) => (
-              <article class="rounded-[1.25rem] border border-brand/10 bg-panel-soft p-5">
-                <p class="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent">{String(index + 1).padStart(2, '0')}</p>
-                <h3 class="mt-4 text-xl font-semibold leading-tight text-brand">{title}</h3>
-                <p class="mt-3 text-sm leading-relaxed text-brand/66">{text}</p>
+            {messySubmissions.map((item) => (
+              <article class="conversion-card rounded-[1.25rem] border border-brand/10 bg-panel p-5">
+                <h3 class="text-xl font-semibold leading-tight text-brand">{item.title}</h3>
+                <p class="mt-3 text-sm leading-relaxed text-brand/64">{item.pain}</p>
+                <p class="mt-4 text-sm leading-relaxed text-brand/72"><span class="font-semibold text-brand">Why it matters:</span> {item.why}</p>
+                <p class="mt-3 text-sm leading-relaxed text-brand/72"><span class="font-semibold text-brand">I would look for:</span> {item.lookFor}</p>
               </article>
             ))}
           </div>
@@ -220,215 +144,145 @@ const structuredData = {
       </div>
     </section>
 
-    <section class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-10 max-w-3xl">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Before and after</p>
-          <h2 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            The boring work is often the expensive work.
-          </h2>
-        </div>
-        <div class="grid gap-5 lg:grid-cols-3">
-          {beforeAfterExamples.map((item, index) => (
-            <BeforeAfterCard before={item.before} after={item.after} effect={item.effect} index={index + 1} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="manual-work-audit" class="px-5 py-16 sm:px-6 md:py-24">
+    <section class="px-5 py-16 sm:px-6 md:py-24">
       <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Recommended first step</p>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">What you get back</p>
           <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Start with a Manual Work Audit.
+            A practical mini-review, not AI theatre.
           </h2>
           <p class="mt-6 max-w-xl text-base leading-relaxed text-brand/70 md:text-lg">
-            In 5 business days, SiteDokAI maps your recurring manual workflows and identifies the 3 best places to start.
+            This is a mini-review, not a full implementation project. The goal is clarity, not a 58-slide deck with a lighthouse on page one.
           </p>
-          <p class="mt-6 text-2xl font-semibold text-brand">From DKK 15,000 excl. VAT</p>
-          <p class="mt-5 max-w-xl text-sm leading-relaxed text-brand/68">
-            Best for teams that want to know where AI actually makes sense before buying tools, launching a big roadmap or automating the wrong work.
-          </p>
-          <a href="/manual-work-audit" class="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-            Start with a Manual Work Audit
-          </a>
         </aside>
-        <div class="grid gap-5 md:grid-cols-2">
-          <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-            <h3 class="text-2xl font-semibold text-brand">What you get</h3>
-            <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/74">
-              {auditOutputs.map((item) => (
-                <li class="border-t border-brand/10 pt-3">{item}</li>
-              ))}
-            </ul>
-          </article>
-          <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-            <h3 class="text-2xl font-semibold text-brand">Not included</h3>
-            <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/74">
-              {auditNotIncluded.map((item) => (
-                <li class="border-t border-brand/10 pt-3">{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section id="method" class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Method</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            From friction to flow.
-          </h2>
-        </aside>
-        <FrictionToFlowTimeline />
-      </div>
-    </section>
-
-    <section id="services" class="px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-10 max-w-3xl">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Services</p>
-          <h2 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Start small. Prove value. Build from there.
-          </h2>
-        </div>
-        <div class="grid gap-5 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard service={service} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section id="workflow-examples" class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto max-w-7xl">
-        <div class="mb-10 max-w-3xl">
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Workflow examples</p>
-          <h2 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Workflow examples that start in daily operations.
-          </h2>
-          <p class="mt-6 text-base leading-relaxed text-brand/70 md:text-lg">
-            These are not testimonials. They are common workflow patterns where manual work can often be reduced with better structure, AI assistance and human approval.
-          </p>
-        </div>
-        <div class="grid gap-5 lg:grid-cols-2">
-          {workflowExamples.map((workflowExample, index) => (
-            <WorkflowExampleCard workflowExample={workflowExample} index={index + 1} />
-          ))}
-        </div>
-        <div class="mt-10">
-          <a href="/workflow-examples" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-accent/35 hover:bg-accent/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-            See workflow examples
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <ProofWithoutPretending />
-
-    <section class="px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto max-w-7xl">
-        <HumanApprovalBlock />
-      </div>
-    </section>
-
-    <GovernanceCards />
-
-    <section class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Fit</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Good fit. Bad fit.
-          </h2>
-        </aside>
-        <div class="grid gap-5 md:grid-cols-2">
-          <article class="rounded-[1.35rem] border border-accent/25 bg-accent/10 p-5 md:p-6">
-            <h3 class="text-2xl font-semibold text-brand">Good fit</h3>
-            <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/74">
-              {goodFit.map((item) => (
-                <li class="border-t border-accent/20 pt-3">{item}</li>
-              ))}
-            </ul>
-          </article>
-          <article class="rounded-[1.35rem] border border-brand/10 bg-panel-soft p-5 md:p-6">
-            <h3 class="text-2xl font-semibold text-brand">Bad fit</h3>
-            <ul class="mt-6 grid gap-3 text-sm leading-relaxed text-brand/74">
-              {badFit.map((item) => (
-                <li class="border-t border-brand/10 pt-3">{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Founder</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Built by an operations person, not an AI theorist.
-          </h2>
-        </aside>
-        <div>
-          <p class="max-w-3xl text-lg leading-relaxed text-brand/72">
-            SiteDokAI is built by Troels Østbjerg. I have spent 10+ years in operations, supply chain and complex collaboration, where the real work often happens in email threads, spreadsheets, follow-ups, handovers and people’s memory.
-          </p>
-          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-brand/72">
-            My job is to find the recurring work that should be simpler, map how it actually happens, and build AI-assisted workflows people can use in a busy day.
-          </p>
-          <p class="mt-6 text-2xl font-semibold leading-tight text-brand">AI is the tool. The workflow is the starting point.</p>
-          <div class="mt-8 grid gap-3 md:grid-cols-2">
-            {[
-              '10+ years in operations, supply chain and process improvement',
-              'Practical AI workflow builder',
-              'Strong bridge between business, operations and technology',
-              'Focus on adoption: the workflow must be used, not just demonstrated',
-            ].map((item) => (
-              <p class="rounded-xl border border-brand/10 bg-panel-soft p-4 text-sm font-medium leading-relaxed text-brand/72">{item}</p>
+        <div class="rounded-[1.6rem] border border-brand/10 bg-panel p-5 shadow-soft md:p-7">
+          <div class="grid gap-4">
+            {outputSteps.map((step, index) => (
+              <article class="grid gap-4 rounded-[1.15rem] border border-brand/10 bg-canvas p-4 sm:grid-cols-[3rem_1fr]">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand font-mono text-sm font-semibold text-canvas">
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold text-brand">{step.title}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-brand/66">{step.text}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">FAQ</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Short answers.
+    <section class="border-y border-brand/10 bg-brand-dark px-5 py-16 text-canvas sm:px-6 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent-light">Why this exists</p>
+          <h2 class="mt-5 max-w-2xl font-display text-4xl font-semibold leading-[1.02] md:text-6xl">
+            I am using the job search phase to stay sharp.
           </h2>
-        </aside>
-        <div class="grid gap-4">
-          {homepageFaq.map((item) => (
-            <article class="rounded-[1.2rem] border border-brand/10 bg-panel-soft p-5">
-              <h3 class="text-lg font-semibold text-brand">{item.question}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-brand/68">{item.answer}</p>
+        </div>
+        <div class="grid gap-5 text-lg leading-relaxed text-canvas/72">
+          <p>
+            I am looking for my next role in AI implementation, operations transformation or workflow automation. While I am doing that, I am using SiteDokAILab as a live process lab: companies send in real workflow problems, and I turn them into practical mini-reviews.
+          </p>
+          <p>
+            It keeps me sharp. It helps companies see what AI could actually do. And it gives hiring teams a much better view of how I think than a normal CV ever could.
+          </p>
+          <p class="rounded-[1.2rem] border border-white/10 bg-white/[0.07] p-5 text-base text-canvas/78">
+            No sales pitch. No magic AI dust. Just a practical look at where the process breaks, where AI might help, and what the first sensible step could be.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10 max-w-3xl">
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">How it works</p>
+          <h2 class="mt-5 font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
+            Simple enough to actually use.
+          </h2>
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-brand/70 md:text-lg">
+            If your process contains sensitive data, remove it before submitting. I do not need customer names, employee names, prices or confidential documents to spot workflow friction.
+          </p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-5">
+          {howItWorks.map((item, index) => (
+            <article class="rounded-[1.25rem] border border-brand/10 bg-panel p-5">
+              <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent">{String(index + 1).padStart(2, '0')}</p>
+              <h3 class="mt-4 text-lg font-semibold leading-tight text-brand">{item}</h3>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="contact" class="px-5 py-16 sm:px-6 md:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside>
-          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Workflow screening</p>
-          <h2 class="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
-            Send the workflow that annoys your team most.
+    <section class="border-y border-brand/10 bg-canvas-soft px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Case library preview</p>
+            <h2 class="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
+              Example reviews, clearly labelled.
+            </h2>
+          </div>
+          <a href="/cases" class="inline-flex min-h-12 w-fit items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+            Open case library
+          </a>
+        </div>
+
+        <div class="grid gap-5 lg:grid-cols-2">
+          {previewCases.map((item) => (
+            <article class="conversion-card rounded-[1.35rem] border border-brand/10 bg-panel p-5 md:p-6">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-accent">{item.category}</p>
+                  <h3 class="mt-3 text-2xl font-semibold leading-tight text-brand">{item.title}</h3>
+                </div>
+                <span class="rounded-lg border border-brand/10 bg-canvas px-3 py-2 font-mono text-[0.66rem] uppercase tracking-[0.18em] text-brand/[0.52]">
+                  Example
+                </span>
+              </div>
+              <p class="mt-5 text-sm leading-relaxed text-brand/66"><span class="font-semibold text-brand">Problem:</span> {item.problem}</p>
+              <p class="mt-3 text-sm leading-relaxed text-brand/66"><span class="font-semibold text-brand">AI opportunity:</span> {item.aiOpportunity}</p>
+              <p class="mt-3 text-sm leading-relaxed text-brand/72"><span class="font-semibold text-brand">First fix:</span> {item.firstStep}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <AIFitChecker />
+      </div>
+    </section>
+
+    <section class="border-t border-brand/10 bg-panel px-5 py-16 sm:px-6 md:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">About / hire preview</p>
+          <h2 class="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.02] text-brand md:text-6xl">
+            I turn operational mess into usable systems.
           </h2>
-        </aside>
-        <div id="workflow-screening" class="rounded-[1.5rem] border border-brand/10 bg-panel-soft p-6 md:p-8">
-          <WorkflowScreeningForm sourcePage="/" />
+        </div>
+        <div>
+          <p class="text-lg leading-relaxed text-brand/72">
+            I am Troels Østbjerg, an operations leader turned AI implementation builder. I have spent 10+ years inside real operational complexity, from FMCG scale-up work to global CMO coordination, and now I use AI to build faster, clearer workflows.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="/about" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-brand/20 px-6 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-canvas focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              Read more about Troels
+            </a>
+            <a href="/hire" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-accent/50 bg-accent px-6 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
+              Talk about a role
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
   <Footer />
-  <MobileStickyCTA />
 </Layout>
