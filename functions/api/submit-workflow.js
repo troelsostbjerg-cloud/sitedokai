@@ -3,6 +3,8 @@ const ALLOWED_PUBLIC_ORIGINS = new Set([
   "https://www.sitedokai.com",
   "https://sitedokai-preview.pages.dev",
   "https://sitedokai-checkout.pages.dev",
+  "http://127.0.0.1:4322",
+  "http://localhost:4322",
   "http://127.0.0.1:4321",
   "http://localhost:4321",
 ]);

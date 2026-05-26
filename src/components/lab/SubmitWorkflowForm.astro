@@ -27,6 +27,8 @@ Permission to anonymize:
 
 Optional context:
 
+Please remove confidential, sensitive or customer-specific information before sharing.
+
 Thanks.`)}`;
 
 const inputClass =
@@ -46,8 +48,8 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
   <input type="hidden" name="source_page" value={sourcePage} />
   <input type="text" name="website_extra" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
 
-  <p data-local-submit-note hidden class="rounded-xl border border-accent/20 bg-accent-soft px-4 py-3 text-sm leading-relaxed text-brand/72">
-    Local preview mode: submissions are stored in this browser for QA. Production storage uses the Cloudflare Pages function when the database binding is configured.
+  <p class="rounded-xl border border-accent/20 bg-accent-soft px-4 py-3 text-sm leading-relaxed text-brand/72">
+    Submissions go directly to Troels. Please remove confidential, sensitive or customer-specific information before submitting.
   </p>
 
   <div class="grid gap-4 md:grid-cols-2">
@@ -176,6 +178,9 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
     >
       Email instead
     </a>
+    <p class="text-sm leading-relaxed text-brand/56 sm:col-span-2">
+      Please do not include confidential data, customer names, personal data or anything under NDA. A rough description is enough.
+    </p>
   </div>
 
   <div data-submit-workflow-pending hidden aria-live="polite" class="rounded-xl border border-brand/10 bg-canvas px-4 py-3 text-sm leading-relaxed text-brand/72">
@@ -190,18 +195,13 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
   </div>
 
   <div data-submit-workflow-error hidden class="rounded-[1.2rem] border border-[#b95a54]/35 bg-[#b95a54]/10 p-4 text-sm leading-relaxed text-brand" aria-live="polite">
-    The form could not be stored right now. Please email the workflow instead, or try again after the submission backend is configured.
+    The form could not be sent right now. Please email the workflow instead, or try again in a few minutes.
   </div>
 </form>
 
 <script is:inline>
   (function() {
     var forms = document.querySelectorAll('[data-submit-workflow]');
-    var localHosts = ['localhost', '127.0.0.1', '::1'];
-
-    function isLocalPreview() {
-      return localHosts.indexOf(window.location.hostname) !== -1;
-    }
 
     function show(form, state) {
       ['pending', 'success', 'error'].forEach(function(name) {
@@ -220,35 +220,7 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
         : button.dataset.defaultLabel;
     }
 
-    function toObject(formData) {
-      var payload = {};
-      formData.forEach(function(value, key) {
-        payload[key] = String(value);
-      });
-      return payload;
-    }
-
-    function storeLocal(payload) {
-      var key = 'sitedokailab.workflowSubmissions';
-      var existing = [];
-      try {
-        existing = JSON.parse(window.localStorage.getItem(key) || '[]');
-      } catch (error) {
-        existing = [];
-      }
-      existing.unshift({
-        id: 'local-' + Date.now(),
-        status: 'new',
-        created_at: new Date().toISOString(),
-        payload: payload,
-      });
-      window.localStorage.setItem(key, JSON.stringify(existing.slice(0, 50)));
-    }
-
     forms.forEach(function(form) {
-      var note = form.querySelector('[data-local-submit-note]');
-      if (note && isLocalPreview()) note.hidden = false;
-
       form.addEventListener('submit', async function(event) {
         event.preventDefault();
         if (!form.reportValidity()) return;
@@ -257,25 +229,20 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
         setButton(form, true);
 
         var formData = new FormData(form);
-        var payload = toObject(formData);
 
         try {
-          if (isLocalPreview()) {
-            storeLocal(payload);
-          } else {
-            var response = await fetch(form.action, {
-              method: 'POST',
-              headers: { accept: 'application/json' },
-              body: formData,
-            });
+          var response = await fetch(form.action, {
+            method: 'POST',
+            headers: { accept: 'application/json' },
+            body: formData,
+          });
 
-            var result = await response.json().catch(function() {
-              return {};
-            });
+          var result = await response.json().catch(function() {
+            return {};
+          });
 
-            if (!response.ok || !result.ok) {
-              throw new Error(result.error || 'submit_failed');
-            }
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || 'submit_failed');
           }
 
           form.reset();

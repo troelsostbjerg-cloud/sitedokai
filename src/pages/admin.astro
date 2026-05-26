@@ -6,8 +6,8 @@ import '../styles/global.css';
 ---
 
 <Layout
-  title="Local backlog - SiteDokAILab"
-  description="Local development backlog for SiteDokAILab workflow submissions stored in this browser."
+  title="Workflow submissions - SiteDokAILab"
+  description="Private workflow submission view for SiteDokAILab."
   canonical="/admin"
   noindex={true}
 >
@@ -15,22 +15,22 @@ import '../styles/global.css';
   <main id="main" class="bg-canvas text-brand">
     <section class="border-b border-brand/10 px-5 py-16 sm:px-6 md:py-20">
       <div class="mx-auto max-w-7xl">
-        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Dev-only local backlog</p>
+        <p class="font-mono text-xs uppercase tracking-[0.22em] text-accent">Submission inbox</p>
         <h1 class="mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.02] text-brand sm:text-5xl md:text-6xl">
-          Local workflow submissions in this browser.
+          Workflow submissions.
         </h1>
         <p class="mt-6 max-w-2xl text-base leading-relaxed text-brand/68 md:text-lg">
-          This page reads local preview submissions from browser storage. Production submissions live in the configured Cloudflare database, not here.
+          This view is only for reviewing submitted workflows.
         </p>
       </div>
     </section>
 
     <section class="px-5 py-12 sm:px-6 md:py-16">
-      <div class="mx-auto grid max-w-7xl gap-5" data-local-backlog>
+      <div class="mx-auto grid max-w-7xl gap-5" data-submission-backlog>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p class="text-sm leading-relaxed text-brand/64" data-backlog-count>No local submissions loaded.</p>
+          <p class="text-sm leading-relaxed text-brand/64" data-backlog-count>No submissions loaded.</p>
           <button type="button" class="inline-flex min-h-11 w-fit items-center justify-center rounded-xl border border-brand/20 px-5 py-3 text-sm font-semibold text-brand transition-colors hover:border-brand/30 hover:bg-panel-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px" data-clear-backlog>
-            Clear local backlog
+            Clear submissions
           </button>
         </div>
         <div class="grid gap-4" data-backlog-list></div>
@@ -41,7 +41,7 @@ import '../styles/global.css';
 
   <script is:inline>
     (function() {
-      var root = document.querySelector('[data-local-backlog]');
+      var root = document.querySelector('[data-submission-backlog]');
       if (!root) return;
 
       var list = root.querySelector('[data-backlog-list]');
@@ -77,13 +77,13 @@ import '../styles/global.css';
         var items = readItems();
         if (count) {
           count.textContent = items.length
-            ? items.length + ' local submission' + (items.length === 1 ? '' : 's') + ' stored in this browser.'
-            : 'No local submissions in this browser yet.';
+            ? items.length + ' submission' + (items.length === 1 ? '' : 's') + ' available for review.'
+            : 'No submissions available yet.';
         }
         if (!list) return;
 
         if (!items.length) {
-          list.innerHTML = '<p class="rounded-[1.2rem] border border-brand/10 bg-panel p-5 text-sm leading-relaxed text-brand/66">Submit a test workflow on /submit in local preview, then come back here.</p>';
+          list.innerHTML = '<p class="rounded-[1.2rem] border border-brand/10 bg-panel p-5 text-sm leading-relaxed text-brand/66">Submitted workflows will appear here when available.</p>';
           return;
         }
 

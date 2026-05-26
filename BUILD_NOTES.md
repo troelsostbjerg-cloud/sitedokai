@@ -31,7 +31,7 @@ npm run build
 - `/about` - Troels profile
 - `/hire` - role-fit and contact page
 - `/privacy` - plain-language privacy and case handling
-- `/admin` - local preview backlog for browser-stored test submissions, noindex and not linked in main nav
+- `/admin` - private workflow submission view, noindex and not linked in main nav
 
 ## Components created
 
@@ -44,17 +44,16 @@ npm run build
 
 ## Form handling status
 
-- Local preview on `localhost` stores test submissions in browser `localStorage` under `sitedokailab.workflowSubmissions`.
-- Production form posts to `/api/submit-workflow`.
+- The public form posts to `/api/submit-workflow`.
 - `/api/submit-workflow` is a Cloudflare Pages Function.
 - Production storage uses `WORKFLOW_SUBMISSIONS_DB` if configured, otherwise `LEADS_DB` or `ORDERS_DB`.
 - The function creates a `workflow_submissions` table if the configured D1 database is available.
-- Email notification is not implemented because no SMTP or provider configuration was found in this stack.
+- Email fallback uses Troels' Gmail address from `src/data/labContent.ts`.
 
 ## Known limitations
 
-- CV PDF is not present in the repo. `/hire` labels this clearly and uses the role-fit page as the proof profile for now.
-- `/admin` only reads local browser storage from development QA submissions. It does not read production D1 data.
+- CV PDF is not present in the repo. `/hire` asks hiring teams to request the current CV by email.
+- `/admin` is a noindex private view and is not linked from public navigation.
 - Old service pages still exist in source, but public navigation and redirects now point to the Lab journeys.
 
 ## Suggested next steps before launch

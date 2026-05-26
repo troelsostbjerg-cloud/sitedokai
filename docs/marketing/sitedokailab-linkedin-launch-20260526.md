@@ -68,5 +68,5 @@ https://sitedokai.com/hire
 ## Posting Notes
 
 - Attach the MP4 directly to the post rather than linking to the video.
-- Use the `/hire` link in the body, not the raw local file path.
+- Use the `/hire` link in the body, not the raw file path.
 - Keep the tone practical and human; this is a proof-of-work post, not a product launch with inflated claims.
