@@ -8,7 +8,9 @@ Disallow: /room
 Disallow: /room/
 Disallow: /mockups
 Disallow: /mockups/
+Disallow: /admin
+Disallow: /admin/
 
 Sitemap: https://sitedokai.com/sitemap.xml
 # AI-readable profile: https://sitedokai.com/llms.txt
-# Legacy Danish paths redirect to canonical English pages.
+# Legacy SiteDokAI paths redirect to the Lab journeys.

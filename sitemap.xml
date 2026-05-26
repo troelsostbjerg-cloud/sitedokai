@@ -6,104 +6,34 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/manual-work-audit</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.92</priority>
+    <loc>https://sitedokai.com/submit</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.94</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/ai-workflow-sprint</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.86</priority>
+    <loc>https://sitedokai.com/cases</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/ai-operations-partner</loc>
+    <loc>https://sitedokai.com/method</loc>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.82</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/pricing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.78</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.78</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/troels</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.72</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/about</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.68</priority>
+    <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/ai-readiness</loc>
+    <loc>https://sitedokai.com/hire</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.68</priority>
+    <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://sitedokai.com/workflow-examples/ai-status-report</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/management-report</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/customer-reply-draft</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/meeting-actions-follow-up</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/supplier-status-exceptions</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/rfq-clarification</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/new-customer-onboarding</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/crm-follow-up-next-step</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/complaint-case-brief</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/workflow-examples/process-documentation</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://sitedokai.com/privacy-policy</loc>
+    <loc>https://sitedokai.com/privacy</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://sitedokai.com/accessibility</loc>
