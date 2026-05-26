@@ -22,12 +22,28 @@ const REQUIRED_FIELDS = [
   "permission_to_publish",
 ];
 
-function jsonResponse(status, payload) {
+function corsHeaders(request) {
+  const origin = normalizeOrigin(request?.headers?.get("origin"))
+    || normalizeOrigin(request?.headers?.get("referer"));
+
+  if (!origin) return {};
+
+  return {
+    "access-control-allow-origin": origin,
+    "access-control-allow-methods": "GET, POST, OPTIONS",
+    "access-control-allow-headers": "content-type, authorization, x-workflow-sync-token, x-leads-sync-token",
+    "access-control-max-age": "86400",
+    "vary": "Origin",
+  };
+}
+
+function jsonResponse(status, payload, request) {
   return new Response(JSON.stringify(payload), {
     status,
     headers: {
       "content-type": "application/json; charset=utf-8",
       "cache-control": "private, no-store, max-age=0",
+      ...corsHeaders(request),
     },
   });
 }
@@ -301,11 +317,12 @@ async function listSubmissions(db, limit = 50) {
   return result.results || [];
 }
 
-export async function onRequestOptions() {
+export async function onRequestOptions(context) {
   return new Response(null, {
     status: 204,
     headers: {
       "cache-control": "private, no-store, max-age=0",
+      ...corsHeaders(context.request),
     },
   });
 }
@@ -318,17 +335,17 @@ export async function onRequestGet(context) {
   ).trim();
 
   if (!expectedToken) {
-    return jsonResponse(500, { ok: false, error: "WORKFLOW_SUBMISSIONS_SYNC_TOKEN_missing" });
+    return jsonResponse(500, { ok: false, error: "WORKFLOW_SUBMISSIONS_SYNC_TOKEN_missing" }, context.request);
   }
 
   const providedToken = readSyncToken(context.request);
   if (!providedToken || providedToken !== expectedToken) {
-    return jsonResponse(401, { ok: false, error: "unauthorized" });
+    return jsonResponse(401, { ok: false, error: "unauthorized" }, context.request);
   }
 
   const db = getDb(context.env);
   if (!db) {
-    return jsonResponse(503, { ok: false, error: "WORKFLOW_SUBMISSIONS_DB_or_LEADS_DB_missing" });
+    return jsonResponse(503, { ok: false, error: "WORKFLOW_SUBMISSIONS_DB_or_LEADS_DB_missing" }, context.request);
   }
 
   const limit = Math.max(
@@ -342,28 +359,28 @@ export async function onRequestGet(context) {
   return jsonResponse(200, {
     ok: true,
     submissions,
-  });
+  }, context.request);
 }
 
 export async function onRequestPost(context) {
   if (!isAllowedRequestSource(context.request)) {
-    return jsonResponse(403, { ok: false, error: "forbidden_origin" });
+    return jsonResponse(403, { ok: false, error: "forbidden_origin" }, context.request);
   }
 
   const payload = await readPayload(context.request);
   if (hasHoneypot(payload)) {
-    return jsonResponse(200, { ok: true, stored: false });
+    return jsonResponse(200, { ok: true, stored: false }, context.request);
   }
 
   const record = buildRecord(payload, context.request);
   const validation = validateRecord(record);
   if (!validation.ok) {
-    return jsonResponse(400, validation);
+    return jsonResponse(400, validation, context.request);
   }
 
   const db = getDb(context.env);
   if (!db) {
-    return jsonResponse(503, { ok: false, error: "WORKFLOW_SUBMISSIONS_DB_or_LEADS_DB_missing" });
+    return jsonResponse(503, { ok: false, error: "WORKFLOW_SUBMISSIONS_DB_or_LEADS_DB_missing" }, context.request);
   }
 
   await ensureSchema(db);
@@ -374,5 +391,5 @@ export async function onRequestPost(context) {
     stored: true,
     submission_id: result.submission_id,
     created_at: result.created_at,
-  });
+  }, context.request);
 }

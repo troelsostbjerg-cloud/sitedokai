@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { sourcePage = Astro.url.pathname } = Astro.props;
+const workflowSubmitEndpoint = 'https://sitedokai-checkout.pages.dev/api/submit-workflow';
 
 const directMailto = `mailto:${contactEmail}?subject=${encodeURIComponent('Workflow for SiteDokAILab')}&body=${encodeURIComponent(`Hi Troels,
 
@@ -36,7 +37,7 @@ const labelClass = 'grid gap-2 text-sm font-medium text-brand';
 ---
 
 <form
-  action="/api/submit-workflow"
+  action={workflowSubmitEndpoint}
   method="POST"
   class="grid gap-5"
   data-submit-workflow
