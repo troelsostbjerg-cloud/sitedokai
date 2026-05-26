@@ -68,7 +68,7 @@ Remove confidential data before submitting. Names, prices, secrets and customer 
 Send the workflow that keeps coming back.
 </h1> <p class="mt-8 max-w-2xl text-xl leading-relaxed text-brand/70">
 I will review where the process breaks, whether AI belongs anywhere near it, and what the first practical step could be.
-</p> <div id="workflow-form" class="mt-12 rounded-[1.6rem] border border-brand/10 bg-panel p-5 shadow-soft md:p-8"> <form action="/api/submit-workflow" method="POST" class="grid gap-5" data-submit-workflow data-pending-label="Sending..."> <input type="hidden" name="source_page" value="/submit"> <input type="text" name="website_extra" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true"> <p data-local-submit-note hidden class="rounded-xl border border-accent/20 bg-accent-soft px-4 py-3 text-sm leading-relaxed text-brand/72">
+</p> <div id="workflow-form" class="mt-12 rounded-[1.6rem] border border-brand/10 bg-panel p-5 shadow-soft md:p-8"> <form action="https://sitedokai-checkout.pages.dev/api/submit-workflow" method="POST" class="grid gap-5" data-submit-workflow data-pending-label="Sending..."> <input type="hidden" name="source_page" value="/submit"> <input type="text" name="website_extra" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true"> <p data-local-submit-note hidden class="rounded-xl border border-accent/20 bg-accent-soft px-4 py-3 text-sm leading-relaxed text-brand/72">
 Local preview mode: submissions are stored in this browser for QA. Production storage uses the Cloudflare Pages function when the database binding is configured.
 </p> <div class="grid gap-4 md:grid-cols-2"> <label class="grid gap-2 text-sm font-medium text-brand">
 Name
