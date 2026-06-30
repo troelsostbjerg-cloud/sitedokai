@@ -6,7 +6,7 @@ Tidligere var domænet et konsulent-site (SitedokAI); det er nu lagt om.
 ## Stack
 
 - Astro 5 (statisk) + Tailwind CSS 3
-- Cloudflare Pages (deploy via GitHub-repo → Pages)
+- Hostes på **GitHub Pages** (domæne sitedokai.com)
 - Helt statisk: intet login, ingen backend, ingen database
 
 ## Kør lokalt
@@ -15,6 +15,20 @@ Tidligere var domænet et konsulent-site (SitedokAI); det er nu lagt om.
 npm install
 npm run dev      # http://localhost:4321
 npm run build    # bygger til ./dist
+```
+
+## Deploy (gør siden live)
+
+```bash
+npm run deploy   # bygger og lægger siden live på sitedokai.com
+```
+
+GitHub Pages serverer fra branchen **`gh-pages`** (det færdige build i roden).
+`npm run deploy` bygger `dist/` og publicerer det dertil — live efter 1-2 minutter.
+Husk også at committe dine ændringer i `src/` til `main`, så kilden er gemt:
+
+```bash
+git add -A && git commit -m "Tilføj ny måned" && git push
 ```
 
 ## Sådan tilføjer du en ny måned (det vigtigste)
