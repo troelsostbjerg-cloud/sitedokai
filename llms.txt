@@ -1,94 +1,25 @@
-# SiteDokAILab
+# AI-tidslinjen
 
-SiteDokAILab is a free workflow and AI process lab run by Troels Østbjerg while he is looking for his next role.
+AI-tidslinjen (sitedokai.com) er et uafhængigt, dansk overblik over udviklingen i
+kunstig intelligens. Den dækker de vigtigste begivenheder måned for måned, fra
+januar 2025 og frem, og opdateres løbende. Projektet drives af Troels Østbjerg.
 
-Core positioning: Free workflow reviews for teams drowning in manual work.
+## Formål
+At gøre det nemt for almindelige mennesker at følge med i AI-kapløbet uden at
+drukne i nyheder. Indholdet er på dansk, jargonfrit og redigeret til at kunne
+læses af alle — ikke kun fagfolk.
 
-Sharper positioning line: Send me your messy workflow. I will tell you where AI can actually help.
+## Struktur
+- Forside: hero, "Denne uge i AI" og en kronologisk tidslinje (nyeste øverst).
+- /maaned/ÅÅÅÅ-MM: detaljeside for hver måned med alle milepæle.
+- /om: baggrund og metode.
+- Helt offentligt: intet login, ingen betaling, ingen reklamer.
 
-SiteDokAILab does not start with AI tools. It starts with recurring work that wastes time, creates confusion or keeps almost becoming an AI idea.
+## Spor (kategorier)
+Ny model, Produkt, Forskning, Penge & magt, Politik, Samfund.
 
-Language: English.
-Primary audience: companies with messy workflows, hiring managers, recruiters and Troels' network.
-Company base: Denmark.
-Contact email: troelsostbjerg@gmail.com.
+## Kilder
+Indholdet er sammenfattet fra offentlige kilder om AI-udviklingen.
 
-## What companies can submit
-
-- Weekly reporting chaos
-- Customer requests stuck in inboxes
-- Supplier follow-ups
-- Repeated meeting notes and action tracking
-- Manual spreadsheet updates
-- CRM follow-up gaps
-- Handover problems
-- AI ideas nobody has made concrete yet
-
-## What a mini-review covers
-
-- Diagnosis: what the real problem seems to be
-- Workflow sketch: the simple version of the process
-- AI fit: where AI could help and where it should not
-- Risk / watch-out: what could break, confuse people or create bad automation
-- First step: one practical thing the company can do without buying a tool
-
-This is a mini-review, not a full implementation project.
-
-## Method
-
-Mess -> Map -> Simplify -> Assist -> Approve -> Measure.
-
-- Mess: start with the annoying reality, not the tool.
-- Map: who does what, where information moves, and where it gets stuck.
-- Simplify: remove unnecessary steps before adding AI.
-- Assist: decide where AI can summarize, draft, classify, compare, extract or flag.
-- Approve: decide where a human must still review, decide or own the outcome.
-- Measure: define whether the new workflow saves time, reduces errors or improves decisions.
-
-## Case handling
-
-- Public cases are only published if permission is given.
-- Public cases are anonymized.
-- Example cases must be labelled as example cases.
-- Do not submit confidential, personal or sensitive data.
-- Remove names, customer details, financial numbers and internal secrets before submitting.
-- Submissions are not sold.
-- SiteDokAILab is not legal, compliance, security or financial advice.
-
-## Troels Østbjerg
-
-Troels Østbjerg is a Copenhagen-based operations leader and practical AI implementation builder.
-
-Target roles: AI Implementation Lead, AI Adoption Lead, Operations Transformation Manager, Digital Transformation / Project Manager, Workflow Automation Lead and Business Operations / Process Improvement roles.
-
-Core competencies: operations leadership, supply chain, FMCG operations, stakeholder alignment, process mapping, workflow automation, AI adoption, human-in-the-loop design, structured decision support and practical implementation.
-
-Proof-of-work route: https://sitedokai.com/hire
-
-LinkedIn: https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726/
-
-## Important URLs
-
-- Home: https://sitedokai.com/
-- Submit a workflow: https://sitedokai.com/submit
-- Case library: https://sitedokai.com/cases
-- Method: https://sitedokai.com/method
-- About Troels: https://sitedokai.com/about
-- Hire Troels: https://sitedokai.com/hire
-- Privacy and case handling: https://sitedokai.com/privacy
-- Accessibility: https://sitedokai.com/accessibility
-- Sitemap: https://sitedokai.com/sitemap.xml
-- llms.txt: https://sitedokai.com/llms.txt
-
-## Legacy redirects
-
-Old SiteDokAI service URLs should point users toward the new Lab journeys where practical:
-
-- /workflow-examples -> /cases
-- /contact -> /submit
-- /hire-troels -> /hire
-- /privacy-policy -> /privacy
-
-## Contact
-
-Email: troelsostbjerg@gmail.com
+## Kontakt
+Troels Østbjerg — solo-bygger bag projektet.
