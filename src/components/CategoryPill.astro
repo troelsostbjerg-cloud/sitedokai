@@ -1,0 +1,18 @@
+---
+import { CATEGORIES, type Category } from '../data/timeline';
+
+interface Props {
+  category: Category;
+  size?: 'sm' | 'md';
+}
+const { category, size = 'sm' } = Astro.props;
+const meta = CATEGORIES[category];
+---
+
+<span
+  class:list={['pill', size === 'md' ? 'text-xs' : 'text-[11px]']}
+  style={`color:${meta.color}; border-color:${meta.color}33; background:${meta.color}14`}
+>
+  <span class="h-1.5 w-1.5 rounded-full" style={`background:${meta.color}`} aria-hidden="true"></span>
+  {meta.label}
+</span>

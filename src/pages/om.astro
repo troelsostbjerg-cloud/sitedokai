@@ -1,3 +1,101 @@
 ---
-return Astro.redirect('/about', 301);
+import Layout from '../layouts/Layout.astro';
+import { CATEGORIES, type Category, months, totalHighlights } from '../data/timeline';
 ---
+
+<Layout
+  title="Om AI-tidslinjen — hvorfor og hvordan"
+  description="Hvorfor jeg bygger en tidslinje over AI-udviklingen, og hvordan indholdet bliver til."
+>
+  <section class="relative overflow-hidden border-b border-line">
+    <div class="pointer-events-none absolute inset-0 bg-aurora opacity-70"></div>
+    <div class="container-page relative py-16">
+      <span class="mono-label">Om projektet</span>
+      <h1 class="mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+        Vi står i den mest revolutionerende tidsalder. <span class="text-gradient">Nogen burde skrive det ned.</span>
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-soft">
+        Kunstig intelligens flytter sig så hurtigt, at selv folk midt i det taber
+        overblikket. AI-tidslinjen er mit forsøg på at holde fast i, hvad der
+        faktisk skete — så du om et år kan klikke ind og genopleve præcis, hvad
+        der flyttede verden i netop denne måned.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-14">
+    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
+      <div class="space-y-10">
+        <div>
+          <h2 class="font-display text-2xl font-bold">Hvorfor</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Jeg byggede oprindeligt SitedokAI som et lille bureau. Det kapitel er
+            lukket — jeg har fået fast arbejde i AI-branchen. Men interessen for
+            udviklingen forsvandt ikke; den voksede. Så jeg lavede domænet om til
+            det, jeg selv havde manglet: ét roligt, dansk sted, hvor man kan følge
+            kapløbet uden at drukne i nyheder.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-2xl font-bold">Hvordan indholdet bliver til</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Hver måned får én side. Den samler de vigtigste begivenheder —
+            modeller, produkter, forskning, penge, politik og samfund — i korte,
+            jargonfri opslag. Indholdet er sammenfattet fra offentlige kilder og
+            redigeret til at kunne læses af alle, ikke kun ingeniører. Tidslinjen
+            starter i januar 2025 og opdateres løbende. "Denne uge i AI" på
+            forsiden holder dig opdateret på det helt friske.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-2xl font-bold">Helt frit tilgængeligt</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Der er ingen login, ingen betaling og ingen reklamer. Du kommer bare
+            ind og læser. Sæt et bogmærke, og kig forbi igen, når du vil se, hvad
+            der er sket siden sidst.
+          </p>
+          <a href="/#tidslinje" class="btn-primary mt-6">Gå til tidslinjen</a>
+        </div>
+      </div>
+
+      <aside class="space-y-5">
+        <div class="glass p-6">
+          <h2 class="mono-label">De seks spor</h2>
+          <ul class="mt-4 space-y-3">
+            {
+              (Object.keys(CATEGORIES) as Category[]).map((c) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 h-3 w-3 flex-shrink-0 rounded-full" style={`background:${CATEGORIES[c].color}`} />
+                  <div>
+                    <p class="text-sm font-semibold text-text">{CATEGORIES[c].label}</p>
+                    <p class="text-xs leading-relaxed text-text-soft">{CATEGORIES[c].blurb}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass p-6">
+          <h2 class="mono-label">Status</h2>
+          <dl class="mt-4 space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Måneder dækket</dt>
+              <dd class="font-mono font-semibold text-text">{months.length}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Milepæle</dt>
+              <dd class="font-mono font-semibold text-text">{totalHighlights}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Sprog</dt>
+              <dd class="font-mono font-semibold text-text">Dansk</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>

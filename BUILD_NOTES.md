@@ -1,73 +1,52 @@
-# SiteDokAILab build notes
+# AI-tidslinjen — build & vedligehold
 
-## Stack detected
+sitedokai.com er en dansk tidslinje over udviklingen i kunstig intelligens.
+Tidligere var domænet et konsulent-site (SitedokAI); det er nu lagt om.
 
-- Astro 5 static site
-- Tailwind CSS 3 via `@astrojs/tailwind`
-- Cloudflare Pages functions under `functions/`
-- No React, Next.js or extra UI dependencies added
+## Stack
 
-## Commands
+- Astro 5 (statisk) + Tailwind CSS 3
+- Cloudflare Pages (deploy via GitHub-repo → Pages)
+- Helt statisk: intet login, ingen backend, ingen database
 
-Run locally:
+## Kør lokalt
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:4321
+npm run build    # bygger til ./dist
 ```
 
-Build:
+## Sådan tilføjer du en ny måned (det vigtigste)
 
-```bash
-npm run build
-```
+Alt indhold ligger ét sted: **`src/data/timeline.ts`**.
 
-## Pages created or changed
+1. Åbn filen og find `months`-arrayet.
+2. Kopiér det nederste måned-objekt og indsæt det i bunden.
+3. Ret felterne:
+   - `id`: `"ÅÅÅÅ-MM"` (bliver URL'en `/maaned/ÅÅÅÅ-MM`)
+   - `year`, `month`, `monthLabel`
+   - `headline`: én linje der fanger måneden
+   - `summary`: 2-3 sætninger
+   - `highlights`: 3-7 punkter med `category`, `title`, `detail` (+ valgfri `date`, `source`)
+4. Gyldige `category`-værdier: `model`, `produkt`, `forskning`, `erhverv`, `politik`, `kultur`.
+5. Commit + push. Forside, tidslinje, detaljeside og sitemap opdateres automatisk.
 
-- `/` - rebuilt as the SiteDokAILab landing page
-- `/submit` - workflow submission form
-- `/cases` - filterable case library
-- `/method` - Mess -> Map -> Simplify -> Assist -> Approve -> Measure
-- `/about` - Troels profile
-- `/hire` - role-fit and contact page
-- `/privacy` - plain-language privacy and case handling
-- `/admin` - private workflow submission view, noindex and not linked in main nav
+## Sådan opdaterer du "Denne uge i AI"
 
-## Components created
+Ret `thisWeek`-objektet nederst i `src/data/timeline.ts` (`weekLabel`,
+`dateRange`, `intro`, `items`). Vises på forsiden og i "Mit overblik".
 
-- `src/components/lab/LabHeroVisual.astro`
-- `src/components/lab/WorkflowTypeSelector.astro`
-- `src/components/lab/AIFitChecker.astro`
-- `src/components/lab/CaseLibrary.astro`
-- `src/components/lab/MethodStepper.astro`
-- `src/components/lab/SubmitWorkflowForm.astro`
+## Sider
 
-## Form handling status
+- `/` — hero, "Denne uge i AI" og tidslinjen (nyeste øverst)
+- `/maaned/[id]` — detaljeside pr. måned (genereres fra data)
+- `/om` — baggrund og metode
+- `/privacy` — privatlivspolitik
+- `/sitemap.xml` — genereres dynamisk fra månederne
 
-- The public form posts to `/api/submit-workflow`.
-- `/api/submit-workflow` is a Cloudflare Pages Function.
-- Production storage uses `WORKFLOW_SUBMISSIONS_DB` if configured, otherwise `LEADS_DB` or `ORDERS_DB`.
-- The function creates a `workflow_submissions` table if the configured D1 database is available.
-- Email fallback uses Troels' Gmail address from `src/data/labContent.ts`.
+## Design
 
-## Known limitations
-
-- CV PDF is not present in the repo. `/hire` asks hiring teams to request the current CV by email.
-- `/admin` is a noindex private view and is not linked from public navigation.
-- Old service pages still exist in source, but public navigation and redirects now point to the Lab journeys.
-
-## Suggested next steps before launch
-
-- Configure a Cloudflare D1 binding named `WORKFLOW_SUBMISSIONS_DB` or reuse the existing lead database binding intentionally.
-- Add `WORKFLOW_SUBMISSIONS_SYNC_TOKEN` if production submission export is needed.
-- Decide whether old paid-service routes should remain as hidden archive pages or be removed later.
-- Add a real CV PDF if the `View CV` CTA should open a document.
-- Submit one real safe test case and publish it as the first anonymized case once permission is clear.
-
-## How to publish a case
-
-1. Confirm the submitter's permission choice.
-2. Remove company names, person names, customer details, prices, internal systems and sensitive facts.
-3. Convert the review into the `CaseStudy` shape in `src/data/labContent.ts`.
-4. Set `status` to `reviewed` or `published`.
-5. Keep examples labelled as examples and real cases labelled honestly.
+- Mørkt tema. Farver i `tailwind.config.mjs`, basis-styles i `src/styles/global.css`.
+- Kategori-farver skal matche mellem `tailwind.config.mjs` (`cat.*`) og
+  `CATEGORIES` i `src/data/timeline.ts`.

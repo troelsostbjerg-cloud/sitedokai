@@ -1,53 +1,51 @@
 ---
-import { contactEmail } from '../data/labContent';
-
-const navItems = [
-  { label: 'Submit a workflow', href: '/submit' },
-  { label: 'Case library', href: '/cases' },
-  { label: 'Method', href: '/method' },
-  { label: 'About', href: '/about' },
-  { label: 'Hire Troels', href: '/hire' },
-  { label: 'Privacy', href: '/privacy' },
-  { label: 'Accessibility', href: '/accessibility' },
-];
+const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-brand/10 bg-canvas px-5 pb-24 pt-10 text-brand sm:px-6 lg:pb-10" role="contentinfo">
-  <div class="mx-auto max-w-7xl">
-    <div class="grid grid-cols-1 gap-10 md:grid-cols-[1.25fr_0.9fr_0.9fr]">
-      <div>
-        <div class="mb-4 font-display text-2xl font-semibold">SiteDokAILab</div>
-        <p class="max-w-md text-sm leading-relaxed text-brand/60">
-          A free workflow and AI process lab where companies can send messy recurring work and get a practical mini-review from Troels.
-        </p>
-        <a href="/submit" class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent/40 bg-accent px-5 py-3 text-sm font-semibold text-canvas transition-colors hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px">
-          Submit a workflow
-        </a>
+<footer class="mt-24 border-t border-line bg-ink-soft/60">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-violet-cyan text-ink">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 18 L9 11 L13 14 L20 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="5" r="2.4" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="font-display text-[17px] font-extrabold tracking-tight">
+          AI<span class="text-gradient">tidslinjen</span>
+        </span>
       </div>
-
-      <div>
-        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Links</h3>
-        <div class="space-y-2">
-          {navItems.map((item) => (
-            <p><a href={item.href} class="text-sm text-brand/60 transition-colors hover:text-brand">{item.label}</a></p>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <h3 class="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-brand/50">Contact</h3>
-        <p class="mb-2 text-sm text-brand/60">
-          <a href={`mailto:${contactEmail}`} class="transition-colors hover:text-brand">{contactEmail}</a>
-        </p>
-        <p class="text-sm text-brand/60">Company based in Denmark.</p>
-        <p class="mt-2 text-sm text-brand/60">Built while Troels is looking for his next role.</p>
-        <p class="mt-2 text-sm text-brand/60">Free workflow mini-reviews. No sales pitch.</p>
-      </div>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-text-soft">
+        Et uafhængigt, dansk overblik over udviklingen i kunstig intelligens.
+        Vi står i den mest revolutionerende teknologiske tidsalder — her kan du
+        følge med, måned for måned.
+      </p>
     </div>
 
-    <div class="mt-10 flex flex-col gap-4 border-t border-brand/10 pt-7 text-center md:flex-row md:items-center md:justify-between md:text-left">
-      <p class="text-sm text-brand/50">&copy; 2026 SiteDokAILab. All rights reserved.</p>
-      <p class="text-sm text-brand/50">Necessary cookies only. No tracking.</p>
+    <nav aria-label="Sider">
+      <h2 class="mono-label">Sider</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li><a href="/" class="text-text-soft hover:text-text">Tidslinjen</a></li>
+        <li><a href="/#denne-uge" class="text-text-soft hover:text-text">Denne uge i AI</a></li>
+        <li><a href="/om" class="text-text-soft hover:text-text">Om projektet</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Mere">
+      <h2 class="mono-label">Mere</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li><a href="/om" class="text-text-soft hover:text-text">Om projektet</a></li>
+        <li><a href="/privacy" class="text-text-soft hover:text-text">Privatliv</a></li>
+        <li><a href="/sitemap.xml" class="text-text-soft hover:text-text">Sitemap</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-line">
+    <div class="container-page flex flex-col items-start justify-between gap-2 py-5 text-xs text-text-dim sm:flex-row sm:items-center">
+      <p>© {year} AI-tidslinjen · sitedokai.com · Bygget af Troels Østbjerg</p>
+      <p>Indholdet er sammenfattet fra offentlige kilder og opdateres løbende.</p>
     </div>
   </div>
 </footer>

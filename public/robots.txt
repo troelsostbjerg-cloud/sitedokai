@@ -1,16 +1,5 @@
 User-agent: *
 Allow: /
 
-# Internal tools are not public launch pages.
-Disallow: /studio
-Disallow: /studio/
-Disallow: /room
-Disallow: /room/
-Disallow: /mockups
-Disallow: /mockups/
-Disallow: /admin
-Disallow: /admin/
-
 Sitemap: https://sitedokai.com/sitemap.xml
-# AI-readable profile: https://sitedokai.com/llms.txt
-# Legacy SiteDokAI paths redirect to the Lab journeys.
+# AI-læsbar profil: https://sitedokai.com/llms.txt

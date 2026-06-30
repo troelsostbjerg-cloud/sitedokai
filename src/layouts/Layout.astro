@@ -1,354 +1,75 @@
 ---
-interface StructuredData {
-  [key: string]: unknown;
-}
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
   description?: string;
   canonical?: string;
-  ogImage?: string;
-  ogImageWidth?: number | string;
-  ogImageHeight?: number | string;
-  ogLocale?: string;
-  lang?: string;
-  themeColor?: string;
-  cookieTheme?: 'light' | 'dark';
-  structuredData?: StructuredData | StructuredData[];
   noindex?: boolean;
+  ogImage?: string;
 }
 
 const {
   title,
-  description = 'Send in a recurring workflow, manual process or AI idea. Troels Østbjerg reviews where the friction is, whether AI can help, and what the first practical step should be.',
+  description = 'En tidslinje over den vigtigste udvikling i kunstig intelligens — måned for måned, fra januar 2025 til i dag. Følg med i historiens hurtigste teknologiske kapløb.',
   canonical = Astro.url.href,
-  ogImage = '/og-image.svg',
-  ogImageWidth = 1200,
-  ogImageHeight = 630,
-  ogLocale = 'en_US',
-  lang = 'en',
-  themeColor = '#f5f0e8',
-  cookieTheme = 'light',
-  structuredData,
   noindex = false,
+  ogImage = '/og-image.svg',
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ?? 'https://sitedokai.com/';
-const canonicalUrl = canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href;
-const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
-const ogImageType = ogImageUrl.endsWith('.png') ? 'image/png' : ogImageUrl.endsWith('.jpg') || ogImageUrl.endsWith('.jpeg') ? 'image/jpeg' : undefined;
-const schemaBlocks = !structuredData ? [] : Array.isArray(structuredData) ? structuredData : [structuredData];
-const robotsContent = noindex ? 'noindex, follow' : 'index, follow';
+const canonicalUrl = canonical.startsWith('http')
+  ? canonical
+  : new URL(canonical, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : new URL(ogImage, siteUrl).href;
+const robots = noindex ? 'noindex, follow' : 'index, follow';
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#0a0b12" />
     <meta name="author" content="Troels Østbjerg" />
-    <meta name="application-name" content="SiteDokAILab" />
-    <meta name="robots" content={robotsContent} />
-    <meta name="theme-color" content={themeColor} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SiteDokAILab" />
-    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="AI-tidslinjen" />
+    <meta property="og:locale" content="da_DK" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
-    {ogImageType && <meta property="og:image:type" content={ogImageType} />}
-    <meta property="og:image:width" content={String(ogImageWidth)} />
-    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="SiteDokAILab AI-readable profile" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
-    <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
-    {schemaBlocks.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    ))}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2026" />
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+    <link
+      href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&family=outfit:400,500,600,700,800"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body class="bg-canvas text-brand">
-    <section
-      id="cookie-banner"
-      aria-label="Cookie information"
-      class:list={[
-        'z-50 hidden border-b px-3 py-2 backdrop-blur sm:px-6 sm:py-2.5',
-        cookieTheme === 'dark'
-          ? 'border-white/10 bg-[#121713]/95 text-[#f3efe5]'
-          : 'border-brand/10 bg-canvas/95 text-brand',
-      ]}
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-white"
     >
-      <div class="mx-auto flex max-w-7xl items-center justify-between gap-2.5">
-        <p
-          class:list={[
-            'min-w-0 text-[12px] leading-tight sm:text-sm sm:leading-relaxed',
-            cookieTheme === 'dark' ? 'text-[#d8d2c5]/75' : 'text-brand/70',
-          ]}
-        >
-          Necessary cookies only. <span class="hidden sm:inline">No tracking.</span>
-          <a
-            href="/privacy"
-            class:list={[
-              'underline underline-offset-4',
-              cookieTheme === 'dark'
-                ? 'text-[#b6c8b8] decoration-[#96b391]/40 hover:text-[#f3efe5]'
-                : 'text-accent decoration-accent/30 hover:text-brand',
-            ]}
-          >
-            Read more
-          </a>
-        </p>
-        <div class="flex flex-shrink-0 gap-1.5 sm:gap-2">
-          <button
-            id="cookie-decline"
-            class:list={[
-              'whitespace-nowrap rounded-[0.65rem] border px-2.5 py-1.5 text-[11px] font-bold leading-none transition-colors sm:px-4 sm:py-2 sm:text-sm sm:leading-normal',
-              cookieTheme === 'dark'
-                ? 'border-white/10 text-[#d8d2c5]/75 hover:bg-white/10'
-                : 'border-brand/10 text-brand/70 hover:bg-panel-soft',
-            ]}
-          >
-            Reject
-          </button>
-          <button
-            id="cookie-accept"
-            class:list={[
-              'whitespace-nowrap rounded-[0.65rem] px-3 py-1.5 text-[11px] font-bold leading-none transition-colors sm:px-4 sm:py-2 sm:text-sm sm:leading-normal',
-              cookieTheme === 'dark'
-                ? 'bg-[#96b391] text-[#121713] hover:bg-[#b5c9ab]'
-                : 'bg-accent text-canvas hover:bg-accent-bright',
-            ]}
-          >
-            Accept
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <slot />
-
-    <script is:inline>
-      (function() {
-        var banner = document.getElementById('cookie-banner');
-        if (!(banner instanceof HTMLElement)) return;
-
-        var root = document.documentElement;
-        var accept = document.getElementById('cookie-accept');
-        var decline = document.getElementById('cookie-decline');
-
-        function readChoice() {
-          try {
-            return localStorage.getItem('cookie-choice');
-          } catch (error) {
-            return null;
-          }
-        }
-
-        function writeChoice(choice) {
-          try {
-            localStorage.setItem('cookie-choice', choice);
-          } catch (error) {
-            // Ignore storage failures and still let the user continue.
-          }
-        }
-
-        function syncBannerSpacing() {
-          root.style.setProperty('--cookie-banner-space', '0px');
-        }
-
-        function scheduleSpacingSync() {
-          window.requestAnimationFrame(syncBannerSpacing);
-        }
-
-        function hideBanner(choice) {
-          writeChoice(choice);
-          banner.classList.add('hidden');
-          scheduleSpacingSync();
-        }
-
-        if (!readChoice()) {
-          banner.classList.remove('hidden');
-        }
-
-        scheduleSpacingSync();
-        window.addEventListener('load', scheduleSpacingSync, { once: true });
-        window.addEventListener('resize', scheduleSpacingSync);
-
-        if (accept) accept.addEventListener('click', function() { hideBanner('accepted'); });
-        if (decline) decline.addEventListener('click', function() { hideBanner('declined'); });
-      })();
-    </script>
-
-    <script is:inline>
-      document.addEventListener('submit', (event) => {
-        const form = event.target;
-        if (!(form instanceof HTMLFormElement)) return;
-
-        const websiteInput = form.querySelector('input[name="website"]');
-        if (!(websiteInput instanceof HTMLInputElement)) return;
-
-        const value = websiteInput.value.trim();
-        if (!value) return;
-
-        if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value)) {
-          websiteInput.value = `https://${value.replace(/^\/+/, '')}`;
-        }
-      });
-    </script>
-
-    <script is:inline>
-      (function() {
-        var forms = document.querySelectorAll('[data-ajax-email-form]');
-        if (!forms.length) return;
-
-        function normalizeUrl(value) {
-          var trimmed = value.trim();
-          if (!trimmed) return '';
-          if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(trimmed)) return trimmed;
-          return 'https://' + trimmed.replace(/^\/+/, '');
-        }
-
-        function findStatus(form, type) {
-          return form.querySelector('[data-ajax-form-' + type + ']');
-        }
-
-        function showOnly(form, type) {
-          ['success', 'error', 'pending'].forEach(function(statusType) {
-            var status = findStatus(form, statusType);
-            if (status) status.hidden = statusType !== type;
-          });
-        }
-
-        function setSubmitState(form, isSubmitting) {
-          var button = form.querySelector('[data-ajax-submit]');
-          if (!(button instanceof HTMLButtonElement)) return;
-
-          if (!button.dataset.defaultLabel) {
-            button.dataset.defaultLabel = button.textContent.trim();
-          }
-
-          button.disabled = isSubmitting;
-          button.textContent = isSubmitting
-            ? (form.getAttribute('data-pending-label') || 'Sending...')
-            : button.dataset.defaultLabel;
-        }
-
-        function normalizeWebsiteField(form) {
-          var websiteInput = form.querySelector('input[name="website"]');
-          if (!(websiteInput instanceof HTMLInputElement)) return;
-          var value = normalizeUrl(websiteInput.value);
-          if (value) {
-            websiteInput.value = value;
-          }
-        }
-
-        function submitLeadBackup(form) {
-          var backupAction = form.getAttribute('data-lead-backup-action');
-          if (!backupAction) return;
-
-          var payload = new FormData(form);
-          payload.set('lead_type', form.getAttribute('data-lead-type') || 'contact');
-          payload.set('source_page', payload.get('source_page') || window.location.pathname);
-          payload.set('public_origin', window.location.origin);
-
-          fetch(backupAction, {
-            method: 'POST',
-            headers: {
-              accept: 'application/json',
-            },
-            body: payload,
-          }).catch(function() {
-            // The lead backup must never block the primary FormSubmit flow.
-          });
-        }
-
-        forms.forEach(function(form) {
-          form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            if (!form.reportValidity()) {
-              return;
-            }
-
-            normalizeWebsiteField(form);
-            submitLeadBackup(form);
-            showOnly(form, 'pending');
-            setSubmitState(form, true);
-
-            try {
-              var ajaxAction = form.getAttribute('data-ajax-action') || form.action;
-              var response = await fetch(ajaxAction, {
-                method: 'POST',
-                headers: {
-                  accept: 'application/json',
-                },
-                body: new FormData(form),
-              });
-
-              if (!response.ok) {
-                throw new Error('The form could not be sent.');
-              }
-
-              form.reset();
-              showOnly(form, 'success');
-            } catch (error) {
-              var errorStatus = findStatus(form, 'error');
-              if (errorStatus && error instanceof Error && error.message) {
-                errorStatus.textContent = errorStatus.getAttribute('data-default-error') || errorStatus.textContent;
-              }
-              showOnly(form, 'error');
-            } finally {
-              setSubmitState(form, false);
-            }
-          });
-        });
-      })();
-    </script>
-
-    <script is:inline>
-      (function() {
-        function getHashTarget() {
-          var rawHash = window.location.hash;
-          if (!rawHash || rawHash.length <= 1) return null;
-
-          var id = decodeURIComponent(rawHash.slice(1));
-          return document.getElementById(id);
-        }
-
-        function alignHashTarget(forceImmediate) {
-          var target = getHashTarget();
-          if (!(target instanceof HTMLElement)) return;
-
-          var rootStyle = window.getComputedStyle(document.documentElement);
-          var scrollPaddingTop = parseFloat(rootStyle.scrollPaddingTop || '0') || 0;
-          var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          var nextTop = Math.max(target.getBoundingClientRect().top + window.scrollY - scrollPaddingTop - 16, 0);
-
-          window.scrollTo({
-            top: nextTop,
-            behavior: forceImmediate || prefersReducedMotion ? 'auto' : 'smooth',
-          });
-        }
-
-        function scheduleHashAlignment(forceImmediate) {
-          window.requestAnimationFrame(function() {
-            alignHashTarget(forceImmediate);
-            window.setTimeout(function() { alignHashTarget(forceImmediate); }, 180);
-          });
-        }
-
-        window.addEventListener('hashchange', function() { scheduleHashAlignment(false); });
-        window.addEventListener('load', function() { scheduleHashAlignment(true); }, { once: true });
-      })();
-    </script>
+      Spring til indhold
+    </a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
