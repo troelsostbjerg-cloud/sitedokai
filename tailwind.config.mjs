@@ -4,46 +4,69 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          DEFAULT: '#202622',
-          light: '#354039',
-          dark: '#151a17',
+        // Mørkt "revolutionær AI-tidsalder"-tema
+        ink: {
+          DEFAULT: '#0a0b12', // baggrund
+          soft: '#0f1119',
+          panel: '#14161f',
+          raised: '#1a1d28',
         },
-        accent: {
-          DEFAULT: '#6f8a72',
-          bright: '#8fa68f',
-          light: '#dfe8dc',
-          soft: '#edf3ea',
-          dark: '#526b55',
+        line: {
+          DEFAULT: 'rgba(255,255,255,0.08)',
+          soft: 'rgba(255,255,255,0.05)',
+          strong: 'rgba(255,255,255,0.14)',
         },
-        canvas: {
-          DEFAULT: '#fbf7ef',
-          soft: '#f6f0e6',
+        text: {
+          DEFAULT: '#eef0f6',
+          soft: '#aeb4c2',
+          dim: '#7a8092',
         },
-        surface: {
-          DEFAULT: '#fffdf8',
-          muted: '#f8f4ec',
+        violet: {
+          DEFAULT: '#8b5cf6',
+          bright: '#a78bfa',
+          deep: '#6d28d9',
         },
-        muted: {
-          DEFAULT: '#66706a',
+        cyan: {
+          DEFAULT: '#22d3ee',
+          bright: '#67e8f9',
         },
-        border: {
-          soft: '#e8ded0',
-        },
-        score: {
-          green: '#22863a',
-          yellow: '#b08800',
-          red: '#cb2431',
+        // kategori-accenter (match src/data/timeline.ts)
+        cat: {
+          model: '#a78bfa',
+          produkt: '#22d3ee',
+          forskning: '#34d399',
+          erhverv: '#fbbf24',
+          politik: '#fb7185',
+          kultur: '#94a3b8',
         },
       },
       fontFamily: {
-        display: ['Newsreader', 'Georgia', 'serif'],
+        display: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         sans: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       boxShadow: {
-        soft: '0 22px 70px rgba(32, 38, 34, 0.055)',
-        card: '0 18px 45px rgba(32, 38, 34, 0.09)',
+        glow: '0 0 0 1px rgba(139,92,246,0.25), 0 18px 60px -18px rgba(139,92,246,0.55)',
+        card: '0 24px 70px -30px rgba(0,0,0,0.8)',
+      },
+      backgroundImage: {
+        aurora:
+          'radial-gradient(60% 50% at 50% 0%, rgba(139,92,246,0.22) 0%, rgba(34,211,238,0.10) 38%, transparent 72%)',
+        'violet-cyan': 'linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%)',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(14px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'pulse-dot': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.55', transform: 'scale(0.82)' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'pulse-dot': 'pulse-dot 2.4s ease-in-out infinite',
       },
     },
   },

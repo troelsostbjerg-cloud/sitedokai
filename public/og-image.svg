@@ -1,41 +1,47 @@
-<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SiteDokAI — Gratis mini-tjek</title>
-  <desc id="desc">Find og ret det, der får din hjemmeside til at miste kunder.</desc>
-  <rect width="1200" height="630" fill="#FBF7EF"/>
-  <rect x="52" y="52" width="1096" height="526" rx="42" fill="#FFFDF8" stroke="#E8DED0"/>
-  <circle cx="1040" cy="126" r="210" fill="#DFE8DC" opacity="0.55"/>
-  <circle cx="110" cy="500" r="230" fill="#FFFFFF" opacity="0.55"/>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI-tidslinjen">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0b12"/>
+      <stop offset="1" stop-color="#10131f"/>
+    </linearGradient>
+    <radialGradient id="aurora" cx="50%" cy="0%" r="70%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="45%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0a0b12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#67e8f9"/>
+    </linearGradient>
+  </defs>
 
-  <text x="112" y="136" fill="#526B55" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="0.18em">GRATIS MINI-TJEK FOR SMÅ VIRKSOMHEDER</text>
-  <text x="112" y="250" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">Find og ret det,</text>
-  <text x="112" y="332" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">der får din hjemmeside</text>
-  <text x="112" y="414" fill="#202622" font-family="Georgia, serif" font-size="72" font-weight="500">til at miste kunder.</text>
-  <text x="116" y="482" fill="#66706A" font-family="Arial, sans-serif" font-size="29" font-weight="600">Klarhed · Tillid · Synlighed · Flere henvendelser</text>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#aurora)"/>
 
-  <g transform="translate(780 300)">
-    <path d="M-40 110C40 70 100 82 176 114C246 143 320 132 438 78V230H-40Z" fill="#DFE8DC"/>
-    <path d="M-40 166C54 108 146 120 236 158C308 188 374 178 438 142V230H-40Z" fill="#8FA08D" opacity="0.35"/>
-    <path d="M168 18L230 108L264 66L354 190H94L168 18Z" fill="#9CAC98" opacity="0.28"/>
-  </g>
-
-  <g transform="translate(790 122)">
-    <rect width="275" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Uklart budskab</text>
-  </g>
-  <g transform="translate(740 202)">
-    <rect width="304" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Tillid kan styrkes</text>
-  </g>
-  <g transform="translate(825 282)">
-    <rect width="315" height="62" rx="18" fill="#FFFFFF" stroke="#E8DED0"/>
-    <circle cx="34" cy="31" r="15" fill="#DFE8DC"/>
-    <text x="60" y="38" fill="#202622" font-family="Arial, sans-serif" font-size="22" font-weight="700">Svær at forstå i Google</text>
+  <!-- logo -->
+  <g transform="translate(90, 90)">
+    <rect width="64" height="64" rx="16" fill="url(#grad)"/>
+    <path d="M14 46 L28 28 L38 36 L52 18" fill="none" stroke="#0a0b12" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="52" cy="18" r="5.5" fill="#0a0b12"/>
+    <text x="84" y="42" font-family="Outfit, sans-serif" font-size="30" font-weight="800" fill="#eef0f6">AI-tidslinjen</text>
   </g>
 
-  <g transform="translate(112 522)">
-    <rect width="240" height="56" rx="16" fill="#6F8A72"/>
-    <text x="31" y="36" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="22" font-weight="800">Få gratis mini-tjek</text>
+  <text x="90" y="320" font-family="Outfit, sans-serif" font-size="76" font-weight="800" fill="#eef0f6">Den mest revolutionerende</text>
+  <text x="90" y="408" font-family="Outfit, sans-serif" font-size="76" font-weight="800" fill="url(#grad)">tidsalder — måned for måned</text>
+
+  <text x="90" y="478" font-family="Outfit, sans-serif" font-size="30" font-weight="500" fill="#aeb4c2">Udviklingen i kunstig intelligens, fra januar 2025 til i dag.</text>
+
+  <!-- mini tidslinje -->
+  <g transform="translate(90, 540)">
+    <line x1="0" y1="10" x2="1020" y2="10" stroke="#2a2f3e" stroke-width="2"/>
+    <circle cx="0" cy="10" r="8" fill="#a78bfa"/>
+    <circle cx="255" cy="10" r="8" fill="#22d3ee"/>
+    <circle cx="510" cy="10" r="8" fill="#34d399"/>
+    <circle cx="765" cy="10" r="8" fill="#fbbf24"/>
+    <circle cx="1020" cy="10" r="9" fill="#67e8f9"/>
+    <text x="0" y="46" font-family="JetBrains Mono, monospace" font-size="20" fill="#7a8092">2025</text>
+    <text x="980" y="46" font-family="JetBrains Mono, monospace" font-size="20" fill="#7a8092">2026</text>
   </g>
+
+  <text x="1110" y="120" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="22" fill="#7a8092">sitedokai.com</text>
 </svg>

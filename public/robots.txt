@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
 
-# Internal tools are not public launch pages.
-Disallow: /studio/
-
 Sitemap: https://sitedokai.com/sitemap.xml
+# AI-læsbar profil: https://sitedokai.com/llms.txt

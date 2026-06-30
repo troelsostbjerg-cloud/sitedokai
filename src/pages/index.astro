@@ -1,186 +1,92 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import Container from '../components/site/Container.astro';
-import FeatureCard from '../components/site/FeatureCard.astro';
-import HeroSection from '../components/site/HeroSection.astro';
-import MiniCheckBenefitStrip from '../components/site/MiniCheckBenefitStrip.astro';
-import PaidAuditCard from '../components/site/PaidAuditCard.astro';
-import SecondaryOfferCard from '../components/site/SecondaryOfferCard.astro';
-import SectionHeader from '../components/site/SectionHeader.astro';
-import '../styles/global.css';
+import HighlightCard from '../components/HighlightCard.astro';
+import HorizontalTimeline from '../components/HorizontalTimeline.astro';
+import {
+  thisWeek,
+  months,
+  totalHighlights,
+  firstMonth,
+  latestMonth,
+  CATEGORIES,
+} from '../data/timeline';
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://sitedokai.com/#organization',
-      name: 'SiteDokAI',
-      url: 'https://sitedokai.com',
-      logo: 'https://sitedokai.com/favicon.svg',
-      email: 'info@sitedokai.com',
-    },
-    {
-      '@type': 'WebSite',
-      '@id': 'https://sitedokai.com/#website',
-      url: 'https://sitedokai.com',
-      name: 'SiteDokAI',
-      inLanguage: 'da-DK',
-    },
-    {
-      '@type': 'ProfessionalService',
-      '@id': 'https://sitedokai.com/#service',
-      name: 'SiteDokAI',
-      serviceType: 'Gratis mini-tjek, Hjemmeside-tjek, Hjemmeside-fix og Visuelt løft for små virksomheder',
-      provider: {
-        '@id': 'https://sitedokai.com/#organization',
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Danmark',
-      },
-      email: 'info@sitedokai.com',
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'SiteDokAI ydelser',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'DKK',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Gratis mini-tjek',
-              description: 'Tre konkrete observationer og en anbefaling til næste skridt.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            price: '2495',
-            priceCurrency: 'DKK',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Hjemmeside-tjek',
-              description: 'Fuld gennemgang af klarhed, tillid, synlighed, tekst, struktur, kontaktknapper og visuelt udtryk.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '6500',
-              maxPrice: '12500',
-              priceCurrency: 'DKK',
-            },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Hjemmeside-fix',
-              description: 'Ret tekst, struktur og kontaktknapper.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              minPrice: '9500',
-              priceCurrency: 'DKK',
-            },
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Visuelt løft',
-              description: 'Forbedr design, billeder og førstehåndsindtryk.',
-            },
-          },
-        ],
-      },
-    },
-  ],
+  '@type': 'WebSite',
+  name: 'AI-tidslinjen',
+  url: 'https://sitedokai.com/',
+  description:
+    'En tidslinje over den vigtigste udvikling i kunstig intelligens, måned for måned.',
+  inLanguage: 'da-DK',
 };
 ---
 
-<Layout
-  title="SiteDokAI | Få gratis mini-tjek af din hjemmeside"
-  description="SiteDokAI hjælper små virksomheder med at finde og rette det, der får hjemmesiden til at miste kunder. Start med et gratis mini-tjek, og gå videre til Hjemmeside-tjek hvis problemerne er tydelige."
-  structuredData={structuredData}
->
-  <Nav />
-  <main id="main" class="bg-canvas text-brand">
-    <HeroSection />
+<Layout title="AI-tidslinjen — udviklingen i kunstig intelligens, måned for måned">
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
 
-    <Container id="det-kigger-vi-efter" class="pb-4 pt-1">
-      <SectionHeader label="Det kigger vi efter" />
-      <div class="mt-6 grid gap-5 md:grid-cols-3">
-        <FeatureCard
-          icon="clarity"
-          title="Klarhed"
-          text="Forstår kunden hurtigt, hvad du tilbyder?"
-        />
-        <FeatureCard
-          icon="trust"
-          title="Tillid"
-          text="Virker siden professionel og tryg nok til kontakt?"
-        />
-        <FeatureCard
-          icon="visibility"
-          title="Synlighed"
-          text="Kan kunder og Google hurtigt forstå din side?"
-        />
+  <!-- HERO (kompakt) -->
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-aurora"></div>
+    <div class="container-page relative pb-8 pt-12 sm:pt-16">
+      <div class="mx-auto max-w-3xl text-center animate-fade-up">
+        <span class="mono-label inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-3 py-1.5">
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan animate-pulse-dot"></span>
+          Opdateret · {latestMonth.monthLabel}
+        </span>
+        <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+          Den mest revolutionerende tidsalder —
+          <span class="text-gradient">måned for måned</span>
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-soft sm:text-lg">
+          Følg hele rejsen gennem AI-kapløbet — fra {firstMonth.monthLabel.toLowerCase()} til i dag.
+          Klik ind i en måned og genoplev præcis, hvad der flyttede verden.
+        </p>
+        <p class="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-xs text-text-dim">
+          <span class="text-text-soft">{months.length}</span> måneder
+          <span class="text-line-strong">·</span>
+          <span class="text-text-soft">{totalHighlights}</span> milepæle
+          <span class="text-line-strong">·</span>
+          <span class="text-text-soft">{Object.keys(CATEGORIES).length}</span> spor
+        </p>
       </div>
-    </Container>
+    </div>
+  </section>
 
-    <Container id="gratis-mini" class="pb-7 pt-3">
-      <SectionHeader label="Det får du gratis" uppercase={false} />
-      <div class="mt-6">
-        <MiniCheckBenefitStrip />
-      </div>
-    </Container>
+  <!-- DET VANDRETTE TIDSLINJEBÅND -->
+  <HorizontalTimeline />
 
-    <Container id="fuld-gennemgang" class="py-7">
-      <PaidAuditCard />
-    </Container>
-
-    <Container id="rette-det" class="pb-8 pt-7 md:pb-10">
-      <SectionHeader label="Hvis du vil have os til at rette det" />
-      <div class="mt-7 grid gap-5 lg:grid-cols-2">
-        <SecondaryOfferCard
-          id="hjemmeside-fix"
-          icon="fix"
-          title="Hjemmeside-fix"
-          price="6.500-12.500 kr."
-          text="Retter tekst, struktur og kontaktknapper"
-          href="/hjemmeside-fix"
-        />
-        <SecondaryOfferCard
-          id="visuelt-loeft"
-          icon="visual"
-          title="Visuelt løft"
-          price="Fra 9.500 kr."
-          text="Forbedrer design, billeder og førstehåndsindtryk"
-          href="/visuelt-loeft"
-        />
-      </div>
-    </Container>
-
-    <Container id="klar-til-start" class="pb-16 pt-6 md:pb-20">
-      <div class="rounded-[1.6rem] border border-accent/28 bg-brand px-6 py-10 text-white shadow-[0_24px_70px_rgba(32,38,34,0.12)] md:px-10 md:py-12">
-        <div class="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/62">Klar til første skridt?</p>
-            <h2 class="mt-5 max-w-3xl font-display text-4xl font-medium leading-[1.02] tracking-tight md:text-5xl">
-              Start med et gratis mini-tjek af din hjemmeside.
-            </h2>
-            <p class="mt-5 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg">
-              Du får 3 konkrete observationer og en klar vurdering af, hvad der bør rettes først.
-            </p>
-          </div>
-          <a href="/gratis-mini-tjek" class="inline-flex items-center justify-center rounded-[0.9rem] border border-white bg-white px-6 py-3.5 text-sm font-semibold text-brand transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-light hover:bg-accent-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:translate-y-px">
-            Få gratis mini-tjek
-          </a>
+  <!-- DENNE UGE -->
+  <section id="denne-uge" class="container-page scroll-mt-20 py-10">
+    <div class="glass relative overflow-hidden p-6 sm:p-8" style="box-shadow:0 0 0 1px rgba(34,211,238,0.18)">
+      <div class="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan/10 blur-3xl"></div>
+      <div class="relative flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <span class="h-2 w-2 rounded-full bg-cyan animate-pulse-dot"></span>
+          <h2 class="font-display text-xl font-bold sm:text-2xl">Denne uge i AI</h2>
         </div>
+        <span class="mono-label">{thisWeek.weekLabel} · {thisWeek.dateRange}</span>
       </div>
-    </Container>
-  </main>
-  <Footer />
+      <p class="relative mt-3 max-w-2xl text-sm leading-relaxed text-text-soft">{thisWeek.intro}</p>
+      <div class="relative mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {thisWeek.items.map((item) => <HighlightCard highlight={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container-page py-8">
+    <div class="glass relative overflow-hidden p-8 text-center sm:p-10">
+      <div class="pointer-events-none absolute inset-0 bg-aurora opacity-60"></div>
+      <h2 class="relative font-display text-2xl font-extrabold sm:text-3xl">Sæt et bogmærke</h2>
+      <p class="relative mx-auto mt-3 max-w-xl text-text-soft">
+        Tidslinjen opdateres løbende. Kig forbi igen — om en uge eller om et år —
+        og se præcis, hvad der skete i kapløbet, mens du var væk.
+      </p>
+      <div class="relative mt-7 flex flex-wrap justify-center gap-3">
+        <a href="#tidslinje" class="btn-primary">Udforsk tidslinjen</a>
+        <a href="/om" class="btn-ghost">Læs om projektet</a>
+      </div>
+    </div>
+  </section>
 </Layout>

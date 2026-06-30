@@ -3,44 +3,165 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-canvas: #fbf7ef;
-    --color-brand: #202622;
-    --color-muted: #66706a;
-  }
-
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: clamp(6rem, 8vw, 8rem);
+    scroll-padding-top: clamp(5rem, 8vw, 7rem);
+    -webkit-text-size-adjust: 100%;
   }
+
   body {
-    @apply bg-canvas font-sans text-muted antialiased;
-    padding-bottom: var(--cookie-banner-space, 0px);
-    transition: padding-bottom 180ms ease;
+    @apply bg-ink font-sans text-text antialiased;
+    background-image:
+      radial-gradient(70% 55% at 50% -5%, rgba(139, 92, 246, 0.18), transparent 70%),
+      radial-gradient(45% 40% at 95% 5%, rgba(34, 211, 238, 0.1), transparent 70%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    min-height: 100vh;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
+    @apply font-display text-text;
     text-wrap: balance;
+    overflow-wrap: break-word;
   }
 
   p {
-    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    text-underline-offset: 3px;
   }
 
   ::selection {
-    background: rgba(111, 138, 114, 0.22);
-    color: var(--color-brand);
+    background: rgba(139, 92, 246, 0.35);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0b12;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    border: 2px solid #0a0b12;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
-
-    body {
-      transition: none;
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
     }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Glas-kort */
+  .glass {
+    @apply rounded-2xl border border-line bg-ink-panel/70 backdrop-blur-sm;
+  }
+
+  .card-hover {
+    transition:
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-hover:hover {
+    @apply border-line-strong;
+    transform: translateY(-3px);
+    box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Gradient-tekst */
+  .text-gradient {
+    @apply bg-violet-cyan bg-clip-text text-transparent;
+  }
+
+  /* Knapper */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-bright disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-violet text-white hover:bg-violet-bright active:translate-y-px;
+    box-shadow: 0 12px 40px -16px rgba(139, 92, 246, 0.9);
+  }
+  .btn-ghost {
+    @apply btn border border-line-strong bg-white/[0.03] text-text hover:border-violet/50 hover:bg-white/[0.06];
+  }
+
+  /* Kategori-mærkat */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide;
+  }
+
+  /* Inputfelter */
+  .field {
+    @apply h-12 w-full rounded-xl border border-line-strong bg-white/[0.04] px-4 text-base text-text outline-none transition-colors placeholder:text-text-dim focus:border-violet/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-bright;
+  }
+
+  .mono-label {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-text-dim;
+  }
+
+  /* Skjul scrollbar (vandret tidslinje) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Toning i kanterne på det vandrette bånd */
+  .edge-fade {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 64px,
+      #000 calc(100% - 64px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 64px,
+      #000 calc(100% - 64px),
+      transparent 100%
+    );
+  }
+  @media (max-width: 640px) {
+    .edge-fade {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+
+  .grab {
+    cursor: grab;
+  }
+  .grab:active {
+    cursor: grabbing;
   }
 }

@@ -1,32 +1,32 @@
 ---
-interface StructuredData {
-  [key: string]: unknown;
-}
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
   description?: string;
   canonical?: string;
-  ogImage?: string;
-  structuredData?: StructuredData | StructuredData[];
   noindex?: boolean;
+  ogImage?: string;
 }
 
 const {
   title,
-  description = 'SiteDokAI hjælper små virksomheder med at finde og rette det, der får hjemmesiden til at miste kunder. Klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt udtryk.',
+  description = 'En tidslinje over den vigtigste udvikling i kunstig intelligens — måned for måned, fra januar 2025 til i dag. Følg med i historiens hurtigste teknologiske kapløb.',
   canonical = Astro.url.href,
-  ogImage = '/og-image.svg',
-  structuredData,
   noindex = false,
+  ogImage = '/og-image.svg',
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ?? 'https://sitedokai.com/';
-const canonicalUrl = canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href;
-const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
-const ogImageType = ogImageUrl.endsWith('.png') ? 'image/png' : ogImageUrl.endsWith('.jpg') || ogImageUrl.endsWith('.jpeg') ? 'image/jpeg' : undefined;
-const schemaBlocks = !structuredData ? [] : Array.isArray(structuredData) ? structuredData : [structuredData];
-const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
+const canonicalUrl = canonical.startsWith('http')
+  ? canonical
+  : new URL(canonical, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : new URL(ogImage, siteUrl).href;
+const robots = noindex ? 'noindex, follow' : 'index, follow';
 ---
 
 <!doctype html>
@@ -35,154 +35,41 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="SiteDokAI" />
-    <meta name="robots" content={robotsContent} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#0a0b12" />
+    <meta name="author" content="Troels Østbjerg" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SiteDokAI" />
+    <meta property="og:site_name" content="AI-tidslinjen" />
     <meta property="og:locale" content="da_DK" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
-    {ogImageType && <meta property="og:image:type" content={ogImageType} />}
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260427" />
-    <link rel="preconnect" href="https://fonts.bunny.net" />
-    <link href="https://fonts.bunny.net/css?family=newsreader:400,500,600,700&family=jetbrains-mono:400,600&family=outfit:400,500,600,700" rel="stylesheet" />
-    {schemaBlocks.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    ))}
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2026" />
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+    <link
+      href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&family=outfit:400,500,600,700,800"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
-  <body class="bg-[#faf7f2] text-brand">
-    <section id="cookie-banner" aria-label="Cookie-information" class="z-50 hidden border-b border-[#d9cfbf] bg-[#f7f2e8]/96 px-3 py-2 text-brand backdrop-blur sm:px-6 sm:py-2.5">
-      <div class="mx-auto flex max-w-5xl items-center justify-between gap-2.5">
-        <p class="min-w-0 text-[12px] leading-tight text-brand/72 sm:text-sm sm:leading-relaxed">
-          Kun nødvendige cookies. <span class="hidden sm:inline">Ingen tracking.</span> <a href="/privatlivspolitik" class="text-accent underline decoration-[rgba(159,106,36,0.35)] underline-offset-4 hover:text-brand">Læs mere</a>
-        </p>
-        <div class="flex flex-shrink-0 gap-1.5 sm:gap-2">
-          <button id="cookie-decline" class="whitespace-nowrap rounded-[0.65rem] border border-[#d9cfbf] px-2.5 py-1.5 text-[11px] font-bold leading-none text-brand/70 transition-colors hover:bg-white sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
-            Afvis
-          </button>
-          <button id="cookie-accept" class="whitespace-nowrap rounded-[0.65rem] bg-brand px-3 py-1.5 text-[11px] font-bold leading-none text-white transition-colors hover:bg-brand-light sm:px-4 sm:py-2 sm:text-sm sm:leading-normal">
-            OK
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <slot />
-
-    <script is:inline>
-      (function() {
-        var banner = document.getElementById('cookie-banner');
-        if (!(banner instanceof HTMLElement)) return;
-
-        var root = document.documentElement;
-        var accept = document.getElementById('cookie-accept');
-        var decline = document.getElementById('cookie-decline');
-
-        function readChoice() {
-          try {
-            return localStorage.getItem('cookie-choice');
-          } catch (error) {
-            return null;
-          }
-        }
-
-        function writeChoice(choice) {
-          try {
-            localStorage.setItem('cookie-choice', choice);
-          } catch (error) {
-            // Ignore storage failures and still let the user continue.
-          }
-        }
-
-        function syncBannerSpacing() {
-          root.style.setProperty('--cookie-banner-space', '0px');
-        }
-
-        function scheduleSpacingSync() {
-          window.requestAnimationFrame(syncBannerSpacing);
-        }
-
-        function hideBanner(choice) {
-          writeChoice(choice);
-          banner.classList.add('hidden');
-          scheduleSpacingSync();
-        }
-
-        if (!readChoice()) {
-          banner.classList.remove('hidden');
-        }
-
-        scheduleSpacingSync();
-        window.addEventListener('load', scheduleSpacingSync, { once: true });
-        window.addEventListener('resize', scheduleSpacingSync);
-
-        if (accept) accept.addEventListener('click', function() { hideBanner('accepted'); });
-        if (decline) decline.addEventListener('click', function() { hideBanner('declined'); });
-      })();
-    </script>
-
-    <script is:inline>
-      document.addEventListener('submit', (event) => {
-        const form = event.target;
-        if (!(form instanceof HTMLFormElement)) return;
-
-        const websiteInput = form.querySelector('input[name="website"]');
-        if (!(websiteInput instanceof HTMLInputElement)) return;
-
-        const value = websiteInput.value.trim();
-        if (!value) return;
-
-        if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value)) {
-          websiteInput.value = `https://${value.replace(/^\/+/, '')}`;
-        }
-      });
-    </script>
-
-    <script is:inline>
-      (function() {
-        function getHashTarget() {
-          var rawHash = window.location.hash;
-          if (!rawHash || rawHash.length <= 1) return null;
-
-          var id = decodeURIComponent(rawHash.slice(1));
-          return document.getElementById(id);
-        }
-
-        function alignHashTarget(forceImmediate) {
-          var target = getHashTarget();
-          if (!(target instanceof HTMLElement)) return;
-
-          var rootStyle = window.getComputedStyle(document.documentElement);
-          var scrollPaddingTop = parseFloat(rootStyle.scrollPaddingTop || '0') || 0;
-          var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          var nextTop = Math.max(target.getBoundingClientRect().top + window.scrollY - scrollPaddingTop - 16, 0);
-
-          window.scrollTo({
-            top: nextTop,
-            behavior: forceImmediate || prefersReducedMotion ? 'auto' : 'smooth',
-          });
-        }
-
-        function scheduleHashAlignment(forceImmediate) {
-          window.requestAnimationFrame(function() {
-            alignHashTarget(forceImmediate);
-            window.setTimeout(function() { alignHashTarget(forceImmediate); }, 180);
-          });
-        }
-
-        window.addEventListener('hashchange', function() { scheduleHashAlignment(false); });
-        window.addEventListener('load', function() { scheduleHashAlignment(true); }, { once: true });
-      })();
-    </script>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-white"
+    >
+      Spring til indhold
+    </a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

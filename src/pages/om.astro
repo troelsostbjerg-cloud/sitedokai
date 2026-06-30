@@ -1,146 +1,101 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-const principles = [
-  'Vi starter med det kunderne faktisk ser på hjemmesiden.',
-  'Vi gør problemet konkret, før vi anbefaler et fix.',
-  'Vi skriver i almindeligt dansk og prioriterer det, der kan flytte henvendelser.',
-  'Vi løfter tekst, struktur og visuelt udtryk uden at gøre projektet større end nødvendigt.',
-];
-
-const process = [
-  {
-    title: '1. Find hvor siden mister tillid',
-    text: 'Vi kigger på klarhed, tillid, synlighed, tekst, struktur, CTA og visuelt førstehåndsindtryk.',
-  },
-  {
-    title: '2. Gør næste skridt tydeligt',
-    text: 'Du får prioriterede fund og konkrete forslag, så du ikke står tilbage med en vag analyse.',
-  },
-  {
-    title: '3. Ret det vigtigste først',
-    text: 'Når det giver mening, hjælper SiteDokAI også med Hjemmeside-fix eller Visuelt løft.',
-  },
-];
-
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Troels Østbjerg',
-  jobTitle: 'Founder',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'SiteDokAI',
-    url: 'https://sitedokai.com',
-  },
-  image: 'https://sitedokai.com/images/troels-ostbjerg-founder.png',
-  url: 'https://sitedokai.com/om',
-  description:
-    'Founder Troels Østbjerg bygger SiteDokAI for at hjælpe små virksomheder med klarere, mere troværdige og mere handlingsklare hjemmesider.',
-};
+import { CATEGORIES, type Category, months, totalHighlights } from '../data/timeline';
 ---
 
 <Layout
-  title="Om SiteDokAI"
-  description="SiteDokAI hjælper små virksomheder med at finde og rette det, der får deres hjemmeside til at miste kunder."
-  ogImage="/images/troels-ostbjerg-founder.png"
-  structuredData={structuredData}
+  title="Om AI-tidslinjen — hvorfor og hvordan"
+  description="Hvorfor jeg bygger en tidslinje over AI-udviklingen, og hvordan indholdet bliver til."
 >
-  <Nav />
-  <main id="main">
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto grid max-w-6xl gap-14 px-6 py-16 md:py-24 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-        <div class="max-w-3xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Om SiteDokAI</p>
-          <h1 class="mt-5 font-display text-4xl font-extrabold tracking-tight text-brand md:text-6xl">
-            Vi hjælper små virksomheder med at få hjemmesider, der er lettere at forstå og vælge.
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-brand/72">
-            Mange virksomheder er gode i virkeligheden, men deres hjemmeside får dem til at virke mindre klare, mindre trygge eller mindre professionelle end de er.
-          </p>
-          <p class="mt-4 max-w-2xl text-lg leading-relaxed text-brand/72">
-            SiteDokAI er lavet til at finde og rette de ting: tekst, struktur, CTAer, tillidssignaler, synlighed og visuelt udtryk.
-          </p>
+  <section class="relative overflow-hidden border-b border-line">
+    <div class="pointer-events-none absolute inset-0 bg-aurora opacity-70"></div>
+    <div class="container-page relative py-16">
+      <span class="mono-label">Om projektet</span>
+      <h1 class="mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+        Vi står i den mest revolutionerende tidsalder. <span class="text-gradient">Nogen burde skrive det ned.</span>
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-soft">
+        Kunstig intelligens flytter sig så hurtigt, at selv folk midt i det taber
+        overblikket. AI-tidslinjen er mit forsøg på at holde fast i, hvad der
+        faktisk skete — så du om et år kan klikke ind og genopleve præcis, hvad
+        der flyttede verden i netop denne måned.
+      </p>
+    </div>
+  </section>
 
-          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a href="/hjemmeside-tjek#bestil" class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-light">
-              Bestil Hjemmeside-tjek
-            </a>
-            <a href="mailto:info@sitedokai.com" class="inline-flex items-center justify-center rounded-full border border-[#d9cfbf] bg-[#fbf8f3] px-6 py-3 text-sm font-bold text-brand transition-colors hover:bg-white">
-              info@sitedokai.com
-            </a>
-          </div>
+  <section class="container-page py-14">
+    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
+      <div class="space-y-10">
+        <div>
+          <h2 class="font-display text-2xl font-bold">Hvorfor</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Jeg byggede oprindeligt SitedokAI som et lille bureau. Det kapitel er
+            lukket — jeg har fået fast arbejde i AI-branchen. Men interessen for
+            udviklingen forsvandt ikke; den voksede. Så jeg lavede domænet om til
+            det, jeg selv havde manglet: ét roligt, dansk sted, hvor man kan følge
+            kapløbet uden at drukne i nyheder.
+          </p>
         </div>
 
-        <div class="relative">
-          <div class="absolute inset-0 rounded-[2rem] bg-[#f5eee2]"></div>
-          <article class="relative rounded-[2rem] border border-[#e2d8cb] bg-[#fcfaf6] p-5">
-            <img
-              src="/images/troels-ostbjerg-founder.png"
-              alt="Troels Østbjerg, founder af SiteDokAI"
-              class="aspect-[4/4.7] w-full rounded-[1.5rem] object-cover object-center"
-            />
-            <div class="border-t border-[#e7ddcf] px-2 pt-5">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">Troels Østbjerg</p>
-              <p class="mt-3 font-display text-2xl font-bold tracking-tight text-brand">Founder</p>
-              <p class="mt-2 text-sm leading-relaxed text-brand/62">
-                Arbejder med praktiske forbedringer af hjemmesider, tekster og visuelle flader for små virksomheder.
-              </p>
+        <div>
+          <h2 class="font-display text-2xl font-bold">Hvordan indholdet bliver til</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Hver måned får én side. Den samler de vigtigste begivenheder —
+            modeller, produkter, forskning, penge, politik og samfund — i korte,
+            jargonfri opslag. Indholdet er sammenfattet fra offentlige kilder og
+            redigeret til at kunne læses af alle, ikke kun ingeniører. Tidslinjen
+            starter i januar 2025 og opdateres løbende. "Denne uge i AI" på
+            forsiden holder dig opdateret på det helt friske.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-display text-2xl font-bold">Helt frit tilgængeligt</h2>
+          <p class="mt-3 leading-relaxed text-text-soft">
+            Der er ingen login, ingen betaling og ingen reklamer. Du kommer bare
+            ind og læser. Sæt et bogmærke, og kig forbi igen, når du vil se, hvad
+            der er sket siden sidst.
+          </p>
+          <a href="/#tidslinje" class="btn-primary mt-6">Gå til tidslinjen</a>
+        </div>
+      </div>
+
+      <aside class="space-y-5">
+        <div class="glass p-6">
+          <h2 class="mono-label">De seks spor</h2>
+          <ul class="mt-4 space-y-3">
+            {
+              (Object.keys(CATEGORIES) as Category[]).map((c) => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1 h-3 w-3 flex-shrink-0 rounded-full" style={`background:${CATEGORIES[c].color}`} />
+                  <div>
+                    <p class="text-sm font-semibold text-text">{CATEGORIES[c].label}</p>
+                    <p class="text-xs leading-relaxed text-text-soft">{CATEGORIES[c].blurb}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass p-6">
+          <h2 class="mono-label">Status</h2>
+          <dl class="mt-4 space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Måneder dækket</dt>
+              <dd class="font-mono font-semibold text-text">{months.length}</dd>
             </div>
-          </article>
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Milepæle</dt>
+              <dd class="font-mono font-semibold text-text">{totalHighlights}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-text-soft">Sprog</dt>
+              <dd class="font-mono font-semibold text-text">Dansk</dd>
+            </div>
+          </dl>
         </div>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-[#f7f2e8]">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <div class="max-w-3xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Arbejdsprincipper</p>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-            Mindre støj. Mere klarhed. Mere konkret forbedring.
-          </h2>
-        </div>
-        <div class="mt-10 grid gap-4 md:grid-cols-2">
-          {principles.map((item) => (
-            <article class="flex gap-4 rounded-[1.4rem] border border-[#e6ddd1] bg-white p-5">
-              <span class="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-accent"></span>
-              <p class="text-base leading-relaxed text-brand/72">{item}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="border-b border-[#e6ddd1] bg-white">
-      <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Sådan arbejder vi</p>
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {process.map((item) => (
-            <article class="rounded-[1.6rem] border border-[#e2d8cb] bg-[#fbf8f3] p-6">
-              <h3 class="font-display text-2xl font-bold tracking-tight text-brand">{item.title}</h3>
-              <p class="mt-4 text-sm leading-relaxed text-brand/70">{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-white">
-      <div class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-        <div class="rounded-[2rem] border border-[#dfd3c2] bg-[#f6efe3] px-8 py-10 text-center md:px-12 md:py-14">
-          <p class="text-sm font-semibold uppercase tracking-[0.18em] text-accent">Kort fortalt</p>
-          <blockquote class="mx-auto mt-5 max-w-3xl font-display text-3xl font-bold tracking-tight text-brand md:text-5xl">
-            “En hjemmeside skal hurtigt gøre det klart, hvorfor kunden kan stole på dig og hvad de skal gøre nu.”
-          </blockquote>
-          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand/68">
-            Det er den enkle ide bag SiteDokAI.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
+      </aside>
+    </div>
+  </section>
 </Layout>

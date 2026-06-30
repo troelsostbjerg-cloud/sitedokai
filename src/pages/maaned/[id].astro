@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HighlightCard from '../../components/HighlightCard.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
+import {
+  months,
+  adjacentMonths,
+  CATEGORIES,
+  type Category,
+} from '../../data/timeline';
+
+export function getStaticPaths() {
+  return months.map((m) => ({ params: { id: m.id } }));
+}
+
+const { id } = Astro.params;
+const month = months.find((m) => m.id === id)!;
+const { prev, next } = adjacentMonths(month.id);
+
+const cats = [...new Set(month.highlights.map((h) => h.category))] as Category[];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `${month.monthLabel}: ${month.headline}`,
+  description: month.summary,
+  inLanguage: 'da-DK',
+  datePublished: `${month.id}-01`,
+  author: { '@type': 'Person', name: 'Troels Østbjerg' },
+};
+---
+
+<Layout
+  title={`${month.monthLabel} i AI — ${month.headline} | AI-tidslinjen`}
+  description={month.summary}
+  canonical={`https://sitedokai.com/maaned/${month.id}`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-line">
+    <div class="pointer-events-none absolute inset-0 bg-aurora opacity-70"></div>
+    <div class="container-page relative py-12 sm:py-16">
+      <a href="/#tidslinje" class="inline-flex items-center gap-1.5 text-sm font-medium text-text-soft hover:text-text">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Hele tidslinjen
+      </a>
+
+      <p class="mt-8 font-mono text-sm font-medium uppercase tracking-[0.2em] text-cyan">{month.monthLabel}</p>
+      <h1 class="mt-3 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+        {month.headline}
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-soft">{month.summary}</p>
+
+      <div class="mt-6 flex flex-wrap gap-1.5">
+        {cats.map((c) => <CategoryPill category={c} size="md" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- MILEPÆLE -->
+  <section class="container-page py-12">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="font-display text-xl font-bold sm:text-2xl">
+        {month.highlights.length} milepæle i {month.monthLabel.toLowerCase()}
+      </h2>
+    </div>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {month.highlights.map((h) => <HighlightCard highlight={h} />)}
+    </div>
+  </section>
+
+  <!-- NABO-MÅNEDER -->
+  <section class="container-page pb-16">
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        prev ? (
+          <a href={`/maaned/${prev.id}`} class="glass card-hover group flex flex-col p-5">
+            <span class="mono-label inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Måneden før
+            </span>
+            <span class="mt-2 font-mono text-sm text-cyan">{prev.monthLabel}</span>
+            <span class="mt-1 font-display font-semibold text-text">{prev.headline}</span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next ? (
+          <a href={`/maaned/${next.id}`} class="glass card-hover group flex flex-col items-end p-5 text-right">
+            <span class="mono-label inline-flex items-center gap-1.5">
+              Måneden efter
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="mt-2 font-mono text-sm text-cyan">{next.monthLabel}</span>
+            <span class="mt-1 font-display font-semibold text-text">{next.headline}</span>
+          </a>
+        ) : (
+          <a href="/#denne-uge" class="glass card-hover group flex flex-col items-end p-5 text-right">
+            <span class="mono-label">Helt nyt</span>
+            <span class="mt-2 font-mono text-sm text-cyan">Denne uge i AI</span>
+            <span class="mt-1 font-display font-semibold text-text">Følg den friske udvikling →</span>
+          </a>
+        )
+      }
+    </div>
+  </section>
+</Layout>

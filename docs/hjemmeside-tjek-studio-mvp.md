@@ -35,6 +35,16 @@ Ingen nye dependencies.
 
 ## Implementeret i MVP
 
+### 0. Enterprise CRM-shell
+Studio-fladen er opgraderet til en mere professionel operations-CRM:
+- Fast venstre navigation til oversigt, ny sag, editor, rapport og video-script
+- Topbar med tydelig intern kontekst
+- Status-metrics for alle sager, produktion, QA-kø og færdige tjek
+- Søgning og statusfiltre på dashboardet
+- Tabelbaseret pipeline-visning i stedet for løse kort
+- Blød blå-grå enterprise palette med blå primærhandlinger og focus states
+- Rapport-navigation til drift, kundeanalyse, branchebenchmark og produkt-fit
+
 ### 1. Dashboard
 Dashboard viser:
 - Kundenavn
@@ -45,6 +55,26 @@ Dashboard viser:
 - Dato
 - Knap til at åbne tjekket
 - Knap til at åbne rapporten
+- Søgning på kunde, website, branche og lokation
+- Filter på status
+
+### 1a. Rapporter og brancheintelligens
+Rapportfladen kan trække fem interne rapporttyper:
+- Pipeline-overblik
+- Kundeanalyse
+- Branche-benchmark
+- Produkt-fit rapport
+- Månedlig SiteDok Intelligence rapport
+
+Diagrammer i MVP:
+- Pipeline-funnel fordelt på status
+- Radar-diagram for aktiv kundes klarhed, tillid og handling
+- Branche-benchmark som bar chart
+- Branche-heatmap for klarhed, tillid og handling
+- Produkt-fit bar chart på tværs af anbefalinger
+- Tværgående problem-/effektanalyse baseret på udfyldte Top 5 problemer
+
+Alt beregnes lokalt fra eksisterende Hjemmeside-tjek i localStorage. Der er ingen ekstern analyse, crawler eller AI-generering i denne rapportflade endnu.
 
 Statusmuligheder:
 - Ikke startet
@@ -116,17 +146,17 @@ Struktur:
 - Ingen backend endnu.
 - Ingen login/adgangskontrol endnu.
 - Ingen rigtig PDF-generator; PDF laves via browserens printfunktion.
-- Ingen video-script-side endnu.
 - Ingen crawler eller AI-generering.
 - Data er lokal for den browser der bruges.
+- Branche- og intelligence-rapporter er lokale beregninger oven på de sager, der findes i browseren.
 
 ## Næste tekniske skridt
 
-1. Video-script sektion.
-2. Import/export JSON så data kan flyttes mellem browser/maskiner.
-3. Enkel adgangskontrol hvis route skal deployes offentligt.
-4. Backend/D1 først når workflowet er testet manuelt.
-5. Eventuelt finere PDF-cover / print-optimering efter reel brug.
+1. Import/export JSON så data kan flyttes mellem browser/maskiner.
+2. Enkel adgangskontrol hvis route skal deployes offentligt.
+3. Backend/D1 først når workflowet er testet manuelt.
+4. Eventuelt finere PDF-cover / print-optimering efter reel brug.
+5. Evt. senere AI/crawler-lag til automatisk brancheanalyse, stadig draft-first og QA-gated.
 
 ## QA kørt
 

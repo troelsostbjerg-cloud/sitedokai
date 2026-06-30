@@ -1,0 +1,35 @@
+# Gamle SitedokAI-sider → den nye AI-tidslinje
+/about            /om        301
+/privacy-policy   /privacy   301
+/privatlivspolitik /privacy  301
+
+# Alt øvrigt gammelt indhold sendes til forsiden
+/cases            /          301
+/hire             /          301
+/hire-troels      /          301
+/troels           /          301
+/method           /          301
+/submit           /          301
+/contact          /          301
+/kontakt          /          301
+/priser           /          301
+/pricing          /          301
+/gratis-mini-tjek /          301
+/gratis-rapport   /          301
+/hjemmeside-tjek  /          301
+/hjemmeside-fix   /          301
+/manual-work-audit /         301
+/ai-readiness     /          301
+/ai-klar          /          301
+/ai-workflow-sprint /        301
+/ai-operations-partner /     301
+/visuelt-loeft    /          301
+/eksempel         /          301
+/use-cases        /          301
+/use-cases/*      /          301
+/workflow-examples /         301
+/workflow-examples/* /       301
+/studio           /          301
+/studio/*         /          301
+/blog             /          301
+/blog/*           /          301

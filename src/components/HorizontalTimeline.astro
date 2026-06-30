@@ -1,0 +1,221 @@
+---
+import { monthsNewestFirst, CATEGORIES, latestMonth, type Category } from '../data/timeline';
+
+// Ældste → nyeste, så man rejser fremad i tiden mod "NU".
+const items = [...monthsNewestFirst].reverse();
+const COL = 248; // px pr. måned-kolonne
+const H = 360; // px båndets højde
+
+function uniqueCats(cats: Category[]): Category[] {
+  return [...new Set(cats)];
+}
+
+// Hvor hvert år starter (til store baggrunds-årstal)
+const years = [...new Set(items.map((m) => m.year))];
+const yearMarks = years.map((y) => ({
+  year: y,
+  index: items.findIndex((m) => m.year === y),
+}));
+
+const trackWidth = (items.length + 1) * COL;
+---
+
+<section id="tidslinje" class="scroll-mt-20 py-6">
+  <div class="container-page flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h2 class="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">Rejsen gennem AI-kapløbet</h2>
+      <p class="mt-1.5 text-sm text-text-soft">
+        Træk eller scroll til siden. Klik på en måned for hele historien.
+      </p>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="mr-1 hidden items-center gap-1.5 sm:flex">
+        {
+          years.map((y) => (
+            <button type="button" data-year-jump={y} class="rounded-lg border border-line-strong bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-text-soft transition-colors hover:border-violet/50 hover:text-text">
+              {y}
+            </button>
+          ))
+        }
+      </div>
+      <button type="button" data-tl-prev aria-label="Tilbage i tiden" class="grid h-10 w-10 place-items-center rounded-lg border border-line-strong bg-white/[0.03] text-text transition-colors hover:border-violet/50">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" data-tl-next aria-label="Frem i tiden" class="grid h-10 w-10 place-items-center rounded-lg border border-line-strong bg-white/[0.03] text-text transition-colors hover:border-violet/50">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div data-tl-scroll class="no-scrollbar edge-fade grab mt-6 overflow-x-auto overflow-y-hidden overscroll-x-contain" style="scroll-behavior:smooth">
+    <div data-tl-track class="relative" style={`width:${trackWidth}px; height:${H}px`}>
+      <!-- store baggrunds-årstal -->
+      {
+        yearMarks.map((ym) => (
+          <span
+            class="pointer-events-none absolute top-1 select-none font-mono text-7xl font-bold text-white/[0.04] sm:text-8xl"
+            style={`left:${ym.index * COL + 16}px`}
+          >
+            {ym.year}
+          </span>
+        ))
+      }
+
+      <!-- glødende midterlinje -->
+      <div class="pointer-events-none absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-violet/40 via-cyan/50 to-cyan" style="box-shadow:0 0 20px rgba(34,211,238,0.35)"></div>
+
+      <!-- måned-kolonner -->
+      {
+        items.map((m, i) => {
+          const above = i % 2 === 0;
+          const isLatest = m.id === latestMonth.id;
+          const cats = uniqueCats(m.highlights.map((h) => h.category));
+          return (
+            <a
+              href={`/maaned/${m.id}`}
+              class="group absolute top-0 block h-full focus-visible:outline-none"
+              style={`left:${i * COL}px; width:${COL}px`}
+              data-col-year={m.year}
+              data-col-index={i}
+            >
+              {/* node */}
+              <span
+                class:list={[
+                  'absolute left-1/2 top-1/2 z-10 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink transition-transform duration-200 group-hover:scale-125',
+                  isLatest ? 'bg-cyan' : 'bg-violet',
+                ]}
+              >
+                {isLatest && <span class="absolute inset-0 rounded-full bg-cyan/50 animate-pulse-dot"></span>}
+              </span>
+
+              {/* forbindelses-streg */}
+              <span
+                class:list={[
+                  'absolute left-1/2 w-px -translate-x-1/2 bg-line-strong transition-colors group-hover:bg-violet/60',
+                  above ? 'bottom-1/2 h-6' : 'top-1/2 h-6',
+                ]}
+              ></span>
+
+              {/* kort */}
+              <div
+                class:list={[
+                  'glass card-hover absolute left-3 right-3 p-3.5',
+                  above ? 'bottom-[calc(50%+28px)]' : 'top-[calc(50%+28px)]',
+                ]}
+              >
+                <div class="flex items-center justify-between gap-2">
+                  <span class:list={['font-mono text-[11px] font-medium', isLatest ? 'text-cyan' : 'text-violet-bright']}>
+                    {m.monthLabel}
+                  </span>
+                  <span class="text-[10px] text-text-dim">{m.highlights.length}</span>
+                </div>
+                <h3 class="mt-1.5 line-clamp-2 font-display text-[15px] font-bold leading-snug text-text">
+                  {m.headline}
+                </h3>
+                <div class="mt-2.5 flex flex-wrap gap-1">
+                  {cats.map((c) => (
+                    <span class="h-1.5 w-1.5 rounded-full" style={`background:${CATEGORIES[c].color}`} title={CATEGORIES[c].label}></span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+
+      <!-- "NU"-node til sidst -->
+      <a
+        href="#denne-uge"
+        class="group absolute top-0 block h-full"
+        style={`left:${items.length * COL}px; width:${COL}px`}
+      >
+        <span class="absolute left-1/2 top-1/2 z-10 grid h-7 w-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-cyan text-ink shadow-glow">
+          <span class="absolute inset-0 rounded-full bg-cyan/40 animate-pulse-dot"></span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="absolute left-1/2 top-1/2 h-6 w-px -translate-x-1/2 bg-cyan/50"></span>
+        <div class="glass card-hover absolute left-3 right-3 top-[calc(50%+28px)] border-cyan/30 p-3.5" style="box-shadow:0 0 0 1px rgba(34,211,238,0.2)">
+          <span class="font-mono text-[11px] font-medium text-cyan">NU</span>
+          <h3 class="mt-1.5 font-display text-[15px] font-bold leading-snug text-text">Denne uge i AI</h3>
+          <p class="mt-1 text-[11px] leading-snug text-text-soft">Den helt friske udvikling →</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- kategori-forklaring -->
+  <div class="container-page mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+    <span class="mono-label">Spor:</span>
+    {
+      (Object.keys(CATEGORIES) as Category[]).map((c) => (
+        <span class="inline-flex items-center gap-1.5 text-xs text-text-soft">
+          <span class="h-2 w-2 rounded-full" style={`background:${CATEGORIES[c].color}`} />
+          {CATEGORIES[c].label}
+        </span>
+      ))
+    }
+  </div>
+</section>
+
+<script is:inline define:vars={{ COL }}>
+  (function () {
+    var scroller = document.querySelector('[data-tl-scroll]');
+    if (!scroller) return;
+
+    // Starter ved begyndelsen (jan 2025) og rejser mod "NU".
+
+    // Knapper
+    var prev = document.querySelector('[data-tl-prev]');
+    var next = document.querySelector('[data-tl-next]');
+    function step(dir) { scroller.scrollBy({ left: dir * COL * 3, behavior: 'smooth' }); }
+    if (prev) prev.addEventListener('click', function () { step(-1); });
+    if (next) next.addEventListener('click', function () { step(1); });
+
+    // Hop til år
+    document.querySelectorAll('[data-year-jump]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var y = btn.getAttribute('data-year-jump');
+        var col = document.querySelector('[data-col-year="' + y + '"]');
+        if (col) {
+          var left = parseFloat(col.style.left) || 0;
+          scroller.scrollTo({ left: Math.max(left - 24, 0), behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Lodret hjul → vandret scroll
+    scroller.addEventListener(
+      'wheel',
+      function (e) {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        scroller.scrollLeft += e.deltaY;
+        e.preventDefault();
+      },
+      { passive: false },
+    );
+
+    // Træk-for-at-scrolle (pointer)
+    var down = false, startX = 0, startLeft = 0, moved = 0;
+    scroller.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch') return; // touch scroller selv
+      down = true; moved = 0;
+      startX = e.clientX; startLeft = scroller.scrollLeft;
+      scroller.style.scrollBehavior = 'auto';
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      moved += Math.abs(dx);
+      scroller.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = false;
+      scroller.style.scrollBehavior = 'smooth';
+    });
+    // Undgå at en lille trækbevægelse udløser klik på kort
+    scroller.addEventListener('click', function (e) {
+      if (moved > 8) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  })();
+</script>

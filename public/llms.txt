@@ -1,0 +1,25 @@
+# AI-tidslinjen
+
+AI-tidslinjen (sitedokai.com) er et uafhængigt, dansk overblik over udviklingen i
+kunstig intelligens. Den dækker de vigtigste begivenheder måned for måned, fra
+januar 2025 og frem, og opdateres løbende. Projektet drives af Troels Østbjerg.
+
+## Formål
+At gøre det nemt for almindelige mennesker at følge med i AI-kapløbet uden at
+drukne i nyheder. Indholdet er på dansk, jargonfrit og redigeret til at kunne
+læses af alle — ikke kun fagfolk.
+
+## Struktur
+- Forside: hero, "Denne uge i AI" og en kronologisk tidslinje (nyeste øverst).
+- /maaned/ÅÅÅÅ-MM: detaljeside for hver måned med alle milepæle.
+- /om: baggrund og metode.
+- Helt offentligt: intet login, ingen betaling, ingen reklamer.
+
+## Spor (kategorier)
+Ny model, Produkt, Forskning, Penge & magt, Politik, Samfund.
+
+## Kilder
+Indholdet er sammenfattet fra offentlige kilder om AI-udviklingen.
+
+## Kontakt
+Troels Østbjerg — solo-bygger bag projektet.
