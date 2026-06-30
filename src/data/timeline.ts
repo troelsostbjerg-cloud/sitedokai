@@ -744,6 +744,57 @@ export const months: MonthEntry[] = [
       },
     ],
   },
+  {
+    id: '2026-06',
+    year: 2026,
+    month: 6,
+    monthLabel: 'Juni 2026',
+    headline: 'Fable 5 — og da AI ramte eksportkontrol',
+    summary:
+      'Anthropic lancerede en ny topmodel, Claude Fable 5, men måtte kortvarigt lukke den globalt, da USA strammede eksportkontrollen med de stærkeste AI-modeller. Samtidig genopfandt Apple sin Siri, og Microsoft begyndte for alvor at gøre sig uafhængig af OpenAI.',
+    highlights: [
+      {
+        category: 'model',
+        date: '9. jun',
+        title: 'Claude Fable 5',
+        detail:
+          'Anthropics nye ræsonneringsmodel med en million tokens kontekst — et nyt niveau over Opus 4.8 og endnu et skridt i et tempo, hvor topmodeller nu kommer næsten månedligt.',
+      },
+      {
+        category: 'politik',
+        date: '12.-18. jun',
+        title: 'Eksportkontrol lukker en frontier-model',
+        detail:
+          'USA udstedte et hastedirektiv om eksportkontrol af de stærkeste AI-modeller. Anthropic måtte kortvarigt lukke Fable 5 globalt og genåbnede den først efter at have indført adgang baseret på nationalitet — første gang en topmodel blev trukket tilbage af sikkerhedshensyn.',
+      },
+      {
+        category: 'produkt',
+        date: '8. jun',
+        title: 'Apple genopfinder Siri',
+        detail:
+          'Apple lancerede en helt ombygget Siri drevet af næste generation Apple Intelligence — med forståelse for hvad der er på skærmen og evne til at styre apps med stemme og tekst.',
+      },
+      {
+        category: 'erhverv',
+        title: 'Microsoft gør sig uafhængig',
+        detail:
+          'Microsoft udgav sine egne modeller (bl.a. MAI-Code-1-Flash, der laver kode ud fra en beskrivelse) for at mindske afhængigheden af OpenAI — mens de fortsat investerer i både OpenAI og Anthropic.',
+      },
+      {
+        category: 'model',
+        title: 'Google Gemini 3.5 Pro',
+        detail:
+          'Google udvidede til to millioner tokens kontekst og en "Deep Think"-tilstand, og viste Gemini Live Translate, der oversætter tale til tale næsten i realtid.',
+      },
+      {
+        category: 'erhverv',
+        date: '1. jun',
+        title: 'Anthropic mod børsen',
+        detail:
+          'Anthropic indgav fortroligt en børsnotering til en værdi omkring 965 mia. dollars — AI-pengestrømmen viser fortsat ingen tegn på at stoppe.',
+      },
+    ],
+  },
 ];
 
 // -----------------------------------------------------------------------------
@@ -760,30 +811,29 @@ export interface ThisWeek {
 }
 
 export const thisWeek: ThisWeek = {
-  weekLabel: 'Uge 26, 2026',
-  dateRange: '23.-29. juni 2026',
+  weekLabel: 'Uge 27, 2026',
+  dateRange: '29. juni – 5. juli 2026',
   intro:
     'Den helt friske udvikling — opdateres hver uge. Her samler vi de nyeste træk i kapløbet, mens de sker.',
   items: [
     {
       category: 'model',
-      date: '9. jun',
-      title: 'Anthropic Claude Fable 5',
+      date: '18. jun',
+      title: 'Fable 5 åben igen',
       detail:
-        'En ny ræsonneringsmodel med en million tokens kontekst — endnu et skridt i et tempo hvor topmodeller nu kommer næsten månedligt.',
-    },
-    {
-      category: 'erhverv',
-      title: 'Anthropic mod børsen',
-      detail:
-        'Anthropic lukkede en runde til en værdi omkring 965 mia. dollars og indgav fortroligt en børsnotering — AI-pengestrømmen viser ingen tegn på at stoppe.',
+        'Efter eksportkontrol-nedlukningen genåbnede Anthropic Claude Fable 5 — nu med adgang baseret på nationalitet og strammere sikkerhedsfiltre.',
     },
     {
       category: 'produkt',
-      date: '1. jun',
-      title: 'Microsoft og Google går efter kodning',
+      title: 'Gemini Live Translate',
       detail:
-        'Begge lancerede nye kodnings-modeller for at udfordre Anthropic og OpenAI på det hurtigst voksende AI-marked: software-udvikling.',
+        'Googles nye lydmodel oversætter tale til tale næsten i realtid — et skridt mod at sprogbarrierer forsvinder midt i en samtale.',
+    },
+    {
+      category: 'erhverv',
+      title: 'Grok 5 på vej',
+      detail:
+        'xAI træner sin næste store model, Grok 5, på det udvidede Colossus 2-anlæg (1,5 gigawatt) — ventet i løbet af sommeren.',
     },
   ],
 };
