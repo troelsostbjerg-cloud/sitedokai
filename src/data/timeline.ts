@@ -795,6 +795,55 @@ export const months: MonthEntry[] = [
       },
     ],
   },
+  {
+    id: '2026-07',
+    year: 2026,
+    month: 7,
+    monthLabel: 'Juli 2026',
+    headline: 'Opus 5 — og magten forskyder sig',
+    summary:
+      'Anthropic lancerede Claude Opus 5 og overhalede samtidig OpenAI på omsætning. Elon Musk samlede sit imperium som SpaceXAI og opkøbte kodnings-darlingen Cursor, mens OpenAI svarede igen med GPT-5.6-familien.',
+    highlights: [
+      {
+        category: 'model',
+        date: '24. jul',
+        title: 'Claude Opus 5',
+        detail:
+          'Anthropics nye flagskib gik direkte i top på intelligens-listerne — og til den halve pris af Fable 5. Stærkere AI blev igen billigere.',
+      },
+      {
+        category: 'model',
+        date: '9. jul',
+        title: 'OpenAI GPT-5.6 (Sol, Terra, Luna)',
+        detail:
+          'En familie af tre modeller med hvert sit fokus. Sol sigter mod tung ræsonnering og kodning og kører lynhurtigt på specialiseret hardware.',
+      },
+      {
+        category: 'erhverv',
+        title: 'Musks imperium bliver til SpaceXAI',
+        detail:
+          'Efter SpaceX blev børsnoteret samlede Elon Musk AI, rumfart og sociale medier under navnet SpaceXAI — og opkøbte kodnings-platformen Cursor for omkring 60 mia. dollars.',
+      },
+      {
+        category: 'erhverv',
+        title: 'Anthropic overhaler OpenAI',
+        detail:
+          'For første gang løb Anthropic fra OpenAI på omsætning — på vej mod cirka 47 mia. dollars om året, drevet af erhverv og kodning.',
+      },
+      {
+        category: 'kultur',
+        title: 'Grok-værktøj sendte kode i smug',
+        detail:
+          'xAIs kodnings-værktøj viste sig at uploade brugernes private kode-projekter, selv når de havde fravalgt datadeling. xAI slettede dataene og gjorde værktøjet åbent — en skarp påmindelse om tillid og privatliv i AI-værktøjer.',
+      },
+      {
+        category: 'politik',
+        title: 'Vagthund bygger sine egne AI-agenter',
+        detail:
+          'Den franske konkurrencemyndighed byggede AI-agenter til at granske branchen og konkluderede, at tre selskaber — OpenAI, Google og Anthropic — tilsammen styrer over 84% af markedet for AI-agenter.',
+      },
+    ],
+  },
 ];
 
 // -----------------------------------------------------------------------------
@@ -811,29 +860,29 @@ export interface ThisWeek {
 }
 
 export const thisWeek: ThisWeek = {
-  weekLabel: 'Uge 27, 2026',
-  dateRange: '29. juni – 5. juli 2026',
+  weekLabel: 'Uge 31, 2026',
+  dateRange: '27. juli – 2. august 2026',
   intro:
     'Den helt friske udvikling — opdateres hver uge. Her samler vi de nyeste træk i kapløbet, mens de sker.',
   items: [
     {
       category: 'model',
-      date: '18. jun',
-      title: 'Fable 5 åben igen',
+      date: '24. jul',
+      title: 'Claude Opus 5 lige landet',
       detail:
-        'Efter eksportkontrol-nedlukningen genåbnede Anthropic Claude Fable 5 — nu med adgang baseret på nationalitet og strammere sikkerhedsfiltre.',
+        'Anthropics nye top-model tog føringen på intelligens-listerne — til den halve pris af Fable 5.',
     },
     {
-      category: 'produkt',
-      title: 'Gemini Live Translate',
+      category: 'model',
+      title: 'Gemini 3.6 og Grok STT',
       detail:
-        'Googles nye lydmodel oversætter tale til tale næsten i realtid — et skridt mod at sprogbarrierer forsvinder midt i en samtale.',
+        'Google udgav Gemini 3.6 Flash og xAI en ny tale-til-tekst-model — flagskibe og specialmodeller kommer nu nærmest hver uge.',
     },
     {
       category: 'erhverv',
-      title: 'Grok 5 på vej',
+      title: 'Anthropic foran OpenAI',
       detail:
-        'xAI træner sin næste store model, Grok 5, på det udvidede Colossus 2-anlæg (1,5 gigawatt) — ventet i løbet af sommeren.',
+        'Anthropic løb for første gang fra OpenAI på omsætning — et vendepunkt i kapløbet mellem de to største labs.',
     },
   ],
 };
