@@ -183,8 +183,8 @@ const metrics = [
     } catch (e) {}
     var stored = null;
     try { stored = localStorage.getItem('asi-min'); } catch (e) {}
-    // Mobil: start som lille chip (fylder ikke). Desktop: vis målerne.
-    var startMin = stored === '1' || (stored === null && window.matchMedia('(max-width: 639px)').matches);
+    // Mobil/tablet: start som lille chip (fylder ikke). Desktop: vis målerne.
+    var startMin = stored === '1' || (stored === null && window.matchMedia('(max-width: 767px)').matches);
 
     if (startMin) { setMin(true); }
     else { animateIn(); if (graphWrap && !graphWrap.hasAttribute('hidden')) drawGraph(nowYear()); }

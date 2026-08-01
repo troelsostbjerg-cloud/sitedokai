@@ -9,6 +9,11 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* hidden-attributten skal vinde over display-utilities (fx .flex) */
+  [hidden] {
+    display: none !important;
+  }
+
   body {
     @apply bg-ink font-sans text-text antialiased;
     background-image:
