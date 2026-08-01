@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ProgressToASI from '../components/ProgressToASI.astro';
 
 interface Props {
   title: string;
@@ -67,6 +68,7 @@ const robots = noindex ? 'noindex, follow' : 'index, follow';
       Spring til indhold
     </a>
     <Nav />
+    <ProgressToASI />
     <main id="main">
       <slot />
     </main>
