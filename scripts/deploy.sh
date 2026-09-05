@@ -49,7 +49,6 @@ case "$DEPLOY_MODE" in
     gcloud app services set-traffic default \
       --project "$PROJECT_ID" \
       --splits "$DEPLOY_VERSION=1" \
-      --migrate \
       --quiet
     VERIFY_URL="https://$APP_HOST"
     ;;
