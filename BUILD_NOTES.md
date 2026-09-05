@@ -1,66 +1,110 @@
-# AI-tidslinjen — build & vedligehold
+# SiteDokAI — build og vedligehold
 
-sitedokai.com er en dansk tidslinje over udviklingen i kunstig intelligens.
-Tidligere var domænet et konsulent-site (SitedokAI); det er nu lagt om.
+sitedokai.com er Troels Østbjergs personlige rådgivningssite for AI adoption og
+enablement i mellemstore virksomheder. Den tidligere AI-tidslinje er pensioneret;
+dens dynamiske månedsroute ligger bevaret under `_archive/`, og gamle offentlige
+adresser får permanente HTTP-viderestillinger.
 
-## Stack
+## Stack og source of truth
 
-- Astro 5 (statisk) + Tailwind CSS 3
-- Hostes på **GitHub Pages** (domæne sitedokai.com)
-- Helt statisk: intet login, ingen backend, ingen database
+- Astro 7, statisk output
+- Tailwind CSS 4 via den officielle Vite-plugin
+- npm og `package-lock.json` er den kanoniske package manager og låsefil
+- Google App Engine i projektet `sitedok` serverer produktion via en lille Node-server
+- Serveren leverer 308-redirects, HTTP-sikkerhedsheaders og en per-side CSP,
+  hvis hashes beregnes fra den præcise build-HTML ved opstart
+- App Engine er låst til `europe-west`, TLS 1.2 og højst én F1-instans
+- Intet login, ingen database, ingen analytics og ingen kontaktformular
+
+Kildekoden ligger på `main` i `troelsostbjerg-cloud/sitedokai`. GitHub Pages-
+branchen `gh-pages` bevares midlertidigt som rollback, men er ikke længere den
+kanoniske produktionsplatform.
 
 ## Kør lokalt
 
 ```bash
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # bygger til ./dist
+npm ci
+npm run dev
+npm run build
+npm test
+npm audit --omit=dev
 ```
 
-## Deploy (gør siden live)
+Preview af et færdigt build:
 
 ```bash
-npm run deploy   # bygger og lægger siden live på sitedokai.com
+npm run preview
 ```
 
-GitHub Pages serverer fra branchen **`gh-pages`** (det færdige build i roden).
-`npm run deploy` bygger `dist/` og publicerer det dertil — live efter 1-2 minutter.
-Husk også at committe dine ændringer i `src/` til `main`, så kilden er gemt:
+## Deploy med QA-gate
 
 ```bash
-git add -A && git commit -m "Tilføj ny måned" && git push
+npm run deploy
 ```
 
-## Sådan tilføjer du en ny måned (det vigtigste)
+Standardkommandoen laver en ny staging-version uden at flytte trafik. Scriptet
+bruger den aktive Google Cloud-konto og:
 
-Alt indhold ligger ét sted: **`src/data/timeline.ts`**.
+1. bygger `dist/`
+2. kører Node-serverens integrationstests
+3. kører produktions-audit af npm-afhængigheder
+4. deployer en navngivet App Engine-version til projektet `sitedok`
+5. verificerer den versionsspecifikke URL, som sender `X-Robots-Tag: noindex`
 
-1. Åbn filen og find `months`-arrayet.
-2. Kopiér det nederste måned-objekt og indsæt det i bunden.
-3. Ret felterne:
-   - `id`: `"ÅÅÅÅ-MM"` (bliver URL'en `/maaned/ÅÅÅÅ-MM`)
-   - `year`, `month`, `monthLabel`
-   - `headline`: én linje der fanger måneden
-   - `summary`: 2-3 sætninger
-   - `highlights`: 3-7 punkter med `category`, `title`, `detail` (+ valgfri `date`, `source`)
-4. Gyldige `category`-værdier: `model`, `produkt`, `forskning`, `erhverv`, `politik`, `kultur`.
-5. Commit + push. Forside, tidslinje, detaljeside og sitemap opdateres automatisk.
+Når den eksakte version har bestået selvstændig QA, promoveres samme immutable
+version — der bygges ikke et nyt artifact mellem QA og produktion:
 
-## Sådan opdaterer du "Denne uge i AI"
+```bash
+npm run deploy:production -- qa-ÅÅÅÅMMDD-TTMMSS
+```
 
-Ret `thisWeek`-objektet nederst i `src/data/timeline.ts` (`weekLabel`,
-`dateRange`, `intro`, `items`). Vises på forsiden og i "Mit overblik".
+Et budget på 50 DKK pr. måned er afgrænset til projektet med varsler ved 50,
+90 og 100 procent. Budgettet er et varsel, ikke et automatisk forbrugsstop.
 
-## Sider
+Kildeændringer skal committes og pushes til `main` separat. Brug altid
+path-scoped staging i en dirty worktree; brug ikke `git add -A` på kildebranchen.
 
-- `/` — hero, "Denne uge i AI" og tidslinjen (nyeste øverst)
-- `/maaned/[id]` — detaljeside pr. måned (genereres fra data)
-- `/om` — baggrund og metode
-- `/privacy` — privatlivspolitik
-- `/sitemap.xml` — genereres dynamisk fra månederne
+## Aktive sider
 
-## Design
+- `/` — positionering, samarbejdsformer, metode, arbejdseksempel og FAQ
+- `/om/` — Troels, arbejdsform og faglige grænser
+- `/kontakt/` — direkte mail og LinkedIn
+- `/privacy/` — privatliv, hosting og lokalt hostede skrifttyper
+- `/sitemap.xml` og `/llms.txt` — crawl- og AI-læsbar profil
+- `/404.html` — brugerdefineret fejlside
 
-- Mørkt tema. Farver i `tailwind.config.mjs`, basis-styles i `src/styles/global.css`.
-- Kategori-farver skal matche mellem `tailwind.config.mjs` (`cat.*`) og
-  `CATEGORIES` i `src/data/timeline.ts`.
+Gamle routes vedligeholdes ét sted i `src/config/redirects.mjs`. Astro bruger
+dem til statisk output, og `server.mjs` returnerer ægte 308-svar i produktion.
+
+## Indhold og design
+
+- Dansk, konkret og varmt
+- Primær målgruppe: mellemstore virksomheder
+- Kerne: AI adoption og enablement tæt på reelle arbejdsgange
+- Farver og typografi: `tailwind.config.mjs`
+- Lokale WOFF2-skrifttyper og OFL-licenser: `public/fonts/newsreader/` og
+  `public/fonts/outfit/`
+- Globale komponentstile: `src/styles/global.css`
+- Fælles metadata og schema: `src/layouts/Layout.astro`
+- Server, redirects og per-side hash-baseret CSP: `server.mjs` og
+  `src/config/redirects.mjs`
+- Socialt delingsbillede: `public/og-image.png`
+
+Arbejdseksemplet skal forblive anonymiseret. Der må ikke tilføjes
+virksomhedsnavn, interne medarbejderoplysninger eller effekter/ROI, som ikke er
+dokumenteret.
+
+## Release-check
+
+Før deploy:
+
+```bash
+npm ci
+npm run build
+npm test
+npm audit --omit=dev
+git diff --check
+```
+
+Kontrollér derefter desktop og mobil i en browser: navigation, mobilmenu, FAQ,
+mailto, LinkedIn, overflow, konsollog, metadata og de fire aktive sider.

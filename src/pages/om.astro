@@ -1,101 +1,131 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { CATEGORIES, type Category, months, totalHighlights } from '../data/timeline';
 ---
 
 <Layout
-  title="Om AI-tidslinjen — hvorfor og hvordan"
-  description="Hvorfor jeg bygger en tidslinje over AI-udviklingen, og hvordan indholdet bliver til."
+  title="Om Troels og SiteDokAI | AI-enablement i praksis"
+  description="SiteDokAI er Troels Østbjergs lille AI-enablement- og adoptionspraksis for mellemstore virksomheder. Fra strategi og værktøjer til arbejdsgange, mennesker og målbar brug."
+  canonical="/om/"
 >
-  <section class="relative overflow-hidden border-b border-line">
-    <div class="pointer-events-none absolute inset-0 bg-aurora opacity-70"></div>
-    <div class="container-page relative py-16">
-      <span class="mono-label">Om projektet</span>
-      <h1 class="mt-4 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-        Vi står i den mest revolutionerende tidsalder. <span class="text-gradient">Nogen burde skrive det ned.</span>
-      </h1>
-      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-text-soft">
-        Kunstig intelligens flytter sig så hurtigt, at selv folk midt i det taber
-        overblikket. AI-tidslinjen er mit forsøg på at holde fast i, hvad der
-        faktisk skete — så du om et år kan klikke ind og genopleve præcis, hvad
-        der flyttede verden i netop denne måned.
-      </p>
+  <section class="section-shell overflow-hidden">
+    <div class="container-page grid gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)] lg:items-end">
+      <div class="reveal">
+        <p class="eyebrow">Om SiteDokAI</p>
+        <h1 class="mt-5 max-w-4xl font-display text-4xl leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
+          Jeg hjælper AI det sidste stykke ind i hverdagen.
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+          Jeg hedder Troels Østbjerg. SiteDokAI er min lille rådgivningspraksis for mellemstore
+          virksomheder, der vil gøre AI konkret, trygt og brugbart for de mennesker, der skal
+          arbejde med det.
+        </p>
+      </div>
+
+      <aside class="paper-panel reveal p-6 sm:p-8" aria-label="Kort om samarbejdet">
+        <p class="eyebrow">Én rådgiver</p>
+        <p class="mt-5 font-display text-2xl leading-snug text-brand">
+          Du taler med den samme person, der lytter, bygger, faciliterer og følger op.
+        </p>
+        <p class="mt-5 text-sm leading-relaxed text-muted">
+          Ingen stor leverandørmodel og ingen overlevering til et anonymt projektteam. Jeg tager
+          hellere et afgrænset problem hele vejen end at sælge et stort program uden jordforbindelse.
+        </p>
+      </aside>
     </div>
   </section>
 
-  <section class="container-page py-14">
-    <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
-      <div class="space-y-10">
-        <div>
-          <h2 class="font-display text-2xl font-bold">Hvorfor</h2>
-          <p class="mt-3 leading-relaxed text-text-soft">
-            Jeg byggede oprindeligt SitedokAI som et lille bureau. Det kapitel er
-            lukket — jeg har fået fast arbejde i AI-branchen. Men interessen for
-            udviklingen forsvandt ikke; den voksede. Så jeg lavede domænet om til
-            det, jeg selv havde manglet: ét roligt, dansk sted, hvor man kan følge
-            kapløbet uden at drukne i nyheder.
-          </p>
-        </div>
-
-        <div>
-          <h2 class="font-display text-2xl font-bold">Hvordan indholdet bliver til</h2>
-          <p class="mt-3 leading-relaxed text-text-soft">
-            Hver måned får én side. Den samler de vigtigste begivenheder —
-            modeller, produkter, forskning, penge, politik og samfund — i korte,
-            jargonfri opslag. Indholdet er sammenfattet fra offentlige kilder og
-            redigeret til at kunne læses af alle, ikke kun ingeniører. Tidslinjen
-            starter i januar 2025 og opdateres løbende. "Denne uge i AI" på
-            forsiden holder dig opdateret på det helt friske.
-          </p>
-        </div>
-
-        <div>
-          <h2 class="font-display text-2xl font-bold">Helt frit tilgængeligt</h2>
-          <p class="mt-3 leading-relaxed text-text-soft">
-            Der er ingen login, ingen betaling og ingen reklamer. Du kommer bare
-            ind og læser. Sæt et bogmærke, og kig forbi igen, når du vil se, hvad
-            der er sket siden sidst.
-          </p>
-          <a href="/#tidslinje" class="btn-primary mt-6">Gå til tidslinjen</a>
-        </div>
+  <section class="section-shell border-t border-brand/10" aria-labelledby="mellemled-heading">
+    <div class="container-page grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+      <div class="reveal">
+        <p class="eyebrow">Min rolle</p>
+        <h2 id="mellemled-heading" class="mt-4 font-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
+          Mellemleddet, der ofte mangler
+        </h2>
       </div>
 
-      <aside class="space-y-5">
-        <div class="glass p-6">
-          <h2 class="mono-label">De seks spor</h2>
-          <ul class="mt-4 space-y-3">
-            {
-              (Object.keys(CATEGORIES) as Category[]).map((c) => (
-                <li class="flex items-start gap-3">
-                  <span class="mt-1 h-3 w-3 flex-shrink-0 rounded-full" style={`background:${CATEGORIES[c].color}`} />
-                  <div>
-                    <p class="text-sm font-semibold text-text">{CATEGORIES[c].label}</p>
-                    <p class="text-xs leading-relaxed text-text-soft">{CATEGORIES[c].blurb}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+      <div class="reveal max-w-3xl space-y-6 text-base leading-relaxed text-muted sm:text-lg">
+        <p>
+          Strategien kan være besluttet, og værktøjerne kan være købt, uden at AI bliver en reel
+          del af arbejdet. Afstanden opstår mellem ledelsens ambition, teknologiens muligheder og
+          medarbejdernes faktiske opgaver.
+        </p>
+        <p>
+          Det er dér, jeg arbejder. Jeg oversætter muligheder til konkrete arbejdsgange, gør
+          roller og ansvar tydelige og hjælper de involverede med at lære gennem små forsøg i
+          deres egen hverdag. Målet er ikke flest mulige AI-initiativer. Målet er bedre arbejde,
+          som mennesker forstår og vælger at bruge.
+        </p>
+      </div>
+    </div>
+  </section>
 
-        <div class="glass p-6">
-          <h2 class="mono-label">Status</h2>
-          <dl class="mt-4 space-y-3 text-sm">
-            <div class="flex justify-between">
-              <dt class="text-text-soft">Måneder dækket</dt>
-              <dd class="font-mono font-semibold text-text">{months.length}</dd>
-            </div>
-            <div class="flex justify-between">
-              <dt class="text-text-soft">Milepæle</dt>
-              <dd class="font-mono font-semibold text-text">{totalHighlights}</dd>
-            </div>
-            <div class="flex justify-between">
-              <dt class="text-text-soft">Sprog</dt>
-              <dd class="font-mono font-semibold text-text">Dansk</dd>
-            </div>
-          </dl>
+  <section class="section-shell" aria-labelledby="arbejdsmaade-heading">
+    <div class="container-page">
+      <div class="reveal max-w-3xl">
+        <p class="eyebrow">Sådan arbejder jeg</p>
+        <h2 id="arbejdsmaade-heading" class="mt-4 font-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
+          Fælles læring før stor skalering
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-muted">
+          Et godt forløb starter tæt på arbejdet og efterlader mere kunnen i organisationen, end
+          da vi begyndte.
+        </p>
+      </div>
+
+      <ol class="mt-12 divide-y divide-brand/10 border-y border-brand/10">
+        <li class="reveal grid gap-3 py-7 sm:grid-cols-[4rem_0.8fr_1.2fr] sm:items-start sm:gap-8">
+          <span class="number-mark" aria-hidden="true">01</span>
+          <h3 class="font-display text-2xl leading-tight">Forstå arbejdet</h3>
+          <p class="leading-relaxed text-muted">Vi tager udgangspunkt i konkrete opgaver, beslutninger, friktioner og mennesker — ikke i en værktøjsdemo.</p>
+        </li>
+        <li class="reveal grid gap-3 py-7 sm:grid-cols-[4rem_0.8fr_1.2fr] sm:items-start sm:gap-8">
+          <span class="number-mark" aria-hidden="true">02</span>
+          <h3 class="font-display text-2xl leading-tight">Vælg et lille bevis</h3>
+          <p class="leading-relaxed text-muted">Vi prioriterer én brugssituation med tydelig værdi, realistiske data og en ansvarlig ejer.</p>
+        </li>
+        <li class="reveal grid gap-3 py-7 sm:grid-cols-[4rem_0.8fr_1.2fr] sm:items-start sm:gap-8">
+          <span class="number-mark" aria-hidden="true">03</span>
+          <h3 class="font-display text-2xl leading-tight">Byg med brugerne</h3>
+          <p class="leading-relaxed text-muted">Vi tester i den virkelige arbejdsgang, justerer sprog og ansvar og beholder menneskelig godkendelse dér, hvor den gør en forskel.</p>
+        </li>
+        <li class="reveal grid gap-3 py-7 sm:grid-cols-[4rem_0.8fr_1.2fr] sm:items-start sm:gap-8">
+          <span class="number-mark" aria-hidden="true">04</span>
+          <h3 class="font-display text-2xl leading-tight">Lær og gør næste skridt mindre</h3>
+          <p class="leading-relaxed text-muted">Vi dokumenterer brug, effekt, begrænsninger og læring, så næste beslutning bliver bedre — også når svaret er ikke at skalere endnu.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-shell" aria-labelledby="graenser-heading">
+    <div class="container-page">
+      <div class="paper-panel reveal grid gap-10 p-7 sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+        <div>
+          <p class="eyebrow">Ansvarlig fremdrift</p>
+          <h2 id="graenser-heading" class="mt-4 font-display text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
+            Grænserne skal være lige så tydelige som mulighederne
+          </h2>
         </div>
-      </aside>
+        <div>
+          <ul class="divide-y divide-brand/10 border-y border-brand/10 text-sm leading-relaxed text-muted sm:text-base">
+            <li class="py-4">AI foreslår. Mennesker godkender, når kvalitet, relationer eller risiko kræver det.</li>
+            <li class="py-4">Usikkerheder, datakilder og kendte begrænsninger bliver dokumenteret — ikke gemt væk.</li>
+            <li class="py-4">Jeg anbefaler ikke AI, hvis en enklere procesændring løser problemet bedre.</li>
+            <li class="py-4">Et pilotforsøg er først en succes, når det bliver brugt og skaber mærkbar værdi i hverdagen.</li>
+          </ul>
+          <a href="/kontakt/" class="rule-link mt-7 inline-flex">Fortæl mig, hvor jeres AI-arbejde går i stå</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell border-t border-brand/10">
+    <div class="container-page flex flex-col gap-7 sm:flex-row sm:items-center sm:justify-between">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow">En rolig begyndelse</p>
+        <h2 class="mt-3 font-display text-3xl leading-tight tracking-[-0.035em]">Lad os starte med én konkret situation.</h2>
+      </div>
+      <a href="/kontakt/" class="btn btn-primary reveal">Tag den første samtale</a>
     </div>
   </section>
 </Layout>

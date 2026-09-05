@@ -1,25 +1,33 @@
-# AI-tidslinjen
+# SiteDokAI
 
-AI-tidslinjen (sitedokai.com) er et uafhængigt, dansk overblik over udviklingen i
-kunstig intelligens. Den dækker de vigtigste begivenheder måned for måned, fra
-januar 2025 og frem, og opdateres løbende. Projektet drives af Troels Østbjerg.
+SiteDokAI er Troels Østbjergs personlige rådgivning i AI adoption og enablement
+for mellemstore virksomheder i Danmark.
 
 ## Formål
-At gøre det nemt for almindelige mennesker at følge med i AI-kapløbet uden at
-drukne i nyheder. Indholdet er på dansk, jargonfrit og redigeret til at kunne
-læses af alle — ikke kun fagfolk.
 
-## Struktur
-- Forside: hero, "Denne uge i AI" og en kronologisk tidslinje (nyeste øverst).
-- /maaned/ÅÅÅÅ-MM: detaljeside for hver måned med alle milepæle.
-- /om: baggrund og metode.
-- Helt offentligt: intet login, ingen betaling, ingen reklamer.
+At gøre AI konkret, trygt og brugbart i det daglige arbejde. Arbejdet starter
+med reelle arbejdsproblemer og bevæger sig gennem små piloter, menneskelig
+godkendelse, jobnær læring og enkel dokumentation af effekten.
 
-## Spor (kategorier)
-Ny model, Produkt, Forskning, Penge & magt, Politik, Samfund.
+## Samarbejder
 
-## Kilder
-Indholdet er sammenfattet fra offentlige kilder om AI-udviklingen.
+- AI-adoptionstjek: fælles billede af brug, friktion, initiativer og næste valg.
+- Fra arbejdsproblem til pilot: afgrænset forsøg med ejer, baseline og stopkriterier.
+- AI i hverdagen: jobnær læring, ambassadører og lederopfølgning.
+- Løbende AI-enablement: prioritering, portefølje, governance og opfølgning.
+
+## Metode
+
+Forstå. Vælg. Test. Aktivér. Mål og forankr.
+
+SiteDokAI lover ikke et bestemt ROI-resultat. Muligheder, risici og effekt skal
+dokumenteres i den konkrete kontekst, og mennesker godkender det endelige arbejde.
 
 ## Kontakt
-Troels Østbjerg — solo-bygger bag projektet.
+
+Troels Østbjerg — info@sitedokai.com
+
+- [Forside og samarbejdsformer](https://sitedokai.com/)
+- [Om Troels og arbejdsformen](https://sitedokai.com/om/)
+- [Kontakt SiteDokAI](https://sitedokai.com/kontakt/)
+- [Privatliv](https://sitedokai.com/privacy/)

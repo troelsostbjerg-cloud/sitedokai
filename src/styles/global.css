@@ -1,172 +1,154 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+
+/* Self-hosted latin subsets. Each family is licensed under the SIL OFL 1.1. */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/outfit/outfit-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/outfit/outfit-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/outfit/outfit-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/outfit/outfit-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: clamp(5rem, 8vw, 7rem);
-    -webkit-text-size-adjust: 100%;
-  }
-
-  /* hidden-attributten skal vinde over display-utilities (fx .flex) */
-  [hidden] {
-    display: none !important;
-  }
-
+  :root { color-scheme: light; font-synthesis: none; }
+  html { scroll-behavior: smooth; scroll-padding-top: 6.5rem; -webkit-text-size-adjust: 100%; }
+  [hidden] { display: none !important; }
   body {
-    @apply bg-ink font-sans text-text antialiased;
+    @apply min-h-screen overflow-x-hidden bg-canvas font-sans text-brand antialiased;
     background-image:
-      radial-gradient(70% 55% at 50% -5%, rgba(139, 92, 246, 0.18), transparent 70%),
-      radial-gradient(45% 40% at 95% 5%, rgba(34, 211, 238, 0.1), transparent 70%);
+      radial-gradient(circle at 94% 4%, rgba(102, 122, 99, 0.14), transparent 28rem),
+      radial-gradient(circle at 7% 42%, rgba(223, 231, 219, 0.58), transparent 25rem);
     background-attachment: fixed;
-    overflow-x: hidden;
-    min-height: 100vh;
   }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply font-display text-text;
+  body::before {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    content: ''; inset: 0; opacity: 0.035; pointer-events: none; position: fixed; z-index: 80;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-medium tracking-[-0.035em] text-brand;
     text-wrap: balance;
-    overflow-wrap: break-word;
   }
-
-  p {
-    overflow-wrap: break-word;
-  }
-
-  a {
-    text-underline-offset: 3px;
-  }
-
-  ::selection {
-    background: rgba(139, 92, 246, 0.35);
-    color: #fff;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0b12;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 999px;
-    border: 2px solid #0a0b12;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(139, 92, 246, 0.5);
-  }
-
+  p, li { text-wrap: pretty; }
+  a { text-underline-offset: 0.22em; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid #4e6250; outline-offset: 4px; }
+  ::selection { background: #667a63; color: #fffdf8; }
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
       transition-duration: 0.001ms !important;
     }
   }
 }
 
 @layer components {
-  .container-page {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
-  }
-
-  /* Glas-kort */
-  .glass {
-    @apply rounded-2xl border border-line bg-ink-panel/70 backdrop-blur-sm;
-  }
-
-  .card-hover {
-    transition:
-      border-color 220ms ease,
-      background-color 220ms ease,
-      box-shadow 220ms ease,
-      transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .card-hover:hover {
-    @apply border-line-strong;
-    transform: translateY(-3px);
-    box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.9);
-  }
-
-  /* Gradient-tekst */
-  .text-gradient {
-    @apply bg-violet-cyan bg-clip-text text-transparent;
-  }
-
-  /* Knapper */
+  .container-page { @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-10; }
+  .section-shell { @apply py-20 sm:py-28 lg:py-32; }
+  .eyebrow { @apply inline-flex items-center gap-2.5 text-[0.69rem] font-semibold uppercase tracking-[0.19em] text-sage-dark; }
+  .eyebrow::before { @apply h-px w-7 bg-sage content-['']; }
   .btn {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-bright disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 py-3 text-[0.93rem] font-semibold no-underline;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
-  .btn-primary {
-    @apply btn bg-violet text-white hover:bg-violet-bright active:translate-y-px;
-    box-shadow: 0 12px 40px -16px rgba(139, 92, 246, 0.9);
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary { @apply bg-brand text-paper shadow-lift hover:bg-brand-soft; }
+  .btn-secondary { @apply border border-line-strong bg-paper/70 text-brand hover:border-sage hover:bg-paper; }
+  .paper-panel { @apply rounded-[1.75rem] border border-line bg-paper/90 shadow-soft; }
+  .rule-link {
+    @apply inline-flex items-center gap-2 border-b border-brand/35 pb-1 text-sm font-semibold text-brand no-underline;
+    transition: border-color 180ms ease, gap 180ms ease;
   }
-  .btn-ghost {
-    @apply btn border border-line-strong bg-white/[0.03] text-text hover:border-violet/50 hover:bg-white/[0.06];
+  .rule-link:hover { @apply gap-3 border-brand; }
+  .reveal { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .reveal-delay-1 { animation-delay: 90ms; }
+  .reveal-delay-2 { animation-delay: 180ms; }
+  .reveal-delay-3 { animation-delay: 270ms; }
+  .portrait-frame { @apply relative overflow-hidden rounded-[2rem] border border-line bg-sage-soft shadow-soft; }
+  .portrait-frame::after {
+    @apply pointer-events-none absolute inset-0 content-[''];
+    background: linear-gradient(180deg, transparent 55%, rgba(32, 42, 36, 0.13));
   }
-
-  /* Kategori-mærkat */
-  .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide;
+  .service-card {
+    @apply border-t border-line-strong py-8;
+    transition: border-color 180ms ease, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  /* Inputfelter */
-  .field {
-    @apply h-12 w-full rounded-xl border border-line-strong bg-white/[0.04] px-4 text-base text-text outline-none transition-colors placeholder:text-text-dim focus:border-violet/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-bright;
-  }
-
-  .mono-label {
-    @apply font-mono text-xs uppercase tracking-[0.2em] text-text-dim;
-  }
-
-  /* Skjul scrollbar (vandret tidslinje) */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Toning i kanterne på det vandrette bånd */
-  .edge-fade {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 64px,
-      #000 calc(100% - 64px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 64px,
-      #000 calc(100% - 64px),
-      transparent 100%
-    );
-  }
-  @media (max-width: 640px) {
-    .edge-fade {
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-  }
-
-  .grab {
-    cursor: grab;
-  }
-  .grab:active {
-    cursor: grabbing;
-  }
+  .service-card:hover { @apply border-sage; transform: translateY(-3px); }
+  .number-mark { @apply font-display text-2xl italic text-sage; }
 }

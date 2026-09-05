@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Siden findes ikke | SiteDokAI"
+  description="Den side, du ledte efter, findes ikke længere. Find tilbage til SiteDokAI."
+  canonical="/404"
+  noindex={true}
+>
+  <section class="section-shell">
+    <div class="container-page">
+      <div class="paper-panel reveal grid gap-10 p-7 sm:p-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:p-14">
+        <div>
+          <p class="eyebrow">Fejl 404</p>
+          <p class="mt-4 font-display text-7xl leading-none tracking-[-0.06em] text-sage sm:text-8xl" aria-hidden="true">404</p>
+        </div>
+
+        <div>
+          <h1 class="font-display text-4xl leading-tight tracking-[-0.04em] sm:text-5xl">Her er lidt mere stille end planlagt.</h1>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+            Siden findes ikke, eller også har den fået en ny adresse. Du kan gå tilbage til
+            forsiden, læse om min måde at arbejde på eller skrive direkte til mig.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <a href="/" class="btn btn-primary">Gå til forsiden</a>
+            <a href="/om/" class="btn btn-secondary">Læs om SiteDokAI</a>
+          </div>
+          <a href="/kontakt/" class="rule-link mt-7 inline-flex">Eller kontakt mig her</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

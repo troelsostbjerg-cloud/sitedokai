@@ -1,52 +1,98 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const updated = '29. juni 2026';
+
+const updated = '5. september 2026';
+const email = 'info@sitedokai.com';
 ---
 
-<Layout title="Privatlivspolitik — AI-tidslinjen" description="Sådan håndterer AI-tidslinjen dine data.">
-  <section class="container-page py-16">
-    <div class="mx-auto max-w-2xl">
-      <span class="mono-label">Privatliv</span>
-      <h1 class="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Privatlivspolitik</h1>
-      <p class="mt-3 text-sm text-text-dim">Senest opdateret {updated}</p>
+<Layout
+  title="Privatliv | SiteDokAI"
+  description="Læs hvordan SiteDokAI håndterer personoplysninger, mailkontakt og tekniske forespørgsler ved hosting hos Google Cloud."
+  canonical="/privacy/"
+>
+  <section class="section-shell">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+      <header class="reveal lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow">Privatliv</p>
+        <h1 class="mt-5 font-display text-4xl leading-tight tracking-[-0.04em] sm:text-5xl">Kort og gennemskueligt</h1>
+        <p class="mt-5 max-w-md leading-relaxed text-muted">
+          SiteDokAI.com bruger ingen formularer, cookies eller analyseværktøjer. Hvis du skriver,
+          håndterer jeg kun det, der er nødvendigt for at svare dig.
+        </p>
+        <p class="mt-5 text-sm text-muted">Senest opdateret {updated}</p>
+      </header>
 
-      <div class="mt-10 space-y-8 leading-relaxed text-text-soft">
-        <div>
-          <h2 class="font-display text-xl font-bold text-text">Kort fortalt</h2>
-          <p class="mt-2">
-            AI-tidslinjen er et lille, dansk passionsprojekt. Du kan bare læse —
-            der er intet login, ingen konto og ingen betaling.
-          </p>
-        </div>
+      <div class="paper-panel reveal p-7 sm:p-10">
+        <div class="space-y-9 text-base leading-relaxed text-muted">
+          <section aria-labelledby="ansvarlig-heading">
+            <h2 id="ansvarlig-heading" class="font-display text-2xl text-brand">Hvem er ansvarlig?</h2>
+            <p class="mt-3">
+              SiteDokAI drives af Troels Østbjerg. Du kan kontakte mig på{' '}
+              <a class="rule-link" href={`mailto:${email}`}>{email}</a>, hvis du har spørgsmål til
+              denne side eller til oplysninger, du har sendt til mig.
+            </p>
+          </section>
 
-        <div>
-          <h2 class="font-display text-xl font-bold text-text">Hvad jeg gemmer</h2>
-          <p class="mt-2">
-            Ingenting om dig. Jeg beder ikke om dine oplysninger, sætter ingen
-            sporings-cookies og bruger ikke reklamer, der følger dig rundt.
-          </p>
-        </div>
+          <section class="border-t border-brand/10 pt-8" aria-labelledby="ingen-sporing-heading">
+            <h2 id="ingen-sporing-heading" class="font-display text-2xl text-brand">Ingen cookies, analytics eller formularer</h2>
+            <p class="mt-3">
+              Sitet sætter ikke cookies, bruger ikke webanalyse og indeholder ingen kontaktformular.
+              Jeg opbygger derfor ikke profiler af besøgende og modtager ingen besøgsstatistik fra
+              siden.
+            </p>
+          </section>
 
-        <div>
-          <h2 class="font-display text-xl font-bold text-text">Hosting</h2>
-          <p class="mt-2">
-            Siden hostes hos Cloudflare. Som hos enhver hjemmeside kan udbyderen
-            behandle helt almindelige, anonyme serverlogs (fx IP-adresse) af
-            tekniske og sikkerhedsmæssige årsager. De bruges ikke til at
-            identificere dig.
-          </p>
-        </div>
+          <section class="border-t border-brand/10 pt-8" aria-labelledby="mail-heading">
+            <h2 id="mail-heading" class="font-display text-2xl text-brand">Når du sender en mail</h2>
+            <p class="mt-3">
+              Hvis du kontakter mig på mail, behandler jeg de oplysninger, du selv sender — typisk
+              navn, mailadresse, virksomhed og indholdet af beskeden — for at kunne besvare din
+              henvendelse og følge op på en mulig opgave. Oplysningerne deles ikke til markedsføring.
+            </p>
+            <p class="mt-3">
+              Korrespondance gemmes kun så længe, den er relevant for dialogen, en aftale eller
+              almindelige dokumentationskrav. Du kan altid bede om indsigt, rettelse eller sletning,
+              medmindre anden lovgivning kræver, at noget bevares.
+            </p>
+          </section>
 
-        <div>
-          <h2 class="font-display text-xl font-bold text-text">Kontakt</h2>
-          <p class="mt-2">
-            Projektet drives af Troels Østbjerg. Spørgsmål? Tag fat, så vender
-            jeg tilbage.
-          </p>
+          <section class="border-t border-brand/10 pt-8" aria-labelledby="hosting-heading">
+            <h2 id="hosting-heading" class="font-display text-2xl text-brand">Hosting hos Google Cloud</h2>
+            <p class="mt-3">
+              Sitet hostes på Google Cloud. Når din browser henter en side, kan Google behandle
+              almindelige tekniske forespørgselsdata som IP-adresse, tidspunkt, browseroplysninger og
+              den ønskede adresse for at levere og beskytte tjenesten. Det er Googles tekniske
+              behandling; SiteDokAI bruger ikke disse data til analyse.
+            </p>
+            <a
+              class="rule-link mt-3 inline-flex"
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Læs Googles privatlivspolitik</a>
+          </section>
+
+          <section class="border-t border-brand/10 pt-8" aria-labelledby="fonts-heading">
+            <h2 id="fonts-heading" class="font-display text-2xl text-brand">Lokalt hostede skrifttyper</h2>
+            <p class="mt-3">
+              Sitet bruger de åbne skrifttyper Newsreader og Outfit. Filerne hostes sammen med resten
+              af sitet og hentes fra samme domæne. Din browser kontakter derfor ikke Bunny Fonts,
+              Google Fonts eller en anden ekstern skrifttypetjeneste for at vise teksten, og der sker
+              ingen særskilt deling af din IP-adresse med en fontudbyder.
+            </p>
+          </section>
+
+          <section class="border-t border-brand/10 pt-8" aria-labelledby="rettigheder-heading">
+            <h2 id="rettigheder-heading" class="font-display text-2xl text-brand">Dine rettigheder</h2>
+            <p class="mt-3">
+              Du kan bede om indsigt i, rettelse af eller sletning af de personoplysninger, jeg har
+              om dig. Du kan også gøre indsigelse mod behandlingen. Skriv til{' '}
+              <a class="rule-link" href={`mailto:${email}`}>{email}</a>. Du har desuden ret til at
+              klage til Datatilsynet.
+            </p>
+          </section>
         </div>
       </div>
-
-      <a href="/" class="btn-ghost mt-12">Tilbage til forsiden</a>
     </div>
   </section>
 </Layout>

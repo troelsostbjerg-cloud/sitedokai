@@ -1,9 +1,13 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
+import { siteRedirects } from './src/config/redirects.mjs';
 
 export default defineConfig({
   site: 'https://sitedokai.com',
-  integrations: [tailwind()],
+  redirects: siteRedirects,
+  vite: {
+    plugins: [tailwindcss()],
+  },
   devToolbar: {
     enabled: false,
   },

@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import ProgressToASI from '../components/ProgressToASI.astro';
 
 interface Props {
   title: string;
@@ -10,24 +9,44 @@ interface Props {
   canonical?: string;
   noindex?: boolean;
   ogImage?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
-  description = 'En tidslinje over den vigtigste udvikling i kunstig intelligens — måned for måned, fra januar 2025 til i dag. Følg med i historiens hurtigste teknologiske kapløb.',
-  canonical = Astro.url.href,
+  description = 'SiteDokAI hjælper mellemstore virksomheder med at gøre AI konkret, trygt og brugbart i det daglige arbejde.',
+  canonical,
   noindex = false,
-  ogImage = '/og-image.svg',
+  ogImage = '/og-image.png',
+  structuredData = [],
 } = Astro.props;
 
 const siteUrl = Astro.site?.href ?? 'https://sitedokai.com/';
-const canonicalUrl = canonical.startsWith('http')
-  ? canonical
-  : new URL(canonical, siteUrl).href;
-const ogImageUrl = ogImage.startsWith('http')
-  ? ogImage
-  : new URL(ogImage, siteUrl).href;
+const canonicalUrl = canonical
+  ? canonical.startsWith('http') ? canonical : new URL(canonical, siteUrl).href
+  : new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
 const robots = noindex ? 'noindex, follow' : 'index, follow';
+
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://sitedokai.com/#business',
+  name: 'SiteDokAI',
+  url: 'https://sitedokai.com/',
+  image: ogImageUrl,
+  email: 'info@sitedokai.com',
+  founder: {
+    '@type': 'Person',
+    name: 'Troels Østbjerg',
+    url: 'https://sitedokai.com/om/',
+    sameAs: 'https://www.linkedin.com/in/troels-%C3%B8stbjerg-37757726',
+  },
+  areaServed: { '@type': 'Country', name: 'Danmark' },
+  serviceType: 'AI adoption og enablement',
+};
+
+const schemaItems = [businessSchema, ...(Array.isArray(structuredData) ? structuredData : [structuredData])];
 ---
 
 <!doctype html>
@@ -37,38 +56,51 @@ const robots = noindex ? 'noindex, follow' : 'index, follow';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
-    <meta name="theme-color" content="#0a0b12" />
+    <meta name="theme-color" content="#f4f0e7" />
     <meta name="author" content="Troels Østbjerg" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="AI-tidslinjen" />
+    <meta property="og:site_name" content="SiteDokAI" />
     <meta property="og:locale" content="da_DK" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SiteDokAI — AI der kan mærkes i arbejdet" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2026" />
-    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260905" />
     <link
-      href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700&family=outfit:400,500,600,700,800"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/outfit/outfit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <link
+      rel="preload"
+      href="/fonts/newsreader/newsreader-latin-500-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    {schemaItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
     <title>{title}</title>
   </head>
   <body>
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand focus:px-5 focus:py-3 focus:text-paper"
     >
       Spring til indhold
     </a>
     <Nav />
-    <ProgressToASI />
     <main id="main">
       <slot />
     </main>

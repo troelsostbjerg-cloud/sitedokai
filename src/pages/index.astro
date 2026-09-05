@@ -1,91 +1,372 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HighlightCard from '../components/HighlightCard.astro';
-import HorizontalTimeline from '../components/HorizontalTimeline.astro';
-import {
-  thisWeek,
-  months,
-  totalHighlights,
-  firstMonth,
-  latestMonth,
-  CATEGORIES,
-} from '../data/timeline';
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'AI-tidslinjen',
-  url: 'https://sitedokai.com/',
-  description:
-    'En tidslinje over den vigtigste udvikling i kunstig intelligens, måned for måned.',
-  inLanguage: 'da-DK',
-};
+const mailHref =
+  'mailto:info@sitedokai.com?subject=Afklarende%20samtale%20om%20AI-adoption&body=Hej%20Troels%2C%0A%0AVi%20vil%20gerne%20tale%20om%20en%20konkret%20arbejdsgang%3A%0A%0A';
+
+const services = [
+  {
+    number: '01',
+    title: 'AI-adoptionstjek',
+    text: 'Vi skaber et ærligt billede af faktisk brug, friktion, initiativer og grænser — og vælger de få steder, der er værd at arbejde videre med.',
+    output: 'I får: fælles startbillede, tre prioriterede problemer og et konkret 90-dages næste skridt.',
+  },
+  {
+    number: '02',
+    title: 'Fra arbejdsproblem til pilot',
+    text: 'Vi tager én reel opgave gennem et lille, kontrolleret forsøg med en tydelig ejer, relevante data og menneskelig kvalitetssikring.',
+    output: 'I får: pilotdesign, baseline, succeskriterier, stopkriterier og dokumenteret læring.',
+  },
+  {
+    number: '03',
+    title: 'AI i hverdagen',
+    text: 'Vi gør læringen jobnær. Medarbejdere afprøver AI i deres egne arbejdssituationer, mens ledere og nøglepersoner følger op.',
+    output: 'I får: læringsforløb, praktiske arbejdsgreb, office hours og en model for lokale AI-ambassadører.',
+  },
+  {
+    number: '04',
+    title: 'Løbende AI-enablement',
+    text: 'Jeg hjælper med at holde retning på tværs af use cases, mennesker, data og governance, så gode forsøg ikke ender som løse projekter.',
+    output: 'I får: enkel portefølje, prioriteringsrytme, beslutningspunkter og løbende status på brug og effekt.',
+  },
+];
+
+const method = [
+  ['Forstå', 'Se arbejdet, som det faktisk foregår — gennem samtaler, observationer og eksisterende data.'],
+  ['Vælg', 'Prioritér få problemer efter værdi, gennemførlighed, genbrug og risiko.'],
+  ['Test', 'Kør et lille pilotforsøg med ejer, baseline og klare kriterier for at fortsætte eller stoppe.'],
+  ['Aktivér', 'Træn i rigtige opgaver, følg tæt op og gør det let at dele det, der virker.'],
+  ['Mål & forankr', 'Følg tid, kvalitet, genarbejde, gentagen brug og sikkerhed — og skalér kun på evidens.'],
+];
+
+const faq = [
+  {
+    question: 'Skal vi have valgt det rigtige AI-værktøj først?',
+    answer:
+      'Nej. Vi starter med arbejdssituationen og vurderer derefter, om jeres nuværende værktøjer kan løse den. Det reducerer risikoen for at købe teknologi uden en tydelig anvendelse.',
+  },
+  {
+    question: 'Hvad hvis vores proces er rodet?',
+    answer:
+      'Det er et legitimt udgangspunkt. Nogle gange er AI en del af løsningen; andre gange skal processen forenkles først. Jeg anbefaler ikke AI, hvis et enklere greb løser problemet bedre.',
+  },
+  {
+    question: 'Hvordan arbejder vi med governance og risiko?',
+    answer:
+      'Vi gør data, ansvar, menneskelig godkendelse og kendte begrænsninger synlige fra begyndelsen og involverer jeres relevante ejere. SiteDokAI erstatter ikke juridisk, sikkerheds- eller compliance-rådgivning.',
+  },
+  {
+    question: 'Hvordan måler vi, om det virker?',
+    answer:
+      'Vi vælger få mål tæt på opgaven — eksempelvis tid, kvalitet, genarbejde, gentagen brug og sikker håndtering. Baseline og succeskriterier aftales før testen, så læringen ikke bliver en mavefornemmelse.',
+  },
+];
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'SiteDokAI — AI, der kan mærkes i arbejdet',
+    url: 'https://sitedokai.com/',
+    description:
+      'Personlig AI adoption og enablement for mellemstore virksomheder — fra arbejdsproblem til pilot, vane og dokumenteret læring.',
+    inLanguage: 'da-DK',
+    about: { '@id': 'https://sitedokai.com/#business' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  },
+];
 ---
 
-<Layout title="AI-tidslinjen — udviklingen i kunstig intelligens, måned for måned">
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+<Layout
+  title="SiteDokAI | AI adoption & enablement i praksis"
+  description="Jeg hjælper mellemstore virksomheder med at gøre AI konkret, trygt og brugbart — fra de rigtige arbejdsproblemer til små piloter, nye vaner og dokumenteret læring."
+  canonical="/"
+  structuredData={structuredData}
+>
+  <section class="relative overflow-hidden pb-16 pt-12 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
+    <div class="pointer-events-none absolute -right-32 top-6 h-80 w-80 rounded-full border border-sage/20 sm:h-[30rem] sm:w-[30rem]"></div>
+    <div class="pointer-events-none absolute right-10 top-24 h-44 w-44 rounded-full bg-sage-soft/75 sm:right-32 sm:h-72 sm:w-72"></div>
 
-  <!-- HERO (kompakt) -->
-  <section class="relative overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 bg-aurora"></div>
-    <div class="container-page relative pb-8 pt-12 sm:pt-16">
-      <div class="mx-auto max-w-3xl text-center animate-fade-up">
-        <span class="mono-label inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-3 py-1.5">
-          <span class="h-1.5 w-1.5 rounded-full bg-cyan animate-pulse-dot"></span>
-          Opdateret · {latestMonth.monthLabel}
-        </span>
-        <h1 class="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
-          Den mest revolutionerende tidsalder —
-          <span class="text-gradient">måned for måned</span>
+    <div class="container-page relative grid gap-14 lg:grid-cols-[minmax(0,1.14fr)_minmax(20rem,.76fr)] lg:items-center lg:gap-16">
+      <div class="reveal">
+        <p class="eyebrow">AI adoption &amp; enablement · for mellemstore virksomheder</p>
+        <h1 class="mt-6 max-w-4xl text-[3.15rem] leading-[0.96] sm:text-6xl lg:text-[5.35rem]">
+          AI skal kunne mærkes <span class="italic text-sage-dark">i arbejdet.</span>
         </h1>
-        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-text-soft sm:text-lg">
-          Følg hele rejsen gennem AI-kapløbet — fra {firstMonth.monthLabel.toLowerCase()} til i dag.
-          Klik ind i en måned og genoplev præcis, hvad der flyttede verden.
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-muted sm:text-xl sm:leading-9">
+          Jeg hjælper mellemstore virksomheder med at gøre AI konkret, trygt og brugbart — fra de
+          rigtige arbejdsproblemer til små piloter, nye vaner og dokumenteret læring.
         </p>
-        <p class="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-xs text-text-dim">
-          <span class="text-text-soft">{months.length}</span> måneder
-          <span class="text-line-strong">·</span>
-          <span class="text-text-soft">{totalHighlights}</span> milepæle
-          <span class="text-line-strong">·</span>
-          <span class="text-text-soft">{Object.keys(CATEGORIES).length}</span> spor
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DET VANDRETTE TIDSLINJEBÅND -->
-  <HorizontalTimeline />
-
-  <!-- DENNE UGE -->
-  <section id="denne-uge" class="container-page scroll-mt-20 py-10">
-    <div class="glass relative overflow-hidden p-6 sm:p-8" style="box-shadow:0 0 0 1px rgba(34,211,238,0.18)">
-      <div class="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan/10 blur-3xl"></div>
-      <div class="relative flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5">
-          <span class="h-2 w-2 rounded-full bg-cyan animate-pulse-dot"></span>
-          <h2 class="font-display text-xl font-bold sm:text-2xl">Denne uge i AI</h2>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href={mailHref} class="btn btn-primary">
+            Tag en afklarende samtale
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10h12m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#metode" class="btn btn-secondary">Se, hvordan jeg arbejder</a>
         </div>
-        <span class="mono-label">{thisWeek.weekLabel} · {thisWeek.dateRange}</span>
+        <p class="mt-5 max-w-xl text-sm leading-6 text-muted">
+          Første samtale handler om jeres arbejde — ikke om at presse et bestemt værktøj ind.
+        </p>
       </div>
-      <p class="relative mt-3 max-w-2xl text-sm leading-relaxed text-text-soft">{thisWeek.intro}</p>
-      <div class="relative mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {thisWeek.items.map((item) => <HighlightCard highlight={item} />)}
+
+      <div class="reveal reveal-delay-2 relative mx-auto w-full max-w-[27rem] lg:mx-0 lg:ml-auto">
+        <div class="portrait-frame aspect-[4/4.55]">
+          <picture class="block h-full w-full">
+            <source srcset="/images/troels-ostbjerg.webp" type="image/webp" />
+            <img
+              src="/images/troels-ostbjerg.png"
+              width="320"
+              height="320"
+              alt="Troels Østbjerg, rådgiver bag SiteDokAI"
+              class="h-full w-full object-cover object-center"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </picture>
+        </div>
+        <div class="absolute -bottom-7 -left-5 max-w-[15.5rem] rounded-2xl border border-line bg-paper p-4 shadow-lift sm:-left-10 sm:p-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-sage-dark">Troels Østbjerg</p>
+          <p class="mt-2 text-sm leading-6 text-muted">Din rådgiver fra første samtale til sidste opfølgning.</p>
+        </div>
+        <div class="absolute -right-3 top-8 rounded-full bg-brand px-4 py-2.5 text-xs font-semibold text-paper shadow-lift sm:-right-8">
+          Arbejde → pilot → vane
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="container-page py-8">
-    <div class="glass relative overflow-hidden p-8 text-center sm:p-10">
-      <div class="pointer-events-none absolute inset-0 bg-aurora opacity-60"></div>
-      <h2 class="relative font-display text-2xl font-extrabold sm:text-3xl">Sæt et bogmærke</h2>
-      <p class="relative mx-auto mt-3 max-w-xl text-text-soft">
-        Tidslinjen opdateres løbende. Kig forbi igen — om en uge eller om et år —
-        og se præcis, hvad der skete i kapløbet, mens du var væk.
-      </p>
-      <div class="relative mt-7 flex flex-wrap justify-center gap-3">
-        <a href="#tidslinje" class="btn-primary">Udforsk tidslinjen</a>
-        <a href="/om" class="btn-ghost">Læs om projektet</a>
+  <section class="container-page pb-10 sm:pb-16" aria-label="Principper for samarbejdet">
+    <div class="grid overflow-hidden rounded-[1.75rem] bg-brand text-paper sm:grid-cols-3">
+      <div class="border-b border-paper/10 p-6 sm:border-b-0 sm:border-r sm:p-7">
+        <p class="text-xs font-semibold uppercase tracking-[0.17em] text-sage-soft">Direkte</p>
+        <p class="mt-2 font-display text-xl leading-snug">Én rådgiver hele vejen</p>
+      </div>
+      <div class="border-b border-paper/10 p-6 sm:border-b-0 sm:border-r sm:p-7">
+        <p class="text-xs font-semibold uppercase tracking-[0.17em] text-sage-soft">Konkret</p>
+        <p class="mt-2 font-display text-xl leading-snug">Én reel arbejdsgang ad gangen</p>
+      </div>
+      <div class="p-6 sm:p-7">
+        <p class="text-xs font-semibold uppercase tracking-[0.17em] text-sage-soft">Ansvarligt</p>
+        <p class="mt-2 font-display text-xl leading-snug">Mennesker godkender det endelige arbejde</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell" aria-labelledby="problem-heading">
+    <div class="container-page grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-24">
+      <div class="reveal">
+        <p class="eyebrow">Når ambition møder hverdag</p>
+        <h2 id="problem-heading" class="mt-5 text-4xl leading-[1.06] sm:text-5xl">
+          I har måske værktøjerne. Det betyder ikke, at arbejdet har flyttet sig.
+        </h2>
+      </div>
+      <div class="reveal reveal-delay-1 lg:pt-16">
+        <p class="max-w-2xl text-xl leading-9 text-brand">
+          AI-adoption går ofte i stå i mellemrummet mellem ledelsens ambition, teknologiens
+          muligheder og medarbejdernes faktiske opgaver.
+        </p>
+        <ul class="mt-8 divide-y divide-line-strong border-y border-line-strong">
+          <li class="grid gap-2 py-5 sm:grid-cols-[1fr_1.25fr] sm:gap-8">
+            <strong class="font-medium text-brand">Brugen er ujævn</strong>
+            <span class="text-muted">Nogle eksperimenterer, mens andre mangler et trygt sted at begynde.</span>
+          </li>
+          <li class="grid gap-2 py-5 sm:grid-cols-[1fr_1.25fr] sm:gap-8">
+            <strong class="font-medium text-brand">Grænserne er uklare</strong>
+            <span class="text-muted">Ingen ved helt, hvilke data, opgaver og godkendelser der er forsvarlige.</span>
+          </li>
+          <li class="grid gap-2 py-5 sm:grid-cols-[1fr_1.25fr] sm:gap-8">
+            <strong class="font-medium text-brand">Initiativerne hænger ikke sammen</strong>
+            <span class="text-muted">Der er aktivitet, men ikke et fælles billede af værdi, ejerskab og næste valg.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="ydelser" class="section-shell scroll-mt-24" aria-labelledby="services-heading">
+    <div class="container-page">
+      <div class="rounded-[2.25rem] bg-paper px-6 py-12 shadow-soft sm:px-10 sm:py-16 lg:rounded-[3rem] lg:px-14 lg:py-20">
+        <div class="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div class="reveal">
+            <p class="eyebrow">Fire måder at samarbejde på</p>
+            <h2 id="services-heading" class="mt-5 text-4xl leading-[1.06] sm:text-5xl">Fra første overblik til en praksis, der holder.</h2>
+          </div>
+          <p class="reveal reveal-delay-1 max-w-xl text-lg leading-8 text-muted lg:ml-auto">
+            Vi vælger et afgrænset format ud fra, hvor I står. Ingen standardpakke forklædt som
+            transformation — bare det næste stykke arbejde, der skaber reel læring.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-x-12 lg:grid-cols-2">
+          {services.map((service) => (
+            <article class="service-card reveal">
+              <div class="flex items-start justify-between gap-5">
+                <h3 class="max-w-md text-3xl leading-tight">{service.title}</h3>
+                <span class="number-mark" aria-hidden="true">{service.number}</span>
+              </div>
+              <p class="mt-5 max-w-xl leading-7 text-muted">{service.text}</p>
+              <p class="mt-5 max-w-xl border-l-2 border-sage pl-4 text-sm leading-6 text-brand">
+                {service.output}
+              </p>
+            </article>
+          ))}
+        </div>
+        <a href="/kontakt/" class="rule-link mt-10">Find det rigtige sted at begynde</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="metode" class="section-shell scroll-mt-24" aria-labelledby="method-heading">
+    <div class="container-page">
+      <div class="reveal grid gap-7 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+        <div>
+          <p class="eyebrow">En rolig, praktisk metode</p>
+          <h2 id="method-heading" class="mt-5 text-4xl leading-[1.06] sm:text-5xl">Læring før stor skalering.</h2>
+        </div>
+        <p class="max-w-xl text-lg leading-8 text-muted lg:ml-auto">
+          Fremdrift er ikke flest mulige use cases. Det er bedre valg, tydeligt ansvar og små beviser,
+          som organisationen kan lære af.
+        </p>
+      </div>
+
+      <ol class="mt-14 border-t border-line-strong">
+        {method.map(([title, text], index) => (
+          <li class="reveal grid gap-3 border-b border-line-strong py-7 sm:grid-cols-[4rem_.7fr_1.3fr] sm:items-start sm:gap-7">
+            <span class="number-mark" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3 class="text-2xl leading-tight">{title}</h3>
+            <p class="max-w-2xl leading-7 text-muted">{text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="arbejdseksempel" class="section-shell scroll-mt-24" aria-labelledby="case-heading">
+    <div class="container-page">
+      <div class="overflow-hidden rounded-[2.25rem] bg-sage-pale lg:rounded-[3rem]">
+        <div class="grid lg:grid-cols-[.84fr_1.16fr]">
+          <div class="bg-brand p-7 text-paper sm:p-10 lg:p-14">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-soft">Arbejdseksempel · anonymiseret</p>
+            <h2 id="case-heading" class="mt-6 text-4xl leading-[1.03] text-paper sm:text-5xl">
+              Fra mange AI-spor til én praktisk arbejdsmodel.
+            </h2>
+            <p class="mt-7 text-base leading-7 text-paper/70">
+              Eksemplet er fra et tidligt AI-adoptionsforløb i en reguleret dansk virksomhed.
+              Organisation og interne forhold er anonymiseret.
+            </p>
+          </div>
+
+          <div class="p-7 sm:p-10 lg:p-14">
+            <div class="grid gap-9 sm:grid-cols-2">
+              <div>
+                <p class="eyebrow">Udgangspunktet</p>
+                <p class="mt-4 leading-7 text-muted">
+                  Der var ledelsesambition, værktøjer og lokale initiativer — men ikke ét fælles
+                  billede af faktisk brug, barrierer, ejerskab og governance.
+                </p>
+              </div>
+              <div>
+                <p class="eyebrow">Arbejdet</p>
+                <p class="mt-4 leading-7 text-muted">
+                  Stakeholdersamtaler og kortlægning blev samlet med en problem-først
+                  prioritering, tydelige pilotkriterier og en enkel rytme for opfølgning.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-10 border-y border-sage/30 py-8">
+              <p class="eyebrow">Det dokumenterede resultat</p>
+              <p class="mt-4 font-display text-2xl leading-9 text-brand sm:text-3xl sm:leading-10">
+                Forløbet samlede spredte initiativer i en fælles arbejdsmodel med prioriterede spor,
+                konkrete pilotkriterier, tydelige governance-spørgsmål og en enkel struktur for
+                opfølgning.
+              </p>
+            </div>
+
+            <p class="mt-7 text-sm leading-6 text-muted">
+              <strong class="font-semibold text-brand">Evidensgrænse:</strong> Eksemplet beskriver
+              arbejdsform og leverancer i et tidligt forløb. Det er ikke en påstand om dokumenteret
+              ROI, fuldt implementeret governance eller adoption i hele organisationen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell" aria-labelledby="personal-heading">
+    <div class="container-page grid gap-12 lg:grid-cols-[.78fr_1.22fr] lg:gap-24">
+      <div class="reveal">
+        <p class="eyebrow">Personligt samarbejde</p>
+        <h2 id="personal-heading" class="mt-5 text-4xl leading-[1.06] sm:text-5xl">Du får mig. Ikke et skiftende team.</h2>
+        <a href="/om/" class="rule-link mt-8">Læs mere om mit ståsted</a>
+      </div>
+      <div class="reveal reveal-delay-1 lg:pt-12">
+        <p class="font-display text-3xl leading-[1.22] text-brand sm:text-4xl">
+          Jeg arbejder i krydsfeltet mellem forretning, mennesker, processer og AI — dér, hvor en
+          god idé enten bliver til en ny vane eller ender som endnu et initiativ.
+        </p>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-muted">
+          Mit faglige ståsted er formet af konkret AI-adoptionsarbejde i en reguleret organisation.
+          Hos SiteDokAI omsætter jeg den erfaring til en enkel og nærværende samarbejdsform for
+          mellemstore virksomheder. Jeg spørger, faciliterer, bygger, dokumenterer og følger selv op.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell" aria-labelledby="faq-heading">
+    <div class="container-page grid gap-10 lg:grid-cols-[.62fr_1.38fr] lg:gap-20">
+      <div class="reveal">
+        <p class="eyebrow">Praktiske spørgsmål</p>
+        <h2 id="faq-heading" class="mt-5 text-4xl leading-[1.06] sm:text-5xl">Før vi går i gang.</h2>
+      </div>
+      <div class="reveal reveal-delay-1 border-t border-line-strong">
+        {faq.map((item) => (
+          <details class="group border-b border-line-strong">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-display text-xl leading-7 marker:content-none sm:text-2xl">
+              {item.question}
+              <span class="relative h-5 w-5 shrink-0" aria-hidden="true">
+                <span class="absolute left-0 top-1/2 h-px w-5 bg-brand"></span>
+                <span class="absolute left-1/2 top-0 h-5 w-px bg-brand transition-transform duration-200 group-open:rotate-90"></span>
+              </span>
+            </summary>
+            <p class="max-w-2xl pb-7 pr-8 leading-7 text-muted">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page pb-10 sm:pb-16">
+    <div class="relative overflow-hidden rounded-[2.25rem] bg-brand px-7 py-14 text-paper sm:px-12 sm:py-16 lg:rounded-[3rem] lg:px-16 lg:py-20">
+      <div class="pointer-events-none absolute -right-20 -top-28 h-80 w-80 rounded-full border border-paper/10"></div>
+      <div class="pointer-events-none absolute -bottom-48 right-20 h-80 w-80 rounded-full bg-sage/30"></div>
+      <div class="relative grid gap-9 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-sage-soft">Lad os begynde konkret</p>
+          <h2 class="mt-5 max-w-3xl text-4xl leading-[1.02] text-paper sm:text-5xl lg:text-6xl">
+            Hvor går AI i stå hos jer?
+          </h2>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-paper/70">
+            Fortæl mig om én arbejdsgang, ét team eller ét pilotforsøg. Så finder vi ud af, om og
+            hvordan jeg kan hjælpe.
+          </p>
+        </div>
+        <div class="lg:text-right">
+          <a href={mailHref} class="btn bg-paper text-brand hover:bg-sage-soft">Tag en afklarende samtale</a>
+          <p class="mt-4 text-sm text-paper/65">Eller skriv direkte til info@sitedokai.com</p>
+        </div>
       </div>
     </div>
   </section>
