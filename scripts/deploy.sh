@@ -45,7 +45,7 @@ case "$DEPLOY_MODE" in
       --project "$PROJECT_ID" \
       --service default \
       --format='value(id)' >/dev/null
-    echo "› Promoverer den eksisterende, QA-godkendte version $DEPLOY_VERSION…"
+    echo "› Promoverer den eksisterende, QA-godkendte version ${DEPLOY_VERSION}…"
     gcloud app services set-traffic default \
       --project "$PROJECT_ID" \
       --splits "$DEPLOY_VERSION=1" \
