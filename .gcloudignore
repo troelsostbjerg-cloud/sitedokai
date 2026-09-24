@@ -11,6 +11,7 @@
 .github
 .gitignore
 _archive
+video
 .astro
 brand
 BUILD_NOTES.md

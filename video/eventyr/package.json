@@ -1,0 +1,12 @@
+{
+  "name": "eventyr-video",
+  "private": true,
+  "type": "module",
+  "description": "5 sekunders Peter Pan-agtigt eventyr renderet med three.js til MP4",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  }
+}
