@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { once } from 'node:events';
 import { request as httpRequest } from 'node:http';
@@ -69,7 +70,7 @@ test('serves every self-hosted font as WOFF2', async () => {
 });
 
 test('hashes every inline script and style on every active HTML page', async () => {
-  for (const pathname of ['/', '/om/', '/kontakt/', '/privacy/', '/findes-ikke']) {
+  for (const pathname of ['/', '/om/', '/kontakt/', '/privacy/', '/univers/', '/findes-ikke']) {
     const response = await fetch(`${baseUrl}${pathname}`);
     const csp = response.headers.get('content-security-policy');
     const html = await response.text();
@@ -83,6 +84,46 @@ test('hashes every inline script and style on every active HTML page', async () 
       assert.ok(csp.includes(`'sha256-${hash}'`), `Missing CSP hash on ${pathname}`);
     }
   }
+});
+
+test('serves the universe lab with self-hosted assets only', async () => {
+  const bare = await fetch(`${baseUrl}/univers`, { redirect: 'manual' });
+  assert.equal(bare.status, 308);
+  assert.equal(bare.headers.get('location'), '/univers/');
+
+  const response = await fetch(`${baseUrl}/univers/`);
+  assert.equal(response.status, 200);
+  const csp = response.headers.get('content-security-policy');
+  assert.doesNotMatch(csp, /unsafe-inline|unsafe-eval/);
+  assert.match(csp, /(?:^|; )font-src 'self'(?:;|$)/);
+
+  const html = await response.text();
+  assert.match(html, /<canvas id="scene"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/sitedokai\.com\/univers\/"/);
+  assert.doesNotMatch(html, /\sstyle="/i, 'style attributes are blocked by the CSP');
+  assert.doesNotMatch(html, /https:\/\/(?:fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com)/i);
+
+  const scripts = [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
+  assert.ok(scripts.some((src) => src.startsWith('/_astro/')), 'Expected a bundled module in /_astro/');
+  for (const src of scripts) {
+    const script = await fetch(`${baseUrl}${src}`);
+    assert.equal(script.status, 200, src);
+    assert.match(script.headers.get('content-type'), /javascript/, src);
+    assert.doesNotMatch(await script.text(), /cdn\.jsdelivr\.net|fonts\.googleapis\.com/, src);
+  }
+
+  const fonts = [...new Set([...html.matchAll(/url\("?(\/fonts\/[^")]+\.woff2)"?\)/g)].map((match) => match[1]))];
+  assert.equal(fonts.length, 4);
+  for (const pathname of fonts) {
+    const font = await fetch(`${baseUrl}${pathname}`, { method: 'HEAD' });
+    assert.equal(font.status, 200, pathname);
+    assert.equal(font.headers.get('content-type'), 'font/woff2', pathname);
+  }
+});
+
+test('keeps the generated universe files in sync with lab/univers/src', () => {
+  const result = spawnSync(process.execPath, ['lab/univers/build.mjs', '--check'], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
 });
 
 test('returns permanent redirects for legacy and normalized routes', async () => {

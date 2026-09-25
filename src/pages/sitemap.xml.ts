@@ -8,13 +8,14 @@ export const GET: APIRoute = () => {
     { path: '/', priority: '1.0' },
     { path: '/om/', priority: '0.8' },
     { path: '/kontakt/', priority: '0.8' },
+    { path: '/univers/', priority: '0.5', lastmod: '2026-09-25' },
     { path: '/privacy/', priority: '0.3' },
   ];
 
   const urls = pages
     .map(
-      ({ path, priority }) =>
-        `  <url><loc>${BASE}${path}</loc><lastmod>${LAST_MODIFIED}</lastmod><priority>${priority}</priority></url>`,
+      ({ path, priority, lastmod = LAST_MODIFIED }) =>
+        `  <url><loc>${BASE}${path}</loc><lastmod>${lastmod}</lastmod><priority>${priority}</priority></url>`,
     )
     .join('\n');
 

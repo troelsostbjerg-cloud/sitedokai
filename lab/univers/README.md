@@ -4,9 +4,19 @@ En interaktiv 3D-rejse i 8 kapitler: fra sollyset på Jorden til kanten af det
 synlige univers og videre ud i det uendelige. Undervejs kommer tomheden,
 stjernernes liv og død, og det en superintelligens kunne nå inden for kendt fysik.
 
-Siden er et selvstændigt lab-projekt. Den er **ikke** koblet på sitedokai.com og
-bliver ikke bygget eller deployet sammen med Astro-sitet (`lab/` er udeladt i
-`.gcloudignore`).
+Kilden i `lab/univers/src/` bruges to steder:
+
+- `lab/univers/index.html`: en selvstændig fil (three.js fra jsDelivr og
+  skrifttyper fra Google Fonts), som også bruges til Claude-artifact'en.
+- **sitedokai.com/univers/**: `build.mjs` genererer `src/pages/univers.astro`,
+  `src/univers/app.js` og `src/univers/univers.css`. Astro/Vite bundter three.js
+  fra npm, og skrifttyperne ligger i `public/fonts/`, så siden overholder sitets
+  CSP (kun `'self'` og hashes, ingen style-attributter).
+
+`lab/` er udeladt i `.gcloudignore`. App Engine bygger kun ud fra de genererede
+filer i `src/` og `public/`, så kør altid `node lab/univers/build.mjs` og commit
+resultatet efter ændringer. `npm test` fejler, hvis de genererede filer er
+forældede.
 
 ## Åbn den
 
@@ -37,10 +47,11 @@ lab/univers/
   tools/make-land.mjs genererer 12-land-data.js
 ```
 
-Byg efter ændringer:
+Byg efter ændringer (skriver både den selvstændige fil og sitets filer):
 
 ```bash
 node lab/univers/build.mjs
+npm run build && npm test
 ```
 
 Med et ekstra argument skrives også et fragment uden `<html>`/`<head>`/`<body>`

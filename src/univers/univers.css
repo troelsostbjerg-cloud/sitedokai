@@ -1,3 +1,10 @@
+/* GENERERET af lab/univers/build.mjs. Ret i lab/univers/src/ og kør `node lab/univers/build.mjs`. */
+/* Lokale skrifttyper (SIL Open Font License, se OFL.txt i hver mappe under public/fonts). */
+@font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 900; font-display: swap; src: url("/fonts/bodoni-moda/bodoni-moda-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bodoni Moda"; font-style: italic; font-weight: 400 900; font-display: swap; src: url("/fonts/bodoni-moda/bodoni-moda-latin-wght-italic.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible Next"; font-style: normal; font-weight: 200 800; font-display: swap; src: url("/fonts/atkinson-hyperlegible-next/atkinson-hyperlegible-next-latin-wght-normal.woff2") format("woff2"); }
+@font-face { font-family: "Martian Mono"; font-style: normal; font-weight: 100 800; font-display: swap; src: url("/fonts/martian-mono/martian-mono-latin-wght-normal.woff2") format("woff2"); }
+
 /* Et bevidst mørkt univers i ét tema: rummet er sort, uanset lyst eller mørkt system. */
 :root {
   color-scheme: dark;

@@ -70,6 +70,14 @@ path-scoped staging i en dirty worktree; brug ikke `git add -A` på kildebranche
 - `/om/` — Troels, arbejdsform og faglige grænser
 - `/kontakt/` — direkte mail og LinkedIn
 - `/privacy/` — privatliv, hosting og lokalt hostede skrifttyper
+- `/univers/` — lab: interaktiv 3D-rejse gennem universet (three.js). Siden, dens
+  modul og stilark er genereret fra `lab/univers/src/` med
+  `node lab/univers/build.mjs`; ret aldrig de genererede filer direkte
+  (`src/pages/univers.astro`, `src/univers/`). `npm test` fejler, hvis de ikke
+  matcher kilden. Skrifttyperne Bodoni Moda, Atkinson Hyperlegible Next og
+  Martian Mono ligger lokalt i `public/fonts/` med OFL-licenser, og
+  delingsbilledet er `public/og-univers.jpg`. Siden er ikke linket fra
+  navigationen
 - `/sitemap.xml` og `/llms.txt` — crawl- og AI-læsbar profil
 - `/404.html` — brugerdefineret fejlside
 

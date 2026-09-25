@@ -188,7 +188,19 @@ const CHAPTERS = [
       { title: 'Den blå prik', scale: 12.8,
         lead: 'Den 14. februar 1990 vendte Voyager 1 kameraet hjem fra 6 milliarder kilometers afstand. Jorden fyldte 0,12 pixel.',
         facts: ['Carl Sagan kaldte den et støvkorn, der svæver i en solstråle.', 'Alle mennesker, der nogensinde har levet, har levet på den prik.', 'Så vidt vi ved, er vi de eneste i hele universet, der kan undre sig over det.'],
-        widget: (el) => { const row = div(el, 'row'); button(row, 'Start forfra', () => go(0, 0), 'primary'); button(row, 'Fri flyvning', () => setFree(true)); button(row, 'Tag dybden igen', () => go(4, 0)); },
+        widget: (el) => {
+          const row = div(el, 'row');
+          button(row, 'Start forfra', () => go(0, 0), 'primary');
+          button(row, 'Fri flyvning', () => setFree(true));
+          button(row, 'Tag dybden igen', () => go(4, 0));
+          if (document.body.dataset.site) {
+            const a = document.createElement('a');
+            a.className = 'chip';
+            a.href = '/';
+            a.textContent = 'Til SiteDokAI';
+            row.appendChild(a);
+          }
+        },
         enter: (first) => W.bluedot.beat(0, first) },
     ],
   },

@@ -9,7 +9,7 @@ import { redirectTargetForPath } from './src/config/redirects.mjs';
 const ROOT_DIR = fileURLToPath(new URL('.', import.meta.url));
 const DEFAULT_DIST_DIR = resolve(ROOT_DIR, 'dist');
 const CANONICAL_HOST = 'sitedokai.com';
-const TRAILING_SLASH_ROUTES = new Set(['/om', '/kontakt', '/privacy']);
+const TRAILING_SLASH_ROUTES = new Set(['/om', '/kontakt', '/privacy', '/univers']);
 
 const MIME_TYPES = new Map([
   ['.css', 'text/css; charset=utf-8'],

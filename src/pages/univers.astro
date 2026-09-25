@@ -1,0 +1,127 @@
+---
+// GENERERET af lab/univers/build.mjs. Ret i lab/univers/src/ og kør `node lab/univers/build.mjs`.
+import '../univers/univers.css';
+
+const url = 'https://sitedokai.com/univers/';
+const title = 'Rejsen gennem universet | SiteDokAI';
+const description = "En interaktiv 3D-rejse fra sollyset på Jorden til kanten af det synlige univers. Med stjernernes liv og død, uendeligheden og det, en superintelligens kunne nå inden for kendt fysik. Et lab fra SiteDokAI.";
+const image = 'https://sitedokai.com/og-univers.jpg';
+---
+
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#03050b" />
+    <meta name="author" content="Troels Østbjerg" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SiteDokAI" />
+    <meta property="og:locale" content="da_DK" />
+    <meta property="og:title" content="Rejsen gennem universet" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Jorden set fra rummet med nordlys og titlen Rejsen gennem universet" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Rejsen gennem universet" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <link rel="canonical" href={url} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260905" />
+    <link rel="preload" href="/fonts/bodoni-moda/bodoni-moda-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/atkinson-hyperlegible-next/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{title}</title>
+  </head>
+  <body data-site="sitedokai">
+    <div id="app">
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div id="labels" aria-hidden="true"></div>
+      <div id="fade"></div>
+
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Rejsen gennem universet</span></div>
+        <nav class="chapters" id="chapters" aria-label="Kapitler"></nav>
+        <div class="tools">
+          <button type="button" class="tool" id="soundBtn" aria-pressed="false">Lyd</button>
+          <button type="button" class="tool" id="freeBtn" aria-pressed="false" aria-label="Fri flyvning"><span class="lg">Fri flyvning</span><span class="sm">Fri</span></button>
+        </div>
+      </header>
+
+      <div class="hud" id="hud" aria-live="off"></div>
+      <div class="rail" id="rail" aria-hidden="true"></div>
+
+      <section class="panel" id="panel" aria-live="polite">
+        <div class="panel-head">
+          <div class="eyebrow" id="eyebrow"></div>
+          <button type="button" class="icon-btn" id="collapseBtn" aria-label="Skjul teksten" aria-expanded="true"><span aria-hidden="true">−</span></button>
+        </div>
+        <div class="panel-body" id="panelBody">
+          <h2 class="beat-title" id="beatTitle"></h2>
+          <p class="lead" id="beatLead"></p>
+          <div class="widget" id="widget"></div>
+          <ul class="facts" id="facts"></ul>
+          <div class="spec" id="spec"></div>
+        </div>
+        <div class="panel-foot">
+          <div class="beat-dots" id="beatDots"></div>
+          <div class="nav-btns">
+            <button type="button" class="btn ghost" id="prevBtn" aria-label="Forrige trin">←</button>
+            <button type="button" class="btn primary" id="nextBtn">Næste →</button>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" class="btn primary back-btn" id="backBtn" hidden>Tilbage til rejsen</button>
+      <div class="card" id="infoCard" hidden></div>
+
+      <div class="intro" id="intro">
+        <div class="intro-inner">
+          <p class="intro-eyebrow">8 kapitler · fra 10<sup>−15</sup> m til ∞</p>
+          <h1 class="intro-title">Rejsen gennem <em>universet</em></h1>
+          <p class="intro-sub">Fra sollyset på din hud til kanten af det synlige univers og videre ud i det uendelige. Undervejs: stjerner, der fødes og dør, og hvad en superintelligens kunne nå derude.</p>
+          <div class="intro-actions">
+            <button type="button" class="btn primary big" id="startBtn">Start rejsen</button>
+            <span class="intro-hint">Træk for at dreje · rul eller knib for at zoome · ← → skifter trin</span>
+          </div>
+          <p class="intro-credit">Et lab fra <a href="/">SiteDokAI</a> · Troels Østbjerg</p>
+        </div>
+      </div>
+
+      <div class="loading" id="loading"><p class="loading-txt" id="loadingTxt">Henter universet …</p></div>
+    </div>
+
+    <script is:inline>
+    /* Viser en fejl, hvis 3D-motoren ikke kan hentes eller starte. */
+    (function () {
+      window.__universeFail = function (msg) {
+        var box = document.getElementById('loadingTxt');
+        var wrap = document.getElementById('loading');
+        if (!box || !wrap) return;
+        wrap.classList.remove('gone');
+        box.className = 'loading-err';
+        box.textContent = msg;
+      };
+      setTimeout(function () {
+        if (!window.__universeReady) {
+          window.__universeFail('3D-motoren (three.js) blev ikke hentet. Tjek din internetforbindelse, og genindlæs siden.');
+        }
+      }, 35000);
+      window.addEventListener('error', function (e) {
+        if (!window.__universeReady && e && e.message) {
+          window.__universeFail('Noget gik galt under opstarten: ' + e.message);
+        }
+      });
+    })();
+    </script>
+    <script>
+      import '../univers/app.js';
+    </script>
+  </body>
+</html>

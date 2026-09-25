@@ -87,6 +87,7 @@ function renderPanel(opts = {}) {
   if (B.note) { const li = document.createElement('li'); li.className = 'note'; li.textContent = B.note; ul.appendChild(li); }
   if (!opts.keepWidget) { const wEl = $('#widget'); wEl.innerHTML = ''; if (B.widget) B.widget(wEl); }
   $('#spec').innerHTML = B.spec ? specHTML(B.spec[0], B.spec[1]) : '';
+  hydrateCss($('#spec'));
   const dots = $('#beatDots');
   dots.innerHTML = '';
   C.beats.forEach((b, i) => {
@@ -124,7 +125,7 @@ function renderNav() {
 }
 function specHTML(level, text) {
   const c = ['#7fd4ff', '#7fd4ff', '#ffb547', '#ff9b6b', '#ff7096'][level - 1];
-  return `<div class="spec-top"><span>Spekulationsmåler</span><span class="spec-bars" style="--c:${c}" aria-label="${level} af 5">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= level ? 'on' : ''}"></i>`).join('')}</span></div><div class="spec-txt">${text}</div>`;
+  return `<div class="spec-top"><span>Spekulationsmåler</span><span class="spec-bars" data-css="--c:${c}" aria-label="${level} af 5">${[1, 2, 3, 4, 5].map((i) => `<i class="${i <= level ? 'on' : ''}"></i>`).join('')}</span></div><div class="spec-txt">${text}</div>`;
 }
 
 // ---------- Skala-skinne ----------
@@ -135,8 +136,9 @@ function railY(s) {
 }
 function buildRail() {
   const r = $('#rail');
-  r.innerHTML = RAIL_TICKS.map(([s, t]) => `<div class="tick" style="top:${railY(s)}%"><span>${t}</span><b>${pow10(s)}</b></div>`).join('') +
-    `<div class="tick" style="top:${railY(1000)}%"><span>uendeligt</span><b>∞</b></div><div class="mark" id="railMark"></div>`;
+  r.innerHTML = RAIL_TICKS.map(([s, t]) => `<div class="tick" data-css="top:${railY(s)}%"><span>${t}</span><b>${pow10(s)}</b></div>`).join('') +
+    `<div class="tick" data-css="top:${railY(1000)}%"><span>uendeligt</span><b>∞</b></div><div class="mark" id="railMark"></div>`;
+  hydrateCss(r);
 }
 let railS = 11;
 function setRail(s) { railS = s; const m = $('#railMark'); if (m) m.style.top = `${railY(s)}%`; }
@@ -162,6 +164,17 @@ function toggleChips(el, items, current, onPick) {
   return row;
 }
 function setRangeFill(inp) { const p = ((inp.value - inp.min) / (inp.max - inp.min)) * 100; inp.style.setProperty('--p', `${p}%`); }
+// Stilarter fra genereret markup sættes via CSSOM: sitets CSP tillader ikke style-attributter.
+function hydrateCss(root) {
+  if (!root) return;
+  root.querySelectorAll('[data-css]').forEach((n) => {
+    for (const decl of n.dataset.css.split(';')) {
+      const i = decl.indexOf(':');
+      if (i > 0) n.style.setProperty(decl.slice(0, i).trim(), decl.slice(i + 1).trim());
+    }
+    n.removeAttribute('data-css');
+  });
+}
 
 // ---------- Solsystemet: tid og planeter ----------
 const DATE_FMT = new Intl.DateTimeFormat('da-DK', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -281,11 +294,12 @@ function massStats() {
   const c = kelvinRGB(m.T, 0.1).map((v) => Math.round(v * 255));
   el.innerHTML = [
     ['Masse', `${fmt(m.M, m.M < 1 ? 2 : m.M < 10 ? 1 : 0)} × Solen`],
-    ['Overflade', `<span class="swatch" style="color:rgb(${c.join(',')})"></span>${fmt(Math.round(m.T / 100) * 100)} K`],
+    ['Overflade', `<span class="swatch" data-css="color:rgb(${c.join(',')})"></span>${fmt(Math.round(m.T / 100) * 100)} K`],
     ['Lysstyrke', `${num(m.L, 2)} × Solen`],
     ['Levetid', yearsText(m.tMS)],
     ['Ender som', m.fate],
   ].map(([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+  hydrateCss(el);
 }
 function lifeControls(el) {
   const f = div(el, 'field');
@@ -321,7 +335,8 @@ const ELEMENT_TILES = [
 ];
 function elementTiles(el) {
   const g = div(el, 'elements');
-  g.innerHTML = ELEMENT_TILES.map(([s, n, t, c]) => `<div class="el" style="--c:${c}"><span class="sym">${s}</span><span class="txt"><b>${n}</b>${t}</span></div>`).join('');
+  g.innerHTML = ELEMENT_TILES.map(([s, n, t, c]) => `<div class="el" data-css="--c:${c}"><span class="sym">${s}</span><span class="txt"><b>${n}</b>${t}</span></div>`).join('');
+  hydrateCss(g);
 }
 
 // ---------- Dybden og uendeligheden ----------
@@ -464,7 +479,8 @@ function timeOfUniverseControls(el) {
 // ---------- ASI ----------
 function kardashevGauge(el) {
   const K = 0.727, pct = (k) => (k / 3) * 100;
-  el.insertAdjacentHTML('beforeend', `<div class="gauge"><span class="k">Kardashev-skalaen</span><div class="gauge-track"><div class="gauge-fill" style="width:${pct(K)}%"></div>${['0', 'I', 'II', 'III'].map((t, i) => `<div class="gauge-tick" style="left:${pct(i)}%">${t}</div>`).join('')}<div class="gauge-you" style="left:${pct(K)}%"><span>Os: 0,73</span></div></div><div class="gauge-legend"><span>10<sup>6</sup> W</span><span>10<sup>16</sup> W</span><span>10<sup>26</sup> W</span><span>10<sup>36</sup> W</span></div></div>`);
+  el.insertAdjacentHTML('beforeend', `<div class="gauge"><span class="k">Kardashev-skalaen</span><div class="gauge-track"><div class="gauge-fill" data-css="width:${pct(K)}%"></div>${['0', 'I', 'II', 'III'].map((t, i) => `<div class="gauge-tick" data-css="left:${pct(i)}%">${t}</div>`).join('')}<div class="gauge-you" data-css="left:${pct(K)}%"><span>Os: 0,73</span></div></div><div class="gauge-legend"><span>10<sup>6</sup> W</span><span>10<sup>16</sup> W</span><span>10<sup>26</sup> W</span><span>10<sup>36</sup> W</span></div></div>`);
+  hydrateCss(el);
 }
 
 // ---------- Fri flyvning ----------
