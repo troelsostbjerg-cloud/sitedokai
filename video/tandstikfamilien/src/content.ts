@@ -140,7 +140,7 @@ export const COPY: Record<Lang, Copy> = {
       hyperfocus: "Then came *hyperfocus*.",
       version: "Version",
       times: ["Saturday 9:14", "11:02", "13:47", "16:30", "19:58"],
-      fourTimes: "The garden was redone *4 times*.",
+      fourTimes: "She redid the garden *4 times*.",
       result: "Result: one rose.",
     },
     house: {
@@ -148,7 +148,7 @@ export const COPY: Record<Lang, Copy> = {
       counter: "Unfinished projects",
       notes: ["Started: March", "Started: 2024", "Started: ???"],
       doesntSee: "She doesn't see them.",
-      blinkers: "Hyperfocus comes with *blinkers*.",
+      blinkers: "Hyperfocus comes with *blinders*.",
     },
     factLise: {
       tag: "ADHD FACT #2",

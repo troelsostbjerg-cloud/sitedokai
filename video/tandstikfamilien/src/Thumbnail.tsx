@@ -10,7 +10,7 @@ import { C, FONT, TITLE_FONT } from "./lib/theme";
 
 const T = {
   da: { a: "Kaffen er i", b: "køleskabet.", c: "IGEN.", tag: "ADHD i hverdagen" },
-  en: { a: "The coffee is", b: "in the fridge.", c: "AGAIN.", tag: "ADHD, daily life" },
+  en: { a: "The coffee is", b: "in the fridge.", c: "AGAIN.", tag: "Everyday ADHD" },
 };
 
 /** YouTube thumbnail: one big joke, readable at phone size. */

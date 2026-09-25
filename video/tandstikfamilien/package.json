@@ -5,9 +5,9 @@
   "scripts": {
     "studio": "remotion studio",
     "audio": "node scripts/make-audio.mjs",
-    "render": "node scripts/make-audio.mjs && remotion render Afsnit1-DA out/afsnit1-da.mp4",
-    "render:en": "node scripts/make-audio.mjs && remotion render Afsnit1-EN out/afsnit1-en.mp4",
-    "cover": "remotion still Afsnit1-DA out/cover-da.png --frame=150"
+    "render": "node scripts/make-audio.mjs && remotion render Episode1-EN out/episode1-en.mp4",
+    "render:da": "node scripts/make-audio.mjs && remotion render Episode1-DA out/episode1-da.mp4",
+    "thumbnail": "remotion still Thumbnail-EN out/thumbnail-en.png"
   },
   "dependencies": {
     "@remotion/bundler": "^4.0.529",

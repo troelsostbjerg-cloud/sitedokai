@@ -1,11 +1,13 @@
-# Tændstikfamilien – seriebibel
+# The Stick Family (Tændstikfamilien) – seriebibel
+
+**Sprog:** Serien udgives på engelsk. Danske versioner kan renderes fra samme kode (`npm run render:da`).
 
 > Kort, tegnet komedie om en familie, hvor begge forældre har ADHD. Kærligt, genkendeligt, aldrig hånligt.
 > Målgruppe: voksne med ADHD, deres partnere og alle, der har fundet kaffen i køleskabet.
 
 ## Hvorfor det kan vokse
 - **Genkendelse deles.** ADHD-indhold spreder sig, fordi folk tagger deres partner: "det er DIG". Hvert afsnit skal have mindst ét øjeblik, der kan tagges.
-- **Fysisk komik rejser.** Næsten alt fortælles med billeder. Teksten ligger i `content.ts`, så en engelsk version er én kommando (`npm run render:en`). Det giver et 50 gange større marked uden ekstra tegnearbejde.
+- **Fysisk komik rejser.** Næsten alt fortælles med billeder og kort engelsk tekst. Det engelsksprogede ADHD-marked er langt over 50 gange større end det danske.
 - **Serielle ritualer skaber abonnenter.** Faste elementer (se nedenfor) giver seerne noget at vente på og kommentere på.
 - **Produktionsomkostning tæt på nul.** Figurer, køkken, have og lyd er genbrugelige komponenter. Et nyt afsnit er mest manuskript plus timing.
 
@@ -14,7 +16,7 @@
 |---|---|---|---|
 | **Bo** (far) | Briller skubbet op i håret, strittende tot | Arbejdshukommelse, distraktion, "ude af syne = ude af sind" | Leder efter brillerne, der sidder på hovedet |
 | **Lise** (mor) | Knold med en blyant i | Hyperfokus, projekt-hop, starter alt | Sedler med "Startet: ???" |
-| **Fru Hansen** (katten) | Halvlukkede øjne | Ingen. Hun er husets eneste neurotypiske | Kigger tørt i kameraet, når det går galt |
+| **Fru Hansen** / Mrs. Hansen (katten) | Halvlukkede øjne | Ingen. Hun er husets eneste neurotypiske | Kigger tørt i kameraet, når det går galt |
 
 Mulige nye figurer: et barn (afsnit 3+) med *en anden* ADHD-profil (fx den stille, drømmende type, der ofte overses hos piger) og en nabo med "har I prøvet at lave en liste?"-energi.
 
@@ -49,17 +51,17 @@ Mulige nye figurer: et barn (afsnit 3+) med *en anden* ADHD-profil (fx den still
 - **Shorts, Reels og TikTok (9:16, 20–40 s):** klip hvert afsnit op i 3–4 lodrette klip (cold open, BONK, haven i 4 versioner, faktakort). Shorts er vækstmotoren, og hovedafsnittet er der, hvor folk bliver abonnenter.
 - **Kommentarbait (det ærlige slags):** spørg i beskrivelsen: "Er du en Bo eller en Lise?" Det giver tusindvis af svar, og algoritmen elsker det.
 - **Udgiv fast**, fx hver torsdag. En uforudsigelig udgivelsesplan er ironisk nok den ene ting, publikum ikke tilgiver.
-- **Engelsk kanal parallelt** med de samme afsnit og `Afsnit1-EN`.
+- **Dansk version** kan bruges på en separat dansk kanal eller som undertekst-alternativ (`npm run render:da`).
 
-### Forslag til YouTube-tekst (afsnit 1)
-**Titel:** Kaffen er i køleskabet. Igen. | Tændstikfamilien #1 (ADHD i hverdagen)
+### YouTube-tekst (afsnit 1)
+**Title:** The Coffee Is in the Fridge. Again. | The Stick Family #1 (ADHD Comedy)
 
-**Beskrivelse:**
-Bo åbner alle låger og lukker ingen. Undtagen køleskabet, med kaffen i.
-Lise skulle bare plante én rose. Haven blev lavet om 4 gange.
-Velkommen til Tændstikfamilien: ADHD i hverdagen, tegnet med kærlighed.
+**Description:**
+Bo opens every cabinet and closes none. Except the fridge. With the coffee inside.
+Lise was just going to plant one rose. She redid the garden 4 times.
+Welcome to The Stick Family: everyday ADHD, drawn with love.
 
-Er du en Bo eller en Lise? Skriv det i kommentarerne 👇
-Nyt afsnit hver torsdag. Abonnér, hvis du kan huske det.
+Are you a Bo or a Lise? Tell us in the comments 👇
+New episode every Thursday. Subscribe (if you can remember to).
 
-#ADHD #ADHDvoksen #ADHDhumor #tændstikfamilien
+#ADHD #ADHDcomedy #AdultADHD #ADHDlife #Hyperfocus #TheStickFamily
