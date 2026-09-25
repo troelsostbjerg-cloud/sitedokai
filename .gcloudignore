@@ -17,6 +17,7 @@ BUILD_NOTES.md
 CNAME
 dist
 docs
+lab
 node_modules/
 sql
 test

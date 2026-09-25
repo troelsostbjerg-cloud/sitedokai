@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="En interaktiv 3D-rejse fra sollyset på Jorden til kanten af det synlige univers.">
+</head>
+<body>
+<!-- artifact:start -->
+<title>Rejsen gennem universet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Martian+Mono:wght@300..600&display=swap">
+<style>
+/*STYLE*/
+</style>
+<div id="app">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div id="labels" aria-hidden="true"></div>
+  <div id="fade"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Rejsen gennem universet</span></div>
+    <nav class="chapters" id="chapters" aria-label="Kapitler"></nav>
+    <div class="tools">
+      <button type="button" class="tool" id="soundBtn" aria-pressed="false">Lyd</button>
+      <button type="button" class="tool" id="freeBtn" aria-pressed="false" aria-label="Fri flyvning"><span class="lg">Fri flyvning</span><span class="sm">Fri</span></button>
+    </div>
+  </header>
+
+  <div class="hud" id="hud" aria-live="off"></div>
+  <div class="rail" id="rail" aria-hidden="true"></div>
+
+  <section class="panel" id="panel" aria-live="polite">
+    <div class="panel-head">
+      <div class="eyebrow" id="eyebrow"></div>
+      <button type="button" class="icon-btn" id="collapseBtn" aria-label="Skjul teksten" aria-expanded="true"><span aria-hidden="true">−</span></button>
+    </div>
+    <div class="panel-body" id="panelBody">
+      <h2 class="beat-title" id="beatTitle"></h2>
+      <p class="lead" id="beatLead"></p>
+      <div class="widget" id="widget"></div>
+      <ul class="facts" id="facts"></ul>
+      <div class="spec" id="spec"></div>
+    </div>
+    <div class="panel-foot">
+      <div class="beat-dots" id="beatDots"></div>
+      <div class="nav-btns">
+        <button type="button" class="btn ghost" id="prevBtn" aria-label="Forrige trin">←</button>
+        <button type="button" class="btn primary" id="nextBtn">Næste →</button>
+      </div>
+    </div>
+  </section>
+
+  <button type="button" class="btn primary back-btn" id="backBtn" hidden>Tilbage til rejsen</button>
+  <div class="card" id="infoCard" hidden></div>
+
+  <div class="intro" id="intro">
+    <div class="intro-inner">
+      <p class="intro-eyebrow">8 kapitler · fra 10<sup>−15</sup> m til ∞</p>
+      <h1 class="intro-title">Rejsen gennem <em>universet</em></h1>
+      <p class="intro-sub">Fra sollyset på din hud til kanten af det synlige univers og videre ud i det uendelige. Undervejs: stjerner, der fødes og dør, og hvad en superintelligens kunne nå derude.</p>
+      <div class="intro-actions">
+        <button type="button" class="btn primary big" id="startBtn">Start rejsen</button>
+        <span class="intro-hint">Træk for at dreje · rul eller knib for at zoome · ← → skifter trin</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading"><p class="loading-txt" id="loadingTxt">Henter universet …</p></div>
+</div>
+
+<script>
+/* Viser en fejl, hvis 3D-motoren ikke kan hentes eller starte. */
+(function () {
+  window.__universeFail = function (msg) {
+    var box = document.getElementById('loadingTxt');
+    var wrap = document.getElementById('loading');
+    if (!box || !wrap) return;
+    wrap.classList.remove('gone');
+    box.className = 'loading-err';
+    box.textContent = msg;
+  };
+  setTimeout(function () {
+    if (!window.__universeReady) {
+      window.__universeFail('3D-motoren (three.js) blev ikke hentet. Tjek din internetforbindelse, og genindlæs siden.');
+    }
+  }, 35000);
+  window.addEventListener('error', function (e) {
+    if (!window.__universeReady && e && e.message) {
+      window.__universeFail('Noget gik galt under opstarten: ' + e.message);
+    }
+  });
+})();
+</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }
+</script>
+<script type="module">
+/*SCRIPT*/
+</script>
+<!-- artifact:end -->
+</body>
+</html>
