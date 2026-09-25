@@ -25,3 +25,4 @@ wrangler.toml
 .env
 .env.*
 *.log
+video

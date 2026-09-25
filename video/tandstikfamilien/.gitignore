@@ -1,0 +1,6 @@
+node_modules/
+out/stills/
+public/audio/*.wav
+out/*.wav
+out/*.log
+out/*-muted.mp4
