@@ -1,0 +1,1597 @@
+<title>Junglesål</title>
+<meta name="description" content="Junglesål – en butik med brugte løbesko, hvor skoene hænger i træerne og du går rundt i junglen for at kigge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    color-scheme: dark;
+    --night: #0b1d14;
+    --canopy: #12291c;
+    --moss: #1f3d2b;
+    --leaf: #8cc46a;
+    --mist: #dcebd3;
+    --mist-dim: #a3bb9c;
+    --kraft: #d9b47c;
+    --signal: #ff6b35;
+    --signal-ink: #1f0c03;
+    --panel: rgba(9, 24, 16, 0.86);
+    --line: rgba(220, 235, 211, 0.16);
+    --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --gut: 16px;
+    --top: calc(var(--gut) + env(safe-area-inset-top, 0px));
+    --bot: calc(var(--gut) + env(safe-area-inset-bottom, 0px));
+  }
+  html, body { height: 100%; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0; overflow: hidden; background: var(--night); color: var(--mist);
+    font-family: var(--body); font-size: 15px; line-height: 1.45;
+    -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
+  }
+  #stage { position: fixed; inset: 0; }
+  #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #stage canvas.dragging { cursor: grabbing; }
+  #stage canvas.over-shoe { cursor: pointer; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+  .glass {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    backdrop-filter: blur(12px) saturate(1.2); -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px;
+    border-radius: 999px; border: 1px solid var(--line); background: var(--panel);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    font-weight: 600; font-size: 14px; white-space: nowrap;
+  }
+  .btn:hover { border-color: rgba(220, 235, 211, 0.4); }
+  .btn.primary { background: var(--signal); color: var(--signal-ink); border-color: var(--signal); }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* HUD */
+  .brand { position: fixed; top: var(--top); left: var(--gut); z-index: 5; pointer-events: none; }
+  .logo {
+    font-family: var(--display); font-weight: 900; font-size: 34px; line-height: 0.9;
+    letter-spacing: 0.01em; text-transform: uppercase; color: var(--mist);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+  }
+  .logo span { color: var(--signal); }
+  .zone {
+    margin-top: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mist-dim); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  }
+  .zone b { color: var(--kraft); font-weight: 600; }
+  .cart-btn { position: fixed; top: var(--top); right: var(--gut); z-index: 6; }
+  .cart-btn b {
+    display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px;
+    border-radius: 99px; background: var(--signal); color: var(--signal-ink); font-size: 12px;
+  }
+  .cart-btn.bump { animation: bump 0.4s ease; }
+  @keyframes bump { 40% { transform: scale(1.1); } }
+  .dock {
+    position: fixed; left: 50%; bottom: var(--bot); transform: translateX(-50%); z-index: 6;
+    display: flex; gap: 8px; max-width: calc(100% - 2 * var(--gut));
+  }
+  .dock .count { font-family: var(--mono); font-size: 12px; opacity: 0.7; }
+  .hint {
+    position: fixed; left: var(--gut); bottom: var(--bot); z-index: 5; max-width: 260px;
+    font-size: 12.5px; color: var(--mist-dim); line-height: 1.6; pointer-events: none;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+  }
+  kbd {
+    font-family: var(--mono); font-size: 11px; padding: 1px 5px; border-radius: 4px;
+    border: 1px solid var(--line); background: rgba(0, 0, 0, 0.35); color: var(--mist);
+  }
+  #minimap {
+    position: fixed; right: var(--gut); bottom: var(--bot); z-index: 5; width: 168px; height: 168px;
+    border-radius: 50%; border: 1px solid var(--line); background: rgba(9, 24, 16, 0.7); cursor: pointer;
+  }
+  .near {
+    position: fixed; left: 50%; bottom: calc(var(--bot) + 60px); transform: translateX(-50%); z-index: 5;
+    padding: 8px 14px; border-radius: 999px; font-size: 13.5px; white-space: nowrap;
+    background: rgba(9, 24, 16, 0.78); border: 1px solid var(--line);
+  }
+  .near b { color: var(--kraft); }
+  .hovertip {
+    position: fixed; z-index: 7; pointer-events: none; transform: translate(14px, 14px);
+    padding: 6px 10px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap;
+    background: var(--kraft); color: #2a1a08; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .hovertip span { font-family: var(--mono); font-weight: 500; margin-left: 6px; }
+
+  /* Product panel */
+  .panel {
+    position: fixed; top: calc(var(--top) + 58px); right: var(--gut); z-index: 8;
+    width: 360px; max-width: calc(100% - 2 * var(--gut)); max-height: calc(100% - 180px);
+    overflow-y: auto; padding: 20px; display: grid; gap: 14px; animation: slide 0.25s ease;
+  }
+  @keyframes slide { from { opacity: 0; transform: translateY(8px); } }
+  .x {
+    position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--line); background: transparent; font-size: 18px; line-height: 1;
+  }
+  .eyebrow {
+    display: flex; gap: 8px; align-items: center; font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist-dim);
+  }
+  .tagchip {
+    padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--mist);
+    letter-spacing: 0.06em;
+  }
+  .panel h2 {
+    margin: -6px 0 0; padding-right: 36px; font-family: var(--display); font-weight: 800;
+    font-size: 38px; line-height: 0.95; text-transform: uppercase; text-wrap: balance;
+  }
+  .grade { display: flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 600; }
+  .grade i { width: 10px; height: 10px; border-radius: 50%; background: var(--leaf); }
+  .grade[data-g="B"] i { background: var(--kraft); }
+  .grade[data-g="C"] i { background: var(--signal); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 0; border-radius: 10px; overflow: hidden; background: var(--line); }
+  .stats div { background: rgba(9, 24, 16, 0.92); padding: 8px 10px; }
+  .stats dt { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mist-dim); }
+  .stats dd { margin: 2px 0 0; font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .wear-head { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--mist-dim); }
+  .wear-head span:last-child { font-family: var(--mono); color: var(--mist); }
+  .bar { height: 8px; margin-top: 6px; border-radius: 99px; background: rgba(220, 235, 211, 0.1); overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--leaf), var(--kraft) 55%, var(--signal)); background-size: 360px 100%; }
+  .wear-scale { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px; color: var(--mist-dim); }
+  .panel blockquote {
+    margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--kraft); color: #2a1a08;
+    font-size: 14px; line-height: 1.45; transform: rotate(-0.6deg);
+  }
+  .panel blockquote::before { content: "Sælgers note"; display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: 2px; }
+  .buy { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .price b { font-family: var(--display); font-weight: 900; font-size: 36px; line-height: 1; color: var(--signal); }
+  .price s { font-family: var(--mono); font-size: 13px; color: var(--mist-dim); }
+  .price em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--leaf); }
+  .kmprice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12.5px; color: var(--mist-dim); }
+  .kmprice div { padding: 8px 10px; border-radius: 10px; border: 1px dashed var(--line); }
+  .kmprice b { display: block; font-family: var(--mono); font-size: 15px; color: var(--mist); font-weight: 600; }
+  .kmprice .win b { color: var(--leaf); }
+  .kmprice .lose b { color: var(--signal); }
+  .verdict { margin: -6px 0 0; font-size: 12.5px; color: var(--mist-dim); }
+
+  /* Drawers */
+  .drawer {
+    position: fixed; top: calc(var(--top) + 58px); z-index: 9; width: 340px;
+    max-width: calc(100% - 2 * var(--gut)); max-height: calc(100% - 180px); overflow-y: auto; padding: 18px;
+    display: grid; gap: 12px; align-content: start; animation: slide 0.25s ease;
+  }
+  .drawer.left { left: var(--gut); }
+  .drawer.right { right: var(--gut); }
+  .drawer h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 26px; text-transform: uppercase; }
+  .drawer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .group-title { margin: 6px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--kraft); }
+  .row {
+    width: 100%; display: grid; grid-template-columns: 14px 1fr auto; gap: 10px; align-items: center;
+    padding: 8px 10px; border-radius: 10px; border: 1px solid transparent; background: rgba(220, 235, 211, 0.05); text-align: left;
+  }
+  .row:hover { border-color: var(--line); }
+  .row .sw { width: 14px; height: 14px; border-radius: 4px; }
+  .row small { display: block; color: var(--mist-dim); font-size: 12px; }
+  .row .p { font-family: var(--mono); font-size: 13px; }
+  .row.in-cart .p::after { content: " ✓"; color: var(--leaf); }
+  .cart-foot { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .cart-foot .total { display: flex; justify-content: space-between; align-items: baseline; }
+  .cart-foot .total b { font-family: var(--display); font-size: 30px; font-weight: 900; color: var(--signal); }
+  .cart-foot small { color: var(--mist-dim); }
+  .empty { color: var(--mist-dim); font-size: 14px; margin: 0; }
+  .rm { border: 0; background: none; color: var(--mist-dim); font-size: 12px; text-decoration: underline; padding: 0; }
+
+  /* Intro */
+  .intro {
+    position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 0 var(--gut);
+    background: radial-gradient(ellipse at center, rgba(9, 24, 16, 0.25), rgba(9, 24, 16, 0.75));
+    transition: opacity 0.5s ease;
+  }
+  .intro.gone { opacity: 0; pointer-events: none; }
+  .intro-card { max-width: 480px; padding: 28px; display: grid; gap: 14px; }
+  .intro h1 {
+    margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(56px, 13vw, 88px);
+    line-height: 0.85; text-transform: uppercase; letter-spacing: 0.005em;
+  }
+  .intro h1 span { color: var(--signal); }
+  .lede { margin: 0; font-size: 16px; color: var(--mist); max-width: 42ch; }
+  .intro-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .controls { margin: 0; font-size: 12.5px; color: var(--mist-dim); }
+  .touch-only { display: none; }
+
+  .toast {
+    position: fixed; left: 50%; top: calc(var(--top) + 64px); transform: translate(-50%, -8px); z-index: 30;
+    padding: 10px 16px; border-radius: 12px; background: var(--kraft); color: #2a1a08; font-weight: 600; font-size: 14px;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; max-width: calc(100% - 2 * var(--gut)); text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .stick {
+    position: fixed; z-index: 4; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%;
+    border: 1px solid rgba(220, 235, 211, 0.35); background: rgba(9, 24, 16, 0.3); pointer-events: none;
+  }
+  .stick i { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(220, 235, 211, 0.55); }
+  .nogl { position: fixed; inset: auto var(--gut) calc(var(--bot) + 70px); z-index: 7; padding: 14px; font-size: 14px; }
+
+  @media (pointer: coarse) {
+    .hint, .desk-only { display: none; }
+    .touch-only { display: block; }
+  }
+  @media (max-width: 720px) {
+    .logo { font-size: 26px; }
+    .btn { min-height: 40px; padding: 0 13px; font-size: 13.5px; }
+    .dock { width: calc(100% - 2 * var(--gut)); justify-content: space-between; }
+    .dock .btn { flex: 1; justify-content: center; }
+    .hint { display: none; }
+    #minimap { top: calc(var(--top) + 54px); bottom: auto; width: 104px; height: 104px; }
+    .panel, .drawer { top: auto; left: var(--gut); right: var(--gut); width: auto; bottom: calc(var(--bot) + 54px); max-height: min(56%, calc(100% - 190px)); }
+    .panel h2 { font-size: 32px; }
+    .panel .eyebrow, .panel h2, .panel .grade { order: -2; }
+    .panel .buy { order: -1; }
+    .zdesc { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .near { bottom: calc(var(--bot) + 56px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panel, .drawer { animation: none; }
+    .intro, .toast { transition: none; }
+  }
+</style>
+
+<div id="stage"></div>
+
+<header class="brand">
+  <div class="logo">Jungle<span>sål</span></div>
+  <div class="zone" id="zone">Du står ved <b>indgangen</b></div>
+</header>
+
+<button class="btn cart-btn" id="cartBtn" aria-haspopup="dialog">Kurv <b id="cartCount">0</b><span class="num" id="cartSum">0 kr</span></button>
+
+<div class="hint" id="hint">
+  <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> gå · <kbd>Shift</kbd> løb<br>
+  Træk med musen for at kigge<br>
+  Klik på en sko · <kbd>E</kbd> åbner nærmeste par
+</div>
+
+<canvas id="minimap" width="336" height="336" aria-label="Kort over junglestien. Klik på en prik for at gå derhen."></canvas>
+
+<div class="near" id="near" hidden></div>
+<div class="hovertip" id="hoverTip" hidden></div>
+<div class="stick" id="stick" hidden><i></i></div>
+
+<nav class="dock" aria-label="Rundtur">
+  <button class="btn" id="prevBtn">← Forrige</button>
+  <button class="btn" id="listBtn" aria-haspopup="dialog">Sortiment <span class="count" id="listCount">14</span></button>
+  <button class="btn primary" id="nextBtn">Næste par →</button>
+</nav>
+
+<aside class="panel glass" id="panel" hidden aria-live="polite">
+  <button class="x" id="panelClose" aria-label="Luk">×</button>
+  <div class="eyebrow"><span id="pBrand"></span><span class="tagchip" id="pCat"></span></div>
+  <h2 id="pModel"></h2>
+  <div class="grade" id="pGrade"><i></i><span></span></div>
+  <dl class="stats">
+    <div><dt>Str.</dt><dd id="pSize"></dd></div>
+    <div><dt>Løbet</dt><dd id="pKm"></dd></div>
+    <div><dt>Drop</dt><dd id="pDrop"></dd></div>
+    <div><dt>Vægt</dt><dd id="pWeight"></dd></div>
+  </dl>
+  <div>
+    <div class="wear-head"><span>Sålslid</span><span id="pWearTxt"></span></div>
+    <div class="bar"><i id="pWear"></i></div>
+    <div class="wear-scale"><span>frisk mønster</span><span>glat som en curlingsten</span></div>
+  </div>
+  <blockquote id="pNote"></blockquote>
+  <div class="kmprice">
+    <div>Pris pr. km tilbage<b id="pKmPrice"></b></div>
+    <div>Ny sko pr. km<b id="pKmNew"></b></div>
+  </div>
+  <p class="verdict" id="pVerdict"></p>
+  <div class="buy">
+    <div class="price"><b id="pPrice"></b><s id="pNew"></s><em id="pSave"></em></div>
+    <button class="btn primary" id="pAdd">Læg i kurv</button>
+  </div>
+</aside>
+
+<aside class="drawer left glass" id="list" hidden aria-label="Sortiment">
+  <button class="x" id="listClose" aria-label="Luk">×</button>
+  <h3>Sortiment</h3>
+  <div id="listBody"></div>
+</aside>
+
+<aside class="drawer right glass" id="cart" hidden aria-label="Kurv">
+  <button class="x" id="cartClose" aria-label="Luk">×</button>
+  <h3>Kurv</h3>
+  <ul id="cartList"></ul>
+  <div class="cart-foot">
+    <div class="total"><span>I alt</span><b class="num" id="cartTotal">0 kr</b></div>
+    <small id="cartKm">0 km erfaring medfølger gratis</small>
+    <button class="btn primary" id="checkout">Gå til kassen</button>
+  </div>
+</aside>
+
+<div class="intro" id="intro">
+  <div class="intro-card glass">
+    <div class="eyebrow">Brugte løbesko · 14 par · alle km er talt</div>
+    <h1>Jungle<span>sål</span></h1>
+    <p class="lede">Vi hænger brugte løbesko op i træerne, så de kan lufte ud. Følg stien, kig op, og tag et par med hjem, før de begynder at spire.</p>
+    <div class="intro-actions">
+      <button class="btn primary" id="enterBtn">Gå ind i junglen</button>
+      <button class="btn" id="tourBtn">Før mig til første par</button>
+    </div>
+    <p class="controls desk-only">WASD eller piletaster for at gå, træk med musen for at kigge, klik på en sko for at se den.</p>
+    <p class="controls touch-only">Venstre tommel går, højre tommel kigger. Tryk på en sko for at se den.</p>
+  </div>
+</div>
+
+<div class="glass nogl" id="nogl" hidden>Din browser kan ikke tegne 3D-junglen. Sortimentet virker stadig: tryk på <b>Sortiment</b>.</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+"use strict";
+
+// ---------- Sortiment ----------
+const LIFE_KM = 800; // typisk levetid for en løbesko
+const PRODUCTS = [
+  { id: "peg40", brand: "Nike", model: "Pegasus 40", cat: "Vej", size: 44, km: 520, wear: 46, g: "B", price: 425, newPrice: 1050, drop: 10, weight: 283,
+    note: "Løbet hver tirsdag i to år. Tirsdagene er mere slidte end skoene.", c: ["#d4ee55", "#f0f0ec", "#303030", "#1c1c1c", "#1c1c1c"] },
+  { id: "nim25", brand: "Asics", model: "Gel-Nimbus 25", cat: "Vej", size: 45, km: 690, wear: 61, g: "C", price: 295, newPrice: 1500, drop: 8, weight: 305,
+    note: "Maraton-veteran. Dæmpningen husker stadig kilometer 32.", c: ["#22408f", "#e6e6e2", "#333333", "#7fd3e8", "#ffffff"] },
+  { id: "gho15", brand: "Brooks", model: "Ghost 15", cat: "Vej", size: 39, km: 350, wear: 30, g: "B", price: 480, newPrice: 1100, drop: 12, weight: 272,
+    note: "Løbet af en sygeplejerske efter nattevagter. De har set ting.", c: ["#9aa8ba", "#f3f3f1", "#444444", "#2a4a9a", "#f3f3f1"] },
+  { id: "clm", brand: "On", model: "Cloudmonster", cat: "Vej", size: 42, km: 300, wear: 35, g: "B", price: 560, newPrice: 1300, drop: 6, weight: 275,
+    note: "Der sidder to småsten fast i sålen. De følger med uden merpris.", c: ["#efeee8", "#ff9a3c", "#2a2a2a", "#4ac2e0", "#ff9a3c"] },
+  { id: "nb1080", brand: "New Balance", model: "Fresh Foam X 1080v13", cat: "Vej", size: 46, km: 150, wear: 12, g: "A", price: 790, newPrice: 1400, drop: 6, weight: 293,
+    note: "Købt en størrelse for store. Ejeren prøvede at vokse ind i dem.", c: ["#3c2a6e", "#f4f4f2", "#333333", "#ffb000", "#ffffff"] },
+  { id: "wr27", brand: "Mizuno", model: "Wave Rider 27", cat: "Vej", size: 43, km: 760, wear: 70, g: "C", price: 195, newPrice: 1100, drop: 12, weight: 280,
+    note: "Mest løbet rundt om Søerne. Kender placeringen af hver eneste bænk.", c: ["#5b8fd9", "#ffffff", "#444444", "#ff6fa7", "#ffffff"] },
+  { id: "bos12", brand: "Adidas", model: "Adizero Boston 12", cat: "Konkurrence", size: 42, km: 180, wear: 15, g: "A", price: 895, newPrice: 1400, drop: 6, weight: 255,
+    note: "Købt til en personlig rekord, der aldrig kom. Skoene er klar. Det var ejeren ikke.", c: ["#f05a3a", "#fbfbfb", "#222222", "#ffffff", "#ffffff"] },
+  { id: "end3", brand: "Saucony", model: "Endorphin Speed 3", cat: "Konkurrence", size: 43, km: 240, wear: 20, g: "A", price: 840, newPrice: 1400, drop: 8, weight: 233,
+    note: "Nylonpladen er intakt. Selvtilliden medfølger ikke.", c: ["#6fcfc5", "#f06a8a", "#333333", "#ffffff", "#ffffff"] },
+  { id: "vf3", brand: "Nike", model: "Vaporfly 3", cat: "Konkurrence", size: 42, km: 95, wear: 9, g: "A", price: 1195, newPrice: 2200, drop: 8, weight: 196,
+    note: "Kun brugt til løb med tidtagning. Aldrig til at gå efter brød.", c: ["#f7f9fc", "#ff5fa2", "#222222", "#14c4a6", "#ff5fa2"] },
+  { id: "dn2", brand: "Puma", model: "Deviate Nitro 2", cat: "Konkurrence", size: 40, km: 320, wear: 33, g: "B", price: 540, newPrice: 1200, drop: 8, weight: 262,
+    note: "Karbonplade i fin stand. Har slået ejerens svoger to gange.", c: ["#cf2e2e", "#ffd23f", "#222222", "#111111", "#111111"] },
+  { id: "sg5", brand: "Hoka", model: "Speedgoat 5", cat: "Trail", size: 43, km: 410, wear: 38, g: "B", price: 650, newPrice: 1300, drop: 4, weight: 291,
+    note: "Har set mere mudder end en festivalbillet. Vasket én gang. Af regnen.", c: ["#2f6fb5", "#f2c14e", "#2b2b2b", "#ff7a3d", "#f2c14e"] },
+  { id: "sc6", brand: "Salomon", model: "Speedcross 6", cat: "Trail", size: 41, km: 260, wear: 22, g: "A", price: 720, newPrice: 1200, drop: 10, weight: 298,
+    note: "Greb som en blæksprutte. Lugter heldigvis ikke sådan.", c: ["#3a3f47", "#5b6b3a", "#1a1a1a", "#e84a3c", "#e84a3c"] },
+  { id: "mf4", brand: "Hoka", model: "Mafate Speed 4", cat: "Trail", size: 44, km: 580, wear: 55, g: "C", price: 390, newPrice: 1500, drop: 4, weight: 318,
+    note: "Tre ultraløb og én forkert afkørsel i Harzen. Den sidste var den længste.", c: ["#e8a13a", "#3b3b3b", "#1b1b1b", "#2e5d9a", "#2e5d9a"] },
+  { id: "lp7", brand: "Altra", model: "Lone Peak 7", cat: "Trail", size: 45, km: 440, wear: 41, g: "B", price: 520, newPrice: 1250, drop: 0, weight: 305,
+    note: "Zero drop og plads til tæerne. Tæerne har aldrig haft det bedre.", c: ["#6b7a3a", "#d9c7a3", "#2a2a2a", "#ff6b35", "#d9c7a3"] },
+];
+const GRADES = { A: "Som ny", B: "Godt brugt", C: "Trænet hårdt" };
+const CATS = {
+  "Vej": "Asfalt og hverdagskilometer",
+  "Konkurrence": "Karbon, skum og store forhåbninger",
+  "Trail": "Mudder, rødder og dårlige beslutninger",
+};
+
+// ---------- Små hjælpere ----------
+const $ = (id) => document.getElementById(id);
+const kr = (n) => n.toLocaleString("da-DK") + " kr";
+const krs = (n) => n.toLocaleString("da-DK", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " kr";
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (a, b, t) => { const x = clamp((t - a) / (b - a), 0, 1); return x * x * (3 - 2 * x); };
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const wrapAngle = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+let seed = 7;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const rr = (a, b) => a + (b - a) * rnd();
+function hash2(x, y) { const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); }
+function vnoise(x, y) {
+  const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+  const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+  const a = hash2(xi, yi), b = hash2(xi + 1, yi), c = hash2(xi, yi + 1), d = hash2(xi + 1, yi + 1);
+  return lerp(lerp(a, b, u), lerp(c, d, u), v);
+}
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const coarse = matchMedia("(pointer: coarse)").matches;
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ingen lagring, fint nok */ } },
+};
+
+// Sortér så stien går Vej → Konkurrence → Trail
+const ORDER = ["Vej", "Konkurrence", "Trail"];
+PRODUCTS.sort((a, b) => ORDER.indexOf(a.cat) - ORDER.indexOf(b.cat));
+const cart = new Set(store.get("junglesaal-cart", []).filter((id) => PRODUCTS.some((p) => p.id === id)));
+
+// ---------- Renderer ----------
+let renderer;
+try {
+  if (typeof THREE === "undefined") throw new Error("three mangler");
+  renderer = new THREE.WebGLRenderer({ antialias: !coarse, powerPreference: "high-performance" });
+} catch (e) {
+  renderer = null;
+}
+const stage = $("stage");
+const scene = renderer ? new THREE.Scene() : null;
+const camera = renderer ? new THREE.PerspectiveCamera(66, innerWidth / innerHeight, 0.08, 180) : null;
+const FOG = 0x24412e;
+if (renderer) {
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarse ? 1.5 : 1.75));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  stage.appendChild(renderer.domElement);
+  scene.background = new THREE.Color(FOG);
+  scene.fog = new THREE.FogExp2(FOG, 0.034);
+  camera.rotation.order = "YXZ";
+}
+
+// ---------- Stien: en lukket sløjfe gennem junglen ----------
+const PATH = (() => {
+  if (!renderer) return null;
+  const pts = [];
+  const n = 18;
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2;
+    const r = 30 + 7 * Math.sin(a * 3 + 0.6) + 3.5 * Math.cos(a * 5);
+    pts.push(new THREE.Vector3(Math.cos(a) * r, 0, Math.sin(a) * r));
+  }
+  const curve = new THREE.CatmullRomCurve3(pts, true, "centripetal");
+  const samples = curve.getSpacedPoints(400);
+  samples.pop();
+  return { curve, samples, length: curve.getLength() };
+})();
+function pathDist(x, z) {
+  let best = Infinity, bi = 0;
+  const s = PATH.samples;
+  for (let i = 0; i < s.length; i++) {
+    const dx = s[i].x - x, dz = s[i].z - z, d = dx * dx + dz * dz;
+    if (d < best) { best = d; bi = i; }
+  }
+  return { d: Math.sqrt(best), t: bi / s.length };
+}
+function pathFrame(t) {
+  t = ((t % 1) + 1) % 1;
+  const p = PATH.curve.getPointAt(t);
+  const tan = PATH.curve.getTangentAt(t).setY(0).normalize();
+  const nrm = new THREE.Vector3(-tan.z, 0, tan.x);
+  return { p, tan, nrm };
+}
+
+// ---------- Junglen ----------
+const colliders = [];
+const trees = [];
+const SPOTS = [];
+let fireflies = null, fireBase = null, fireSeed = null;
+const shafts = [];
+const SUN_DIR = renderer ? new THREE.Vector3(25, 45, 12).normalize() : null;
+
+function planSpots() {
+  const N = PRODUCTS.length;
+  PRODUCTS.forEach((prod, i) => {
+    const t = 0.03 + (i / N) * 0.94;
+    const side = i % 2 === 0 ? 1 : -1;
+    const f = pathFrame(t);
+    const pivotY = rr(4.2, 4.7);
+    const pivot = f.p.clone().addScaledVector(f.nrm, side * 2.3).setY(pivotY);
+    const trunk = f.p.clone().addScaledVector(f.nrm, side * 5.8).addScaledVector(f.tan, rr(-0.7, 0.7));
+    SPOTS.push({ t, side, f, pivot, trunk, L: rr(1.45, 1.8), prod });
+    trees.push({ x: trunk.x, z: trunk.z, h: rr(9.5, 12.5), r: rr(0.5, 0.62), kind: "hang" });
+  });
+}
+
+function leafGeometry() {
+  const s = new THREE.Shape();
+  s.moveTo(0, 0);
+  s.bezierCurveTo(0.34, 0.18, 0.36, 0.7, 0, 1);
+  s.bezierCurveTo(-0.36, 0.7, -0.34, 0.18, 0, 0);
+  const g = new THREE.ShapeGeometry(s, 6);
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i);
+    p.setXYZ(i, x, -0.42 * y * y - Math.abs(x) * 0.3 + 0.08 * y, y);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+
+function lumpy(geo, amt) {
+  const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+    const k = 1 + (hash2(Math.round(x * 97) + Math.round(z * 13), Math.round(y * 57)) - 0.5) * amt;
+    p.setXYZ(i, x * k, y * k, z * k);
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function instanced(geo, mat, list, opts = {}) {
+  const mesh = new THREE.InstancedMesh(geo, mat, list.length);
+  const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), s = new THREE.Vector3(), v = new THREE.Vector3();
+  list.forEach((it, i) => {
+    e.set(it.rx || 0, it.ry || 0, it.rz || 0, "YXZ");
+    q.setFromEuler(e);
+    s.set(it.sx, it.sy, it.sz);
+    v.set(it.x, it.y, it.z);
+    m.compose(v, q, s);
+    mesh.setMatrixAt(i, m);
+    if (it.c) mesh.setColorAt(i, it.c);
+  });
+  mesh.castShadow = !!opts.cast;
+  mesh.receiveShadow = !!opts.receive;
+  scene.add(mesh);
+  return mesh;
+}
+
+const GREENS = ["#2e5a2b", "#3b6b2f", "#24502a", "#4d7a34", "#1f4526", "#557f2e"];
+const tint = (hex, j) => new THREE.Color(hex).offsetHSL(rr(-j, j) * 0.3, rr(-j, j), rr(-j, j));
+
+function buildEnvironment() {
+  scene.add(new THREE.HemisphereLight(0xd6f0c4, 0x1a2a12, 0.8));
+  scene.add(new THREE.AmbientLight(0x3b5a3a, 0.3));
+  const sun = new THREE.DirectionalLight(0xffe0a3, 1.1);
+  sun.position.copy(SUN_DIR).multiplyScalar(60);
+  sun.castShadow = true;
+  const sz = 62;
+  Object.assign(sun.shadow.camera, { left: -sz, right: sz, top: sz, bottom: -sz, near: 5, far: 140 });
+  sun.shadow.mapSize.set(coarse ? 1024 : 2048, coarse ? 1024 : 2048);
+  sun.shadow.bias = -0.0009;
+  scene.add(sun);
+
+  // Jord med sti
+  const ground = new THREE.PlaneGeometry(230, 230, 150, 150);
+  ground.rotateX(-Math.PI / 2);
+  const gp = ground.attributes.position;
+  const colors = new Float32Array(gp.count * 3);
+  const cA = new THREE.Color("#1c381e"), cB = new THREE.Color("#3a5c2a"), dA = new THREE.Color("#5e4630"), dB = new THREE.Color("#8a6b45"), c = new THREE.Color();
+  for (let i = 0; i < gp.count; i++) {
+    const x = gp.getX(i), z = gp.getZ(i);
+    const n = vnoise(x * 0.07, z * 0.07) * 0.6 + vnoise(x * 0.35, z * 0.35) * 0.4;
+    const d = pathDist(x, z).d;
+    c.copy(cA).lerp(cB, n);
+    const dirt = 1 - smooth(1.3, 2.4, d);
+    if (dirt > 0) c.lerp(dA.clone().lerp(dB, vnoise(x * 0.9, z * 0.9)), dirt);
+    colors.set([c.r, c.g, c.b], i * 3);
+    gp.setY(i, vnoise(x * 0.12 + 9, z * 0.12) * 0.55 * smooth(2.5, 8, d));
+  }
+  ground.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  ground.computeVertexNormals();
+  const groundMesh = new THREE.Mesh(ground, new THREE.MeshLambertMaterial({ vertexColors: true }));
+  groundMesh.receiveShadow = true;
+  scene.add(groundMesh);
+
+  // Træer: kæmpetræet i midten, træerne med sko, resten tilfældigt
+  trees.push({ x: 1.5, z: -2, h: 24, r: 1.7, kind: "giant" });
+  let tries = 0;
+  while (trees.length < (coarse ? 150 : 200) && tries++ < 6000) {
+    const a = rnd() * Math.PI * 2, rad = Math.sqrt(rnd()) * 80;
+    const x = Math.cos(a) * rad, z = Math.sin(a) * rad;
+    if (pathDist(x, z).d < 3.4) continue;
+    if (trees.some((t) => (t.x - x) ** 2 + (t.z - z) ** 2 < 10.5)) continue;
+    if (SPOTS.some((s) => (s.pivot.x - x) ** 2 + (s.pivot.z - z) ** 2 < 12)) continue;
+    trees.push({ x, z, h: rr(8, 15), r: rr(0.3, 0.6), kind: rnd() < 0.28 ? "palm" : "tree" });
+  }
+
+  const trunkList = [], flareList = [], blobList = [], frondList = [], vineList = [];
+  for (const t of trees) {
+    const palm = t.kind === "palm";
+    const h = palm ? t.h * 0.7 : t.h;
+    const bark = tint(palm ? "#6b5a3e" : "#4b3a2a", 0.06);
+    trunkList.push({ x: t.x, y: 0, z: t.z, sx: t.r, sy: h, sz: t.r, rx: rr(-0.04, 0.04), rz: rr(-0.04, 0.04), c: bark });
+    if (!palm) flareList.push({ x: t.x, y: 0, z: t.z, sx: t.r * 2.3, sy: 1.8 + t.r, sz: t.r * 2.3, ry: rnd() * 6, c: bark });
+    colliders.push({ x: t.x, z: t.z, r: (palm ? t.r : t.r * 1.6) + 0.35 });
+    if (palm) {
+      const k = 7 + Math.floor(rnd() * 3);
+      for (let j = 0; j < k; j++) {
+        const s = rr(3, 4.2);
+        frondList.push({ x: t.x, y: h, z: t.z, sx: s * 0.9, sy: s, sz: s, ry: (j / k) * Math.PI * 2 + rr(-0.2, 0.2), rx: rr(-0.5, 0.15), c: tint(GREENS[j % GREENS.length], 0.05) });
+      }
+    } else {
+      const big = t.kind === "giant";
+      const k = big ? 14 : 3 + Math.floor(rnd() * 4);
+      const spread = big ? 7 : 2.6;
+      for (let j = 0; j < k; j++) {
+        const s = big ? rr(4, 6.5) : rr(2.2, 3.8);
+        blobList.push({ x: t.x + rr(-spread, spread), y: h + rr(-1.5, 2.2), z: t.z + rr(-spread, spread), sx: s, sy: s * 0.72, sz: s, ry: rnd() * 6, c: tint(GREENS[Math.floor(rnd() * GREENS.length)], 0.05) });
+      }
+      const vines = big ? 12 : Math.floor(rnd() * 3);
+      for (let j = 0; j < vines; j++) {
+        const top = h + rr(-1.2, 0), len = rr(3, Math.max(3.2, top - 1.2));
+        vineList.push({ x: t.x + rr(-spread, spread), y: top, z: t.z + rr(-spread, spread), sx: 1, sy: len, sz: 1, rx: rr(-0.05, 0.05), c: tint(rnd() < 0.6 ? "#3f5e2c" : "#4d3f26", 0.05) });
+      }
+    }
+  }
+  // Lianer hen over stien, altid over hovedhøjde
+  for (let i = 0; i < 70; i++) {
+    const f = pathFrame(rnd());
+    const top = rr(9, 12);
+    const p = f.p.clone().addScaledVector(f.nrm, rr(-1.8, 1.8));
+    vineList.push({ x: p.x, y: top, z: p.z, sx: 1, sy: top - rr(2.7, 5.5), sz: 1, c: tint("#3f5e2c", 0.06) });
+  }
+
+  const trunkGeo = new THREE.CylinderGeometry(0.62, 1, 1, 7, 3).translate(0, 0.5, 0);
+  const barkMat = new THREE.MeshStandardMaterial({ roughness: 1, flatShading: true });
+  instanced(trunkGeo, barkMat, trunkList, { cast: true, receive: true });
+  instanced(new THREE.ConeGeometry(1, 1, 7).translate(0, 0.5, 0), barkMat, flareList, { cast: true, receive: true });
+  const blobGeo = lumpy(new THREE.IcosahedronGeometry(1, 1), 0.35);
+  instanced(blobGeo, new THREE.MeshStandardMaterial({ roughness: 0.95, flatShading: true }), blobList, { cast: true });
+  const leafGeo = leafGeometry();
+  const leafMat = new THREE.MeshLambertMaterial({ side: THREE.DoubleSide });
+  instanced(leafGeo, leafMat, frondList, { cast: true });
+  instanced(new THREE.CylinderGeometry(0.035, 0.03, 1, 4).translate(0, -0.5, 0), new THREE.MeshLambertMaterial(), vineList);
+
+  // Underskov: store blade langs stien og spredt rundt
+  const under = [];
+  for (let i = 0; i < (coarse ? 170 : 280); i++) {
+    let x, z;
+    if (rnd() < 0.6) {
+      const f = pathFrame(rnd());
+      const off = (rnd() < 0.5 ? -1 : 1) * rr(2.1, 6.5);
+      x = f.p.x + f.nrm.x * off; z = f.p.z + f.nrm.z * off;
+    } else {
+      const a = rnd() * Math.PI * 2, rad = Math.sqrt(rnd()) * 78;
+      x = Math.cos(a) * rad; z = Math.sin(a) * rad;
+    }
+    if (pathDist(x, z).d < 1.9) continue;
+    const k = 4 + Math.floor(rnd() * 5), base = tint(GREENS[Math.floor(rnd() * GREENS.length)], 0.06);
+    for (let j = 0; j < k; j++) {
+      const s = rr(0.7, 1.7);
+      under.push({ x, y: 0.05, z, sx: s * 0.9, sy: s, sz: s, ry: rnd() * Math.PI * 2, rx: rr(-1.1, -0.35), c: base.clone().offsetHSL(0, 0, rr(-0.04, 0.05)) });
+    }
+  }
+  instanced(leafGeo, leafMat, under);
+
+  const grass = [];
+  for (let i = 0; i < (coarse ? 900 : 1700); i++) {
+    const a = rnd() * Math.PI * 2, rad = Math.sqrt(rnd()) * 70;
+    const x = Math.cos(a) * rad, z = Math.sin(a) * rad;
+    if (pathDist(x, z).d < 1.35) continue;
+    const s = rr(0.6, 1.5);
+    grass.push({ x, y: 0, z, sx: s, sy: s * rr(0.8, 1.6), sz: s, rx: rr(-0.2, 0.2), rz: rr(-0.2, 0.2), c: tint("#4f7a33", 0.08) });
+  }
+  instanced(new THREE.ConeGeometry(0.07, 0.5, 3).translate(0, 0.25, 0), new THREE.MeshLambertMaterial(), grass);
+
+  const rocks = [];
+  for (let i = 0; i < 80; i++) {
+    const f = pathFrame(rnd());
+    const off = (rnd() < 0.5 ? -1 : 1) * rr(1.5, 3.4);
+    const s = rr(0.25, 0.8);
+    rocks.push({ x: f.p.x + f.nrm.x * off, y: 0, z: f.p.z + f.nrm.z * off, sx: s, sy: s * 0.6, sz: s * rr(0.8, 1.3), ry: rnd() * 6, c: tint("#5d6b5a", 0.05) });
+  }
+  instanced(lumpy(new THREE.DodecahedronGeometry(0.6, 0), 0.3), new THREE.MeshStandardMaterial({ roughness: 1, flatShading: true }), rocks, { cast: true, receive: true });
+
+  // Lysstriber gennem kronetaget
+  const shaftGeo = new THREE.CylinderGeometry(0.5, 2.8, 40, 20, 1, true);
+  const up = new THREE.Vector3(0, 1, 0);
+  for (let i = 0; i < 8; i++) {
+    const f = pathFrame(i / 8 + rr(0, 0.08));
+    const mat = new THREE.MeshBasicMaterial({ color: 0xfff0bd, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+    const m = new THREE.Mesh(shaftGeo, mat);
+    m.quaternion.setFromUnitVectors(up, SUN_DIR);
+    m.position.copy(f.p).addScaledVector(f.nrm, rr(-3, 3)).addScaledVector(SUN_DIR, 19);
+    m.userData.ph = rnd() * 6;
+    scene.add(m);
+    shafts.push(m);
+  }
+
+  // Ildfluer
+  const N = coarse ? 160 : 280;
+  fireBase = new Float32Array(N * 3);
+  fireSeed = new Float32Array(N * 2);
+  for (let i = 0; i < N; i++) {
+    const f = pathFrame(rnd());
+    const off = rr(-9, 9);
+    fireBase.set([f.p.x + f.nrm.x * off, rr(0.4, 4), f.p.z + f.nrm.z * off], i * 3);
+    fireSeed.set([rr(0.2, 0.7), rnd() * 6.28], i * 2);
+  }
+  const fg = new THREE.BufferGeometry();
+  fg.setAttribute("position", new THREE.BufferAttribute(fireBase.slice(), 3));
+  const glow = document.createElement("canvas");
+  glow.width = glow.height = 64;
+  const gx = glow.getContext("2d");
+  const grd = gx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grd.addColorStop(0, "rgba(255,250,200,1)");
+  grd.addColorStop(0.25, "rgba(255,230,120,0.7)");
+  grd.addColorStop(1, "rgba(255,210,80,0)");
+  gx.fillStyle = grd;
+  gx.fillRect(0, 0, 64, 64);
+  fireflies = new THREE.Points(fg, new THREE.PointsMaterial({ size: 0.2, map: new THREE.CanvasTexture(glow), color: 0xfff3a8, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  scene.add(fireflies);
+}
+
+// ---------- Løbeskoen, bygget af tre sideprofiler ----------
+const V2 = renderer ? THREE.Vector2 : null;
+const SHOE_SCALE = 0.46;
+const yb = (x) => (x < -0.3 ? 0.014 * ((-0.3 - x) / 0.2) ** 2 : x > 0.2 ? 0.1 * ((x - 0.2) / 0.32) ** 2 : 0);
+const thick = (x) => (x <= 0.35 ? 0.15 + ((x + 0.5) / 0.85) * -0.065 : 0.085 - ((x - 0.35) / 0.17) * 0.03);
+const ym = (x) => yb(x) + 0.028 + thick(x);
+const laceY = (x) => 0.34 - 0.333 * (x - 0.15);
+const collarY = (x) => 0.385 + 2.2 * (x + 0.3) ** 2;
+function widthK(x, y) {
+  let w = 1;
+  if (x > 0.2) w *= 1 - Math.min(1, (x - 0.2) / 0.38) ** 2 * 0.5;
+  if (x < -0.35) w *= 1 - Math.min(1, (-0.35 - x) / 0.22) ** 2 * 0.28;
+  const k = Math.max(0, (y - 0.15) / 0.34);
+  return w * (1 - 0.4 * Math.min(1, k * k));
+}
+function extrudeWarp(shapes, depth, bevel, warpY) {
+  const g = new THREE.ExtrudeGeometry(shapes, { depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel * 0.8, bevelSegments: 2, curveSegments: 8, steps: 1 });
+  g.translate(0, 0, -depth / 2);
+  const p = g.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const x = p.getX(i), y = p.getY(i);
+    p.setZ(i, p.getZ(i) * widthK(x, warpY ? y : 0.15));
+  }
+  g.computeVertexNormals();
+  return g;
+}
+function band(f0, f1, x0, x1, n) {
+  const s = new THREE.Shape();
+  for (let i = 0; i <= n; i++) { const x = lerp(x0, x1, i / n); i ? s.lineTo(x, f0(x)) : s.moveTo(x, f0(x)); }
+  s.lineTo(x1 + 0.016, (f0(x1) + f1(x1)) / 2);
+  for (let i = n; i >= 0; i--) { const x = lerp(x0, x1, i / n); s.lineTo(x, f1(x)); }
+  s.lineTo(x0 - 0.016, (f0(x0) + f1(x0)) / 2);
+  return s;
+}
+const poly = (pts) => new THREE.Shape(pts.map(([x, y]) => new V2(x, y)));
+
+let SHOE_GEO = null;
+function shoeGeometry() {
+  if (SHOE_GEO) return SHOE_GEO;
+  const upper = new THREE.Shape();
+  upper.moveTo(-0.49, ym(-0.49) - 0.012);
+  for (let i = 1; i <= 12; i++) { const x = lerp(-0.49, 0.5, i / 12); upper.lineTo(x, ym(x) - 0.012); }
+  upper.splineThru([
+    [0.535, 0.2], [0.5, 0.245], [0.42, 0.268], [0.3, 0.298], [0.15, 0.34], [0, 0.392], [-0.12, 0.43],
+    [-0.2, 0.415], [-0.3, 0.385], [-0.41, 0.405], [-0.47, 0.46], [-0.515, 0.43], [-0.535, 0.32],
+    [-0.51, 0.22], [-0.49, ym(-0.49) - 0.012],
+  ].map(([x, y]) => new V2(x, y)));
+  const stripe = [poly([[-0.38, 0.215], [-0.25, 0.215], [0.05, 0.35], [-0.07, 0.375]])];
+  const three = [0, 1, 2].map((k) => {
+    const dx = k * 0.075;
+    return poly([[-0.28 + dx, 0.2], [-0.24 + dx, 0.2], [-0.04 + dx, 0.37 - dx * 0.35], [-0.08 + dx, 0.37 - dx * 0.35]]);
+  });
+  const collar = new THREE.Shape();
+  collar.moveTo(-0.4, collarY(-0.4) - 0.05);
+  for (let i = 0; i <= 8; i++) { const x = lerp(-0.4, -0.19, i / 8); collar.lineTo(x, collarY(x) + 0.035); }
+  collar.lineTo(-0.19, collarY(-0.19) - 0.05);
+  SHOE_GEO = {
+    outsole: extrudeWarp(band(yb, (x) => yb(x) + 0.03, -0.5, 0.52, 18), 0.31, 0.012, false),
+    midsole: extrudeWarp(band((x) => yb(x) + 0.026, ym, -0.5, 0.52, 18), 0.3, 0.02, false),
+    upper: extrudeWarp(upper, 0.26, 0.035, true),
+    stripe: extrudeWarp(stripe, 0.33, 0.006, true),
+    stripes3: extrudeWarp(three, 0.33, 0.006, true),
+    tab: new THREE.ExtrudeGeometry(poly([[-0.535, 0.3], [-0.465, 0.3], [-0.445, 0.495], [-0.505, 0.49]]), { depth: 0.07, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, bevelSegments: 1 }).translate(0, 0, -0.035),
+    tongue: new THREE.ExtrudeGeometry(poly([[-0.17, 0.39], [-0.04, 0.4], [-0.08, 0.505], [-0.19, 0.49]]), { depth: 0.12, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.012, bevelSegments: 1 }).translate(0, 0, -0.06),
+    collar: new THREE.ExtrudeGeometry(collar, { depth: 0.17, bevelEnabled: false }).translate(0, 0, -0.085),
+    lace: new THREE.BoxGeometry(0.032, 0.02, 1),
+  };
+  return SHOE_GEO;
+}
+
+const MUD = renderer ? new THREE.Color("#5a4127") : null;
+function shoeMaterials(prod) {
+  const [u, m, o, a, l] = prod.c;
+  const dirt = prod.wear / 100;
+  const std = (color, rough) => new THREE.MeshStandardMaterial({ color, roughness: rough, flatShading: true });
+  const mats = {
+    upper: std(new THREE.Color(u), 0.85),
+    mid: std(new THREE.Color(m).lerp(MUD, dirt * 0.38), 0.55),
+    out: std(new THREE.Color(o).lerp(MUD, dirt * 0.3), 1),
+    accent: std(new THREE.Color(a), 0.6),
+    lace: std(new THREE.Color(l), 0.9),
+    tongue: std(new THREE.Color(u).offsetHSL(0, -0.05, 0.07), 0.9),
+    dark: std(new THREE.Color("#141414"), 1),
+  };
+  mats.all = Object.values(mats);
+  return mats;
+}
+
+function makeShoe(mats, prod) {
+  const G = shoeGeometry();
+  const inner = new THREE.Group();
+  const add = (geo, mat) => { const m = new THREE.Mesh(geo, mat); m.castShadow = true; inner.add(m); return m; };
+  add(G.outsole, mats.out);
+  add(G.midsole, mats.mid);
+  add(G.upper, mats.upper);
+  add(prod.brand === "Adidas" ? G.stripes3 : G.stripe, mats.accent);
+  add(G.tab, mats.accent);
+  add(G.tongue, mats.tongue);
+  add(G.collar, mats.dark);
+  [0.14, 0.08, 0.02, -0.04, -0.1].forEach((x) => {
+    const y = laceY(x);
+    const bar = add(G.lace, mats.lace);
+    bar.position.set(x, y + 0.036, 0);
+    bar.rotation.z = -0.32;
+    bar.scale.z = 2 * 0.165 * widthK(x, y) * 0.72;
+  });
+  inner.position.set(-0.02, -0.44, 0);
+  const shoe = new THREE.Group();
+  shoe.add(inner);
+  shoe.scale.setScalar(SHOE_SCALE);
+  return shoe;
+}
+
+function rope(a, b, mat, r = 0.007) {
+  const d = new THREE.Vector3().subVectors(b, a);
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, d.length(), 5), mat);
+  m.position.copy(a).addScaledVector(d, 0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+  return m;
+}
+
+// ---------- Hængemærker, skilte og selve parrene ----------
+const F_DISPLAY = '"Big Shoulders Display", "Arial Narrow", Impact, sans-serif';
+const F_MONO = '"IBM Plex Mono", Menlo, Consolas, monospace';
+const F_BODY = '"Figtree", system-ui, sans-serif';
+const redraws = [];
+function canvasTex(w, h, draw) {
+  const cv = document.createElement("canvas");
+  cv.width = w; cv.height = h;
+  const ctx = cv.getContext("2d");
+  const tex = new THREE.CanvasTexture(cv);
+  tex.anisotropy = 4;
+  const run = () => { ctx.save(); ctx.clearRect(0, 0, w, h); draw(ctx, w, h); ctx.restore(); tex.needsUpdate = true; };
+  run();
+  redraws.push(run);
+  return { tex, run };
+}
+function fitFont(ctx, text, weight, family, size, maxW) {
+  let s = size;
+  ctx.font = `${weight} ${s}px ${family}`;
+  while (ctx.measureText(text).width > maxW && s > 12) { s -= 2; ctx.font = `${weight} ${s}px ${family}`; }
+}
+
+function drawTag(ctx, W, H, prod) {
+  ctx.beginPath();
+  ctx.moveTo(70, 8); ctx.lineTo(W - 20, 8); ctx.quadraticCurveTo(W - 8, 8, W - 8, 20);
+  ctx.lineTo(W - 8, H - 20); ctx.quadraticCurveTo(W - 8, H - 8, W - 20, H - 8);
+  ctx.lineTo(70, H - 8); ctx.lineTo(8, H - 70); ctx.lineTo(8, 70); ctx.closePath();
+  ctx.fillStyle = "#dcb67d"; ctx.fill();
+  ctx.lineWidth = 4; ctx.strokeStyle = "#b08654"; ctx.stroke();
+  ctx.globalAlpha = 0.09; ctx.fillStyle = "#6b4a1f";
+  for (let i = 0; i < 90; i++) ctx.fillRect(hash2(i, 1) * W, hash2(i, 2) * H, 30 * hash2(i, 3) + 6, 1.5);
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.beginPath(); ctx.arc(46, H / 2, 14, 0, Math.PI * 2); ctx.fill();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.lineWidth = 6; ctx.strokeStyle = "#c9c2b0"; ctx.beginPath(); ctx.arc(46, H / 2, 18, 0, Math.PI * 2); ctx.stroke();
+  const x0 = 90, maxW = W - x0 - 28;
+  ctx.fillStyle = "#4a3216";
+  fitFont(ctx, `${prod.brand} · ${prod.cat}`.toUpperCase(), 600, F_MONO, 24, maxW);
+  ctx.fillText(`${prod.brand} · ${prod.cat}`.toUpperCase(), x0, 56);
+  ctx.fillStyle = "#24170a";
+  fitFont(ctx, prod.model.toUpperCase(), 800, F_DISPLAY, 64, maxW);
+  ctx.fillText(prod.model.toUpperCase(), x0, 122);
+  ctx.fillStyle = "#4a3216";
+  const line = `EU ${prod.size} · ${prod.km} km · slid ${prod.wear}%`;
+  fitFont(ctx, line, 500, F_MONO, 24, maxW);
+  ctx.fillText(line, x0, 170);
+  ctx.fillStyle = "#b53f0c"; ctx.font = `900 90px ${F_DISPLAY}`;
+  const pt = kr(prod.price);
+  ctx.fillText(pt, x0, 274);
+  const pw = ctx.measureText(pt).width;
+  ctx.fillStyle = "#6b5334"; ctx.font = `500 26px ${F_MONO}`;
+  const nt = kr(prod.newPrice);
+  ctx.fillText(nt, x0 + pw + 18, 270);
+  ctx.fillRect(x0 + pw + 16, 261, ctx.measureText(nt).width + 4, 3);
+  if (cart.has(prod.id)) {
+    ctx.globalAlpha = 0.88;
+    ctx.translate(W - 128, 96); ctx.rotate(-0.2);
+    ctx.strokeStyle = ctx.fillStyle = "#2f6b2a"; ctx.lineWidth = 6;
+    ctx.strokeRect(-96, -32, 192, 64);
+    ctx.font = `900 42px ${F_DISPLAY}`; ctx.textAlign = "center";
+    ctx.fillText("I KURVEN", 0, 15);
+  }
+}
+
+function drawWood(ctx, W, H) {
+  ctx.fillStyle = "#6e4c2e"; ctx.fillRect(0, 0, W, H);
+  ctx.globalAlpha = 0.18;
+  for (let i = 0; i < 40; i++) {
+    ctx.strokeStyle = i % 2 ? "#3d2716" : "#9a7048"; ctx.lineWidth = 1 + hash2(i, 9) * 3;
+    const y = hash2(i, 4) * H;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.bezierCurveTo(W * 0.3, y + 8, W * 0.6, y - 8, W, y + 4); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  ctx.lineWidth = 10; ctx.strokeStyle = "#3d2716"; ctx.strokeRect(5, 5, W - 10, H - 10);
+}
+function drawSign(ctx, W, H, title, sub) {
+  drawWood(ctx, W, H);
+  ctx.fillStyle = "#f3e2c0";
+  fitFont(ctx, title + "  →", 900, F_DISPLAY, 118, W - 70);
+  ctx.fillText(title + "  →", 34, 138);
+  fitFont(ctx, sub, 600, F_BODY, 30, W - 70);
+  ctx.globalAlpha = 0.85;
+  ctx.fillText(sub, 36, 206);
+}
+function drawGate(ctx, W, H) {
+  drawWood(ctx, W, H);
+  ctx.fillStyle = "#f3e2c0"; ctx.textAlign = "center";
+  ctx.font = `900 150px ${F_DISPLAY}`;
+  ctx.fillText("JUNGLESÅL", W / 2, 158);
+  ctx.fillStyle = "#ffb08a";
+  ctx.font = `600 30px ${F_MONO}`;
+  ctx.fillText("BRUGTE LØBESKO · 14 PAR I TRÆERNE", W / 2, 218);
+}
+
+function limb(a, b, r0, r1, mat) {
+  const d = new THREE.Vector3().subVectors(b, a);
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(r1, r0, d.length(), 6), mat);
+  m.position.copy(a).addScaledVector(d, 0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize());
+  m.castShadow = true;
+  return m;
+}
+
+const hangers = [];
+const pickRoots = [];
+function buildPairs() {
+  const barkMat = new THREE.MeshStandardMaterial({ color: "#4b3a2a", roughness: 1, flatShading: true });
+  const stringMat = new THREE.MeshBasicMaterial({ color: "#e9dcc0" });
+  const knotGeo = new THREE.SphereGeometry(0.04, 8, 6);
+  const branchLeaves = [];
+  SPOTS.forEach((spot, i) => {
+    const { prod, pivot, L, f, trunk } = spot;
+    const mats = shoeMaterials(prod);
+    const A = new THREE.Vector3(trunk.x, pivot.y + 0.34, trunk.z);
+    const dir = new THREE.Vector3(pivot.x - trunk.x, 0, pivot.z - trunk.z);
+    const reach = dir.length();
+    dir.normalize();
+    const B = pivot.clone().addScaledVector(dir, 0.8);
+    B.y = A.y + (pivot.y + 0.08 - A.y) * (reach + 0.8) / reach;
+    scene.add(limb(A, B, 0.17, 0.06, barkMat));
+    for (let j = 0; j < 5; j++) {
+      const p = A.clone().lerp(B, rr(0.35, 1));
+      const s = rr(0.5, 0.9);
+      branchLeaves.push({ x: p.x, y: p.y + 0.05, z: p.z, sx: s, sy: s, sz: s, ry: rnd() * 6, rx: rr(-0.2, 0.5), c: tint(GREENS[j % GREENS.length], 0.05) });
+    }
+
+    const root = new THREE.Group();
+    root.position.copy(pivot);
+    root.rotation.y = Math.atan2(f.p.x - pivot.x, f.p.z - pivot.z);
+    scene.add(root);
+    const swing = new THREE.Group();
+    root.add(swing);
+    swing.add(new THREE.Mesh(knotGeo, mats.lace));
+    const holders = [];
+    [-1, 1].forEach((sgn, k) => {
+      const end = new THREE.Vector3(sgn * 0.14, -L + (k ? 0.1 : -0.02), rr(-0.03, 0.03));
+      swing.add(rope(new THREE.Vector3(), end, mats.lace));
+      const holder = new THREE.Group();
+      holder.position.copy(end);
+      const shoe = makeShoe(mats, prod);
+      shoe.rotation.set(rr(-0.1, 0.1), (sgn < 0 ? 0 : Math.PI) + rr(-0.3, 0.3), -1.0 + rr(-0.2, 0.12));
+      holder.add(shoe);
+      swing.add(holder);
+      holders.push({ g: holder, ph: rnd() * 6 });
+    });
+    const tag = canvasTex(512, 320, (ctx, W, H) => drawTag(ctx, W, H, prod));
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tag.tex, alphaTest: 0.2 }));
+    sprite.scale.set(0.8, 0.5, 1);
+    sprite.position.set(0, -L - 0.72, 0.06);
+    swing.add(sprite);
+    swing.add(rope(new THREE.Vector3(0, -L + 0.02, 0), new THREE.Vector3(0, -L - 0.47, 0.06), stringMat, 0.004));
+    swing.traverse((o) => { o.userData.idx = i; });
+    pickRoots.push(swing);
+    hangers.push({
+      i, prod, spot, root, swing, holders, mats, tag,
+      center: new THREE.Vector3(pivot.x, pivot.y - L - 0.15, pivot.z),
+      w: Math.sqrt(9.8 / (L + 0.3)), ph: rnd() * 6, ph2: rnd() * 6, kick: 0, glow: 0,
+    });
+  });
+  instanced(leafGeometry(), new THREE.MeshLambertMaterial({ side: THREE.DoubleSide }), branchLeaves);
+}
+
+function buildSigns() {
+  const woodMat = new THREE.MeshStandardMaterial({ color: "#5a3f26", roughness: 1, flatShading: true });
+  ORDER.forEach((cat) => {
+    const first = SPOTS.find((s) => s.prod.cat === cat);
+    const f = pathFrame(first.t - 0.014);
+    const side = -first.side;
+    const base = f.p.clone().addScaledVector(f.nrm, side * 2.4);
+    const g = new THREE.Group();
+    g.position.copy(base);
+    const face = f.tan.clone().negate().addScaledVector(f.nrm, -side * 0.45);
+    g.rotation.y = Math.atan2(face.x, face.z);
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.12, 2.6, 0.12), woodMat);
+    post.position.y = 1.3;
+    const back = new THREE.Mesh(new THREE.BoxGeometry(1.74, 0.89, 0.06), woodMat);
+    back.position.set(0, 2.15, 0.09);
+    const tex = canvasTex(512, 256, (ctx, W, H) => drawSign(ctx, W, H, cat.toUpperCase(), CATS[cat]));
+    const board = new THREE.Mesh(new THREE.PlaneGeometry(1.7, 0.85), new THREE.MeshStandardMaterial({ map: tex.tex, roughness: 0.9 }));
+    board.position.set(0, 2.15, 0.125);
+    post.castShadow = back.castShadow = true;
+    g.add(post, back, board);
+    scene.add(g);
+    colliders.push({ x: base.x, z: base.z, r: 0.35 });
+  });
+
+  const f0 = pathFrame(0);
+  const gate = new THREE.Group();
+  gate.position.copy(f0.p);
+  gate.rotation.y = Math.atan2(-f0.tan.x, -f0.tan.z);
+  const postGeo = new THREE.CylinderGeometry(0.16, 0.22, 4.6, 7);
+  [-1, 1].forEach((s) => {
+    const p = new THREE.Mesh(postGeo, woodMat);
+    p.position.set(s * 2.5, 2.3, 0);
+    p.castShadow = true;
+    gate.add(p);
+    const w = f0.p.clone().addScaledVector(f0.nrm, s * 2.5);
+    colliders.push({ x: w.x, z: w.z, r: 0.45 });
+  });
+  const beam = new THREE.Mesh(new THREE.BoxGeometry(5.7, 0.3, 0.32), woodMat);
+  beam.position.y = 4.45;
+  beam.castShadow = true;
+  const tex = canvasTex(1024, 256, drawGate);
+  const board = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 0.85), new THREE.MeshStandardMaterial({ map: tex.tex, roughness: 0.9 }));
+  board.position.set(0, 3.55, 0.04);
+  const boardBack = new THREE.Mesh(new THREE.BoxGeometry(3.44, 0.89, 0.05), woodMat);
+  boardBack.position.set(0, 3.55, 0);
+  gate.add(beam, board, boardBack);
+  const ropeMat = new THREE.MeshBasicMaterial({ color: "#c8b48a" });
+  [-1.4, 1.4].forEach((x) => gate.add(rope(new THREE.Vector3(x, 4.3, 0), new THREE.Vector3(x, 3.98, 0), ropeMat, 0.015)));
+  scene.add(gate);
+}
+
+// ---------- Spilleren og bevægelse ----------
+const EYE = 1.7;
+const player = { pos: renderer ? new THREE.Vector3() : null, vel: { x: 0, z: 0 }, yaw: 0, pitch: 0, bob: 0, moving: 0, ground: 0 };
+const keys = new Set();
+let stick = null, tour = null, tourIdx = -1, openIdx = -1, hoverIdx = -1, nearIdx = -1, introGone = false;
+const angLerp = (a, b, t) => a + wrapAngle(b - a) * t;
+
+function placeStart() {
+  const f = pathFrame(-0.022);
+  player.pos.set(f.p.x, 0, f.p.z);
+  player.yaw = Math.atan2(-f.tan.x, -f.tan.z);
+  player.pitch = 0.06;
+}
+function groundAt(x, z) {
+  const d = pathDist(x, z).d;
+  return vnoise(x * 0.12 + 9, z * 0.12) * 0.55 * smooth(2.5, 8, d);
+}
+function collide() {
+  for (const c of colliders) {
+    const dx = player.pos.x - c.x, dz = player.pos.z - c.z, d = Math.hypot(dx, dz), r = c.r + 0.3;
+    if (d < r && d > 1e-4) { player.pos.x = c.x + (dx / d) * r; player.pos.z = c.z + (dz / d) * r; }
+  }
+  const R = Math.hypot(player.pos.x, player.pos.z);
+  if (R > 64) { player.pos.x *= 64 / R; player.pos.z *= 64 / R; }
+}
+function updateMovement(dt) {
+  let mx = 0, mz = 0;
+  if (keys.has("KeyW") || keys.has("ArrowUp")) mz += 1;
+  if (keys.has("KeyS") || keys.has("ArrowDown")) mz -= 1;
+  if (keys.has("KeyD")) mx += 1;
+  if (keys.has("KeyA")) mx -= 1;
+  if (keys.has("ArrowLeft")) player.yaw += 1.9 * dt;
+  if (keys.has("ArrowRight")) player.yaw -= 1.9 * dt;
+  if (stick) { mx += stick.dx / 50; mz -= stick.dy / 50; }
+  const len = Math.hypot(mx, mz);
+  if (len > 1) { mx /= len; mz /= len; }
+  const run = keys.has("ShiftLeft") || keys.has("ShiftRight") || (stick && len > 0.97);
+  const speed = run ? 7.5 : 3.6;
+  const sy = Math.sin(player.yaw), cy = Math.cos(player.yaw);
+  const vx = (-sy * mz + cy * mx) * speed, vz = (-cy * mz - sy * mx) * speed;
+  const k = 1 - Math.exp(-dt * 10);
+  player.vel.x = lerp(player.vel.x, vx, k);
+  player.vel.z = lerp(player.vel.z, vz, k);
+  player.pos.x += player.vel.x * dt;
+  player.pos.z += player.vel.z * dt;
+  collide();
+  player.moving = Math.hypot(player.vel.x, player.vel.z);
+  player.bob += player.moving * dt * 2.1;
+}
+function applyCamera(dt) {
+  player.ground = lerp(player.ground, groundAt(player.pos.x, player.pos.z), 1 - Math.exp(-dt * 6));
+  const bob = reduceMotion ? 0 : Math.sin(player.bob * 2) * 0.035 * Math.min(1, player.moving / 3);
+  camera.position.set(player.pos.x, EYE + player.ground + bob, player.pos.z);
+  camera.rotation.set(player.pitch, player.yaw, 0);
+}
+
+// ---------- Rundtur langs stien ----------
+function viewFor(h) {
+  const { f, side, t } = h.spot;
+  const pos = f.p.clone().addScaledVector(f.nrm, -side * 0.35).addScaledVector(f.tan, -0.8).setY(0);
+  const c = h.center;
+  const dist = Math.hypot(pos.x - c.x, pos.z - c.z);
+  const aim = c.y - (innerWidth < 720 ? 1.0 : 0.25);
+  const yawOff = narrow() ? 0 : -0.16; // skub skoene lidt til venstre for panelet
+  return { pos, t, yaw: Math.atan2(pos.x - c.x, pos.z - c.z) + yawOff, pitch: Math.atan2(aim - EYE, dist) };
+}
+function flyTo(idx) {
+  const h = hangers[idx];
+  if (!h) return;
+  dismissIntro();
+  closePanel();
+  tourIdx = idx;
+  const v = viewFor(h);
+  const cur = pathDist(player.pos.x, player.pos.z);
+  let dT = v.t - cur.t;
+  dT -= Math.round(dT);
+  const p0 = pathFrame(cur.t).p;
+  tour = {
+    idx, v, t0: cur.t, dT, e: 0,
+    from: { yaw: player.yaw, pitch: player.pitch },
+    off0: new THREE.Vector3(player.pos.x - p0.x, 0, player.pos.z - p0.z),
+    off1: v.pos.clone().sub(pathFrame(v.t).p).setY(0),
+    dur: reduceMotion ? 0.001 : clamp((Math.abs(dT) * PATH.length) / 8.5, 1.2, 7) + (cur.d > 3 ? 0.6 : 0),
+  };
+}
+function updateTour(dt) {
+  tour.e = Math.min(1, tour.e + dt / tour.dur);
+  const s = ease(tour.e);
+  const f = pathFrame(tour.t0 + tour.dT * s);
+  const off = tour.off0.clone().lerp(tour.off1, s);
+  player.pos.set(f.p.x + off.x, 0, f.p.z + off.z);
+  const dir = tour.dT < 0 ? -1 : 1;
+  const travelYaw = Math.atan2(-f.tan.x * dir, -f.tan.z * dir);
+  const wIn = smooth(0, 0.18, tour.e), wOut = smooth(0.62, 1, tour.e);
+  player.yaw = angLerp(angLerp(tour.from.yaw, travelYaw, wIn), tour.v.yaw, wOut);
+  player.pitch = lerp(lerp(tour.from.pitch, 0.02, wIn), tour.v.pitch, wOut);
+  player.moving = tour.e < 0.95 ? 4 : 0;
+  player.bob += dt * 8 * (1 - wOut);
+  if (tour.e >= 1) {
+    const idx = tour.idx;
+    player.yaw = tour.v.yaw;
+    player.pitch = tour.v.pitch;
+    tour = null;
+    player.vel.x = player.vel.z = 0;
+    openProduct(idx);
+  }
+}
+function stopTour() { tour = null; }
+function stepTour(dir) {
+  const N = PRODUCTS.length;
+  let base = openIdx >= 0 ? openIdx : tourIdx;
+  if (!renderer) { openProduct(((base < 0 ? (dir > 0 ? -1 : 0) : base) + dir + N) % N); return; }
+  if (base < 0) {
+    const t = pathDist(player.pos.x, player.pos.z).t;
+    const ahead = SPOTS.findIndex((s) => s.t > t);
+    base = (ahead < 0 ? 0 : ahead) - (dir > 0 ? 1 : 0);
+  }
+  flyTo((base + dir + N) % N);
+}
+
+// ---------- Input ----------
+const MOVE_KEYS = ["KeyW", "KeyA", "KeyS", "KeyD", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "ShiftLeft", "ShiftRight"];
+addEventListener("keydown", (e) => {
+  if (e.target.closest && e.target.closest("input, textarea, select")) return;
+  if (MOVE_KEYS.includes(e.code)) {
+    keys.add(e.code);
+    if (e.code.startsWith("Arrow")) e.preventDefault();
+    if (!e.code.startsWith("Shift")) { stopTour(); dismissIntro(); }
+  } else if (e.code === "KeyE" && nearIdx >= 0) openProduct(nearIdx);
+  else if (e.code === "Escape") closeAll();
+});
+addEventListener("keyup", (e) => keys.delete(e.code));
+addEventListener("blur", () => keys.clear());
+
+const raycaster = renderer ? new THREE.Raycaster() : null;
+const ndc = renderer ? new THREE.Vector2() : null;
+const mouse = { x: 0, y: 0, inside: false };
+function pickAt(x, y) {
+  ndc.set((x / innerWidth) * 2 - 1, -(y / innerHeight) * 2 + 1);
+  raycaster.setFromCamera(ndc, camera);
+  raycaster.far = 28;
+  const hit = raycaster.intersectObjects(pickRoots, true)[0];
+  return hit ? hit.object.userData.idx : -1;
+}
+const pointers = new Map();
+function wireCanvas() {
+  const cv = renderer.domElement;
+  const knob = $("stick").querySelector("i");
+  cv.addEventListener("pointerdown", (e) => {
+    dismissIntro();
+    try { cv.setPointerCapture(e.pointerId); } catch (err) { /* ok */ }
+    const touch = e.pointerType !== "mouse";
+    let mode = "look";
+    if (touch && e.clientX < innerWidth * 0.45 && !stick) {
+      mode = "stick";
+      stick = { id: e.pointerId, cx: e.clientX, cy: e.clientY, dx: 0, dy: 0 };
+      const el = $("stick");
+      el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px"; knob.style.transform = "";
+      el.hidden = false;
+      stopTour();
+    }
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now(), mode, moved: 0 });
+    if (!touch) cv.classList.add("dragging");
+  });
+  cv.addEventListener("pointermove", (e) => {
+    if (e.pointerType === "mouse") { mouse.x = e.clientX; mouse.y = e.clientY; mouse.inside = true; }
+    const p = pointers.get(e.pointerId);
+    if (!p) return;
+    const dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    p.moved += Math.abs(dx) + Math.abs(dy);
+    if (p.mode === "stick") {
+      stick.dx = clamp(e.clientX - stick.cx, -50, 50);
+      stick.dy = clamp(e.clientY - stick.cy, -50, 50);
+      knob.style.transform = `translate(${stick.dx * 0.66}px, ${stick.dy * 0.66}px)`;
+    } else {
+      const k = e.pointerType === "mouse" ? 0.0042 : 0.0062;
+      player.yaw += dx * k;
+      player.pitch = clamp(player.pitch + dy * k * 0.8, -1.1, 1.15);
+      if (p.moved > 6) stopTour();
+    }
+  });
+  const end = (e) => {
+    const p = pointers.get(e.pointerId);
+    if (!p) return;
+    pointers.delete(e.pointerId);
+    if (p.mode === "stick") { stick = null; $("stick").hidden = true; }
+    else if (e.type === "pointerup" && p.moved < 8 && performance.now() - p.t < 500) {
+      const idx = pickAt(e.clientX, e.clientY);
+      if (idx >= 0) { stopTour(); openProduct(idx); }
+    }
+    if (pointers.size === 0) cv.classList.remove("dragging");
+  };
+  cv.addEventListener("pointerup", end);
+  cv.addEventListener("pointercancel", end);
+  cv.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") mouse.inside = false; });
+  cv.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    stopTour();
+    const s = clamp(-e.deltaY * 0.004, -0.8, 0.8);
+    player.pos.x -= Math.sin(player.yaw) * s;
+    player.pos.z -= Math.cos(player.yaw) * s;
+    collide();
+  }, { passive: false });
+}
+
+// ---------- UI: panel, kurv, sortiment ----------
+let toastTimer = 0;
+function toast(msg) {
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+function dismissIntro() {
+  if (introGone) return;
+  introGone = true;
+  const el = $("intro");
+  el.classList.add("gone");
+  setTimeout(() => { el.hidden = true; }, reduceMotion ? 0 : 520);
+}
+const narrow = () => innerWidth < 720;
+function closePanel() { $("panel").hidden = true; openIdx = -1; }
+function closeDrawers() { $("list").hidden = true; $("cart").hidden = true; }
+function closeAll() { closePanel(); closeDrawers(); }
+
+function openProduct(idx) {
+  const p = PRODUCTS[idx];
+  if (!p) return;
+  dismissIntro();
+  openIdx = tourIdx = idx;
+  $("cart").hidden = true;
+  if (narrow()) $("list").hidden = true;
+  $("pBrand").textContent = p.brand;
+  $("pCat").textContent = p.cat;
+  $("pModel").textContent = p.model;
+  $("pGrade").dataset.g = p.g;
+  $("pGrade").querySelector("span").textContent = GRADES[p.g];
+  $("pSize").textContent = "EU " + p.size;
+  $("pKm").textContent = p.km + " km";
+  $("pDrop").textContent = p.drop + " mm";
+  $("pWeight").textContent = p.weight + " g";
+  $("pWearTxt").textContent = p.wear + " %";
+  $("pWear").style.width = p.wear + "%";
+  $("pNote").textContent = p.note;
+  const left = Math.max(50, LIFE_KM - p.km);
+  const used = p.price / left, fresh = p.newPrice / LIFE_KM;
+  $("pKmPrice").textContent = krs(used);
+  $("pKmNew").textContent = krs(fresh);
+  $("pKmPrice").parentElement.className = used <= fresh ? "win" : "lose";
+  $("pVerdict").textContent = used <= fresh
+    ? `Ca. ${left} km tilbage i sålen. Billigere pr. km end en ny sko.`
+    : `Ca. ${left} km tilbage i sålen. Ærligt talt er en ny sko billigere pr. km, men den har ingen historie.`;
+  $("pPrice").textContent = kr(p.price);
+  $("pNew").textContent = kr(p.newPrice);
+  $("pSave").textContent = "spar " + Math.round((1 - p.price / p.newPrice) * 100) + " %";
+  syncAddBtn();
+  $("panel").hidden = false;
+  if (hangers[idx]) hangers[idx].kick = 1;
+}
+function syncAddBtn() {
+  if (openIdx < 0) return;
+  const inCart = cart.has(PRODUCTS[openIdx].id);
+  const b = $("pAdd");
+  b.textContent = inCart ? "Fjern fra kurv" : "Læg i kurv";
+  b.classList.toggle("primary", !inCart);
+}
+function toggleCart(id) {
+  const p = PRODUCTS.find((x) => x.id === id);
+  if (cart.has(id)) { cart.delete(id); toast(`${p.model} hænger igen i træet.`); }
+  else { cart.add(id); toast(`${p.model} er pillet ned og lagt i kurven.`); }
+  store.set("junglesaal-cart", [...cart]);
+  const h = hangers.find((x) => x.prod.id === id);
+  if (h) h.tag.run();
+  renderCart();
+  renderList();
+  syncAddBtn();
+  const btn = $("cartBtn");
+  btn.classList.remove("bump");
+  void btn.offsetWidth;
+  if (!reduceMotion) btn.classList.add("bump");
+}
+function renderCart() {
+  const items = PRODUCTS.filter((p) => cart.has(p.id));
+  const sum = items.reduce((a, p) => a + p.price, 0);
+  const km = items.reduce((a, p) => a + p.km, 0);
+  $("cartCount").textContent = items.length;
+  $("cartSum").textContent = kr(sum);
+  $("cartTotal").textContent = kr(sum);
+  $("cartKm").textContent = items.length ? `${km.toLocaleString("da-DK")} km erfaring medfølger gratis` : "Ingen kilometer valgt endnu";
+  const ul = $("cartList");
+  ul.innerHTML = "";
+  if (!items.length) {
+    const li = document.createElement("li");
+    li.innerHTML = '<p class="empty">Kurven er tom. Skoene hænger stadig i træerne og venter.</p>';
+    ul.appendChild(li);
+  }
+  items.forEach((p) => {
+    const li = document.createElement("li");
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = '<i class="sw"></i><span><b></b><small></small></span><span class="p num"></span>';
+    row.querySelector(".sw").style.background = p.c[0];
+    row.querySelector("b").textContent = p.model;
+    const small = row.querySelector("small");
+    small.textContent = `${p.brand} · EU ${p.size} · `;
+    const rm = document.createElement("button");
+    rm.className = "rm";
+    rm.textContent = "Fjern";
+    rm.addEventListener("click", () => toggleCart(p.id));
+    small.appendChild(rm);
+    row.querySelector(".p").textContent = kr(p.price);
+    li.appendChild(row);
+    ul.appendChild(li);
+  });
+  $("checkout").disabled = !items.length;
+}
+function renderList() {
+  const body = $("listBody");
+  body.innerHTML = "";
+  ORDER.forEach((cat) => {
+    const title = document.createElement("p");
+    title.className = "group-title";
+    title.textContent = `${cat} · ${CATS[cat]}`;
+    const ul = document.createElement("ul");
+    PRODUCTS.forEach((p, i) => {
+      if (p.cat !== cat) return;
+      const li = document.createElement("li");
+      const b = document.createElement("button");
+      b.className = "row" + (cart.has(p.id) ? " in-cart" : "");
+      b.innerHTML = '<i class="sw"></i><span><b></b><small></small></span><span class="p num"></span>';
+      b.querySelector(".sw").style.background = p.c[0];
+      b.querySelector("b").textContent = p.model;
+      b.querySelector("small").textContent = `${p.brand} · EU ${p.size} · ${p.km} km`;
+      b.querySelector(".p").textContent = kr(p.price);
+      b.addEventListener("click", () => { closeDrawers(); renderer ? flyTo(i) : openProduct(i); });
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+    body.append(title, ul);
+  });
+}
+function wireUI() {
+  $("enterBtn").addEventListener("click", dismissIntro);
+  $("tourBtn").addEventListener("click", () => { dismissIntro(); renderer ? flyTo(0) : openProduct(0); });
+  $("nextBtn").addEventListener("click", () => stepTour(1));
+  $("prevBtn").addEventListener("click", () => stepTour(-1));
+  $("listBtn").addEventListener("click", () => {
+    const el = $("list");
+    const show = el.hidden;
+    $("cart").hidden = true;
+    if (show && narrow()) closePanel();
+    el.hidden = !show;
+    dismissIntro();
+  });
+  $("cartBtn").addEventListener("click", () => {
+    const el = $("cart");
+    const show = el.hidden;
+    $("list").hidden = true;
+    if (show) closePanel();
+    el.hidden = !show;
+    dismissIntro();
+  });
+  $("panelClose").addEventListener("click", closePanel);
+  $("listClose").addEventListener("click", () => { $("list").hidden = true; });
+  $("cartClose").addEventListener("click", () => { $("cart").hidden = true; });
+  $("pAdd").addEventListener("click", () => { if (openIdx >= 0) toggleCart(PRODUCTS[openIdx].id); });
+  $("checkout").addEventListener("click", () => toast("Kassen er en demo. Junglen tager ikke imod betaling endnu."));
+  $("listCount").textContent = PRODUCTS.length;
+}
+
+// ---------- Minikort ----------
+const MM = { S: 336, R: 68 };
+let mmBase = null;
+function buildMinimapBase() {
+  const { S, R } = MM, k = S / 2 / R, o = S / 2;
+  mmBase = document.createElement("canvas");
+  mmBase.width = mmBase.height = S;
+  const c = mmBase.getContext("2d");
+  c.beginPath(); c.arc(o, o, o - 2, 0, Math.PI * 2); c.clip();
+  c.fillStyle = "#17331f"; c.fillRect(0, 0, S, S);
+  c.fillStyle = "#0d2214";
+  trees.forEach((t) => { c.beginPath(); c.arc(o + t.x * k, o + t.z * k, t.kind === "giant" ? 9 : 3, 0, 7); c.fill(); });
+  c.strokeStyle = "#9a7a50"; c.lineWidth = 8; c.lineJoin = "round";
+  c.beginPath();
+  PATH.samples.forEach((p, i) => (i ? c.lineTo(o + p.x * k, o + p.z * k) : c.moveTo(o + p.x * k, o + p.z * k)));
+  c.closePath(); c.stroke();
+}
+function drawMinimap() {
+  const { S, R } = MM, k = S / 2 / R, o = S / 2;
+  const c = $("minimap").getContext("2d");
+  c.clearRect(0, 0, S, S);
+  c.drawImage(mmBase, 0, 0);
+  hangers.forEach((h, i) => {
+    c.fillStyle = cart.has(h.prod.id) ? "#8cc46a" : i === openIdx ? "#ffffff" : "#ff6b35";
+    c.beginPath(); c.arc(o + h.spot.pivot.x * k, o + h.spot.pivot.z * k, i === openIdx ? 10 : 7, 0, 7); c.fill();
+  });
+  c.save();
+  c.translate(o + player.pos.x * k, o + player.pos.z * k);
+  c.rotate(-player.yaw);
+  c.fillStyle = "rgba(255,240,190,0.18)";
+  c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, 46, -Math.PI / 2 - 0.55, -Math.PI / 2 + 0.55); c.closePath(); c.fill();
+  c.fillStyle = "#ffffff"; c.strokeStyle = "#0b1d14"; c.lineWidth = 3;
+  c.beginPath(); c.moveTo(0, -13); c.lineTo(9, 10); c.lineTo(0, 5); c.lineTo(-9, 10); c.closePath(); c.stroke(); c.fill();
+  c.restore();
+}
+function wireMinimap() {
+  $("minimap").addEventListener("click", (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const { S, R } = MM, k = S / 2 / R;
+    const x = ((e.clientX - r.left) * (S / r.width) - S / 2) / k, z = ((e.clientY - r.top) * (S / r.height) - S / 2) / k;
+    let best = -1, bd = 9;
+    hangers.forEach((h, i) => { const d = Math.hypot(h.spot.pivot.x - x, h.spot.pivot.z - z); if (d < bd) { bd = d; best = i; } });
+    if (best >= 0) flyTo(best);
+    else toast("Klik på en orange prik for at gå hen til et par.");
+  });
+}
+
+// ---------- Hver frame ----------
+function updateHover() {
+  let idx = -1;
+  if (mouse.inside && !coarse && !pointers.size && introGone) idx = pickAt(mouse.x, mouse.y);
+  const tip = $("hoverTip");
+  if (idx !== hoverIdx) {
+    hoverIdx = idx;
+    renderer.domElement.classList.toggle("over-shoe", idx >= 0);
+    if (idx >= 0) {
+      const p = PRODUCTS[idx];
+      tip.textContent = `${p.brand} ${p.model}`;
+      const s = document.createElement("span");
+      s.textContent = kr(p.price);
+      tip.appendChild(s);
+    }
+    tip.hidden = idx < 0;
+  }
+  if (idx >= 0) { tip.style.left = mouse.x + "px"; tip.style.top = mouse.y + "px"; }
+}
+let zoneKey = "";
+function updateProximity() {
+  let best = -1, bd = 5.5;
+  hangers.forEach((h, i) => {
+    const d = Math.hypot(h.center.x - player.pos.x, h.center.z - player.pos.z);
+    if (d < bd) { bd = d; best = i; }
+  });
+  nearIdx = best;
+  const near = $("near");
+  const show = best >= 0 && best !== openIdx && !tour && introGone;
+  if (show) {
+    const p = PRODUCTS[best];
+    near.innerHTML = "";
+    near.append("Tæt på: ");
+    const b = document.createElement("b");
+    b.textContent = `${p.brand} ${p.model}`;
+    near.append(b, coarse ? " · tryk på skoene" : " · tryk E eller klik");
+  }
+  near.hidden = !show;
+  if (openIdx >= 0 && !tour) {
+    const h = hangers[openIdx];
+    if (Math.hypot(h.center.x - player.pos.x, h.center.z - player.pos.z) > 11) closePanel();
+  }
+  const pd = pathDist(player.pos.x, player.pos.z);
+  let key, html;
+  if (pd.d > 7) { key = "off"; html = "Du er ude i <b>underskoven</b>"; }
+  else if (pd.t < SPOTS[0].t - 0.02 || pd.t > 0.965) { key = "gate"; html = "Du står ved <b>indgangen</b>"; }
+  else {
+    let cat = SPOTS[0].prod.cat;
+    SPOTS.forEach((s) => { if (s.t - 0.016 <= pd.t) cat = s.prod.cat; });
+    key = cat;
+    html = `Sti: <b>${cat}</b><span class="zdesc"> · ${CATS[cat].toLowerCase()}</span>`;
+  }
+  if (key !== zoneKey) { zoneKey = key; $("zone").innerHTML = html; }
+}
+function animateHangers(t, dt) {
+  for (const h of hangers) {
+    h.kick = Math.max(0, h.kick - dt * 0.35);
+    h.glow = lerp(h.glow, h.i === hoverIdx || h.i === openIdx ? 1 : 0, 1 - Math.exp(-dt * 8));
+    const amp = reduceMotion ? 0.008 : 0.04 + h.kick * 0.22;
+    h.swing.rotation.z = amp * Math.sin(t * h.w + h.ph);
+    h.swing.rotation.x = amp * 0.55 * Math.sin(t * h.w * 0.83 + h.ph2);
+    for (const o of h.holders) o.g.rotation.y = (reduceMotion ? 0 : 0.18) * Math.sin(t * 0.7 + o.ph);
+    const e = h.glow * 0.2;
+    if (Math.abs((h.lastE || 0) - e) > 0.003) {
+      h.mats.all.forEach((m) => m.emissive.setRGB(e, e * 0.72, e * 0.4));
+      h.lastE = e;
+    }
+  }
+}
+function animateAmbient(t) {
+  if (!reduceMotion) {
+    const pos = fireflies.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const s = fireSeed[i * 2], ph = fireSeed[i * 2 + 1];
+      pos.setXYZ(i,
+        fireBase[i * 3] + Math.sin(t * s + ph) * 0.9,
+        fireBase[i * 3 + 1] + Math.sin(t * s * 1.7 + ph * 2) * 0.35,
+        fireBase[i * 3 + 2] + Math.cos(t * s * 0.8 + ph) * 0.9);
+    }
+    pos.needsUpdate = true;
+    fireflies.material.opacity = 0.7 + 0.3 * Math.sin(t * 1.4);
+  }
+  for (const m of shafts) m.material.opacity = 0.045 + 0.025 * Math.sin(t * 0.35 + m.userData.ph);
+}
+
+const clock = renderer ? new THREE.Clock() : null;
+let T = 0, frame = 0;
+function tick() {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  T += dt;
+  frame++;
+  if (!introGone && !tour && !reduceMotion) player.yaw += dt * 0.035;
+  if (tour) updateTour(dt); else updateMovement(dt);
+  applyCamera(dt);
+  animateHangers(T, dt);
+  animateAmbient(T);
+  updateHover();
+  if (frame % 6 === 0) updateProximity();
+  if (frame % 2 === 0) drawMinimap();
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+function onResize() {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+}
+
+function init() {
+  wireUI();
+  renderList();
+  renderCart();
+  if (!renderer) {
+    $("nogl").hidden = false;
+    $("minimap").hidden = true;
+    return;
+  }
+  planSpots();
+  buildEnvironment();
+  buildPairs();
+  buildSigns();
+  buildMinimapBase();
+  wireCanvas();
+  wireMinimap();
+  placeStart();
+  applyCamera(1);
+  player.ground = groundAt(player.pos.x, player.pos.z);
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load(`800 64px ${F_DISPLAY}`), document.fonts.load(`900 90px ${F_DISPLAY}`),
+      document.fonts.load(`500 24px ${F_MONO}`), document.fonts.load(`600 24px ${F_MONO}`),
+      document.fonts.load(`600 30px ${F_BODY}`),
+    ]).then(() => redraws.forEach((r) => r())).catch(() => {});
+  }
+  addEventListener("resize", onResize);
+  requestAnimationFrame(tick);
+}
+init();
+})();
+</script>
