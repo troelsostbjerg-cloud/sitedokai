@@ -23,6 +23,11 @@ forældede.
 `index.html` er én selvstændig fil. Åbn den i en browser med internetforbindelse.
 Den henter three.js 0.186.1 fra jsDelivr og skrifttyper fra Google Fonts.
 
+## Video
+
+Se [VIDEO.md](VIDEO.md). `tools/capture.mjs` optager simulationen billede for billede
+til en flydende MP4, også på maskiner uden GPU.
+
 ## Kapitler
 
 1. **Solen varmer Jorden**: snit gennem Solen, fotonens 170.000 år lange vej ud, energistrømmen til Jorden, drivhuseffekt og nordlys.
@@ -45,6 +50,7 @@ lab/univers/
   src/00-…90-*.js     kode; samles i filnavnsorden til ét ES-modul
   src/12-land-data.js verdenskort (Natural Earth 1:50m, public domain), genereret
   tools/make-land.mjs genererer 12-land-data.js
+  tools/capture.mjs   optager video billede for billede (se VIDEO.md)
 ```
 
 Byg efter ændringer (skriver både den selvstændige fil og sitets filer):
